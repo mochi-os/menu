@@ -1,0 +1,15 @@
+// Mochi Menu app — shell header bar (logo, notifications, user menu)
+// Copyright Alistair Cunningham 2026
+
+{
+	"version": "1.0",
+	"label": "app_name",
+	"paths": ["menu"],
+
+	"architecture": {"engine": "starlark", "version": 4},
+
+	"actions": {
+		"": {"file": "web/dist/index.html"},
+		"assets": {"files": "web/dist/assets"}
+	}
+}
