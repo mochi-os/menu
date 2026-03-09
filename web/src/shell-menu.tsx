@@ -1,114 +1,277 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
+  Bell,
+  Check,
   CircleUser,
+  ExternalLink,
   LogOut,
   Settings,
 } from 'lucide-react'
 import {
+  cn,
   useNotifications,
   useAuthStore,
   useScreenSize,
   useDialogState,
-  NotificationsDropdown,
   SignOutDialog,
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
+  shellNavigateExternal,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
   Drawer,
   DrawerContent,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
+  ScrollArea,
+  Switch,
+  Label,
+  Button,
 } from '@mochi/common'
+import type { Notification } from '@mochi/common'
 
 function MochiLogo() {
   return <img src='/images/logo-header.svg' alt='Mochi' className='h-6 w-6' />
 }
 
+function formatTimestamp(timestamp: number): string {
+  const now = Date.now() / 1000
+  const diff = now - timestamp
+
+  if (diff < 60) return 'Just now'
+  if (diff < 3600) return `${Math.floor(diff / 60)}m`
+  if (diff < 86400) return `${Math.floor(diff / 3600)}h`
+  if (diff < 604800) return `${Math.floor(diff / 86400)}d`
+
+  const date = new Date(timestamp * 1000)
+  return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
+}
+
+function NotificationItem({ notification, onClick }: {
+  notification: Notification
+  onClick?: (notification: Notification) => void
+}) {
+  const isUnread = notification.read === 0
+
+  return (
+    <button
+      type='button'
+      onClick={() => onClick?.(notification)}
+      className={cn(
+        'group flex w-full items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/50',
+        isUnread ? 'bg-muted/30' : 'bg-transparent'
+      )}
+    >
+      <div
+        className={cn(
+          'mt-1.5 size-2.5 shrink-0 rounded-full transition-colors',
+          isUnread
+            ? 'bg-primary'
+            : 'bg-transparent group-hover:bg-muted-foreground/20'
+        )}
+      />
+      <div className='flex-1 min-w-0 space-y-1'>
+        <p
+          className={cn(
+            'text-sm leading-snug',
+            isUnread ? 'font-medium text-foreground' : 'text-muted-foreground'
+          )}
+        >
+          {notification.content}
+          {notification.count > 1 && (
+            <span className='ml-1 inline-flex items-center justify-center rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-medium'>
+              {notification.count}
+            </span>
+          )}
+        </p>
+        <p className='text-[11px] text-muted-foreground/70'>
+          {formatTimestamp(notification.created)}
+        </p>
+      </div>
+    </button>
+  )
+}
+
+const STORAGE_KEY = 'notifications-show-all'
+
 export function MochiShellMenu() {
   const [signOutOpen, setSignOutOpen] = useDialogState()
   const [menuOpen, setMenuOpen] = useState(false)
-  const { isMobile } = useScreenSize()
+  const { isDesktop } = useScreenSize()
   const { notifications, markAsRead, markAllAsRead } = useNotifications()
+  const [showAll, setShowAll] = useState(() => {
+    try { return localStorage.getItem(STORAGE_KEY) === 'true' } catch { return false }
+  })
+
+  useEffect(() => {
+    try { localStorage.setItem(STORAGE_KEY, String(showAll)) } catch {}
+  }, [showAll])
 
   const name = useAuthStore((s) => s.name)
+  const unreadCount = notifications.filter((n: Notification) => n.read === 0).length
+  const displayedNotifications = showAll
+    ? notifications
+    : notifications.filter((n: Notification) => n.read === 0)
 
-  const handleNotificationClick = (notification: { id: string; link: string; read: number }) => {
+  const handleNotificationClick = (notification: Notification) => {
     if (notification.read === 0) {
       markAsRead(notification.id)
     }
     if (notification.link) {
       setMenuOpen(false)
-      window.location.href = notification.link
+      shellNavigateExternal(notification.link)
     }
   }
 
-  const menuContent = (
-    <DropdownMenuLabel className='p-0 font-normal'>
-      <div className='flex items-center justify-between px-2 py-1.5'>
-        <div className='grid text-sm'>
-          <span className='font-semibold'>{name || 'User'}</span>
-        </div>
-        <div className='flex items-center gap-1 ml-4'>
-          <a
-            href='/settings'
-            className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-interactive-hover active:bg-interactive-active'
-          >
-            <Settings className='size-4' />
-          </a>
-          <button
-            onClick={() => setSignOutOpen(true)}
-            className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-interactive-hover active:bg-interactive-active'
-          >
-            <LogOut className='size-4' />
-          </button>
-        </div>
-      </div>
-    </DropdownMenuLabel>
+  const trigger = (
+    <button className='relative rounded p-1 hover:bg-interactive-hover active:bg-interactive-active'>
+      <CircleUser className='size-6 text-muted-foreground' />
+      {unreadCount > 0 && (
+        <span className='absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-medium text-white'>
+          {unreadCount > 99 ? '99+' : unreadCount}
+        </span>
+      )}
+    </button>
   )
 
-  const userTrigger = (
-    <button className='rounded p-1 hover:bg-interactive-hover active:bg-interactive-active'>
-      <CircleUser className='size-6 text-muted-foreground' />
-    </button>
+  const userSection = (
+    <div className='flex items-center justify-between px-4 py-2.5'>
+      <span className='text-sm font-semibold'>{name || 'User'}</span>
+      <div className='flex items-center gap-1 ml-4'>
+        <a
+          href='/settings'
+          onClick={() => setMenuOpen(false)}
+          className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-interactive-hover active:bg-interactive-active'
+        >
+          <Settings className='size-4' />
+        </a>
+        <button
+          onClick={() => { setMenuOpen(false); setTimeout(() => setSignOutOpen(true), 150) }}
+          className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-interactive-hover active:bg-interactive-active'
+        >
+          <LogOut className='size-4' />
+        </button>
+      </div>
+    </div>
+  )
+
+  const notificationsHeader = (
+    <div className='flex items-center justify-between border-b bg-muted/30 px-4 py-2.5'>
+      <div className='flex items-center gap-2'>
+        <span className='font-semibold text-sm'>Notifications</span>
+        {unreadCount > 0 && (
+          <span className='rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary'>
+            {unreadCount}
+          </span>
+        )}
+      </div>
+      <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-2 pr-2 border-r mr-2'>
+          <Label
+            htmlFor='shell-show-all'
+            className='text-[10px] uppercase font-medium text-muted-foreground tracking-wider cursor-pointer select-none'
+          >
+            All
+          </Label>
+          <Switch
+            id='shell-show-all'
+            checked={showAll}
+            onCheckedChange={setShowAll}
+            className='scale-75 origin-right'
+          />
+        </div>
+        <a
+          href='/notifications/'
+          onClick={() => setMenuOpen(false)}
+          className='text-muted-foreground hover:text-foreground transition-colors'
+          title='View all'
+        >
+          <ExternalLink className='size-4' />
+        </a>
+      </div>
+    </div>
+  )
+
+  const notificationsList = (
+    <ScrollArea className='max-h-[min(420px,60vh)] overflow-y-scroll'>
+      <div className='flex flex-col'>
+        {displayedNotifications.length === 0 ? (
+          <div className='flex flex-col items-center justify-center py-8 text-center px-4'>
+            <Bell className='size-8 text-muted-foreground/20 mb-3' />
+            <p className='text-sm font-medium text-foreground'>
+              {showAll ? 'No notifications yet' : "You're all caught up!"}
+            </p>
+            <p className='text-xs text-muted-foreground mt-1 max-w-[180px]'>
+              {showAll
+                ? "We'll notify you when something happens."
+                : 'Check "All" to see past notifications.'}
+            </p>
+          </div>
+        ) : (
+          <div className='divide-y divide-border/40'>
+            {displayedNotifications.map((notification: Notification) => (
+              <NotificationItem
+                key={notification.id}
+                notification={notification}
+                onClick={handleNotificationClick}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </ScrollArea>
+  )
+
+  const markAllFooter = unreadCount > 0 && (
+    <div className='border-t bg-muted/30 p-2'>
+      <Button
+        variant='ghost'
+        className='w-full justify-center h-8 text-xs text-muted-foreground hover:text-primary'
+        onClick={() => markAllAsRead()}
+      >
+        <Check className='mr-2 size-3' />
+        Mark all as read
+      </Button>
+    </div>
+  )
+
+  const menuContent = (
+    <>
+      {userSection}
+      {notificationsHeader}
+      {notificationsList}
+      {markAllFooter}
+    </>
   )
 
   return (
     <>
-      <div className='flex h-10 items-center gap-2 border-b bg-background px-2'>
+      <div className='flex items-center gap-2 p-2'>
         <a href='/' title='Home'>
           <MochiLogo />
         </a>
 
-        <div className='flex-1' />
-
-        {/* Notifications dropdown */}
-        <NotificationsDropdown
-          notifications={notifications}
-          notificationsUrl='/notifications/'
-          onMarkAllAsRead={markAllAsRead}
-          onNotificationClick={handleNotificationClick}
-        />
-
-        {/* User menu */}
-        {isMobile ? (
+        {isDesktop ? (
+          <Popover open={menuOpen} onOpenChange={setMenuOpen}>
+            <PopoverTrigger asChild>{trigger}</PopoverTrigger>
+            <PopoverContent
+              align='start'
+              sideOffset={8}
+              className='w-80 p-0 overflow-hidden shadow-lg border-border sm:w-96'
+            >
+              {menuContent}
+            </PopoverContent>
+          </Popover>
+        ) : (
           <Drawer open={menuOpen} onOpenChange={setMenuOpen}>
-            <DrawerTrigger asChild>{userTrigger}</DrawerTrigger>
+            <DrawerTrigger asChild>{trigger}</DrawerTrigger>
             <DrawerContent>
-              <DrawerHeader>
-                <DrawerTitle className='sr-only'>Menu</DrawerTitle>
+              <DrawerHeader className='sr-only'>
+                <DrawerTitle>Menu</DrawerTitle>
               </DrawerHeader>
-              <div className='px-4 pb-4'>{menuContent}</div>
+              {menuContent}
             </DrawerContent>
           </Drawer>
-        ) : (
-          <DropdownMenu open={menuOpen} onOpenChange={setMenuOpen}>
-            <DropdownMenuTrigger asChild>{userTrigger}</DropdownMenuTrigger>
-            <DropdownMenuContent align='end' className='min-w-72'>
-              {menuContent}
-            </DropdownMenuContent>
-          </DropdownMenu>
         )}
       </div>
 
