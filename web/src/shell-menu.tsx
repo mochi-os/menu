@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useSyncExternalStore } from 'react'
+import { usePushRegistration } from './use-push-registration'
 import {
   Bell,
   Check,
@@ -94,10 +95,30 @@ function NotificationItem({ notification, onClick }: {
 
 const STORAGE_KEY = 'notifications-show-all'
 
+// Observe the data-sidebar attribute on #menu, set by shell.js
+function useSidebarState(): 'expanded' | 'collapsed' {
+  return useSyncExternalStore(
+    (cb) => {
+      const el = document.getElementById('menu')
+      if (!el) return () => {}
+      const observer = new MutationObserver(cb)
+      observer.observe(el, { attributes: true, attributeFilter: ['data-sidebar'] })
+      return () => observer.disconnect()
+    },
+    () => {
+      const el = document.getElementById('menu')
+      return (el?.getAttribute('data-sidebar') as 'expanded' | 'collapsed') || 'expanded'
+    }
+  )
+}
+
 export function MochiShellMenu() {
+  usePushRegistration()
   const [signOutOpen, setSignOutOpen] = useDialogState()
   const [menuOpen, setMenuOpen] = useState(false)
   const { isDesktop } = useScreenSize()
+  const sidebarState = useSidebarState()
+  const isCollapsed = sidebarState === 'collapsed'
   const { notifications, markAsRead, markAllAsRead } = useNotifications()
   const [showAll, setShowAll] = useState(() => {
     try { return localStorage.getItem(STORAGE_KEY) === 'true' } catch { return false }
@@ -199,13 +220,13 @@ export function MochiShellMenu() {
           <div className='flex flex-col items-center justify-center py-8 text-center px-4'>
             <Bell className='size-8 text-muted-foreground/20 mb-3' />
             <p className='text-sm font-medium text-foreground'>
-              {showAll ? 'No notifications yet' : "You're all caught up!"}
+              {showAll ? 'No notifications yet' : 'No new notifications'}
             </p>
-            <p className='text-xs text-muted-foreground mt-1 max-w-[180px]'>
-              {showAll
-                ? "We'll notify you when something happens."
-                : 'Check "All" to see past notifications.'}
-            </p>
+            {showAll && (
+              <p className='text-xs text-muted-foreground mt-1 max-w-[180px]'>
+                We'll notify you when something happens.
+              </p>
+            )}
           </div>
         ) : (
           <div className='divide-y divide-border/40'>
@@ -246,7 +267,10 @@ export function MochiShellMenu() {
 
   return (
     <>
-      <div className='flex items-center gap-2 p-2'>
+      <div className={cn(
+        'flex items-center gap-2 p-2',
+        isCollapsed && 'flex-col'
+      )}>
         <a href='/' title='Home'>
           <MochiLogo />
         </a>
