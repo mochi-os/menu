@@ -6,7 +6,7 @@ import {
   CircleUser,
   ExternalLink,
   LogOut,
-  Settings,
+
 } from 'lucide-react'
 import {
   cn,
@@ -25,9 +25,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
   ScrollArea,
-  Switch,
-  Label,
-  Button,
 } from '@mochi/common'
 import type { Notification } from '@mochi/common'
 
@@ -93,8 +90,6 @@ function NotificationItem({ notification, onClick }: {
   )
 }
 
-const STORAGE_KEY = 'notifications-show-all'
-
 // Observe the data-sidebar attribute on #menu, set by shell.js
 function useSidebarState(): 'expanded' | 'collapsed' {
   return useSyncExternalStore(
@@ -120,19 +115,33 @@ export function MochiShellMenu() {
   const sidebarState = useSidebarState()
   const isCollapsed = sidebarState === 'collapsed'
   const { notifications, markAsRead, markAllAsRead } = useNotifications()
-  const [showAll, setShowAll] = useState(() => {
-    try { return localStorage.getItem(STORAGE_KEY) === 'true' } catch { return false }
-  })
 
+  // Close menu on Escape
   useEffect(() => {
-    try { localStorage.setItem(STORAGE_KEY, String(showAll)) } catch {}
-  }, [showAll])
+    if (!menuOpen) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMenuOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [menuOpen])
+
+  // Block iframe clicks while menu is open — iframe swallows pointer events
+  // so Radix can't detect outside clicks. An overlay captures them instead.
+  useEffect(() => {
+    if (!menuOpen) return
+    const container = document.getElementById('app-container')
+    if (!container) return
+    const overlay = document.createElement('div')
+    overlay.style.cssText = 'position:absolute;inset:0;z-index:1;cursor:default'
+    overlay.addEventListener('pointerdown', () => setMenuOpen(false))
+    container.appendChild(overlay)
+    return () => overlay.remove()
+  }, [menuOpen])
 
   const name = useAuthStore((s) => s.name)
-  const unreadCount = notifications.filter((n: Notification) => n.read === 0).length
-  const displayedNotifications = showAll
-    ? notifications
-    : notifications.filter((n: Notification) => n.read === 0)
+  const unreadNotifications = notifications.filter((n: Notification) => n.read === 0)
+  const unreadCount = unreadNotifications.length
 
   const handleNotificationClick = (notification: Notification) => {
     if (notification.read === 0) {
@@ -159,13 +168,6 @@ export function MochiShellMenu() {
     <div className='flex items-center justify-between px-4 py-2.5'>
       <span className='text-sm font-semibold'>{name || 'User'}</span>
       <div className='flex items-center gap-1 ml-4'>
-        <a
-          href='/settings'
-          onClick={() => setMenuOpen(false)}
-          className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-interactive-hover active:bg-interactive-active'
-        >
-          <Settings className='size-4' />
-        </a>
         <button
           onClick={() => { setMenuOpen(false); setTimeout(() => setSignOutOpen(true), 150) }}
           className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-interactive-hover active:bg-interactive-active'
@@ -178,33 +180,23 @@ export function MochiShellMenu() {
 
   const notificationsHeader = (
     <div className='flex items-center justify-between border-b bg-muted/30 px-4 py-2.5'>
-      <div className='flex items-center gap-2'>
-        <span className='font-semibold text-sm'>Notifications</span>
+      <span className='font-semibold text-sm'>
+        Notifications{unreadCount > 0 && ` (${unreadCount})`}
+      </span>
+      <div className='flex items-center gap-1'>
         {unreadCount > 0 && (
-          <span className='rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary'>
-            {unreadCount}
-          </span>
-        )}
-      </div>
-      <div className='flex items-center gap-2'>
-        <div className='flex items-center gap-2 pr-2 border-r mr-2'>
-          <Label
-            htmlFor='shell-show-all'
-            className='text-[10px] uppercase font-medium text-muted-foreground tracking-wider cursor-pointer select-none'
+          <button
+            onClick={() => markAllAsRead()}
+            className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-interactive-hover active:bg-interactive-active'
+            title='Mark all as read'
           >
-            All
-          </Label>
-          <Switch
-            id='shell-show-all'
-            checked={showAll}
-            onCheckedChange={setShowAll}
-            className='scale-75 origin-right'
-          />
-        </div>
+            <Check className='size-4' />
+          </button>
+        )}
         <a
           href='/notifications/'
           onClick={() => setMenuOpen(false)}
-          className='text-muted-foreground hover:text-foreground transition-colors'
+          className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-interactive-hover active:bg-interactive-active'
           title='View all'
         >
           <ExternalLink className='size-4' />
@@ -216,21 +208,16 @@ export function MochiShellMenu() {
   const notificationsList = (
     <ScrollArea className='max-h-[min(420px,60vh)] overflow-y-scroll'>
       <div className='flex flex-col'>
-        {displayedNotifications.length === 0 ? (
+        {unreadNotifications.length === 0 ? (
           <div className='flex flex-col items-center justify-center py-8 text-center px-4'>
             <Bell className='size-8 text-muted-foreground/20 mb-3' />
             <p className='text-sm font-medium text-foreground'>
-              {showAll ? 'No notifications yet' : 'No new notifications'}
+              No new notifications
             </p>
-            {showAll && (
-              <p className='text-xs text-muted-foreground mt-1 max-w-[180px]'>
-                We'll notify you when something happens.
-              </p>
-            )}
           </div>
         ) : (
           <div className='divide-y divide-border/40'>
-            {displayedNotifications.map((notification: Notification) => (
+            {unreadNotifications.map((notification: Notification) => (
               <NotificationItem
                 key={notification.id}
                 notification={notification}
@@ -243,25 +230,11 @@ export function MochiShellMenu() {
     </ScrollArea>
   )
 
-  const markAllFooter = unreadCount > 0 && (
-    <div className='border-t bg-muted/30 p-2'>
-      <Button
-        variant='ghost'
-        className='w-full justify-center h-8 text-xs text-muted-foreground hover:text-primary'
-        onClick={() => markAllAsRead()}
-      >
-        <Check className='mr-2 size-3' />
-        Mark all as read
-      </Button>
-    </div>
-  )
-
   const menuContent = (
     <>
       {userSection}
       {notificationsHeader}
       {notificationsList}
-      {markAllFooter}
     </>
   )
 
