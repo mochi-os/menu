@@ -88,3 +88,19 @@ def action_push_accounts_remove(a):
 
     result = mochi.service.call("notifications", "accounts/remove", int(id))
     return {"data": result or {}}
+
+# Permission grant (shell-managed permission request dialog)
+
+def action_permissions_grant(a):
+    """Grant a standard permission to an app on behalf of the user."""
+    app_id = a.input("app", "").strip()
+    permission = a.input("permission", "").strip()
+    if not app_id or not permission:
+        return a.error(400, "app and permission are required")
+
+    # Block restricted permissions — they must be configured in app settings
+    if mochi.permission.restricted(permission):
+        return a.error(403, "Restricted permissions must be enabled in app settings")
+
+    mochi.permission.grant(app_id, permission)
+    return {"data": {"status": "granted"}}

@@ -2,6 +2,7 @@ import { useState, useEffect, useSyncExternalStore } from 'react'
 import { usePushRegistration } from './use-push-registration'
 import { useMenuNotifications } from './use-menu-notifications'
 import { useSubscribeNotifications } from './use-subscribe-notifications'
+import { usePermissionRequest } from './use-permission-request'
 import {
   Bell,
   Check,
@@ -94,6 +95,7 @@ function useSidebarState(): 'expanded' | 'collapsed' {
 export function MochiShellMenu() {
   usePushRegistration()
   const { dialog: subscribeDialog } = useSubscribeNotifications()
+  const { dialog: permissionDialog } = usePermissionRequest()
   const [signOutOpen, setSignOutOpen] = useDialogState()
   const [menuOpen, setMenuOpen] = useState(false)
   const { isDesktop } = useScreenSize()
@@ -259,6 +261,7 @@ export function MochiShellMenu() {
 
       <SignOutDialog open={!!signOutOpen} onOpenChange={setSignOutOpen} />
       {subscribeDialog}
+      {permissionDialog}
     </>
   )
 }
