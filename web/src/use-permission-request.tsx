@@ -144,7 +144,7 @@ export function usePermissionRequest() {
 
         {pending.restricted && (
           <p className="text-sm text-amber-600 text-center">
-            This is a restricted permission. It must be enabled by an administrator in app settings.
+            This permission must be enabled by you in the app settings.
           </p>
         )}
 
