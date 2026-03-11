@@ -1,8 +1,15 @@
 // Auto-register browser push if permission is already granted.
 // Also handles push-subscribe requests from app iframes via postMessage.
+// All API calls go through the menu's own backend (cookie auth).
 
 import { useEffect, useRef } from 'react'
-import { requestHelpers, NOTIFICATIONS_PATH, push } from '@mochi/common'
+import { push } from '@mochi/common'
+
+const MENU_PATH = '/menu'
+
+function getMenuToken(): string {
+  return (window as unknown as { __mochi_shell?: { menuToken?: string } }).__mochi_shell?.menuToken ?? ''
+}
 
 interface VapidKeyResponse {
   data: { key: string }
@@ -18,16 +25,28 @@ interface AccountsListResponse {
   data: Account[]
 }
 
+async function menuFetch<T>(path: string, init?: RequestInit): Promise<T> {
+  const token = getMenuToken()
+  const res = await fetch(`${MENU_PATH}/${path}`, {
+    credentials: 'same-origin',
+    ...init,
+    headers: {
+      ...init?.headers,
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+  })
+  if (!res.ok) throw new Error(`Menu API error: ${res.status}`)
+  return res.json()
+}
+
 async function getVapidKey(): Promise<string> {
-  const res = await requestHelpers.getRaw<VapidKeyResponse>(
-    `${NOTIFICATIONS_PATH}/-/accounts/vapid`
-  )
+  const res = await menuFetch<VapidKeyResponse>('-/push/vapid')
   return res?.data?.key || ''
 }
 
 async function findBrowserAccount(): Promise<Account | null> {
-  const res = await requestHelpers.getRaw<AccountsListResponse>(
-    `${NOTIFICATIONS_PATH}/-/accounts/list?capability=notify`
+  const res = await menuFetch<AccountsListResponse>(
+    '-/push/accounts/list?capability=notify'
   )
   const accounts = res?.data || []
   return accounts.find((a) => a.type === 'browser') || null
@@ -35,18 +54,17 @@ async function findBrowserAccount(): Promise<Account | null> {
 
 async function createBrowserAccount(sub: PushSubscription): Promise<number | null> {
   const data = push.getSubscriptionData(sub)
-  const formData = new URLSearchParams()
-  formData.append('type', 'browser')
-  formData.append('endpoint', data.endpoint)
-  formData.append('auth', data.auth)
-  formData.append('p256dh', data.p256dh)
-  formData.append('label', push.getBrowserName())
-
-  await requestHelpers.post(
-    `${NOTIFICATIONS_PATH}/-/accounts/add`,
-    formData.toString(),
-    { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
-  )
+  await menuFetch('-/push/accounts/add', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      type: 'browser',
+      endpoint: data.endpoint,
+      auth: data.auth,
+      p256dh: data.p256dh,
+      label: push.getBrowserName(),
+    }).toString(),
+  })
 
   // Fetch the account to get its ID
   const account = await findBrowserAccount()
@@ -70,13 +88,11 @@ async function ensurePushRegistered(): Promise<number | null> {
     // Check if the endpoint matches — if not, update it
     if (existing.identifier !== sub.endpoint) {
       // Remove stale account and create fresh
-      const removeData = new URLSearchParams()
-      removeData.append('id', String(existing.id))
-      await requestHelpers.post(
-        `${NOTIFICATIONS_PATH}/-/accounts/remove`,
-        removeData.toString(),
-        { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
-      )
+      await menuFetch('-/push/accounts/remove', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ id: String(existing.id) }).toString(),
+      })
       return createBrowserAccount(sub)
     }
     return existing.id

@@ -2,14 +2,24 @@
 // Copyright Alistair Cunningham 2026
 
 {
-	"version": "1.0",
+	"version": "1.1",
 	"label": "app_name",
 	"paths": ["menu"],
 
 	"architecture": {"engine": "starlark", "version": 4},
+	"execute": ["menu.star"],
 
 	"actions": {
 		"": {"file": "web/dist/index.html"},
-		"assets": {"files": "web/dist/assets"}
+		"assets": {"files": "web/dist/assets"},
+		"-/notifications/list": {"function": "action_notifications_list"},
+		"-/notifications/read": {"function": "action_notifications_read"},
+		"-/notifications/read/all": {"function": "action_notifications_read_all"},
+		"-/notifications/destinations": {"function": "action_notifications_destinations"},
+		"-/notifications/subscribe": {"function": "action_notifications_subscribe"},
+		"-/push/vapid": {"function": "action_push_vapid"},
+		"-/push/accounts/list": {"function": "action_push_accounts_list"},
+		"-/push/accounts/add": {"function": "action_push_accounts_add"},
+		"-/push/accounts/remove": {"function": "action_push_accounts_remove"}
 	}
 }

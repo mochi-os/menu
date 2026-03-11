@@ -1,5 +1,7 @@
 import { useState, useEffect, useSyncExternalStore } from 'react'
 import { usePushRegistration } from './use-push-registration'
+import { useMenuNotifications } from './use-menu-notifications'
+import { useSubscribeNotifications } from './use-subscribe-notifications'
 import {
   Bell,
   Check,
@@ -10,12 +12,12 @@ import {
 } from 'lucide-react'
 import {
   cn,
-  useNotifications,
   useAuthStore,
   useScreenSize,
   useDialogState,
   SignOutDialog,
   shellNavigateExternal,
+  formatTimestamp,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -32,19 +34,6 @@ function MochiLogo() {
   return <img src='/images/logo-header.svg' alt='Mochi' className='h-6 w-6' />
 }
 
-function formatTimestamp(timestamp: number): string {
-  const now = Date.now() / 1000
-  const diff = now - timestamp
-
-  if (diff < 60) return 'Just now'
-  if (diff < 3600) return `${Math.floor(diff / 60)}m`
-  if (diff < 86400) return `${Math.floor(diff / 3600)}h`
-  if (diff < 604800) return `${Math.floor(diff / 86400)}d`
-
-  const date = new Date(timestamp * 1000)
-  return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
-}
-
 function NotificationItem({ notification, onClick }: {
   notification: Notification
   onClick?: (notification: Notification) => void
@@ -56,19 +45,19 @@ function NotificationItem({ notification, onClick }: {
       type='button'
       onClick={() => onClick?.(notification)}
       className={cn(
-        'group flex w-full items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/50',
+        'group flex w-full items-start gap-3 px-4 py-2 text-left transition-colors hover:bg-muted/50',
         isUnread ? 'bg-muted/30' : 'bg-transparent'
       )}
     >
       <div
         className={cn(
-          'mt-1.5 size-2.5 shrink-0 rounded-full transition-colors',
+          'mt-1.5 size-2 shrink-0 rounded-full transition-colors',
           isUnread
             ? 'bg-primary'
             : 'bg-transparent group-hover:bg-muted-foreground/20'
         )}
       />
-      <div className='flex-1 min-w-0 space-y-1'>
+      <div className='flex-1 min-w-0 space-y-0.5'>
         <p
           className={cn(
             'text-sm leading-snug',
@@ -76,11 +65,6 @@ function NotificationItem({ notification, onClick }: {
           )}
         >
           {notification.content}
-          {notification.count > 1 && (
-            <span className='ml-1 inline-flex items-center justify-center rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-medium'>
-              {notification.count}
-            </span>
-          )}
         </p>
         <p className='text-[11px] text-muted-foreground/70'>
           {formatTimestamp(notification.created)}
@@ -109,12 +93,13 @@ function useSidebarState(): 'expanded' | 'collapsed' {
 
 export function MochiShellMenu() {
   usePushRegistration()
+  const { dialog: subscribeDialog } = useSubscribeNotifications()
   const [signOutOpen, setSignOutOpen] = useDialogState()
   const [menuOpen, setMenuOpen] = useState(false)
   const { isDesktop } = useScreenSize()
   const sidebarState = useSidebarState()
   const isCollapsed = sidebarState === 'collapsed'
-  const { notifications, markAsRead, markAllAsRead } = useNotifications()
+  const { notifications, markAsRead, markAllAsRead } = useMenuNotifications()
 
   // Close menu on Escape
   useEffect(() => {
@@ -212,7 +197,7 @@ export function MochiShellMenu() {
           <div className='flex flex-col items-center justify-center py-8 text-center px-4'>
             <Bell className='size-8 text-muted-foreground/20 mb-3' />
             <p className='text-sm font-medium text-foreground'>
-              No new notifications
+              No unread notifications
             </p>
           </div>
         ) : (
@@ -273,6 +258,7 @@ export function MochiShellMenu() {
       </div>
 
       <SignOutDialog open={!!signOutOpen} onOpenChange={setSignOutOpen} />
+      {subscribeDialog}
     </>
   )
 }
