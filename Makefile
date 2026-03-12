@@ -15,7 +15,7 @@ web/dist/index.html: $(shell find web/src ../../lib/common/src -type f 2>/dev/nu
 
 release: web/dist/index.html
 	rm -f $(RELEASE)/$(APP)_*.zip
-	zip -r $(RELEASE)/$(APP)_$(VERSION).zip app.json labels web/dist
+	zip -r $(RELEASE)/$(APP)_$(VERSION).zip app.json *.star labels web/dist
 	git tag -a $(VERSION) -m "$(VERSION)" 2>/dev/null || true
 
 deploy:
