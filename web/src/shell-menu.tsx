@@ -3,6 +3,7 @@ import { usePushRegistration } from './use-push-registration'
 import { useMenuNotifications } from './use-menu-notifications'
 import { useSubscribeNotifications } from './use-subscribe-notifications'
 import { usePermissionRequest } from './use-permission-request'
+import { useShellFetch } from './use-shell-fetch'
 import {
   Bell,
   Check,
@@ -94,6 +95,7 @@ function useSidebarState(): 'expanded' | 'collapsed' {
 
 export function MochiShellMenu() {
   usePushRegistration()
+  useShellFetch()
   const { dialog: subscribeDialog } = useSubscribeNotifications()
   const { dialog: permissionDialog } = usePermissionRequest()
   const [signOutOpen, setSignOutOpen] = useDialogState()

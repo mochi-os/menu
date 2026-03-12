@@ -61,7 +61,7 @@ describe('usePermissionRequest', () => {
     sendPermissionRequest({
       id: 1,
       app: 'feeds',
-      permission: 'account/read',
+      permission: 'accounts/read',
       restricted: false,
     })
 
@@ -78,7 +78,7 @@ describe('usePermissionRequest', () => {
     sendPermissionRequest({
       id: 1,
       app: 'feeds',
-      permission: 'account/read',
+      permission: 'accounts/read',
       restricted: false,
     })
 
@@ -115,7 +115,7 @@ describe('usePermissionRequest', () => {
     const mockSource = sendPermissionRequest({
       id: 42,
       app: 'feeds',
-      permission: 'account/read',
+      permission: 'accounts/read',
       restricted: false,
     })
 
@@ -173,7 +173,7 @@ describe('usePermissionRequest', () => {
     const mockSource = sendPermissionRequest({
       id: 10,
       app: 'feeds',
-      permission: 'account/read',
+      permission: 'accounts/read',
       restricted: false,
     })
 
@@ -196,7 +196,7 @@ describe('usePermissionRequest', () => {
     // Verify the body contains the right parameters
     const body = new URLSearchParams(opts.body)
     expect(body.get('app')).toBe('feeds')
-    expect(body.get('permission')).toBe('account/read')
+    expect(body.get('permission')).toBe('accounts/read')
 
     // Verify it responded with granted
     expect(mockSource.postMessage).toHaveBeenCalledWith(
@@ -217,7 +217,7 @@ describe('usePermissionRequest', () => {
     const mockSource = sendPermissionRequest({
       id: 11,
       app: 'feeds',
-      permission: 'account/read',
+      permission: 'accounts/read',
       restricted: false,
     })
 
@@ -256,7 +256,7 @@ describe('usePermissionRequest', () => {
     sendPermissionRequest({
       id: 1,
       app: 'repositories',
-      permission: 'group/manage',
+      permission: 'groups/manage',
       restricted: false,
     })
 

@@ -50,6 +50,21 @@ def action_notifications_subscribe(a):
     result = mochi.service.call("notifications", "subscribe", app, label, type, object, destinations_list)
     return {"data": {"id": result}}
 
+def action_notifications_subscriptions(a):
+    """List notification subscriptions for the current user."""
+    result = mochi.service.call("notifications", "subscriptions")
+    if result == None:
+        return {"data": []}
+    return {"data": result}
+
+def action_notifications_unsubscribe(a):
+    """Delete a notification subscription."""
+    id = a.input("id", "").strip()
+    if not id:
+        return a.error(400, "id is required")
+    mochi.service.call("notifications", "unsubscribe", id)
+    return {"data": {"ok": True}}
+
 # Push registration (replaces direct HTTP calls to notifications accounts)
 
 def action_push_vapid(a):

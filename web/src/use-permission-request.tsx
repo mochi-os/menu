@@ -30,11 +30,11 @@ interface PendingRequest {
 
 function getPermissionLabel(permission: string): string {
   const labels: Record<string, string> = {
-    'account/read': 'read connected accounts',
-    'account/manage': 'manage connected accounts',
-    'account/ai': 'use AI services',
-    'account/mcp': 'connect to MCP servers',
-    'group/manage': 'manage groups',
+    'accounts/read': 'read connected accounts',
+    'accounts/manage': 'manage connected accounts',
+    'accounts/ai': 'use AI services',
+    'accounts/mcp': 'connect to MCP servers',
+    'groups/manage': 'manage groups',
     'interests/read': 'read interests',
     'interests/write': 'write interests',
   }
