@@ -1,15 +1,16 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { QueryClientProvider } from '@tanstack/react-query'
-import { ThemeProvider, createQueryClient, useAuthStore } from '@mochi/common'
+import { ThemeProvider, createQueryClient } from '@mochi/common'
 import { MochiShellMenu } from './shell-menu'
+import { bootstrapShellAuth } from './shell-auth'
 import './styles/index.css'
 
-// Set user name from shell config
-const shellConfig = (window as unknown as { __mochi_shell?: { userName?: string } }).__mochi_shell
-if (shellConfig?.userName) {
-  useAuthStore.getState().setProfile('', shellConfig.userName)
-}
+void bootstrapShellAuth(
+  (window as unknown as {
+    __mochi_shell?: { userName?: string; menuToken?: string }
+  }).__mochi_shell
+)
 
 const queryClient = createQueryClient()
 
