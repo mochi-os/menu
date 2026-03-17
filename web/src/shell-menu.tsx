@@ -29,8 +29,8 @@ import {
   DrawerTitle,
   DrawerTrigger,
   ScrollArea,
-} from '@mochi/common'
-import type { Notification } from '@mochi/common'
+} from '@mochi/web'
+import type { Notification } from '@mochi/web'
 
 function MochiLogo() {
   return <img src='/images/logo-header.svg' alt='Mochi' className='h-6 w-6' />

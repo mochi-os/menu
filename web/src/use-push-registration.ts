@@ -3,7 +3,7 @@
 // All API calls go through the menu's own backend (cookie auth).
 
 import { useEffect, useRef } from 'react'
-import { push } from '@mochi/common'
+import { push } from '@mochi/web'
 
 const MENU_PATH = '/menu'
 

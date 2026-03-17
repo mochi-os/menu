@@ -13,7 +13,7 @@ import {
   Rss,
   Webhook,
 } from 'lucide-react'
-import { push } from '@mochi/common'
+import { push } from '@mochi/web'
 import {
   Dialog,
   DialogContent,
@@ -24,7 +24,7 @@ import {
   Button,
   Switch,
   Skeleton,
-} from '@mochi/common'
+} from '@mochi/web'
 
 const MENU_PATH = '/menu'
 

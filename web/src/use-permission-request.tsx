@@ -12,7 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
   Button,
-} from '@mochi/common'
+} from '@mochi/web'
 
 const MENU_PATH = '/menu'
 

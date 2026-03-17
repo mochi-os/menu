@@ -1,4 +1,4 @@
-import { authManager, useAuthStore } from '@mochi/common'
+import { authManager, useAuthStore } from '@mochi/web'
 
 export type ShellBootstrapConfig = {
   userName?: string
