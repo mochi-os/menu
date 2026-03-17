@@ -2,7 +2,7 @@ import path from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import tailwindcss from '@tailwindcss/vite'
-import { mochiPlugin } from '@mochi/common/vite'
+import { mochiPlugin } from '@mochi/web/vite'
 
 export default defineConfig({
   base: './',

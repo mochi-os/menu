@@ -3,7 +3,7 @@
 
 import { useEffect } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import type { Notification } from '@mochi/common'
+import type { Notification } from '@mochi/web'
 
 const MENU_PATH = '/menu'
 

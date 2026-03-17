@@ -10,7 +10,7 @@ all: web/dist/index.html
 clean:
 	rm -rf web/dist
 
-web/dist/index.html: $(shell find web/src ../../lib/common/src -type f 2>/dev/null)
+web/dist/index.html: $(shell find web/src ../../lib/web/src -type f 2>/dev/null)
 	cd web && pnpm run build
 
 release: web/dist/index.html
