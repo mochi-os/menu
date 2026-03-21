@@ -59,6 +59,7 @@ interface SubscriptionToggle extends SubscriptionItem {
 interface PendingRequest {
   id: number
   app: string
+  displayName: string
   subscriptions: SubscriptionItem[]
   source: WindowProxy
 }
@@ -126,9 +127,14 @@ export function useSubscribeNotifications() {
       const source = event.source as WindowProxy | null
       if (!source) return
 
+      // Use the shell's resolved app entity ID (canonical identity for published apps),
+      // falling back to the name the iframe sent (correct for dev apps).
+      const appId = (window as unknown as { __mochi_shell?: { appId?: string } }).__mochi_shell?.appId || data.app
+
       setPending({
         id: data.id,
-        app: data.app,
+        app: appId,
+        displayName: data.app || appId,
         subscriptions: data.subscriptions || [],
         source,
       })
@@ -325,7 +331,7 @@ export function useSubscribeNotifications() {
   }, [toggles, showBrowserPushOption])
 
   const showMultipleSubscriptions = subscriptionToggles.length > 1
-  const appName = pending ? pending.app.charAt(0).toUpperCase() + pending.app.slice(1) : ''
+  const appName = pending ? pending.displayName.charAt(0).toUpperCase() + pending.displayName.slice(1) : ''
 
   const dialog = open ? (
     <Dialog open={open} onOpenChange={(v) => { if (!v) respond('declined') }}>
