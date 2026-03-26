@@ -83,6 +83,13 @@ function getWebSocketUrl(): string {
   return `${protocol}//${window.location.host}/_/websocket?key=notifications`
 }
 
+function broadcastToIframes(msg: Record<string, unknown>) {
+  const iframes = document.querySelectorAll('iframe')
+  for (const iframe of iframes) {
+    iframe.contentWindow?.postMessage(msg, '*')
+  }
+}
+
 function handleWebSocketMessage(event: MessageEvent) {
   if (!wsState.queryClientRef) return
   try {
@@ -95,6 +102,7 @@ function handleWebSocketMessage(event: MessageEvent) {
       case 'clear_app':
       case 'clear_object':
         wsState.queryClientRef.invalidateQueries({ queryKey: notificationKeys.list() })
+        broadcastToIframes({ type: 'notification-update', event: data.type })
         break
     }
   } catch {
