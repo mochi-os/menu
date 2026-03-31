@@ -127,9 +127,9 @@ export function useSubscribeNotifications() {
       const source = event.source as WindowProxy | null
       if (!source) return
 
-      // Use the shell's resolved app entity ID (canonical identity for published apps),
-      // falling back to the name the iframe sent (correct for dev apps).
-      const appId = (window as unknown as { __mochi_shell?: { appId?: string } }).__mochi_shell?.appId || data.app
+      // Use the shell's resolved app entity ID (set by fetchToken for both published and dev apps).
+      const appId = (window as unknown as { __mochi_shell?: { appId?: string } }).__mochi_shell?.appId
+      if (!appId) return
 
       setPending({
         id: data.id,
