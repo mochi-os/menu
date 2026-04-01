@@ -36,9 +36,10 @@ function MochiLogo() {
   return <img src='/images/logo-header.svg' alt='Mochi' className='h-6 w-6' />
 }
 
-function NotificationItem({ notification, onClick }: {
+function NotificationItem({ notification, onClick, onMiddleClick }: {
   notification: Notification
   onClick?: (notification: Notification) => void
+  onMiddleClick?: (notification: Notification) => void
 }) {
   const isUnread = notification.read === 0
 
@@ -46,6 +47,12 @@ function NotificationItem({ notification, onClick }: {
     <button
       type='button'
       onClick={() => onClick?.(notification)}
+      onAuxClick={(e) => {
+        if (e.button === 1) {
+          e.preventDefault()
+          onMiddleClick?.(notification)
+        }
+      }}
       className={cn(
         'group flex w-full items-start gap-3 px-4 py-2 text-left transition-colors hover:bg-muted/50',
         isUnread ? 'bg-muted/30' : 'bg-transparent'
@@ -142,6 +149,15 @@ export function MochiShellMenu() {
     }
   }
 
+  const handleNotificationMiddleClick = (notification: Notification) => {
+    if (notification.read === 0) {
+      markAsRead(notification.id)
+    }
+    if (notification.link) {
+      window.open(notification.link, '_blank')
+    }
+  }
+
   const trigger = (
     <button className='relative rounded p-1 hover:bg-interactive-hover active:bg-interactive-active'>
       <CircleUser className='size-6 text-muted-foreground' />
@@ -195,7 +211,7 @@ export function MochiShellMenu() {
   )
 
   const notificationsList = (
-    <ScrollArea className='max-h-[min(420px,60vh)] overflow-y-scroll'>
+    <ScrollArea className='min-h-0 flex-1 overflow-y-scroll'>
       <div className='flex flex-col'>
         {unreadNotifications.length === 0 ? (
           <div className='flex flex-col items-center justify-center py-8 text-center px-4'>
@@ -211,6 +227,7 @@ export function MochiShellMenu() {
                 key={notification.id}
                 notification={notification}
                 onClick={handleNotificationClick}
+                onMiddleClick={handleNotificationMiddleClick}
               />
             ))}
           </div>
@@ -243,13 +260,13 @@ export function MochiShellMenu() {
             <PopoverContent
               align='start'
               sideOffset={8}
-              className='w-80 p-0 overflow-hidden shadow-lg border-border sm:w-96'
+              className='flex w-80 max-h-[var(--radix-popover-content-available-height)] flex-col p-0 overflow-hidden shadow-lg border-border sm:w-96'
             >
               {menuContent}
             </PopoverContent>
           </Popover>
         ) : (
-          <Drawer open={menuOpen} onOpenChange={setMenuOpen}>
+          <Drawer open={menuOpen} onOpenChange={setMenuOpen} direction='top'>
             <DrawerTrigger asChild>{trigger}</DrawerTrigger>
             <DrawerContent>
               <DrawerHeader className='sr-only'>
