@@ -12,12 +12,13 @@ import {
   DialogHeader,
   DialogTitle,
   Button,
+  useAuthStore,
 } from '@mochi/web'
 
 const MENU_PATH = '/menu'
 
 function getMenuToken(): string {
-  return (window as unknown as { __mochi_shell?: { menuToken?: string } }).__mochi_shell?.menuToken ?? ''
+  return useAuthStore.getState().token || ''
 }
 
 interface PendingRequest {

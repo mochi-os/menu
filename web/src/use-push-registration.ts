@@ -3,12 +3,12 @@
 // All API calls go through the menu's own backend (cookie auth).
 
 import { useEffect, useRef } from 'react'
-import { push } from '@mochi/web'
+import { push, useAuthStore } from '@mochi/web'
 
 const MENU_PATH = '/menu'
 
 function getMenuToken(): string {
-  return (window as unknown as { __mochi_shell?: { menuToken?: string } }).__mochi_shell?.menuToken ?? ''
+  return useAuthStore.getState().token || ''
 }
 
 interface VapidKeyResponse {

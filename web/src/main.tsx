@@ -6,20 +6,25 @@ import { MochiShellMenu } from './shell-menu'
 import { bootstrapShellAuth } from './shell-auth'
 import './styles/index.css'
 
-void bootstrapShellAuth(
-  (window as unknown as {
-    __mochi_shell?: { userName?: string; menuToken?: string }
-  }).__mochi_shell
-)
+async function init() {
+  const shellReady = (window as unknown as {
+    __mochi_shell_ready?: Promise<{ menuToken?: string }>
+  }).__mochi_shell_ready
 
-const queryClient = createQueryClient()
+  const config = shellReady ? await shellReady : undefined
+  await bootstrapShellAuth(config)
 
-createRoot(document.getElementById('menu')!).render(
-  <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <MochiShellMenu />
-      </ThemeProvider>
-    </QueryClientProvider>
-  </StrictMode>
-)
+  const queryClient = createQueryClient()
+
+  createRoot(document.getElementById('menu')!).render(
+    <StrictMode>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider>
+          <MochiShellMenu />
+        </ThemeProvider>
+      </QueryClientProvider>
+    </StrictMode>
+  )
+}
+
+void init()
