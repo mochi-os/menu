@@ -5,12 +5,12 @@
 import { useState, useEffect, useCallback } from 'react'
 import { Shield, ShieldAlert, Loader2 } from 'lucide-react'
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
+  ResponsiveDialog,
+  ResponsiveDialogContent,
+  ResponsiveDialogDescription,
+  ResponsiveDialogFooter,
+  ResponsiveDialogHeader,
+  ResponsiveDialogTitle,
   Button,
   useAuthStore,
 } from '@mochi/web'
@@ -127,9 +127,9 @@ export function usePermissionRequest() {
   const permissionLabel = pending ? getPermissionLabel(pending.permission) : ''
 
   const dialog = open ? (
-    <Dialog open={open} onOpenChange={(v) => { if (!v) respond('denied') }}>
-      <DialogContent className="max-w-sm">
-        <DialogHeader>
+    <ResponsiveDialog open={open} onOpenChange={(v) => { if (!v) respond('denied') }}>
+      <ResponsiveDialogContent className="max-w-sm">
+        <ResponsiveDialogHeader>
           <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-muted">
             {pending.restricted ? (
               <ShieldAlert className="h-6 w-6 text-amber-500" />
@@ -137,11 +137,11 @@ export function usePermissionRequest() {
               <Shield className="h-6 w-6 text-blue-500" />
             )}
           </div>
-          <DialogTitle className="text-center">Permission request</DialogTitle>
-          <DialogDescription className="text-center">
+          <ResponsiveDialogTitle className="text-center">Permission request</ResponsiveDialogTitle>
+          <ResponsiveDialogDescription className="text-center">
             <span className="font-medium">{appName}</span> wants permission to {permissionLabel}.
-          </DialogDescription>
-        </DialogHeader>
+          </ResponsiveDialogDescription>
+        </ResponsiveDialogHeader>
 
         {pending.restricted && (
           <p className="text-sm text-amber-600 text-center">
@@ -149,7 +149,7 @@ export function usePermissionRequest() {
           </p>
         )}
 
-        <DialogFooter className="flex-row gap-2 sm:justify-end">
+        <ResponsiveDialogFooter className="flex-row gap-2 sm:justify-end">
           {pending.restricted ? (
             <Button variant="outline" className="flex-1" onClick={handleDeny}>
               Close
@@ -168,9 +168,9 @@ export function usePermissionRequest() {
               </Button>
             </>
           )}
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        </ResponsiveDialogFooter>
+      </ResponsiveDialogContent>
+    </ResponsiveDialog>
   ) : null
 
   return { dialog }

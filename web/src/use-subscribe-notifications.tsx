@@ -15,12 +15,12 @@ import {
 } from 'lucide-react'
 import {
   push,
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
+  ResponsiveDialog,
+  ResponsiveDialogContent,
+  ResponsiveDialogDescription,
+  ResponsiveDialogFooter,
+  ResponsiveDialogHeader,
+  ResponsiveDialogTitle,
   Button,
   Switch,
   Skeleton,
@@ -335,15 +335,15 @@ export function useSubscribeNotifications() {
   const appName = pending ? pending.displayName.charAt(0).toUpperCase() + pending.displayName.slice(1) : ''
 
   const dialog = open ? (
-    <Dialog open={open} onOpenChange={(v) => { if (!v) respond('declined') }}>
-      <DialogContent className="max-w-md">
-        <DialogHeader>
-          <DialogTitle>Enable notifications</DialogTitle>
-          <DialogDescription>
+    <ResponsiveDialog open={open} onOpenChange={(v) => { if (!v) respond('declined') }}>
+      <ResponsiveDialogContent className="max-w-md">
+        <ResponsiveDialogHeader>
+          <ResponsiveDialogTitle>Enable notifications</ResponsiveDialogTitle>
+          <ResponsiveDialogDescription>
             <span className="font-medium">{appName}</span> would like to send you
             notifications{showMultipleSubscriptions ? '.' : `: ${subscriptionToggles[0]?.label ?? ''}`}
-          </DialogDescription>
-        </DialogHeader>
+          </ResponsiveDialogDescription>
+        </ResponsiveDialogHeader>
 
         <div className="py-4 space-y-4">
           {loading ? (
@@ -433,7 +433,7 @@ export function useSubscribeNotifications() {
           )}
         </div>
 
-        <DialogFooter className="flex-row gap-2 sm:justify-end">
+        <ResponsiveDialogFooter className="flex-row gap-2 sm:justify-end">
           <Button variant="outline" onClick={handleRefuse} disabled={submitting}>
             Not now
           </Button>
@@ -445,9 +445,9 @@ export function useSubscribeNotifications() {
             )}
             Enable
           </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        </ResponsiveDialogFooter>
+      </ResponsiveDialogContent>
+    </ResponsiveDialog>
   ) : null
 
   return { dialog }
