@@ -140,6 +140,7 @@ export function MochiShellMenu() {
   const unreadCount = unreadNotifications.length
 
   const handleNotificationClick = (notification: Notification) => {
+    console.log('[notif-click]', { id: notification.id, read: notification.read, link: notification.link })
     if (notification.read === 0) {
       markAsRead(notification.id)
     }

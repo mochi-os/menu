@@ -12,6 +12,7 @@ export async function bootstrapShellAuth(
 
   if (menuToken) {
     store.setToken(menuToken)
+    store.setInitialized()
     await authManager.loadIdentity(true)
   }
 }

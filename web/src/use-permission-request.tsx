@@ -134,7 +134,7 @@ export function usePermissionRequest() {
             {pending.restricted ? (
               <ShieldAlert className="h-6 w-6 text-amber-500" />
             ) : (
-              <Shield className="h-6 w-6 text-blue-500" />
+              <Shield className="h-6 w-6 text-primary" />
             )}
           </div>
           <DialogTitle className="text-center">Permission request</DialogTitle>
