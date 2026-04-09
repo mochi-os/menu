@@ -21,6 +21,7 @@ const EMPTY_RESPONSE: NotificationsListResponse = { data: [], count: 0, total: 0
 
 async function menuFetch<T>(path: string, init?: RequestInit): Promise<T> {
   const token = getMenuToken()
+  console.log(`[menu-fetch] ${init?.method || 'GET'} ${path} token=${token ? token.substring(0, 20) + '...' : 'NONE'}`)
   const res = await fetch(`${MENU_PATH}/${path}`, {
     credentials: 'same-origin',
     ...init,
@@ -29,7 +30,12 @@ async function menuFetch<T>(path: string, init?: RequestInit): Promise<T> {
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
   })
-  if (!res.ok) throw new Error(`Menu API error: ${res.status}`)
+  if (!res.ok) {
+    const body = await res.text().catch(() => '')
+    console.error(`[menu-fetch] ${init?.method || 'GET'} ${path} -> ${res.status} ${body}`)
+    throw new Error(`Menu API error: ${res.status}`)
+  }
+  console.log(`[menu-fetch] ${init?.method || 'GET'} ${path} -> ${res.status}`)
   return res.json()
 }
 
