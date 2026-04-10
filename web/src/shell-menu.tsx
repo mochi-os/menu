@@ -19,7 +19,7 @@ import {
   useDialogState,
   SignOutDialog,
   shellNavigateExternal,
-  formatTimestamp,
+  useFormat,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -41,6 +41,7 @@ function NotificationItem({ notification, onClick, onMiddleClick }: {
   onClick?: (notification: Notification) => void
   onMiddleClick?: (notification: Notification) => void
 }) {
+  const { formatTimestamp } = useFormat()
   const isUnread = notification.read === 0
 
   return (
