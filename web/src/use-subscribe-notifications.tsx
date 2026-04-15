@@ -110,13 +110,49 @@ export function useSubscribeNotifications() {
       const items: SubscriptionItem[] = data.items || []
       if (items.length === 0) return
 
-      setPending({
-        id: data.id,
-        app: appId,
-        displayName: data.app || appId,
-        items,
-        source,
-      })
+      // Reconcile: delete orphan subscriptions for this app, and narrow the
+      // items to the ones the user still needs to choose a category for.
+      ;(async () => {
+        try {
+          const body = new URLSearchParams({
+            app: appId,
+            desired: JSON.stringify(items.map((i) => ({
+              label: i.label,
+              topic: i.topic ?? '',
+              object: i.object ?? '',
+            }))),
+          })
+          const res = await menuFetch<{ data: SubscriptionItem[] }>('-/notifications/reconcile', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: body.toString(),
+          })
+          const missing = res.data || []
+          if (missing.length === 0) {
+            source?.postMessage(
+              { type: 'subscribe-notifications-result', id: data.id, result: 'accepted' },
+              '*'
+            )
+            return
+          }
+          setPending({
+            id: data.id,
+            app: appId,
+            displayName: data.app || appId,
+            items: missing,
+            source,
+          })
+        } catch {
+          // On reconcile error, fall back to prompting for all items.
+          setPending({
+            id: data.id,
+            app: appId,
+            displayName: data.app || appId,
+            items,
+            source,
+          })
+        }
+      })()
     }
 
     window.addEventListener('message', handleMessage)

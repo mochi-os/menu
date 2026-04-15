@@ -59,6 +59,18 @@ def action_notifications_subscribe(a):
     result = mochi.service.call("notifications", "subscribe", app, label, topic, object, category)
     return {"data": {"id": result}}
 
+def action_notifications_reconcile(a):
+    """Given an app and its declared list of desired (topic, object, label) items,
+    delete orphaned subscriptions for the app and return the items that still
+    need user input (no sub yet, or category unassigned)."""
+    app = a.input("app", "").strip()
+    desired_raw = a.input("desired", "")
+    if not app:
+        return a.error(400, "app is required")
+    desired = json.decode(desired_raw) if desired_raw else []
+    missing = mochi.service.call("notifications", "subscriptions/reconcile", app, desired)
+    return {"data": missing or []}
+
 def action_notifications_pending(a):
     """List unassigned subscriptions the shell should prompt for. Optional `app` filter."""
     app = a.input("app", "").strip()
