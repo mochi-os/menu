@@ -49,7 +49,6 @@ interface PendingRow {
 interface Category {
   id: number
   label: string
-  badge: number
   default: number
 }
 
