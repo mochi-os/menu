@@ -31,30 +31,39 @@ def action_notifications_read_all(a):
 
 # Subscribe dialog support
 
-def action_notifications_destinations(a):
-    """Return notification destinations via service call."""
-    result = mochi.service.call("notifications", "destinations")
-    if result == None:
-        return {"data": {"accounts": [], "feeds": []}}
-    return {"data": result}
+def action_notifications_categories(a):
+    """Return the user's notification categories (id + label + badge, no destinations)."""
+    result = mochi.service.call("notifications", "categories")
+    return {"data": result or []}
 
 def action_notifications_subscribe(a):
-    """Create subscriptions via service call with explicit app."""
+    """Create or update a subscription and optionally assign a category.
+
+    Inputs: app, label, topic (optional), object (optional), category (optional).
+    """
     app = a.input("app", "").strip()
     label = a.input("label", "").strip()
-    type = a.input("type", "").strip()
+    topic = a.input("topic", "").strip()
     object = a.input("object", "").strip()
-    destinations = a.input("destinations", "")
+    cat_raw = a.input("category", "").strip()
 
     if not app:
         return a.error(400, "app is required")
     if not label:
         return a.error(400, "label is required")
 
-    destinations_list = json.decode(destinations) if destinations else []
+    category = None
+    if cat_raw != "" and cat_raw.lstrip("-").isdigit():
+        category = int(cat_raw)
 
-    result = mochi.service.call("notifications", "subscribe", app, label, type, object, destinations_list)
+    result = mochi.service.call("notifications", "subscribe", app, label, topic, object, category)
     return {"data": {"id": result}}
+
+def action_notifications_pending(a):
+    """List unassigned subscriptions the shell should prompt for. Optional `app` filter."""
+    app = a.input("app", "").strip()
+    result = mochi.service.call("notifications", "pending/list", app)
+    return {"data": result or []}
 
 def action_notifications_subscriptions(a):
     """List notification subscriptions for the current user."""
