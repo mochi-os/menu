@@ -12,7 +12,6 @@ import { Check, Loader2 } from 'lucide-react'
 import {
   ResponsiveDialog,
   ResponsiveDialogContent,
-  ResponsiveDialogDescription,
   ResponsiveDialogFooter,
   ResponsiveDialogHeader,
   ResponsiveDialogTitle,
@@ -217,8 +216,7 @@ export function useSubscribeNotifications() {
     >
       <ResponsiveDialogContent className="max-w-md">
         <ResponsiveDialogHeader>
-          <ResponsiveDialogTitle>Notifications</ResponsiveDialogTitle>
-          <ResponsiveDialogDescription>{appName}</ResponsiveDialogDescription>
+          <ResponsiveDialogTitle>Notifications for {appName}</ResponsiveDialogTitle>
         </ResponsiveDialogHeader>
 
         <div className="py-4 space-y-4">

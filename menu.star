@@ -103,8 +103,8 @@ def action_push_accounts_add(a):
 
     fields = {}
     for key in ["label", "endpoint", "auth", "p256dh"]:
-        val = a.input(key)
-        if val:
+        val = a.input(key, "")
+        if val != "":
             fields[key] = val
 
     result = mochi.service.call("notifications", "accounts/add", type, **fields)

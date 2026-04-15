@@ -2,7 +2,7 @@
 // Also handles push-subscribe requests from app iframes via postMessage.
 // All API calls go through the menu's own backend (cookie auth).
 
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { push, useAuthStore } from '@mochi/web'
 
 const MENU_PATH = '/menu'
@@ -44,12 +44,12 @@ async function getVapidKey(): Promise<string> {
   return res?.data?.key || ''
 }
 
-async function findBrowserAccount(): Promise<Account | null> {
+async function findBrowserAccountByEndpoint(endpoint: string): Promise<Account | null> {
   const res = await menuFetch<AccountsListResponse>(
     '-/push/accounts/list?capability=notify'
   )
   const accounts = res?.data || []
-  return accounts.find((a) => a.type === 'browser') || null
+  return accounts.find((a) => a.type === 'browser' && a.identifier === endpoint) || null
 }
 
 async function createBrowserAccount(sub: PushSubscription): Promise<number | null> {
@@ -66,85 +66,114 @@ async function createBrowserAccount(sub: PushSubscription): Promise<number | nul
     }).toString(),
   })
 
-  // Fetch the account to get its ID
-  const account = await findBrowserAccount()
-  return account?.id ?? null
+  return (await findBrowserAccountByEndpoint(data.endpoint))?.id ?? null
 }
 
-/** Ensure browser push is registered. Returns the account ID or null. */
+/** Ensure browser push is registered for THIS device. Returns the account ID or null. */
 async function ensurePushRegistered(): Promise<number | null> {
   if (!(await push.isSupported())) return null
 
   const vapidKey = await getVapidKey()
   if (!vapidKey) return null
 
-  // Subscribe (reuses existing subscription if present)
+  // Subscribe (reuses existing subscription if present on this device)
   const sub = await push.subscribe(vapidKey)
   if (!sub) return null
 
-  // Check if a browser account already exists with this endpoint
-  const existing = await findBrowserAccount()
-  if (existing) {
-    // Check if the endpoint matches — if not, update it
-    if (existing.identifier !== sub.endpoint) {
-      // Remove stale account and create fresh
-      await menuFetch('-/push/accounts/remove', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ id: String(existing.id) }).toString(),
-      })
-      return createBrowserAccount(sub)
-    }
-    return existing.id
-  }
+  // Find the account matching this device's endpoint (other devices keep theirs).
+  const existing = await findBrowserAccountByEndpoint(sub.endpoint)
+  if (existing) return existing.id
 
   return createBrowserAccount(sub)
 }
 
 /**
- * Hook that:
- * 1. Auto-registers push if permission is already granted
- * 2. Listens for push-subscribe requests from app iframes
+ * Hook that listens for push-subscribe / -unsubscribe / -status requests from
+ * app iframes. Registration is driven explicitly from the settings UI — we do
+ * NOT auto-register on page load, because browser permission being 'granted'
+ * does not mean the user currently wants push enabled (they may have disabled
+ * it via the button, which cannot revoke browser permission).
  */
 export function usePushRegistration() {
-  const registering = useRef(false)
-
   useEffect(() => {
-    // Auto-register if permission is already granted (user previously allowed)
-    if (push.getPermission() === 'granted' && !registering.current) {
-      registering.current = true
-      ensurePushRegistered()
-        .catch(() => {})
-        .finally(() => { registering.current = false })
+    async function removeBrowserAccount(): Promise<void> {
+      const reg = await navigator.serviceWorker.ready
+      const sub = await reg.pushManager.getSubscription()
+      if (sub) {
+        const account = await findBrowserAccountByEndpoint(sub.endpoint)
+        if (account) {
+          await menuFetch('-/push/accounts/remove', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({ id: String(account.id) }).toString(),
+          })
+        }
+        await sub.unsubscribe()
+      }
     }
 
-    // Listen for push-subscribe requests from app iframes
     function handleMessage(event: MessageEvent) {
       const data = event.data
-      if (!data || typeof data !== 'object' || data.type !== 'push-subscribe') return
-
+      if (!data || typeof data !== 'object') return
       const source = event.source as WindowProxy | null
       const id = data.id
 
-      ;(async () => {
-        try {
-          // Request permission if not yet granted
-          const permission = await push.requestPermission()
-          if (permission !== 'granted') {
-            source?.postMessage({ type: 'push-result', id, ok: false, reason: 'denied' }, '*')
-            return
+      if (data.type === 'push-subscribe') {
+        ;(async () => {
+          try {
+            const permission = await push.requestPermission()
+            if (permission !== 'granted') {
+              source?.postMessage({ type: 'push-result', id, ok: false, reason: 'denied' }, '*')
+              return
+            }
+            const accountId = await ensurePushRegistered()
+            if (accountId != null) {
+              source?.postMessage({ type: 'push-result', id, ok: true, accountId }, '*')
+            } else {
+              source?.postMessage({ type: 'push-result', id, ok: false, reason: 'failed' }, '*')
+            }
+          } catch {
+            source?.postMessage({ type: 'push-result', id, ok: false, reason: 'error' }, '*')
           }
+        })()
+        return
+      }
 
-          const accountId = await ensurePushRegistered()
-          if (accountId != null) {
-            source?.postMessage({ type: 'push-result', id, ok: true, accountId }, '*')
-          } else {
-            source?.postMessage({ type: 'push-result', id, ok: false, reason: 'failed' }, '*')
+      if (data.type === 'push-unsubscribe') {
+        ;(async () => {
+          try {
+            await removeBrowserAccount()
+            source?.postMessage({ type: 'push-unsubscribe-result', id, ok: true }, '*')
+          } catch {
+            source?.postMessage({ type: 'push-unsubscribe-result', id, ok: false, reason: 'error' }, '*')
           }
-        } catch {
-          source?.postMessage({ type: 'push-result', id, ok: false, reason: 'error' }, '*')
-        }
-      })()
+        })()
+        return
+      }
+
+      if (data.type === 'push-status') {
+        ;(async () => {
+          try {
+            const permission = push.getPermission()
+            let subscribed = false
+            if (permission === 'granted' && (await push.isSupported())) {
+              const reg = await navigator.serviceWorker.ready
+              const sub = await reg.pushManager.getSubscription()
+              if (sub) {
+                const account = await findBrowserAccountByEndpoint(sub.endpoint)
+                subscribed = !!account
+              }
+            }
+            source?.postMessage(
+              { type: 'push-status-result', id, ok: true, subscribed, permission },
+              '*'
+            )
+          } catch {
+            source?.postMessage({ type: 'push-status-result', id, ok: false, reason: 'error' }, '*')
+          }
+        })()
+        return
+      }
     }
 
     window.addEventListener('message', handleMessage)
