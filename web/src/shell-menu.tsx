@@ -159,6 +159,9 @@ export function MochiShellMenu() {
     if (notification.link) {
       window.open(notification.link, '_blank')
     }
+    if (unreadCount === 1) {
+      setMenuOpen(false)
+    }
   }
 
   const trigger = (
@@ -194,7 +197,7 @@ export function MochiShellMenu() {
       <div className='flex items-center gap-1'>
         {unreadCount > 0 && (
           <button
-            onClick={() => markAllAsRead()}
+            onClick={() => { markAllAsRead(); setMenuOpen(false) }}
             className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-interactive-hover active:bg-interactive-active'
             title='Mark all as read'
           >
