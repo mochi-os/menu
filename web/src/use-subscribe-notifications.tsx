@@ -12,6 +12,7 @@ import { Check, Loader2 } from 'lucide-react'
 import {
   ResponsiveDialog,
   ResponsiveDialogContent,
+  ResponsiveDialogDescription,
   ResponsiveDialogFooter,
   ResponsiveDialogHeader,
   ResponsiveDialogTitle,
@@ -253,9 +254,16 @@ export function useSubscribeNotifications() {
       <ResponsiveDialogContent className="max-w-md">
         <ResponsiveDialogHeader>
           <ResponsiveDialogTitle>Notifications for {appName}</ResponsiveDialogTitle>
+          <ResponsiveDialogDescription>
+            You can change {pending && pending.items.length === 1 ? 'this' : 'these'} later in the{' '}
+            <a href="/settings/user/notifications" className="underline hover:text-foreground">
+              Settings app
+            </a>
+            .
+          </ResponsiveDialogDescription>
         </ResponsiveDialogHeader>
 
-        <div className="py-4 space-y-4">
+        <div className="pb-4 space-y-4 -mt-2">
           {loading ? (
             <div className="space-y-2">
               <Skeleton className="h-8 w-full" />
