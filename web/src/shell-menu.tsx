@@ -102,6 +102,25 @@ function useSidebarState(): 'expanded' | 'collapsed' {
   )
 }
 
+// Observe data-sidebar-present on #menu. True when the currently loaded app
+// has a sidebar; when false, the menu should ignore the persisted collapse
+// state and render horizontally (e.g. on the home page).
+function useSidebarPresent(): boolean {
+  return useSyncExternalStore(
+    (cb) => {
+      const el = document.getElementById('menu')
+      if (!el) return () => {}
+      const observer = new MutationObserver(cb)
+      observer.observe(el, { attributes: true, attributeFilter: ['data-sidebar-present'] })
+      return () => observer.disconnect()
+    },
+    () => {
+      const el = document.getElementById('menu')
+      return el?.getAttribute('data-sidebar-present') === 'true'
+    }
+  )
+}
+
 export function MochiShellMenu() {
   usePushRegistration()
   useShellFetch()
@@ -111,7 +130,8 @@ export function MochiShellMenu() {
   const [menuOpen, setMenuOpen] = useState(false)
   const { isDesktop } = useScreenSize()
   const sidebarState = useSidebarState()
-  const isCollapsed = sidebarState === 'collapsed'
+  const sidebarPresent = useSidebarPresent()
+  const isCollapsed = sidebarPresent && sidebarState === 'collapsed'
   const { notifications, markAsRead, markAllAsRead } = useMenuNotifications()
 
   // Close menu on Escape
