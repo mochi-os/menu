@@ -61,6 +61,15 @@ export function usePermissionRequest() {
       const data = event.data
       if (!data || typeof data !== 'object' || data.type !== 'request-permission') return
 
+      // Diagnostic logging for ticket mochi-dev-185 — remove once resolved
+      console.log('[menu debug 185] request-permission received', {
+        id: data.id,
+        app: data.app,
+        permission: data.permission,
+        restricted: data.restricted,
+        hasSource: !!event.source,
+      })
+
       const source = event.source as WindowProxy | null
       if (!source) return
 
