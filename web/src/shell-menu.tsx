@@ -7,7 +7,6 @@ import { useShellFetch } from './use-shell-fetch'
 import {
   Bell,
   Check,
-  CircleUser,
   ExternalLink,
   LogOut,
 
@@ -17,6 +16,7 @@ import {
   useAuthStore,
   useScreenSize,
   useDialogState,
+  EntityAvatar,
   SignOutDialog,
   shellNavigateExternal,
   useFormat,
@@ -158,6 +158,7 @@ export function MochiShellMenu() {
   }, [menuOpen])
 
   const name = useAuthStore((s) => s.name)
+  const identity = useAuthStore((s) => s.identity)
   const unreadNotifications = notifications.filter((n: Notification) => n.read === 0)
   const unreadCount = unreadNotifications.length
 
@@ -186,7 +187,7 @@ export function MochiShellMenu() {
 
   const trigger = (
     <button className='relative rounded p-1 hover:bg-interactive-hover active:bg-interactive-active'>
-      <CircleUser className='size-6 text-muted-foreground' />
+      <EntityAvatar fingerprint={identity || undefined} name={name} size={24} />
       {unreadCount > 0 && (
         <span className='absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-medium text-white'>
           {unreadCount > 99 ? '99+' : unreadCount}
@@ -197,7 +198,10 @@ export function MochiShellMenu() {
 
   const userSection = (
     <div className='flex items-center justify-between px-4 py-2.5'>
-      <span className='text-sm font-semibold'>{name || 'User'}</span>
+      <div className='flex items-center gap-2'>
+        <EntityAvatar fingerprint={identity || undefined} name={name} size={32} />
+        <span className='text-sm font-semibold'>{name || 'User'}</span>
+      </div>
       <div className='flex items-center gap-1 ml-4'>
         <button
           onClick={() => { setMenuOpen(false); setTimeout(() => setSignOutOpen(true), 150) }}
