@@ -162,6 +162,11 @@ export function MochiShellMenu() {
   const unreadNotifications = notifications.filter((n: Notification) => n.read === 0)
   const unreadCount = unreadNotifications.length
 
+  // Publish count to shell.js so it can prefix "(N)" onto the tab title.
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent('mochi-notification-count', { detail: unreadCount }))
+  }, [unreadCount])
+
   const handleNotificationClick = (notification: Notification) => {
     console.log('[notif-click]', { id: notification.id, read: notification.read, link: notification.link })
     if (notification.read === 0) {
