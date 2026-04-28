@@ -29,7 +29,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
   ScrollArea,
-  prefetchUrl,
 } from '@mochi/web'
 import type { Notification } from '@mochi/web'
 
@@ -285,12 +284,7 @@ export function MochiShellMenu() {
         'flex items-center gap-2 p-2',
         isCollapsed && 'flex-col'
       )}>
-        <a
-          href='/'
-          title='Home'
-          onMouseEnter={() => prefetchUrl('/')}
-          onFocus={() => prefetchUrl('/')}
-        >
+        <a href='/' title='Home'>
           <MochiLogo />
         </a>
 
