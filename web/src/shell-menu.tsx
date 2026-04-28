@@ -9,7 +9,8 @@ import {
   Check,
   ExternalLink,
   LogOut,
-
+  PanelLeftClose,
+  PanelLeftOpen,
 } from 'lucide-react'
 import {
   cn,
@@ -36,7 +37,11 @@ function MochiLogo() {
   return <img src='/images/logo-header.svg' alt='Mochi' className='h-6 w-6' />
 }
 
-function NotificationItem({ notification, onClick, onMiddleClick }: {
+function NotificationItem({
+  notification,
+  onClick,
+  onMiddleClick,
+}: {
   notification: Notification
   onClick?: (notification: Notification) => void
   onMiddleClick?: (notification: Notification) => void
@@ -91,12 +96,18 @@ function useSidebarState(): 'expanded' | 'collapsed' {
       const el = document.getElementById('menu')
       if (!el) return () => {}
       const observer = new MutationObserver(cb)
-      observer.observe(el, { attributes: true, attributeFilter: ['data-sidebar'] })
+      observer.observe(el, {
+        attributes: true,
+        attributeFilter: ['data-sidebar'],
+      })
       return () => observer.disconnect()
     },
     () => {
       const el = document.getElementById('menu')
-      return (el?.getAttribute('data-sidebar') as 'expanded' | 'collapsed') || 'expanded'
+      return (
+        (el?.getAttribute('data-sidebar') as 'expanded' | 'collapsed') ||
+        'expanded'
+      )
     }
   )
 }
@@ -110,7 +121,10 @@ function useSidebarPresent(): boolean {
       const el = document.getElementById('menu')
       if (!el) return () => {}
       const observer = new MutationObserver(cb)
-      observer.observe(el, { attributes: true, attributeFilter: ['data-sidebar-present'] })
+      observer.observe(el, {
+        attributes: true,
+        attributeFilter: ['data-sidebar-present'],
+      })
       return () => observer.disconnect()
     },
     () => {
@@ -128,6 +142,7 @@ export function MochiShellMenu() {
   const [signOutOpen, setSignOutOpen] = useDialogState()
   const [menuOpen, setMenuOpen] = useState(false)
   const { isDesktop } = useScreenSize()
+  const isCompact = !isDesktop
   const sidebarState = useSidebarState()
   const sidebarPresent = useSidebarPresent()
   const isCollapsed = sidebarPresent && sidebarState === 'collapsed'
@@ -189,8 +204,16 @@ export function MochiShellMenu() {
     }
   }
 
+  const handleSidebarToggle = () => {
+    window.dispatchEvent(new CustomEvent('mochi-sidebar-toggle'))
+  }
+
   const trigger = (
-    <button className='relative rounded p-1 hover:bg-interactive-hover active:bg-interactive-active'>
+    <button
+      type='button'
+      aria-label='Open menu'
+      className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 hover:bg-interactive-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+    >
       <EntityAvatar fingerprint={identity || undefined} name={name} size={24} />
       {unreadCount > 0 && (
         <span className='absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-medium text-white'>
@@ -278,6 +301,65 @@ export function MochiShellMenu() {
     </>
   )
 
+  const menuControl = isDesktop ? (
+    <Popover open={menuOpen} onOpenChange={setMenuOpen}>
+      <PopoverTrigger asChild>{trigger}</PopoverTrigger>
+      <PopoverContent
+        align='start'
+        sideOffset={8}
+        className='flex w-80 max-h-[var(--radix-popover-content-available-height)] flex-col p-0 overflow-hidden shadow-lg border-border sm:w-96'
+      >
+        {menuContent}
+      </PopoverContent>
+    </Popover>
+  ) : (
+    <Drawer open={menuOpen} onOpenChange={setMenuOpen} direction='bottom'>
+      <DrawerTrigger asChild>{trigger}</DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader className='sr-only'>
+          <DrawerTitle>Menu</DrawerTitle>
+        </DrawerHeader>
+        {menuContent}
+      </DrawerContent>
+    </Drawer>
+  )
+
+  if (isCompact) {
+    return (
+      <>
+        <header className='flex h-12 w-full items-center gap-1 border-b bg-background px-2'>
+          {sidebarPresent && (
+            <button
+              type='button'
+              aria-label={sidebarState === 'expanded' ? 'Close navigation' : 'Open navigation'}
+              title={sidebarState === 'expanded' ? 'Close navigation' : 'Open navigation'}
+              onClick={handleSidebarToggle}
+              className='flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 hover:bg-interactive-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+            >
+              {sidebarState === 'expanded' ? <PanelLeftClose className='size-5' /> : <PanelLeftOpen className='size-5' />}
+            </button>
+          )}
+
+          <a
+            href='/'
+            title='Home'
+            className='flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 hover:bg-interactive-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+          >
+            <MochiLogo />
+          </a>
+
+          <div className='min-w-0 flex-1' />
+
+          {menuControl}
+        </header>
+
+        <SignOutDialog open={!!signOutOpen} onOpenChange={setSignOutOpen} />
+        {subscribeDialog}
+        {permissionDialog}
+      </>
+    )
+  }
+
   return (
     <>
       <div className={cn(
@@ -288,28 +370,7 @@ export function MochiShellMenu() {
           <MochiLogo />
         </a>
 
-        {isDesktop ? (
-          <Popover open={menuOpen} onOpenChange={setMenuOpen}>
-            <PopoverTrigger asChild>{trigger}</PopoverTrigger>
-            <PopoverContent
-              align='start'
-              sideOffset={8}
-              className='flex w-80 max-h-[var(--radix-popover-content-available-height)] flex-col p-0 overflow-hidden shadow-lg border-border sm:w-96'
-            >
-              {menuContent}
-            </PopoverContent>
-          </Popover>
-        ) : (
-          <Drawer open={menuOpen} onOpenChange={setMenuOpen} direction='top'>
-            <DrawerTrigger asChild>{trigger}</DrawerTrigger>
-            <DrawerContent>
-              <DrawerHeader className='sr-only'>
-                <DrawerTitle>Menu</DrawerTitle>
-              </DrawerHeader>
-              {menuContent}
-            </DrawerContent>
-          </Drawer>
-        )}
+        {menuControl}
       </div>
 
       <SignOutDialog open={!!signOutOpen} onOpenChange={setSignOutOpen} />
