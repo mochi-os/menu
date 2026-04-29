@@ -9,6 +9,7 @@ import {
   Check,
   ExternalLink,
   LogOut,
+  Menu,
 
 } from 'lucide-react'
 import {
@@ -284,6 +285,20 @@ export function MochiShellMenu() {
         'flex items-center gap-2 p-2',
         isCollapsed && 'flex-col'
       )}>
+        {!isDesktop && (
+          <button
+            type='button'
+            onClick={() => window.dispatchEvent(new CustomEvent('mochi-sidebar-toggle'))}
+            className={cn(
+              'rounded p-1 hover:bg-interactive-hover active:bg-interactive-active',
+              !sidebarPresent && 'invisible'
+            )}
+            aria-label='Toggle navigation'
+            tabIndex={sidebarPresent ? 0 : -1}
+          >
+            <Menu className='size-5' />
+          </button>
+        )}
         <a href='/' title='Home'>
           <MochiLogo />
         </a>

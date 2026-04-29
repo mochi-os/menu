@@ -8,7 +8,7 @@
 // routes to the reserved suppress category (id 0) so it won't re-prompt.
 
 import { useState, useEffect, useCallback } from 'react'
-import { Check, Loader2 } from 'lucide-react'
+import { Check, ChevronDown, ChevronUp, Loader2 } from 'lucide-react'
 import {
   ResponsiveDialog,
   ResponsiveDialogContent,
@@ -95,6 +95,7 @@ export function useSubscribeNotifications() {
   // Per-item category selection, keyed by item index.
   const [selections, setSelections] = useState<Record<number, string>>({})
   const [submitting, setSubmitting] = useState(false)
+  const [expanded, setExpanded] = useState(false)
 
   const open = pending !== null
 
@@ -165,6 +166,7 @@ export function useSubscribeNotifications() {
     if (!pending) {
       setCategories([])
       setSelections({})
+      setExpanded(false)
       return
     }
 
@@ -215,6 +217,21 @@ export function useSubscribeNotifications() {
   }, [pending])
 
   const allSelected = pending ? pending.items.every((_, idx) => selections[idx]) : false
+  const allSame =
+    pending !== null &&
+    pending.items.length > 0 &&
+    pending.items.every((_, idx) => selections[idx] === selections[0])
+  const bulkValue = allSame ? (selections[0] ?? '') : ''
+
+  const handleBulkChange = useCallback((v: string) => {
+    setSelections((prev) => {
+      const next: Record<number, string> = {}
+      Object.keys(prev).forEach((k) => {
+        next[Number(k)] = v
+      })
+      return next
+    })
+  }, [])
 
   const handleAccept = useCallback(async () => {
     if (!pending || !allSelected) return
@@ -274,29 +291,76 @@ export function useSubscribeNotifications() {
             <p className="text-sm text-muted-foreground">
               No categories available. Create one in settings → Notifications.
             </p>
+          ) : pending && pending.items.length === 1 ? (
+            <div className="flex items-center justify-between gap-3 py-2">
+              <span className="text-sm">{pending.items[0].label}</span>
+              <Select
+                value={selections[0] ?? ''}
+                onValueChange={(v) => setSelections({ 0: v })}
+              >
+                <SelectTrigger className="w-44">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((cat) => (
+                    <SelectItem key={cat.id} value={String(cat.id)}>{cat.label}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           ) : (
-            <div className="flex flex-col">
-              {pending?.items.map((item, idx) => (
-                <div
-                  key={`${item.topic ?? ''}-${item.object ?? ''}-${idx}`}
-                  className="flex items-center justify-between gap-3 py-2"
-                >
-                  <span className="text-sm">{item.label}</span>
-                  <Select
-                    value={selections[idx] ?? ''}
-                    onValueChange={(v) => setSelections((prev) => ({ ...prev, [idx]: v }))}
-                  >
-                    <SelectTrigger className="w-44">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {categories.map((cat) => (
-                        <SelectItem key={cat.id} value={String(cat.id)}>{cat.label}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
+            <div className="space-y-3">
+              {!expanded && (
+                <Select value={bulkValue} onValueChange={handleBulkChange}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Mixed (see individual topics)" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {categories.map((cat) => (
+                      <SelectItem key={cat.id} value={String(cat.id)}>{cat.label}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+
+              <button
+                type="button"
+                onClick={() => setExpanded((v) => !v)}
+                className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"
+              >
+                {expanded ? (
+                  <ChevronUp className="h-3 w-3" />
+                ) : (
+                  <ChevronDown className="h-3 w-3" />
+                )}
+                {expanded ? 'Hide topics' : 'Set per topic'}
+              </button>
+
+              {expanded && (
+                <div className="max-h-[50vh] overflow-y-auto border-t pt-2">
+                  {pending?.items.map((item, idx) => (
+                    <div
+                      key={`${item.topic ?? ''}-${item.object ?? ''}-${idx}`}
+                      className="flex items-center justify-between gap-3 py-2"
+                    >
+                      <span className="text-sm">{item.label}</span>
+                      <Select
+                        value={selections[idx] ?? ''}
+                        onValueChange={(v) => setSelections((prev) => ({ ...prev, [idx]: v }))}
+                      >
+                        <SelectTrigger className="w-44">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {categories.map((cat) => (
+                            <SelectItem key={cat.id} value={String(cat.id)}>{cat.label}</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              )}
             </div>
           )}
         </div>
