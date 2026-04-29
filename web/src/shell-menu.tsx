@@ -24,11 +24,6 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
   ScrollArea,
 } from '@mochi/web'
 import type { Notification } from '@mochi/web'
@@ -94,7 +89,7 @@ function useSidebarState(): 'expanded' | 'collapsed' {
   return useSyncExternalStore(
     (cb) => {
       const el = document.getElementById('menu')
-      if (!el) return () => {}
+      if (!el) return () => { }
       const observer = new MutationObserver(cb)
       observer.observe(el, {
         attributes: true,
@@ -112,6 +107,27 @@ function useSidebarState(): 'expanded' | 'collapsed' {
   )
 }
 
+// Observe data-app on #menu — set by shell.js to the current app's path segment.
+// The home app has path "" (root "/").
+function useCurrentApp(): string {
+  return useSyncExternalStore(
+    (cb) => {
+      const el = document.getElementById('menu')
+      if (!el) return () => { }
+      const observer = new MutationObserver(cb)
+      observer.observe(el, {
+        attributes: true,
+        attributeFilter: ['data-app'],
+      })
+      return () => observer.disconnect()
+    },
+    () => {
+      const el = document.getElementById('menu')
+      return el?.getAttribute('data-app') ?? ''
+    }
+  )
+}
+
 // Observe data-sidebar-present on #menu. True when the currently loaded app
 // has a sidebar; when false, the menu should ignore the persisted collapse
 // state and render horizontally (e.g. on the home page).
@@ -119,7 +135,7 @@ function useSidebarPresent(): boolean {
   return useSyncExternalStore(
     (cb) => {
       const el = document.getElementById('menu')
-      if (!el) return () => {}
+      if (!el) return () => { }
       const observer = new MutationObserver(cb)
       observer.observe(el, {
         attributes: true,
@@ -146,6 +162,8 @@ export function MochiShellMenu() {
   const sidebarState = useSidebarState()
   const sidebarPresent = useSidebarPresent()
   const isCollapsed = sidebarPresent && sidebarState === 'collapsed'
+  const currentApp = useCurrentApp()
+  const isHome = currentApp === ''
   const { notifications, markAsRead, markAllAsRead } = useMenuNotifications()
 
   // Close menu on Escape
@@ -301,7 +319,7 @@ export function MochiShellMenu() {
     </>
   )
 
-  const menuControl = isDesktop ? (
+  const menuControl = (
     <Popover open={menuOpen} onOpenChange={setMenuOpen}>
       <PopoverTrigger asChild>{trigger}</PopoverTrigger>
       <PopoverContent
@@ -312,16 +330,6 @@ export function MochiShellMenu() {
         {menuContent}
       </PopoverContent>
     </Popover>
-  ) : (
-    <Drawer open={menuOpen} onOpenChange={setMenuOpen} direction='bottom'>
-      <DrawerTrigger asChild>{trigger}</DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader className='sr-only'>
-          <DrawerTitle>Menu</DrawerTitle>
-        </DrawerHeader>
-        {menuContent}
-      </DrawerContent>
-    </Drawer>
   )
 
   if (isCompact) {
@@ -348,10 +356,49 @@ export function MochiShellMenu() {
             <MochiLogo />
           </a>
 
-          <div className='min-w-0 flex-1' />
+          <div className='min-w-0 flex-1 flex items-center justify-center'>
+            {isHome && (
+              <span className='sm:hidden text-[1.5rem] font-light tracking-[3px] bg-linear-to-br from-foreground to-muted-foreground/30 bg-clip-text text-transparent select-none'>mochi</span>
+            )}
+          </div>
 
-          {menuControl}
+          <button
+            type='button'
+            aria-label='Open menu'
+            onClick={() => setMenuOpen(true)}
+            className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 hover:bg-interactive-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+          >
+            <EntityAvatar fingerprint={identity || undefined} name={name} size={24} />
+            {unreadCount > 0 && (
+              <span className='absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-medium text-white'>
+                {unreadCount > 99 ? '99+' : unreadCount}
+              </span>
+            )}
+          </button>
         </header>
+
+        {/* Custom bottom sheet — renders inside #menu (position:fixed), no Radix Dialog,
+            no react-remove-scroll, no body style changes that shift the app iframe */}
+        <div
+          aria-hidden='true'
+          className={cn(
+            'fixed inset-0 bg-black/50 transition-opacity duration-300',
+            menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          )}
+          onClick={() => setMenuOpen(false)}
+        />
+        <div
+          role='dialog'
+          aria-label='Menu'
+          aria-modal='true'
+          className={cn(
+            'fixed bottom-0 inset-x-0 bg-background rounded-t-lg border-t flex flex-col max-h-[80dvh] overflow-hidden transition-transform duration-300 ease-out',
+            menuOpen ? 'translate-y-0' : 'translate-y-full pointer-events-none'
+          )}
+        >
+          <div className='mx-auto mt-4 mb-1 h-2 w-25 shrink-0 rounded-full bg-muted' />
+          {menuContent}
+        </div>
 
         <SignOutDialog open={!!signOutOpen} onOpenChange={setSignOutOpen} />
         {subscribeDialog}
