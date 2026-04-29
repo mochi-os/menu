@@ -325,7 +325,7 @@ export function MochiShellMenu() {
       <PopoverContent
         align='start'
         sideOffset={8}
-        className='flex w-80 max-h-[var(--radix-popover-content-available-height)] flex-col p-0 overflow-hidden shadow-lg border-border sm:w-96'
+        className='flex w-80 max-h-(--radix-popover-content-available-height) flex-col p-0 overflow-hidden shadow-lg border-border sm:w-96'
       >
         {menuContent}
       </PopoverContent>
