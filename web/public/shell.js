@@ -41,6 +41,12 @@
     // --- Locale state ---
     var currentLocale = null;
 
+    // --- Language state ---
+    // BCP 47 tag (e.g. "en", "fr", "zh-Hant") for the active i18n catalog.
+    // Sourced from /_/shell init data; updated when an app broadcasts
+    // language-set so all open iframes pick up the change without a reload.
+    var currentLanguage = null;
+
     // --- Color theme state ---
     // Read initial color theme from server-injected inline style on <html>
     var currentColorTheme = null;
@@ -483,6 +489,7 @@
                     var tokenData = results[0];
                     var sc = shellConfig || {};
                     if (!currentLocale && sc.locale) currentLocale = sc.locale;
+                    if (!currentLanguage && sc.language) currentLanguage = sc.language;
                     var theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
                     var initMsg = {
                         type: 'init',
@@ -491,7 +498,8 @@
                         inShell: true,
                         sidebarOpen: sidebarOpen,
                         domain: sc.domain || null,
-                        locale: currentLocale || null
+                        locale: currentLocale || null,
+                        language: currentLanguage || null
                     };
                     if (currentColorTheme) initMsg.colorTheme = currentColorTheme;
                     postToIframe(initMsg);
@@ -506,7 +514,8 @@
                         inShell: true,
                         sidebarOpen: sidebarOpen,
                         domain: null,
-                        locale: currentLocale || null
+                        locale: currentLocale || null,
+                        language: currentLanguage || null
                     };
                     if (currentColorTheme) initMsg.colorTheme = currentColorTheme;
                     postToIframe(initMsg);
@@ -590,6 +599,13 @@
                 // App changed locale prefs — store and forward to iframe
                 if (data.locale) currentLocale = data.locale;
                 postToIframe({ type: 'locale-change', locale: data.locale || null });
+                break;
+
+            case 'language-set':
+                // App changed the i18n language — store and forward so every
+                // open iframe re-activates its Lingui catalog without a reload.
+                if (typeof data.language === 'string') currentLanguage = data.language;
+                postToIframe({ type: 'language-change', language: currentLanguage });
                 break;
         }
     });
