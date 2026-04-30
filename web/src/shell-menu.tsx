@@ -1,4 +1,5 @@
 import { useState, useEffect, useSyncExternalStore } from 'react'
+import { Trans, useLingui } from '@lingui/react/macro'
 import { usePushRegistration } from './use-push-registration'
 import { useMenuNotifications } from './use-menu-notifications'
 import { usePermissionRequest } from './use-permission-request'
@@ -206,6 +207,7 @@ export function MochiShellMenu() {
     return () => overlay.remove()
   }, [menuOpen])
 
+  const { t } = useLingui()
   const name = useAuthStore((s) => s.name)
   const identity = useAuthStore((s) => s.identity)
   const unreadNotifications = notifications.filter((n: Notification) => n.read === 0)
@@ -246,7 +248,7 @@ export function MochiShellMenu() {
   const trigger = (
     <button
       type='button'
-      aria-label='Open menu'
+      aria-label={t`Open menu`}
       className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 hover:bg-interactive-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
     >
       <EntityAvatar fingerprint={identity || undefined} name={name} size="sm" />
@@ -262,7 +264,7 @@ export function MochiShellMenu() {
     <div className='flex items-center justify-between px-4 py-2.5'>
       <div className='flex items-center gap-2'>
         <EntityAvatar fingerprint={identity || undefined} name={name} size="md" />
-        <span className='text-sm font-semibold'>{name || 'User'}</span>
+        <span className='text-sm font-semibold'>{name || t`User`}</span>
       </div>
       <div className='flex items-center gap-1 ml-4'>
         <button
@@ -278,14 +280,14 @@ export function MochiShellMenu() {
   const notificationsHeader = (
     <div className='flex items-center justify-between border-b bg-muted/30 px-4 py-2.5'>
       <span className='font-semibold text-sm'>
-        Notifications{unreadCount > 0 && ` (${unreadCount})`}
+        <Trans>Notifications</Trans>{unreadCount > 0 && ` (${unreadCount})`}
       </span>
       <div className='flex items-center gap-1'>
         {unreadCount > 0 && (
           <button
             onClick={() => { markAllAsRead(); setMenuOpen(false) }}
             className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-interactive-hover active:bg-interactive-active'
-            title='Mark all as read'
+            title={t`Mark all as read`}
           >
             <Check className='size-4' />
           </button>
@@ -294,7 +296,7 @@ export function MochiShellMenu() {
           href='/notifications/'
           onClick={() => setMenuOpen(false)}
           className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-interactive-hover active:bg-interactive-active'
-          title='View all'
+          title={t`View all`}
         >
           <ExternalLink className='size-4' />
         </a>
@@ -309,7 +311,7 @@ export function MochiShellMenu() {
           <div className='flex flex-col items-center justify-center py-8 text-center px-4'>
             <Bell className='size-8 text-muted-foreground/20 mb-3' />
             <p className='text-sm font-medium text-foreground'>
-              No unread notifications
+              <Trans>No unread notifications</Trans>
             </p>
           </div>
         ) : (
@@ -356,8 +358,8 @@ export function MochiShellMenu() {
           {sidebarPresent && (
             <button
               type='button'
-              aria-label={sidebarState === 'expanded' ? 'Close navigation' : 'Open navigation'}
-              title={sidebarState === 'expanded' ? 'Close navigation' : 'Open navigation'}
+              aria-label={sidebarState === 'expanded' ? t`Close navigation` : t`Open navigation`}
+              title={sidebarState === 'expanded' ? t`Close navigation` : t`Open navigation`}
               onClick={handleSidebarToggle}
               className='flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 hover:bg-interactive-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
             >
@@ -367,7 +369,7 @@ export function MochiShellMenu() {
 
           <a
             href='/'
-            title='Home'
+            title={t`Home`}
             className='flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 hover:bg-interactive-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
           >
             <MochiLogo />
@@ -381,7 +383,7 @@ export function MochiShellMenu() {
 
           <button
             type='button'
-            aria-label='Open menu'
+            aria-label={t`Open menu`}
             onClick={() => setMenuOpen(true)}
             className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 hover:bg-interactive-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
           >
@@ -406,7 +408,7 @@ export function MochiShellMenu() {
         />
         <div
           role='dialog'
-          aria-label='Menu'
+          aria-label={t`Menu`}
           aria-modal='true'
           className={cn(
             'fixed bottom-0 inset-x-0 bg-background rounded-t-lg border-t flex flex-col max-h-[80dvh] overflow-hidden transition-transform duration-300 ease-out',
@@ -429,7 +431,7 @@ export function MochiShellMenu() {
         'flex items-center gap-2 p-2',
         isCollapsed && 'flex-col'
       )}>
-        <a href='/' title='Home'>
+        <a href='/' title={t`Home`}>
           <MochiLogo />
         </a>
 
