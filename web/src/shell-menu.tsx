@@ -1,7 +1,6 @@
 import { useState, useEffect, useSyncExternalStore } from 'react'
 import { usePushRegistration } from './use-push-registration'
 import { useMenuNotifications } from './use-menu-notifications'
-import { useSubscribeNotifications } from './use-subscribe-notifications'
 import { usePermissionRequest } from './use-permission-request'
 import { useShellFetch } from './use-shell-fetch'
 import {
@@ -18,6 +17,7 @@ import {
   useScreenSize,
   useDialogState,
   EntityAvatar,
+  NotificationCategoryButton,
   SignOutDialog,
   shellNavigateExternal,
   useFormat,
@@ -29,7 +29,7 @@ import {
 import type { Notification } from '@mochi/web'
 
 function MochiLogo() {
-  return <img src='/images/logo-header.svg' alt='Mochi' className='h-6 w-6' />
+  return <img src='/images/logo-header.svg' alt='Mochi' className='h-7 w-7' />
 }
 
 function NotificationItem({
@@ -45,42 +45,60 @@ function NotificationItem({
   const isUnread = notification.read === 0
 
   return (
-    <button
-      type='button'
-      onClick={() => onClick?.(notification)}
-      onAuxClick={(e) => {
-        if (e.button === 1) {
-          e.preventDefault()
-          onMiddleClick?.(notification)
-        }
-      }}
+    <div
       className={cn(
-        'group flex w-full items-start gap-3 px-4 py-2 text-left transition-colors hover:bg-muted/50',
+        'group flex w-full items-start gap-3 px-4 py-2 transition-colors hover:bg-muted/50',
         isUnread ? 'bg-muted/30' : 'bg-transparent'
       )}
     >
-      <div
-        className={cn(
-          'mt-1.5 size-2 shrink-0 rounded-full transition-colors',
-          isUnread
-            ? 'bg-primary'
-            : 'bg-transparent group-hover:bg-muted-foreground/20'
-        )}
-      />
-      <div className='flex-1 min-w-0 space-y-0.5'>
-        <p
+      <button
+        type='button'
+        onClick={() => onClick?.(notification)}
+        onAuxClick={(e) => {
+          if (e.button === 1) {
+            e.preventDefault()
+            onMiddleClick?.(notification)
+          }
+        }}
+        className='flex flex-1 items-start gap-3 text-left'
+      >
+        <div
           className={cn(
-            'text-sm leading-snug',
-            isUnread ? 'font-medium text-foreground' : 'text-muted-foreground'
+            'mt-1.5 size-2 shrink-0 rounded-full transition-colors',
+            isUnread
+              ? 'bg-primary'
+              : 'bg-transparent group-hover:bg-muted-foreground/20'
           )}
-        >
-          {notification.content}
-        </p>
-        <p className='text-[11px] text-muted-foreground/70'>
-          {formatTimestamp(notification.created)}
-        </p>
-      </div>
-    </button>
+        />
+        {notification.sender && (
+          <EntityAvatar
+            src={`/people/${notification.sender}/-/avatar`}
+            styleUrl={`/people/${notification.sender}/-/style`}
+            size={24}
+            className='mt-0.5 shrink-0'
+          />
+        )}
+        <div className='flex-1 min-w-0 space-y-0.5'>
+          <p
+            className={cn(
+              'text-sm leading-snug',
+              isUnread ? 'font-medium text-foreground' : 'text-muted-foreground'
+            )}
+          >
+            {notification.content}
+          </p>
+          <p className='text-[11px] text-muted-foreground/70'>
+            {formatTimestamp(notification.created)}
+          </p>
+        </div>
+      </button>
+      <NotificationCategoryButton
+        app={notification.app}
+        topic={notification.topic}
+        object={notification.object}
+        className='mt-0.5 shrink-0'
+      />
+    </div>
   )
 }
 
@@ -153,7 +171,6 @@ function useSidebarPresent(): boolean {
 export function MochiShellMenu() {
   usePushRegistration()
   useShellFetch()
-  const { dialog: subscribeDialog } = useSubscribeNotifications()
   const { dialog: permissionDialog } = usePermissionRequest()
   const [signOutOpen, setSignOutOpen] = useDialogState()
   const [menuOpen, setMenuOpen] = useState(false)
@@ -232,7 +249,7 @@ export function MochiShellMenu() {
       aria-label='Open menu'
       className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 hover:bg-interactive-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
     >
-      <EntityAvatar fingerprint={identity || undefined} name={name} size={24} />
+      <EntityAvatar fingerprint={identity || undefined} name={name} size="sm" />
       {unreadCount > 0 && (
         <span className='absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-medium text-white'>
           {unreadCount > 99 ? '99+' : unreadCount}
@@ -244,7 +261,7 @@ export function MochiShellMenu() {
   const userSection = (
     <div className='flex items-center justify-between px-4 py-2.5'>
       <div className='flex items-center gap-2'>
-        <EntityAvatar fingerprint={identity || undefined} name={name} size={32} />
+        <EntityAvatar fingerprint={identity || undefined} name={name} size="md" />
         <span className='text-sm font-semibold'>{name || 'User'}</span>
       </div>
       <div className='flex items-center gap-1 ml-4'>
@@ -368,7 +385,7 @@ export function MochiShellMenu() {
             onClick={() => setMenuOpen(true)}
             className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 hover:bg-interactive-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
           >
-            <EntityAvatar fingerprint={identity || undefined} name={name} size={24} />
+            <EntityAvatar fingerprint={identity || undefined} name={name} size="sm" />
             {unreadCount > 0 && (
               <span className='absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-medium text-white'>
                 {unreadCount > 99 ? '99+' : unreadCount}
@@ -401,7 +418,6 @@ export function MochiShellMenu() {
         </div>
 
         <SignOutDialog open={!!signOutOpen} onOpenChange={setSignOutOpen} />
-        {subscribeDialog}
         {permissionDialog}
       </>
     )
@@ -421,7 +437,6 @@ export function MochiShellMenu() {
       </div>
 
       <SignOutDialog open={!!signOutOpen} onOpenChange={setSignOutOpen} />
-      {subscribeDialog}
       {permissionDialog}
     </>
   )

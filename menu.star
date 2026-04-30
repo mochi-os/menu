@@ -29,68 +29,37 @@ def action_notifications_read_all(a):
     mochi.service.call("notifications", "read/all")
     return {"data": {"ok": True}}
 
-# Subscribe dialog support
+# Per-notification category picker support
 
 def action_notifications_categories(a):
-    """Return the user's notification categories (id + label + badge, no destinations)."""
+    """Return the user's notification categories (id + label, no destinations)."""
     result = mochi.service.call("notifications", "categories")
     return {"data": result or []}
 
-def action_notifications_subscribe(a):
-    """Create or update a subscription and optionally assign a category.
-
-    Inputs: app, label, topic (optional), object (optional), category (optional).
-    """
+def action_notifications_topic_lookup(a):
+    """Find the topic row matching (app, topic, object) so the picker can show
+    the current category."""
     app = a.input("app", "").strip()
-    label = a.input("label", "").strip()
     topic = a.input("topic", "").strip()
     object = a.input("object", "").strip()
-    cat_raw = a.input("category", "").strip()
-
     if not app:
         return a.error(400, "app is required")
-    if not label:
-        return a.error(400, "label is required")
+    row = mochi.service.call("notifications", "topic/lookup", app, topic, object)
+    return {"data": row}
 
+def action_notifications_topic_set_category(a):
+    """Set the category of a topic row by id."""
+    id = a.input("id", "").strip()
+    if not id or not id.isdigit():
+        return a.error(400, "Invalid id")
+    cat_raw = a.input("category", "")
     category = None
     if cat_raw != "" and cat_raw.lstrip("-").isdigit():
         category = int(cat_raw)
-
-    result = mochi.service.call("notifications", "subscribe", app, label, topic, object, category)
-    return {"data": {"id": result}}
-
-def action_notifications_reconcile(a):
-    """Given an app and its declared list of desired (topic, object, label) items,
-    delete orphaned subscriptions for the app and return the items that still
-    need user input (no sub yet, or category unassigned)."""
-    app = a.input("app", "").strip()
-    desired_raw = a.input("desired", "")
-    if not app:
-        return a.error(400, "app is required")
-    desired = json.decode(desired_raw) if desired_raw else []
-    missing = mochi.service.call("notifications", "subscriptions/reconcile", app, desired)
-    return {"data": missing or []}
-
-def action_notifications_pending(a):
-    """List unassigned subscriptions the shell should prompt for. Optional `app` filter."""
-    app = a.input("app", "").strip()
-    result = mochi.service.call("notifications", "pending/list", app)
-    return {"data": result or []}
-
-def action_notifications_subscriptions(a):
-    """List notification subscriptions for the current user."""
-    result = mochi.service.call("notifications", "subscriptions")
-    if result == None:
-        return {"data": []}
-    return {"data": result}
-
-def action_notifications_unsubscribe(a):
-    """Delete a notification subscription."""
-    id = a.input("id", "").strip()
-    if not id:
-        return a.error(400, "id is required")
-    mochi.service.call("notifications", "unsubscribe", id)
-    return {"data": {"ok": True}}
+    ok = mochi.service.call("notifications", "topic/set_category", int(id), category)
+    if not ok:
+        return a.error(404, "Not found")
+    return {"data": {}}
 
 # Push registration (replaces direct HTTP calls to notifications accounts)
 
