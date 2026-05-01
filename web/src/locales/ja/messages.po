@@ -17,28 +17,40 @@ msgstr ""
 msgid "Access Forbidden"
 msgstr "アクセスが禁止されています"
 
-#: ../../../lib/web/src/features/access/access-list.tsx:187
+#: ../../../lib/web/src/features/access/access-list.tsx:188
 msgid "Access level"
 msgstr "アクセスレベル"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:122
+#: ../../../lib/web/src/features/accounts/account-manager.tsx:208
+msgid "Account added"
+msgstr "アカウントを追加しました"
+
+#: ../../../lib/web/src/features/accounts/account-manager.tsx:224
+msgid "Account removed"
+msgstr "アカウントを削除しました"
+
+#: ../../../lib/web/src/features/accounts/account-add.tsx:123
 msgid "Account type"
 msgstr "アカウントタイプ"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:116
+#: ../../../lib/web/src/features/accounts/account-manager.tsx:234
+msgid "Account verified"
+msgstr "アカウントを確認しました"
+
+#: ../../../lib/web/src/features/accounts/account-add.tsx:117
 msgid "Add a new account"
 msgstr "新しいアカウントを追加"
 
-#: ../../../lib/web/src/features/access/access-dialog.tsx:144
+#: ../../../lib/web/src/features/access/access-dialog.tsx:145
 msgid "Add access"
 msgstr "アクセスを追加"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:115
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:278
+#: ../../../lib/web/src/features/accounts/account-add.tsx:116
+#: ../../../lib/web/src/features/accounts/account-manager.tsx:280
 msgid "Add account"
 msgstr "アカウントを追加"
 
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:287
+#: ../../../lib/web/src/features/accounts/account-manager.tsx:289
 msgid "Add an account to receive notifications and use services."
 msgstr "通知を受け取り、サービスを利用するには、アカウントを追加してください。"
 
@@ -46,13 +58,21 @@ msgstr "通知を受け取り、サービスを利用するには、アカウン
 msgid "Add new account"
 msgstr "新しいアカウントを追加"
 
+#: ../../../lib/web/src/components/post-tags.tsx:119
+msgid "Add tag..."
+msgstr "タグを追加…"
+
 #: ../../../lib/web/src/components/layout/team-switcher.tsx:80
 msgid "Add team/app"
 msgstr "チーム/アプリを追加"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:158
+#: ../../../lib/web/src/features/accounts/account-add.tsx:159
 msgid "Add to existing notifications"
 msgstr "既存の通知に追加"
+
+#: ../../../lib/web/src/components/view-tabs.tsx:57
+msgid "Add view"
+msgstr ""
 
 #: ../../../lib/web/src/components/config-drawer.tsx:62
 msgid "Adjust the appearance and layout to suit your preferences."
@@ -62,7 +82,7 @@ msgstr "外観とレイアウトをお好みに合わせて調整できます。
 msgid "AI"
 msgstr "AI"
 
-#: ../../../lib/web/src/components/notifications-dropdown.tsx:158
+#: ../../../lib/web/src/components/notifications-dropdown.tsx:159
 msgid "All"
 msgstr "すべて"
 
@@ -80,18 +100,26 @@ msgstr "戻る"
 msgid "Back to Home"
 msgstr "ホームに戻る"
 
-#: ../../../lib/web/src/components/travelling-picker.tsx:291
+#: ../../../lib/web/src/components/post-tags.tsx:160
+msgid "Boost interest"
+msgstr "関心を高める"
+
+#: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
-#: ../../../lib/web/src/features/access/access-dialog.tsx:324
-#: ../../../lib/web/src/features/access/access-list.tsx:254
-#: ../../../lib/web/src/features/accounts/account-add.tsx:184
+#: ../../../lib/web/src/features/access/access-dialog.tsx:325
+#: ../../../lib/web/src/features/access/access-list.tsx:255
+#: ../../../lib/web/src/features/accounts/account-add.tsx:185
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:86
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:129
+#: ../../../lib/web/src/components/notification-category-button.tsx:131
 msgid "Category for this notification"
 msgstr "この通知のカテゴリ"
+
+#: ../../../lib/web/src/components/notification-category-button.tsx:115
+msgid "Change notification category"
+msgstr "通知カテゴリを変更"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:315
 msgid "Choose between default expanded, compact icon-only, or full layout mode"
@@ -109,6 +137,10 @@ msgstr "左から右、または右から左のサイト表示方向から選択
 msgid "Choose between system preference, light mode, or dark mode"
 msgstr "システム設定、ライトモード、ダークモードから選択します"
 
+#: ../../../lib/web/src/components/language-picker.tsx:107
+msgid "Choose language"
+msgstr "言語を選択"
+
 #: ../../../lib/web/src/components/colour-picker.tsx:304
 msgid "Clear"
 msgstr "クリア"
@@ -121,12 +153,17 @@ msgstr "すべてクリア"
 msgid "Clear filters"
 msgstr "フィルターをクリア"
 
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:167
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:164
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:168
 msgid "Clear selection"
 msgstr "選択をクリア"
 
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:165
+msgid "Clear selection (Escape)"
+msgstr "選択をクリア（Esc）"
+
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:317
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
 #: src/use-permission-request.tsx:165
 msgid "Close"
@@ -139,6 +176,10 @@ msgstr "ナビゲーションを閉じる"
 #: ../../../lib/web/src/components/layout/right-panel.tsx:254
 msgid "Close Panel"
 msgstr "パネルを閉じる"
+
+#: ../../../lib/web/src/components/header-search.tsx:51
+msgid "Close search"
+msgstr "検索を閉じる"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Collapse sidebar"
@@ -153,9 +194,13 @@ msgid "Compact"
 msgstr "コンパクト"
 
 #: ../../../lib/web/src/components/place-picker.tsx:155
-#: ../../../lib/web/src/components/travelling-picker.tsx:298
+#: ../../../lib/web/src/components/travelling-picker.tsx:299
 msgid "Confirm"
 msgstr "確認"
+
+#: ../../../lib/web/src/lib/query-client.ts:78
+msgid "Content not modified"
+msgstr "コンテンツは変更されていません"
 
 #: ../../../lib/web/src/components/layout/right-panel.tsx:145
 msgid "Contextual information and details."
@@ -181,7 +226,7 @@ msgstr "ダークモード"
 msgid "Default"
 msgstr "デフォルト"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:168
+#: ../../../lib/web/src/features/accounts/account-add.tsx:169
 msgid "Default AI account"
 msgstr "デフォルト AI アカウント"
 
@@ -201,19 +246,39 @@ msgstr "詳細パネル"
 msgid "Direction"
 msgstr "方向"
 
-#: ../../../lib/web/src/components/ui/sidebar.tsx:234
+#: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "モバイルサイドバーを表示します。"
+
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:312
+msgid "Download"
+msgstr "ダウンロード"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
 msgstr "サイドバーを展開"
 
+#: ../../../lib/web/src/features/accounts/account-manager.tsx:217
+msgid "Failed to add account"
+msgstr "アカウントの追加に失敗しました"
+
+#: ../../../lib/web/src/features/accounts/account-manager.tsx:226
+msgid "Failed to remove account"
+msgstr "アカウントの削除に失敗しました"
+
+#: ../../../lib/web/src/features/accounts/account-manager.tsx:249
+msgid "Failed to send verification code"
+msgstr "確認コードの送信に失敗しました"
+
+#: ../../../lib/web/src/components/notification-category-button.tsx:104
+msgid "Failed to update category"
+msgstr "カテゴリの更新に失敗しました"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
 msgstr "フローティング"
 
-#: ../../../lib/web/src/components/travelling-picker.tsx:148
+#: ../../../lib/web/src/components/travelling-picker.tsx:149
 msgid "From"
 msgstr "差出元"
 
@@ -243,7 +308,7 @@ msgstr "次のページへ"
 msgid "Go to previous page"
 msgstr "前のページへ"
 
-#: ../../../lib/web/src/features/access/access-dialog.tsx:158
+#: ../../../lib/web/src/features/access/access-dialog.tsx:159
 msgid "Group"
 msgstr "グループ"
 
@@ -252,6 +317,9 @@ msgid "Hide"
 msgstr "非表示"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:82
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:142
+#: ../../../lib/web/src/components/layout/top-bar.tsx:62
+#: ../../../lib/web/src/components/layout/top-bar.tsx:91
 #: src/shell-menu.tsx:372
 #: src/shell-menu.tsx:434
 msgid "Home"
@@ -268,6 +336,10 @@ msgstr "インセット"
 #: ../../../lib/web/src/components/ui/sort-selector.tsx:39
 msgid "Interests"
 msgstr "興味"
+
+#: ../../../lib/web/src/features/accounts/account-manager.tsx:237
+msgid "Invalid verification code"
+msgstr "確認コードが無効です"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:273
 msgid "Layout"
@@ -298,6 +370,7 @@ msgstr "読み込み中…"
 #: ../../../lib/web/src/components/layout/nav-user.tsx:212
 #: ../../../lib/web/src/components/profile-dropdown.tsx:66
 #: ../../../lib/web/src/components/profile-dropdown.tsx:95
+#: ../../../lib/web/src/components/sign-out-dialog.tsx:23
 msgid "Log out"
 msgstr "ログアウト"
 
@@ -309,11 +382,12 @@ msgstr "ログアウトしました (エラーあり)"
 msgid "Logged out successfully"
 msgstr "ログアウトしました"
 
-#: ../../../lib/web/src/components/notifications-dropdown.tsx:219
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:86
+#: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 msgid "Mark all as read"
 msgstr "すべて既読にする"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:151
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
 msgid "Menu"
 msgstr "メニュー"
 
@@ -321,19 +395,23 @@ msgstr "メニュー"
 msgid "New"
 msgstr "新規"
 
-#: ../../../lib/web/src/features/access/access-list.tsx:155
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:342
+msgid "Next image"
+msgstr "次の画像"
+
+#: ../../../lib/web/src/features/access/access-list.tsx:156
 msgid "No access rules configured. Add rules to control who can access this resource."
 msgstr "アクセスルールが設定されていません。このリソースへのアクセスを制御するルールを追加してください。"
 
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:285
+#: ../../../lib/web/src/features/accounts/account-manager.tsx:287
 msgid "No connected accounts"
 msgstr "接続されたアカウントがありません"
 
-#: ../../../lib/web/src/features/access/access-dialog.tsx:237
+#: ../../../lib/web/src/features/access/access-dialog.tsx:238
 msgid "No groups available"
 msgstr "利用可能なグループがありません"
 
-#: ../../../lib/web/src/components/language-picker.tsx:96
+#: ../../../lib/web/src/components/language-picker.tsx:117
 msgid "No matches."
 msgstr "一致するものがありません。"
 
@@ -345,16 +423,16 @@ msgstr "場所が見つかりません"
 msgid "No profile"
 msgstr "プロフィールがありません"
 
-#: ../../../lib/web/src/components/command-menu.tsx:51
+#: ../../../lib/web/src/components/command-menu.tsx:52
 #: ../../../lib/web/src/components/data-table/faceted-filter.tsx:87
 msgid "No results found."
 msgstr "結果が見つかりません。"
 
-#: ../../../lib/web/src/components/timezone-select.tsx:62
+#: ../../../lib/web/src/components/timezone-select.tsx:63
 msgid "No time zone found."
 msgstr "タイムゾーンが見つかりません。"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:133
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "No topic record yet — try again after the next notification."
 msgstr "まだトピック記録がありません — 次の通知後にもう一度お試しください。"
 
@@ -362,16 +440,17 @@ msgstr "まだトピック記録がありません — 次の通知後にもう�
 msgid "No unread notifications"
 msgstr "未読の通知はありません"
 
-#: ../../../lib/web/src/features/access/access-dialog.tsx:202
+#: ../../../lib/web/src/features/access/access-dialog.tsx:203
 msgid "No users found"
 msgstr "ユーザーが見つかりません"
 
-#: ../../../lib/web/src/components/person-picker.tsx:332
+#: ../../../lib/web/src/components/person-picker.tsx:333
 msgid "None"
 msgstr "なし"
 
-#: ../../../lib/web/src/components/notifications-dropdown.tsx:145
-#: ../../../lib/web/src/components/notifications-dropdown.tsx:246
+#: ../../../lib/web/src/components/notifications-dropdown.tsx:132
+#: ../../../lib/web/src/components/notifications-dropdown.tsx:146
+#: ../../../lib/web/src/components/notifications-dropdown.tsx:247
 #: src/shell-menu.tsx:283
 msgid "Notifications"
 msgstr "通知"
@@ -380,21 +459,39 @@ msgstr "通知"
 msgid "Oops! Page Not Found!"
 msgstr "ページが見つかりません!"
 
+#: ../../../lib/web/src/features/accounts/account-manager.tsx:150
+#: ../../../lib/web/src/features/accounts/account-manager.tsx:151
+msgid "Open account actions"
+msgstr "アカウントのアクションを開く"
+
+#: ../../../lib/web/src/components/layout/top-bar.tsx:57
+msgid "Open navigation"
+msgstr "ナビゲーションを開く"
+
+#: ../../../lib/web/src/components/layout/top-nav.tsx:32
+#: ../../../lib/web/src/components/layout/top-nav.tsx:33
+msgid "Open navigation menu"
+msgstr "ナビゲーションメニューを開く"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:51
 msgid "Open theme settings"
 msgstr "テーマ設定を開く"
 
-#: ../../../lib/web/src/features/access/access-dialog.tsx:162
+#: ../../../lib/web/src/features/access/access-dialog.tsx:163
 msgid "Other"
 msgstr "その他"
 
-#: ../../../lib/web/src/features/access/access-list.tsx:212
+#: ../../../lib/web/src/features/access/access-list.tsx:213
 msgid "Owner"
 msgstr "オーナー\"#. placeholder {0}: formatInterval(source.interval)"
 
 #: src/use-permission-request.tsx:150
 msgid "Permission request"
 msgstr "権限のリクエスト"
+
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:332
+msgid "Previous image"
+msgstr "前の画像"
 
 #: ../../../lib/web/src/components/layout/nav-user.tsx:134
 #: ../../../lib/web/src/components/profile-dropdown.tsx:111
@@ -410,14 +507,27 @@ msgstr "おすすめ"
 msgid "Redirecting to login."
 msgstr "ログイン画面にリダイレクトしています。"
 
-#: ../../../lib/web/src/features/access/access-list.tsx:256
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:170
+#: ../../../lib/web/src/components/post-tags.tsx:175
+msgid "Reduce interest"
+msgstr "関心を下げる"
+
+#: ../../../lib/web/src/features/access/access-list.tsx:257
+#: ../../../lib/web/src/features/accounts/account-manager.tsx:172
 msgid "Remove"
 msgstr "削除"
 
-#: ../../../lib/web/src/features/access/access-list.tsx:248
+#: ../../../lib/web/src/features/access/access-list.tsx:241
+#: ../../../lib/web/src/features/access/access-list.tsx:242
+msgid "Remove access rule"
+msgstr "アクセスルールを削除"
+
+#: ../../../lib/web/src/features/access/access-list.tsx:249
 msgid "Remove access?"
 msgstr "アクセスを削除しますか?"
+
+#: ../../../lib/web/src/components/post-tags.tsx:190
+msgid "Remove interest"
+msgstr "関心を削除"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 msgid "Reset"
@@ -439,25 +549,49 @@ msgstr "ページあたりの行数"
 msgid "Search for a place"
 msgstr "場所を検索"
 
-#: ../../../lib/web/src/features/access/access-dialog.tsx:169
+#: ../../../lib/web/src/components/travelling-picker.tsx:234
+msgid "Search for destination..."
+msgstr "目的地を検索…"
+
+#: ../../../lib/web/src/components/travelling-picker.tsx:173
+msgid "Search for origin..."
+msgstr "出発地を検索…"
+
+#: ../../../lib/web/src/components/timezone-select.tsx:61
+msgid "Search time zone..."
+msgstr "タイムゾーンを検索…"
+
+#: ../../../lib/web/src/features/access/access-dialog.tsx:170
 msgid "Search users"
 msgstr "ユーザーを検索"
 
+#: ../../../lib/web/src/components/person-picker.tsx:312
+msgid "Search..."
+msgstr ""
+
+#: ../../../lib/web/src/components/language-picker.tsx:115
+msgid "Search…"
+msgstr "検索…"
+
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:174
 #: ../../../lib/web/src/components/search-entity-page.tsx:149
-#: ../../../lib/web/src/features/access/access-dialog.tsx:198
+#: ../../../lib/web/src/features/access/access-dialog.tsx:199
 msgid "Searching..."
 msgstr "検索中..."
 
-#: ../../../lib/web/src/features/access/access-dialog.tsx:146
+#: ../../../lib/web/src/features/access/access-dialog.tsx:147
 msgid "Select a user, group, or other rule to grant access."
 msgstr "アクセスを付与するユーザー、グループ、または他のルールを選択してください。"
 
-#: ../../../lib/web/src/features/access/access-dialog.tsx:269
+#: ../../../lib/web/src/features/access/access-dialog.tsx:270
 msgid "Select access rule"
 msgstr "アクセスルールを選択"
 
-#: ../../../lib/web/src/features/access/access-dialog.tsx:227
+#: ../../../lib/web/src/features/accounts/account-add.tsx:126
+msgid "Select account type"
+msgstr "アカウントの種類を選択"
+
+#: ../../../lib/web/src/features/access/access-dialog.tsx:228
 msgid "Select group"
 msgstr "グループを選択"
 
@@ -477,7 +611,11 @@ msgstr "サイトの表示方向を選択"
 msgid "Select theme preference"
 msgstr "テーマの設定を選択"
 
-#: ../../../lib/web/src/components/travelling-picker.tsx:142
+#: ../../../lib/web/src/lib/api-client.ts:224
+msgid "Session expired"
+msgstr "セッションの有効期限が切れました"
+
+#: ../../../lib/web/src/components/travelling-picker.tsx:143
 msgid "Set origin and destination"
 msgstr "出発地と目的地を設定"
 
@@ -493,7 +631,7 @@ msgstr "{total}件中{totalShown}件を表示"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:225
 #: ../../../lib/web/src/components/config-drawer.tsx:249
-#: ../../../lib/web/src/components/ui/sidebar.tsx:233
+#: ../../../lib/web/src/components/ui/sidebar.tsx:234
 msgid "Sidebar"
 msgstr "サイドバー"
 
@@ -509,7 +647,7 @@ msgstr "メインコンテンツへスキップ"
 msgid "Stay tuned though!"
 msgstr "今後の更新にご期待ください!"
 
-#: ../../../lib/web/src/features/access/access-list.tsx:186
+#: ../../../lib/web/src/features/access/access-list.tsx:187
 msgid "Subject"
 msgstr "件名"
 
@@ -545,7 +683,9 @@ msgstr "列を切り替え"
 msgid "Toggle Right Panel"
 msgstr "右パネルを切り替え"
 
-#: ../../../lib/web/src/components/ui/sidebar.tsx:311
+#: ../../../lib/web/src/components/ui/sidebar.tsx:312
+#: ../../../lib/web/src/components/ui/sidebar.tsx:324
+#: ../../../lib/web/src/components/ui/sidebar.tsx:327
 msgid "Toggle Sidebar"
 msgstr "サイドバーを切り替え"
 
@@ -557,7 +697,7 @@ msgstr "テーマを切り替え"
 msgid "Top"
 msgstr "トップ"
 
-#: ../../../lib/web/src/components/travelling-picker.tsx:140
+#: ../../../lib/web/src/components/travelling-picker.tsx:141
 msgid "Travelling"
 msgstr "移動中"
 
@@ -572,19 +712,36 @@ msgstr "検索語を変えてみてください"
 msgid "Try again"
 msgstr "再試行"
 
-#: ../../../lib/web/src/features/access/access-dialog.tsx:187
+#: ../../../lib/web/src/components/command-menu.tsx:49
+msgid "Type a command or search..."
+msgstr "コマンドを入力または検索…"
+
+#: ../../../lib/web/src/features/access/access-dialog.tsx:188
 msgid "Type to search users"
 msgstr "入力してユーザーを検索"
+
+#: ../../../lib/web/src/features/access/access-dialog.tsx:180
+msgid "Type to search..."
+msgstr "入力して検索…"
+
+#: ../../../lib/web/src/lib/auth-manager.ts:82
+#: ../../../lib/web/src/lib/auth-manager.ts:94
+msgid "Unable to redirect to login. Please try again."
+msgstr "ログインページにリダイレクトできません。再試行してください。"
+
+#: ../../../lib/web/src/components/notification-category-button.tsx:143
+msgid "Unassigned"
+msgstr "未割り当て"
 
 #: ../../../lib/web/src/features/errors/unauthorized-error.tsx:12
 msgid "Unauthorized Access"
 msgstr "認証されていないアクセス"
 
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:129
+#: ../../../lib/web/src/features/accounts/account-manager.tsx:131
 msgid "Unverified"
 msgstr "未認証"
 
-#: ../../../lib/web/src/features/access/access-dialog.tsx:154
+#: ../../../lib/web/src/features/access/access-dialog.tsx:155
 msgid "User"
 msgstr "ユーザー"
 
@@ -592,7 +749,15 @@ msgstr "ユーザー"
 msgid "Verification code"
 msgstr "認証コード"
 
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:162
+#: ../../../lib/web/src/features/accounts/account-manager.tsx:247
+msgid "Verification code sent"
+msgstr "確認コードを送信しました"
+
+#: ../../../lib/web/src/features/accounts/account-manager.tsx:240
+msgid "Verification failed"
+msgstr "確認に失敗しました"
+
+#: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 msgid "Verify"
 msgstr "認証"
 
@@ -603,6 +768,14 @@ msgstr "メールアドレスを認証"
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
 msgstr "ビュー"
+
+#: ../../../lib/web/src/components/notifications-dropdown.tsx:173
+msgid "View all"
+msgstr "すべて表示"
+
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:94
+msgid "View all notifications"
+msgstr "すべての通知を表示"
 
 #: ../../../lib/web/src/features/errors/maintenance-error.tsx:12
 msgid "We'll be back online shortly."
