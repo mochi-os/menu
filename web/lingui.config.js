@@ -5,7 +5,7 @@ export default {
   catalogs: [
     {
       path: 'src/locales/{locale}/messages',
-      include: ['src'],
+      include: ['src', '../../../lib/web/src'],
     },
   ],
   format: 'po',
