@@ -109,8 +109,8 @@ def action_permissions_grant(a):
     if not app_id or not permission:
         return a.error_label(400, "errors.app_and_permission_are_required")
 
-    # Block restricted permissions — they must be configured in app settings
-    if mochi.permission.restricted(permission):
+    # Block non-standard permissions — they must be configured in app settings
+    if mochi.permission.level(permission) != "standard":
         return a.error_label(403, "errors.restricted_permissions_must_be_enabled_in_app_settings")
 
     mochi.permission.grant(app_id, permission)
