@@ -3,6 +3,7 @@
 // shows a dialog for the user to grant or deny the permission.
 
 import { useState, useEffect, useCallback } from 'react'
+import { Trans } from '@lingui/react/macro'
 import { Shield, ShieldAlert, Loader2 } from 'lucide-react'
 import {
   ResponsiveDialog,
@@ -146,7 +147,7 @@ export function usePermissionRequest() {
               <Shield className="h-6 w-6 text-primary" />
             )}
           </div>
-          <ResponsiveDialogTitle className="text-center">Permission request</ResponsiveDialogTitle>
+          <ResponsiveDialogTitle className="text-center"><Trans>Permission request</Trans></ResponsiveDialogTitle>
           <ResponsiveDialogDescription className="text-center">
             <span className="font-medium">{appName}</span> wants permission to {permissionLabel}.
           </ResponsiveDialogDescription>
@@ -154,19 +155,19 @@ export function usePermissionRequest() {
 
         {pending.restricted && (
           <p className="text-sm text-amber-600 text-center">
-            This permission must be enabled by you in the app settings.
+            <Trans>This permission must be enabled by you in the app settings.</Trans>
           </p>
         )}
 
         <ResponsiveDialogFooter className="flex-row gap-2 sm:justify-end">
           {pending.restricted ? (
             <Button variant="outline" className="flex-1" onClick={handleDeny}>
-              Close
+              <Trans>Close</Trans>
             </Button>
           ) : (
             <>
               <Button variant="outline" className="flex-1" onClick={handleDeny} disabled={submitting}>
-                Deny
+                <Trans>Deny</Trans>
               </Button>
               <Button className="flex-1" onClick={handleAllow} disabled={submitting}>
                 {submitting ? (
