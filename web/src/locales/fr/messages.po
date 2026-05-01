@@ -13,6 +13,18 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:52
+msgid "12 hours"
+msgstr "12 heures"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:51
+msgid "24 hours"
+msgstr "24 heures"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:61
+msgid "Absolute (date and time)"
+msgstr "Absolu (date et heure)"
+
 #: ../../../lib/web/src/features/errors/forbidden.tsx:12
 msgid "Access Forbidden"
 msgstr "Accès interdit"
@@ -86,6 +98,10 @@ msgstr "IA"
 msgid "All"
 msgstr "Tout"
 
+#: ../../../lib/web/src/components/sign-out-dialog.tsx:24
+msgid "Are you sure you want to log out? You will need to log in again to access your account."
+msgstr "Voulez-vous vraiment vous déconnecter ? Vous devrez vous reconnecter pour accéder à votre compte."
+
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Croissant"
@@ -104,6 +120,7 @@ msgstr "Retour à l'accueil"
 msgid "Boost interest"
 msgstr "Augmenter l'intérêt"
 
+#: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -137,7 +154,7 @@ msgstr "Choisissez entre l'écriture de gauche à droite ou de droite à gauche"
 msgid "Choose between system preference, light mode, or dark mode"
 msgstr "Choisissez entre la préférence système, le mode clair ou le mode sombre"
 
-#: ../../../lib/web/src/components/language-picker.tsx:107
+#: ../../../lib/web/src/components/language-picker.tsx:121
 msgid "Choose language"
 msgstr "Choisir la langue"
 
@@ -206,11 +223,16 @@ msgstr "Contenu non modifié"
 msgid "Contextual information and details."
 msgstr "Informations contextuelles et détails."
 
+#: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:72
+msgid "Continue"
+msgstr "Continuer"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Copier"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
+#: ../../../lib/web/src/lib/preference-utils.ts:17
 msgid "Dark"
 msgstr "Sombre"
 
@@ -241,6 +263,15 @@ msgstr "Décroissant"
 #: ../../../lib/web/src/components/layout/right-panel.tsx:144
 msgid "Details Panel"
 msgstr "Panneau des détails"
+
+#: ../../../lib/web/src/components/language-picker.tsx:99
+#: ../../../lib/web/src/lib/preference-utils.ts:38
+#: ../../../lib/web/src/lib/preference-utils.ts:50
+#: ../../../lib/web/src/lib/preference-utils.ts:68
+#: ../../../lib/web/src/lib/preference-utils.ts:82
+#: ../../../lib/web/src/lib/preference-utils.ts:94
+msgid "Detect from web browser"
+msgstr "Détecter depuis le navigateur web"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:327
 msgid "Direction"
@@ -277,6 +308,10 @@ msgstr "Échec de la mise à jour de la catégorie"
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
 msgstr "Flottant"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:73
+msgid "Friday"
+msgstr "Vendredi"
 
 #: ../../../lib/web/src/components/travelling-picker.tsx:149
 msgid "From"
@@ -329,6 +364,10 @@ msgstr "Accueil"
 msgid "Hot"
 msgstr "Populaire"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:96
+msgid "Imperial"
+msgstr "Impérial"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:239
 msgid "Inset"
 msgstr "Encastré"
@@ -354,6 +393,7 @@ msgid "Left to Right"
 msgstr "Gauche à droite"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:200
+#: ../../../lib/web/src/lib/preference-utils.ts:16
 msgid "Light"
 msgstr "Clair"
 
@@ -371,6 +411,7 @@ msgstr "Chargement…"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:66
 #: ../../../lib/web/src/components/profile-dropdown.tsx:95
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:23
+#: ../../../lib/web/src/components/sign-out-dialog.tsx:25
 msgid "Log out"
 msgstr "Se déconnecter"
 
@@ -382,6 +423,14 @@ msgstr "Déconnecté (avec erreurs)"
 msgid "Logged out successfully"
 msgstr "Déconnexion réussie"
 
+#: ../../../lib/web/src/components/sign-out-dialog.tsx:25
+msgid "Logging out…"
+msgstr "Déconnexion en cours…"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:25
+msgid "Luma (Default)"
+msgstr "Luma (par défaut)"
+
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:290
@@ -392,6 +441,14 @@ msgstr "Tout marquer comme lu"
 #: src/shell-menu.tsx:411
 msgid "Menu"
 msgstr "Menu"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:95
+msgid "Metric"
+msgstr "Métrique"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:69
+msgid "Monday"
+msgstr "Lundi"
 
 #: ../../../lib/web/src/components/ui/sort-selector.tsx:40
 msgid "New"
@@ -413,7 +470,7 @@ msgstr "Aucun compte connecté"
 msgid "No groups available"
 msgstr "Aucun groupe disponible"
 
-#: ../../../lib/web/src/components/language-picker.tsx:117
+#: ../../../lib/web/src/components/language-picker.tsx:131
 msgid "No matches."
 msgstr "Aucune correspondance."
 
@@ -518,6 +575,14 @@ msgstr "Redirection vers la connexion."
 msgid "Reduce interest"
 msgstr "Réduire l'intérêt"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:60
+msgid "Relative (5m, 3h, 2d)"
+msgstr "Relatif (5min, 3h, 2j)"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:59
+msgid "Relative within 24 hours, else absolute"
+msgstr "Relatif dans les 24 heures, sinon absolu"
+
 #: ../../../lib/web/src/features/access/access-list.tsx:257
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:172
 msgid "Remove"
@@ -552,6 +617,10 @@ msgstr "Droite à gauche"
 msgid "Rows per page"
 msgstr "Lignes par page"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:74
+msgid "Saturday"
+msgstr "Samedi"
+
 #: ../../../lib/web/src/components/place-picker.tsx:82
 msgid "Search for a place"
 msgstr "Rechercher un lieu"
@@ -576,7 +645,7 @@ msgstr "Rechercher des utilisateurs"
 msgid "Search..."
 msgstr "Rechercher…"
 
-#: ../../../lib/web/src/components/language-picker.tsx:115
+#: ../../../lib/web/src/components/language-picker.tsx:129
 msgid "Search…"
 msgstr "Rechercher…"
 
@@ -658,7 +727,12 @@ msgstr "Restez à l'écoute !"
 msgid "Subject"
 msgstr "Sujet"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:75
+msgid "Sunday"
+msgstr "Dimanche"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:195
+#: ../../../lib/web/src/lib/preference-utils.ts:18
 msgid "System"
 msgstr "Système"
 
@@ -681,6 +755,10 @@ msgstr "Paramètres du thème"
 #: src/use-permission-request.tsx:158
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Cette permission doit être activée par vous dans les paramètres de l'application."
+
+#: ../../../lib/web/src/lib/preference-utils.ts:72
+msgid "Thursday"
+msgstr "Jeudi"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:34
 msgid "Toggle columns"
@@ -719,6 +797,10 @@ msgstr "Essayez d'ajuster vos termes de recherche"
 msgid "Try again"
 msgstr "Réessayer"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:70
+msgid "Tuesday"
+msgstr "Mardi"
+
 #: ../../../lib/web/src/components/command-menu.tsx:49
 msgid "Type a command or search..."
 msgstr "Tapez une commande ou recherchez…"
@@ -743,6 +825,10 @@ msgstr "Non assigné"
 #: ../../../lib/web/src/features/errors/unauthorized-error.tsx:12
 msgid "Unauthorized Access"
 msgstr "Accès non autorisé"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:97
+msgid "United States"
+msgstr "États-Unis"
 
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:131
 msgid "Unverified"
@@ -792,3 +878,7 @@ msgstr "Nous serons de retour en ligne sous peu."
 #: ../../../lib/web/src/features/errors/maintenance-error.tsx:9
 msgid "Website is under maintenance!"
 msgstr "Le site est en maintenance !"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:71
+msgid "Wednesday"
+msgstr "Mercredi"

@@ -61,7 +61,7 @@ function NotificationItem({
             onMiddleClick?.(notification)
           }
         }}
-        className='flex flex-1 items-start gap-3 text-left'
+        className='flex flex-1 items-start gap-3 text-start'
       >
         <div
           className={cn(
@@ -266,7 +266,7 @@ export function MochiShellMenu() {
         <EntityAvatar fingerprint={identity || undefined} name={name} size="md" />
         <span className='text-sm font-semibold'>{name || "User"}</span>
       </div>
-      <div className='flex items-center gap-1 ml-4'>
+      <div className='flex items-center gap-1 ms-4'>
         <button
           onClick={() => { setMenuOpen(false); setTimeout(() => setSignOutOpen(true), 150) }}
           className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-interactive-hover active:bg-interactive-active'
