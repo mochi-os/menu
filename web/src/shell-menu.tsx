@@ -1,5 +1,5 @@
 import { useState, useEffect, useSyncExternalStore } from 'react'
-import { Trans } from '@lingui/react/macro'
+import { Trans, useLingui } from '@lingui/react/macro'
 import { usePushRegistration } from './use-push-registration'
 import { useMenuNotifications } from './use-menu-notifications'
 import { usePermissionRequest } from './use-permission-request'
@@ -170,6 +170,7 @@ function useSidebarPresent(): boolean {
 }
 
 export function MochiShellMenu() {
+  const { t } = useLingui()
   usePushRegistration()
   useShellFetch()
   const { dialog: permissionDialog } = usePermissionRequest()
@@ -368,7 +369,7 @@ export function MochiShellMenu() {
 
           <a
             href='/'
-            title={"Home"}
+            title={t`Home`}
             className='flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 hover:bg-interactive-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
           >
             <MochiLogo />
@@ -430,7 +431,7 @@ export function MochiShellMenu() {
         'flex items-center gap-2 p-2',
         isCollapsed && 'flex-col'
       )}>
-        <a href='/' title={"Home"}>
+        <a href='/' title={t`Home`}>
           <MochiLogo />
         </a>
 
