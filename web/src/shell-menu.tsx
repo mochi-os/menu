@@ -248,7 +248,7 @@ export function MochiShellMenu() {
   const trigger = (
     <button
       type='button'
-      aria-label={"Open menu"}
+      aria-label={t`Open menu`}
       className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 hover:bg-interactive-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
     >
       <EntityAvatar fingerprint={identity || undefined} name={name} size="sm" />
@@ -287,7 +287,7 @@ export function MochiShellMenu() {
           <button
             onClick={() => { markAllAsRead(); setMenuOpen(false) }}
             className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-interactive-hover active:bg-interactive-active'
-            title={"Mark all as read"}
+            title={t`Mark all as read`}
           >
             <Check className='size-4' />
           </button>
@@ -296,7 +296,7 @@ export function MochiShellMenu() {
           href='/notifications/'
           onClick={() => setMenuOpen(false)}
           className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-interactive-hover active:bg-interactive-active'
-          title={"View all"}
+          title={t`View all`}
         >
           <ExternalLink className='size-4' />
         </a>
@@ -383,7 +383,7 @@ export function MochiShellMenu() {
 
           <button
             type='button'
-            aria-label={"Open menu"}
+            aria-label={t`Open menu`}
             onClick={() => setMenuOpen(true)}
             className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 hover:bg-interactive-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
           >
@@ -408,7 +408,7 @@ export function MochiShellMenu() {
         />
         <div
           role='dialog'
-          aria-label={"Menu"}
+          aria-label={t`Menu`}
           aria-modal='true'
           className={cn(
             'fixed bottom-0 inset-x-0 bg-background rounded-t-lg border-t flex flex-col max-h-[80dvh] overflow-hidden transition-transform duration-300 ease-out',
