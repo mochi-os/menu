@@ -5,13 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="mochi:shell" content="true">
     {{APPEARANCE_SCRIPT}}
+    <script>
+    // Flip document direction early (before paint) when the user's language is
+    // right-to-left. The iframes set dir on their own documents via
+    // applyDocumentDir; the shell page sets its own here using cookie /
+    // localStorage / navigator.language so #menu's logical positioning lands on
+    // the correct visual side from the first frame.
+    (function() {
+        var rtl = { ar:1, he:1, iw:1, fa:1, ur:1, ps:1, sd:1, ku:1, ckb:1, yi:1, dv:1 };
+        function read() {
+            var m = document.cookie.match(/(?:^|;\s*)mochi_language=([^;]*)/);
+            if (m) try { return decodeURIComponent(m[1]); } catch(e){}
+            try { var s = localStorage.getItem('mochi:language'); if (s) return s; } catch(e){}
+            return navigator.language || 'en';
+        }
+        var lang = (read() || 'en').toLowerCase();
+        document.documentElement.lang = lang;
+        if (lang === 'en-x-pseudo-rtl' || rtl[lang.split('-')[0]]) {
+            document.documentElement.dir = 'rtl';
+        }
+    })();
+    </script>
     <title>Mochi</title>
     <link rel="icon" type="image/svg+xml" href="/images/logo-header.svg">
     {{MENU_CSS}}
     <style>
         :root { --shell-mobile-topbar-height: 3rem; }
         html, body { height: 100%; margin: 0; overflow: hidden; }
-        #menu { position: fixed; top: 0; left: 0; z-index: 50; }
+        #menu { position: fixed; top: 0; inset-inline-start: 0; z-index: 50; }
         #menu::after {
             content: '';
             position: absolute;
@@ -30,10 +51,10 @@
             pointer-events: auto;
         }
         #app-container { position: relative; width: 100%; height: 100%; }
-        #app-container > iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; transition: opacity 0.15s ease; }
-        #shell-progress { position: fixed; top: 0; left: 0; height: 2px; z-index: 100; pointer-events: none; background: hsl(220, 60%, 35%); width: 0%; transition: width 0.3s ease-out; opacity: 1; }
+        #app-container > iframe { position: absolute; top: 0; inset-inline-start: 0; width: 100%; height: 100%; border: none; transition: opacity 0.15s ease; }
+        #shell-progress { position: fixed; top: 0; inset-inline-start: 0; height: 2px; z-index: 100; pointer-events: none; background: hsl(220, 60%, 35%); width: 0%; transition: width 0.3s ease-out; opacity: 1; }
         @media (max-width: 1023.98px) {
-            #menu { right: 0; width: 100%; min-height: var(--shell-mobile-topbar-height); background: var(--background); }
+            #menu { inset-inline: 0; width: 100%; min-height: var(--shell-mobile-topbar-height); background: var(--background); }
             #menu::after { background: transparent; }
             #app-container > iframe { top: var(--shell-mobile-topbar-height); height: calc(100% - var(--shell-mobile-topbar-height)); }
         }

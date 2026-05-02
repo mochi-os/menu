@@ -606,6 +606,15 @@
                 // open iframe re-activates its Lingui catalog without a reload.
                 if (typeof data.language === 'string') currentLanguage = data.language;
                 postToIframe({ type: 'language-change', language: currentLanguage });
+                // Flip the shell page's own direction so #menu's logical
+                // positioning lands on the correct visual side without reload.
+                (function() {
+                    var rtl = { ar:1, he:1, iw:1, fa:1, ur:1, ps:1, sd:1, ku:1, ckb:1, yi:1, dv:1 };
+                    var lang = (currentLanguage || 'en').toLowerCase();
+                    var isRtl = lang === 'en-x-pseudo-rtl' || !!rtl[lang.split('-')[0]];
+                    document.documentElement.lang = lang;
+                    document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+                })();
                 break;
         }
     });
