@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "i18n:extract": "lingui extract"
+    "i18n:extract": "lingui extract",
+    "i18n:check": "lingui extract --clean && git diff --exit-code -- src/locales || (echo \"\\033[1;31mCatalogs out of date \u2014 run pnpm i18n:extract and commit.\\033[0m\" && exit 1)"
   },
   "dependencies": {
     "@lingui/core": "^5.5.0",
