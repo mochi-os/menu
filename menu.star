@@ -20,7 +20,7 @@ def action_notifications_read(a):
     """Mark a single notification as read."""
     id = a.input("id", "").strip()
     if not id:
-        return a.error_label(400, "errors.id_is_required")
+        return a.error.label(400, "errors.id_is_required")
     mochi.service.call("notifications", "read", id)
     return {"data": {"ok": True}}
 
@@ -43,7 +43,7 @@ def action_notifications_topic_lookup(a):
     topic = a.input("topic", "").strip()
     object = a.input("object", "").strip()
     if not app:
-        return a.error_label(400, "errors.app_is_required")
+        return a.error.label(400, "errors.app_is_required")
     row = mochi.service.call("notifications", "topic/lookup", app, topic, object)
     return {"data": row}
 
@@ -51,14 +51,14 @@ def action_notifications_topic_set_category(a):
     """Set the category of a topic row by id."""
     id = a.input("id", "").strip()
     if not id or not id.isdigit():
-        return a.error_label(400, "errors.invalid_id")
+        return a.error.label(400, "errors.invalid_id")
     cat_raw = a.input("category", "")
     category = None
     if cat_raw != "" and cat_raw.lstrip("-").isdigit():
         category = int(cat_raw)
     ok = mochi.service.call("notifications", "topic/set_category", int(id), category)
     if not ok:
-        return a.error_label(404, "errors.not_found")
+        return a.error.label(404, "errors.not_found")
     return {"data": {}}
 
 # Push registration (replaces direct HTTP calls to notifications accounts)
@@ -67,7 +67,7 @@ def action_push_vapid(a):
     """Get VAPID key for browser push subscription."""
     result = mochi.service.call("notifications", "accounts/vapid")
     if result == None:
-        return a.error_label(503, "errors.push_notifications_not_available")
+        return a.error.label(503, "errors.push_notifications_not_available")
     return {"data": result}
 
 def action_push_accounts_list(a):
@@ -80,7 +80,7 @@ def action_push_accounts_add(a):
     """Register a browser push account."""
     type = a.input("type", "").strip()
     if not type:
-        return a.error_label(400, "errors.type_is_required")
+        return a.error.label(400, "errors.type_is_required")
 
     fields = {}
     for key in ["label", "endpoint", "auth", "p256dh"]:
@@ -95,7 +95,7 @@ def action_push_accounts_remove(a):
     """Remove a browser push account."""
     id = a.input("id", "").strip()
     if not id or not id.isdigit():
-        return a.error_label(400, "errors.invalid_id")
+        return a.error.label(400, "errors.invalid_id")
 
     result = mochi.service.call("notifications", "accounts/remove", int(id))
     return {"data": result or {}}
@@ -107,11 +107,11 @@ def action_permissions_grant(a):
     app_id = a.input("app", "").strip()
     permission = a.input("permission", "").strip()
     if not app_id or not permission:
-        return a.error_label(400, "errors.app_and_permission_are_required")
+        return a.error.label(400, "errors.app_and_permission_are_required")
 
     # Block non-standard permissions — they must be configured in app settings
     if mochi.permission.level(permission) != "standard":
-        return a.error_label(403, "errors.restricted_permissions_must_be_enabled_in_app_settings")
+        return a.error.label(403, "errors.restricted_permissions_must_be_enabled_in_app_settings")
 
     mochi.permission.grant(app_id, permission)
     return {"data": {"status": "granted"}}
