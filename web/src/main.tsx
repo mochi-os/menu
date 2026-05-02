@@ -11,7 +11,7 @@ import './styles/index.css'
 // src/locales/<lang>/messages.po on the fly).
 const catalogs: Catalogs = {
   en: () => import('./locales/en/messages.po'),
-  'en-us': () => import('./locales/en-US/messages.po'),
+  'en-us': () => import('./locales/en-us/messages.po'),
   fr: () => import('./locales/fr/messages.po'),
   ja: () => import('./locales/ja/messages.po'),
 
