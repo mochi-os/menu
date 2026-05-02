@@ -1,7 +1,7 @@
 /** @type {import('@lingui/conf').LinguiConfig} */
 export default {
   sourceLocale: 'en',
-  locales: ['en', 'en-US', 'fr', 'ja'],
+  locales: ['en', 'en-US', 'fr', 'ja', 'ar'],
   catalogs: [
     {
       path: 'src/locales/{locale}/messages',
