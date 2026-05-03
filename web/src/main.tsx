@@ -15,6 +15,10 @@ const catalogs: Catalogs = {
   fr: () => import('./locales/fr/messages.po'),
   ja: () => import('./locales/ja/messages.po'),
 
+
+
+  af: () => import('./locales/af/messages.po'),
+  'nl-be': () => import('./locales/nl-be/messages.po'),
   ms: () => import('./locales/ms/messages.po'),
   is: () => import('./locales/is/messages.po'),
   nb: () => import('./locales/nb/messages.po'),
