@@ -111,7 +111,7 @@ def action_permissions_grant(a):
 
     # Block non-standard permissions — they must be configured in app settings
     if mochi.permission.level(permission) != "standard":
-        return a.error.label(403, "errors.restricted_permissions_must_be_enabled_in_app_settings")
+        return a.error.label(403, "errors.restricted_permissions_disabled")
 
     mochi.permission.grant(app_id, permission)
     return {"data": {"status": "granted"}}
