@@ -23,6 +23,26 @@ const catalogs: Catalogs = {
 
 
 
+
+
+
+
+
+
+
+
+
+
+  ne: () => import('./locales/ne/messages.po'),
+  si: () => import('./locales/si/messages.po'),
+  pa: () => import('./locales/pa/messages.po'),
+  gu: () => import('./locales/gu/messages.po'),
+  ml: () => import('./locales/ml/messages.po'),
+  kn: () => import('./locales/kn/messages.po'),
+  mr: () => import('./locales/mr/messages.po'),
+  te: () => import('./locales/te/messages.po'),
+  ta: () => import('./locales/ta/messages.po'),
+  bn: () => import('./locales/bn/messages.po'),
   xh: () => import('./locales/xh/messages.po'),
   zu: () => import('./locales/zu/messages.po'),
   am: () => import('./locales/am/messages.po'),
