@@ -17,6 +17,18 @@ const catalogs: Catalogs = {
 
 
 
+
+
+
+
+
+
+  xh: () => import('./locales/xh/messages.po'),
+  zu: () => import('./locales/zu/messages.po'),
+  am: () => import('./locales/am/messages.po'),
+  ha: () => import('./locales/ha/messages.po'),
+  yo: () => import('./locales/yo/messages.po'),
+  sw: () => import('./locales/sw/messages.po'),
   af: () => import('./locales/af/messages.po'),
   'nl-be': () => import('./locales/nl-be/messages.po'),
   ms: () => import('./locales/ms/messages.po'),
