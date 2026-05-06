@@ -13,6 +13,10 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/use-permission-request.tsx:159
+msgid "<0>{appName}</0> wants permission to {permissionLabel}."
+msgstr "<0>{appName}</0> מבקש הרשאה ל{permissionLabel}."
+
 #: ../../../lib/web/src/lib/preference-utils.ts:52
 msgid "12 hours"
 msgstr "12 שעות"
@@ -24,6 +28,10 @@ msgstr "24 שעות"
 #: ../../../lib/web/src/lib/preference-utils.ts:61
 msgid "Absolute (date and time)"
 msgstr "מוחלט (תאריך ושעה)"
+
+#: src/use-permission-request.tsx:50
+msgid "access {domain}"
+msgstr "לגשת ל-{domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:12
 msgid "Access Forbidden"
@@ -97,6 +105,10 @@ msgstr "AI"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:159
 msgid "All"
 msgstr "הכול"
+
+#: src/use-permission-request.tsx:183
+msgid "Allow"
+msgstr "אפשר"
 
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:24
 msgid "Are you sure you want to log out? You will need to log in again to access your account."
@@ -182,11 +194,13 @@ msgstr "נקה בחירה (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:172
 msgid "Close"
 msgstr "סגור"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:97
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Close navigation"
 msgstr "סגור ניווט"
 
@@ -214,6 +228,10 @@ msgstr "מצומצם"
 #: ../../../lib/web/src/components/travelling-picker.tsx:299
 msgid "Confirm"
 msgstr "אישור"
+
+#: src/use-permission-request.tsx:40
+msgid "connect to MCP servers"
+msgstr "להתחבר לשרתי MCP"
 
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
@@ -252,7 +270,7 @@ msgstr "ברירת מחדל"
 msgid "Default AI account"
 msgstr "חשבון AI ברירת מחדל"
 
-#: src/use-permission-request.tsx:170
+#: src/use-permission-request.tsx:177
 msgid "Deny"
 msgstr "דחייה"
 
@@ -357,8 +375,8 @@ msgstr "הסתר"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:142
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
-#: src/shell-menu.tsx:372
-#: src/shell-menu.tsx:434
+#: src/shell-menu.tsx:375
+#: src/shell-menu.tsx:437
 msgid "Home"
 msgstr "בית"
 
@@ -433,14 +451,22 @@ msgstr "מתנתק…"
 msgid "Luma (Default)"
 msgstr "Luma (ברירת מחדל)"
 
+#: src/use-permission-request.tsx:38
+msgid "manage connected accounts"
+msgstr "לנהל חשבונות מקושרים"
+
+#: src/use-permission-request.tsx:41
+msgid "manage groups"
+msgstr "לנהל קבוצות"
+
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
-#: src/shell-menu.tsx:290
+#: src/shell-menu.tsx:293
 msgid "Mark all as read"
 msgstr "סמן הכול כנקרא"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
-#: src/shell-menu.tsx:411
+#: src/shell-menu.tsx:414
 msgid "Menu"
 msgstr "תפריט"
 
@@ -497,7 +523,7 @@ msgstr "לא נמצא אזור זמן."
 msgid "No topic record yet — try again after the next notification."
 msgstr "עדיין אין רשומת נושא — נסה שוב לאחר ההתראה הבאה."
 
-#: src/shell-menu.tsx:314
+#: src/shell-menu.tsx:317
 msgid "No unread notifications"
 msgstr "אין התראות שלא נקראו"
 
@@ -512,7 +538,7 @@ msgstr "ללא"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:247
-#: src/shell-menu.tsx:283
+#: src/shell-menu.tsx:286
 msgid "Notifications"
 msgstr "התראות"
 
@@ -525,12 +551,14 @@ msgstr "אופס! הדף לא נמצא!"
 msgid "Open account actions"
 msgstr "פתח פעולות חשבון"
 
-#: src/shell-menu.tsx:251
-#: src/shell-menu.tsx:386
+#: src/shell-menu.tsx:254
+#: src/shell-menu.tsx:389
 msgid "Open menu"
 msgstr "פתח תפריט"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:57
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Open navigation"
 msgstr "פתח ניווט"
 
@@ -551,7 +579,7 @@ msgstr "אחר"
 msgid "Owner"
 msgstr "בעלים"
 
-#: src/use-permission-request.tsx:150
+#: src/use-permission-request.tsx:157
 msgid "Permission request"
 msgstr "בקשת הרשאה"
 
@@ -563,6 +591,14 @@ msgstr "התמונה הקודמת"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:111
 msgid "Profile"
 msgstr "פרופיל"
+
+#: src/use-permission-request.tsx:37
+msgid "read connected accounts"
+msgstr "לקרוא חשבונות מקושרים"
+
+#: src/use-permission-request.tsx:42
+msgid "read interests"
+msgstr "לקרוא תחומי עניין"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -754,7 +790,7 @@ msgstr "ערכת נושא"
 msgid "Theme Settings"
 msgstr "הגדרות ערכת נושא"
 
-#: src/use-permission-request.tsx:158
+#: src/use-permission-request.tsx:165
 msgid "This permission must be enabled by you in the app settings."
 msgstr "הרשאה זו חייבת להיות מופעלת על ידך בהגדרות האפליקציה."
 
@@ -836,7 +872,12 @@ msgstr "ארצות הברית"
 msgid "Unverified"
 msgstr "לא מאומת"
 
+#: src/use-permission-request.tsx:39
+msgid "use AI services"
+msgstr "להשתמש בשירותי AI"
+
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
+#: src/shell-menu.tsx:270
 msgid "User"
 msgstr "משתמש"
 
@@ -865,7 +906,7 @@ msgid "View"
 msgstr "הצג"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:173
-#: src/shell-menu.tsx:299
+#: src/shell-menu.tsx:302
 msgid "View all"
 msgstr "הצג הכל"
 
@@ -884,3 +925,7 @@ msgstr "האתר בתחזוקה!"
 #: ../../../lib/web/src/lib/preference-utils.ts:71
 msgid "Wednesday"
 msgstr "יום רביעי"
+
+#: src/use-permission-request.tsx:43
+msgid "write interests"
+msgstr "לכתוב תחומי עניין"

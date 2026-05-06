@@ -13,6 +13,10 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/use-permission-request.tsx:159
+msgid "<0>{appName}</0> wants permission to {permissionLabel}."
+msgstr "<0>{appName}</0> fẹ́ àyè láti {permissionLabel}."
+
 #: ../../../lib/web/src/lib/preference-utils.ts:52
 msgid "12 hours"
 msgstr "Wákàtí 12"
@@ -24,6 +28,10 @@ msgstr "Wákàtí 24"
 #: ../../../lib/web/src/lib/preference-utils.ts:61
 msgid "Absolute (date and time)"
 msgstr "Pípé (ọjọ́ àti àkókò)"
+
+#: src/use-permission-request.tsx:50
+msgid "access {domain}"
+msgstr "wọlé sí {domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:12
 msgid "Access Forbidden"
@@ -97,6 +105,10 @@ msgstr "AI"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:159
 msgid "All"
 msgstr "Gbogbo"
+
+#: src/use-permission-request.tsx:183
+msgid "Allow"
+msgstr "Gba láyè"
 
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:24
 msgid "Are you sure you want to log out? You will need to log in again to access your account."
@@ -182,11 +194,13 @@ msgstr "Pa ìyàn rẹ́ (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:172
 msgid "Close"
 msgstr "Tì"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:97
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Close navigation"
 msgstr "Ti ìṣíkiri"
 
@@ -214,6 +228,10 @@ msgstr "Kékeré"
 #: ../../../lib/web/src/components/travelling-picker.tsx:299
 msgid "Confirm"
 msgstr "Fọwọ́sí"
+
+#: src/use-permission-request.tsx:40
+msgid "connect to MCP servers"
+msgstr "sopọ̀ pẹ̀lú àwọn olùpèsè MCP"
 
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
@@ -252,7 +270,7 @@ msgstr "Àìpé"
 msgid "Default AI account"
 msgstr "Àkáǹtì AI àìpé"
 
-#: src/use-permission-request.tsx:170
+#: src/use-permission-request.tsx:177
 msgid "Deny"
 msgstr "Kọ̀"
 
@@ -357,8 +375,8 @@ msgstr "Fi pamọ́"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:142
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
-#: src/shell-menu.tsx:372
-#: src/shell-menu.tsx:434
+#: src/shell-menu.tsx:375
+#: src/shell-menu.tsx:437
 msgid "Home"
 msgstr "Ilé"
 
@@ -433,14 +451,22 @@ msgstr "Ń jáde…"
 msgid "Luma (Default)"
 msgstr "Luma (Àbùdá)"
 
+#: src/use-permission-request.tsx:38
+msgid "manage connected accounts"
+msgstr "ṣàkóso àwọn àkàǹtì tí a sopọ̀"
+
+#: src/use-permission-request.tsx:41
+msgid "manage groups"
+msgstr "ṣàkóso àwọn àpapọ̀"
+
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
-#: src/shell-menu.tsx:290
+#: src/shell-menu.tsx:293
 msgid "Mark all as read"
 msgstr "Sàmì sí gbogbo gẹ́gẹ́ bí kíkà"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
-#: src/shell-menu.tsx:411
+#: src/shell-menu.tsx:414
 msgid "Menu"
 msgstr "Ìtòlẹ́sẹẹsẹ"
 
@@ -497,7 +523,7 @@ msgstr "A kò rí àgbègbè àkókò kankan."
 msgid "No topic record yet — try again after the next notification."
 msgstr "Kò sí àkọsílẹ̀ kókó síbẹ̀ — gbìyànjú lẹ́ẹ̀kan síi lẹ́yìn ìfìtọ́nisí tó kàn."
 
-#: src/shell-menu.tsx:314
+#: src/shell-menu.tsx:317
 msgid "No unread notifications"
 msgstr "Kò sí ìfìtọ́nisí tí a kò kà"
 
@@ -512,7 +538,7 @@ msgstr "Kòsí"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:247
-#: src/shell-menu.tsx:283
+#: src/shell-menu.tsx:286
 msgid "Notifications"
 msgstr "Àwọn ìfìtọ́nisí"
 
@@ -525,12 +551,14 @@ msgstr "Aàá! A Kò Rí Ojú-ìwé!"
 msgid "Open account actions"
 msgstr "Ṣí àwọn iṣẹ́ ìròyìn"
 
-#: src/shell-menu.tsx:251
-#: src/shell-menu.tsx:386
+#: src/shell-menu.tsx:254
+#: src/shell-menu.tsx:389
 msgid "Open menu"
 msgstr "Ṣí ìtòlẹ́sẹẹsẹ"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:57
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Open navigation"
 msgstr "Ṣí ìṣàkóso"
 
@@ -551,7 +579,7 @@ msgstr "Mìíràn"
 msgid "Owner"
 msgstr "Onílé"
 
-#: src/use-permission-request.tsx:150
+#: src/use-permission-request.tsx:157
 msgid "Permission request"
 msgstr "Ìbéèrè àyè"
 
@@ -563,6 +591,14 @@ msgstr "Àwòrán tó kọjá"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:111
 msgid "Profile"
 msgstr "Profile"
+
+#: src/use-permission-request.tsx:37
+msgid "read connected accounts"
+msgstr "ka àwọn àkàǹtì tí a sopọ̀"
+
+#: src/use-permission-request.tsx:42
+msgid "read interests"
+msgstr "ka àwọn ìfẹ́"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -754,7 +790,7 @@ msgstr "Theme"
 msgid "Theme Settings"
 msgstr "Àwọn ìṣètò Theme"
 
-#: src/use-permission-request.tsx:158
+#: src/use-permission-request.tsx:165
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Ìwọ gbọ́dọ̀ múṣiṣẹ́ ààyè yìí nínú àwọn ìṣètò app."
 
@@ -836,7 +872,12 @@ msgstr "United States"
 msgid "Unverified"
 msgstr "Kò tíì jẹ́rìí sí"
 
+#: src/use-permission-request.tsx:39
+msgid "use AI services"
+msgstr "lo àwọn iṣẹ́ AI"
+
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
+#: src/shell-menu.tsx:270
 msgid "User"
 msgstr "User"
 
@@ -865,7 +906,7 @@ msgid "View"
 msgstr "Wo"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:173
-#: src/shell-menu.tsx:299
+#: src/shell-menu.tsx:302
 msgid "View all"
 msgstr "Wo gbogbo"
 
@@ -884,3 +925,7 @@ msgstr "Síìtì wà lábẹ́ ìtọ́jú!"
 #: ../../../lib/web/src/lib/preference-utils.ts:71
 msgid "Wednesday"
 msgstr "Ọjọ́rú"
+
+#: src/use-permission-request.tsx:43
+msgid "write interests"
+msgstr "kọ àwọn ìfẹ́"

@@ -26,8 +26,8 @@ import {
   PopoverContent,
   PopoverTrigger,
   ScrollArea,
+  type Notification,
 } from '@mochi/web'
-import type { Notification } from '@mochi/web'
 
 function MochiLogo() {
   return <img src='/images/logo-header.svg' alt='Mochi' className='h-7 w-7' />
@@ -219,7 +219,10 @@ export function MochiShellMenu() {
   }, [unreadCount])
 
   const handleNotificationClick = (notification: Notification) => {
-    console.log('[notif-click]', { id: notification.id, read: notification.read, link: notification.link })
+    if (import.meta.env.DEV) {
+      // eslint-disable-next-line no-console
+      console.log('[notif-click]', { id: notification.id, read: notification.read, link: notification.link })
+    }
     if (notification.read === 0) {
       markAsRead(notification.id)
     }
@@ -264,7 +267,7 @@ export function MochiShellMenu() {
     <div className='flex items-center justify-between px-4 py-2.5'>
       <div className='flex items-center gap-2'>
         <EntityAvatar fingerprint={identity || undefined} name={name} size="md" />
-        <span className='text-sm font-semibold'>{name || "User"}</span>
+        <span className='text-sm font-semibold'>{name || t`User`}</span>
       </div>
       <div className='flex items-center gap-1 ms-4'>
         <button
@@ -358,8 +361,8 @@ export function MochiShellMenu() {
           {sidebarPresent && (
             <button
               type='button'
-              aria-label={sidebarState === 'expanded' ? "Close navigation" : "Open navigation"}
-              title={sidebarState === 'expanded' ? "Close navigation" : "Open navigation"}
+              aria-label={sidebarState === 'expanded' ? t`Close navigation` : t`Open navigation`}
+              title={sidebarState === 'expanded' ? t`Close navigation` : t`Open navigation`}
               onClick={handleSidebarToggle}
               className='flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 hover:bg-interactive-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
             >

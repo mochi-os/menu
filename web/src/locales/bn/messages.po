@@ -6,6 +6,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: bn\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/use-permission-request.tsx:159
+msgid "<0>{appName}</0> wants permission to {permissionLabel}."
+msgstr "<0>{appName}</0> {permissionLabel}-এর জন্য অনুমতি চায়।"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:52
 msgid "12 hours"
@@ -18,6 +28,10 @@ msgstr "২৪ ঘণ্টা"
 #: ../../../lib/web/src/lib/preference-utils.ts:61
 msgid "Absolute (date and time)"
 msgstr "নিরঙ্কুশ (তারিখ এবং সময়)"
+
+#: src/use-permission-request.tsx:50
+msgid "access {domain}"
+msgstr "{domain} অ্যাক্সেস করুন"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:12
 msgid "Access Forbidden"
@@ -91,6 +105,10 @@ msgstr "AI"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:159
 msgid "All"
 msgstr "সব"
+
+#: src/use-permission-request.tsx:183
+msgid "Allow"
+msgstr "অনুমতি দিন"
 
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:24
 msgid "Are you sure you want to log out? You will need to log in again to access your account."
@@ -176,11 +194,13 @@ msgstr "নির্বাচন পরিষ্কার করুন (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:172
 msgid "Close"
 msgstr "বন্ধ করুন"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:97
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Close navigation"
 msgstr "নেভিগেশন বন্ধ করুন"
 
@@ -208,6 +228,10 @@ msgstr "কম্প্যাক্ট"
 #: ../../../lib/web/src/components/travelling-picker.tsx:299
 msgid "Confirm"
 msgstr "নিশ্চিত করুন"
+
+#: src/use-permission-request.tsx:40
+msgid "connect to MCP servers"
+msgstr "MCP সার্ভারের সাথে সংযোগ করুন"
 
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
@@ -246,7 +270,7 @@ msgstr "ডিফল্ট"
 msgid "Default AI account"
 msgstr "ডিফল্ট AI অ্যাকাউন্ট"
 
-#: src/use-permission-request.tsx:170
+#: src/use-permission-request.tsx:177
 msgid "Deny"
 msgstr "অস্বীকার করুন"
 
@@ -351,8 +375,8 @@ msgstr "লুকান"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:142
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
-#: src/shell-menu.tsx:372
-#: src/shell-menu.tsx:434
+#: src/shell-menu.tsx:375
+#: src/shell-menu.tsx:437
 msgid "Home"
 msgstr "হোম"
 
@@ -427,14 +451,22 @@ msgstr "লগ আউট হচ্ছে…"
 msgid "Luma (Default)"
 msgstr "লুমা (ডিফল্ট)"
 
+#: src/use-permission-request.tsx:38
+msgid "manage connected accounts"
+msgstr "সংযুক্ত অ্যাকাউন্ট পরিচালনা করুন"
+
+#: src/use-permission-request.tsx:41
+msgid "manage groups"
+msgstr "গ্রুপ পরিচালনা করুন"
+
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
-#: src/shell-menu.tsx:290
+#: src/shell-menu.tsx:293
 msgid "Mark all as read"
 msgstr "সবগুলি পঠিত হিসেবে চিহ্নিত করুন"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
-#: src/shell-menu.tsx:411
+#: src/shell-menu.tsx:414
 msgid "Menu"
 msgstr "মেনু"
 
@@ -491,7 +523,7 @@ msgstr "কোনো টাইম জোন পাওয়া যায়ন�
 msgid "No topic record yet — try again after the next notification."
 msgstr "এখনও কোনো বিষয়ের রেকর্ড নেই — পরবর্তী বিজ্ঞপ্তির পরে আবার চেষ্টা করুন।"
 
-#: src/shell-menu.tsx:314
+#: src/shell-menu.tsx:317
 msgid "No unread notifications"
 msgstr "কোনো অপঠিত বিজ্ঞপ্তি নেই"
 
@@ -506,7 +538,7 @@ msgstr "কোনোটি নয়"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:247
-#: src/shell-menu.tsx:283
+#: src/shell-menu.tsx:286
 msgid "Notifications"
 msgstr "বিজ্ঞপ্তি"
 
@@ -519,12 +551,14 @@ msgstr "ওহ! পৃষ্ঠাটি পাওয়া যায়নি!"
 msgid "Open account actions"
 msgstr "অ্যাকাউন্ট অ্যাকশন খুলুন"
 
-#: src/shell-menu.tsx:251
-#: src/shell-menu.tsx:386
+#: src/shell-menu.tsx:254
+#: src/shell-menu.tsx:389
 msgid "Open menu"
 msgstr "মেনু খুলুন"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:57
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Open navigation"
 msgstr "নেভিগেশন খুলুন"
 
@@ -545,7 +579,7 @@ msgstr "অন্যান্য"
 msgid "Owner"
 msgstr "মালিক"
 
-#: src/use-permission-request.tsx:150
+#: src/use-permission-request.tsx:157
 msgid "Permission request"
 msgstr "অনুমতির অনুরোধ"
 
@@ -557,6 +591,14 @@ msgstr "পূর্ববর্তী ছবি"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:111
 msgid "Profile"
 msgstr "প্রোফাইল"
+
+#: src/use-permission-request.tsx:37
+msgid "read connected accounts"
+msgstr "সংযুক্ত অ্যাকাউন্ট পড়ুন"
+
+#: src/use-permission-request.tsx:42
+msgid "read interests"
+msgstr "আগ্রহ পড়ুন"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -748,7 +790,7 @@ msgstr "থিম"
 msgid "Theme Settings"
 msgstr "থিম সেটিংস"
 
-#: src/use-permission-request.tsx:158
+#: src/use-permission-request.tsx:165
 msgid "This permission must be enabled by you in the app settings."
 msgstr "এই অনুমতি অ্যাপ সেটিংসে আপনাকে সক্ষম করতে হবে।"
 
@@ -830,7 +872,12 @@ msgstr "যুক্তরাষ্ট্র"
 msgid "Unverified"
 msgstr "যাচাই করা হয়নি"
 
+#: src/use-permission-request.tsx:39
+msgid "use AI services"
+msgstr "AI পরিষেবা ব্যবহার করুন"
+
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
+#: src/shell-menu.tsx:270
 msgid "User"
 msgstr "ব্যবহারকারী"
 
@@ -859,7 +906,7 @@ msgid "View"
 msgstr "দেখুন"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:173
-#: src/shell-menu.tsx:299
+#: src/shell-menu.tsx:302
 msgid "View all"
 msgstr "সব দেখুন"
 
@@ -878,3 +925,7 @@ msgstr "ওয়েবসাইট রক্ষণাবেক্ষণাধ�
 #: ../../../lib/web/src/lib/preference-utils.ts:71
 msgid "Wednesday"
 msgstr "বুধবার"
+
+#: src/use-permission-request.tsx:43
+msgid "write interests"
+msgstr "আগ্রহ লিখুন"

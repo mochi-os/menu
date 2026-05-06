@@ -6,6 +6,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: ne\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/use-permission-request.tsx:159
+msgid "<0>{appName}</0> wants permission to {permissionLabel}."
+msgstr "<0>{appName}</0> ले {permissionLabel} को लागि अनुमति माग्छ।"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:52
 msgid "12 hours"
@@ -18,6 +28,10 @@ msgstr "२४ घण्टा"
 #: ../../../lib/web/src/lib/preference-utils.ts:61
 msgid "Absolute (date and time)"
 msgstr "निरपेक्ष (मिति र समय)"
+
+#: src/use-permission-request.tsx:50
+msgid "access {domain}"
+msgstr "{domain} पहुँच गर्नुहोस्"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:12
 msgid "Access Forbidden"
@@ -91,6 +105,10 @@ msgstr "AI"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:159
 msgid "All"
 msgstr "सबै"
+
+#: src/use-permission-request.tsx:183
+msgid "Allow"
+msgstr "अनुमति दिनुहोस्"
 
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:24
 msgid "Are you sure you want to log out? You will need to log in again to access your account."
@@ -176,11 +194,13 @@ msgstr "चयन खाली गर्नुहोस् (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:172
 msgid "Close"
 msgstr "बन्द गर्नुहोस्"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:97
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Close navigation"
 msgstr "नेभिगेसन बन्द गर्नुहोस्"
 
@@ -208,6 +228,10 @@ msgstr "कम्प्याक्ट"
 #: ../../../lib/web/src/components/travelling-picker.tsx:299
 msgid "Confirm"
 msgstr "पुष्टि गर्नुहोस्"
+
+#: src/use-permission-request.tsx:40
+msgid "connect to MCP servers"
+msgstr "MCP सर्भरहरूसँग जडान गर्नुहोस्"
 
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
@@ -246,7 +270,7 @@ msgstr "पूर्वनिर्धारित"
 msgid "Default AI account"
 msgstr "पूर्वनिर्धारित AI खाता"
 
-#: src/use-permission-request.tsx:170
+#: src/use-permission-request.tsx:177
 msgid "Deny"
 msgstr "अस्वीकार गर्नुहोस्"
 
@@ -351,8 +375,8 @@ msgstr "लुकाउनुहोस्"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:142
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
-#: src/shell-menu.tsx:372
-#: src/shell-menu.tsx:434
+#: src/shell-menu.tsx:375
+#: src/shell-menu.tsx:437
 msgid "Home"
 msgstr "होम"
 
@@ -427,14 +451,22 @@ msgstr "लग आउट हुँदै…"
 msgid "Luma (Default)"
 msgstr "लुमा (पूर्वनिर्धारित)"
 
+#: src/use-permission-request.tsx:38
+msgid "manage connected accounts"
+msgstr "जडान गरिएका खाताहरू व्यवस्थापन गर्नुहोस्"
+
+#: src/use-permission-request.tsx:41
+msgid "manage groups"
+msgstr "समूहहरू व्यवस्थापन गर्नुहोस्"
+
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
-#: src/shell-menu.tsx:290
+#: src/shell-menu.tsx:293
 msgid "Mark all as read"
 msgstr "सबै पढिएको रूपमा चिन्ह लगाउनुहोस्"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
-#: src/shell-menu.tsx:411
+#: src/shell-menu.tsx:414
 msgid "Menu"
 msgstr "मेनु"
 
@@ -491,7 +523,7 @@ msgstr "कुनै समय क्षेत्र भेटिएन।"
 msgid "No topic record yet — try again after the next notification."
 msgstr "अहिलेसम्म कुनै टपिक रेकर्ड छैन — अर्को सूचना पछि फेरि प्रयास गर्नुहोस्।"
 
-#: src/shell-menu.tsx:314
+#: src/shell-menu.tsx:317
 msgid "No unread notifications"
 msgstr "कुनै नपढिएको सूचना छैन"
 
@@ -506,7 +538,7 @@ msgstr "कुनै पनि होइन"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:247
-#: src/shell-menu.tsx:283
+#: src/shell-menu.tsx:286
 msgid "Notifications"
 msgstr "सूचनाहरू"
 
@@ -519,12 +551,14 @@ msgstr "ओहो! पृष्ठ भेटिएन!"
 msgid "Open account actions"
 msgstr "खाता कार्यहरू खोल्नुहोस्"
 
-#: src/shell-menu.tsx:251
-#: src/shell-menu.tsx:386
+#: src/shell-menu.tsx:254
+#: src/shell-menu.tsx:389
 msgid "Open menu"
 msgstr "मेनु खोल्नुहोस्"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:57
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Open navigation"
 msgstr "नेभिगेसन खोल्नुहोस्"
 
@@ -545,7 +579,7 @@ msgstr "अन्य"
 msgid "Owner"
 msgstr "मालिक"
 
-#: src/use-permission-request.tsx:150
+#: src/use-permission-request.tsx:157
 msgid "Permission request"
 msgstr "अनुमति अनुरोध"
 
@@ -557,6 +591,14 @@ msgstr "अघिल्लो तस्बिर"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:111
 msgid "Profile"
 msgstr "प्रोफाइल"
+
+#: src/use-permission-request.tsx:37
+msgid "read connected accounts"
+msgstr "जडान गरिएका खाताहरू पढ्नुहोस्"
+
+#: src/use-permission-request.tsx:42
+msgid "read interests"
+msgstr "रुचिहरू पढ्नुहोस्"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -748,7 +790,7 @@ msgstr "थिम"
 msgid "Theme Settings"
 msgstr "थिम सेटिङहरू"
 
-#: src/use-permission-request.tsx:158
+#: src/use-permission-request.tsx:165
 msgid "This permission must be enabled by you in the app settings."
 msgstr "यो अनुमति तपाईंले एप सेटिङहरूमा सक्षम पार्नुपर्छ।"
 
@@ -830,7 +872,12 @@ msgstr "संयुक्त राज्य अमेरिका"
 msgid "Unverified"
 msgstr "अप्रमाणित"
 
+#: src/use-permission-request.tsx:39
+msgid "use AI services"
+msgstr "AI सेवाहरू प्रयोग गर्नुहोस्"
+
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
+#: src/shell-menu.tsx:270
 msgid "User"
 msgstr "प्रयोगकर्ता"
 
@@ -859,7 +906,7 @@ msgid "View"
 msgstr "हेर्नुहोस्"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:173
-#: src/shell-menu.tsx:299
+#: src/shell-menu.tsx:302
 msgid "View all"
 msgstr "सबै हेर्नुहोस्"
 
@@ -878,3 +925,7 @@ msgstr "वेबसाइट मर्मतसम्भारमा छ!"
 #: ../../../lib/web/src/lib/preference-utils.ts:71
 msgid "Wednesday"
 msgstr "बुधबार"
+
+#: src/use-permission-request.tsx:43
+msgid "write interests"
+msgstr "रुचिहरू लेख्नुहोस्"

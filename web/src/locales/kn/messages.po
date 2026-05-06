@@ -6,6 +6,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: kn\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/use-permission-request.tsx:159
+msgid "<0>{appName}</0> wants permission to {permissionLabel}."
+msgstr "<0>{appName}</0> {permissionLabel} ಗಾಗಿ ಅನುಮತಿ ಬಯಸುತ್ತದೆ."
 
 #: ../../../lib/web/src/lib/preference-utils.ts:52
 msgid "12 hours"
@@ -18,6 +28,10 @@ msgstr "24 ಗಂಟೆಗಳು"
 #: ../../../lib/web/src/lib/preference-utils.ts:61
 msgid "Absolute (date and time)"
 msgstr "ಸಂಪೂರ್ಣ (ದಿನಾಂಕ ಮತ್ತು ಸಮಯ)"
+
+#: src/use-permission-request.tsx:50
+msgid "access {domain}"
+msgstr "{domain} ಪ್ರವೇಶಿಸಿ"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:12
 msgid "Access Forbidden"
@@ -91,6 +105,10 @@ msgstr "AI"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:159
 msgid "All"
 msgstr "ಎಲ್ಲಾ"
+
+#: src/use-permission-request.tsx:183
+msgid "Allow"
+msgstr "ಅನುಮತಿಸಿ"
 
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:24
 msgid "Are you sure you want to log out? You will need to log in again to access your account."
@@ -176,11 +194,13 @@ msgstr "ಆಯ್ಕೆ ತೆರವುಗೊಳಿಸಿ (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:172
 msgid "Close"
 msgstr "ಮುಚ್ಚಿ"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:97
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Close navigation"
 msgstr "ನ್ಯಾವಿಗೇಶನ್ ಮುಚ್ಚಿ"
 
@@ -208,6 +228,10 @@ msgstr "ಕಾಂಪ್ಯಾಕ್ಟ್"
 #: ../../../lib/web/src/components/travelling-picker.tsx:299
 msgid "Confirm"
 msgstr "ದೃಢೀಕರಿಸಿ"
+
+#: src/use-permission-request.tsx:40
+msgid "connect to MCP servers"
+msgstr "MCP ಸರ್ವರ್‌ಗಳಿಗೆ ಸಂಪರ್ಕಿಸಿ"
 
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
@@ -246,7 +270,7 @@ msgstr "ಡೀಫಾಲ್ಟ್"
 msgid "Default AI account"
 msgstr "ಡೀಫಾಲ್ಟ್ AI ಖಾತೆ"
 
-#: src/use-permission-request.tsx:170
+#: src/use-permission-request.tsx:177
 msgid "Deny"
 msgstr "ನಿರಾಕರಿಸಿ"
 
@@ -351,8 +375,8 @@ msgstr "ಮರೆಮಾಡಿ"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:142
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
-#: src/shell-menu.tsx:372
-#: src/shell-menu.tsx:434
+#: src/shell-menu.tsx:375
+#: src/shell-menu.tsx:437
 msgid "Home"
 msgstr "ಮುಖಪುಟ"
 
@@ -427,14 +451,22 @@ msgstr "ಲಾಗ್ ಔಟ್ ಆಗುತ್ತಿದೆ…"
 msgid "Luma (Default)"
 msgstr "Luma (ಡೀಫಾಲ್ಟ್)"
 
+#: src/use-permission-request.tsx:38
+msgid "manage connected accounts"
+msgstr "ಸಂಪರ್ಕಿತ ಖಾತೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ"
+
+#: src/use-permission-request.tsx:41
+msgid "manage groups"
+msgstr "ಗುಂಪುಗಳನ್ನು ನಿರ್ವಹಿಸಿ"
+
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
-#: src/shell-menu.tsx:290
+#: src/shell-menu.tsx:293
 msgid "Mark all as read"
 msgstr "ಎಲ್ಲವನ್ನೂ ಓದಲಾಗಿದೆ ಎಂದು ಮಾರ್ಕ್ ಮಾಡಿ"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
-#: src/shell-menu.tsx:411
+#: src/shell-menu.tsx:414
 msgid "Menu"
 msgstr "ಮೆನು"
 
@@ -491,7 +523,7 @@ msgstr "ಯಾವುದೇ ಟೈಮ್ ಜೋನ್ ಸಿಗಲಿಲ್ಲ."
 msgid "No topic record yet — try again after the next notification."
 msgstr "ಇನ್ನೂ ಯಾವುದೇ ಟಾಪಿಕ್ ರೆಕಾರ್ಡ್ ಇಲ್ಲ — ಮುಂದಿನ ನೋಟಿಫಿಕೇಶನ್ ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
 
-#: src/shell-menu.tsx:314
+#: src/shell-menu.tsx:317
 msgid "No unread notifications"
 msgstr "ಯಾವುದೇ ಓದದ ನೋಟಿಫಿಕೇಶನ್‌ಗಳಿಲ್ಲ"
 
@@ -506,7 +538,7 @@ msgstr "ಯಾವುದೂ ಇಲ್ಲ"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:247
-#: src/shell-menu.tsx:283
+#: src/shell-menu.tsx:286
 msgid "Notifications"
 msgstr "ನೋಟಿಫಿಕೇಶನ್‌ಗಳು"
 
@@ -519,12 +551,14 @@ msgstr "ಓ! ಪುಟ ಸಿಗಲಿಲ್ಲ!"
 msgid "Open account actions"
 msgstr "ಖಾತೆ ಆಕ್ಷನ್‌ಗಳನ್ನು ತೆರೆಯಿರಿ"
 
-#: src/shell-menu.tsx:251
-#: src/shell-menu.tsx:386
+#: src/shell-menu.tsx:254
+#: src/shell-menu.tsx:389
 msgid "Open menu"
 msgstr "ಮೆನು ತೆರೆಯಿರಿ"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:57
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Open navigation"
 msgstr "ನ್ಯಾವಿಗೇಶನ್ ತೆರೆಯಿರಿ"
 
@@ -545,7 +579,7 @@ msgstr "ಇತರ"
 msgid "Owner"
 msgstr "ಮಾಲೀಕ"
 
-#: src/use-permission-request.tsx:150
+#: src/use-permission-request.tsx:157
 msgid "Permission request"
 msgstr "ಪರ್ಮಿಷನ್ ರಿಕ್ವೆಸ್ಟ್"
 
@@ -557,6 +591,14 @@ msgstr "ಹಿಂದಿನ ಚಿತ್ರ"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:111
 msgid "Profile"
 msgstr "ಪ್ರೊಫೈಲ್"
+
+#: src/use-permission-request.tsx:37
+msgid "read connected accounts"
+msgstr "ಸಂಪರ್ಕಿತ ಖಾತೆಗಳನ್ನು ಓದಿ"
+
+#: src/use-permission-request.tsx:42
+msgid "read interests"
+msgstr "ಆಸಕ್ತಿಗಳನ್ನು ಓದಿ"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -748,7 +790,7 @@ msgstr "ಥೀಮ್"
 msgid "Theme Settings"
 msgstr "ಥೀಮ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
 
-#: src/use-permission-request.tsx:158
+#: src/use-permission-request.tsx:165
 msgid "This permission must be enabled by you in the app settings."
 msgstr "ಈ ಅನುಮತಿಯನ್ನು ಆ್ಯಪ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ನೀವೇ ಸಕ್ರಿಯಗೊಳಿಸಬೇಕು."
 
@@ -830,7 +872,12 @@ msgstr "ಯುನೈಟೆಡ್ ಸ್ಟೇಟ್ಸ್"
 msgid "Unverified"
 msgstr "ಪರಿಶೀಲಿಸದ"
 
+#: src/use-permission-request.tsx:39
+msgid "use AI services"
+msgstr "AI ಸೇವೆಗಳನ್ನು ಬಳಸಿ"
+
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
+#: src/shell-menu.tsx:270
 msgid "User"
 msgstr "ಬಳಕೆದಾರ"
 
@@ -859,7 +906,7 @@ msgid "View"
 msgstr "ವೀಕ್ಷಿಸಿ"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:173
-#: src/shell-menu.tsx:299
+#: src/shell-menu.tsx:302
 msgid "View all"
 msgstr "ಎಲ್ಲವನ್ನೂ ವೀಕ್ಷಿಸಿ"
 
@@ -878,3 +925,7 @@ msgstr "ವೆಬ್‌ಸೈಟ್ ನಿರ್ವಹಣೆಯಲ್ಲಿದ�
 #: ../../../lib/web/src/lib/preference-utils.ts:71
 msgid "Wednesday"
 msgstr "ಬುಧವಾರ"
+
+#: src/use-permission-request.tsx:43
+msgid "write interests"
+msgstr "ಆಸಕ್ತಿಗಳನ್ನು ಬರೆಯಿರಿ"

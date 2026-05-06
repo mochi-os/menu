@@ -13,6 +13,10 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/use-permission-request.tsx:159
+msgid "<0>{appName}</0> wants permission to {permissionLabel}."
+msgstr "<0>{appName}</0> {permissionLabel} ፈቃድ ይፈልጋል።"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:52
 msgid "12 hours"
 msgstr "12 ሰዓት"
@@ -24,6 +28,10 @@ msgstr "24 ሰዓት"
 #: ../../../lib/web/src/lib/preference-utils.ts:61
 msgid "Absolute (date and time)"
 msgstr "ፍጹም (ቀንና ሰዓት)"
+
+#: src/use-permission-request.tsx:50
+msgid "access {domain}"
+msgstr "{domain}ን ይድረሱ"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:12
 msgid "Access Forbidden"
@@ -97,6 +105,10 @@ msgstr "AI"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:159
 msgid "All"
 msgstr "ሁሉም"
+
+#: src/use-permission-request.tsx:183
+msgid "Allow"
+msgstr "ፍቀድ"
 
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:24
 msgid "Are you sure you want to log out? You will need to log in again to access your account."
@@ -182,11 +194,13 @@ msgstr "ምርጫ አጽዳ (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:172
 msgid "Close"
 msgstr "ዝጋ"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:97
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Close navigation"
 msgstr "ማሰሻን ዝጋ"
 
@@ -214,6 +228,10 @@ msgstr "የታመቀ"
 #: ../../../lib/web/src/components/travelling-picker.tsx:299
 msgid "Confirm"
 msgstr "አረጋግጥ"
+
+#: src/use-permission-request.tsx:40
+msgid "connect to MCP servers"
+msgstr "ከMCP አገልጋዮች ጋር ይገናኙ"
 
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
@@ -252,7 +270,7 @@ msgstr "ነባሪ"
 msgid "Default AI account"
 msgstr "ነባሪ የAI መለያ"
 
-#: src/use-permission-request.tsx:170
+#: src/use-permission-request.tsx:177
 msgid "Deny"
 msgstr "ተከለከል"
 
@@ -357,8 +375,8 @@ msgstr "ደብቅ"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:142
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
-#: src/shell-menu.tsx:372
-#: src/shell-menu.tsx:434
+#: src/shell-menu.tsx:375
+#: src/shell-menu.tsx:437
 msgid "Home"
 msgstr "መነሻ"
 
@@ -433,14 +451,22 @@ msgstr "በመውጣት ላይ…"
 msgid "Luma (Default)"
 msgstr "ሉማ (ነባሪ)"
 
+#: src/use-permission-request.tsx:38
+msgid "manage connected accounts"
+msgstr "የተገናኙ መለያዎችን ያስተዳድሩ"
+
+#: src/use-permission-request.tsx:41
+msgid "manage groups"
+msgstr "ቡድኖችን ያስተዳድሩ"
+
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
-#: src/shell-menu.tsx:290
+#: src/shell-menu.tsx:293
 msgid "Mark all as read"
 msgstr "ሁሉንም እንደተነበበ ምልክት አድርግ"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
-#: src/shell-menu.tsx:411
+#: src/shell-menu.tsx:414
 msgid "Menu"
 msgstr "ምናሌ"
 
@@ -497,7 +523,7 @@ msgstr "ምንም የሰዓት ሰቅ አልተገኘም።"
 msgid "No topic record yet — try again after the next notification."
 msgstr "እስካሁን የርዕስ መዝገብ የለም — ከቀጣዩ ማሳወቂያ በኋላ እንደገና ይሞክሩ።"
 
-#: src/shell-menu.tsx:314
+#: src/shell-menu.tsx:317
 msgid "No unread notifications"
 msgstr "ያልተነበቡ ማሳወቂያዎች የሉም"
 
@@ -512,7 +538,7 @@ msgstr "ምንም"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:247
-#: src/shell-menu.tsx:283
+#: src/shell-menu.tsx:286
 msgid "Notifications"
 msgstr "ማሳወቂያዎች"
 
@@ -525,12 +551,14 @@ msgstr "ኦህ! ገጽ አልተገኘም!"
 msgid "Open account actions"
 msgstr "የመለያ ድርጊቶችን ክፈት"
 
-#: src/shell-menu.tsx:251
-#: src/shell-menu.tsx:386
+#: src/shell-menu.tsx:254
+#: src/shell-menu.tsx:389
 msgid "Open menu"
 msgstr "ምናሌ ክፈት"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:57
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Open navigation"
 msgstr "ዳሰሳ ክፈት"
 
@@ -551,7 +579,7 @@ msgstr "ሌላ"
 msgid "Owner"
 msgstr "ባለቤት"
 
-#: src/use-permission-request.tsx:150
+#: src/use-permission-request.tsx:157
 msgid "Permission request"
 msgstr "የፍቃድ ጥያቄ"
 
@@ -563,6 +591,14 @@ msgstr "ቀዳሚ ምስል"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:111
 msgid "Profile"
 msgstr "መገለጫ"
+
+#: src/use-permission-request.tsx:37
+msgid "read connected accounts"
+msgstr "የተገናኙ መለያዎችን ያንብቡ"
+
+#: src/use-permission-request.tsx:42
+msgid "read interests"
+msgstr "ፍላጎቶችን ያንብቡ"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -754,7 +790,7 @@ msgstr "ገጽታ"
 msgid "Theme Settings"
 msgstr "የገጽታ ቅንብሮች"
 
-#: src/use-permission-request.tsx:158
+#: src/use-permission-request.tsx:165
 msgid "This permission must be enabled by you in the app settings."
 msgstr "ይህ ፈቃድ በመተግበሪያው ቅንብሮች ውስጥ በእርስዎ መንቃት አለበት።"
 
@@ -836,7 +872,12 @@ msgstr "ዩናይትድ ስቴትስ"
 msgid "Unverified"
 msgstr "ያልተረጋገጠ"
 
+#: src/use-permission-request.tsx:39
+msgid "use AI services"
+msgstr "የAI አገልግሎቶችን ይጠቀሙ"
+
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
+#: src/shell-menu.tsx:270
 msgid "User"
 msgstr "ተጠቃሚ"
 
@@ -865,7 +906,7 @@ msgid "View"
 msgstr "ይመልከቱ"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:173
-#: src/shell-menu.tsx:299
+#: src/shell-menu.tsx:302
 msgid "View all"
 msgstr "ሁሉንም ይመልከቱ"
 
@@ -884,3 +925,7 @@ msgstr "ድረ-ገጽ በጥገና ላይ ነው!"
 #: ../../../lib/web/src/lib/preference-utils.ts:71
 msgid "Wednesday"
 msgstr "ረቡዕ"
+
+#: src/use-permission-request.tsx:43
+msgid "write interests"
+msgstr "ፍላጎቶችን ይጻፉ"

@@ -13,6 +13,10 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: src/use-permission-request.tsx:159
+msgid "<0>{appName}</0> wants permission to {permissionLabel}."
+msgstr "<0>{appName}</0> demande l'autorisation de {permissionLabel}."
+
 #: ../../../lib/web/src/lib/preference-utils.ts:52
 msgid "12 hours"
 msgstr "12 heures"
@@ -24,6 +28,10 @@ msgstr "24 heures"
 #: ../../../lib/web/src/lib/preference-utils.ts:61
 msgid "Absolute (date and time)"
 msgstr "Absolu (date et heure)"
+
+#: src/use-permission-request.tsx:50
+msgid "access {domain}"
+msgstr "accéder à {domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:12
 msgid "Access Forbidden"
@@ -97,6 +105,10 @@ msgstr "IA"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:159
 msgid "All"
 msgstr "Tout"
+
+#: src/use-permission-request.tsx:183
+msgid "Allow"
+msgstr "Autoriser"
 
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:24
 msgid "Are you sure you want to log out? You will need to log in again to access your account."
@@ -182,11 +194,13 @@ msgstr "Effacer la sélection (Échap)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:172
 msgid "Close"
 msgstr "Fermer"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:97
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Close navigation"
 msgstr "Fermer la navigation"
 
@@ -214,6 +228,10 @@ msgstr "Compact"
 #: ../../../lib/web/src/components/travelling-picker.tsx:299
 msgid "Confirm"
 msgstr "Confirmer"
+
+#: src/use-permission-request.tsx:40
+msgid "connect to MCP servers"
+msgstr "se connecter aux serveurs MCP"
 
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
@@ -252,7 +270,7 @@ msgstr "Par défaut"
 msgid "Default AI account"
 msgstr "Compte IA par défaut"
 
-#: src/use-permission-request.tsx:170
+#: src/use-permission-request.tsx:177
 msgid "Deny"
 msgstr "Refuser"
 
@@ -357,8 +375,8 @@ msgstr "Masquer"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:142
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
-#: src/shell-menu.tsx:372
-#: src/shell-menu.tsx:434
+#: src/shell-menu.tsx:375
+#: src/shell-menu.tsx:437
 msgid "Home"
 msgstr "Accueil"
 
@@ -433,14 +451,22 @@ msgstr "Déconnexion en cours…"
 msgid "Luma (Default)"
 msgstr "Luma (par défaut)"
 
+#: src/use-permission-request.tsx:38
+msgid "manage connected accounts"
+msgstr "gérer les comptes connectés"
+
+#: src/use-permission-request.tsx:41
+msgid "manage groups"
+msgstr "gérer les groupes"
+
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
-#: src/shell-menu.tsx:290
+#: src/shell-menu.tsx:293
 msgid "Mark all as read"
 msgstr "Tout marquer comme lu"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
-#: src/shell-menu.tsx:411
+#: src/shell-menu.tsx:414
 msgid "Menu"
 msgstr "Menu"
 
@@ -497,7 +523,7 @@ msgstr "Aucun fuseau horaire trouvé."
 msgid "No topic record yet — try again after the next notification."
 msgstr "Aucun enregistrement de sujet pour le moment — réessayez après la prochaine notification."
 
-#: src/shell-menu.tsx:314
+#: src/shell-menu.tsx:317
 msgid "No unread notifications"
 msgstr "Aucune notification non lue"
 
@@ -512,7 +538,7 @@ msgstr "Aucun"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:247
-#: src/shell-menu.tsx:283
+#: src/shell-menu.tsx:286
 msgid "Notifications"
 msgstr "Notifications"
 
@@ -525,12 +551,14 @@ msgstr "Oups ! Page introuvable !"
 msgid "Open account actions"
 msgstr "Ouvrir les actions du compte"
 
-#: src/shell-menu.tsx:251
-#: src/shell-menu.tsx:386
+#: src/shell-menu.tsx:254
+#: src/shell-menu.tsx:389
 msgid "Open menu"
 msgstr "Ouvrir le menu"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:57
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Open navigation"
 msgstr "Ouvrir la navigation"
 
@@ -551,7 +579,7 @@ msgstr "Autre"
 msgid "Owner"
 msgstr "Propriétaire\"#. placeholder {0}: formatInterval(source.interval)"
 
-#: src/use-permission-request.tsx:150
+#: src/use-permission-request.tsx:157
 msgid "Permission request"
 msgstr "Demande de permission"
 
@@ -563,6 +591,14 @@ msgstr "Image précédente"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:111
 msgid "Profile"
 msgstr "Profil"
+
+#: src/use-permission-request.tsx:37
+msgid "read connected accounts"
+msgstr "lire les comptes connectés"
+
+#: src/use-permission-request.tsx:42
+msgid "read interests"
+msgstr "lire les centres d'intérêt"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -754,7 +790,7 @@ msgstr "Thème"
 msgid "Theme Settings"
 msgstr "Paramètres du thème"
 
-#: src/use-permission-request.tsx:158
+#: src/use-permission-request.tsx:165
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Cette permission doit être activée par vous dans les paramètres de l'application."
 
@@ -836,7 +872,12 @@ msgstr "États-Unis"
 msgid "Unverified"
 msgstr "Non vérifié"
 
+#: src/use-permission-request.tsx:39
+msgid "use AI services"
+msgstr "utiliser les services d'IA"
+
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
+#: src/shell-menu.tsx:270
 msgid "User"
 msgstr "Utilisateur"
 
@@ -865,7 +906,7 @@ msgid "View"
 msgstr "Vue"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:173
-#: src/shell-menu.tsx:299
+#: src/shell-menu.tsx:302
 msgid "View all"
 msgstr "Tout voir"
 
@@ -884,3 +925,7 @@ msgstr "Le site est en maintenance !"
 #: ../../../lib/web/src/lib/preference-utils.ts:71
 msgid "Wednesday"
 msgstr "Mercredi"
+
+#: src/use-permission-request.tsx:43
+msgid "write interests"
+msgstr "écrire les centres d'intérêt"

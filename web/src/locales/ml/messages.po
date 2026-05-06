@@ -6,6 +6,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: ml\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/use-permission-request.tsx:159
+msgid "<0>{appName}</0> wants permission to {permissionLabel}."
+msgstr "<0>{appName}</0> {permissionLabel} അനുമതി ആവശ്യപ്പെടുന്നു."
 
 #: ../../../lib/web/src/lib/preference-utils.ts:52
 msgid "12 hours"
@@ -18,6 +28,10 @@ msgstr "24 മണിക്കൂർ"
 #: ../../../lib/web/src/lib/preference-utils.ts:61
 msgid "Absolute (date and time)"
 msgstr "സമ്പൂർണ്ണം (തീയതിയും സമയവും)"
+
+#: src/use-permission-request.tsx:50
+msgid "access {domain}"
+msgstr "{domain} ആക്സസ് ചെയ്യുക"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:12
 msgid "Access Forbidden"
@@ -91,6 +105,10 @@ msgstr "AI"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:159
 msgid "All"
 msgstr "എല്ലാം"
+
+#: src/use-permission-request.tsx:183
+msgid "Allow"
+msgstr "അനുവദിക്കുക"
 
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:24
 msgid "Are you sure you want to log out? You will need to log in again to access your account."
@@ -176,11 +194,13 @@ msgstr "തിരഞ്ഞെടുപ്പ് മായ്ക്കുക (Esc
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:172
 msgid "Close"
 msgstr "അടയ്ക്കുക"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:97
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Close navigation"
 msgstr "നാവിഗേഷൻ അടയ്ക്കുക"
 
@@ -208,6 +228,10 @@ msgstr "കോംപാക്റ്റ്"
 #: ../../../lib/web/src/components/travelling-picker.tsx:299
 msgid "Confirm"
 msgstr "സ്ഥിരീകരിക്കുക"
+
+#: src/use-permission-request.tsx:40
+msgid "connect to MCP servers"
+msgstr "MCP സെർവറുകളിലേക്ക് കണക്റ്റ് ചെയ്യുക"
 
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
@@ -246,7 +270,7 @@ msgstr "ഡിഫോൾട്ട്"
 msgid "Default AI account"
 msgstr "ഡിഫോൾട്ട് AI അക്കൗണ്ട്"
 
-#: src/use-permission-request.tsx:170
+#: src/use-permission-request.tsx:177
 msgid "Deny"
 msgstr "നിഷേധിക്കുക"
 
@@ -351,8 +375,8 @@ msgstr "മറയ്ക്കുക"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:142
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
-#: src/shell-menu.tsx:372
-#: src/shell-menu.tsx:434
+#: src/shell-menu.tsx:375
+#: src/shell-menu.tsx:437
 msgid "Home"
 msgstr "ഹോം"
 
@@ -427,14 +451,22 @@ msgstr "ലോഗ് ഔട്ട് ചെയ്യുന്നു…"
 msgid "Luma (Default)"
 msgstr "Luma (ഡിഫോൾട്ട്)"
 
+#: src/use-permission-request.tsx:38
+msgid "manage connected accounts"
+msgstr "കണക്റ്റ് ചെയ്ത അക്കൗണ്ടുകൾ കൈകാര്യം ചെയ്യുക"
+
+#: src/use-permission-request.tsx:41
+msgid "manage groups"
+msgstr "ഗ്രൂപ്പുകൾ കൈകാര്യം ചെയ്യുക"
+
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
-#: src/shell-menu.tsx:290
+#: src/shell-menu.tsx:293
 msgid "Mark all as read"
 msgstr "എല്ലാം വായിച്ചതായി അടയാളപ്പെടുത്തുക"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
-#: src/shell-menu.tsx:411
+#: src/shell-menu.tsx:414
 msgid "Menu"
 msgstr "മെനു"
 
@@ -491,7 +523,7 @@ msgstr "സമയ മേഖലയൊന്നും കണ്ടെത്തി�
 msgid "No topic record yet — try again after the next notification."
 msgstr "വിഷയ റെക്കോർഡ് ഇതുവരെയില്ല — അടുത്ത അറിയിപ്പിന് ശേഷം വീണ്ടും ശ്രമിക്കുക."
 
-#: src/shell-menu.tsx:314
+#: src/shell-menu.tsx:317
 msgid "No unread notifications"
 msgstr "വായിക്കാത്ത അറിയിപ്പുകളൊന്നുമില്ല"
 
@@ -506,7 +538,7 @@ msgstr "ഒന്നുമില്ല"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:247
-#: src/shell-menu.tsx:283
+#: src/shell-menu.tsx:286
 msgid "Notifications"
 msgstr "അറിയിപ്പുകൾ"
 
@@ -519,12 +551,14 @@ msgstr "ഓ! പേജ് കണ്ടെത്തിയില്ല!"
 msgid "Open account actions"
 msgstr "അക്കൗണ്ട് പ്രവർത്തനങ്ങൾ തുറക്കുക"
 
-#: src/shell-menu.tsx:251
-#: src/shell-menu.tsx:386
+#: src/shell-menu.tsx:254
+#: src/shell-menu.tsx:389
 msgid "Open menu"
 msgstr "മെനു തുറക്കുക"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:57
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Open navigation"
 msgstr "navigation തുറക്കുക"
 
@@ -545,7 +579,7 @@ msgstr "മറ്റുള്ളവ"
 msgid "Owner"
 msgstr "ഉടമ"
 
-#: src/use-permission-request.tsx:150
+#: src/use-permission-request.tsx:157
 msgid "Permission request"
 msgstr "അനുമതി അഭ്യർത്ഥന"
 
@@ -557,6 +591,14 @@ msgstr "മുമ്പത്തെ ഫോട്ടോ"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:111
 msgid "Profile"
 msgstr "പ്രൊഫൈൽ പ്രിവ്യൂ"
+
+#: src/use-permission-request.tsx:37
+msgid "read connected accounts"
+msgstr "കണക്റ്റ് ചെയ്ത അക്കൗണ്ടുകൾ വായിക്കുക"
+
+#: src/use-permission-request.tsx:42
+msgid "read interests"
+msgstr "താൽപ്പര്യങ്ങൾ വായിക്കുക"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -748,7 +790,7 @@ msgstr "തീം"
 msgid "Theme Settings"
 msgstr "തീം ക്രമീകരണങ്ങൾ"
 
-#: src/use-permission-request.tsx:158
+#: src/use-permission-request.tsx:165
 msgid "This permission must be enabled by you in the app settings."
 msgstr "ഈ അനുമതി ആപ്പ് ക്രമീകരണങ്ങളിൽ നിങ്ങൾ പ്രവർത്തനക്ഷമമാക്കണം."
 
@@ -830,7 +872,12 @@ msgstr "യുണൈറ്റഡ് സ്റ്റേറ്റ്സ്"
 msgid "Unverified"
 msgstr "സ്ഥിരീകരിച്ചിട്ടില്ല"
 
+#: src/use-permission-request.tsx:39
+msgid "use AI services"
+msgstr "AI സേവനങ്ങൾ ഉപയോഗിക്കുക"
+
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
+#: src/shell-menu.tsx:270
 msgid "User"
 msgstr "ഉപയോക്താവ്"
 
@@ -859,7 +906,7 @@ msgid "View"
 msgstr "കാണുക"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:173
-#: src/shell-menu.tsx:299
+#: src/shell-menu.tsx:302
 msgid "View all"
 msgstr "എല്ലാം കാണുക"
 
@@ -878,3 +925,7 @@ msgstr "വെബ്സൈറ്റ് മെയിന്റനൻസിലാ�
 #: ../../../lib/web/src/lib/preference-utils.ts:71
 msgid "Wednesday"
 msgstr "ബുധനാഴ്ച"
+
+#: src/use-permission-request.tsx:43
+msgid "write interests"
+msgstr "താൽപ്പര്യങ്ങൾ എഴുതുക"

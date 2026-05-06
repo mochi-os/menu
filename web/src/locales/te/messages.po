@@ -6,6 +6,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: te\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/use-permission-request.tsx:159
+msgid "<0>{appName}</0> wants permission to {permissionLabel}."
+msgstr "<0>{appName}</0> {permissionLabel} అనుమతిని కోరుతోంది."
 
 #: ../../../lib/web/src/lib/preference-utils.ts:52
 msgid "12 hours"
@@ -18,6 +28,10 @@ msgstr "24 గంటలు"
 #: ../../../lib/web/src/lib/preference-utils.ts:61
 msgid "Absolute (date and time)"
 msgstr "సంపూర్ణ (తేదీ మరియు సమయం)"
+
+#: src/use-permission-request.tsx:50
+msgid "access {domain}"
+msgstr "{domain}ని యాక్సెస్ చేయండి"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:12
 msgid "Access Forbidden"
@@ -91,6 +105,10 @@ msgstr "AI"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:159
 msgid "All"
 msgstr "అన్నీ"
+
+#: src/use-permission-request.tsx:183
+msgid "Allow"
+msgstr "అనుమతించు"
 
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:24
 msgid "Are you sure you want to log out? You will need to log in again to access your account."
@@ -176,11 +194,13 @@ msgstr "ఎంపికను క్లియర్ చేయండి (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:172
 msgid "Close"
 msgstr "మూసివేయండి"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:97
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Close navigation"
 msgstr "నావిగేషన్‌ను మూసివేయండి"
 
@@ -208,6 +228,10 @@ msgstr "కాంపాక్ట్"
 #: ../../../lib/web/src/components/travelling-picker.tsx:299
 msgid "Confirm"
 msgstr "నిర్ధారించండి"
+
+#: src/use-permission-request.tsx:40
+msgid "connect to MCP servers"
+msgstr "MCP సర్వర్‌లకు కనెక్ట్ చేయండి"
 
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
@@ -246,7 +270,7 @@ msgstr "డిఫాల్ట్"
 msgid "Default AI account"
 msgstr "డిఫాల్ట్ AI ఖాతా"
 
-#: src/use-permission-request.tsx:170
+#: src/use-permission-request.tsx:177
 msgid "Deny"
 msgstr "నిరాకరించండి"
 
@@ -351,8 +375,8 @@ msgstr "దాచండి"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:142
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
-#: src/shell-menu.tsx:372
-#: src/shell-menu.tsx:434
+#: src/shell-menu.tsx:375
+#: src/shell-menu.tsx:437
 msgid "Home"
 msgstr "హోమ్"
 
@@ -427,14 +451,22 @@ msgstr "లాగ్ అవుట్ చేస్తోంది…"
 msgid "Luma (Default)"
 msgstr "లుమా (డిఫాల్ట్)"
 
+#: src/use-permission-request.tsx:38
+msgid "manage connected accounts"
+msgstr "కనెక్ట్ చేయబడిన ఖాతాలను నిర్వహించండి"
+
+#: src/use-permission-request.tsx:41
+msgid "manage groups"
+msgstr "సమూహాలను నిర్వహించండి"
+
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
-#: src/shell-menu.tsx:290
+#: src/shell-menu.tsx:293
 msgid "Mark all as read"
 msgstr "అన్నింటినీ చదివినట్లు గుర్తించండి"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
-#: src/shell-menu.tsx:411
+#: src/shell-menu.tsx:414
 msgid "Menu"
 msgstr "మెను"
 
@@ -491,7 +523,7 @@ msgstr "టైం జోన్ కనుగొనబడలేదు."
 msgid "No topic record yet — try again after the next notification."
 msgstr "ఇంకా టాపిక్ రికార్డ్ లేదు — తదుపరి నోటిఫికేషన్ తర్వాత మళ్లీ ప్రయత్నించండి."
 
-#: src/shell-menu.tsx:314
+#: src/shell-menu.tsx:317
 msgid "No unread notifications"
 msgstr "చదవని నోటిఫికేషన్‌లు లేవు"
 
@@ -506,7 +538,7 @@ msgstr "ఏదీ లేదు"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:247
-#: src/shell-menu.tsx:283
+#: src/shell-menu.tsx:286
 msgid "Notifications"
 msgstr "నోటిఫికేషన్‌లు"
 
@@ -519,12 +551,14 @@ msgstr "అయ్యో! పేజీ కనుగొనబడలేదు!"
 msgid "Open account actions"
 msgstr "ఖాతా చర్యలను ఓపెన్ చేయండి"
 
-#: src/shell-menu.tsx:251
-#: src/shell-menu.tsx:386
+#: src/shell-menu.tsx:254
+#: src/shell-menu.tsx:389
 msgid "Open menu"
 msgstr "మెనుని ఓపెన్ చేయండి"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:57
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Open navigation"
 msgstr "నావిగేషన్‌ను ఓపెన్ చేయండి"
 
@@ -545,7 +579,7 @@ msgstr "ఇతర"
 msgid "Owner"
 msgstr "ఓనర్"
 
-#: src/use-permission-request.tsx:150
+#: src/use-permission-request.tsx:157
 msgid "Permission request"
 msgstr "పర్మిషన్ రిక్వెస్ట్"
 
@@ -557,6 +591,14 @@ msgstr "మునుపటి చిత్రం"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:111
 msgid "Profile"
 msgstr "ప్రొఫైల్"
+
+#: src/use-permission-request.tsx:37
+msgid "read connected accounts"
+msgstr "కనెక్ట్ చేయబడిన ఖాతాలను చదవండి"
+
+#: src/use-permission-request.tsx:42
+msgid "read interests"
+msgstr "ఆసక్తులను చదవండి"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -748,7 +790,7 @@ msgstr "థీమ్"
 msgid "Theme Settings"
 msgstr "థీమ్ సెట్టింగ్‌లు"
 
-#: src/use-permission-request.tsx:158
+#: src/use-permission-request.tsx:165
 msgid "This permission must be enabled by you in the app settings."
 msgstr "ఈ అనుమతిని యాప్ సెట్టింగ్‌లలో మీరు ఎనేబుల్ చేయాలి."
 
@@ -830,7 +872,12 @@ msgstr "యునైటెడ్ స్టేట్స్"
 msgid "Unverified"
 msgstr "ధృవీకరించబడలేదు"
 
+#: src/use-permission-request.tsx:39
+msgid "use AI services"
+msgstr "AI సేవలను ఉపయోగించండి"
+
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
+#: src/shell-menu.tsx:270
 msgid "User"
 msgstr "యూజర్"
 
@@ -859,7 +906,7 @@ msgid "View"
 msgstr "వీక్షించండి"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:173
-#: src/shell-menu.tsx:299
+#: src/shell-menu.tsx:302
 msgid "View all"
 msgstr "అన్నీ వీక్షించండి"
 
@@ -878,3 +925,7 @@ msgstr "వెబ్‌సైట్ మెయింటెనెన్స్‌�
 #: ../../../lib/web/src/lib/preference-utils.ts:71
 msgid "Wednesday"
 msgstr "బుధవారం"
+
+#: src/use-permission-request.tsx:43
+msgid "write interests"
+msgstr "ఆసక్తులను వ్రాయండి"

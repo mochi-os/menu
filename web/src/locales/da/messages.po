@@ -13,6 +13,10 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/use-permission-request.tsx:159
+msgid "<0>{appName}</0> wants permission to {permissionLabel}."
+msgstr "<0>{appName}</0> ønsker tilladelse til at {permissionLabel}."
+
 #: ../../../lib/web/src/lib/preference-utils.ts:52
 msgid "12 hours"
 msgstr "12 timer"
@@ -24,6 +28,10 @@ msgstr "24 timer"
 #: ../../../lib/web/src/lib/preference-utils.ts:61
 msgid "Absolute (date and time)"
 msgstr "Absolut (dato og klokkeslæt)"
+
+#: src/use-permission-request.tsx:50
+msgid "access {domain}"
+msgstr "tilgå {domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:12
 msgid "Access Forbidden"
@@ -97,6 +105,10 @@ msgstr "AI"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:159
 msgid "All"
 msgstr "Alle"
+
+#: src/use-permission-request.tsx:183
+msgid "Allow"
+msgstr "Tillad"
 
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:24
 msgid "Are you sure you want to log out? You will need to log in again to access your account."
@@ -182,11 +194,13 @@ msgstr "Ryd valg (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:172
 msgid "Close"
 msgstr "Luk"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:97
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Close navigation"
 msgstr "Luk navigation"
 
@@ -214,6 +228,10 @@ msgstr "Kompakt"
 #: ../../../lib/web/src/components/travelling-picker.tsx:299
 msgid "Confirm"
 msgstr "Bekræft"
+
+#: src/use-permission-request.tsx:40
+msgid "connect to MCP servers"
+msgstr "oprette forbindelse til MCP-servere"
 
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
@@ -252,7 +270,7 @@ msgstr "Standard"
 msgid "Default AI account"
 msgstr "Standard AI-konto"
 
-#: src/use-permission-request.tsx:170
+#: src/use-permission-request.tsx:177
 msgid "Deny"
 msgstr "Nægt"
 
@@ -357,8 +375,8 @@ msgstr "Skjul"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:142
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
-#: src/shell-menu.tsx:372
-#: src/shell-menu.tsx:434
+#: src/shell-menu.tsx:375
+#: src/shell-menu.tsx:437
 msgid "Home"
 msgstr "Hjem"
 
@@ -433,14 +451,22 @@ msgstr "Logger ud…"
 msgid "Luma (Default)"
 msgstr "Luma (standard)"
 
+#: src/use-permission-request.tsx:38
+msgid "manage connected accounts"
+msgstr "administrere tilknyttede konti"
+
+#: src/use-permission-request.tsx:41
+msgid "manage groups"
+msgstr "administrere grupper"
+
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
-#: src/shell-menu.tsx:290
+#: src/shell-menu.tsx:293
 msgid "Mark all as read"
 msgstr "Markér alle som læst"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
-#: src/shell-menu.tsx:411
+#: src/shell-menu.tsx:414
 msgid "Menu"
 msgstr "Menu"
 
@@ -497,7 +523,7 @@ msgstr "Ingen tidszone fundet."
 msgid "No topic record yet — try again after the next notification."
 msgstr "Ingen emnepost endnu — prøv igen efter næste notifikation."
 
-#: src/shell-menu.tsx:314
+#: src/shell-menu.tsx:317
 msgid "No unread notifications"
 msgstr "Ingen ulæste notifikationer"
 
@@ -512,7 +538,7 @@ msgstr "Ingen"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:247
-#: src/shell-menu.tsx:283
+#: src/shell-menu.tsx:286
 msgid "Notifications"
 msgstr "Notifikationer"
 
@@ -525,12 +551,14 @@ msgstr "Ups! Siden blev ikke fundet!"
 msgid "Open account actions"
 msgstr "Åbn kontohandlinger"
 
-#: src/shell-menu.tsx:251
-#: src/shell-menu.tsx:386
+#: src/shell-menu.tsx:254
+#: src/shell-menu.tsx:389
 msgid "Open menu"
 msgstr "Åbn menu"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:57
+#: src/shell-menu.tsx:364
+#: src/shell-menu.tsx:365
 msgid "Open navigation"
 msgstr "Åbn navigation"
 
@@ -551,7 +579,7 @@ msgstr "Andet"
 msgid "Owner"
 msgstr "Ejer"
 
-#: src/use-permission-request.tsx:150
+#: src/use-permission-request.tsx:157
 msgid "Permission request"
 msgstr "Tilladelsesanmodning"
 
@@ -563,6 +591,14 @@ msgstr "Forrige billede"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:111
 msgid "Profile"
 msgstr "Profil"
+
+#: src/use-permission-request.tsx:37
+msgid "read connected accounts"
+msgstr "læse tilknyttede konti"
+
+#: src/use-permission-request.tsx:42
+msgid "read interests"
+msgstr "læse interesser"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -754,7 +790,7 @@ msgstr "Tema"
 msgid "Theme Settings"
 msgstr "Temaindstillinger"
 
-#: src/use-permission-request.tsx:158
+#: src/use-permission-request.tsx:165
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Denne tilladelse skal aktiveres af dig i appindstillingerne."
 
@@ -836,7 +872,12 @@ msgstr "USA"
 msgid "Unverified"
 msgstr "Uverificeret"
 
+#: src/use-permission-request.tsx:39
+msgid "use AI services"
+msgstr "bruge AI-tjenester"
+
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
+#: src/shell-menu.tsx:270
 msgid "User"
 msgstr "Bruger"
 
@@ -865,7 +906,7 @@ msgid "View"
 msgstr "Vis"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:173
-#: src/shell-menu.tsx:299
+#: src/shell-menu.tsx:302
 msgid "View all"
 msgstr "Vis alle"
 
@@ -884,3 +925,7 @@ msgstr "Webstedet er under vedligeholdelse!"
 #: ../../../lib/web/src/lib/preference-utils.ts:71
 msgid "Wednesday"
 msgstr "Onsdag"
+
+#: src/use-permission-request.tsx:43
+msgid "write interests"
+msgstr "skrive interesser"

@@ -3,7 +3,7 @@
 // shows a dialog for the user to grant or deny the permission.
 
 import { useState, useEffect, useCallback } from 'react'
-import { Trans } from '@lingui/react/macro'
+import { Trans, useLingui } from '@lingui/react/macro'
 import { Shield, ShieldAlert, Loader2 } from 'lucide-react'
 import {
   ResponsiveDialog,
@@ -30,25 +30,28 @@ interface PendingRequest {
   source: WindowProxy
 }
 
-function getPermissionLabel(permission: string): string {
-  const labels: Record<string, string> = {
-    'accounts/read': 'read connected accounts',
-    'accounts/manage': 'manage connected accounts',
-    'accounts/ai': 'use AI services',
-    'accounts/mcp': 'connect to MCP servers',
-    'groups/manage': 'manage groups',
-    'interests/read': 'read interests',
-    'interests/write': 'write interests',
+function usePermissionLabel() {
+  const { t } = useLingui()
+  return (permission: string): string => {
+    const labels: Record<string, string> = {
+      'accounts/read': t`read connected accounts`,
+      'accounts/manage': t`manage connected accounts`,
+      'accounts/ai': t`use AI services`,
+      'accounts/mcp': t`connect to MCP servers`,
+      'groups/manage': t`manage groups`,
+      'interests/read': t`read interests`,
+      'interests/write': t`write interests`,
+    }
+
+    if (labels[permission]) return labels[permission]
+
+    if (permission.startsWith('url:')) {
+      const domain = permission.slice(4)
+      return t`access ${domain}`
+    }
+
+    return permission
   }
-
-  if (labels[permission]) return labels[permission]
-
-  if (permission.startsWith('url:')) {
-    const domain = permission.slice(4)
-    return `access ${domain}`
-  }
-
-  return permission
 }
 
 export function usePermissionRequest() {
@@ -63,13 +66,16 @@ export function usePermissionRequest() {
       if (!data || typeof data !== 'object' || data.type !== 'request-permission') return
 
       // Diagnostic logging for ticket mochi-dev-185 — remove once resolved
-      console.log('[menu debug 185] request-permission received', {
-        id: data.id,
-        app: data.app,
-        permission: data.permission,
-        restricted: data.restricted,
-        hasSource: !!event.source,
-      })
+      if (import.meta.env.DEV) {
+        // eslint-disable-next-line no-console
+        console.log('[menu debug 185] request-permission received', {
+          id: data.id,
+          app: data.app,
+          permission: data.permission,
+          restricted: data.restricted,
+          hasSource: !!event.source,
+        })
+      }
 
       const source = event.source as WindowProxy | null
       if (!source) return
@@ -133,6 +139,7 @@ export function usePermissionRequest() {
     respond('denied')
   }, [respond])
 
+  const getPermissionLabel = usePermissionLabel()
   const appName = pending ? pending.app.charAt(0).toUpperCase() + pending.app.slice(1) : ''
   const permissionLabel = pending ? getPermissionLabel(pending.permission) : ''
 
@@ -149,7 +156,7 @@ export function usePermissionRequest() {
           </div>
           <ResponsiveDialogTitle className="text-center"><Trans>Permission request</Trans></ResponsiveDialogTitle>
           <ResponsiveDialogDescription className="text-center">
-            <span className="font-medium">{appName}</span> wants permission to {permissionLabel}.
+            <Trans><span className="font-medium">{appName}</span> wants permission to {permissionLabel}.</Trans>
           </ResponsiveDialogDescription>
         </ResponsiveDialogHeader>
 
@@ -173,7 +180,7 @@ export function usePermissionRequest() {
                 {submitting ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
                 ) : (
-                  'Allow'
+                  <Trans>Allow</Trans>
                 )}
               </Button>
             </>
