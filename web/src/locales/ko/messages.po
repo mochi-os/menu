@@ -17,15 +17,15 @@ msgstr ""
 msgid "<0>{appName}</0> wants permission to {permissionLabel}."
 msgstr "<0>{appName}</0>이(가) {permissionLabel} 권한을 요청합니다."
 
-#: ../../../lib/web/src/lib/preference-utils.ts:52
+#: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
 msgstr "12시간"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:51
+#: ../../../lib/web/src/lib/preference-utils.ts:38
 msgid "24 hours"
 msgstr "24시간"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:61
+#: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "절대값 (날짜 및 시간)"
 
@@ -285,11 +285,11 @@ msgstr "세부 정보 패널"
 #: ../../../lib/web/src/components/language-picker.tsx:145
 #: ../../../lib/web/src/components/timezone-select.tsx:43
 #: ../../../lib/web/src/components/timezone-select.tsx:80
-#: ../../../lib/web/src/lib/preference-utils.ts:38
-#: ../../../lib/web/src/lib/preference-utils.ts:50
-#: ../../../lib/web/src/lib/preference-utils.ts:68
-#: ../../../lib/web/src/lib/preference-utils.ts:82
-#: ../../../lib/web/src/lib/preference-utils.ts:94
+#: ../../../lib/web/src/lib/preference-utils.ts:25
+#: ../../../lib/web/src/lib/preference-utils.ts:37
+#: ../../../lib/web/src/lib/preference-utils.ts:55
+#: ../../../lib/web/src/lib/preference-utils.ts:69
+#: ../../../lib/web/src/lib/preference-utils.ts:81
 msgid "Detect from web browser"
 msgstr "웹 브라우저에서 감지"
 
@@ -329,7 +329,7 @@ msgstr "카테고리 업데이트에 실패했어요"
 msgid "Floating"
 msgstr "플로팅"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:73
+#: ../../../lib/web/src/lib/preference-utils.ts:60
 msgid "Friday"
 msgstr "금요일"
 
@@ -384,7 +384,7 @@ msgstr "홈"
 msgid "Hot"
 msgstr "인기"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:96
+#: ../../../lib/web/src/lib/preference-utils.ts:83
 msgid "Imperial"
 msgstr "야드파운드법"
 
@@ -447,10 +447,6 @@ msgstr "성공적으로 로그아웃되었어요"
 msgid "Logging out…"
 msgstr "로그아웃 중…"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:25
-msgid "Luma (Default)"
-msgstr "Luma (기본)"
-
 #: src/use-permission-request.tsx:38
 msgid "manage connected accounts"
 msgstr "연결된 계정 관리"
@@ -470,11 +466,11 @@ msgstr "모두 읽음으로 표시"
 msgid "Menu"
 msgstr "메뉴"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:95
+#: ../../../lib/web/src/lib/preference-utils.ts:82
 msgid "Metric"
 msgstr "측정 항목"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:69
+#: ../../../lib/web/src/lib/preference-utils.ts:56
 msgid "Monday"
 msgstr "월요일"
 
@@ -613,11 +609,11 @@ msgstr "로그인으로 리디렉션 중이에요."
 msgid "Reduce interest"
 msgstr "관심사 줄이기"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:60
+#: ../../../lib/web/src/lib/preference-utils.ts:47
 msgid "Relative (5m, 3h, 2d)"
 msgstr "상대적 (5분, 3시간, 2일)"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:59
+#: ../../../lib/web/src/lib/preference-utils.ts:46
 msgid "Relative within 24 hours, else absolute"
 msgstr "24시간 이내는 상대적, 그 외는 절대적"
 
@@ -655,7 +651,7 @@ msgstr "오른쪽에서 왼쪽"
 msgid "Rows per page"
 msgstr "페이지당 행"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:74
+#: ../../../lib/web/src/lib/preference-utils.ts:61
 msgid "Saturday"
 msgstr "토요일"
 
@@ -765,7 +761,7 @@ msgstr "기대해 주세요!"
 msgid "Subject"
 msgstr "제목"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:75
+#: ../../../lib/web/src/lib/preference-utils.ts:62
 msgid "Sunday"
 msgstr "일요일"
 
@@ -794,7 +790,7 @@ msgstr "테마 설정"
 msgid "This permission must be enabled by you in the app settings."
 msgstr "이 권한은 앱 설정에서 직접 활성화해야 해요."
 
-#: ../../../lib/web/src/lib/preference-utils.ts:72
+#: ../../../lib/web/src/lib/preference-utils.ts:59
 msgid "Thursday"
 msgstr "목요일"
 
@@ -835,7 +831,7 @@ msgstr "검색어를 조정해 보세요"
 msgid "Try again"
 msgstr "다시 시도"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:70
+#: ../../../lib/web/src/lib/preference-utils.ts:57
 msgid "Tuesday"
 msgstr "화요일"
 
@@ -864,7 +860,7 @@ msgstr "할당되지 않음"
 msgid "Unauthorized Access"
 msgstr "허용되지 않은 접근"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:97
+#: ../../../lib/web/src/lib/preference-utils.ts:84
 msgid "United States"
 msgstr "미국"
 
@@ -922,7 +918,7 @@ msgstr "곧 다시 온라인으로 돌아올게요."
 msgid "Website is under maintenance!"
 msgstr "웹사이트가 점검 중이에요!"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:71
+#: ../../../lib/web/src/lib/preference-utils.ts:58
 msgid "Wednesday"
 msgstr "수요일"
 

@@ -1,7 +1,7 @@
 /** @type {import('@lingui/conf').LinguiConfig} */
 export default {
   sourceLocale: 'en',
-  locales: ['en', 'en-us', 'fr', 'ja', 'ar', 'zh-hans', 'zh-hant', 'ko', 'id', 'th', 'tl', 'pt', 'pt-br', 'de', 'sv', 'nl', 'pl', 'he', 'it', 'hi', 'ur', 'vi', 'el', 'ru', 'uk', 'cs', 'hu', 'da', 'fi', 'nb', 'is', 'ms', 'es-419', 'es', 'nl-be', 'af', 'sw', 'yo', 'ha', 'am', 'zu', 'xh', 'bn', 'ta', 'te', 'mr', 'kn', 'ml', 'gu', 'pa', 'si', 'ne'],
+  locales: ['en', 'en-us', 'fr', 'ja', 'ar', 'zh-hans', 'zh-hant', 'ko', 'id', 'th', 'tl', 'pt', 'pt-br', 'de', 'sv', 'nl', 'pl', 'he', 'it', 'hi', 'ur', 'vi', 'el', 'ru', 'uk', 'cs', 'hu', 'da', 'fi', 'nb', 'is', 'ms', 'es-419', 'es', 'nl-be', 'af', 'sw', 'yo', 'ha', 'am', 'zu', 'xh', 'bn', 'ta', 'te', 'mr', 'kn', 'ml', 'gu', 'pa', 'si', 'ne', 'tr', 'fa', 'ro', 'bg', 'hr', 'sr', 'sk', 'sl', 'ca', 'et', 'lv', 'lt', 'sq', 'be', 'mk', 'bs', 'yi'],
   catalogs: [
     {
       path: 'src/locales/{locale}/messages',

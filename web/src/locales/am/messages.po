@@ -17,15 +17,15 @@ msgstr ""
 msgid "<0>{appName}</0> wants permission to {permissionLabel}."
 msgstr "<0>{appName}</0> {permissionLabel} ፈቃድ ይፈልጋል።"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:52
+#: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
 msgstr "12 ሰዓት"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:51
+#: ../../../lib/web/src/lib/preference-utils.ts:38
 msgid "24 hours"
 msgstr "24 ሰዓት"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:61
+#: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "ፍጹም (ቀንና ሰዓት)"
 
@@ -285,11 +285,11 @@ msgstr "የዝርዝሮች ፓነል"
 #: ../../../lib/web/src/components/language-picker.tsx:145
 #: ../../../lib/web/src/components/timezone-select.tsx:43
 #: ../../../lib/web/src/components/timezone-select.tsx:80
-#: ../../../lib/web/src/lib/preference-utils.ts:38
-#: ../../../lib/web/src/lib/preference-utils.ts:50
-#: ../../../lib/web/src/lib/preference-utils.ts:68
-#: ../../../lib/web/src/lib/preference-utils.ts:82
-#: ../../../lib/web/src/lib/preference-utils.ts:94
+#: ../../../lib/web/src/lib/preference-utils.ts:25
+#: ../../../lib/web/src/lib/preference-utils.ts:37
+#: ../../../lib/web/src/lib/preference-utils.ts:55
+#: ../../../lib/web/src/lib/preference-utils.ts:69
+#: ../../../lib/web/src/lib/preference-utils.ts:81
 msgid "Detect from web browser"
 msgstr "ከድር አሳሽ አውቅ"
 
@@ -329,7 +329,7 @@ msgstr "ምድብን ማዘመን አልተሳካም"
 msgid "Floating"
 msgstr "ተንሳፋፊ"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:73
+#: ../../../lib/web/src/lib/preference-utils.ts:60
 msgid "Friday"
 msgstr "ዓርብ"
 
@@ -384,7 +384,7 @@ msgstr "መነሻ"
 msgid "Hot"
 msgstr "ሞቅ ያለ"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:96
+#: ../../../lib/web/src/lib/preference-utils.ts:83
 msgid "Imperial"
 msgstr "ኢምፔሪያል"
 
@@ -447,10 +447,6 @@ msgstr "በተሳካ ሁኔታ ወጥቷል"
 msgid "Logging out…"
 msgstr "በመውጣት ላይ…"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:25
-msgid "Luma (Default)"
-msgstr "ሉማ (ነባሪ)"
-
 #: src/use-permission-request.tsx:38
 msgid "manage connected accounts"
 msgstr "የተገናኙ መለያዎችን ያስተዳድሩ"
@@ -470,11 +466,11 @@ msgstr "ሁሉንም እንደተነበበ ምልክት አድርግ"
 msgid "Menu"
 msgstr "ምናሌ"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:95
+#: ../../../lib/web/src/lib/preference-utils.ts:82
 msgid "Metric"
 msgstr "ሜትሪክ"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:69
+#: ../../../lib/web/src/lib/preference-utils.ts:56
 msgid "Monday"
 msgstr "ሰኞ"
 
@@ -613,11 +609,11 @@ msgstr "ወደ መግቢያ በማዘዋወር ላይ።"
 msgid "Reduce interest"
 msgstr "ፍላጎትን ቀንስ"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:60
+#: ../../../lib/web/src/lib/preference-utils.ts:47
 msgid "Relative (5m, 3h, 2d)"
 msgstr "አንፃራዊ (5m, 3h, 2d)"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:59
+#: ../../../lib/web/src/lib/preference-utils.ts:46
 msgid "Relative within 24 hours, else absolute"
 msgstr "በ24 ሰዓታት ውስጥ አንፃራዊ፣ ካልሆነ ፍጹም"
 
@@ -655,7 +651,7 @@ msgstr "ከቀኝ ወደ ግራ"
 msgid "Rows per page"
 msgstr "በገጽ ያሉ ረድፎች"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:74
+#: ../../../lib/web/src/lib/preference-utils.ts:61
 msgid "Saturday"
 msgstr "ቅዳሜ"
 
@@ -765,7 +761,7 @@ msgstr "ግን ይከታተሉ!"
 msgid "Subject"
 msgstr "ርዕሰ ጉዳይ"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:75
+#: ../../../lib/web/src/lib/preference-utils.ts:62
 msgid "Sunday"
 msgstr "እሁድ"
 
@@ -794,7 +790,7 @@ msgstr "የገጽታ ቅንብሮች"
 msgid "This permission must be enabled by you in the app settings."
 msgstr "ይህ ፈቃድ በመተግበሪያው ቅንብሮች ውስጥ በእርስዎ መንቃት አለበት።"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:72
+#: ../../../lib/web/src/lib/preference-utils.ts:59
 msgid "Thursday"
 msgstr "ሐሙስ"
 
@@ -835,7 +831,7 @@ msgstr "የፍለጋ ቃላትዎን ማስተካከል ይሞክሩ"
 msgid "Try again"
 msgstr "እንደገና ይሞክሩ"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:70
+#: ../../../lib/web/src/lib/preference-utils.ts:57
 msgid "Tuesday"
 msgstr "ማክሰኞ"
 
@@ -864,7 +860,7 @@ msgstr "ያልተመደበ"
 msgid "Unauthorized Access"
 msgstr "ያልተፈቀደ መዳረሻ"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:97
+#: ../../../lib/web/src/lib/preference-utils.ts:84
 msgid "United States"
 msgstr "ዩናይትድ ስቴትስ"
 
@@ -922,7 +918,7 @@ msgstr "በቅርቡ ወደ መስመር እንመለሳለን።"
 msgid "Website is under maintenance!"
 msgstr "ድረ-ገጽ በጥገና ላይ ነው!"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:71
+#: ../../../lib/web/src/lib/preference-utils.ts:58
 msgid "Wednesday"
 msgstr "ረቡዕ"
 

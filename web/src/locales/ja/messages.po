@@ -17,15 +17,15 @@ msgstr ""
 msgid "<0>{appName}</0> wants permission to {permissionLabel}."
 msgstr "<0>{appName}</0>が{permissionLabel}の権限を要求しています。"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:52
+#: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
 msgstr "12時間"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:51
+#: ../../../lib/web/src/lib/preference-utils.ts:38
 msgid "24 hours"
 msgstr "24時間"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:61
+#: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "絶対 (日付と時刻)"
 
@@ -285,11 +285,11 @@ msgstr "詳細パネル"
 #: ../../../lib/web/src/components/language-picker.tsx:145
 #: ../../../lib/web/src/components/timezone-select.tsx:43
 #: ../../../lib/web/src/components/timezone-select.tsx:80
-#: ../../../lib/web/src/lib/preference-utils.ts:38
-#: ../../../lib/web/src/lib/preference-utils.ts:50
-#: ../../../lib/web/src/lib/preference-utils.ts:68
-#: ../../../lib/web/src/lib/preference-utils.ts:82
-#: ../../../lib/web/src/lib/preference-utils.ts:94
+#: ../../../lib/web/src/lib/preference-utils.ts:25
+#: ../../../lib/web/src/lib/preference-utils.ts:37
+#: ../../../lib/web/src/lib/preference-utils.ts:55
+#: ../../../lib/web/src/lib/preference-utils.ts:69
+#: ../../../lib/web/src/lib/preference-utils.ts:81
 msgid "Detect from web browser"
 msgstr "ウェブブラウザから検出"
 
@@ -329,7 +329,7 @@ msgstr "カテゴリの更新に失敗しました"
 msgid "Floating"
 msgstr "フローティング"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:73
+#: ../../../lib/web/src/lib/preference-utils.ts:60
 msgid "Friday"
 msgstr "金曜日"
 
@@ -384,7 +384,7 @@ msgstr "ホーム"
 msgid "Hot"
 msgstr "人気"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:96
+#: ../../../lib/web/src/lib/preference-utils.ts:83
 msgid "Imperial"
 msgstr "ヤード・ポンド法"
 
@@ -447,10 +447,6 @@ msgstr "ログアウトしました"
 msgid "Logging out…"
 msgstr "ログアウトしています…"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:25
-msgid "Luma (Default)"
-msgstr "Luma（デフォルト）"
-
 #: src/use-permission-request.tsx:38
 msgid "manage connected accounts"
 msgstr "連携済みアカウントを管理する"
@@ -470,11 +466,11 @@ msgstr "すべて既読にする"
 msgid "Menu"
 msgstr "メニュー"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:95
+#: ../../../lib/web/src/lib/preference-utils.ts:82
 msgid "Metric"
 msgstr "メートル法"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:69
+#: ../../../lib/web/src/lib/preference-utils.ts:56
 msgid "Monday"
 msgstr "月曜日"
 
@@ -578,6 +574,7 @@ msgstr "その他"
 #: ../../../lib/web/src/features/access/access-list.tsx:213
 msgid "Owner"
 msgstr "オーナー"
+
 #: src/use-permission-request.tsx:157
 msgid "Permission request"
 msgstr "権限のリクエスト"
@@ -612,11 +609,11 @@ msgstr "ログイン画面にリダイレクトしています。"
 msgid "Reduce interest"
 msgstr "関心を下げる"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:60
+#: ../../../lib/web/src/lib/preference-utils.ts:47
 msgid "Relative (5m, 3h, 2d)"
 msgstr "相対 (5分、3時間、2日)"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:59
+#: ../../../lib/web/src/lib/preference-utils.ts:46
 msgid "Relative within 24 hours, else absolute"
 msgstr "24時間以内は相対、それ以外は絶対"
 
@@ -654,7 +651,7 @@ msgstr "右から左"
 msgid "Rows per page"
 msgstr "ページあたりの行数"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:74
+#: ../../../lib/web/src/lib/preference-utils.ts:61
 msgid "Saturday"
 msgstr "土曜日"
 
@@ -764,7 +761,7 @@ msgstr "今後の更新にご期待ください!"
 msgid "Subject"
 msgstr "件名"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:75
+#: ../../../lib/web/src/lib/preference-utils.ts:62
 msgid "Sunday"
 msgstr "日曜日"
 
@@ -793,7 +790,7 @@ msgstr "テーマ設定"
 msgid "This permission must be enabled by you in the app settings."
 msgstr "この権限はアプリ設定でご自身で有効にする必要があります。"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:72
+#: ../../../lib/web/src/lib/preference-utils.ts:59
 msgid "Thursday"
 msgstr "木曜日"
 
@@ -834,7 +831,7 @@ msgstr "検索語を変えてみてください"
 msgid "Try again"
 msgstr "再試行"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:70
+#: ../../../lib/web/src/lib/preference-utils.ts:57
 msgid "Tuesday"
 msgstr "火曜日"
 
@@ -863,7 +860,7 @@ msgstr "未割り当て"
 msgid "Unauthorized Access"
 msgstr "認証されていないアクセス"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:97
+#: ../../../lib/web/src/lib/preference-utils.ts:84
 msgid "United States"
 msgstr "アメリカ合衆国"
 
@@ -921,7 +918,7 @@ msgstr "まもなく復旧します。"
 msgid "Website is under maintenance!"
 msgstr "ウェブサイトはメンテナンス中です!"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:71
+#: ../../../lib/web/src/lib/preference-utils.ts:58
 msgid "Wednesday"
 msgstr "水曜日"
 

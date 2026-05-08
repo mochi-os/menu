@@ -17,15 +17,15 @@ msgstr ""
 msgid "<0>{appName}</0> wants permission to {permissionLabel}."
 msgstr "<0>{appName}</0> {permissionLabel} ಗಾಗಿ ಅನುಮತಿ ಬಯಸುತ್ತದೆ."
 
-#: ../../../lib/web/src/lib/preference-utils.ts:52
+#: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
 msgstr "12 ಗಂಟೆಗಳು"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:51
+#: ../../../lib/web/src/lib/preference-utils.ts:38
 msgid "24 hours"
 msgstr "24 ಗಂಟೆಗಳು"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:61
+#: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "ಸಂಪೂರ್ಣ (ದಿನಾಂಕ ಮತ್ತು ಸಮಯ)"
 
@@ -285,11 +285,11 @@ msgstr "ವಿವರಗಳ ಪ್ಯಾನೆಲ್"
 #: ../../../lib/web/src/components/language-picker.tsx:145
 #: ../../../lib/web/src/components/timezone-select.tsx:43
 #: ../../../lib/web/src/components/timezone-select.tsx:80
-#: ../../../lib/web/src/lib/preference-utils.ts:38
-#: ../../../lib/web/src/lib/preference-utils.ts:50
-#: ../../../lib/web/src/lib/preference-utils.ts:68
-#: ../../../lib/web/src/lib/preference-utils.ts:82
-#: ../../../lib/web/src/lib/preference-utils.ts:94
+#: ../../../lib/web/src/lib/preference-utils.ts:25
+#: ../../../lib/web/src/lib/preference-utils.ts:37
+#: ../../../lib/web/src/lib/preference-utils.ts:55
+#: ../../../lib/web/src/lib/preference-utils.ts:69
+#: ../../../lib/web/src/lib/preference-utils.ts:81
 msgid "Detect from web browser"
 msgstr "ವೆಬ್ ಬ್ರೌಸರ್‌ನಿಂದ ಪತ್ತೆ ಮಾಡಿ"
 
@@ -329,7 +329,7 @@ msgstr "ವರ್ಗ ಅಪ್‌ಡೇಟ್ ಮಾಡಲು ವಿಫಲವಾ
 msgid "Floating"
 msgstr "ಫ್ಲೋಟಿಂಗ್"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:73
+#: ../../../lib/web/src/lib/preference-utils.ts:60
 msgid "Friday"
 msgstr "ಶುಕ್ರವಾರ"
 
@@ -384,7 +384,7 @@ msgstr "ಮುಖಪುಟ"
 msgid "Hot"
 msgstr "ಹಾಟ್"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:96
+#: ../../../lib/web/src/lib/preference-utils.ts:83
 msgid "Imperial"
 msgstr "ಇಂಪೀರಿಯಲ್"
 
@@ -447,10 +447,6 @@ msgstr "ಯಶಸ್ವಿಯಾಗಿ ಲಾಗ್ ಔಟ್ ಆಗಿದೆ"
 msgid "Logging out…"
 msgstr "ಲಾಗ್ ಔಟ್ ಆಗುತ್ತಿದೆ…"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:25
-msgid "Luma (Default)"
-msgstr "Luma (ಡೀಫಾಲ್ಟ್)"
-
 #: src/use-permission-request.tsx:38
 msgid "manage connected accounts"
 msgstr "ಸಂಪರ್ಕಿತ ಖಾತೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ"
@@ -470,11 +466,11 @@ msgstr "ಎಲ್ಲವನ್ನೂ ಓದಲಾಗಿದೆ ಎಂದು ಮಾ
 msgid "Menu"
 msgstr "ಮೆನು"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:95
+#: ../../../lib/web/src/lib/preference-utils.ts:82
 msgid "Metric"
 msgstr "ಮೆಟ್ರಿಕ್"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:69
+#: ../../../lib/web/src/lib/preference-utils.ts:56
 msgid "Monday"
 msgstr "ಸೋಮವಾರ"
 
@@ -613,11 +609,11 @@ msgstr "ಲಾಗಿನ್‌ಗೆ ರಿಡೈರೆಕ್ಟ್ ಮಾಡಲ�
 msgid "Reduce interest"
 msgstr "ಆಸಕ್ತಿ ಕಡಿಮೆಗೊಳಿಸಿ"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:60
+#: ../../../lib/web/src/lib/preference-utils.ts:47
 msgid "Relative (5m, 3h, 2d)"
 msgstr "ಸಾಪೇಕ್ಷ (5m, 3h, 2d)"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:59
+#: ../../../lib/web/src/lib/preference-utils.ts:46
 msgid "Relative within 24 hours, else absolute"
 msgstr "24 ಗಂಟೆಗಳ ಒಳಗೆ ಸಾಪೇಕ್ಷ, ಇಲ್ಲದಿದ್ದರೆ ಸಂಪೂರ್ಣ"
 
@@ -655,7 +651,7 @@ msgstr "ಬಲದಿಂದ ಎಡಕ್ಕೆ"
 msgid "Rows per page"
 msgstr "ಪ್ರತಿ ಪುಟಕ್ಕೆ ಸಾಲುಗಳು"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:74
+#: ../../../lib/web/src/lib/preference-utils.ts:61
 msgid "Saturday"
 msgstr "ಶನಿವಾರ"
 
@@ -765,7 +761,7 @@ msgstr "ಆದರೆ ಕಾದು ನೋಡಿ!"
 msgid "Subject"
 msgstr "ವಿಷಯ"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:75
+#: ../../../lib/web/src/lib/preference-utils.ts:62
 msgid "Sunday"
 msgstr "ಭಾನುವಾರ"
 
@@ -794,7 +790,7 @@ msgstr "ಥೀಮ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
 msgid "This permission must be enabled by you in the app settings."
 msgstr "ಈ ಅನುಮತಿಯನ್ನು ಆ್ಯಪ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ನೀವೇ ಸಕ್ರಿಯಗೊಳಿಸಬೇಕು."
 
-#: ../../../lib/web/src/lib/preference-utils.ts:72
+#: ../../../lib/web/src/lib/preference-utils.ts:59
 msgid "Thursday"
 msgstr "ಗುರುವಾರ"
 
@@ -835,7 +831,7 @@ msgstr "ನಿಮ್ಮ ಹುಡುಕಾಟ ಪದಗಳನ್ನು ಸರಿ
 msgid "Try again"
 msgstr "ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:70
+#: ../../../lib/web/src/lib/preference-utils.ts:57
 msgid "Tuesday"
 msgstr "ಮಂಗಳವಾರ"
 
@@ -864,7 +860,7 @@ msgstr "ನಿಯೋಜಿಸದ"
 msgid "Unauthorized Access"
 msgstr "ಅನುಮತಿಸದ ಪ್ರವೇಶ"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:97
+#: ../../../lib/web/src/lib/preference-utils.ts:84
 msgid "United States"
 msgstr "ಯುನೈಟೆಡ್ ಸ್ಟೇಟ್ಸ್"
 
@@ -922,7 +918,7 @@ msgstr "ನಾವು ಶೀಘ್ರದಲ್ಲೇ ಮತ್ತೆ ಆನ್‌
 msgid "Website is under maintenance!"
 msgstr "ವೆಬ್‌ಸೈಟ್ ನಿರ್ವಹಣೆಯಲ್ಲಿದೆ!"
 
-#: ../../../lib/web/src/lib/preference-utils.ts:71
+#: ../../../lib/web/src/lib/preference-utils.ts:58
 msgid "Wednesday"
 msgstr "ಬುಧವಾರ"
 

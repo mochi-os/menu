@@ -33,6 +33,40 @@ const catalogs: Catalogs = {
 
 
 
+
+  tr: () => import('./locales/tr/messages.po'),
+
+  fa: () => import('./locales/fa/messages.po'),
+
+  ro: () => import('./locales/ro/messages.po'),
+
+  bg: () => import('./locales/bg/messages.po'),
+
+  hr: () => import('./locales/hr/messages.po'),
+
+  sr: () => import('./locales/sr/messages.po'),
+
+  sk: () => import('./locales/sk/messages.po'),
+
+  sl: () => import('./locales/sl/messages.po'),
+
+  ca: () => import('./locales/ca/messages.po'),
+
+  et: () => import('./locales/et/messages.po'),
+
+  lv: () => import('./locales/lv/messages.po'),
+
+  lt: () => import('./locales/lt/messages.po'),
+
+  sq: () => import('./locales/sq/messages.po'),
+
+  be: () => import('./locales/be/messages.po'),
+
+  mk: () => import('./locales/mk/messages.po'),
+
+  bs: () => import('./locales/bs/messages.po'),
+
+  yi: () => import('./locales/yi/messages.po'),
   ne: () => import('./locales/ne/messages.po'),
   si: () => import('./locales/si/messages.po'),
   pa: () => import('./locales/pa/messages.po'),
