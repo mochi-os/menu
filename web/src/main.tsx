@@ -36,6 +36,18 @@ const catalogs: Catalogs = {
 
 
 
+
+  jv: () => import('./locales/jv/messages.po'),
+
+  sd: () => import('./locales/sd/messages.po'),
+
+  bho: () => import('./locales/bho/messages.po'),
+
+  su: () => import('./locales/su/messages.po'),
+
+  om: () => import('./locales/om/messages.po'),
+
+  yue: () => import('./locales/yue/messages.po'),
   'fr-ca': () => import('./locales/fr-ca/messages.po'),
 
   'zh-hk': () => import('./locales/zh-hk/messages.po'),
