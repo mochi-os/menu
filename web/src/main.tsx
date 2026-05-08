@@ -34,6 +34,56 @@ const catalogs: Catalogs = {
 
 
 
+
+  my: () => import('./locales/my/messages.po'),
+
+  ps: () => import('./locales/ps/messages.po'),
+
+  kk: () => import('./locales/kk/messages.po'),
+
+  uz: () => import('./locales/uz/messages.po'),
+
+  az: () => import('./locales/az/messages.po'),
+
+  km: () => import('./locales/km/messages.po'),
+
+  lo: () => import('./locales/lo/messages.po'),
+
+  mn: () => import('./locales/mn/messages.po'),
+
+  cy: () => import('./locales/cy/messages.po'),
+
+  ga: () => import('./locales/ga/messages.po'),
+
+  gd: () => import('./locales/gd/messages.po'),
+
+  mt: () => import('./locales/mt/messages.po'),
+
+  eu: () => import('./locales/eu/messages.po'),
+
+  gl: () => import('./locales/gl/messages.po'),
+
+  tg: () => import('./locales/tg/messages.po'),
+
+  ky: () => import('./locales/ky/messages.po'),
+
+  tk: () => import('./locales/tk/messages.po'),
+
+  qu: () => import('./locales/qu/messages.po'),
+
+  ay: () => import('./locales/ay/messages.po'),
+
+  gn: () => import('./locales/gn/messages.po'),
+
+  ht: () => import('./locales/ht/messages.po'),
+
+  hy: () => import('./locales/hy/messages.po'),
+
+  ckb: () => import('./locales/ckb/messages.po'),
+
+  ku: () => import('./locales/ku/messages.po'),
+
+  ka: () => import('./locales/ka/messages.po'),
   tr: () => import('./locales/tr/messages.po'),
 
   fa: () => import('./locales/fa/messages.po'),
