@@ -100,6 +100,34 @@ def action_push_accounts_remove(a):
     result = mochi.service.call("notifications", "accounts/remove", int(id))
     return {"data": result or {}}
 
+# UnifiedPush registration / inbound / unregister. The Mochi Android distributor
+# calls /menu/-/push/register; third-party Application Servers POST RFC 8030 to
+# /menu/-/push/inbound/:sub. Unregister reuses the existing accounts/remove.
+
+def action_push_register(a):
+    """Register a UnifiedPush subscription. Local distributor leaves endpoint
+    blank and we synthesise a path; foreign distributor (ntfy etc.) passes its
+    own endpoint URL."""
+    label = a.input("label", "").strip()
+    auth = a.input("auth", "").strip()
+    p256dh = a.input("p256dh", "").strip()
+    endpoint = a.input("endpoint", "").strip()
+
+    if not auth or not p256dh:
+        return a.error.label(400, "errors.invalid_subscription")
+
+    result = mochi.service.call("notifications", "push/register",
+                                label=label, auth=auth, p256dh=p256dh, endpoint=endpoint)
+    if not result:
+        return a.error.label(500, "errors.registration_failed")
+    return {"data": result}
+
+def action_push_inbound(a):
+    """Receive an RFC 8030 push from an external Application Server. Deferred —
+    forwards via WebSocket fast-path once the Go side exposes a binary-safe
+    write API. Currently returns 501."""
+    return a.error.label(501, "errors.inbound_not_implemented")
+
 # Permission grant (shell-managed permission request dialog)
 
 def action_permissions_grant(a):
