@@ -128,6 +128,28 @@ def action_push_inbound(a):
     write API. Currently returns 501."""
     return a.error.label(501, "errors.inbound_not_implemented")
 
+def action_push_drain(a):
+    """Return any unifiedpush events that were queued while the on-device
+    WebSocket wasn't subscribed (phone killed, Doze drop, network blip).
+    Phone calls this immediately after WS subscribe and after each foreground
+    entry. The drain is read-only — phone must POST /menu/-/push/ack with
+    the (account, event_id) pairs it actually delivered."""
+    result = mochi.service.call("notifications", "push/drain")
+    return {"data": result or []}
+
+def action_push_ack(a):
+    """Delete acknowledged rows from the pending queue. Body: events=<JSON array of {account, event_id}>.
+    Idempotent — acking a row that no longer exists is a no-op (TTL'd,
+    manually cleared, or never queued because of a live race)."""
+    events_raw = a.input("events", "")
+    if not events_raw:
+        return {"data": {"acked": 0}}
+    events = json.decode(events_raw)
+    if type(events) != "list":
+        return a.error.label(400, "errors.invalid_subscription")
+    result = mochi.service.call("notifications", "push/ack", events)
+    return {"data": result or {"acked": 0}}
+
 # Permission grant (shell-managed permission request dialog)
 
 def action_permissions_grant(a):

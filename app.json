@@ -2,7 +2,7 @@
 // Copyright Alistair Cunningham 2026
 
 {
-	"version": "1.45",
+	"version": "1.46",
 	"label": "app.name",
 	"paths": ["menu"],
 
@@ -24,6 +24,8 @@
 		"-/push/accounts/remove": {"function": "action_push_accounts_remove"},
 		"-/push/register": {"function": "action_push_register"},
 		"-/push/inbound/:sub": {"function": "action_push_inbound", "public": true},
+		"-/push/drain": {"function": "action_push_drain"},
+		"-/push/ack": {"function": "action_push_ack"},
 		"-/permissions/grant": {"function": "action_permissions_grant"}
 	}
 }
