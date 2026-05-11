@@ -30,7 +30,7 @@ import {
 } from '@mochi/web'
 
 function MochiLogo() {
-  return <img src='/images/logo-header.svg' alt='Mochi' className='h-7 w-7' />
+  return <img src='/images/logo-header.png' alt='Mochi' className='h-7 w-7' />
 }
 
 function NotificationItem({
@@ -430,9 +430,12 @@ export function MochiShellMenu() {
 
   return (
     <>
+      {/* Desktop menu overlay. Stack vertically when there's no sidebar
+          (or a sidebar that's collapsed) so the overlay stays narrow enough
+          for the inner app's `ps-12` left-padding to clear it. */}
       <div className={cn(
         'flex items-center gap-2 p-2',
-        isCollapsed && 'flex-col'
+        (isCollapsed || !sidebarPresent) && 'flex-col'
       )}>
         <a href='/' title={t`Home`}>
           <MochiLogo />
