@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import dagger.hilt.android.AndroidEntryPoint
+import org.mochios.android.push.OemBackgroundHintDialog
 import org.mochios.android.push.PushService
 import org.mochios.android.push.RequestNotificationPermission
 import org.mochios.android.ui.theme.MochiTheme
@@ -22,6 +23,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MochiTheme(themeAnchors = null) {
                 RequestNotificationPermission()
+                OemBackgroundHintDialog()
                 LaunchPadScreen()
             }
         }

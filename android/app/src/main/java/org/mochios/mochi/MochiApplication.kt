@@ -6,6 +6,7 @@ import dagger.hilt.android.HiltAndroidApp
 import org.mochios.android.i18n.AppContext
 import org.mochios.android.i18n.LanguageStore
 import org.mochios.android.i18n.LocaleHelper
+import org.mochios.android.push.PushServiceWatchdog
 
 @HiltAndroidApp
 class MochiApplication : Application() {
@@ -18,5 +19,6 @@ class MochiApplication : Application() {
         super.onCreate()
         AppContext.set(this)
         LocaleHelper.apply(this, LanguageStore.get(this))
+        PushServiceWatchdog.schedule(this)
     }
 }
