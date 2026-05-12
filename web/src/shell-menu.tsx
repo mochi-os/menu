@@ -430,12 +430,15 @@ export function MochiShellMenu() {
 
   return (
     <>
-      {/* Desktop menu overlay. Stack vertically when there's no sidebar
-          (or a sidebar that's collapsed) so the overlay stays narrow enough
-          for the inner app's `ps-12` left-padding to clear it. */}
+      {/* Desktop menu overlay. Horizontal layout by default; collapse to a
+          vertical stack only when the user has explicitly collapsed an
+          existing sidebar (so the collapse animation feels intentional).
+          No-sidebar apps (home, help, notifications) keep the horizontal
+          layout so the icons don't flip orientation between pages — the
+          inner-app `md:ps-24` padding clears the ~88px-wide overlay. */}
       <div className={cn(
         'flex items-center gap-2 p-2',
-        (isCollapsed || !sidebarPresent) && 'flex-col'
+        isCollapsed && 'flex-col'
       )}>
         <a href='/' title={t`Home`}>
           <MochiLogo />

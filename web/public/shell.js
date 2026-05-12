@@ -535,6 +535,13 @@
                 if (data.url) window.location.href = data.url;
                 break;
 
+            case 'navigate-back':
+                // The iframe's own history is frozen (opaque origin), so the
+                // top window owns the real history. Pop here; popstate above
+                // re-renders the iframe at the previous path.
+                window.history.back();
+                break;
+
             case 'title':
                 if (data.title) {
                     baseTitle = data.title;
