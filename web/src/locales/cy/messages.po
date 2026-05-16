@@ -166,7 +166,7 @@ msgstr "Dewiswch rhwng cyfeiriad safle chwith-i-dde neu dde-i-chwith"
 msgid "Choose between system preference, light mode, or dark mode"
 msgstr "Dewiswch rhwng dewis system, modd golau, neu modd tywyll"
 
-#: ../../../lib/web/src/components/language-picker.tsx:167
+#: ../../../lib/web/src/components/language-picker.tsx:174
 msgid "Choose language"
 msgstr "Dewiswch iaith"
 
@@ -216,11 +216,16 @@ msgstr "Cau chwiliad"
 msgid "Collapse sidebar"
 msgstr "Cwympo'r bar ochr"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:93
+msgid "Comfortable"
+msgstr "Cyfforddus"
+
 #: ../../../lib/web/src/components/coming-soon.tsx:9
 msgid "Coming Soon!"
 msgstr "Yn dod yn fuan!"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:302
+#: ../../../lib/web/src/lib/preference-utils.ts:92
 msgid "Compact"
 msgstr "Cryno"
 
@@ -248,6 +253,10 @@ msgstr "Parhau"
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Copïo"
+
+#: ../../../lib/web/src/features/document/document-page.tsx:81
+msgid "Could not load this document. Please try again later."
+msgstr "Methwyd llwytho'r ddogfen hon. Rhowch gynnig arni eto yn nes ymlaen."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -282,7 +291,7 @@ msgstr "Disg"
 msgid "Details Panel"
 msgstr "Panel manylion"
 
-#: ../../../lib/web/src/components/language-picker.tsx:145
+#: ../../../lib/web/src/components/language-picker.tsx:152
 #: ../../../lib/web/src/components/timezone-select.tsx:43
 #: ../../../lib/web/src/components/timezone-select.tsx:80
 #: ../../../lib/web/src/lib/preference-utils.ts:25
@@ -305,9 +314,17 @@ msgstr "Yn dangos y bar ochr symudol."
 msgid "Download"
 msgstr "Lawrlwytho"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:134
+msgid "Dyslexia-friendly"
+msgstr "Cyfeillgar i ddyslecsia"
+
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
 msgstr "Ehangu'r bar ochr"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:124
+msgid "Extra large"
+msgstr "Ychwanegol o fawr"
 
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:217
 msgid "Failed to add account"
@@ -336,6 +353,14 @@ msgstr "Dydd Gwener"
 #: ../../../lib/web/src/components/travelling-picker.tsx:149
 msgid "From"
 msgstr "O"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:91
+#: ../../../lib/web/src/lib/preference-utils.ts:101
+#: ../../../lib/web/src/lib/preference-utils.ts:112
+#: ../../../lib/web/src/lib/preference-utils.ts:120
+#: ../../../lib/web/src/lib/preference-utils.ts:131
+msgid "From theme"
+msgstr "O'r thema"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:307
 msgid "Full layout"
@@ -376,7 +401,7 @@ msgstr "Cuddio"
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
 #: src/shell-menu.tsx:375
-#: src/shell-menu.tsx:437
+#: src/shell-menu.tsx:443
 msgid "Home"
 msgstr "Cartref"
 
@@ -400,6 +425,11 @@ msgstr "Diddordebau"
 msgid "Invalid verification code"
 msgstr "Cod dilysu annilys"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:105
+#: ../../../lib/web/src/lib/preference-utils.ts:123
+msgid "Large"
+msgstr "Mawr"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:273
 msgid "Layout"
 msgstr "Cynllun"
@@ -422,6 +452,7 @@ msgid "Load more"
 msgstr "Llwytho mwy"
 
 #: ../../../lib/web/src/components/ui/load-more.tsx:32
+#: ../../../lib/web/src/features/document/document-page.tsx:87
 msgid "Loading…"
 msgstr "Yn llwytho…"
 
@@ -461,6 +492,10 @@ msgstr "rheoli grwpiau"
 msgid "Mark all as read"
 msgstr "Marcio'r cyfan fel wedi'u darllen"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:104
+msgid "Medium"
+msgstr "Canolig"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
 #: src/shell-menu.tsx:414
 msgid "Menu"
@@ -494,10 +529,6 @@ msgstr "Dim cyfrifon wedi'u cysylltu"
 msgid "No groups available"
 msgstr "Dim grwpiau ar gael"
 
-#: ../../../lib/web/src/components/language-picker.tsx:177
-msgid "No matches."
-msgstr "Dim canlyniadau."
-
 #: ../../../lib/web/src/components/place-picker.tsx:129
 msgid "No places found"
 msgstr "Heb ddod o hyd i leoedd"
@@ -528,8 +559,14 @@ msgid "No users found"
 msgstr "Heb ddod o hyd i ddefnyddwyr"
 
 #: ../../../lib/web/src/components/person-picker.tsx:349
+#: ../../../lib/web/src/lib/preference-utils.ts:102
+#: ../../../lib/web/src/lib/preference-utils.ts:113
 msgid "None"
 msgstr "Dim"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:122
+msgid "Normal"
+msgstr "Arferol"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
@@ -582,6 +619,11 @@ msgstr "Cais am ganiatâd"
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:332
 msgid "Previous image"
 msgstr "Delwedd flaenorol"
+
+#: ../../../lib/web/src/components/server-documents-footer.tsx:24
+#: ../../../lib/web/src/features/document/document-page.tsx:41
+msgid "Privacy"
+msgstr "Preifatrwydd"
 
 #: ../../../lib/web/src/components/layout/nav-user.tsx:134
 #: ../../../lib/web/src/components/profile-dropdown.tsx:111
@@ -679,10 +721,6 @@ msgstr "Chwilio defnyddwyr"
 msgid "Search..."
 msgstr "Chwilio..."
 
-#: ../../../lib/web/src/components/language-picker.tsx:175
-msgid "Search…"
-msgstr "Chwilio…"
-
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:174
 #: ../../../lib/web/src/components/search-entity-page.tsx:149
 #: ../../../lib/web/src/features/access/access-dialog.tsx:199
@@ -721,6 +759,15 @@ msgstr "Dewis cyfeiriad y safle"
 msgid "Select theme preference"
 msgstr "Dewis dewis thema"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:133
+msgid "Serif"
+msgstr "Serif"
+
+#: ../../../lib/web/src/components/server-documents-footer.tsx:16
+#: ../../../lib/web/src/features/document/document-page.tsx:37
+msgid "Server rules"
+msgstr "Rheolau'r gweinydd"
+
 #: ../../../lib/web/src/lib/api-client.ts:224
 msgid "Session expired"
 msgstr "Sesiwn wedi dod i ben"
@@ -753,6 +800,15 @@ msgstr "Yn allgofnodi..."
 msgid "Skip to Main"
 msgstr "Sgipio i'r Prif"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:103
+#: ../../../lib/web/src/lib/preference-utils.ts:121
+msgid "Small"
+msgstr "Bach"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:94
+msgid "Spacious"
+msgstr "Helaeth"
+
 #: ../../../lib/web/src/components/coming-soon.tsx:12
 msgid "Stay tuned though!"
 msgstr "Cadwch lygad serch hynny!"
@@ -767,6 +823,7 @@ msgstr "Dydd Sul"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:195
 #: ../../../lib/web/src/lib/preference-utils.ts:18
+#: ../../../lib/web/src/lib/preference-utils.ts:132
 msgid "System"
 msgstr "System"
 
@@ -777,6 +834,11 @@ msgstr "Tag"
 #: ../../../lib/web/src/components/layout/team-switcher.tsx:60
 msgid "Teams/Apps"
 msgstr "Timau/Apiau"
+
+#: ../../../lib/web/src/components/server-documents-footer.tsx:20
+#: ../../../lib/web/src/features/document/document-page.tsx:39
+msgid "Terms and conditions"
+msgstr "Telerau ac amodau"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"

@@ -6,6 +6,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
 "Language: sd\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
 
 #: src/use-permission-request.tsx:159
 msgid "<0>{appName}</0> wants permission to {permissionLabel}."
@@ -160,7 +166,7 @@ msgstr "کاٻي کان ساڄي يا ساڄي کان کاٻي سائيٽ هدا
 msgid "Choose between system preference, light mode, or dark mode"
 msgstr "سسٽم ترجيح، روشن موڊ، يا اونداهي موڊ مان چونڊيو"
 
-#: ../../../lib/web/src/components/language-picker.tsx:167
+#: ../../../lib/web/src/components/language-picker.tsx:174
 msgid "Choose language"
 msgstr "ٻولي چونڊيو"
 
@@ -210,11 +216,16 @@ msgstr "ڳولا بند ڪريو"
 msgid "Collapse sidebar"
 msgstr "سائڊبار کي سُڪيڙيو"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:93
+msgid "Comfortable"
+msgstr "آرامده"
+
 #: ../../../lib/web/src/components/coming-soon.tsx:9
 msgid "Coming Soon!"
 msgstr "جلد اچي رهيو آهي!"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:302
+#: ../../../lib/web/src/lib/preference-utils.ts:92
 msgid "Compact"
 msgstr "گهٽ"
 
@@ -242,6 +253,10 @@ msgstr "جاري رکو"
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "ڪاپي ڪريو"
+
+#: ../../../lib/web/src/features/document/document-page.tsx:81
+msgid "Could not load this document. Please try again later."
+msgstr "هي دستاويز لوڊ نه ٿي سگهيو. مهرباني ڪري بعد ۾ ٻيهر ڪوشش ڪريو."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -276,7 +291,7 @@ msgstr "گهٽبڙ"
 msgid "Details Panel"
 msgstr "تفصيل پينل"
 
-#: ../../../lib/web/src/components/language-picker.tsx:145
+#: ../../../lib/web/src/components/language-picker.tsx:152
 #: ../../../lib/web/src/components/timezone-select.tsx:43
 #: ../../../lib/web/src/components/timezone-select.tsx:80
 #: ../../../lib/web/src/lib/preference-utils.ts:25
@@ -299,9 +314,17 @@ msgstr "موبائل سائڊبار ڏيکاري ٿو."
 msgid "Download"
 msgstr "ڊائون لوڊ"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:134
+msgid "Dyslexia-friendly"
+msgstr "ڊسليڪسيا لاءِ مناسب"
+
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
 msgstr "سائڊبار وڌايو"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:124
+msgid "Extra large"
+msgstr "تمام وڏو"
 
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:217
 msgid "Failed to add account"
@@ -330,6 +353,14 @@ msgstr "جمعو"
 #: ../../../lib/web/src/components/travelling-picker.tsx:149
 msgid "From"
 msgstr "کان"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:91
+#: ../../../lib/web/src/lib/preference-utils.ts:101
+#: ../../../lib/web/src/lib/preference-utils.ts:112
+#: ../../../lib/web/src/lib/preference-utils.ts:120
+#: ../../../lib/web/src/lib/preference-utils.ts:131
+msgid "From theme"
+msgstr "ٿيم کان"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:307
 msgid "Full layout"
@@ -370,7 +401,7 @@ msgstr "لڪايو"
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
 #: src/shell-menu.tsx:375
-#: src/shell-menu.tsx:437
+#: src/shell-menu.tsx:443
 msgid "Home"
 msgstr "گهر"
 
@@ -394,6 +425,11 @@ msgstr "دلچسپيون"
 msgid "Invalid verification code"
 msgstr "غلط تصديق ڪوڊ"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:105
+#: ../../../lib/web/src/lib/preference-utils.ts:123
+msgid "Large"
+msgstr "وڏو"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:273
 msgid "Layout"
 msgstr "ليئوٽ"
@@ -416,6 +452,7 @@ msgid "Load more"
 msgstr "وڌيڪ لوڊ ڪريو"
 
 #: ../../../lib/web/src/components/ui/load-more.tsx:32
+#: ../../../lib/web/src/features/document/document-page.tsx:87
 msgid "Loading…"
 msgstr "لوڊ ٿي رهيو آهي…"
 
@@ -455,6 +492,10 @@ msgstr "گروپ منظم ڪريو"
 msgid "Mark all as read"
 msgstr "سڀ پڙهيل طور نشانبر ڪريو"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:104
+msgid "Medium"
+msgstr "وچولو"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
 #: src/shell-menu.tsx:414
 msgid "Menu"
@@ -488,10 +529,6 @@ msgstr "ڪو ڳنڍيل اڪائونٽ نه آهي"
 msgid "No groups available"
 msgstr "ڪو گروپ دستياب ناهي"
 
-#: ../../../lib/web/src/components/language-picker.tsx:177
-msgid "No matches."
-msgstr "ڪو ميلاپ نه آهي."
-
 #: ../../../lib/web/src/components/place-picker.tsx:129
 msgid "No places found"
 msgstr "ڪا جاءِ نه ملي"
@@ -522,8 +559,14 @@ msgid "No users found"
 msgstr "ڪو يوزر نه مليو"
 
 #: ../../../lib/web/src/components/person-picker.tsx:349
+#: ../../../lib/web/src/lib/preference-utils.ts:102
+#: ../../../lib/web/src/lib/preference-utils.ts:113
 msgid "None"
 msgstr "ڪا به نه"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:122
+msgid "Normal"
+msgstr "عام"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
@@ -576,6 +619,11 @@ msgstr "اجازت جي درخواست"
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:332
 msgid "Previous image"
 msgstr "پوئيون تصوير"
+
+#: ../../../lib/web/src/components/server-documents-footer.tsx:24
+#: ../../../lib/web/src/features/document/document-page.tsx:41
+msgid "Privacy"
+msgstr "رازداري"
 
 #: ../../../lib/web/src/components/layout/nav-user.tsx:134
 #: ../../../lib/web/src/components/profile-dropdown.tsx:111
@@ -673,10 +721,6 @@ msgstr "يوزر ڳوليو"
 msgid "Search..."
 msgstr "ڳوليو..."
 
-#: ../../../lib/web/src/components/language-picker.tsx:175
-msgid "Search…"
-msgstr "ڳوليو…"
-
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:174
 #: ../../../lib/web/src/components/search-entity-page.tsx:149
 #: ../../../lib/web/src/features/access/access-dialog.tsx:199
@@ -715,6 +759,15 @@ msgstr "سائيٽ جي طرف چونڊيو"
 msgid "Select theme preference"
 msgstr "ٿيم جي ترجيح چونڊيو"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:133
+msgid "Serif"
+msgstr "سيرف"
+
+#: ../../../lib/web/src/components/server-documents-footer.tsx:16
+#: ../../../lib/web/src/features/document/document-page.tsx:37
+msgid "Server rules"
+msgstr "سرور جا ضابطا"
+
 #: ../../../lib/web/src/lib/api-client.ts:224
 msgid "Session expired"
 msgstr "سيشن جي مدي پوري ٿي"
@@ -747,6 +800,15 @@ msgstr "سائن آئوٽ ٿي رهيو آھي..."
 msgid "Skip to Main"
 msgstr "مين تي ڇڏي ڏيو"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:103
+#: ../../../lib/web/src/lib/preference-utils.ts:121
+msgid "Small"
+msgstr "ننڍو"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:94
+msgid "Spacious"
+msgstr "ڪشادو"
+
 #: ../../../lib/web/src/components/coming-soon.tsx:12
 msgid "Stay tuned though!"
 msgstr "البت رابطي ۾ رھو!"
@@ -761,6 +823,7 @@ msgstr "آچر"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:195
 #: ../../../lib/web/src/lib/preference-utils.ts:18
+#: ../../../lib/web/src/lib/preference-utils.ts:132
 msgid "System"
 msgstr "سسٽم"
 
@@ -771,6 +834,11 @@ msgstr "ٽيگ"
 #: ../../../lib/web/src/components/layout/team-switcher.tsx:60
 msgid "Teams/Apps"
 msgstr "ٽيمز/ايپس"
+
+#: ../../../lib/web/src/components/server-documents-footer.tsx:20
+#: ../../../lib/web/src/features/document/document-page.tsx:39
+msgid "Terms and conditions"
+msgstr "شرطون ۽ ضابطا"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"

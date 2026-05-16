@@ -166,7 +166,7 @@ msgstr "هەڵبژێرە لەنێوان ئاراستەی چەپ بۆ ڕاست ی
 msgid "Choose between system preference, light mode, or dark mode"
 msgstr "هەڵبژێرە لەنێوان پێشنیاری سیستەم، دۆخی ڕووناک، یان دۆخی تاریک"
 
-#: ../../../lib/web/src/components/language-picker.tsx:167
+#: ../../../lib/web/src/components/language-picker.tsx:174
 msgid "Choose language"
 msgstr "زمان هەڵبژێرە"
 
@@ -216,11 +216,16 @@ msgstr "داخستنی گەڕان"
 msgid "Collapse sidebar"
 msgstr "نوقاندنی لاتەنیشت"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:93
+msgid "Comfortable"
+msgstr "ئاسوودە"
+
 #: ../../../lib/web/src/components/coming-soon.tsx:9
 msgid "Coming Soon!"
 msgstr "بەم زووانە!"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:302
+#: ../../../lib/web/src/lib/preference-utils.ts:92
 msgid "Compact"
 msgstr "بچووککراوە"
 
@@ -248,6 +253,10 @@ msgstr "بەردەوامبوون"
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "کۆپیکردن"
+
+#: ../../../lib/web/src/features/document/document-page.tsx:81
+msgid "Could not load this document. Please try again later."
+msgstr "ئەم دۆکومێنتە نەخوێنرایەوە. تکایە دواتر هەوڵ بدە."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -282,7 +291,7 @@ msgstr "خوارەوە"
 msgid "Details Panel"
 msgstr "پانێلی وردەکاری"
 
-#: ../../../lib/web/src/components/language-picker.tsx:145
+#: ../../../lib/web/src/components/language-picker.tsx:152
 #: ../../../lib/web/src/components/timezone-select.tsx:43
 #: ../../../lib/web/src/components/timezone-select.tsx:80
 #: ../../../lib/web/src/lib/preference-utils.ts:25
@@ -305,9 +314,17 @@ msgstr "لاتەنیشتی مۆبایل پیشان دەدات."
 msgid "Download"
 msgstr "داگرتن"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:134
+msgid "Dyslexia-friendly"
+msgstr "لەگەڵ دیسلێکسیا گونجاو"
+
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
 msgstr "فراوانکردنی لاتەنیشت"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:124
+msgid "Extra large"
+msgstr "زۆر گەورە"
 
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:217
 msgid "Failed to add account"
@@ -336,6 +353,14 @@ msgstr "هەینی"
 #: ../../../lib/web/src/components/travelling-picker.tsx:149
 msgid "From"
 msgstr "لە"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:91
+#: ../../../lib/web/src/lib/preference-utils.ts:101
+#: ../../../lib/web/src/lib/preference-utils.ts:112
+#: ../../../lib/web/src/lib/preference-utils.ts:120
+#: ../../../lib/web/src/lib/preference-utils.ts:131
+msgid "From theme"
+msgstr "لە ڕووکارەوە"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:307
 msgid "Full layout"
@@ -376,7 +401,7 @@ msgstr "شاردنەوە"
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
 #: src/shell-menu.tsx:375
-#: src/shell-menu.tsx:437
+#: src/shell-menu.tsx:443
 msgid "Home"
 msgstr "ماڵەوە"
 
@@ -400,6 +425,11 @@ msgstr "ئارەزووەکان"
 msgid "Invalid verification code"
 msgstr "کۆدی پشتڕاستکردنەوەی نادروست"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:105
+#: ../../../lib/web/src/lib/preference-utils.ts:123
+msgid "Large"
+msgstr "گەورە"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:273
 msgid "Layout"
 msgstr "ڕێکخستن"
@@ -422,6 +452,7 @@ msgid "Load more"
 msgstr "زیاتر باربکە"
 
 #: ../../../lib/web/src/components/ui/load-more.tsx:32
+#: ../../../lib/web/src/features/document/document-page.tsx:87
 msgid "Loading…"
 msgstr "بار دەکرێت…"
 
@@ -461,6 +492,10 @@ msgstr "گرووپەکان بەڕێوەببە"
 msgid "Mark all as read"
 msgstr "نیشانەکردنی هەمووان وەک خوێندراوە"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:104
+msgid "Medium"
+msgstr "مامناوەند"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
 #: src/shell-menu.tsx:414
 msgid "Menu"
@@ -494,10 +529,6 @@ msgstr "هیچ هەژمارێکی پەیوەندیدراو نییە"
 msgid "No groups available"
 msgstr "هیچ گرووپێک بەردەست نییە"
 
-#: ../../../lib/web/src/components/language-picker.tsx:177
-msgid "No matches."
-msgstr "هیچ یەکگرتنێک نییە."
-
 #: ../../../lib/web/src/components/place-picker.tsx:129
 msgid "No places found"
 msgstr "هیچ شوێنێک نەدۆزرایەوە"
@@ -528,8 +559,14 @@ msgid "No users found"
 msgstr "هیچ بەکارهێنەرێک نەدۆزرایەوە"
 
 #: ../../../lib/web/src/components/person-picker.tsx:349
+#: ../../../lib/web/src/lib/preference-utils.ts:102
+#: ../../../lib/web/src/lib/preference-utils.ts:113
 msgid "None"
 msgstr "هیچ"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:122
+msgid "Normal"
+msgstr "ئاسایی"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
@@ -582,6 +619,11 @@ msgstr "داواکاری مۆڵەت"
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:332
 msgid "Previous image"
 msgstr "وێنەی پێشوو"
+
+#: ../../../lib/web/src/components/server-documents-footer.tsx:24
+#: ../../../lib/web/src/features/document/document-page.tsx:41
+msgid "Privacy"
+msgstr "تایبەتمەندی"
 
 #: ../../../lib/web/src/components/layout/nav-user.tsx:134
 #: ../../../lib/web/src/components/profile-dropdown.tsx:111
@@ -679,10 +721,6 @@ msgstr "گەڕانی بەکارهێنەران"
 msgid "Search..."
 msgstr "گەڕان..."
 
-#: ../../../lib/web/src/components/language-picker.tsx:175
-msgid "Search…"
-msgstr "گەڕان…"
-
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:174
 #: ../../../lib/web/src/components/search-entity-page.tsx:149
 #: ../../../lib/web/src/features/access/access-dialog.tsx:199
@@ -721,6 +759,15 @@ msgstr "ئاراستەی ماڵپەڕ هەڵبژێرە"
 msgid "Select theme preference"
 msgstr "هەڵبژاردەی ڕووکار هەڵبژێرە"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:133
+msgid "Serif"
+msgstr "سێریف"
+
+#: ../../../lib/web/src/components/server-documents-footer.tsx:16
+#: ../../../lib/web/src/features/document/document-page.tsx:37
+msgid "Server rules"
+msgstr "ڕێساکانی ڕاژەکار"
+
 #: ../../../lib/web/src/lib/api-client.ts:224
 msgid "Session expired"
 msgstr "دانیشتن بەسەرچوو"
@@ -753,6 +800,15 @@ msgstr "چوونە دەرەوە..."
 msgid "Skip to Main"
 msgstr "بازدان بۆ سەرەکی"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:103
+#: ../../../lib/web/src/lib/preference-utils.ts:121
+msgid "Small"
+msgstr "بچووک"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:94
+msgid "Spacious"
+msgstr "فراوان"
+
 #: ../../../lib/web/src/components/coming-soon.tsx:12
 msgid "Stay tuned though!"
 msgstr "لەگەڵمان بمێنەوە!"
@@ -767,6 +823,7 @@ msgstr "یەکشەممە"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:195
 #: ../../../lib/web/src/lib/preference-utils.ts:18
+#: ../../../lib/web/src/lib/preference-utils.ts:132
 msgid "System"
 msgstr "سیستەم"
 
@@ -777,6 +834,11 @@ msgstr "تاگ"
 #: ../../../lib/web/src/components/layout/team-switcher.tsx:60
 msgid "Teams/Apps"
 msgstr "تیمەکان/ئەپەکان"
+
+#: ../../../lib/web/src/components/server-documents-footer.tsx:20
+#: ../../../lib/web/src/features/document/document-page.tsx:39
+msgid "Terms and conditions"
+msgstr "مەرج و یاساکان"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"

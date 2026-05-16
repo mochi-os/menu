@@ -166,7 +166,7 @@ msgstr "เลือกระหว่างทิศทางเว็บไซ
 msgid "Choose between system preference, light mode, or dark mode"
 msgstr "เลือกระหว่างการตั้งค่าระบบ โหมดสว่าง หรือโหมดมืด"
 
-#: ../../../lib/web/src/components/language-picker.tsx:167
+#: ../../../lib/web/src/components/language-picker.tsx:174
 msgid "Choose language"
 msgstr "เลือกภาษา"
 
@@ -216,11 +216,16 @@ msgstr "ปิดการค้นหา"
 msgid "Collapse sidebar"
 msgstr "ย่อแถบด้านข้าง"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:93
+msgid "Comfortable"
+msgstr "สบาย"
+
 #: ../../../lib/web/src/components/coming-soon.tsx:9
 msgid "Coming Soon!"
 msgstr "เร็วๆนี้!"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:302
+#: ../../../lib/web/src/lib/preference-utils.ts:92
 msgid "Compact"
 msgstr "กะทัดรัด"
 
@@ -248,6 +253,10 @@ msgstr "ดำเนินการต่อ"
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "คัดลอก"
+
+#: ../../../lib/web/src/features/document/document-page.tsx:81
+msgid "Could not load this document. Please try again later."
+msgstr "ไม่สามารถโหลดเอกสารนี้ได้ โปรดลองอีกครั้งในภายหลัง"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -282,7 +291,7 @@ msgstr "มากไปน้อย"
 msgid "Details Panel"
 msgstr "แผงรายละเอียด"
 
-#: ../../../lib/web/src/components/language-picker.tsx:145
+#: ../../../lib/web/src/components/language-picker.tsx:152
 #: ../../../lib/web/src/components/timezone-select.tsx:43
 #: ../../../lib/web/src/components/timezone-select.tsx:80
 #: ../../../lib/web/src/lib/preference-utils.ts:25
@@ -305,9 +314,17 @@ msgstr "แสดงแถบด้านข้างบนมือถือ"
 msgid "Download"
 msgstr "ดาวน์โหลด"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:134
+msgid "Dyslexia-friendly"
+msgstr "เหมาะสำหรับผู้บกพร่องการอ่าน"
+
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
 msgstr "ขยายแถบด้านข้าง"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:124
+msgid "Extra large"
+msgstr "ใหญ่พิเศษ"
 
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:217
 msgid "Failed to add account"
@@ -336,6 +353,14 @@ msgstr "วันศุกร์"
 #: ../../../lib/web/src/components/travelling-picker.tsx:149
 msgid "From"
 msgstr "จาก"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:91
+#: ../../../lib/web/src/lib/preference-utils.ts:101
+#: ../../../lib/web/src/lib/preference-utils.ts:112
+#: ../../../lib/web/src/lib/preference-utils.ts:120
+#: ../../../lib/web/src/lib/preference-utils.ts:131
+msgid "From theme"
+msgstr "จากธีม"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:307
 msgid "Full layout"
@@ -376,7 +401,7 @@ msgstr "ซ่อน"
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
 #: src/shell-menu.tsx:375
-#: src/shell-menu.tsx:437
+#: src/shell-menu.tsx:443
 msgid "Home"
 msgstr "หน้าหลัก"
 
@@ -400,6 +425,11 @@ msgstr "ความสนใจ"
 msgid "Invalid verification code"
 msgstr "รหัสยืนยันไม่ถูกต้อง"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:105
+#: ../../../lib/web/src/lib/preference-utils.ts:123
+msgid "Large"
+msgstr "ใหญ่"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:273
 msgid "Layout"
 msgstr "เลย์เอาต์"
@@ -422,6 +452,7 @@ msgid "Load more"
 msgstr "โหลดเพิ่ม"
 
 #: ../../../lib/web/src/components/ui/load-more.tsx:32
+#: ../../../lib/web/src/features/document/document-page.tsx:87
 msgid "Loading…"
 msgstr "กำลังโหลด…"
 
@@ -461,6 +492,10 @@ msgstr "จัดการกลุ่ม"
 msgid "Mark all as read"
 msgstr "ทำเครื่องหมายว่าอ่านแล้วทั้งหมด"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:104
+msgid "Medium"
+msgstr "กลาง"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
 #: src/shell-menu.tsx:414
 msgid "Menu"
@@ -494,10 +529,6 @@ msgstr "ไม่มีบัญชีที่เชื่อมต่อ"
 msgid "No groups available"
 msgstr "ไม่มีกลุ่มที่ใช้งานได้"
 
-#: ../../../lib/web/src/components/language-picker.tsx:177
-msgid "No matches."
-msgstr "ไม่พบรายการที่ตรงกัน"
-
 #: ../../../lib/web/src/components/place-picker.tsx:129
 msgid "No places found"
 msgstr "ไม่พบสถานที่"
@@ -528,8 +559,14 @@ msgid "No users found"
 msgstr "ไม่พบผู้ใช้"
 
 #: ../../../lib/web/src/components/person-picker.tsx:349
+#: ../../../lib/web/src/lib/preference-utils.ts:102
+#: ../../../lib/web/src/lib/preference-utils.ts:113
 msgid "None"
 msgstr "ไม่มี"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:122
+msgid "Normal"
+msgstr "ปกติ"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
@@ -582,6 +619,11 @@ msgstr "คำขอสิทธิ์"
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:332
 msgid "Previous image"
 msgstr "รูปก่อนหน้า"
+
+#: ../../../lib/web/src/components/server-documents-footer.tsx:24
+#: ../../../lib/web/src/features/document/document-page.tsx:41
+msgid "Privacy"
+msgstr "ความเป็นส่วนตัว"
 
 #: ../../../lib/web/src/components/layout/nav-user.tsx:134
 #: ../../../lib/web/src/components/profile-dropdown.tsx:111
@@ -679,10 +721,6 @@ msgstr "ค้นหาผู้ใช้"
 msgid "Search..."
 msgstr "ค้นหา..."
 
-#: ../../../lib/web/src/components/language-picker.tsx:175
-msgid "Search…"
-msgstr "ค้นหา…"
-
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:174
 #: ../../../lib/web/src/components/search-entity-page.tsx:149
 #: ../../../lib/web/src/features/access/access-dialog.tsx:199
@@ -721,6 +759,15 @@ msgstr "เลือกทิศทางไซต์"
 msgid "Select theme preference"
 msgstr "เลือกการตั้งค่าธีม"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:133
+msgid "Serif"
+msgstr "เซริฟ"
+
+#: ../../../lib/web/src/components/server-documents-footer.tsx:16
+#: ../../../lib/web/src/features/document/document-page.tsx:37
+msgid "Server rules"
+msgstr "กฎของเซิร์ฟเวอร์"
+
 #: ../../../lib/web/src/lib/api-client.ts:224
 msgid "Session expired"
 msgstr "เซสชันหมดอายุ"
@@ -753,6 +800,15 @@ msgstr "กำลังออกจากระบบ..."
 msgid "Skip to Main"
 msgstr "ข้ามไปยังเนื้อหาหลัก"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:103
+#: ../../../lib/web/src/lib/preference-utils.ts:121
+msgid "Small"
+msgstr "เล็ก"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:94
+msgid "Spacious"
+msgstr "กว้างขวาง"
+
 #: ../../../lib/web/src/components/coming-soon.tsx:12
 msgid "Stay tuned though!"
 msgstr "โปรดรอติดตาม!"
@@ -767,6 +823,7 @@ msgstr "วันอาทิตย์"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:195
 #: ../../../lib/web/src/lib/preference-utils.ts:18
+#: ../../../lib/web/src/lib/preference-utils.ts:132
 msgid "System"
 msgstr "ระบบ"
 
@@ -777,6 +834,11 @@ msgstr "แท็ก"
 #: ../../../lib/web/src/components/layout/team-switcher.tsx:60
 msgid "Teams/Apps"
 msgstr "ทีม/แอป"
+
+#: ../../../lib/web/src/components/server-documents-footer.tsx:20
+#: ../../../lib/web/src/features/document/document-page.tsx:39
+msgid "Terms and conditions"
+msgstr "ข้อกำหนดและเงื่อนไข"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"

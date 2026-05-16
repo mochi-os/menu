@@ -166,7 +166,7 @@ msgstr "இடமிருந்து வலம் அல்லது வலம
 msgid "Choose between system preference, light mode, or dark mode"
 msgstr "கணினி விருப்பம், ஒளிமுறை, அல்லது இருள்முறை இவற்றில் தேர்ந்தெடுக்கவும்"
 
-#: ../../../lib/web/src/components/language-picker.tsx:167
+#: ../../../lib/web/src/components/language-picker.tsx:174
 msgid "Choose language"
 msgstr "மொழியைத் தேர்ந்தெடுக்கவும்"
 
@@ -216,11 +216,16 @@ msgstr "தேடலை மூடு"
 msgid "Collapse sidebar"
 msgstr "பக்கப்பட்டியைச் சுருக்கு"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:93
+msgid "Comfortable"
+msgstr "வசதியான"
+
 #: ../../../lib/web/src/components/coming-soon.tsx:9
 msgid "Coming Soon!"
 msgstr "விரைவில் வருகிறது!"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:302
+#: ../../../lib/web/src/lib/preference-utils.ts:92
 msgid "Compact"
 msgstr "சுருக்கமான"
 
@@ -248,6 +253,10 @@ msgstr "தொடர்"
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "நகலெடு"
+
+#: ../../../lib/web/src/features/document/document-page.tsx:81
+msgid "Could not load this document. Please try again later."
+msgstr "இந்த ஆவணத்தை ஏற்ற முடியவில்லை. பிறகு மீண்டும் முயற்சிக்கவும்."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -282,7 +291,7 @@ msgstr "இறங்கு"
 msgid "Details Panel"
 msgstr "விவரங்கள் பலகம்"
 
-#: ../../../lib/web/src/components/language-picker.tsx:145
+#: ../../../lib/web/src/components/language-picker.tsx:152
 #: ../../../lib/web/src/components/timezone-select.tsx:43
 #: ../../../lib/web/src/components/timezone-select.tsx:80
 #: ../../../lib/web/src/lib/preference-utils.ts:25
@@ -305,9 +314,17 @@ msgstr "மொபைல் பக்கப்பட்டியைக் கா�
 msgid "Download"
 msgstr "பதிவிறக்கு"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:134
+msgid "Dyslexia-friendly"
+msgstr "டிஸ்லெக்சியாவுக்கு உகந்தது"
+
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
 msgstr "பக்கப்பட்டியை விரிவாக்கு"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:124
+msgid "Extra large"
+msgstr "மிகப் பெரியது"
 
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:217
 msgid "Failed to add account"
@@ -336,6 +353,14 @@ msgstr "வெள்ளிக்கிழமை"
 #: ../../../lib/web/src/components/travelling-picker.tsx:149
 msgid "From"
 msgstr "இருந்து"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:91
+#: ../../../lib/web/src/lib/preference-utils.ts:101
+#: ../../../lib/web/src/lib/preference-utils.ts:112
+#: ../../../lib/web/src/lib/preference-utils.ts:120
+#: ../../../lib/web/src/lib/preference-utils.ts:131
+msgid "From theme"
+msgstr "தீமிலிருந்து"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:307
 msgid "Full layout"
@@ -376,7 +401,7 @@ msgstr "மறை"
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
 #: src/shell-menu.tsx:375
-#: src/shell-menu.tsx:437
+#: src/shell-menu.tsx:443
 msgid "Home"
 msgstr "முகப்பு"
 
@@ -400,6 +425,11 @@ msgstr "ஆர்வங்கள்"
 msgid "Invalid verification code"
 msgstr "தவறான சரிபார்ப்பு குறியீடு"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:105
+#: ../../../lib/web/src/lib/preference-utils.ts:123
+msgid "Large"
+msgstr "பெரியது"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:273
 msgid "Layout"
 msgstr "தளவமைப்பு"
@@ -422,6 +452,7 @@ msgid "Load more"
 msgstr "மேலும் ஏற்று"
 
 #: ../../../lib/web/src/components/ui/load-more.tsx:32
+#: ../../../lib/web/src/features/document/document-page.tsx:87
 msgid "Loading…"
 msgstr "ஏற்றுகிறது…"
 
@@ -461,6 +492,10 @@ msgstr "குழுக்களை நிர்வகிக்கவும்"
 msgid "Mark all as read"
 msgstr "அனைத்தையும் படித்ததாகக் குறிக்கவும்"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:104
+msgid "Medium"
+msgstr "நடுத்தரம்"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
 #: src/shell-menu.tsx:414
 msgid "Menu"
@@ -494,10 +529,6 @@ msgstr "இணைக்கப்பட்ட கணக்குகள் இல�
 msgid "No groups available"
 msgstr "குழுக்கள் கிடைக்கவில்லை"
 
-#: ../../../lib/web/src/components/language-picker.tsx:177
-msgid "No matches."
-msgstr "பொருத்தங்கள் இல்லை."
-
 #: ../../../lib/web/src/components/place-picker.tsx:129
 msgid "No places found"
 msgstr "இடங்கள் எதுவும் கிடைக்கவில்லை"
@@ -528,8 +559,14 @@ msgid "No users found"
 msgstr "பயனர்கள் எதுவும் கிடைக்கவில்லை"
 
 #: ../../../lib/web/src/components/person-picker.tsx:349
+#: ../../../lib/web/src/lib/preference-utils.ts:102
+#: ../../../lib/web/src/lib/preference-utils.ts:113
 msgid "None"
 msgstr "ஒன்றுமில்லை"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:122
+msgid "Normal"
+msgstr "சாதாரணம்"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
@@ -582,6 +619,11 @@ msgstr "அனுமதி கோரிக்கை"
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:332
 msgid "Previous image"
 msgstr "முந்தைய படம்"
+
+#: ../../../lib/web/src/components/server-documents-footer.tsx:24
+#: ../../../lib/web/src/features/document/document-page.tsx:41
+msgid "Privacy"
+msgstr "தனியுரிமை"
 
 #: ../../../lib/web/src/components/layout/nav-user.tsx:134
 #: ../../../lib/web/src/components/profile-dropdown.tsx:111
@@ -679,10 +721,6 @@ msgstr "பயனர்களைத் தேடு"
 msgid "Search..."
 msgstr "தேடு..."
 
-#: ../../../lib/web/src/components/language-picker.tsx:175
-msgid "Search…"
-msgstr "தேடு…"
-
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:174
 #: ../../../lib/web/src/components/search-entity-page.tsx:149
 #: ../../../lib/web/src/features/access/access-dialog.tsx:199
@@ -721,6 +759,15 @@ msgstr "தள திசையை தேர்ந்தெடு"
 msgid "Select theme preference"
 msgstr "தீம் விருப்பத்தை தேர்ந்தெடு"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:133
+msgid "Serif"
+msgstr "செரிஃப்"
+
+#: ../../../lib/web/src/components/server-documents-footer.tsx:16
+#: ../../../lib/web/src/features/document/document-page.tsx:37
+msgid "Server rules"
+msgstr "சேவையக விதிகள்"
+
 #: ../../../lib/web/src/lib/api-client.ts:224
 msgid "Session expired"
 msgstr "அமர்வு காலாவதியானது"
@@ -753,6 +800,15 @@ msgstr "வெளியேறுகிறது..."
 msgid "Skip to Main"
 msgstr "முதன்மை பகுதிக்கு தவிர்"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:103
+#: ../../../lib/web/src/lib/preference-utils.ts:121
+msgid "Small"
+msgstr "சிறியது"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:94
+msgid "Spacious"
+msgstr "விரிவான"
+
 #: ../../../lib/web/src/components/coming-soon.tsx:12
 msgid "Stay tuned though!"
 msgstr "எனினும் காத்திருங்கள்!"
@@ -767,6 +823,7 @@ msgstr "ஞாயிற்றுக்கிழமை"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:195
 #: ../../../lib/web/src/lib/preference-utils.ts:18
+#: ../../../lib/web/src/lib/preference-utils.ts:132
 msgid "System"
 msgstr "சிஸ்டம்"
 
@@ -777,6 +834,11 @@ msgstr "டேக்"
 #: ../../../lib/web/src/components/layout/team-switcher.tsx:60
 msgid "Teams/Apps"
 msgstr "டீம்கள்/ஆப்கள்"
+
+#: ../../../lib/web/src/components/server-documents-footer.tsx:20
+#: ../../../lib/web/src/features/document/document-page.tsx:39
+msgid "Terms and conditions"
+msgstr "விதிமுறைகள் மற்றும் நிபந்தனைகள்"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"

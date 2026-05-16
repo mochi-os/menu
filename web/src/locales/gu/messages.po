@@ -166,7 +166,7 @@ msgstr "ડાબેથી-જમણે અથવા જમણેથી-ડા�
 msgid "Choose between system preference, light mode, or dark mode"
 msgstr "સિસ્ટમ પસંદગી, લાઇટ મોડ, અથવા ડાર્ક મોડ વચ્ચે પસંદ કરો"
 
-#: ../../../lib/web/src/components/language-picker.tsx:167
+#: ../../../lib/web/src/components/language-picker.tsx:174
 msgid "Choose language"
 msgstr "ભાષા પસંદ કરો"
 
@@ -216,11 +216,16 @@ msgstr "શોધ બંધ કરો"
 msgid "Collapse sidebar"
 msgstr "સાઇડબાર સંકુચિત કરો"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:93
+msgid "Comfortable"
+msgstr "આરામદાયક"
+
 #: ../../../lib/web/src/components/coming-soon.tsx:9
 msgid "Coming Soon!"
 msgstr "જલ્દી આવી રહ્યું છે!"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:302
+#: ../../../lib/web/src/lib/preference-utils.ts:92
 msgid "Compact"
 msgstr "કોમ્પેક્ટ"
 
@@ -248,6 +253,10 @@ msgstr "ચાલુ રાખો"
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "કૉપિ કરો"
+
+#: ../../../lib/web/src/features/document/document-page.tsx:81
+msgid "Could not load this document. Please try again later."
+msgstr "આ દસ્તાવેજ લોડ કરી શક્યા નહીં. કૃપા કરીને પછીથી ફરી પ્રયાસ કરો."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -282,7 +291,7 @@ msgstr "ઊતરતા"
 msgid "Details Panel"
 msgstr "વિગતો પૅનલ"
 
-#: ../../../lib/web/src/components/language-picker.tsx:145
+#: ../../../lib/web/src/components/language-picker.tsx:152
 #: ../../../lib/web/src/components/timezone-select.tsx:43
 #: ../../../lib/web/src/components/timezone-select.tsx:80
 #: ../../../lib/web/src/lib/preference-utils.ts:25
@@ -305,9 +314,17 @@ msgstr "મોબાઇલ સાઇડબાર દર્શાવે છે."
 msgid "Download"
 msgstr "ડાઉનલોડ કરો"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:134
+msgid "Dyslexia-friendly"
+msgstr "ડિસ્લેક્સિયા-મૈત્રીપૂર્ણ"
+
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
 msgstr "સાઇડબાર વિસ્તૃત કરો"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:124
+msgid "Extra large"
+msgstr "વધારાનું મોટું"
 
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:217
 msgid "Failed to add account"
@@ -336,6 +353,14 @@ msgstr "શુક્રવાર"
 #: ../../../lib/web/src/components/travelling-picker.tsx:149
 msgid "From"
 msgstr "તરફથી"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:91
+#: ../../../lib/web/src/lib/preference-utils.ts:101
+#: ../../../lib/web/src/lib/preference-utils.ts:112
+#: ../../../lib/web/src/lib/preference-utils.ts:120
+#: ../../../lib/web/src/lib/preference-utils.ts:131
+msgid "From theme"
+msgstr "થીમમાંથી"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:307
 msgid "Full layout"
@@ -376,7 +401,7 @@ msgstr "છુપાવો"
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
 #: src/shell-menu.tsx:375
-#: src/shell-menu.tsx:437
+#: src/shell-menu.tsx:443
 msgid "Home"
 msgstr "હોમ"
 
@@ -400,6 +425,11 @@ msgstr "રુચિઓ"
 msgid "Invalid verification code"
 msgstr "અમાન્ય ચકાસણી કોડ"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:105
+#: ../../../lib/web/src/lib/preference-utils.ts:123
+msgid "Large"
+msgstr "મોટું"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:273
 msgid "Layout"
 msgstr "લેઆઉટ"
@@ -422,6 +452,7 @@ msgid "Load more"
 msgstr "વધુ લોડ કરો"
 
 #: ../../../lib/web/src/components/ui/load-more.tsx:32
+#: ../../../lib/web/src/features/document/document-page.tsx:87
 msgid "Loading…"
 msgstr "લોડ થઈ રહ્યું છે…"
 
@@ -461,6 +492,10 @@ msgstr "જૂથોનું સંચાલન કરો"
 msgid "Mark all as read"
 msgstr "બધાને વાંચેલા તરીકે માર્ક કરો"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:104
+msgid "Medium"
+msgstr "મધ્યમ"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
 #: src/shell-menu.tsx:414
 msgid "Menu"
@@ -494,10 +529,6 @@ msgstr "કોઈ કનેક્ટેડ ખાતા નથી"
 msgid "No groups available"
 msgstr "કોઈ ગ્રૂપ્સ ઉપલબ્ધ નથી"
 
-#: ../../../lib/web/src/components/language-picker.tsx:177
-msgid "No matches."
-msgstr "કોઈ મેળ નથી."
-
 #: ../../../lib/web/src/components/place-picker.tsx:129
 msgid "No places found"
 msgstr "કોઈ સ્થળો મળ્યા નથી"
@@ -528,8 +559,14 @@ msgid "No users found"
 msgstr "કોઈ યુઝર્સ મળ્યા નથી"
 
 #: ../../../lib/web/src/components/person-picker.tsx:349
+#: ../../../lib/web/src/lib/preference-utils.ts:102
+#: ../../../lib/web/src/lib/preference-utils.ts:113
 msgid "None"
 msgstr "કોઈ નહીં"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:122
+msgid "Normal"
+msgstr "સામાન્ય"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
@@ -582,6 +619,11 @@ msgstr "પરવાનગી વિનંતી"
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:332
 msgid "Previous image"
 msgstr "પાછળની છબી"
+
+#: ../../../lib/web/src/components/server-documents-footer.tsx:24
+#: ../../../lib/web/src/features/document/document-page.tsx:41
+msgid "Privacy"
+msgstr "ગોપનીયતા"
 
 #: ../../../lib/web/src/components/layout/nav-user.tsx:134
 #: ../../../lib/web/src/components/profile-dropdown.tsx:111
@@ -679,10 +721,6 @@ msgstr "વપરાશકર્તાઓ શોધો"
 msgid "Search..."
 msgstr "શોધો..."
 
-#: ../../../lib/web/src/components/language-picker.tsx:175
-msgid "Search…"
-msgstr "શોધો…"
-
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:174
 #: ../../../lib/web/src/components/search-entity-page.tsx:149
 #: ../../../lib/web/src/features/access/access-dialog.tsx:199
@@ -721,6 +759,15 @@ msgstr "સાઇટ દિશા પસંદ કરો"
 msgid "Select theme preference"
 msgstr "થીમ પસંદગી પસંદ કરો"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:133
+msgid "Serif"
+msgstr "સેરિફ"
+
+#: ../../../lib/web/src/components/server-documents-footer.tsx:16
+#: ../../../lib/web/src/features/document/document-page.tsx:37
+msgid "Server rules"
+msgstr "સર્વર નિયમો"
+
 #: ../../../lib/web/src/lib/api-client.ts:224
 msgid "Session expired"
 msgstr "સત્રની સમય મર્યાદા સમાપ્ત"
@@ -753,6 +800,15 @@ msgstr "સાઇન આઉટ થઈ રહ્યું છે..."
 msgid "Skip to Main"
 msgstr "મુખ્ય પર જાઓ"
 
+#: ../../../lib/web/src/lib/preference-utils.ts:103
+#: ../../../lib/web/src/lib/preference-utils.ts:121
+msgid "Small"
+msgstr "નાનું"
+
+#: ../../../lib/web/src/lib/preference-utils.ts:94
+msgid "Spacious"
+msgstr "વિશાળ"
+
 #: ../../../lib/web/src/components/coming-soon.tsx:12
 msgid "Stay tuned though!"
 msgstr "છતાં અમારી સાથે જોડાયેલા રહો!"
@@ -767,6 +823,7 @@ msgstr "રવિવાર"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:195
 #: ../../../lib/web/src/lib/preference-utils.ts:18
+#: ../../../lib/web/src/lib/preference-utils.ts:132
 msgid "System"
 msgstr "સિસ્ટમ"
 
@@ -777,6 +834,11 @@ msgstr "ટૅગ"
 #: ../../../lib/web/src/components/layout/team-switcher.tsx:60
 msgid "Teams/Apps"
 msgstr "ટીમો/એપ્સ"
+
+#: ../../../lib/web/src/components/server-documents-footer.tsx:20
+#: ../../../lib/web/src/features/document/document-page.tsx:39
+msgid "Terms and conditions"
+msgstr "નિયમો અને શરતો"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
