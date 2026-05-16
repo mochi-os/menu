@@ -23,7 +23,7 @@ permissions:
 
 jobs:
   lint:
-    uses: mochi-os/common/.github/workflows/reusable-frontend-lint.yml@main
+    uses: mochi-os/web/.github/workflows/reusable-frontend-lint.yml@main
     with:
       web_dir: web
       node_version: '20'
