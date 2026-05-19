@@ -374,6 +374,49 @@
         }
     }
 
+    // WebAuthn ceremony bridge. The sandboxed app iframe has an opaque
+    // origin so navigator.credentials.create()/get() fails immediately
+    // with NotAllowedError. The shell runs in the top window with a real
+    // origin, so it can host the ceremony on the iframe app's behalf and
+    // post the JSON-serialized response back. Uses the native
+    // PublicKeyCredential.parseCreationOptionsFromJSON /
+    // parseRequestOptionsFromJSON / toJSON helpers (Chrome 119+,
+    // Safari 17.4+, Firefox 119+).
+    function handleWebauthnCeremony(data, create) {
+        var requestId = data.requestId;
+        var optionsJSON = data.optionsJSON;
+        var resultType = create ? 'webauthn.create.result' : 'webauthn.get.result';
+        if (typeof PublicKeyCredential === 'undefined') {
+            postToIframe({ type: resultType, requestId: requestId,
+                error: { name: 'NotSupportedError', message: 'WebAuthn unavailable in this browser' } });
+            return;
+        }
+        var publicKey;
+        try {
+            publicKey = create
+                ? PublicKeyCredential.parseCreationOptionsFromJSON(optionsJSON)
+                : PublicKeyCredential.parseRequestOptionsFromJSON(optionsJSON);
+        } catch (err) {
+            postToIframe({ type: resultType, requestId: requestId,
+                error: { name: err && err.name || 'TypeError', message: err && err.message || String(err) } });
+            return;
+        }
+        var promise = create
+            ? navigator.credentials.create({ publicKey: publicKey })
+            : navigator.credentials.get({ publicKey: publicKey });
+        promise.then(function(cred) {
+            if (!cred || typeof cred.toJSON !== 'function') {
+                postToIframe({ type: resultType, requestId: requestId,
+                    error: { name: 'NotSupportedError', message: 'Credential JSON serialisation unavailable' } });
+                return;
+            }
+            postToIframe({ type: resultType, requestId: requestId, credential: cred.toJSON() });
+        }).catch(function(err) {
+            postToIframe({ type: resultType, requestId: requestId,
+                error: { name: err && err.name || 'Error', message: err && err.message || String(err) } });
+        });
+    }
+
     // --- URL sync ---
 
     function getAppNameFromPath(path) {
@@ -606,6 +649,14 @@
                 // App changed locale prefs — store and forward to iframe
                 if (data.locale) currentLocale = data.locale;
                 postToIframe({ type: 'locale-change', locale: data.locale || null });
+                break;
+
+            case 'webauthn.create':
+                handleWebauthnCeremony(data, true);
+                break;
+
+            case 'webauthn.get':
+                handleWebauthnCeremony(data, false);
                 break;
 
             case 'language-set':
