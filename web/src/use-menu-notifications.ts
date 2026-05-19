@@ -15,9 +15,10 @@ interface NotificationsListResponse {
   data: Notification[]
   count: number
   total: number
+  app_icons?: Record<string, string>
 }
 
-const EMPTY_RESPONSE: NotificationsListResponse = { data: [], count: 0, total: 0 }
+const EMPTY_RESPONSE: NotificationsListResponse = { data: [], count: 0, total: 0, app_icons: {} }
 
 async function menuFetch<T>(path: string, init?: RequestInit): Promise<T> {
   const token = getMenuToken()
@@ -197,9 +198,11 @@ export function useMenuNotifications() {
   }, [queryClient])
 
   const notifications = data?.data ?? []
+  const appIcons = data?.app_icons ?? {}
 
   return {
     notifications,
+    appIcons,
     isLoading,
     isError,
     markAsRead: (id: string) => markAsReadMutation.mutate(id),

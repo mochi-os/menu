@@ -35,10 +35,12 @@ function MochiLogo() {
 
 function NotificationItem({
   notification,
+  appIconUrl,
   onClick,
   onMiddleClick,
 }: {
   notification: Notification
+  appIconUrl?: string
   onClick?: (notification: Notification) => void
   onMiddleClick?: (notification: Notification) => void
 }) {
@@ -63,22 +65,35 @@ function NotificationItem({
         }}
         className='flex flex-1 items-start gap-3 text-start'
       >
-        <div
-          className={cn(
-            'mt-1.5 size-2 shrink-0 rounded-full transition-colors',
-            isUnread
-              ? 'bg-primary'
-              : 'bg-transparent group-hover:bg-muted-foreground/20'
+        <div className='relative mt-0.5 shrink-0'>
+          {notification.sender ? (
+            <>
+              <EntityAvatar
+                src={`/people/${notification.sender}/-/avatar`}
+                styleUrl={`/people/${notification.sender}/-/style`}
+                size={28}
+              />
+              {appIconUrl && (
+                <div className='absolute -bottom-1 -right-1 flex size-3.5 items-center justify-center rounded-sm bg-muted'>
+                  <img
+                    src={appIconUrl}
+                    aria-hidden='true'
+                    className='size-3 dark:brightness-0 dark:invert'
+                  />
+                </div>
+              )}
+            </>
+          ) : (
+            <div className='flex size-7 items-center justify-center rounded-md bg-muted'>
+              {appIconUrl && (
+                <img src={appIconUrl} aria-hidden='true' className='size-4 dark:brightness-0 dark:invert' />
+              )}
+            </div>
           )}
-        />
-        {notification.sender && (
-          <EntityAvatar
-            src={`/people/${notification.sender}/-/avatar`}
-            styleUrl={`/people/${notification.sender}/-/style`}
-            size={24}
-            className='mt-0.5 shrink-0'
-          />
-        )}
+          {isUnread && (
+            <span className='absolute -right-1 -top-1 size-2 rounded-full bg-primary ring-1 ring-background' />
+          )}
+        </div>
         <div className='flex-1 min-w-0 space-y-0.5'>
           <p
             className={cn(
@@ -183,7 +198,7 @@ export function MochiShellMenu() {
   const isCollapsed = sidebarPresent && sidebarState === 'collapsed'
   const currentApp = useCurrentApp()
   const isHome = currentApp === ''
-  const { notifications, markAsRead, markAllAsRead } = useMenuNotifications()
+  const { notifications, appIcons, markAsRead, markAllAsRead } = useMenuNotifications()
 
   // Close menu on Escape
   useEffect(() => {
@@ -323,6 +338,7 @@ export function MochiShellMenu() {
               <NotificationItem
                 key={notification.id}
                 notification={notification}
+                appIconUrl={appIcons[notification.app]}
                 onClick={handleNotificationClick}
                 onMiddleClick={handleNotificationMiddleClick}
               />
