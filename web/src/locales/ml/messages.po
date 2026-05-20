@@ -33,7 +33,7 @@ msgstr "സമ്പൂർണ്ണം (തീയതിയും സമയവു
 msgid "access {domain}"
 msgstr "{domain} ആക്സസ് ചെയ്യുക"
 
-#: ../../../lib/web/src/features/errors/forbidden.tsx:12
+#: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
 msgstr "ആക്സസ് നിഷിദ്ധം"
 
@@ -56,6 +56,10 @@ msgstr "അക്കൗണ്ട് തരം"
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:234
 msgid "Account verified"
 msgstr "അക്കൗണ്ട് പരിശോധിച്ചുറപ്പിച്ചു"
+
+#: ../../../lib/web/src/features/accounts/account-add.tsx:193
+msgid "Add"
+msgstr "ചേർക്കുക"
 
 #: ../../../lib/web/src/features/accounts/account-add.tsx:117
 msgid "Add a new account"
@@ -122,11 +126,11 @@ msgstr "Asc"
 msgid "Back"
 msgstr "തിരികെ"
 
-#: ../../../lib/web/src/features/errors/forbidden.tsx:21
-#: ../../../lib/web/src/features/errors/not-found-error.tsx:21
-#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:21
-msgid "Back to Home"
-msgstr "ഹോമിലേക്ക് തിരികെ"
+#: ../../../lib/web/src/features/errors/forbidden.tsx:23
+#: ../../../lib/web/src/features/errors/not-found-error.tsx:23
+#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:23
+msgid "Back to home"
+msgstr ""
 
 #: ../../../lib/web/src/components/post-tags.tsx:160
 msgid "Boost interest"
@@ -205,8 +209,8 @@ msgid "Close navigation"
 msgstr "നാവിഗേഷൻ അടയ്ക്കുക"
 
 #: ../../../lib/web/src/components/layout/right-panel.tsx:254
-msgid "Close Panel"
-msgstr "പാനൽ അടയ്ക്കുക"
+msgid "Close panel"
+msgstr ""
 
 #: ../../../lib/web/src/components/header-search.tsx:51
 msgid "Close search"
@@ -366,11 +370,11 @@ msgstr "തീമിൽ നിന്ന്"
 msgid "Full layout"
 msgstr "പൂർണ്ണ ലേഔട്ട്"
 
-#: ../../../lib/web/src/features/errors/forbidden.tsx:19
-#: ../../../lib/web/src/features/errors/not-found-error.tsx:19
-#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:19
-msgid "Go Back"
-msgstr "തിരികെ പോകുക"
+#: ../../../lib/web/src/features/errors/forbidden.tsx:21
+#: ../../../lib/web/src/features/errors/not-found-error.tsx:21
+#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:21
+msgid "Go back"
+msgstr ""
 
 #: ../../../lib/web/src/components/data-table/pagination.tsx:75
 msgid "Go to first page"
@@ -383,6 +387,10 @@ msgstr "അവസാന പേജിലേക്ക് പോകുക"
 #: ../../../lib/web/src/components/data-table/pagination.tsx:112
 msgid "Go to next page"
 msgstr "അടുത്ത പേജിലേക്ക് പോകുക"
+
+#: ../../../lib/web/src/components/data-table/pagination.tsx:99
+msgid "Go to page {pageNumber}"
+msgstr ""
 
 #: ../../../lib/web/src/components/data-table/pagination.tsx:84
 msgid "Go to previous page"
@@ -575,7 +583,7 @@ msgstr "സാധാരണം"
 msgid "Notifications"
 msgstr "അറിയിപ്പുകൾ"
 
-#: ../../../lib/web/src/features/errors/not-found-error.tsx:12
+#: ../../../lib/web/src/features/errors/not-found-error.tsx:13
 msgid "Oops! Page Not Found!"
 msgstr "ഓ! പേജ് കണ്ടെത്തിയില്ല!"
 
@@ -678,6 +686,7 @@ msgid "Remove interest"
 msgstr "item നീക്കം ചെയ്യുക"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
+#: ../../../lib/web/src/components/data-table/toolbar.tsx:78
 msgid "Reset"
 msgstr "എല്ലാ സെറ്റിങ്ങുകളും ഡിഫോൾട്ട് മൂല്യങ്ങളിലേക്ക് റീസെറ്റ് ചെയ്യുക"
 
@@ -758,6 +767,10 @@ msgstr "സൈറ്റ് ദിശ തിരഞ്ഞെടുക്കുക"
 #: ../../../lib/web/src/components/config-drawer.tsx:189
 msgid "Select theme preference"
 msgstr "തീം മുൻഗണന തിരഞ്ഞെടുക്കുക"
+
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:95
+msgid "Send again"
+msgstr ""
 
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
@@ -861,10 +874,13 @@ msgid "Toggle columns"
 msgstr "കോളങ്ങൾ ടോഗിൾ ചെയ്യുക"
 
 #: ../../../lib/web/src/components/layout/right-panel.tsx:227
-msgid "Toggle Right Panel"
-msgstr "വലത് പാനൽ ടോഗിൾ ചെയ്യുക"
+msgid "Toggle right panel"
+msgstr ""
 
 #: ../../../lib/web/src/components/ui/sidebar.tsx:312
+msgid "Toggle sidebar"
+msgstr ""
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:324
 #: ../../../lib/web/src/components/ui/sidebar.tsx:327
 msgid "Toggle Sidebar"
@@ -889,7 +905,7 @@ msgstr "നിങ്ങളുടെ തിരച്ചിൽ പദങ്ങൾ 
 
 #: ../../../lib/web/src/features/errors/general-error.tsx:125
 #: ../../../lib/web/src/features/errors/general-error.tsx:165
-#: ../../../lib/web/src/features/errors/maintenance-error.tsx:15
+#: ../../../lib/web/src/features/errors/maintenance-error.tsx:16
 msgid "Try again"
 msgstr "വീണ്ടും ശ്രമിക്കുക"
 
@@ -918,7 +934,7 @@ msgstr "ലോഗിനിലേക്ക് റീഡയറക്റ്റ് �
 msgid "Unassigned"
 msgstr "നിയോഗിച്ചിട്ടില്ല"
 
-#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:12
+#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:13
 msgid "Unauthorized Access"
 msgstr "അനുവദിക്കാത്ത ആക്സസ്"
 
@@ -952,6 +968,7 @@ msgid "Verification failed"
 msgstr "സ്ഥിരീകരണം പരാജയപ്പെട്ടു"
 
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
 msgstr "സ്ഥിരീകരിക്കുക"
 
@@ -972,11 +989,11 @@ msgstr "എല്ലാം കാണുക"
 msgid "View all notifications"
 msgstr "എല്ലാ അറിയിപ്പുകളും കാണുക"
 
-#: ../../../lib/web/src/features/errors/maintenance-error.tsx:12
+#: ../../../lib/web/src/features/errors/maintenance-error.tsx:13
 msgid "We'll be back online shortly."
 msgstr "ഞങ്ങൾ ഉടൻ വീണ്ടും ഓൺലൈൻ ആകും."
 
-#: ../../../lib/web/src/features/errors/maintenance-error.tsx:9
+#: ../../../lib/web/src/features/errors/maintenance-error.tsx:10
 msgid "Website is under maintenance!"
 msgstr "വെബ്സൈറ്റ് മെയിന്റനൻസിലാണ്!"
 
