@@ -38,22 +38,19 @@ def action_notifications_categories(a):
 
 def action_notifications_topic_lookup(a):
     """Find the topic row matching (app, topic, object) so the picker can show
-    the current category."""
+    the current category. app="" matches server-originated topics."""
     app = a.input("app", "").strip()
     topic = a.input("topic", "").strip()
     object = a.input("object", "").strip()
-    if not app:
-        return a.error.label(400, "errors.app_is_required")
     row = mochi.service.call("notifications", "topic/lookup", app, topic, object)
     return {"data": row}
 
 def action_notifications_topic_set_category(a):
-    """Set the category of a topic row by (app, topic, object)."""
+    """Set the category of a topic row by (app, topic, object). app="" matches
+    server-originated topics (upgrade alerts etc.)."""
     app = a.input("app", "").strip()
     topic = a.input("topic", "").strip()
     object = a.input("object", "")
-    if not app:
-        return a.error.label(400, "errors.app_is_required")
     cat_raw = a.input("category", "")
     category = None
     if cat_raw != "" and cat_raw.lstrip("-").isdigit():
