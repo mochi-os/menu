@@ -542,7 +542,9 @@
                         sidebarOpen: sidebarOpen,
                         domain: sc.domain || null,
                         locale: currentLocale || null,
-                        language: currentLanguage || null
+                        language: currentLanguage || null,
+                        restoreSource: sc.restoreSource || null,
+                        relinks: sc.relinks || null
                     };
                     if (currentColorTheme) initMsg.colorTheme = currentColorTheme;
                     postToIframe(initMsg);
