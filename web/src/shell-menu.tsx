@@ -75,7 +75,7 @@ function NotificationItem({
           <EntityAvatar
             src={`/people/${notification.sender}/-/avatar`}
             styleUrl={`/people/${notification.sender}/-/style`}
-            size={24}
+            size="sm"
             className='mt-0.5 shrink-0'
           />
         )}
