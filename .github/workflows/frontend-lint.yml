@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'web/**'
+      - 'labels/**'
       - 'pnpm-lock.yaml'
       - 'package.json'
       - '.github/workflows/frontend-lint.yml'
@@ -13,6 +14,7 @@ on:
       - master
     paths:
       - 'web/**'
+      - 'labels/**'
       - 'pnpm-lock.yaml'
       - 'package.json'
       - '.github/workflows/frontend-lint.yml'
