@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0>-ը խնդրում է թույլտվություն՝ {permissionLabel}."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0>-ը պահանջում է հետևյալ թույլտվությունը՝"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 ժամ"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "Բացարձակ (ամսաթիվ և ժամ)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "մուտք {domain}-ին"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "Բոլոր CRM-երը"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "Թույլատրել բոլորին կարդալ պահեստը"
 
@@ -121,6 +117,10 @@ msgstr "Վստա՞հ եք, որ ուզում եք հանել <0>{0}</0>-ին ա�
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Կցել մեկնաբանության ֆայլեր"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Հեղինակ"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "Եզրագծի գույն"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "Եզրագծի գույն"
 msgid "Cancel"
 msgstr "Չեղարկել մեկնաբանությունը"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "Կատեգորիան թարմացված է"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "Փոփոխություններ"
 
@@ -198,7 +199,7 @@ msgstr "Կլոնավորել"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "Փակել վահանակը"
 
@@ -238,10 +239,6 @@ msgstr "Ավարտեք Stripe-ի գրանցումը՝ հաստատվելու հ�
 msgid "Confirm"
 msgstr "Հաստատել ստացումը"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "միանալ MCP սերվերներին"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "Համատեքստային տեղեկատվություն և մանրամասներ։"
@@ -254,6 +251,10 @@ msgstr "Շարունակել"
 msgid "Continue"
 msgstr "Շարունակել վճարումը"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "Շարունակել {label}-ով"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Պատճենել ամենը"
@@ -261,6 +262,18 @@ msgstr "Պատճենել ամենը"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "Չհաջողվեց մշակել {slot} պատկերը"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "Չհաջողվեց ուղարկել կոդը։ Խնդրում ենք նորից փորձել։"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "Չհաջողվեց սկսել վերանույնականացումը։ Խնդրում ենք նորից փորձել։"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "Չհաջողվեց ստուգել այդ հաշվով։ Խնդրում ենք նորից փորձել։"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "Լռելյայն"
 msgid "Default AI account"
 msgstr "Լռելյայն AI հաշիվ"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "Ջնջեք ձեր հաշիվը հին սերվերում"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "Մերժել"
 
@@ -310,6 +327,10 @@ msgstr "Հայտնաբերել վեբ բրաուզերից"
 msgid "Direction"
 msgstr "Ուղղություն"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "Հեռացնել"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "Ցուցադրում է բջջային կողագոտին։"
@@ -321,6 +342,18 @@ msgstr "Ներբեռնել"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "Դիսլեքսիայի հարմար"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "Էլ․ փոստի կոդ"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "Մուտքագրեք ձեր էլ. փոստից ստացած կոդը"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "Մուտքագրեք ձեր նույնականացուցիչի կոդը"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "Չհաջողվեց հեռացնել հաշիվը"
 msgid "Failed to send verification code"
 msgstr "Չհաջողվեց ուղարկել հաստատման կոդը"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "Չհաջողվեց թարմացնել կատեգորիան"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "Ավարտեք ձեր հաշվի տեղափոխությունը"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "Մուտքի պահանջներ"
 msgid "Logging out…"
 msgstr "Մուտքի պահանջները թարմացվեցին"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "կառավարել կապակցված հաշիվները"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "կառավարել խմբերը"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "Արդյունքներ չեն գտնվել։"
 msgid "No time zone found."
 msgstr "Ժամային գոտի չի գտնվել։"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "Դեռ թեմայի գրառում չկա — փորձեք նորից հաջորդ ծանուցումից հետո։"
 
@@ -620,7 +649,15 @@ msgstr "Այլ"
 msgid "Owner"
 msgstr "Սեփականատեր"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "Անցաբանալի"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "Անցաբանալու ստուգումը ձախողվեց։ Խնդրում ենք նորից փորձել։"
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "Թույլտվության հարցում"
 
@@ -638,13 +675,9 @@ msgstr "Գաղտնիություն"
 msgid "Profile"
 msgstr "Պրոֆիլ"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "կարդալ կապակցված հաշիվները"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "կարդալ հետաքրքրությունները"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "Նորից կապեք ձեր հաշիվները այս սերվերում"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "Հեռացնե՞լ մուտքը։"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "Հեռացնել հետաքրքրությունը"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "Կրկին ուղարկել նամակը"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "Ընտրել թեմայի նախընտրությունը"
 msgid "Send again"
 msgstr "Ուղարկել կրկին"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "Ուղարկել էլ. փոստ"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "Սերիֆ"
@@ -853,6 +894,10 @@ msgstr "Թիմեր/Հավելվածներ"
 msgid "Terms and conditions"
 msgstr "Պայմաններ և կանոններ"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "Այդ կոդը սխալ է կամ ժամկետանց է։"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "Թեմա"
@@ -861,7 +906,7 @@ msgstr "Թեմա"
 msgid "Theme Settings"
 msgstr "Թեմայի կարգավորումներ"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Այս թույլտվությունը պետք է միացված լինի ձեր կողմից հավելվածի կարգավորումներում:"
 
@@ -930,7 +975,7 @@ msgstr "Մուտքագրեք որոնելու համար..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "Հնարավոր չէ վերահղել մուտք: Խնդրում ենք կրկին փորձել:"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "Չվերագրված"
 
@@ -946,9 +991,9 @@ msgstr "Միացյալ Նահանգներ"
 msgid "Unverified"
 msgstr "Չստուգված"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "օգտագործել AI ծառայությունները"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "Օգտագործեք ձեր անցաբանալին"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "Ստուգման կոդը ուղարկվեց"
 msgid "Verification failed"
 msgstr "Ստուգումը ձախողվեց"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "Ստուգել"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "Ստուգել էլ. փոստի հասցեն"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "Տեսանյութի մանրապատկեր"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "Կայքը գտնվում է սպասարկման փուլում:"
 msgid "Wednesday"
 msgstr "Չորեքշաբթի"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "գրել հետաքրքրությունները"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "Ձեր հաշիվը տեղափոխվել է այստեղ {source}-ից: Մինչ այն ջնջեք այնտեղ, հաղորդագրություններն ու ծանուցումները կարող են հասնել երկու սերվերներին, ձեր որոշ բովանդակություն դեռ մատուցվում է հին սերվերից, և հետևորդները կարող են մի քանի րոպե պահանջել ձեզ գտնելու համար:"

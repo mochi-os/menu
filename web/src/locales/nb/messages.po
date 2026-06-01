@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> ber om tillatelse til å {permissionLabel}."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> ber om følgende tillatelse:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 timer"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "Absolutt (dato og klokkeslett)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "få tilgang til {domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "KI"
 msgid "All"
 msgstr "Alle"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "Tillat"
 
@@ -121,6 +117,10 @@ msgstr "Er du sikker på at du vil logge ut? Du må logge inn igjen for å få t
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Stigende"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Autentiseringskode"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "Øk interesse"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "Øk interesse"
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "Kategori for dette varselet"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "Endre varselkategori"
 
@@ -198,7 +199,7 @@ msgstr "Tøm utvalg (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "Lukk"
 
@@ -238,10 +239,6 @@ msgstr "Kompakt"
 msgid "Confirm"
 msgstr "Bekreft"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "koble til MCP-servere"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "Innhold ikke endret"
@@ -254,6 +251,10 @@ msgstr "Kontekstuell informasjon og detaljer."
 msgid "Continue"
 msgstr "Fortsett"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "Fortsett med {label}"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Kopier"
@@ -261,6 +262,18 @@ msgstr "Kopier"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "Kunne ikke laste dette dokumentet. Prøv igjen senere."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "Kunne ikke sende koden. Prøv igjen."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "Kunne ikke starte ny autentisering. Prøv igjen."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "Kunne ikke verifisere med den kontoen. Prøv igjen."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "Standard"
 msgid "Default AI account"
 msgstr "Standard KI-konto"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "Slett kontoen din på den gamle serveren"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "Nekt"
 
@@ -310,6 +327,10 @@ msgstr "Oppdag fra nettleser"
 msgid "Direction"
 msgstr "Retning"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "Lukk"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "Viser sidefeltet for mobil."
@@ -321,6 +342,18 @@ msgstr "Last ned"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "Dyslektikervennlig"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "E-postkode"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "Skriv inn koden fra e-posten din"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "Skriv inn autentiseringskoden din"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "Kunne ikke fjerne konto"
 msgid "Failed to send verification code"
 msgstr "Kunne ikke sende bekreftelseskode"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "Kunne ikke oppdatere kategori"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "Fullfør flyttingen av kontoen din"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "Logget ut"
 msgid "Logging out…"
 msgstr "Logger ut …"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "administrere tilkoblede kontoer"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "administrere grupper"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "Ingen resultater funnet."
 msgid "No time zone found."
 msgstr "Ingen tidssone funnet."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "Ingen emnepost ennå – prøv igjen etter neste varsel."
 
@@ -620,7 +649,15 @@ msgstr "Annet"
 msgid "Owner"
 msgstr "Eier"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "Passnøkkel"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "Verifisering med passnøkkel mislyktes. Prøv igjen."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "Tillatelsesforespørsel"
 
@@ -638,13 +675,9 @@ msgstr "Personvern"
 msgid "Profile"
 msgstr "Profil"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "lese tilkoblede kontoer"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "lese interesser"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "Koble kontoene dine til på nytt på denne serveren"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "Fjerne tilgang?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "Fjern interesse"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "Send e-post på nytt"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "Velg temapreferanse"
 msgid "Send again"
 msgstr "Send på nytt"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "Send e-post"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "Antikva"
@@ -853,6 +894,10 @@ msgstr "Lag/apper"
 msgid "Terms and conditions"
 msgstr "Vilkår og betingelser"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "Den koden er feil eller har utløpt."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "Tema"
@@ -861,7 +906,7 @@ msgstr "Tema"
 msgid "Theme Settings"
 msgstr "Temainnstillinger"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Denne tillatelsen må aktiveres av deg i appinnstillingene."
 
@@ -930,7 +975,7 @@ msgstr "Skriv for å søke ..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "Kan ikke omdirigere til innlogging. Prøv igjen."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "Ikke tilordnet"
 
@@ -946,9 +991,9 @@ msgstr "USA"
 msgid "Unverified"
 msgstr "Ikke verifisert"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "bruke AI-tjenester"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "Bruk passnøkkelen din"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "Verifiseringskode sendt"
 msgid "Verification failed"
 msgstr "Verifiseringen mislyktes"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "Verifiser"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "Verifiser e-postadresse"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "Videominiatyr"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "Nettstedet er under vedlikehold!"
 msgid "Wednesday"
 msgstr "Onsdag"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "skrive interesser"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "Kontoen din ble flyttet hit fra {source}. Inntil du sletter den der, kan meldinger og varsler nå begge serverne, noe av innholdet ditt fortsetter å bli levert fra den gamle serveren, og følgerne dine kan trenge noen minutter på å finne deg her."

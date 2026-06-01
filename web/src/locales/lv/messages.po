@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> pieprasa atļauju: {permissionLabel}."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> pieprasa šādu atļauju:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 stundas"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "Absolūts (datums un laiks)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "piekļūt {domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "Visi"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "Atļaut"
 
@@ -121,6 +117,10 @@ msgstr "Vai tiešām vēlies izrakstīties? Lai piekļūtu kontam, būs jāpiera
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Aug."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Authenticator kods"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "Veicināt interesi"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "Veicināt interesi"
 msgid "Cancel"
 msgstr "Atcelt"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "Šī paziņojuma kategorija"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "Mainīt paziņojuma kategoriju"
 
@@ -198,7 +199,7 @@ msgstr "Notīrīt atlasi (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "Aizvērt"
 
@@ -238,10 +239,6 @@ msgstr "Kompakts"
 msgid "Confirm"
 msgstr "Apstiprināt"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "savienoties ar MCP serveriem"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "Saturs nav mainīts"
@@ -254,6 +251,10 @@ msgstr "Konteksta informācija un detaļas."
 msgid "Continue"
 msgstr "Turpināt"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "Turpināt ar {label}"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Kopēt"
@@ -261,6 +262,18 @@ msgstr "Kopēt"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "Nevarēja ielādēt šo dokumentu. Lūdzu, mēģini vēlāk vēlreiz."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "Neizdevās nosūtīt kodu. Lūdzu, mēģiniet vēlreiz."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "Neizdevās sākt atkārtotu autentifikāciju. Lūdzu, mēģiniet vēlreiz."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "Neizdevās verificēt ar šo kontu. Lūdzu, mēģiniet vēlreiz."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "Noklusētais"
 msgid "Default AI account"
 msgstr "Noklusētais AI konts"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "Dzēsiet savu kontu vecajā serverī"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "Liegt"
 
@@ -310,6 +327,10 @@ msgstr "Noteikt no tīmekļa pārlūka"
 msgid "Direction"
 msgstr "Virziens"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "Aizvērt"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "Parāda mobilo sānu joslu."
@@ -321,6 +342,18 @@ msgstr "Lejupielādēt"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "Disleksijai draudzīgs"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "E-pasta kods"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "Ievadiet kodu no sava e-pasta"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "Ievadiet autentifikatora kodu"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "Neizdevās noņemt kontu"
 msgid "Failed to send verification code"
 msgstr "Neizdevās nosūtīt verifikācijas kodu"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "Neizdevās atjaunināt kategoriju"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "Pabeidziet konta pārvietošanu"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "Izrakstīšanās veiksmīga"
 msgid "Logging out…"
 msgstr "Izrakstās…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "pārvaldīt savienotos kontus"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "pārvaldīt grupas"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "Rezultāti nav atrasti."
 msgid "No time zone found."
 msgstr "Laika josla nav atrasta."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "Vēl nav tēmas ieraksta — mēģiniet vēlreiz pēc nākamā paziņojuma."
 
@@ -620,7 +649,15 @@ msgstr "Cits"
 msgid "Owner"
 msgstr "Īpašnieks"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "Piekļuves atslēga"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "Piekļuves atslēgas pārbaude neizdevās. Lūdzu, mēģiniet vēlreiz."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "Atļaujas pieprasījums"
 
@@ -638,13 +675,9 @@ msgstr "Privātums"
 msgid "Profile"
 msgstr "Profils"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "lasīt savienotos kontus"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "lasīt intereses"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "Atkārtoti saistiet savus kontus šajā serverī"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "Noņemt piekļuvi?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "Noņemt interesi"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "Sūtīt e-pastu vēlreiz"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "Izvēlieties motīva preferenci"
 msgid "Send again"
 msgstr "Sūtīt vēlreiz"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "Sūtīt e-pastu"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "Serifs"
@@ -853,6 +894,10 @@ msgstr "Komandas/Lietotnes"
 msgid "Terms and conditions"
 msgstr "Lietošanas nosacījumi"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "Šis kods ir nepareizs vai tā derīguma termiņš ir beidzies."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "Tēma"
@@ -861,7 +906,7 @@ msgstr "Tēma"
 msgid "Theme Settings"
 msgstr "Tēmas iestatījumi"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Šī atļauja jums jāiespējo lietotnes iestatījumos."
 
@@ -930,7 +975,7 @@ msgstr "Ierakstiet, lai meklētu..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "Nevar pāradresēt uz pieteikšanos. Lūdzu, mēģiniet vēlreiz."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "Nepiešķirts"
 
@@ -946,9 +991,9 @@ msgstr "Amerikas Savienotās Valstis"
 msgid "Unverified"
 msgstr "Nav pārbaudīts"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "izmantot AI pakalpojumus"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "Izmantojiet savu piekļuves atslēgu"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "Verifikācijas kods nosūtīts"
 msgid "Verification failed"
 msgstr "Verifikācija neizdevās"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "Verificēt"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "Verificēt e-pasta adresi"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "Video sīktēls"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "Vietne tiek apkopta!"
 msgid "Wednesday"
 msgstr "Trešdiena"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "rakstīt intereses"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "Jūsu konts tika pārvietots šeit no {source}. Kamēr to tur nedzēšat, ziņojumi un paziņojumi var sasniegt abus serverus, daļa jūsu satura joprojām tiek apkalpota no vecā servera un sekotājiem var paiet dažas minūtes, lai atrastu jūs šeit."

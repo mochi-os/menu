@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> ขออนุญาตเพื่อ{permissionLabel}"
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> กำลังขอสิทธิ์ต่อไปนี้:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 ชั่วโมง"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "สัมบูรณ์ (วันที่และเวลา)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "เข้าถึง {domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "ทั้งหมด"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "อนุญาต"
 
@@ -121,6 +117,10 @@ msgstr "คุณแน่ใจหรือไม่ว่าต้องกา
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "น้อยไปมาก"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "รหัส Authenticator"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "เพิ่มความสนใจ"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "เพิ่มความสนใจ"
 msgid "Cancel"
 msgstr "ยกเลิก"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "หมวดหมู่สำหรับการแจ้งเตือนนี้"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "เปลี่ยนหมวดหมู่การแจ้งเตือน"
 
@@ -198,7 +199,7 @@ msgstr "ล้างการเลือก (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "ปิด"
 
@@ -238,10 +239,6 @@ msgstr "กะทัดรัด"
 msgid "Confirm"
 msgstr "ยืนยัน"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "เชื่อมต่อกับเซิร์ฟเวอร์ MCP"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "ไม่มีการแก้ไขเนื้อหา"
@@ -254,6 +251,10 @@ msgstr "ข้อมูลบริบทและรายละเอียด
 msgid "Continue"
 msgstr "ดำเนินการต่อ"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "ดำเนินการต่อด้วย {label}"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "คัดลอก"
@@ -261,6 +262,18 @@ msgstr "คัดลอก"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "ไม่สามารถโหลดเอกสารนี้ได้ โปรดลองอีกครั้งในภายหลัง"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "ส่งรหัสไม่สำเร็จ โปรดลองอีกครั้ง"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "เริ่มการยืนยันตัวตนอีกครั้งไม่สำเร็จ โปรดลองอีกครั้ง"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "ไม่สามารถยืนยันด้วยบัญชีนั้นได้ โปรดลองอีกครั้ง"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "ค่าเริ่มต้น"
 msgid "Default AI account"
 msgstr "บัญชี AI เริ่มต้น"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "ลบบัญชีของคุณบนเซิร์ฟเวอร์เดิม"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "ปฏิเสธ"
 
@@ -310,6 +327,10 @@ msgstr "ตรวจจับจากเว็บเบราว์เซอร
 msgid "Direction"
 msgstr "ทิศทาง"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "ปิด"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "แสดงแถบด้านข้างบนมือถือ"
@@ -321,6 +342,18 @@ msgstr "ดาวน์โหลด"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "เหมาะสำหรับผู้บกพร่องการอ่าน"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "รหัสอีเมล"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "ป้อนรหัสจากอีเมลของคุณ"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "ป้อนรหัสจากแอปยืนยันตัวตนของคุณ"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "ไม่สามารถเอาบัญชีออกได้"
 msgid "Failed to send verification code"
 msgstr "ไม่สามารถส่งรหัสยืนยันได้"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "ไม่สามารถอัปเดตหมวดหมู่ได้"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "เสร็จสิ้นการย้ายบัญชี"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "ออกจากระบบเรียบร้อยแล้ว"
 msgid "Logging out…"
 msgstr "กำลังออกจากระบบ…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "จัดการบัญชีที่เชื่อมต่อ"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "จัดการกลุ่ม"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "ไม่พบผลลัพธ์"
 msgid "No time zone found."
 msgstr "ไม่พบเขตเวลา"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "ยังไม่มีบันทึกหัวข้อ — ลองอีกครั้งหลังการแจ้งเตือนครั้งถัดไป"
 
@@ -620,7 +649,15 @@ msgstr "อื่น ๆ"
 msgid "Owner"
 msgstr "เจ้าของ"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr ""
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "การยืนยันด้วยพาสคีย์ล้มเหลว โปรดลองอีกครั้ง"
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "คำขอสิทธิ์"
 
@@ -638,13 +675,9 @@ msgstr "ความเป็นส่วนตัว"
 msgid "Profile"
 msgstr "โปรไฟล์"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "อ่านบัญชีที่เชื่อมต่อ"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "อ่านความสนใจ"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "เชื่อมโยงบัญชีของคุณใหม่บนเซิร์ฟเวอร์นี้"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "ลบสิทธิ์การเข้าถึง?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "ลบความสนใจ"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "ส่งอีเมลอีกครั้ง"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "เลือกการตั้งค่าธีม"
 msgid "Send again"
 msgstr "ส่งอีกครั้ง"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "ส่งอีเมล"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "เซริฟ"
@@ -853,6 +894,10 @@ msgstr "ทีม/แอป"
 msgid "Terms and conditions"
 msgstr "ข้อกำหนดและเงื่อนไข"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "รหัสนั้นไม่ถูกต้องหรือหมดอายุแล้ว"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "ธีม"
@@ -861,7 +906,7 @@ msgstr "ธีม"
 msgid "Theme Settings"
 msgstr "การตั้งค่าธีม"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "สิทธิ์นี้ต้องเปิดใช้งานโดยคุณในการตั้งค่าแอป"
 
@@ -930,7 +975,7 @@ msgstr "พิมพ์เพื่อค้นหา..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "ไม่สามารถเปลี่ยนเส้นทางไปยังการเข้าสู่ระบบได้ โปรดลองอีกครั้ง"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "ยังไม่กำหนด"
 
@@ -946,9 +991,9 @@ msgstr "สหรัฐอเมริกา"
 msgid "Unverified"
 msgstr "ยังไม่ยืนยัน"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "ใช้บริการ AI"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "ใช้พาสคีย์ของคุณ"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "ส่งรหัสยืนยันแล้ว"
 msgid "Verification failed"
 msgstr "การยืนยันไม่สำเร็จ"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "ยืนยัน"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "ยืนยันที่อยู่อีเมล"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "ภาพย่อวิดีโอ"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "เว็บไซต์อยู่ระหว่างการบำ
 msgid "Wednesday"
 msgstr "วันพุธ"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "เขียนความสนใจ"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "บัญชีของคุณถูกย้ายมาที่นี่จาก {source} จนกว่าคุณจะลบออกที่นั่น ข้อความและการแจ้งเตือนอาจไปถึงทั้งสองเซิร์ฟเวอร์ เนื้อหาบางส่วนของคุณยังคงให้บริการจากเซิร์ฟเวอร์เดิม และผู้ติดตามอาจต้องใช้เวลาสักครู่เพื่อพบคุณที่นี่"

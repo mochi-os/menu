@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> ले {permissionLabel} को लागि अनुमति माग्छ।"
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> ले निम्न अनुमति माग्दैछ:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "२४ घण्टा"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "निरपेक्ष (मिति र समय)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "{domain} पहुँच गर्नुहोस्"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "सबै"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "अनुमति दिनुहोस्"
 
@@ -121,6 +117,10 @@ msgstr "के तपाईं लग आउट गर्न निश्चि�
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "बढ्दो"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Authenticator कोड"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "रुचि बढाउनुहोस्"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "रुचि बढाउनुहोस्"
 msgid "Cancel"
 msgstr "रद्द गर्नुहोस्"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "यस सूचनाका लागि श्रेणी"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "सूचना श्रेणी परिवर्तन गर्नुहोस्"
 
@@ -198,7 +199,7 @@ msgstr "चयन खाली गर्नुहोस् (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "बन्द गर्नुहोस्"
 
@@ -238,10 +239,6 @@ msgstr "कम्प्याक्ट"
 msgid "Confirm"
 msgstr "पुष्टि गर्नुहोस्"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "MCP सर्भरहरूसँग जडान गर्नुहोस्"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "सामग्री परिमार्जन गरिएको छैन"
@@ -254,6 +251,10 @@ msgstr "प्रासङ्गिक जानकारी र विवरण
 msgid "Continue"
 msgstr "जारी राख्नुहोस्"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "{label} सँग जारी राख्नुहोस्"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "प्रतिलिपि"
@@ -261,6 +262,18 @@ msgstr "प्रतिलिपि"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "यो कागजात लोड गर्न सकिएन। कृपया पछि फेरि प्रयास गर्नुहोस्।"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "कोड पठाउन सकिएन। कृपया फेरि प्रयास गर्नुहोस्।"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "पुन: प्रमाणीकरण सुरु गर्न सकिएन। कृपया फेरि प्रयास गर्नुहोस्।"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "त्यो खातासँग प्रमाणित गर्न सकिएन। कृपया फेरि प्रयास गर्नुहोस्।"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "पूर्वनिर्धारित"
 msgid "Default AI account"
 msgstr "पूर्वनिर्धारित AI खाता"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "पुरानो सर्भरमा आफ्नो खाता मेटाउनुहोस्"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "अस्वीकार गर्नुहोस्"
 
@@ -310,6 +327,10 @@ msgstr "वेब ब्राउजरबाट पत्ता लगाउन
 msgid "Direction"
 msgstr "दिशा"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "हटाउनुहोस्"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "मोबाइल साइडबार देखाउँछ।"
@@ -321,6 +342,18 @@ msgstr "डाउनलोड"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "डिस्लेक्सिया-मैत्रीपूर्ण"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "इमेल कोड"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "तपाईंको इमेलमा आएको कोड प्रविष्ट गर्नुहोस्"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "आफ्नो प्रमाणक कोड हाल्नुहोस्"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "खाता हटाउन असफल"
 msgid "Failed to send verification code"
 msgstr "प्रमाणीकरण कोड पठाउन असफल"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "वर्ग अद्यावधिक गर्न असफल"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "आफ्नो खाता सार्ने काम सम्पन्न गर्नुहोस्"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "सफलतापूर्वक लग आउट भयो"
 msgid "Logging out…"
 msgstr "लग आउट हुँदै…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "जडान गरिएका खाताहरू व्यवस्थापन गर्नुहोस्"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "समूहहरू व्यवस्थापन गर्नुहोस्"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "कुनै नतिजा भेटिएन।"
 msgid "No time zone found."
 msgstr "कुनै समय क्षेत्र भेटिएन।"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "अहिलेसम्म कुनै टपिक रेकर्ड छैन — अर्को सूचना पछि फेरि प्रयास गर्नुहोस्।"
 
@@ -620,7 +649,15 @@ msgstr "अन्य"
 msgid "Owner"
 msgstr "मालिक"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "पासकी"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "पासकी प्रमाणीकरण असफल भयो। कृपया फेरि प्रयास गर्नुहोस्।"
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "अनुमति अनुरोध"
 
@@ -638,13 +675,9 @@ msgstr "गोपनीयता"
 msgid "Profile"
 msgstr "प्रोफाइल"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "जडान गरिएका खाताहरू पढ्नुहोस्"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "रुचिहरू पढ्नुहोस्"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "यस सर्भरमा आफ्ना खाताहरू पुनः लिङ्क गर्नुहोस्"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "पहुँच हटाउने?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "रुचि हटाउनुहोस्"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "इमेल फेरि पठाउनुहोस्"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "थिम प्राथमिकता छान्नुहोस्"
 msgid "Send again"
 msgstr "फेरि पठाउनुहोस्"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "इमेल पठाउनुहोस्"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "सेरिफ"
@@ -853,6 +894,10 @@ msgstr "टोली/एप"
 msgid "Terms and conditions"
 msgstr "नियम र सर्तहरू"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "त्यो कोड गलत छ वा म्याद सकिएको छ।"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "थिम"
@@ -861,7 +906,7 @@ msgstr "थिम"
 msgid "Theme Settings"
 msgstr "थिम सेटिङहरू"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "यो अनुमति तपाईंले एप सेटिङहरूमा सक्षम पार्नुपर्छ।"
 
@@ -930,7 +975,7 @@ msgstr "खोज्न टाइप गर्नुहोस्..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "लगइनमा रिडाइरेक्ट गर्न असमर्थ। कृपया फेरि प्रयास गर्नुहोस्।"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "नतोकिएको"
 
@@ -946,9 +991,9 @@ msgstr "संयुक्त राज्य अमेरिका"
 msgid "Unverified"
 msgstr "अप्रमाणित"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "AI सेवाहरू प्रयोग गर्नुहोस्"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "आफ्नो पासकी प्रयोग गर्नुहोस्"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "प्रमाणीकरण कोड पठाइयो"
 msgid "Verification failed"
 msgstr "प्रमाणीकरण असफल भयो"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "प्रमाणित गर्नुहोस्"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "इमेल ठेगाना प्रमाणित गर्नुहोस्"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "भिडियो थम्बनेल"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "वेबसाइट मर्मतसम्भारमा छ!"
 msgid "Wednesday"
 msgstr "बुधबार"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "रुचिहरू लेख्नुहोस्"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "तपाईंको खाता {source} बाट यहाँ सारिएको छ। त्यहाँ मेटाउनु नभएसम्म, सन्देश र सूचनाहरू दुवै सर्भरमा पुग्न सक्छन्, तपाईंको केही सामग्री पुरानो सर्भरबाट आउन सक्छ, र अनुयायीहरूलाई तपाईंलाई यहाँ भेट्न केही मिनेट लाग्न सक्छ।"

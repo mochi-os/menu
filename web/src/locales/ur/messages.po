@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> {permissionLabel} کی اجازت چاہتا ہے۔"
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> درج ذیل اجازت طلب کر رہا ہے:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 گھنٹے"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "مطلق (تاریخ اور وقت)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "{domain} تک رسائی"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "تمام"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "اجازت دیں"
 
@@ -121,6 +117,10 @@ msgstr "کیا آپ واقعی لاگ آؤٹ کرنا چاہتے ہیں؟ آپ �
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "بڑھتا ہوا"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Authenticator کوڈ"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "دلچسپی بڑھائیں"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "دلچسپی بڑھائیں"
 msgid "Cancel"
 msgstr "منسوخ کریں"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "اس نوٹیفکیشن کے لیے زمرہ"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "نوٹیفکیشن کا زمرہ تبدیل کریں"
 
@@ -198,7 +199,7 @@ msgstr "انتخاب صاف کریں (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "بند کریں"
 
@@ -238,10 +239,6 @@ msgstr "کمپیکٹ"
 msgid "Confirm"
 msgstr "تصدیق کریں"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "MCP سرورز سے منسلک ہوں"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "مواد میں ترمیم نہیں"
@@ -254,6 +251,10 @@ msgstr "سیاق و سباق کی معلومات اور تفصیلات۔"
 msgid "Continue"
 msgstr "جاری رکھیں"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "{label} کے ساتھ جاری رکھیں"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "کاپی کریں"
@@ -261,6 +262,18 @@ msgstr "کاپی کریں"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "یہ دستاویز لوڈ نہیں ہو سکی۔ براہ کرم بعد میں دوبارہ کوشش کریں۔"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "کوڈ نہیں بھیجا جا سکا۔ براہ کرم دوبارہ کوشش کریں۔"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "دوبارہ تصدیق شروع نہیں کی جا سکی۔ براہ کرم دوبارہ کوشش کریں۔"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "اس اکاؤنٹ سے تصدیق نہیں ہو سکی۔ براہ کرم دوبارہ کوشش کریں۔"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "ڈیفالٹ"
 msgid "Default AI account"
 msgstr "ڈیفالٹ AI اکاؤنٹ"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "پرانے سرور پر اپنا اکاؤنٹ حذف کریں"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "مسترد کریں"
 
@@ -310,6 +327,10 @@ msgstr "ویب براؤزر سے پتہ لگائیں"
 msgid "Direction"
 msgstr "سمت"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "برخاست کریں"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "موبائل سائڈبار دکھاتا ہے۔"
@@ -321,6 +342,18 @@ msgstr "ڈاؤن لوڈ"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "ڈسلیکسیا کے لیے موزوں"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "ای میل کوڈ"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "اپنی ای میل میں موجود کوڈ درج کریں"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "اپنا اتھینٹیکیٹر کوڈ درج کریں"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "اکاؤنٹ ہٹانے میں ناکامی"
 msgid "Failed to send verification code"
 msgstr "تصدیقی کوڈ بھیجنے میں ناکامی"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "زمرہ اپڈیٹ کرنے میں ناکامی"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "اپنا اکاؤنٹ منتقل کرنا مکمل کریں"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "کامیابی سے لاگ آؤٹ ہو گئے"
 msgid "Logging out…"
 msgstr "لاگ آؤٹ ہو رہا ہے…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "منسلک اکاؤنٹس کا انتظام کریں"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "گروپس کا انتظام کریں"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "کوئی نتائج نہیں ملے۔"
 msgid "No time zone found."
 msgstr "کوئی time zone نہیں ملا۔"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "ابھی تک کوئی topic record نہیں — اگلی notification کے بعد دوبارہ کوشش کریں۔"
 
@@ -620,7 +649,15 @@ msgstr "دیگر"
 msgid "Owner"
 msgstr "مالک"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "passkey"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "پاس کی کی تصدیق ناکام ہو گئی۔ براہ کرم دوبارہ کوشش کریں۔"
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "permission کی درخواست"
 
@@ -638,13 +675,9 @@ msgstr "پرائیویسی"
 msgid "Profile"
 msgstr "پروفائل"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "منسلک اکاؤنٹس پڑھیں"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "دلچسپیاں پڑھیں"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "اس سرور پر اپنے اکاؤنٹس دوبارہ لنک کریں"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "رسائی ہٹائیں؟"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "دلچسپی ہٹائیں"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "ای میل دوبارہ بھیجیں"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "تھیم کی ترجیح منتخب کریں"
 msgid "Send again"
 msgstr "دوبارہ بھیجیں"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "ای میل بھیجیں"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "سیرف"
@@ -853,6 +894,10 @@ msgstr "ٹیمز/ایپس"
 msgid "Terms and conditions"
 msgstr "شرائط و ضوابط"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "وہ کوڈ غلط ہے یا اس کی میعاد ختم ہو چکی ہے۔"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "تھیم"
@@ -861,7 +906,7 @@ msgstr "تھیم"
 msgid "Theme Settings"
 msgstr "تھیم سیٹنگز"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "یہ اجازت آپ کو ایپ سیٹنگز میں فعال کرنی ہوگی۔"
 
@@ -930,7 +975,7 @@ msgstr "تلاش کرنے کے لیے ٹائپ کریں..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "لاگ ان پر ری ڈائریکٹ کرنے سے قاصر۔ براہ کرم دوبارہ کوشش کریں۔"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "غیر تفویض شدہ"
 
@@ -946,9 +991,9 @@ msgstr "ریاستہائے متحدہ"
 msgid "Unverified"
 msgstr "غیر تصدیق شدہ"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "AI خدمات استعمال کریں"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "اپنی پاس کی استعمال کریں"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "تصدیقی کوڈ بھیج دیا گیا"
 msgid "Verification failed"
 msgstr "تصدیق ناکام"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "تصدیق کریں"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "ای میل ایڈریس کی تصدیق کریں"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "ویڈیو تھمب نیل"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "ویب سائٹ مرمت کے تحت ہے!"
 msgid "Wednesday"
 msgstr "بدھ"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "دلچسپیاں لکھیں"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "آپ کا اکاؤنٹ {source} سے یہاں منتقل کر دیا گیا ہے۔ جب تک آپ اسے وہاں سے حذف نہیں کرتے، پیغامات اور اطلاعات دونوں سرورز تک پہنچ سکتی ہیں، آپ کے کچھ مواد پرانے سرور سے فراہم ہوتے رہیں گے، اور فالوورز کو آپ کو یہاں تلاش کرنے میں چند منٹ لگ سکتے ہیں۔"

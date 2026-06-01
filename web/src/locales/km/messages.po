@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> ស្នើសុំការអនុញ្ញាតដើម្បី {permissionLabel}។"
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> កំពុងស្នើសុំការអនុញ្ញាតដូចខាងក្រោម៖"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "២៤ ម៉ោង"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "ដាច់ខាត (កាលបរិច្ឆេទ និងពេលវេលា)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "ចូលប្រើ {domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "ទាំងអស់"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "អនុញ្ញាត"
 
@@ -121,6 +117,10 @@ msgstr "តើអ្នកប្រាកដថាចង់ចាកចេញម
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "ឡើង"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "កូដ Authenticator"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "បង្កើនចំណាប់អារម្មណ៍"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "បង្កើនចំណាប់អារម្មណ៍"
 msgid "Cancel"
 msgstr "បោះបង់"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "ប្រភេទសម្រាប់ការជូនដំណឹងនេះ"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "ប្ដូរប្រភេទការជូនដំណឹង"
 
@@ -198,7 +199,7 @@ msgstr "សម្អាតការជ្រើសរើស (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "បិទ"
 
@@ -238,10 +239,6 @@ msgstr "តូច"
 msgid "Confirm"
 msgstr "បញ្ជាក់"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "ភ្ជាប់ទៅម៉ាស៊ីនមេ MCP"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "មាតិកាមិនបានកែប្រែ"
@@ -254,6 +251,10 @@ msgstr "ព័ត៌មាន និងព័ត៌មានលម្អិត�
 msgid "Continue"
 msgstr "បន្ត"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "បន្តជាមួយ {label}"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "ចម្លង"
@@ -261,6 +262,18 @@ msgstr "ចម្លង"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "មិនអាចផ្ទុកឯកសារនេះ។ សូមព្យាយាមម្តងទៀតនៅពេលក្រោយ។"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "មិនអាចផ្ញើកូដបានទេ។ សូមព្យាយាមម្ដងទៀត។"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "មិនអាចចាប់ផ្ដើមការផ្ទៀងផ្ទាត់ឡើងវិញបានទេ។ សូមព្យាយាមម្ដងទៀត។"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "មិនអាចផ្ទៀងផ្ទាត់ជាមួយគណនីនោះបានទេ។ សូមព្យាយាមម្តងទៀត។"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "លំនាំដើម"
 msgid "Default AI account"
 msgstr "គណនី AI លំនាំដើម"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "លុបគណនីរបស់អ្នកនៅម៉ាស៊ីនមេចាស់"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "បដិសេធ"
 
@@ -310,6 +327,10 @@ msgstr "រកឃើញពីកម្មវិធីរុករកគេហទ
 msgid "Direction"
 msgstr "ទិស"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "បិទ"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "បង្ហាញរបារចំហៀងទូរស័ព្ទ។"
@@ -321,6 +342,18 @@ msgstr "ទាញយក"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "ស័ក្តិសមនឹងជំងឺឌីស្លេកស៊ី"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "កូដអ៊ីមែល"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "បញ្ចូលកូដពីអ៊ីមែលរបស់អ្នក"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "បញ្ចូលកូដ authenticator របស់អ្នក"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "បរាជ័យក្នុងការដកគណនី"
 msgid "Failed to send verification code"
 msgstr "បរាជ័យក្នុងការផ្ញើកូដផ្ទៀងផ្ទាត់"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "បរាជ័យក្នុងការធ្វើបច្ចុប្បន្នភាពប្រភេទ"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "បញ្ចប់ការផ្លាស់ប្តូរគណនីរបស់អ្នក"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "បានចាកចេញដោយជោគជ័យ"
 msgid "Logging out…"
 msgstr "កំពុងចាកចេញ…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "គ្រប់គ្រងគណនីដែលបានភ្ជាប់"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "គ្រប់គ្រងក្រុម"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "រកមិនឃើញលទ្ធផល។"
 msgid "No time zone found."
 msgstr "រកមិនឃើញតំបន់ពេលវេលា។"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "មិនទាន់មានកំណត់ត្រាប្រធានបទ — សាកល្បងម្តងទៀតបន្ទាប់ពីការជូនដំណឹងលើកក្រោយ។"
 
@@ -620,7 +649,15 @@ msgstr "ផ្សេងទៀត"
 msgid "Owner"
 msgstr "ម្ចាស់"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr ""
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "ការផ្ទៀងផ្ទាត់ passkey បានបរាជ័យ។ សូមព្យាយាមម្ដងទៀត។"
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "សំណើសិទ្ធិ"
 
@@ -638,13 +675,9 @@ msgstr "ឯកជនភាព"
 msgid "Profile"
 msgstr "ប្រវត្តិរូប"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "អានគណនីដែលបានភ្ជាប់"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "អានចំណាប់អារម្មណ៍"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "ភ្ជាប់គណនីរបស់អ្នកឡើងវិញនៅម៉ាស៊ីនមេនេះ"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "យកសិទ្ធិចូលប្រើចេញ?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "យកចំណាប់អារម្មណ៍ចេញ"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "ផ្ញើអ៊ីមែលឡើងវិញ"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "ជ្រើសរើសចំណូលចិត្តរូបរាង
 msgid "Send again"
 msgstr "ផ្ញើម្តងទៀត"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "ផ្ញើអ៊ីមែល"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "សេរីហ្វ"
@@ -853,6 +894,10 @@ msgstr "ក្រុម/កម្មវិធី"
 msgid "Terms and conditions"
 msgstr "លក្ខខណ្ឌ"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "កូដនោះមិនត្រឹមត្រូវ ឬផុតកំណត់ហើយ។"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "រូបរាង"
@@ -861,7 +906,7 @@ msgstr "រូបរាង"
 msgid "Theme Settings"
 msgstr "ការកំណត់រូបរាង"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "ការអនុញ្ញាតនេះត្រូវតែបើកដោយអ្នកនៅក្នុងការកំណត់កម្មវិធី។"
 
@@ -930,7 +975,7 @@ msgstr "វាយដើម្បីស្វែងរក..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "មិនអាចប្តូរទិសទៅការចូល។ សូមព្យាយាមម្តងទៀត។"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "មិនបានកំណត់"
 
@@ -946,9 +991,9 @@ msgstr "សហរដ្ឋអាមេរិក"
 msgid "Unverified"
 msgstr "មិនបានផ្ទៀងផ្ទាត់"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "ប្រើសេវាកម្ម AI"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "ប្រើ passkey របស់អ្នក"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "បានផ្ញើកូដផ្ទៀងផ្ទាត់"
 msgid "Verification failed"
 msgstr "ការផ្ទៀងផ្ទាត់បរាជ័យ"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "ផ្ទៀងផ្ទាត់"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "ផ្ទៀងផ្ទាត់អាសយដ្ឋានអ៊ីមែល"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "រូបភាពតូចវីដេអូ"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "គេហទំព័រកំពុងស្ថិតក្រោមក
 msgid "Wednesday"
 msgstr "ថ្ងៃពុធ"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "សរសេរចំណាប់អារម្មណ៍"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "គណនីរបស់អ្នកត្រូវបានផ្លាស់ប្តូរមកទីនេះពី {source}។ រហូតដល់អ្នកលុបវានៅទីនោះ សារ និងការជូនដំណឹងអាចទៅដល់ម៉ាស៊ីនមេទាំងពីរ មាតិកាមួយចំនួនរបស់អ្នកនៅតែត្រូវបានបម្រើពីម៉ាស៊ីនមេចាស់ ហើយអ្នកតាមដានអាចចំណាយពេលប៉ុន្មាននាទីដើម្បីរកអ្នកនៅទីនេះ។"

@@ -2,18 +2,49 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen, waitFor, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { i18n } from '@lingui/core'
+import { I18nProvider } from '@lingui/react'
+import { useAuthStore } from '@mochi/web'
 import { usePermissionRequest } from './use-permission-request'
+
+// <Trans> needs an active i18n; an empty catalog renders the source message.
+i18n.loadAndActivate({ locale: 'en', messages: {} })
 
 // Mock fetch globally
 const mockFetch = vi.fn()
 globalThis.fetch = mockFetch
 
-// Mock the shell token
-beforeEach(() => {
-  ;(window as unknown as { __mochi_shell?: { menuToken?: string } }).__mochi_shell = {
-    menuToken: 'test-token',
+// Permission names are owned by core and resolved via /menu/-/permissions/name.
+// The dialog fires that lookup as soon as a request arrives, then issues the
+// grant request on Allow. Route both by URL so tests can assert each.
+const NAMES: Record<string, string> = {
+  'accounts/read': 'Read connected accounts',
+  'groups/manage': 'Manage groups',
+  'users/read': 'Read user data',
+  'url:api.github.com': 'Access api.github.com',
+}
+
+function nameResponse(opts: { body?: string } | undefined) {
+  const code = new URLSearchParams(opts?.body ?? '').get('permission') ?? ''
+  return { ok: true, json: async () => ({ data: { name: NAMES[code] ?? code } }) }
+}
+
+// Default routing: name lookups resolve to the catalog name, grant succeeds.
+// Individual tests override grant behaviour by re-implementing the router.
+function defaultRouter(grant: () => unknown = () => ({ ok: true, json: async () => ({ data: { status: 'granted' } }) })) {
+  return (url: string, opts?: { body?: string }) => {
+    if (typeof url === 'string' && url.endsWith('/permissions/name')) {
+      return Promise.resolve(nameResponse(opts))
+    }
+    return Promise.resolve(grant())
   }
+}
+
+// The dialog reads the menu token from useAuthStore (getMenuToken).
+beforeEach(() => {
+  useAuthStore.setState({ token: 'test-token' })
   mockFetch.mockReset()
+  mockFetch.mockImplementation(defaultRouter())
 })
 
 afterEach(() => {
@@ -23,7 +54,11 @@ afterEach(() => {
 // Test wrapper that renders the hook's dialog
 function TestComponent() {
   const { dialog } = usePermissionRequest()
-  return <div>{dialog}</div>
+  return (
+    <I18nProvider i18n={i18n}>
+      <div>{dialog}</div>
+    </I18nProvider>
+  )
 }
 
 function sendPermissionRequest(opts: {
@@ -50,13 +85,19 @@ function sendPermissionRequest(opts: {
   return mockSource
 }
 
+function grantCall() {
+  return mockFetch.mock.calls.find(
+    ([url]) => typeof url === 'string' && url.endsWith('/permissions/grant')
+  )
+}
+
 describe('usePermissionRequest', () => {
   it('shows no dialog initially', () => {
     render(<TestComponent />)
     expect(screen.queryByText('Permission request')).not.toBeInTheDocument()
   })
 
-  it('shows dialog on request-permission message', async () => {
+  it('shows dialog with the resolved permission name on request-permission message', async () => {
     render(<TestComponent />)
 
     sendPermissionRequest({
@@ -70,7 +111,9 @@ describe('usePermissionRequest', () => {
       expect(screen.getByText('Permission request')).toBeInTheDocument()
     })
     expect(screen.getByText(/Feeds/)).toBeInTheDocument()
-    expect(screen.getByText(/read connected accounts/)).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText('Read connected accounts')).toBeInTheDocument()
+    })
   })
 
   it('shows Allow and Deny buttons for standard permissions', async () => {
@@ -95,7 +138,7 @@ describe('usePermissionRequest', () => {
     sendPermissionRequest({
       id: 1,
       app: 'feeds',
-      permission: 'user/read',
+      permission: 'users/read',
       restricted: true,
     })
 
@@ -106,7 +149,7 @@ describe('usePermissionRequest', () => {
       expect(screen.queryByRole('button', { name: 'Allow' })).not.toBeInTheDocument()
       expect(screen.queryByRole('button', { name: 'Deny' })).not.toBeInTheDocument()
     })
-    expect(screen.getByText(/restricted permission/)).toBeInTheDocument()
+    expect(screen.getByText(/must be enabled/)).toBeInTheDocument()
   })
 
   it('sends denied on Deny click and closes dialog', async () => {
@@ -143,7 +186,7 @@ describe('usePermissionRequest', () => {
     const mockSource = sendPermissionRequest({
       id: 7,
       app: 'feeds',
-      permission: 'user/read',
+      permission: 'users/read',
       restricted: true,
     })
 
@@ -164,11 +207,6 @@ describe('usePermissionRequest', () => {
 
   it('calls grant API and sends granted on Allow click', async () => {
     const user = userEvent.setup()
-    mockFetch.mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({ data: { status: 'granted' } }),
-    })
-
     render(<TestComponent />)
 
     const mockSource = sendPermissionRequest({
@@ -186,10 +224,10 @@ describe('usePermissionRequest', () => {
 
     // Verify the grant API was called
     await waitFor(() => {
-      expect(mockFetch).toHaveBeenCalledTimes(1)
+      expect(grantCall()).toBeTruthy()
     })
 
-    const [url, opts] = mockFetch.mock.calls[0]
+    const [url, opts] = grantCall()!
     expect(url).toBe('/menu/-/permissions/grant')
     expect(opts.method).toBe('POST')
     expect(opts.headers.Authorization).toBe('Bearer test-token')
@@ -208,10 +246,12 @@ describe('usePermissionRequest', () => {
 
   it('sends denied when grant API fails', async () => {
     const user = userEvent.setup()
-    mockFetch.mockResolvedValueOnce({
-      ok: false,
-      json: async () => ({ error: 'Restricted permissions must be enabled in app settings' }),
-    })
+    mockFetch.mockImplementation(
+      defaultRouter(() => ({
+        ok: false,
+        json: async () => ({ error: 'Restricted permissions must be enabled in app settings' }),
+      }))
+    )
 
     render(<TestComponent />)
 
@@ -236,7 +276,7 @@ describe('usePermissionRequest', () => {
     })
   })
 
-  it('displays correct label for url: permissions', async () => {
+  it('displays the resolved name for url: permissions', async () => {
     render(<TestComponent />)
 
     sendPermissionRequest({
@@ -247,7 +287,7 @@ describe('usePermissionRequest', () => {
     })
 
     await waitFor(() => {
-      expect(screen.getByText(/access api.github.com/)).toBeInTheDocument()
+      expect(screen.getByText('Access api.github.com')).toBeInTheDocument()
     })
   })
 

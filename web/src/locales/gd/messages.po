@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "Tha <0>{appName}</0> ag iarraidh cead airson {permissionLabel}."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> ag iarraidh an cead a leanas:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 uair"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "Iomlan (ceann-là agus àm)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "inntrig {domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "Na h-uile"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "Ceadaich"
 
@@ -121,6 +117,10 @@ msgstr "A bheil thu cinnteach gu bheil thu airson clàradh a-mach? Feumaidh tu c
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Dìreadh"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Còd dearbhachaidh"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "Brosnaich ùidh"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "Brosnaich ùidh"
 msgid "Cancel"
 msgstr "Sguir dheth"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "Roinn airson a' bhratha seo"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "Atharraich roinn nam brathan"
 
@@ -198,7 +199,7 @@ msgstr "Falamhaich an taghadh (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "Dùin"
 
@@ -238,10 +239,6 @@ msgstr "Dùmhail"
 msgid "Confirm"
 msgstr "Dearbhaich"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "ceangail ri frithealaichean MCP"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "Cha deach susbaint atharrachadh"
@@ -254,6 +251,10 @@ msgstr "Fiosrachadh agus mion-fhiosrachadh co-theacsail."
 msgid "Continue"
 msgstr "Lean air adhart"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "Lean air adhart le {label}"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Dèan lethbhreac"
@@ -261,6 +262,18 @@ msgstr "Dèan lethbhreac"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "Cha b' urrainn an sgrìobhainn seo a luchdachadh. Feuch ris a-rithist nas anmoiche."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "Cha b' urrainn an còd a chur. Feuch ris a-rithist."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "Cha b' urrainn ath-dhearbhadh a thòiseachadh. Feuch ris a-rithist."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "Cha b' urrainn dearbhadh leis a' chunntas sin. Feuch ris a-rithist."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "Bunaiteach"
 msgid "Default AI account"
 msgstr "Cunntas AI bunaiteach"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "Sguab às do chunntas air an t-seann fhrithealaiche"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "Diùlt"
 
@@ -310,6 +327,10 @@ msgstr "Lorg bhon bhrabhsair-lìn"
 msgid "Direction"
 msgstr "Comhair"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "Leig seachad"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "Seallaidh am bàr-thaobh fòn-làimhe."
@@ -321,6 +342,18 @@ msgstr "Luchdaich a-nuas"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "Freagarrach do dhisléicse"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "Còd puist-d"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "Cuir a-steach an còd on phost-d agad"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "Cuir a-steach còd na h-aplacaid dearbhaidh agad"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "Cha b' urrainn an cunntas a thoirt air falbh"
 msgid "Failed to send verification code"
 msgstr "Cha b' urrainn còd dearbhaidh a chur"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "Cha b' urrainn an roinn-seòrsa ùrachadh"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "Crìochnaich gluasad do chunntas"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "Chaidh clàradh a-mach gu soirbheachail"
 msgid "Logging out…"
 msgstr "A' clàradh a-mach…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "stiùirich cunntasan ceangailte"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "stiùirich buidhnean"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "Cha deach toraidhean a lorg."
 msgid "No time zone found."
 msgstr "Cha deach roinn-tìde a lorg."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "Chan eil clàradh cuspair ann fhathast — feuch a-rithist às dèidh an ath bhrath."
 
@@ -620,7 +649,15 @@ msgstr "Eile"
 msgid "Owner"
 msgstr "Sealbhadair"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "Pasgair"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "Dh'fhàillig dearbhadh na h-iuchrach-inntrigidh. Feuch ris a-rithist."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "Iarrtas cead"
 
@@ -638,13 +675,9 @@ msgstr "Prìobhaideachd"
 msgid "Profile"
 msgstr "Pròifil"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "leugh cunntasan ceangailte"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "leugh ùidhean"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "Ath-cheangail do chunntasan air an fhrithealaiche seo"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "Thoir an cothrom air falbh?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "Thoir an ùidh air falbh"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "Cuir am post-d a-rithist"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "Tagh roghainn an ùrlair"
 msgid "Send again"
 msgstr "Cuir a-rithist"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "Cuir post-d"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "Serif"
@@ -853,6 +894,10 @@ msgstr "Sgiobaidhean/Aplacaidean"
 msgid "Terms and conditions"
 msgstr "Teirmichean is cùmhnantan"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "Tha an còd sin ceàrr no air a dhol à bann."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "Ùrlar"
@@ -861,7 +906,7 @@ msgstr "Ùrlar"
 msgid "Theme Settings"
 msgstr "Roghainnean an ùrlair"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Feumaidh tu fhèin an cead seo a chur an comas ann an roghainnean na h-aplacaid."
 
@@ -930,7 +975,7 @@ msgstr "Sgrìobh airson lorg..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "Cha b' urrainnear ath-stiùireadh dhan log-a-steach. Feuch a-rithist."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "Gun shònrachadh"
 
@@ -946,9 +991,9 @@ msgstr "Stàitean Aonaichte"
 msgid "Unverified"
 msgstr "Gun dearbhadh"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "cleachd seirbheisean AI"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "Cleachd an iuchair-inntrigidh agad"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "Còd dearbhaidh air a chur"
 msgid "Verification failed"
 msgstr "Dh'fhàillig an dearbhadh"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "Dearbh"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "Dearbh seòladh puist-d"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "Dealbhag video"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "Tha an làrach-lìn fo obair-càraidh!"
 msgid "Wednesday"
 msgstr "Diciadain"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "sgrìobh ùidhean"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "Chaidh do chunntas a ghluasad an seo à {source}. Gus an sguab thu às e an sin, faodaidh teachdaireachdan agus brathan ruighinn air an dà fhrithealaiche, bidh cuid den susbaint agad ga frithealadh bhon t-seann fhrithealaiche, agus faodaidh luchd-leantainn beagan mhionaidean a ghabhail gus do lorg an seo."

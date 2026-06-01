@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> njaluk idin kanggo {permissionLabel}."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> njaluk idin ing ngisor iki:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 jam"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "Mutlak (tanggal lan wektu)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "akses {domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "Kabèh"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "Idini"
 
@@ -121,6 +117,10 @@ msgstr "Sampéyan yakin arep metu? Sampéyan kudu mlebu manèh kanggo ngakses ak
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Munggah"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Kode authenticator"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "Tambah minat"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "Tambah minat"
 msgid "Cancel"
 msgstr "Batal"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "Kategori kanggo pemberitahuan iki"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "Ganti kategori pemberitahuan"
 
@@ -198,7 +199,7 @@ msgstr "Resiki pilihan (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "Tutup"
 
@@ -238,10 +239,6 @@ msgstr "Ringkes"
 msgid "Confirm"
 msgstr "Konfirmasi"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "nyambung menyang server MCP"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "Isi ora diowahi"
@@ -254,6 +251,10 @@ msgstr "Informasi kontekstual lan rincian."
 msgid "Continue"
 msgstr "Terus"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "Terusake nganggo {label}"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Salin"
@@ -261,6 +262,18 @@ msgstr "Salin"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "Ora bisa muat dokumen iki. Coba manèh mengko."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "Ora bisa ngirim kode. Coba maneh."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "Ora bisa miwiti otentikasi ulang. Coba maneh."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "Ora bisa verifikasi nganggo akun kasebut. Mangga coba maneh."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "Standar"
 msgid "Default AI account"
 msgstr "Akun AI standar"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "Busak akun sampeyan ing server lawas"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "Tolak"
 
@@ -310,6 +327,10 @@ msgstr "Deteksi saka browser web"
 msgid "Direction"
 msgstr "Arah"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "Singkiraké"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "Nampilaké sidebar mobile."
@@ -321,6 +342,18 @@ msgstr "Download"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "Cocok kanggo disleksia"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "Kode email"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "Ketik kode saka email panjenengan"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "Lebokna kode authenticator sampeyan"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "Gagal mbusak akun"
 msgid "Failed to send verification code"
 msgstr "Gagal ngirim kode verifikasi"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "Gagal nganyari kategori"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "Rampungna mindah akun sampeyan"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "Sukses metu"
 msgid "Logging out…"
 msgstr "Lagi metu…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "ngatur akun sing nyambung"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "ngatur grup"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "Ora ana asil ditemokaké."
 msgid "No time zone found."
 msgstr "Ora ana zona wektu ditemokaké."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "Durung ana cathetan topik — coba manèh sawisé notifikasi sabanjure."
 
@@ -620,7 +649,15 @@ msgstr "Liyané"
 msgid "Owner"
 msgstr "Sing duwé"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr ""
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "Verifikasi passkey gagal. Coba maneh."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "Panyuwunan ijin"
 
@@ -638,13 +675,9 @@ msgstr "Privasi"
 msgid "Profile"
 msgstr "Profil"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "waca akun sing nyambung"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "waca minat"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "Sambungke maneh akun sampeyan ing server iki"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "Cabut akses?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "Cabut minat"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "Kirim ulang email"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "Pilih preferensi tema"
 msgid "Send again"
 msgstr "Kirim maneh"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "Kirim email"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "Serif"
@@ -853,6 +894,10 @@ msgstr "Tim/App"
 msgid "Terms and conditions"
 msgstr "Syarat lan ketentuan"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "Kode kasebut salah utawa wis kadaluwarsa."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "Tema"
@@ -861,7 +906,7 @@ msgstr "Tema"
 msgid "Theme Settings"
 msgstr "Setelan Tema"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Idin iki kudu diaktifaké dening sampéyan ing setelan app."
 
@@ -930,7 +975,7 @@ msgstr "Ketik kanggo nggolèki..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "Ora bisa ngarahaké menyang login. Mangga coba manèh."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "Ora ditugasaké"
 
@@ -946,9 +991,9 @@ msgstr "Amerika Serikat"
 msgid "Unverified"
 msgstr "Durung diverifikasi"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "gunakaké layanan AI"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "Gunakake passkey sampeyan"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "Kode verifikasi dikirim"
 msgid "Verification failed"
 msgstr "Verifikasi gagal"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "Verifikasi"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "Verifikasi alamat email"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "Thumbnail video"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "Situs lagi pemeliharaan!"
 msgid "Wednesday"
 msgstr "Rebo"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "tulis minat"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "Akun sampeyan dipindah mrene saka {source}. Nganti sampeyan mbusak ana, pesen lan notifikasi bisa tekan loro-lorone server, sawetara konten sampeyan tetep dilayani saka server lawas, lan pengikut bisa butuh sawetara menit kanggo nemokake sampeyan ing kene."

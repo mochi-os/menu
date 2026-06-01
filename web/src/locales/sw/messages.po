@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> inaomba ruhusa ya {permissionLabel}."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> inaomba ruhusa ifuatayo:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "Masaa 24"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "Kamili (tarehe na muda)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "kufikia {domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "Vyote"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "Ruhusu"
 
@@ -121,6 +117,10 @@ msgstr "Una uhakika unataka kuondoka? Utahitaji kuingia tena kufikia akaunti yak
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Pandisha"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Msimbo wa mthibitishaji"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "Ongeza mvuto"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "Ongeza mvuto"
 msgid "Cancel"
 msgstr "Ghairi"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "Kategoria ya arifa hii"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "Badilisha kategoria ya arifa"
 
@@ -198,7 +199,7 @@ msgstr "Futa uteuzi (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "Funga"
 
@@ -238,10 +239,6 @@ msgstr "Fupi"
 msgid "Confirm"
 msgstr "Thibitisha"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "kuunganisha kwa seva za MCP"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "Maudhui hayajabadilishwa"
@@ -254,6 +251,10 @@ msgstr "Maelezo ya muktadha na undani."
 msgid "Continue"
 msgstr "Endelea"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "Endelea na {label}"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Nakili"
@@ -261,6 +262,18 @@ msgstr "Nakili"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "Haikuweza kupakia hati hii. Tafadhali jaribu tena baadaye."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "Imeshindwa kutuma msimbo. Tafadhali jaribu tena."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "Imeshindwa kuanza uthibitishaji upya. Tafadhali jaribu tena."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "Imeshindwa kuthibitisha kwa akaunti hiyo. Tafadhali jaribu tena."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "Chaguo-msingi"
 msgid "Default AI account"
 msgstr "Akaunti chaguo-msingi ya AI"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "Futa akaunti yako kwenye seva ya zamani"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "Kataa"
 
@@ -310,6 +327,10 @@ msgstr "Tambua kutoka kwa kivinjari cha wavuti"
 msgid "Direction"
 msgstr "Mwelekeo"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "Ondoa"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "Huonyesha utepe wa simu."
@@ -321,6 +342,18 @@ msgstr "Pakua"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "Rahisi kwa dyslexia"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "Msimbo wa barua pepe"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "Weka msimbo kutoka kwa barua pepe yako"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "Weka msimbo wako wa kithibitishaji"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "Imeshindwa kuondoa akaunti"
 msgid "Failed to send verification code"
 msgstr "Imeshindwa kutuma msimbo wa uthibitisho"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "Imeshindwa kusasisha kategoria"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "Maliza kuhamisha akaunti yako"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "Umetoka kwa ufanisi"
 msgid "Logging out…"
 msgstr "Inatoka…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "kusimamia akaunti zilizounganishwa"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "kusimamia vikundi"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "Hakuna matokeo yaliyopatikana."
 msgid "No time zone found."
 msgstr "Hakuna saa za eneo zilizopatikana."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "Hakuna rekodi ya mada bado — jaribu tena baada ya arifa inayofuata."
 
@@ -620,7 +649,15 @@ msgstr "Nyingine"
 msgid "Owner"
 msgstr "Mmiliki"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "Pasiki"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "Uthibitishaji wa ufunguo umeshindwa. Tafadhali jaribu tena."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "Ombi la ruhusa"
 
@@ -638,13 +675,9 @@ msgstr "Faragha"
 msgid "Profile"
 msgstr "Wasifu"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "kusoma akaunti zilizounganishwa"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "kusoma maslahi"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "Unganisha tena akaunti zako kwenye seva hii"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "Ondoa ufikiaji?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "Ondoa shauku"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "Tuma barua pepe tena"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "Chagua mapendeleo ya mandhari"
 msgid "Send again"
 msgstr "Tuma tena"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "Tuma barua pepe"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "Serif"
@@ -853,6 +894,10 @@ msgstr "Timu/Programu"
 msgid "Terms and conditions"
 msgstr "Masharti na vigezo"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "Msimbo huo si sahihi au umekwisha muda wake."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "Mandhari"
@@ -861,7 +906,7 @@ msgstr "Mandhari"
 msgid "Theme Settings"
 msgstr "Mipangilio ya Mandhari"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Ruhusa hii lazima iwezeshwe nawe katika mipangilio ya programu."
 
@@ -930,7 +975,7 @@ msgstr "Andika kutafuta..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "Imeshindwa kuelekeza upya kwenye kuingia. Tafadhali jaribu tena."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "Haijapewa"
 
@@ -946,9 +991,9 @@ msgstr "Marekani"
 msgid "Unverified"
 msgstr "Haijathibitishwa"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "kutumia huduma za AI"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "Tumia ufunguo wako"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "Msimbo wa uthibitishaji umetumwa"
 msgid "Verification failed"
 msgstr "Uthibitishaji umeshindwa"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "Thibitisha"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "Thibitisha anwani ya barua pepe"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "Kijipicha cha video"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "Tovuti iko chini ya matengenezo!"
 msgid "Wednesday"
 msgstr "Jumatano"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "kuandika maslahi"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "Akaunti yako ilihamishiwa hapa kutoka {source}. Mpaka uifute hapo, ujumbe na arifa zinaweza kufikia seva zote mbili, baadhi ya maudhui yako bado yanatolewa kutoka seva ya zamani, na wafuasi wanaweza kuchukua dakika chache kukupata hapa."

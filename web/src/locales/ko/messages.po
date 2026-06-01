@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0>이(가) {permissionLabel} 권한을 요청합니다."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0>이(가) 다음 권한을 요청합니다:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24시간"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "절대값 (날짜 및 시간)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "{domain} 액세스"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "전체"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "허용"
 
@@ -121,6 +117,10 @@ msgstr "로그아웃할까요? 계정에 다시 접근하려면 다시 로그인
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "오름차순"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "인증 코드"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "관심도 부스트"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "관심도 부스트"
 msgid "Cancel"
 msgstr "취소"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "이 알림의 카테고리"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "알림 카테고리 변경"
 
@@ -198,7 +199,7 @@ msgstr "선택 해제 (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "닫기"
 
@@ -238,10 +239,6 @@ msgstr "컴팩트"
 msgid "Confirm"
 msgstr "확인"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "MCP 서버에 연결"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "콘텐츠가 수정되지 않았어요"
@@ -254,6 +251,10 @@ msgstr "맥락 정보 및 세부 사항."
 msgid "Continue"
 msgstr "계속"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "{label}(으)로 계속하기"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "복사"
@@ -261,6 +262,18 @@ msgstr "복사"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "이 문서를 불러올 수 없었습니다. 잠시 후 다시 시도해 주세요."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "코드를 보낼 수 없습니다. 다시 시도해 주세요."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "재인증을 시작할 수 없습니다. 다시 시도해 주세요."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "해당 계정으로 인증하지 못했습니다. 다시 시도해 주세요."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "기본값"
 msgid "Default AI account"
 msgstr "기본 AI 계정"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "이전 서버에서 계정 삭제"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "거부"
 
@@ -310,6 +327,10 @@ msgstr "웹 브라우저에서 감지"
 msgid "Direction"
 msgstr "방향"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "닫기"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "모바일 사이드바를 표시해요."
@@ -321,6 +342,18 @@ msgstr "다운로드"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "난독증 친화적"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "이메일 코드"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "이메일로 받은 코드를 입력하세요"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "인증 앱 코드를 입력하세요"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "계정 제거에 실패했어요"
 msgid "Failed to send verification code"
 msgstr "인증 코드 전송에 실패했어요"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "카테고리 업데이트에 실패했어요"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "계정 이전 완료"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "성공적으로 로그아웃되었어요"
 msgid "Logging out…"
 msgstr "로그아웃 중…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "연결된 계정 관리"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "그룹 관리"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "결과를 찾을 수 없어요."
 msgid "No time zone found."
 msgstr "타임존을 찾을 수 없어요."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "아직 토픽 기록이 없어요 — 다음 알림 후에 다시 시도해 주세요."
 
@@ -620,7 +649,15 @@ msgstr "기타"
 msgid "Owner"
 msgstr "소유자"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "패스키"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "패스키 인증에 실패했습니다. 다시 시도해 주세요."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "권한 요청"
 
@@ -638,13 +675,9 @@ msgstr "개인정보"
 msgid "Profile"
 msgstr "프로필"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "연결된 계정 읽기"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "관심사 읽기"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "이 서버에서 계정 다시 연결"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "접근 권한을 제거할까요?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "관심사 제거"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "이메일 다시 보내기"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "테마 환경설정 선택"
 msgid "Send again"
 msgstr "다시 보내기"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "이메일 보내기"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "세리프"
@@ -853,6 +894,10 @@ msgstr "팀/앱"
 msgid "Terms and conditions"
 msgstr "이용 약관"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "코드가 올바르지 않거나 만료되었습니다."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "테마"
@@ -861,7 +906,7 @@ msgstr "테마"
 msgid "Theme Settings"
 msgstr "테마 설정"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "이 권한은 앱 설정에서 직접 활성화해야 해요."
 
@@ -930,7 +975,7 @@ msgstr "입력하여 검색..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "로그인으로 리디렉션할 수 없어요. 다시 시도해 주세요."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "할당되지 않음"
 
@@ -946,9 +991,9 @@ msgstr "미국"
 msgid "Unverified"
 msgstr "확인되지 않음"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "AI 서비스 사용"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "패스키 사용"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "확인 코드가 전송되었어요"
 msgid "Verification failed"
 msgstr "확인에 실패했어요"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "확인"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "이메일 주소 확인"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "동영상 미리보기 이미지"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "웹사이트가 점검 중이에요!"
 msgid "Wednesday"
 msgstr "수요일"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "관심사 쓰기"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "계정이 {source}에서 이곳으로 이전되었습니다. 거기서 삭제할 때까지 메시지와 알림이 두 서버 모두에 전달될 수 있으며, 일부 콘텐츠는 이전 서버에서 계속 제공되고 팔로워가 이곳에서 나를 찾는 데 몇 분이 걸릴 수 있습니다."

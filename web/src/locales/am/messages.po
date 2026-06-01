@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> {permissionLabel} ፈቃድ ይፈልጋል።"
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> የሚከተለውን ፍቃድ እየጠየቀ ነው፦"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 ሰዓት"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "ፍጹም (ቀንና ሰዓት)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "{domain}ን ይድረሱ"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "ሁሉም"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "ፍቀድ"
 
@@ -121,6 +117,10 @@ msgstr "መውጣት እንደምትፈልግ እርግጠኛ ነህ? መለያ�
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "ዕርገት"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "የማረጋገጫ ኮድ"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "ፍላጎትን አሳድግ"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "ፍላጎትን አሳድግ"
 msgid "Cancel"
 msgstr "ይቅር"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "ለዚህ ማሳወቂያ ምድብ"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "የማሳወቂያ ምድብ ለውጥ"
 
@@ -198,7 +199,7 @@ msgstr "ምርጫ አጽዳ (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "ዝጋ"
 
@@ -238,10 +239,6 @@ msgstr "የታመቀ"
 msgid "Confirm"
 msgstr "አረጋግጥ"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "ከMCP አገልጋዮች ጋር ይገናኙ"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "ይዘት አልተስተካከለም"
@@ -254,6 +251,10 @@ msgstr "የአውድ መረጃና ዝርዝሮች።"
 msgid "Continue"
 msgstr "ቀጥል"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "በ{label} ይቀጥሉ"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "ቅዳ"
@@ -261,6 +262,18 @@ msgstr "ቅዳ"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "ይህን ሰነድ መጫን አልተቻለም። እባክዎ በኋላ እንደገና ይሞክሩ።"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "ኮዱን መላክ አልተቻለም። እባክዎ እንደገና ይሞክሩ።"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "እንደገና ማረጋገጥን መጀመር አልተቻለም። እባክዎ እንደገና ይሞክሩ።"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "በዚያ መለያ ማረጋገጥ አልተቻለም። እባክዎ እንደገና ይሞክሩ።"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "ነባሪ"
 msgid "Default AI account"
 msgstr "ነባሪ የAI መለያ"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "በድሮ ሰርቨር ላይ ያለ መለያህን ሰርዝ"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "ተከለከል"
 
@@ -310,6 +327,10 @@ msgstr "ከድር አሳሽ አውቅ"
 msgid "Direction"
 msgstr "አቅጣጫ"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "አጥፋ"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "የሞባይል ጎንደርን ያሳያል።"
@@ -321,6 +342,18 @@ msgstr "አውርድ"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "ለዲስሌክሲያ ምቹ"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "የኢሜይል ኮድ"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "ከኢሜይልዎ የመጣውን ኮድ ያስገቡ"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "የአረጋጋጭዎን ኮድ ያስገቡ"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "መለያን ማስወገድ አልተሳካም"
 msgid "Failed to send verification code"
 msgstr "የማረጋገጫ ኮድ መላክ አልተሳካም"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "ምድብን ማዘመን አልተሳካም"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "የመለያ ዝውውርን አጠናቅ"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "በተሳካ ሁኔታ ወጥቷል"
 msgid "Logging out…"
 msgstr "በመውጣት ላይ…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "የተገናኙ መለያዎችን ያስተዳድሩ"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "ቡድኖችን ያስተዳድሩ"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "ምንም ውጤቶች አልተገኙም።"
 msgid "No time zone found."
 msgstr "ምንም የሰዓት ሰቅ አልተገኘም።"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "እስካሁን የርዕስ መዝገብ የለም — ከቀጣዩ ማሳወቂያ በኋላ እንደገና ይሞክሩ።"
 
@@ -620,7 +649,15 @@ msgstr "ሌላ"
 msgid "Owner"
 msgstr "ባለቤት"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "የይለፍ ቁልፍ"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "የይለፍ ቁልፍ ማረጋገጫ አልተሳካም። እባክዎ እንደገና ይሞክሩ።"
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "የፍቃድ ጥያቄ"
 
@@ -638,13 +675,9 @@ msgstr "ግላዊነት"
 msgid "Profile"
 msgstr "መገለጫ"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "የተገናኙ መለያዎችን ያንብቡ"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "ፍላጎቶችን ያንብቡ"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "በዚህ ሰርቨር ላይ መለያዎችህን እንደገና አገናኝ"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "ድረሳ ይወገድ?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "ፍላጎት አስወግድ"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "ኢሜይል እንደገና ላክ"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "የገጽታ ምርጫ ይምረጡ"
 msgid "Send again"
 msgstr "እንደገና ላክ"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "ኢሜይል ላክ"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "ሰሪፍ"
@@ -853,6 +894,10 @@ msgstr "ቡድኖች/መተግበሪያዎች"
 msgid "Terms and conditions"
 msgstr "ውሎችና መመሪያዎች"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "ያ ኮድ የተሳሳተ ነው ወይም ጊዜው አልፎበታል።"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "ገጽታ"
@@ -861,7 +906,7 @@ msgstr "ገጽታ"
 msgid "Theme Settings"
 msgstr "የገጽታ ቅንብሮች"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "ይህ ፈቃድ በመተግበሪያው ቅንብሮች ውስጥ በእርስዎ መንቃት አለበት።"
 
@@ -930,7 +975,7 @@ msgstr "ለመፈለግ ይተይቡ..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "ወደ መግቢያ መዞር አልተቻለም። እባክዎ እንደገና ይሞክሩ።"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "ያልተመደበ"
 
@@ -946,9 +991,9 @@ msgstr "ዩናይትድ ስቴትስ"
 msgid "Unverified"
 msgstr "ያልተረጋገጠ"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "የAI አገልግሎቶችን ይጠቀሙ"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "የይለፍ ቁልፍዎን ይጠቀሙ"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "የማረጋገጫ ኮድ ተልኳል"
 msgid "Verification failed"
 msgstr "ማረጋገጫ አልተሳካም"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "ያረጋግጡ"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "የኢሜይል አድራሻ ያረጋግጡ"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "የቪዲዮ ጥፍር ምስል"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "ድረ-ገጽ በጥገና ላይ ነው!"
 msgid "Wednesday"
 msgstr "ረቡዕ"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "ፍላጎቶችን ይጻፉ"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "መለያህ ከ{source} ወደዚህ ተዛውሯል። እዚያ እስኪሰርዝ ድረስ፣ መልዕክቶችና ማሳወቂያዎች ሁለቱ ሰርቨሮች ሊደርሱ ይችላሉ፣ አንዳንድ ይዘቶችህ ከድሮ ሰርቨር ሲቀርቡ ይቀጥላሉ፣ ተከታዮችህ ወደዚህ ለማግኘት ጥቂት ደቂቃዎች ሊወስድ ይችላል።"

@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0>が{permissionLabel}の権限を要求しています。"
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> は次の権限を要求しています:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24時間"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "絶対 (日付と時刻)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "{domain}にアクセスする"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "すべて"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "許可"
 
@@ -121,6 +117,10 @@ msgstr "本当にログアウトしますか？再度アクセスするにはロ
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "昇順"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "認証コード"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "関心を高める"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "関心を高める"
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "この通知のカテゴリ"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "通知カテゴリを変更"
 
@@ -198,7 +199,7 @@ msgstr "選択をクリア（Esc）"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "閉じる"
 
@@ -238,10 +239,6 @@ msgstr "コンパクト"
 msgid "Confirm"
 msgstr "確認"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "MCPサーバーに接続する"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "コンテンツは変更されていません"
@@ -254,6 +251,10 @@ msgstr "コンテキスト情報と詳細。"
 msgid "Continue"
 msgstr "続行"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "{label} で続行"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "コピー"
@@ -261,6 +262,18 @@ msgstr "コピー"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "このドキュメントを読み込めませんでした。後ほどもう一度お試しください。"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "コードを送信できませんでした。もう一度お試しください。"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "再認証を開始できませんでした。もう一度お試しください。"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "そのアカウントで確認できませんでした。もう一度お試しください。"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "デフォルト"
 msgid "Default AI account"
 msgstr "デフォルト AI アカウント"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "旧サーバーのアカウントを削除する"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "拒否"
 
@@ -310,6 +327,10 @@ msgstr "ウェブブラウザから検出"
 msgid "Direction"
 msgstr "方向"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "閉じる"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "モバイルサイドバーを表示します。"
@@ -321,6 +342,18 @@ msgstr "ダウンロード"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "ディスレクシア対応"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "メールコード"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "メールに記載されたコードを入力してください"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "認証アプリのコードを入力"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "アカウントの削除に失敗しました"
 msgid "Failed to send verification code"
 msgstr "確認コードの送信に失敗しました"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "カテゴリの更新に失敗しました"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "アカウントの移行を完了する"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "ログアウトしました"
 msgid "Logging out…"
 msgstr "ログアウトしています…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "連携済みアカウントを管理する"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "グループを管理する"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "結果が見つかりません。"
 msgid "No time zone found."
 msgstr "タイムゾーンが見つかりません。"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "まだトピック記録がありません — 次の通知後にもう一度お試しください。"
 
@@ -620,7 +649,15 @@ msgstr "その他"
 msgid "Owner"
 msgstr "オーナー"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "パスキー"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "パスキーの認証に失敗しました。もう一度お試しください。"
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "権限のリクエスト"
 
@@ -638,13 +675,9 @@ msgstr "プライバシー"
 msgid "Profile"
 msgstr "プロフィール"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "連携済みアカウントを読み取る"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "関心事を読み取る"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "このサーバーでアカウントを再リンクする"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "アクセスを削除しますか?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "関心を削除"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "メールを再送信"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "テーマの設定を選択"
 msgid "Send again"
 msgstr "再送信"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "メールを送信"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "セリフ"
@@ -853,6 +894,10 @@ msgstr "チーム/アプリ"
 msgid "Terms and conditions"
 msgstr "利用規約"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "そのコードは正しくないか、有効期限が切れています。"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "テーマ"
@@ -861,7 +906,7 @@ msgstr "テーマ"
 msgid "Theme Settings"
 msgstr "テーマ設定"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "この権限はアプリ設定でご自身で有効にする必要があります。"
 
@@ -930,7 +975,7 @@ msgstr "入力して検索…"
 msgid "Unable to redirect to login. Please try again."
 msgstr "ログインページにリダイレクトできません。再試行してください。"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "未割り当て"
 
@@ -946,9 +991,9 @@ msgstr "アメリカ合衆国"
 msgid "Unverified"
 msgstr "未認証"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "AIサービスを使用する"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "パスキーを使用"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "確認コードを送信しました"
 msgid "Verification failed"
 msgstr "確認に失敗しました"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "認証"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "メールアドレスを認証"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "動画のサムネイル"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "ウェブサイトはメンテナンス中です!"
 msgid "Wednesday"
 msgstr "水曜日"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "関心事を書き込む"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "アカウントが{source}からここに移行されました。そちらで削除するまで、メッセージや通知が両方のサーバーに届く場合があり、一部のコンテンツは旧サーバーから引き続き提供され、フォロワーがここであなたを見つけるまで数分かかる場合があります。"

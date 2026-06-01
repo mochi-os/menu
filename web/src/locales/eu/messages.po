@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0>(e)k baimena nahi du {permissionLabel} egiteko."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> hurrengo baimena eskatzen ari da:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 ordu"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "Absolutua (data eta ordua)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "{domain} atzitu"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AA"
 msgid "All"
 msgstr "Guztiak"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "Baimendu"
 
@@ -121,6 +117,10 @@ msgstr "Ziur al zaude saioa amaitu nahi duzula? Berriro hasi beharko duzu saioa 
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Goranzkoa"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Autentifikatzaile kodea"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "Bultzatu interesa"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "Bultzatu interesa"
 msgid "Cancel"
 msgstr "Utzi"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "Jakinarazpen honentzako kategoria"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "Aldatu jakinarazpen kategoria"
 
@@ -198,7 +199,7 @@ msgstr "Garbitu hautapena (Ihes)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "Itxi"
 
@@ -238,10 +239,6 @@ msgstr "Trinkoa"
 msgid "Confirm"
 msgstr "Berretsi"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "MCP zerbitzarietara konektatu"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "Edukia ez da aldatu"
@@ -254,6 +251,10 @@ msgstr "Testuinguruko informazioa eta xehetasunak."
 msgid "Continue"
 msgstr "Jarraitu"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "Jarraitu {label} erabiliz"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Kopiatu"
@@ -261,6 +262,18 @@ msgstr "Kopiatu"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "Ezin izan da dokumentu hau kargatu. Saiatu berriro geroago."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "Ezin izan da kodea bidali. Saiatu berriro."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "Ezin izan da berrautentifikazioa hasi. Saiatu berriro."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "Ezin izan da kontu horrekin egiaztatu. Saiatu berriro."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "Lehenetsia"
 msgid "Default AI account"
 msgstr "Lehenetsitako AA kontua"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "Ezabatu zure kontua zerbitzari zaharrean"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "Ukatu"
 
@@ -310,6 +327,10 @@ msgstr "Detektatu web nabigatzailetik"
 msgid "Direction"
 msgstr "Norabidea"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "Baztertu"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "Mugikorraren alboko barra erakusten du."
@@ -321,6 +342,18 @@ msgstr "Deskargatu"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "Dislexiarako egokia"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "Posta elektronikoko kodea"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "Sartu zure mezu elektronikoko kodea"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "Sartu zure autentifikazio-aplikazioaren kodea"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "Ezin izan da kontua kendu"
 msgid "Failed to send verification code"
 msgstr "Ezin izan da egiaztapen-kodea bidali"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "Ezin izan da kategoria eguneratu"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "Amaitu kontuaren mugiketa"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "Saioa ondo amaituta"
 msgid "Logging out…"
 msgstr "Saioa amaitzen…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "konektatutako kontuak kudeatu"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "taldeak kudeatu"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "Ez da emaitzarik aurkitu."
 msgid "No time zone found."
 msgstr "Ez da ordu-zonarik aurkitu."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "Oraindik gairik ez — saiatu berriro hurrengo jakinarazpenaren ondoren."
 
@@ -620,7 +649,15 @@ msgstr "Bestelakoa"
 msgid "Owner"
 msgstr "Jabea"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "Passkey-a"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "Sarbide-gakoaren egiaztapenak huts egin du. Saiatu berriro."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "Baimen-eskaera"
 
@@ -638,13 +675,9 @@ msgstr "Pribatutasuna"
 msgid "Profile"
 msgstr "Profila"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "konektatutako kontuak irakurri"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "interesak irakurri"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "Berriro lotu zure kontuak zerbitzari honetan"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "Sarbidea kendu?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "Kendu interesa"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "Bidali mezua berriro"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "Hautatu gaiaren hobespena"
 msgid "Send again"
 msgstr "Bidali berriz"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "Bidali emaila"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "Serif"
@@ -853,6 +894,10 @@ msgstr "Taldeak/Aplikazioak"
 msgid "Terms and conditions"
 msgstr "Baldintzak"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "Kode hori okerra da edo iraungi egin da."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "Gaia"
@@ -861,7 +906,7 @@ msgstr "Gaia"
 msgid "Theme Settings"
 msgstr "Gaiaren ezarpenak"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Baimen hau zuk gaitu behar duzu aplikazioaren ezarpenetan."
 
@@ -930,7 +975,7 @@ msgstr "Idatzi bilatzeko..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "Ezin da saio-hasierara birbideratu. Saiatu berriro."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "Esleitu gabe"
 
@@ -946,9 +991,9 @@ msgstr "Estatu Batuak"
 msgid "Unverified"
 msgstr "Egiaztatu gabe"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "AA zerbitzuak erabili"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "Erabili zure sarbide-gakoa"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "Egiaztatze-kodea bidali da"
 msgid "Verification failed"
 msgstr "Egiaztatzeak huts egin du"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "Egiaztatu"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "Egiaztatu helbide elektronikoa"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "Bideoaren miniatura"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "Webgunea mantentze-lanetan dago!"
 msgid "Wednesday"
 msgstr "Asteazkena"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "interesak idatzi"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "Zure kontua {source}-etik hona mugitu da. Han ezabatu arte, mezuak eta jakinarazpenak bi zerbitzarietara irits daitezke, zure edukiaren zati bat zerbitzari zaharretik ematen jarraitzen du, eta jarraitzaileek minutu batzuk behar izan ditzakete zu hemen aurkitzeko."

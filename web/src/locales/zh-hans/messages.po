@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> 请求权限以{permissionLabel}。"
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> 请求以下权限:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 小时"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "绝对(日期和时间)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "访问 {domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "全部"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "允许"
 
@@ -121,6 +117,10 @@ msgstr "确定要退出登录吗?你需要重新登录才能访问账户。"
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "升序"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "身份验证码"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "提升兴趣"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "提升兴趣"
 msgid "Cancel"
 msgstr "取消"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "该通知的分类"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "更改通知分类"
 
@@ -198,7 +199,7 @@ msgstr "清除选择(Esc)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "关闭"
 
@@ -238,10 +239,6 @@ msgstr "紧凑"
 msgid "Confirm"
 msgstr "确认"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "连接 MCP 服务器"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "内容未修改"
@@ -254,6 +251,10 @@ msgstr "上下文信息和详情。"
 msgid "Continue"
 msgstr "继续"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "使用 {label} 继续"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "复制"
@@ -261,6 +262,18 @@ msgstr "复制"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "无法加载此文档。请稍后重试。"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "无法发送代码。请重试。"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "无法开始重新验证。请重试。"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "无法使用该账户进行验证。请重试。"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "默认"
 msgid "Default AI account"
 msgstr "默认 AI 账户"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "删除旧服务器上的账户"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "拒绝"
 
@@ -310,6 +327,10 @@ msgstr "从浏览器检测"
 msgid "Direction"
 msgstr "方向"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "关闭"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "显示移动端侧边栏。"
@@ -321,6 +342,18 @@ msgstr "下载"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "阅读障碍友好"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "邮箱验证码"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "输入电子邮件中的验证码"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "请输入您的身份验证器代码"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "移除账户失败"
 msgid "Failed to send verification code"
 msgstr "发送验证码失败"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "更新分类失败"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "完成账户迁移"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "已成功退出登录"
 msgid "Logging out…"
 msgstr "正在退出登录…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "管理已连接账号"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "管理群组"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "未找到结果。"
 msgid "No time zone found."
 msgstr "未找到时区。"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "暂无主题记录,请在下次通知后重试。"
 
@@ -620,7 +649,15 @@ msgstr "其他"
 msgid "Owner"
 msgstr "所有者"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "通行密钥"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "通行密钥验证失败。请重试。"
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "权限请求"
 
@@ -638,13 +675,9 @@ msgstr "隐私"
 msgid "Profile"
 msgstr "个人资料"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "读取已连接账号"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "读取兴趣"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "在此服务器上重新关联账户"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "移除访问权限?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "移除兴趣"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "重新发送邮件"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "选择主题偏好"
 msgid "Send again"
 msgstr "再次发送"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "发送邮件"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "衬线体"
@@ -853,6 +894,10 @@ msgstr "团队/应用"
 msgid "Terms and conditions"
 msgstr "服务条款"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "该代码不正确或已过期。"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "主题"
@@ -861,7 +906,7 @@ msgstr "主题"
 msgid "Theme Settings"
 msgstr "主题设置"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "此权限需要由您在应用设置中启用。"
 
@@ -930,7 +975,7 @@ msgstr "输入以搜索..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "无法重定向到登录页面。请重试。"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "未分配"
 
@@ -946,9 +991,9 @@ msgstr "美国"
 msgid "Unverified"
 msgstr "未验证"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "使用 AI 服务"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "使用您的通行密钥"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "验证码已发送"
 msgid "Verification failed"
 msgstr "验证失败"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "验证"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "验证邮箱地址"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "视频缩略图"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "网站正在维护中!"
 msgid "Wednesday"
 msgstr "星期三"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "写入兴趣"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "您的账户已从 {source} 迁移至此。在您于那里删除之前，消息和通知可能会同时到达两个服务器，您的部分内容仍会从旧服务器提供，关注者可能需要几分钟才能在此找到您。"

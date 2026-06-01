@@ -77,3 +77,11 @@ def action_permissions_grant(a):
 
     mochi.permission.grant(app_id, permission)
     return {"data": {"status": "granted"}}
+
+def action_permissions_name(a):
+    """Resolve a permission code to its translated, human-readable name."""
+    permission = a.input("permission", "").strip()
+    if not permission:
+        return a.error.label(400, "errors.permission_is_required")
+
+    return {"data": {"name": mochi.permission.name(permission)}}

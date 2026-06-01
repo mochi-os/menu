@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> möchte die Berechtigung, {permissionLabel}."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> fordert die folgende Berechtigung an:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 Stunden"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "Absolut (Datum und Uhrzeit)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "auf {domain} zugreifen"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "KI"
 msgid "All"
 msgstr "Alle"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "Zulassen"
 
@@ -121,6 +117,10 @@ msgstr "Möchten Sie sich wirklich abmelden? Sie müssen sich erneut anmelden, u
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Aufst."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Authenticator-Code"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "Interesse hervorheben"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "Interesse hervorheben"
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "Kategorie für diese Benachrichtigung"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "Benachrichtigungskategorie ändern"
 
@@ -198,7 +199,7 @@ msgstr "Auswahl aufheben (Esc)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "Schließen"
 
@@ -238,10 +239,6 @@ msgstr "Kompakt"
 msgid "Confirm"
 msgstr "Bestätigen"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "mit MCP-Servern zu verbinden"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "Inhalt nicht geändert"
@@ -254,6 +251,10 @@ msgstr "Kontextinformationen und Details."
 msgid "Continue"
 msgstr "Fortfahren"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "Mit {label} fortsetzen"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Kopieren"
@@ -261,6 +262,18 @@ msgstr "Kopieren"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "Dieses Dokument konnte nicht geladen werden. Bitte versuchen Sie es später erneut."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "Der Code konnte nicht gesendet werden. Bitte versuchen Sie es erneut."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "Die erneute Authentifizierung konnte nicht gestartet werden. Bitte versuchen Sie es erneut."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "Verifizierung mit diesem Konto fehlgeschlagen. Bitte versuchen Sie es erneut."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "Standard"
 msgid "Default AI account"
 msgstr "Standard-KI-Konto"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "Konto auf dem alten Server löschen"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "Verweigern"
 
@@ -310,6 +327,10 @@ msgstr "Aus Webbrowser ermitteln"
 msgid "Direction"
 msgstr "Richtung"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "Schließen"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "Zeigt die mobile Seitenleiste an."
@@ -321,6 +342,18 @@ msgstr "Herunterladen"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "Legasthenie-freundlich"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "E-Mail-Code"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "Code aus deiner E-Mail eingeben"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "Code Ihrer Authenticator-App eingeben"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "Konto konnte nicht entfernt werden"
 msgid "Failed to send verification code"
 msgstr "Bestätigungscode konnte nicht gesendet werden"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "Kategorie konnte nicht aktualisiert werden"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "Kontoumzug abschließen"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "Erfolgreich abgemeldet"
 msgid "Logging out…"
 msgstr "Abmelden …"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "verbundene Konten zu verwalten"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "Gruppen zu verwalten"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "Keine Ergebnisse gefunden."
 msgid "No time zone found."
 msgstr "Keine Zeitzone gefunden."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "Noch kein Themaeintrag — versuchen Sie es nach der nächsten Benachrichtigung erneut."
 
@@ -620,7 +649,15 @@ msgstr "Sonstige"
 msgid "Owner"
 msgstr "Eigentümer"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr ""
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "Die Passkey-Überprüfung ist fehlgeschlagen. Bitte versuchen Sie es erneut."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "Berechtigungsanfrage"
 
@@ -638,13 +675,9 @@ msgstr "Datenschutz"
 msgid "Profile"
 msgstr "Profil"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "verbundene Konten zu lesen"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "Interessen zu lesen"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "Konten auf diesem Server erneut verknüpfen"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "Zugriff entfernen?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "Interesse entfernen"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "E-Mail erneut senden"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "Theme-Einstellung auswählen"
 msgid "Send again"
 msgstr "Erneut senden"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "E-Mail senden"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "Serife"
@@ -853,6 +894,10 @@ msgstr "Teams/Apps"
 msgid "Terms and conditions"
 msgstr "Allgemeine Geschäftsbedingungen"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "Dieser Code ist falsch oder abgelaufen."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "Theme"
@@ -861,7 +906,7 @@ msgstr "Theme"
 msgid "Theme Settings"
 msgstr "Theme-Einstellungen"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Diese Berechtigung muss von Ihnen in den App-Einstellungen aktiviert werden."
 
@@ -930,7 +975,7 @@ msgstr "Tippen, um zu suchen..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "Weiterleitung zur Anmeldung nicht möglich. Bitte versuchen Sie es erneut."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "Nicht zugewiesen"
 
@@ -946,9 +991,9 @@ msgstr "Vereinigte Staaten"
 msgid "Unverified"
 msgstr "Nicht verifiziert"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "KI-Dienste zu nutzen"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "Passkey verwenden"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "Verifizierungscode gesendet"
 msgid "Verification failed"
 msgstr "Verifizierung fehlgeschlagen"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "Verifizieren"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "E-Mail-Adresse verifizieren"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "Video-Vorschaubild"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "Die Website wird derzeit gewartet!"
 msgid "Wednesday"
 msgstr "Mittwoch"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "Interessen zu schreiben"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "Ihr Konto wurde von {source} hierher verschoben. Bis Sie es dort löschen, können Nachrichten und Benachrichtigungen beide Server erreichen, ein Teil Ihrer Inhalte wird weiterhin vom alten Server bereitgestellt, und Follower benötigen möglicherweise ein paar Minuten, um Sie hier zu finden."

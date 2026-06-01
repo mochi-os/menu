@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> yana son izini ya {permissionLabel}."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> yana neman izinin mai zuwa:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "Awa 24"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "Cikakke (kwanan wata da lokaci)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "samun damar {domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "Duk"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "Yarda"
 
@@ -121,6 +117,10 @@ msgstr "Ka tabbata kana son fita? Za ka buƙaci shiga kuma don shiga asusunka."
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Asc"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Code na authenticator"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "Ƙara sha'awa"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "Ƙara sha'awa"
 msgid "Cancel"
 msgstr "Soke"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "Rukuni don wannan sanarwa"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "Sauya rukunin sanarwa"
 
@@ -198,7 +199,7 @@ msgstr "Share zaɓi (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "Rufe"
 
@@ -238,10 +239,6 @@ msgstr "Ƙanƙane"
 msgid "Confirm"
 msgstr "Tabbatar"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "haɗa zuwa sabar MCP"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "Ba a gyara abun ciki ba"
@@ -254,6 +251,10 @@ msgstr "Bayanan da suka shafi mahallin da cikakkun bayanai."
 msgid "Continue"
 msgstr "Ci gaba"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "Ci gaba da {label}"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Kwafi"
@@ -261,6 +262,18 @@ msgstr "Kwafi"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "Ba a iya loda wannan takarda ba. Da fatan a sake gwadawa daga baya."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "An kasa aika lambar. Don Allah a sake gwadawa."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "An kasa fara sake tantancewa. Don Allah a sake gwadawa."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "An kasa tabbatar da wannan asusun. Da fatan za a sake gwadawa."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "Default"
 msgid "Default AI account"
 msgstr "Default AI asusu"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "Goge asusu ka akan tsohon uwar garken"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "Ƙi"
 
@@ -310,6 +327,10 @@ msgstr "Gano daga web browser"
 msgid "Direction"
 msgstr "Hanya"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "Kau da shi"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "Yana nuna sidebar na wayar hannu."
@@ -321,6 +342,18 @@ msgstr "Sauke"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "Mai dacewa da rashin karatu"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr ""
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "Shigar da lambar daga imel ɗinka"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "Shigar da lambar mai tantancewarka"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "An gaza cire account"
 msgid "Failed to send verification code"
 msgstr "An gaza aika verification code"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "An gaza sabunta category"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "Kammala ƙaurar asusunka"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "An fita cikin nasara"
 msgid "Logging out…"
 msgstr "Ana fita…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "sarrafa asusun da aka haɗa"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "sarrafa ƙungiyoyi"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "Ba a sami sakamako ba."
 msgid "No time zone found."
 msgstr "Ba a sami time zone ba."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "Babu rikodin topic tukuna — sake gwadawa bayan sanarwa ta gaba."
 
@@ -620,7 +649,15 @@ msgstr "Sauran"
 msgid "Owner"
 msgstr "Mai shi"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "Maɓallin shiga"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "Tantance maɓallin shiga ya gaza. Don Allah a sake gwadawa."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "Buƙatar izini"
 
@@ -638,13 +675,9 @@ msgstr "Sirri"
 msgid "Profile"
 msgstr "Profile"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "karanta asusun da aka haɗa"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "karanta abubuwan sha'awa"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "Sake haɗa asusunka a wannan uwar garken"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "A cire damar shiga?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "Cire sha'awa"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "Sake aika imel"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "Zaɓi zaɓin theme"
 msgid "Send again"
 msgstr "Aika kuma"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "Aika email"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "Serif"
@@ -853,6 +894,10 @@ msgstr "Tawagogi/Apps"
 msgid "Terms and conditions"
 msgstr "Sharuɗɗa da yanayi"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "Wannan lambar ba daidai ba ce ko kuma ta kare."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "Theme"
@@ -861,7 +906,7 @@ msgstr "Theme"
 msgid "Theme Settings"
 msgstr "Saitunan Theme"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Dole ne ku kunna wannan izini a saitunan app."
 
@@ -930,7 +975,7 @@ msgstr "Buga don bincika..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "Ba a iya tura zuwa login. Da fatan sake gwadawa."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "Ba a sanya wa kowa"
 
@@ -946,9 +991,9 @@ msgstr "Amurka"
 msgid "Unverified"
 msgstr "Ba a tabbatar ba"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "amfani da hidimomin AI"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "Yi amfani da maɓallin shiganka"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "An aika lambar tabbatarwa"
 msgid "Verification failed"
 msgstr "Tabbatarwa ya gaza"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "Tabbatar"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "Tabbatar da adireshin imel"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "Ƙaramin hoton bidiyo"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "Shafin yana cikin kulawa!"
 msgid "Wednesday"
 msgstr "Laraba"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "rubuta abubuwan sha'awa"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "An ƙauri asusunka zuwa nan daga {source}. Sai ka goge shi a can, saƙonni da sanarwa na iya kai ga uwar garken biyu, wasu abubuwan ka suna ci gaba da samarwa daga tsohon uwar garken, kuma mabiyanka na iya ɗaukar 'yan mintoci don su same ka nan."

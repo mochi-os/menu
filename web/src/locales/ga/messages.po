@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "Tá <0>{appName}</0> ag iarraidh ceada chun {permissionLabel}."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> ag iarraidh an cead seo a leanas:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 uair"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "Absalóideach (dáta agus am)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "rochtain {domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "Iomlán"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "Ceadaigh"
 
@@ -121,6 +117,10 @@ msgstr "An bhfuil tú cinnte gur mian leat logáil amach? Beidh ort logáil iste
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Ardaitheach"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Cód fíordheimhnitheora"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "Spreag spéis"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "Spreag spéis"
 msgid "Cancel"
 msgstr "Cealaigh"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "Catagóir don fhógra seo"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "Athraigh catagóir an fhógra"
 
@@ -198,7 +199,7 @@ msgstr "Glan rogha (Éalú)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "Dún"
 
@@ -238,10 +239,6 @@ msgstr "Dlúth"
 msgid "Confirm"
 msgstr "Deimhnigh"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "ceangail le freastalaithe MCP"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "Níor athraíodh an t-ábhar"
@@ -254,6 +251,10 @@ msgstr "Eolas comhthéacsúil agus sonraí."
 msgid "Continue"
 msgstr "Lean ar aghaidh"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "Lean ar aghaidh le {label}"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Cóipeáil"
@@ -261,6 +262,18 @@ msgstr "Cóipeáil"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "Níorbh fhéidir an cháipéis seo a luchtú. Bain triail eile as ar ball."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "Níorbh fhéidir an cód a sheoladh. Bain triail eile as."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "Níorbh fhéidir an t-athfhíordheimhniú a thosú. Bain triail eile as."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "Níorbh fhéidir fíorú leis an gcuntas sin. Bain triail eile as le do thoil."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "Réamhshocrú"
 msgid "Default AI account"
 msgstr "Cuntas AI réamhshocraithe"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "Scrios do chuntas ar an sean-fhreastalaí"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "Diúltaigh"
 
@@ -310,6 +327,10 @@ msgstr "Brath ón mbrabhsálaí gréasáin"
 msgid "Direction"
 msgstr "Treo"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "Dífhostaigh"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "Taispeánann an barra taoibh móibíleach."
@@ -321,6 +342,18 @@ msgstr "Íoslódáil"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "Oiriúnach do disléicse"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "Cód ríomhphoist"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "Cuir isteach an cód ó do ríomhphost"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "Cuir isteach cód d'aip fhíordheimhnithe"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "Theip ar bhaint chuntais"
 msgid "Failed to send verification code"
 msgstr "Theip ar sheoladh cód fíoraithe"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "Theip ar nuashonrú catagóire"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "Críochnaigh aistriú do chuntas"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "Logáilte amach go rathúil"
 msgid "Logging out…"
 msgstr "Á logáil amach…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "bainistigh cuntais cheangailte"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "bainistigh grúpaí"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "Níor aimsíodh aon toradh."
 msgid "No time zone found."
 msgstr "Níor aimsíodh aon chrios ama."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "Níl aon taifead ábhair fós — bain triail eile as tar éis an chéad fhógra eile."
 
@@ -620,7 +649,15 @@ msgstr "Eile"
 msgid "Owner"
 msgstr "Úinéir"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "Pasluiche"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "Theip ar fhíorú na heochrach rochtana. Bain triail eile as."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "Iarratas ceada"
 
@@ -638,13 +675,9 @@ msgstr "Príobháideacht"
 msgid "Profile"
 msgstr "Próifíl"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "léigh cuntais cheangailte"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "léigh sainspéiseanna"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "Athnasc do chuntais ar an bhfreastalaí seo"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "Bain rochtain?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "Bain spéis"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "Seol an ríomhphost arís"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "Roghnaigh sainrogha téama"
 msgid "Send again"
 msgstr "Seol arís"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "Seol ríomhphost"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "Le serif"
@@ -853,6 +894,10 @@ msgstr "Foirne/Aipeanna"
 msgid "Terms and conditions"
 msgstr "Téarmaí agus coinníollacha"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "Tá an cód sin mícheart nó tá sé imithe in éag."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "Téama"
@@ -861,7 +906,7 @@ msgstr "Téama"
 msgid "Theme Settings"
 msgstr "Socruithe Téama"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Caithfidh tusa an chead seo a chumasú i socruithe na haipe."
 
@@ -930,7 +975,7 @@ msgstr "Clóscríobh chun cuardach a dhéanamh..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "Ní féidir athsheoladh chuig logáil isteach. Bain triail eile as le do thoil."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "Gan sannadh"
 
@@ -946,9 +991,9 @@ msgstr "Stáit Aontaithe"
 msgid "Unverified"
 msgstr "Neamhfhíoraithe"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "úsáid seirbhísí IS"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "Úsáid d'eochair rochtana"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "Cód fíoraithe seolta"
 msgid "Verification failed"
 msgstr "Theip ar an bhfíorú"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "Fíoraigh"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "Fíoraigh seoladh ríomhphoist"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "Mionsamhail físeáin"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "Tá an suíomh gréasáin faoi chothabháil!"
 msgid "Wednesday"
 msgstr "Céadaoin"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "scríobh sainspéiseanna"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "Aistríodh do chuntas anseo ó {source}. Go dtí go scriosann tú é ansin, d'fhéadfadh teachtaireachtaí agus fógraí an dá fhreastalaí a bhaint amach, leanann roinnt de d'ábhar á sheirbheáil ón sean-fhreastalaí, agus d'fhéadfadh sé cúpla nóiméad a thógáil ar do lucht leanúna tú a aimsiú anseo."

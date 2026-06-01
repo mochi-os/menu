@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> {permissionLabel} ಗಾಗಿ ಅನುಮತಿ ಬಯಸುತ್ತದೆ."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> ಈ ಕೆಳಗಿನ ಅನುಮತಿಯನ್ನು ಕೇಳುತ್ತಿದೆ:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 ಗಂಟೆಗಳು"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "ಸಂಪೂರ್ಣ (ದಿನಾಂಕ ಮತ್ತು ಸಮಯ)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "{domain} ಪ್ರವೇಶಿಸಿ"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "ಎಲ್ಲಾ"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "ಅನುಮತಿಸಿ"
 
@@ -121,6 +117,10 @@ msgstr "ಲಾಗ್ ಔಟ್ ಮಾಡಲು ನೀವು ಖಚಿತವಾ�
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "ಆರೋಹಣ"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Authenticator ಕೋಡ್"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "ಆಸಕ್ತಿಯನ್ನು ಹೆಚ್ಚಿಸಿ"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "ಆಸಕ್ತಿಯನ್ನು ಹೆಚ್ಚಿಸಿ"
 msgid "Cancel"
 msgstr "ರದ್ದುಮಾಡಿ"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "ಈ ಅಧಿಸೂಚನೆಗಾಗಿ ವರ್ಗ"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "ಅಧಿಸೂಚನೆ ವರ್ಗವನ್ನು ಬದಲಾಯಿಸಿ"
 
@@ -198,7 +199,7 @@ msgstr "ಆಯ್ಕೆ ತೆರವುಗೊಳಿಸಿ (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "ಮುಚ್ಚಿ"
 
@@ -238,10 +239,6 @@ msgstr "ಕಾಂಪ್ಯಾಕ್ಟ್"
 msgid "Confirm"
 msgstr "ದೃಢೀಕರಿಸಿ"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "MCP ಸರ್ವರ್‌ಗಳಿಗೆ ಸಂಪರ್ಕಿಸಿ"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "ವಿಷಯ ಮಾರ್ಪಡಿಸಲಾಗಿಲ್ಲ"
@@ -254,6 +251,10 @@ msgstr "ಸಂದರ್ಭಾನುಸಾರ ಮಾಹಿತಿ ಮತ್ತು 
 msgid "Continue"
 msgstr "ಮುಂದುವರಿಸಿ"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "{label} ಮೂಲಕ ಮುಂದುವರಿಸಿ"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "ನಕಲಿಸಿ"
@@ -261,6 +262,18 @@ msgstr "ನಕಲಿಸಿ"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "ಈ ಡಾಕ್ಯುಮೆಂಟ್ ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ನಂತರ ಪುನಃ ಪ್ರಯತ್ನಿಸಿ."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "ಕೋಡ್ ಕಳುಹಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "ಮರು-ದೃಢೀಕರಣವನ್ನು ಪ್ರಾರಂಭಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "ಆ ಖಾತೆಯೊಂದಿಗೆ ಪರಿಶೀಲಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "ಡೀಫಾಲ್ಟ್"
 msgid "Default AI account"
 msgstr "ಡೀಫಾಲ್ಟ್ AI ಖಾತೆ"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "ಹಳೆಯ ಸರ್ವರ್‌ನಲ್ಲಿ ನಿಮ್ಮ ಖಾತೆಯನ್ನು ಅಳಿಸಿ"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "ನಿರಾಕರಿಸಿ"
 
@@ -310,6 +327,10 @@ msgstr "ವೆಬ್ ಬ್ರೌಸರ್‌ನಿಂದ ಪತ್ತೆ ಮಾ
 msgid "Direction"
 msgstr "ದಿಕ್ಕು"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "ತಿರಸ್ಕರಿಸಿ"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "ಮೊಬೈಲ್ ಸೈಡ್‌ಬಾರ್ ಪ್ರದರ್ಶಿಸುತ್ತದೆ."
@@ -321,6 +342,18 @@ msgstr "ಡೌನ್‌ಲೋಡ್"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "ಡಿಸ್ಲೆಕ್ಸಿಯಾ-ಸ್ನೇಹಿ"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "ಇಮೇಲ್ ಕೋಡ್"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "ನಿಮ್ಮ ಇಮೇಲ್‌ನಿಂದ ಕೋಡ್ ನಮೂದಿಸಿ"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "ನಿಮ್ಮ authenticator ಕೋಡ್ ನಮೂದಿಸಿ"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "ಖಾತೆ ತೆಗೆದುಹಾಕಲು ವಿಫಲವಾಗಿ�
 msgid "Failed to send verification code"
 msgstr "ಪರಿಶೀಲನಾ ಕೋಡ್ ಕಳುಹಿಸಲು ವಿಫಲವಾಗಿದೆ"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "ವರ್ಗ ಅಪ್‌ಡೇಟ್ ಮಾಡಲು ವಿಫಲವಾಗಿದೆ"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "ನಿಮ್ಮ ಖಾತೆಯ ವರ್ಗಾವಣೆ ಮುಗಿಸಿ"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "ಯಶಸ್ವಿಯಾಗಿ ಲಾಗ್ ಔಟ್ ಆಗಿದೆ"
 msgid "Logging out…"
 msgstr "ಲಾಗ್ ಔಟ್ ಆಗುತ್ತಿದೆ…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "ಸಂಪರ್ಕಿತ ಖಾತೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "ಗುಂಪುಗಳನ್ನು ನಿರ್ವಹಿಸಿ"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "ಯಾವುದೇ ಫಲಿತಾಂಶಗಳು ಸಿಗಲಿಲ್�
 msgid "No time zone found."
 msgstr "ಯಾವುದೇ ಟೈಮ್ ಜೋನ್ ಸಿಗಲಿಲ್ಲ."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "ಇನ್ನೂ ಯಾವುದೇ ಟಾಪಿಕ್ ರೆಕಾರ್ಡ್ ಇಲ್ಲ — ಮುಂದಿನ ನೋಟಿಫಿಕೇಶನ್ ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
 
@@ -620,7 +649,15 @@ msgstr "ಇತರ"
 msgid "Owner"
 msgstr "ಮಾಲೀಕ"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "ಪಾಸ್‌ಕೀ"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "ಪಾಸ್‌ಕೀ ಪರಿಶೀಲನೆ ವಿಫಲವಾಯಿತು. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "ಪರ್ಮಿಷನ್ ರಿಕ್ವೆಸ್ಟ್"
 
@@ -638,13 +675,9 @@ msgstr "ಗೌಪ್ಯತೆ"
 msgid "Profile"
 msgstr "ಪ್ರೊಫೈಲ್"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "ಸಂಪರ್ಕಿತ ಖಾತೆಗಳನ್ನು ಓದಿ"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "ಆಸಕ್ತಿಗಳನ್ನು ಓದಿ"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "ಈ ಸರ್ವರ್‌ನಲ್ಲಿ ನಿಮ್ಮ ಖಾತೆಗಳನ್ನು ಮತ್ತೆ ಲಿಂಕ್ ಮಾಡಿ"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "ಪ್ರವೇಶ ತೆಗೆದುಹಾಕಬೇಕೆ?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "ಆಸಕ್ತಿ ತೆಗೆದುಹಾಕಿ"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "ಇಮೇಲ್ ಮತ್ತೆ ಕಳುಹಿಸಿ"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "ಥೀಮ್ ಆದ್ಯತೆಯನ್ನು ಆಯ್ಕೆಮಾಡ�
 msgid "Send again"
 msgstr "ಮತ್ತೆ ಕಳುಹಿಸಿ"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "ಇಮೇಲ್ ಕಳುಹಿಸಿ"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "ಸೆರಿಫ್"
@@ -853,6 +894,10 @@ msgstr "ತಂಡಗಳು/ಆ್ಯಪ್‌ಗಳು"
 msgid "Terms and conditions"
 msgstr "ನಿಯಮಗಳು ಮತ್ತು ಷರತ್ತುಗಳು"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "ಆ ಕೋಡ್ ತಪ್ಪಾಗಿದೆ ಅಥವಾ ಅವಧಿ ಮೀರಿದೆ."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "ಥೀಮ್"
@@ -861,7 +906,7 @@ msgstr "ಥೀಮ್"
 msgid "Theme Settings"
 msgstr "ಥೀಮ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "ಈ ಅನುಮತಿಯನ್ನು ಆ್ಯಪ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ನೀವೇ ಸಕ್ರಿಯಗೊಳಿಸಬೇಕು."
 
@@ -930,7 +975,7 @@ msgstr "ಹುಡುಕಲು ಟೈಪ್ ಮಾಡಿ..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "ಲಾಗಿನ್‌ಗೆ ಮರುನಿರ್ದೇಶಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "ನಿಯೋಜಿಸದ"
 
@@ -946,9 +991,9 @@ msgstr "ಯುನೈಟೆಡ್ ಸ್ಟೇಟ್ಸ್"
 msgid "Unverified"
 msgstr "ಪರಿಶೀಲಿಸದ"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "AI ಸೇವೆಗಳನ್ನು ಬಳಸಿ"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "ನಿಮ್ಮ ಪಾಸ್‌ಕೀ ಬಳಸಿ"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "ಪರಿಶೀಲನೆ ಕೋಡ್ ಕಳುಹಿಸಲಾಗಿದ�
 msgid "Verification failed"
 msgstr "ಪರಿಶೀಲನೆ ವಿಫಲವಾಗಿದೆ"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "ಪರಿಶೀಲಿಸಿ"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "ಇಮೇಲ್ ವಿಳಾಸವನ್ನು ಪರಿಶೀಲಿಸಿ"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "ವಿಡಿಯೋ ಥಂಬ್‌ನೇಲ್"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "ವೆಬ್‌ಸೈಟ್ ನಿರ್ವಹಣೆಯಲ್ಲಿದ�
 msgid "Wednesday"
 msgstr "ಬುಧವಾರ"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "ಆಸಕ್ತಿಗಳನ್ನು ಬರೆಯಿರಿ"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "ನಿಮ್ಮ ಖಾತೆಯನ್ನು {source} ನಿಂದ ಇಲ್ಲಿಗೆ ವರ್ಗಾಯಿಸಲಾಗಿದೆ. ಅಲ್ಲಿ ಅದನ್ನು ಅಳಿಸುವವರೆಗೆ, ಸಂದೇಶಗಳು ಮತ್ತು ಅಧಿಸೂಚನೆಗಳು ಎರಡೂ ಸರ್ವರ್‌ಗಳಿಗೆ ತಲುಪಬಹುದು, ನಿಮ್ಮ ಕೆಲವು ವಿಷಯಗಳು ಹಳೆಯ ಸರ್ವರ್‌ನಿಂದ ಮಾತ್ರ ಒದಗಿಸಲ್ಪಡುತ್ತಿರಬಹುದು, ಮತ್ತು ಅನುಯಾಯಿಗಳು ನಿಮ್ಮನ್ನು ಇಲ್ಲಿ ಹುಡುಕಲು ಕೆಲವು ನಿಮಿಷಗಳು ಬೇಕಾಗಬಹುದು."

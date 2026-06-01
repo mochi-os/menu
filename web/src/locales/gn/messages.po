@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> oipota permiso {permissionLabel}."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> ojerure ko permíso:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 aravo"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "Sa'ipýpe (ára ha aravo)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "eike {domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "Opaite"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "Eipysyrõ"
 
@@ -121,6 +117,10 @@ msgstr "Añetehápe esẽse? Eñepyrũjeýta hag̃ua eike ne tetãyguápe."
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Asc"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Authenticator código"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "Boost mba'erekohápe"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "Boost mba'erekohápe"
 msgid "Cancel"
 msgstr "Heja"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "Categoría ko ñe'ẽmondo-pegua"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "Embojere ñe'ẽmondo categoría"
 
@@ -198,7 +199,7 @@ msgstr "Embopotĩ ñemboheka (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "Mboty"
 
@@ -238,10 +239,6 @@ msgstr "Compact"
 msgid "Confirm"
 msgstr "Emoneĩ"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "ojuaju MCP mohendaha"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "Tembikuaa nojembojeguáiri"
@@ -254,6 +251,10 @@ msgstr "Marandu rehegua ha detalle."
 msgid "Continue"
 msgstr "Tenonde"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "Eku tenonde {label} ndive"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Kopia"
@@ -261,6 +262,18 @@ msgstr "Kopia"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "Ndaikatúi oñemyenyhẽ ko documento. Eha'ã jeýta upéi."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "Ndaikatúi oñemondo pe código. Eñehaʼã jey."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "Ndaikatúi oñepyrũ ñemoneʼẽ jey. Eñehaʼã jey."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "Ndaikatúi ojehechajey upe mba'ete ndive. Eha'ã jey."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "Default"
 msgid "Default AI account"
 msgstr "Default AI tetãygua"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "Emomba'apo nde cuenta ypykue servidor-pe"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "Heja"
 
@@ -310,6 +327,10 @@ msgstr "Heka web browser-gui"
 msgid "Direction"
 msgstr "Direccióna"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "Mbohovái"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "Ohechauka mobile sidebar."
@@ -321,6 +342,18 @@ msgstr "Emboguejy"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "Disléxia peguarã iporãva"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "Código email"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "Emoinge code ne email-pegua"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "Emoinge nde código autenticador rehegua"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "Ndaikatúi oñembogue cuenta"
 msgid "Failed to send verification code"
 msgstr "Ndaikatúi oñemondo verificación código"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "Ndaikatúi oñembohera'ã pyahu categoría"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "Oñepyrũ nde cuenta mbojuaju"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "Osẽ porã"
 msgid "Logging out…"
 msgstr "Osẽhína…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "ñembohape cuenta ojuaju"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "ñembohape aty"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "Ndojejuhúi resultados."
 msgid "No time zone found."
 msgstr "Ndojejuhúi tiempo zona."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "Ndaipóri tópico marandu gueteri — eha'ã jey notificación pyahu rire."
 
@@ -620,7 +649,15 @@ msgstr "Ambue"
 msgid "Owner"
 msgstr "Mburuvicha"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr ""
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "Passkey ñemyatã ndoikói. Eñehaʼã jey."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "Permiso jerure"
 
@@ -638,13 +675,9 @@ msgstr "Privacidad"
 msgid "Profile"
 msgstr "Perfil"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "elee cuenta ojuaju"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "elee mba'eporã"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "Embojoja jey nde cuenta ko servidor-pe"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "Embogue acceso?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "Embogue ñembyeko'ói"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "Embou jey ñe'ẽveve"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "Eiporavo theme jeporavo"
 msgid "Send again"
 msgstr "Emondo jey"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "Emondo email"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "Serif"
@@ -853,6 +894,10 @@ msgstr "Atykuéra/Tembiporukuéra"
 msgid "Terms and conditions"
 msgstr "Ñe'ẽmecha ha tekorosã rehegua"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "Upe código ndoikoporãi térã hiʼaravoʼimáma."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "Theme"
@@ -861,7 +906,7 @@ msgstr "Theme"
 msgid "Theme Settings"
 msgstr "Theme Ñemboheko"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Ko permiso oĩva'erã eike haguã tembiporu ñembohekópe."
 
@@ -930,7 +975,7 @@ msgstr "Ehai eheka..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "Ndaikatúi ohohag̃ua login-pe. Eha'ã jey."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "Mavevenoĩva"
 
@@ -946,9 +991,9 @@ msgstr "Estados Unidos"
 msgid "Unverified"
 msgstr "Verificación'ỹva"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "eipuru AI tembiapokuéra"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "Eipuru nde passkey"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "Verificación código mondopyre"
 msgid "Verification failed"
 msgstr "Verificación ndoiporãi"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "Ehesa'ỹijo"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "Ehesa'ỹijo email tape"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "Video ta'ãnga'i"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "Web tembiporu ojejapo!"
 msgid "Wednesday"
 msgstr "Mba'embohopapa"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "ehai mba'eporã"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "Nde cuenta oiko ko'ápe {source} guive. Peve reipe'a upépe, marandu ha mba'emimi ikatu ogueru servidor mokõive-pe, nde mba'e mba'eapo ambuéva ohasave ypykue servidor guive, ha erekopy'araka'e minutopi peve reko'ata ko'ápe."

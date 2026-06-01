@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> {permissionLabel} అనుమతిని కోరుతోంది."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> కింది అనుమతిని అడుగుతోంది:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 గంటలు"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "సంపూర్ణ (తేదీ మరియు సమయం)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "{domain}ని యాక్సెస్ చేయండి"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "అన్నీ"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "అనుమతించు"
 
@@ -121,6 +117,10 @@ msgstr "మీరు లాగ్ అవుట్ చేయాలనుకుం
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "ఆరోహణ"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "ఆథెంటికేటర్ కోడ్"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "ఆసక్తిని పెంచండి"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "ఆసక్తిని పెంచండి"
 msgid "Cancel"
 msgstr "రద్దు చేయండి"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "ఈ నోటిఫికేషన్ కోసం వర్గం"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "నోటిఫికేషన్ వర్గాన్ని మార్చండి"
 
@@ -198,7 +199,7 @@ msgstr "ఎంపికను క్లియర్ చేయండి (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "మూసివేయండి"
 
@@ -238,10 +239,6 @@ msgstr "కాంపాక్ట్"
 msgid "Confirm"
 msgstr "నిర్ధారించండి"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "MCP సర్వర్‌లకు కనెక్ట్ చేయండి"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "కంటెంట్ సవరించబడలేదు"
@@ -254,6 +251,10 @@ msgstr "సందర్భోచిత సమాచారం మరియు వ
 msgid "Continue"
 msgstr "కొనసాగించండి"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "{label}తో కొనసాగించండి"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "కాపీ చేయండి"
@@ -261,6 +262,18 @@ msgstr "కాపీ చేయండి"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "ఈ పత్రాన్ని లోడ్ చేయలేకపోయింది. దయచేసి తర్వాత మళ్లీ ప్రయత్నించండి."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "కోడ్‌ను పంపడం సాధ్యం కాలేదు. దయచేసి మళ్లీ ప్రయత్నించండి."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "పునఃప్రమాణీకరణను ప్రారంభించడం సాధ్యం కాలేదు. దయచేసి మళ్లీ ప్రయత్నించండి."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "ఆ ఖాతాతో ధృవీకరించడం సాధ్యం కాలేదు. దయచేసి మళ్లీ ప్రయత్నించండి."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "డిఫాల్ట్"
 msgid "Default AI account"
 msgstr "డిఫాల్ట్ AI ఖాతా"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "పాత సర్వర్‌లో మీ ఖాతాను తొలగించండి"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "నిరాకరించండి"
 
@@ -310,6 +327,10 @@ msgstr "వెబ్ బ్రౌజర్ నుండి గుర్తిం
 msgid "Direction"
 msgstr "దిశ"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "విస్మరించండి"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "మొబైల్ సైడ్‌బార్‌ను ప్రదర్శిస్తుంది."
@@ -321,6 +342,18 @@ msgstr "డౌన్‌లోడ్"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "డిస్లెక్సియా-అనుకూలం"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "ఇమెయిల్ కోడ్"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "మీ ఇమెయిల్‌లోని కోడ్‌ను నమోదు చేయండి"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "మీ ప్రమాణీకరణ కోడ్‌ను నమోదు చేయండి"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "ఖాతాను తీసివేయడంలో విఫలమై�
 msgid "Failed to send verification code"
 msgstr "ధృవీకరణ కోడ్‌ను పంపడంలో విఫలమైంది"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "విభాగాన్ని నవీకరించడంలో విఫలమైంది"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "మీ ఖాతా తరలింపు పూర్తి చేయండి"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "విజయవంతంగా లాగ్ అవుట్ అయ్య
 msgid "Logging out…"
 msgstr "లాగ్ అవుట్ చేస్తోంది…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "కనెక్ట్ చేయబడిన ఖాతాలను నిర్వహించండి"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "సమూహాలను నిర్వహించండి"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "ఫలితాలు ఏవీ కనుగొనబడలేదు."
 msgid "No time zone found."
 msgstr "టైం జోన్ కనుగొనబడలేదు."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "ఇంకా టాపిక్ రికార్డ్ లేదు — తదుపరి నోటిఫికేషన్ తర్వాత మళ్లీ ప్రయత్నించండి."
 
@@ -620,7 +649,15 @@ msgstr "ఇతర"
 msgid "Owner"
 msgstr "ఓనర్"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "పాస్‌కీ"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "పాస్‌కీ ధృవీకరణ విఫలమైంది. దయచేసి మళ్లీ ప్రయత్నించండి."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "పర్మిషన్ రిక్వెస్ట్"
 
@@ -638,13 +675,9 @@ msgstr "గోప్యత"
 msgid "Profile"
 msgstr "ప్రొఫైల్"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "కనెక్ట్ చేయబడిన ఖాతాలను చదవండి"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "ఆసక్తులను చదవండి"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "ఈ సర్వర్‌లో మీ ఖాతాలను మళ్ళీ లింక్ చేయండి"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "యాక్సెస్‌ను తొలగించాలా?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "ఆసక్తిని తొలగించండి"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "ఇమెయిల్‌ను మళ్లీ పంపండి"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "థీమ్ ప్రాధాన్యతను ఎంచుకోం�
 msgid "Send again"
 msgstr "మళ్ళీ పంపండి"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "ఇమెయిల్ పంపండి"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "సెరిఫ్"
@@ -853,6 +894,10 @@ msgstr "టీమ్‌లు/యాప్‌లు"
 msgid "Terms and conditions"
 msgstr "నియమాలు మరియు షరతులు"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "ఆ కోడ్ తప్పు లేదా గడువు ముగిసింది."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "థీమ్"
@@ -861,7 +906,7 @@ msgstr "థీమ్"
 msgid "Theme Settings"
 msgstr "థీమ్ సెట్టింగ్‌లు"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "ఈ అనుమతిని యాప్ సెట్టింగ్‌లలో మీరు ఎనేబుల్ చేయాలి."
 
@@ -930,7 +975,7 @@ msgstr "శోధించడానికి టైప్ చేయండి..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "లాగిన్‌కు రీడైరెక్ట్ చేయలేకపోయింది. దయచేసి మళ్ళీ ప్రయత్నించండి."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "కేటాయించబడలేదు"
 
@@ -946,9 +991,9 @@ msgstr "యునైటెడ్ స్టేట్స్"
 msgid "Unverified"
 msgstr "ధృవీకరించబడలేదు"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "AI సేవలను ఉపయోగించండి"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "మీ పాస్‌కీని ఉపయోగించండి"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "ధృవీకరణ కోడ్ పంపబడింది"
 msgid "Verification failed"
 msgstr "ధృవీకరణ విఫలమైంది"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "ధృవీకరించండి"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "ఇమెయిల్ చిరునామాను ధృవీకరించండి"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "వీడియో థంబ్‌నెయిల్"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "వెబ్‌సైట్ మెయింటెనెన్స్‌�
 msgid "Wednesday"
 msgstr "బుధవారం"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "ఆసక్తులను వ్రాయండి"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "మీ ఖాతా {source} నుండి ఇక్కడికి తరలించబడింది. మీరు అక్కడ దాన్ని తొలగించే వరకు, సందేశాలు మరియు నోటిఫికేషన్లు రెండు సర్వర్లకు చేరవచ్చు, మీ కొంత కంటెంట్ పాత సర్వర్ నుండి అందించబడుతూ ఉంటుంది, మరియు ఫాలోవర్లు మిమ్మల్ని ఇక్కడ కనుగొనడానికి కొన్ని నిమిషాలు పట్టవచ్చు."

@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> {permissionLabel} അനുമതി ആവശ്യപ്പെടുന്നു."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> ഇനിപ്പറയുന്ന അനുമതി അഭ്യർത്ഥിക്കുന്നു:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 മണിക്കൂർ"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "സമ്പൂർണ്ണം (തീയതിയും സമയവും)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "{domain} ആക്സസ് ചെയ്യുക"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "എല്ലാം"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "അനുവദിക്കുക"
 
@@ -121,6 +117,10 @@ msgstr "ലോഗ് ഔട്ട് ചെയ്യണമെന്ന് നി
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Asc"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Authenticator കോഡ്"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "താൽപ്പര്യം വർദ്ധിപ്പിക്കുക"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "താൽപ്പര്യം വർദ്ധിപ്പിക്ക�
 msgid "Cancel"
 msgstr "റദ്ദാക്കുക"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "ഈ അറിയിപ്പിനുള്ള വിഭാഗം"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "അറിയിപ്പ് വിഭാഗം മാറ്റുക"
 
@@ -198,7 +199,7 @@ msgstr "തിരഞ്ഞെടുപ്പ് മായ്ക്കുക (Esc
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "അടയ്ക്കുക"
 
@@ -238,10 +239,6 @@ msgstr "കോംപാക്റ്റ്"
 msgid "Confirm"
 msgstr "സ്ഥിരീകരിക്കുക"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "MCP സെർവറുകളിലേക്ക് കണക്റ്റ് ചെയ്യുക"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "ഉള്ളടക്കം പരിഷ്കരിച്ചിട്ടില്ല"
@@ -254,6 +251,10 @@ msgstr "സന്ദർഭോചിത വിവരങ്ങളും വിശ�
 msgid "Continue"
 msgstr "തുടരുക"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "{label} ഉപയോഗിച്ച് തുടരുക"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "പകർത്തുക"
@@ -261,6 +262,18 @@ msgstr "പകർത്തുക"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "ഈ ഡോക്യുമെന്റ് ലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല. ദയവായി പിന്നീട് വീണ്ടും ശ്രമിക്കുക."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "കോഡ് അയയ്ക്കാനായില്ല. ദയവായി വീണ്ടും ശ്രമിക്കുക."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "വീണ്ടും പരിശോധന ആരംഭിക്കാനായില്ല. ദയവായി വീണ്ടും ശ്രമിക്കുക."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "ആ അക്കൗണ്ട് ഉപയോഗിച്ച് പരിശോധിക്കാനായില്ല. വീണ്ടും ശ്രമിക്കുക."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "ഡിഫോൾട്ട്"
 msgid "Default AI account"
 msgstr "ഡിഫോൾട്ട് AI അക്കൗണ്ട്"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "പഴയ സെർവറിൽ നിങ്ങളുടെ അക്കൗണ്ട് ഇല്ലാതാക്കുക"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "നിഷേധിക്കുക"
 
@@ -310,6 +327,10 @@ msgstr "വെബ് ബ്രൗസറിൽ നിന്ന് കണ്ടെ
 msgid "Direction"
 msgstr "ദിശ"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "ഒഴിവാക്കുക"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "മൊബൈൽ സൈഡ്‌ബാർ പ്രദർശിപ്പിക്കുന്നു."
@@ -321,6 +342,18 @@ msgstr "ഡൗൺലോഡ്"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "ഡിസ്ലെക്സിയ-സൗഹൃദം"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "ഇമെയിൽ കോഡ്"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "നിങ്ങളുടെ ഇമെയിലിലെ കോഡ് നൽകുക"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "നിങ്ങളുടെ ഓതെന്റിക്കേറ്റർ കോഡ് നൽകുക"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "അക്കൗണ്ട് നീക്കം ചെയ്യുന്�
 msgid "Failed to send verification code"
 msgstr "സ്ഥിരീകരണ കോഡ് അയയ്ക്കുന്നതിൽ പരാജയപ്പെട്ടു"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "വിഭാഗം പുതുക്കുന്നതിൽ പരാജയപ്പെട്ടു"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "നിങ്ങളുടെ അക്കൗണ്ട് മാറ്റൽ പൂർത്തിയാക്കുക"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "വിജയകരമായി ലോഗ് ഔട്ട് ചെയ്
 msgid "Logging out…"
 msgstr "ലോഗ് ഔട്ട് ചെയ്യുന്നു…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "കണക്റ്റ് ചെയ്ത അക്കൗണ്ടുകൾ കൈകാര്യം ചെയ്യുക"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "ഗ്രൂപ്പുകൾ കൈകാര്യം ചെയ്യുക"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "ഫലങ്ങളൊന്നും കണ്ടെത്തിയി�
 msgid "No time zone found."
 msgstr "സമയ മേഖലയൊന്നും കണ്ടെത്തിയില്ല."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "വിഷയ റെക്കോർഡ് ഇതുവരെയില്ല — അടുത്ത അറിയിപ്പിന് ശേഷം വീണ്ടും ശ്രമിക്കുക."
 
@@ -620,7 +649,15 @@ msgstr "മറ്റുള്ളവ"
 msgid "Owner"
 msgstr "ഉടമ"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "പാസ്കീ"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "പാസ്‌കീ പരിശോധന പരാജയപ്പെട്ടു. ദയവായി വീണ്ടും ശ്രമിക്കുക."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "അനുമതി അഭ്യർത്ഥന"
 
@@ -638,13 +675,9 @@ msgstr "സ്വകാര്യതാ നയം"
 msgid "Profile"
 msgstr "പ്രൊഫൈൽ പ്രിവ്യൂ"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "കണക്റ്റ് ചെയ്ത അക്കൗണ്ടുകൾ വായിക്കുക"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "താൽപ്പര്യങ്ങൾ വായിക്കുക"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "ഈ സെർവറിൽ നിങ്ങളുടെ അക്കൗണ്ടുകൾ വീണ്ടും ലിങ്ക് ചെയ്യുക"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "അക്കൗണ്ട് നീക്കം ചെയ്യണോ?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "item നീക്കം ചെയ്യുക"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "ഇമെയിൽ വീണ്ടും അയയ്ക്കുക"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "തീം മുൻഗണന തിരഞ്ഞെടുക്കുക"
 msgid "Send again"
 msgstr "വീണ്ടും അയയ്ക്കുക"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "ഇമെയിൽ അയയ്ക്കുക"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "സെരിഫ്"
@@ -853,6 +894,10 @@ msgstr "ടീമുകൾ/ആപ്പുകൾ"
 msgid "Terms and conditions"
 msgstr "നിബന്ധനകളും വ്യവസ്ഥകളും"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "ആ കോഡ് തെറ്റാണ് അല്ലെങ്കിൽ കാലഹരണപ്പെട്ടു."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "തീം"
@@ -861,7 +906,7 @@ msgstr "തീം"
 msgid "Theme Settings"
 msgstr "തീം ക്രമീകരണങ്ങൾ"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "ഈ അനുമതി ആപ്പ് ക്രമീകരണങ്ങളിൽ നിങ്ങൾ പ്രവർത്തനക്ഷമമാക്കണം."
 
@@ -930,7 +975,7 @@ msgstr "തിരയാൻ ടൈപ്പ് ചെയ്യുക..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "ലോഗിനിലേക്ക് റീഡയറക്റ്റ് ചെയ്യാൻ കഴിയുന്നില്ല. വീണ്ടും ശ്രമിക്കുക."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "നിയോഗിച്ചിട്ടില്ല"
 
@@ -946,9 +991,9 @@ msgstr "യുണൈറ്റഡ് സ്റ്റേറ്റ്സ്"
 msgid "Unverified"
 msgstr "സ്ഥിരീകരിച്ചിട്ടില്ല"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "AI സേവനങ്ങൾ ഉപയോഗിക്കുക"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "നിങ്ങളുടെ പാസ്‌കീ ഉപയോഗിക്കുക"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "സ്ഥിരീകരണ കോഡ് അയച്ചു"
 msgid "Verification failed"
 msgstr "സ്ഥിരീകരണം പരാജയപ്പെട്ടു"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "സ്ഥിരീകരിക്കുക"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "ഇമെയിൽ വിലാസം സ്ഥിരീകരിക്കുക"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "വീഡിയോ തംബ്നെയിൽ"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "വെബ്സൈറ്റ് മെയിന്റനൻസിലാ�
 msgid "Wednesday"
 msgstr "ബുധനാഴ്ച"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "താൽപ്പര്യങ്ങൾ എഴുതുക"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "നിങ്ങളുടെ അക്കൗണ്ട് {source} ൽ നിന്ന് ഇവിടേക്ക് മാറ്റി. അവിടെ ഇല്ലാതാക്കുന്നതുവരെ, സന്ദേശങ്ങളും അറിയിപ്പുകളും രണ്ട് സെർവറുകളിലും എത്തിയേക്കാം, നിങ്ങളുടെ ചില ഉള്ളടക്കം പഴയ സെർവറിൽ നിന്ന് വിതരണം ചെയ്യപ്പെടും, ഫോളോവർമാർ ഇവിടെ നിങ്ങളെ കണ്ടെത്താൻ ഏതാനും മിനിറ്റ് എടുക്കാം."

@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "I-<0>{appName}</0> ifuna imvume yokuthi {permissionLabel}."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> icela imvume elandelayo:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "Amahora angu-24"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "Okuphelele (usuku nesikhathi)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "finyelela {domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "I-AI"
 msgid "All"
 msgstr "Konke"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "Vumela"
 
@@ -121,6 +117,10 @@ msgstr "Uqinisekile ufuna ukuphuma? Kuzodingeka ungene futhi ukuze ufinyelele i-
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Khuphukayo"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Ikhodi yesiqinisekisi"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "Khulisa intshisekelo"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "Khulisa intshisekelo"
 msgid "Cancel"
 msgstr "Khansela"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "Isigaba salesi saziso"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "Shintsha isigaba sesaziso"
 
@@ -198,7 +199,7 @@ msgstr "Sula ukukhetha (i-Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "Vala"
 
@@ -238,10 +239,6 @@ msgstr "Okufishane"
 msgid "Confirm"
 msgstr "Qinisekisa"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "xhuma ezisingathini ze-MCP"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "Okuqukethwe akushintshiwe"
@@ -254,6 +251,10 @@ msgstr "Ulwazi nemininingwane yomongo."
 msgid "Continue"
 msgstr "Qhubeka"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "Qhubeka nge-{label}"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Kopisha"
@@ -261,6 +262,18 @@ msgstr "Kopisha"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "Akukwazanga ukulayisha le dokhumenti. Sicela uzame futhi kamuva."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "Ayikwazanga ukuthumela ikhodi. Sicela uzame futhi."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "Ayikwazanga ukuqala ukuqinisekiswa kabusha. Sicela uzame futhi."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "Ayikwazanga ukuqinisekisa ngaleyo akhawunti. Sicela uzame futhi."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "Okuzenzakalelayo"
 msgid "Default AI account"
 msgstr "I-akhawunti ye-AI ezenzakalelayo"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "Susa i-akhawunti yakho eservereni endala"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "Yenqaba"
 
@@ -310,6 +327,10 @@ msgstr "Bona kusuka kubhrawuza ye-web"
 msgid "Direction"
 msgstr "Indlela"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "Cashisa"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "Ibonisa ibha eseceleni yefoni."
@@ -321,6 +342,18 @@ msgstr "Landa"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "Sokulungele i-dyslexia"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "Ikhodi ye-imeyili"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "Faka ikhodi evela ku-imeyili yakho"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "Faka ikhodi yakho yesiqinisekisi"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "Kuhlulekile ukususa i-akhawunti"
 msgid "Failed to send verification code"
 msgstr "Kuhlulekile ukuthumela ikhodi yokuqinisekisa"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "Kuhlulekile ukubuyekeza isigaba"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "Qeda ukudlulisa i-akhawunti yakho"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "Uphume ngempumelelo"
 msgid "Logging out…"
 msgstr "Iyaphuma…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "phatha ama-akhawunti axhunyiwe"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "phatha amaqembu"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "Imiphumela ayitholakali."
 msgid "No time zone found."
 msgstr "Asikho isikhathi sendawo esitholakele."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "Awukho umbiko wesihloko okwamanje — zama futhi ngemva kwesaziso esilandelayo."
 
@@ -620,7 +649,15 @@ msgstr "Okunye"
 msgid "Owner"
 msgstr "Umnikazi"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "Ukhiye wokungena"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "Ukuqinisekiswa kwe-passkey kuhlulekile. Sicela uzame futhi."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "Isicelo semvume"
 
@@ -638,13 +675,9 @@ msgstr "Ubumfihlo"
 msgid "Profile"
 msgstr "Umbiko womsebenzisi"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "funda ama-akhawunti axhunyiwe"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "funda izithakazelo"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "Xhuma kabusha ama-akhawunti akho kule server"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "Khipha ukufinyelela?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "Khipha intshisekelo"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "Thumela i-imeyili futhi"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "Khetha okuncamelayo kwendikimba"
 msgid "Send again"
 msgstr "Thumela futhi"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "Thumela i-imeyili"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "I-Serif"
@@ -853,6 +894,10 @@ msgstr "Amaqembu/Izinhlelo zokusebenza"
 msgid "Terms and conditions"
 msgstr "Imibandela nemigomo"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "Leyo khodi ayilungile noma isiphelelwe yisikhathi."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "Indikimba"
@@ -861,7 +906,7 @@ msgstr "Indikimba"
 msgid "Theme Settings"
 msgstr "Izilungiselelo Zendikimba"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Le mvume kufanele inikwe amandla nguwe ezilungiselelweni zohlelo lokusebenza."
 
@@ -930,7 +975,7 @@ msgstr "Thayipha ukuze useshe..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "Ayikwazi ukuqondisa kabusha ekungeneni. Sicela uzame futhi."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "Akwabelwanga"
 
@@ -946,9 +991,9 @@ msgstr "I-United States"
 msgid "Unverified"
 msgstr "Akuqinisekisiwe"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "sebenzisa amasevisi e-AI"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "Sebenzisa i-passkey yakho"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "Ikhodi yokuqinisekiswa ithunyelwe"
 msgid "Verification failed"
 msgstr "Ukuqinisekiswa kuhlulekile"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "Qinisekisa"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "Qinisekisa ikheli le-imeyili"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "Isithombe esincane sevidiyo"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "Iwebhusayithi ingaphansi kwezilungiselelo!"
 msgid "Wednesday"
 msgstr "ULwesithathu"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "bhala izithakazelo"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "I-akhawunti yakho isuswe lapha ivela ku-{source}. Uze uyisuse lapho, imilayezo nezaziso zingafika eziservereni zombili, ingxenye yomqukathi wakho iqhubeka inikezwa eservereni endala, futhi abalandeli bangathatha imizuzu embalwa ukukuthola lapha."

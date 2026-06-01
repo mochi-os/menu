@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> иска разрешение да {permissionLabel}."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> иска следното разрешение:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 часа"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "Абсолютно (дата и час)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "достъп до {domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "Всички"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "Позволи"
 
@@ -121,6 +117,10 @@ msgstr "Сигурни ли сте, че искате да излезете? Щ�
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Възх."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Код от authenticator"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "Усили интереса"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "Усили интереса"
 msgid "Cancel"
 msgstr "Отказ"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "Категория за това известие"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "Смени категорията на известие"
 
@@ -198,7 +199,7 @@ msgstr "Изчисти избраното (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "Затвори"
 
@@ -238,10 +239,6 @@ msgstr "Компактно"
 msgid "Confirm"
 msgstr "Потвърди"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "свързване с MCP сървъри"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "Съдържанието не е променено"
@@ -254,6 +251,10 @@ msgstr "Контекстуална информация и детайли."
 msgid "Continue"
 msgstr "Продължи"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "Продължи с {label}"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Копирай"
@@ -261,6 +262,18 @@ msgstr "Копирай"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "Документът не може да бъде зареден. Моля, опитайте по-късно."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "Кодът не можа да бъде изпратен. Моля, опитайте отново."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "Повторното удостоверяване не можа да започне. Моля, опитайте отново."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "Потвърждаването с този акаунт не бе успешно. Моля, опитайте отново."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "По подразбиране"
 msgid "Default AI account"
 msgstr "AI акаунт по подразбиране"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "Изтрийте профила си на стария сървър"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "Откажи"
 
@@ -310,6 +327,10 @@ msgstr "Засечи от уеб браузъра"
 msgid "Direction"
 msgstr "Посока"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "Отхвърли"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "Показва мобилната странична лента."
@@ -321,6 +342,18 @@ msgstr "Изтегляне"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "Подходящ за дислексия"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "Имейл код"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "Въведете кода от имейла си"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "Въведете кода от приложението за удостоверяване"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "Неуспешно премахване на акаунт"
 msgid "Failed to send verification code"
 msgstr "Неуспешно изпращане на код за потвърждение"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "Неуспешна актуализация на категория"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "Завършете преместването на профила"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "Успешен изход"
 msgid "Logging out…"
 msgstr "Излизане…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "управлявай свързаните профили"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "управлявай групите"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "Не са намерени резултати."
 msgid "No time zone found."
 msgstr "Не е намерена часова зона."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "Все още няма запис за темата — опитайте отново след следващото известие."
 
@@ -620,7 +649,15 @@ msgstr "Друго"
 msgid "Owner"
 msgstr "Собственик"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr ""
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "Проверката на ключа за достъп беше неуспешна. Моля, опитайте отново."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "Заявка за разрешение"
 
@@ -638,13 +675,9 @@ msgstr "Поверителност"
 msgid "Profile"
 msgstr "Профил"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "чети свързаните профили"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "чети интересите"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "Свържете отново профилите си на този сървър"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "Премахни достъпа?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "Премахни интерес"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "Изпрати имейла отново"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "Избор на предпочитание за тема"
 msgid "Send again"
 msgstr "Изпрати отново"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "Изпрати имейл"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "Серифен"
@@ -853,6 +894,10 @@ msgstr "Екипи/Приложения"
 msgid "Terms and conditions"
 msgstr "Общи условия"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "Този код е неправилен или е изтекъл."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "Тема"
@@ -861,7 +906,7 @@ msgstr "Тема"
 msgid "Theme Settings"
 msgstr "Настройки на темата"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Това разрешение трябва да бъде активирано от вас в настройките на приложението."
 
@@ -930,7 +975,7 @@ msgstr "Пишете, за да търсите..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "Не може да се пренасочи към вход. Моля, опитайте отново."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "Неприсвоено"
 
@@ -946,9 +991,9 @@ msgstr "Съединени щати"
 msgid "Unverified"
 msgstr "Непотвърдено"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "използвай AI услуги"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "Използвайте своя ключ за достъп"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "Кодът за потвърждение е изпратен"
 msgid "Verification failed"
 msgstr "Потвърждението не успя"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "Потвърди"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "Потвърди имейл адреса"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "Миниатюра на видео"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "Уебсайтът е в поддръжка!"
 msgid "Wednesday"
 msgstr "Сряда"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "пиши интересите"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "Профилът ви беше преместен тук от {source}. Докато не го изтриете там, съобщенията и известията може да достигат до двата сървъра, част от съдържанието ви продължава да се обслужва от стария сървър и последователите може да отнеме няколко минути, за да ви намерят тук."

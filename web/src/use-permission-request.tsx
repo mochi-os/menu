@@ -3,7 +3,7 @@
 // shows a dialog for the user to grant or deny the permission.
 
 import { useState, useEffect, useCallback } from 'react'
-import { Trans, useLingui } from '@lingui/react/macro'
+import { Trans } from '@lingui/react/macro'
 import { Shield, ShieldAlert, Loader2 } from 'lucide-react'
 import {
   ResponsiveDialog,
@@ -30,33 +30,10 @@ interface PendingRequest {
   source: WindowProxy
 }
 
-function usePermissionLabel() {
-  const { t } = useLingui()
-  return (permission: string): string => {
-    const labels: Record<string, string> = {
-      'accounts/read': t`read connected accounts`,
-      'accounts/manage': t`manage connected accounts`,
-      'accounts/ai': t`use AI services`,
-      'accounts/mcp': t`connect to MCP servers`,
-      'groups/manage': t`manage groups`,
-      'interests/read': t`read interests`,
-      'interests/write': t`write interests`,
-    }
-
-    if (labels[permission]) return labels[permission]
-
-    if (permission.startsWith('url:')) {
-      const domain = permission.slice(4)
-      return t`access ${domain}`
-    }
-
-    return permission
-  }
-}
-
 export function usePermissionRequest() {
   const [pending, setPending] = useState<PendingRequest | null>(null)
   const [submitting, setSubmitting] = useState(false)
+  const [permissionName, setPermissionName] = useState('')
 
   const open = pending !== null
 
@@ -139,9 +116,39 @@ export function usePermissionRequest() {
     respond('denied')
   }, [respond])
 
-  const getPermissionLabel = usePermissionLabel()
+  // Resolve the permission code to its translated name. Names are owned by core
+  // (mochi.permission.name, exposed via the menu's permissions/name action), so
+  // the dialog carries no permission vocabulary of its own. The raw code shows
+  // only briefly while the lookup is in flight, or if it fails.
+  useEffect(() => {
+    if (!pending) {
+      setPermissionName('')
+      return
+    }
+    const code = pending.permission
+    setPermissionName(code)
+    let cancelled = false
+    const token = getMenuToken()
+    fetch(`${MENU_PATH}/-/permissions/name`, {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+      body: new URLSearchParams({ permission: code }).toString(),
+    })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((body) => {
+        if (!cancelled && body?.data?.name) setPermissionName(body.data.name)
+      })
+      .catch(() => {})
+    return () => {
+      cancelled = true
+    }
+  }, [pending])
+
   const appName = pending ? pending.app.charAt(0).toUpperCase() + pending.app.slice(1) : ''
-  const permissionLabel = pending ? getPermissionLabel(pending.permission) : ''
 
   const dialog = open ? (
     <ResponsiveDialog open={open} onOpenChange={(v) => { if (!v) respond('denied') }}>
@@ -156,9 +163,13 @@ export function usePermissionRequest() {
           </div>
           <ResponsiveDialogTitle className="text-center"><Trans>Permission request</Trans></ResponsiveDialogTitle>
           <ResponsiveDialogDescription className="text-center">
-            <Trans><span className="font-medium">{appName}</span> wants permission to {permissionLabel}.</Trans>
+            <Trans><span className="font-medium">{appName}</span> is requesting the following permission:</Trans>
           </ResponsiveDialogDescription>
         </ResponsiveDialogHeader>
+
+        <div className="rounded-lg border px-4 py-3 text-center text-sm font-medium">
+          {permissionName}
+        </div>
 
         {pending.restricted && (
           <p className="text-sm text-amber-600 text-center">

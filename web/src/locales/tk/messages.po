@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> {permissionLabel} üçin rugsat soraýar."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> şu rugsady soraýar:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 sagat"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "Mutlak (sene we wagt)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "{domain} -e girmek"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "Hemmesi"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "Rugsat bermek"
 
@@ -121,6 +117,10 @@ msgstr "Çykmak isleýärsiňizmi? Hasabyňyza girmek üçin täzeden girmeli bo
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Aşak"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Autentifikator kody"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "Gyzyklanmany ýokarlandyrmak"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "Gyzyklanmany ýokarlandyrmak"
 msgid "Cancel"
 msgstr "Ýatyrmak"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "Bu bildiriş üçin kategoriýa"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "Bildiriş kategoriýasyny üýtgetmek"
 
@@ -198,7 +199,7 @@ msgstr "Saýlamany arassalamak (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "Ýapmak"
 
@@ -238,10 +239,6 @@ msgstr "Gysga"
 msgid "Confirm"
 msgstr "Tassyklamak"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "MCP serverlerine birik"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "Mazmun üýtgemedi"
@@ -254,6 +251,10 @@ msgstr "Kontekstual maglumat we jikme-jiklikler."
 msgid "Continue"
 msgstr "Dowam etmek"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "{label} bilen dowam et"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Nusgalamak"
@@ -261,6 +262,18 @@ msgstr "Nusgalamak"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "Bu resminamany ýüklemedi. Soň gaýtadan synanyşyň."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "Kody ugratmak başartmady. Täzeden synanyşyň."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "Gaýtadan tassyklamany başlatmak başartmady. Täzeden synanyşyň."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "Şol hasap bilen barlap bolmady. Täzeden synanyşyň."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "Adaty"
 msgid "Default AI account"
 msgstr "Adaty AI hasap"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "Köne serwerdäki hasabyňyzy pozy"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "Ret etmek"
 
@@ -310,6 +327,10 @@ msgstr "Web brauzerden anyklamak"
 msgid "Direction"
 msgstr "Ugur"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "Goýbermek"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "Mobil gapdal paneli görkezýär."
@@ -321,6 +342,18 @@ msgstr "Ýükläp al"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "Disleksiýa uýgunlaşan"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "E-poçta kody"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "E-poçtaňyzdaky kody giriziň"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "Autentifikator koduňyzy giriziň"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "Hasap aýrylmady"
 msgid "Failed to send verification code"
 msgstr "Tassyklama kody iberilmedi"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "Kategoriýa täzelenmedi"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "Hasabyňyzy göçürip gutaryň"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "Üstünlikli çykyldy"
 msgid "Logging out…"
 msgstr "Çykylýar…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "baglanan hasaplary dolandyr"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "toparlary dolandyr"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "Netijeler tapylmady."
 msgid "No time zone found."
 msgstr "Wagt zolagy tapylmady."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "Heniz mowzuk ýazgysy ýok — indiki bildirişden soň gaýtadan synanyşyň."
 
@@ -620,7 +649,15 @@ msgstr "Beýleki"
 msgid "Owner"
 msgstr "Eýesi"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr ""
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "Giriş açary bilen tassyklamak şowsuz boldy. Täzeden synanyşyň."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "Rugsat haýyşy"
 
@@ -638,13 +675,9 @@ msgstr "Gizlinlik"
 msgid "Profile"
 msgstr "Profil"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "baglanan hasaplary oka"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "gyzyklanmalary oka"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "Bu serwerde hasaplaryňyzy täzeden baglanyşdyryň"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "Girişi aýyrmak?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "Gyzyklanmany aýyr"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "E-poçtany gaýtadan iber"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "Tema saýlawyňy saýla"
 msgid "Send again"
 msgstr "Täzeden iber"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "E-poçt iber"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "Serif"
@@ -853,6 +894,10 @@ msgstr "Toparlar/Programmalar"
 msgid "Terms and conditions"
 msgstr "Şertler"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "Ol kod nädogry ýa-da möhleti geçen."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "Tema"
@@ -861,7 +906,7 @@ msgstr "Tema"
 msgid "Theme Settings"
 msgstr "Tema sazlamalary"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Bu rugsat sen tarapyndan programma sazlamalarynda işjeňleşdirilmeli."
 
@@ -930,7 +975,7 @@ msgstr "Gözlemek üçin ýaz..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "Girişe ugradyp bolmady. Gaýtadan synanyş."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "Bellenilmedik"
 
@@ -946,9 +991,9 @@ msgstr "Birleşen Ştatlar"
 msgid "Unverified"
 msgstr "Tassyklanmadyk"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "AI hyzmatlaryny ulan"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "Giriş açaryňyzy ulanyň"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "Tassyklama kody iberildi"
 msgid "Verification failed"
 msgstr "Tassyklama şowsuz boldy"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "Tassykla"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "E-poçta salgysyny tassykla"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "Wideo eskizi"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "Web sahypasy abatlaýyşa düşdi!"
 msgid "Wednesday"
 msgstr "Çarşenbe"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "gyzyklanmalary ýaz"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "Hasabyňyz {source} serwерinden bu ýere geçirildi. Şol ýerden pozýançaňyz, habarlar we duýduryşlar iki serwere hem ýetip biler, käbir mazmunyňyz köne serweriň üsti bilen berler, yzarlaýanlar sizi bu ýerde tapmak üçin birnäçe minut gerek bolup biler."

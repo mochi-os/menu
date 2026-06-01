@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> kërkon leje për të {permissionLabel}."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> po kërkon lejen e mëposhtme:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 orë"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "Absolut (data dhe ora)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "akseso {domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "Të gjitha"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "Lejo"
 
@@ -121,6 +117,10 @@ msgstr "Je i sigurt që do të dalësh? Do të të duhet të rihysh për të hyr
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Rritës"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Kodi i autentikuesit"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "Rrit interesin"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "Rrit interesin"
 msgid "Cancel"
 msgstr "Anulo"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "Kategoria për këtë njoftim"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "Ndrysho kategorinë e njoftimit"
 
@@ -198,7 +199,7 @@ msgstr "Pastro përzgjedhjen (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "Mbyll"
 
@@ -238,10 +239,6 @@ msgstr "Kompakt"
 msgid "Confirm"
 msgstr "Konfirmo"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "lidhu me serverët MCP"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "Përmbajtja nuk u modifikua"
@@ -254,6 +251,10 @@ msgstr "Informacion kontekstual dhe detaje."
 msgid "Continue"
 msgstr "Vazhdo"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "Vazhdo me {label}"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Kopjo"
@@ -261,6 +262,18 @@ msgstr "Kopjo"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "Nuk mund të ngarkohej ky dokument. Provo më vonë."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "Kodi nuk mund të dërgohej. Ju lutemi provoni përsëri."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "Rivërtetimi nuk mund të niste. Ju lutemi provoni përsëri."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "Nuk u verifikua dot me atë llogari. Ju lutemi provoni përsëri."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "I parazgjedhur"
 msgid "Default AI account"
 msgstr "Llogaria e parazgjedhur AI"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "Fshini llogarinë tuaj në serverin e vjetër"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "Mohoj"
 
@@ -310,6 +327,10 @@ msgstr "Zbulo nga shfletuesi i web-it"
 msgid "Direction"
 msgstr "Drejtimi"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "Hidhe"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "Shfaq anën mobile."
@@ -321,6 +342,18 @@ msgstr "Shkarko"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "I përshtatshëm për disleksi"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "Kodi me email"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "Vendosni kodin nga email-i juaj"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "Vendosni kodin e aplikacionit të vërtetimit"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "Heqja e llogarisë dështoi"
 msgid "Failed to send verification code"
 msgstr "Dërgimi i kodit të verifikimit dështoi"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "Përditësimi i kategorisë dështoi"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "Përfundoni lëvizjen e llogarisë suaj"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "U dol me sukses"
 msgid "Logging out…"
 msgstr "Duke dalë…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "menaxho llogaritë e lidhura"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "menaxho grupet"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "S'u gjet asnjë rezultat."
 msgid "No time zone found."
 msgstr "S'u gjet asnjë zonë kohore."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "Ende asnjë regjistrim teme — provoni përsëri pas njoftimit tjetër."
 
@@ -620,7 +649,15 @@ msgstr "Tjetër"
 msgid "Owner"
 msgstr "Pronari"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "Kyç"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "Verifikimi i çelësit të hyrjes dështoi. Ju lutemi provoni përsëri."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "Kërkesë për leje"
 
@@ -638,13 +675,9 @@ msgstr "Privatësia"
 msgid "Profile"
 msgstr "Profili"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "lexo llogaritë e lidhura"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "lexo interesat"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "Rilinkoni llogaritë tuaja në këtë server"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "Të hiqet qasja?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "Hiq interesin"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "Ridërgo email-in"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "Zgjidh preferencën e temës"
 msgid "Send again"
 msgstr "Dërgo përsëri"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "Dërgo email"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "Me serif"
@@ -853,6 +894,10 @@ msgstr "Ekipet/Aplikacionet"
 msgid "Terms and conditions"
 msgstr "Kushtet dhe rregullat"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "Ai kod është i pasaktë ose ka skaduar."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "Tema"
@@ -861,7 +906,7 @@ msgstr "Tema"
 msgid "Theme Settings"
 msgstr "Cilësimet e temës"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Ky leje duhet të aktivizohet nga ti në cilësimet e aplikacionit."
 
@@ -930,7 +975,7 @@ msgstr "Shkruaj për të kërkuar..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "Nuk mund të ridrejtohet te hyrja. Ju lutemi provoni përsëri."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "I pacaktuar"
 
@@ -946,9 +991,9 @@ msgstr "Shtetet e Bashkuara"
 msgid "Unverified"
 msgstr "I paverifikuar"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "përdor shërbimet e AI-së"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "Përdorni çelësin tuaj të hyrjes"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "Kodi i verifikimit u dërgua"
 msgid "Verification failed"
 msgstr "Verifikimi dështoi"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "Verifiko"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "Verifiko adresën e email-it"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "Miniatura e videos"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "Faqja është nën mirëmbajtje!"
 msgid "Wednesday"
 msgstr "E mërkurë"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "shkruaj interesat"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "Llogaria juaj u zhvendos këtu nga {source}. Derisa ta fshini atje, mesazhet dhe njoftimet mund të arrijnë në të dy serverët, një pjesë e përmbajtjes suaj vazhdon të shërbejë nga serveri i vjetër dhe ndjekësit mund të kenë nevojë për disa minuta që t'ju gjejnë këtu."

@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> {permissionLabel} hayyama barbaada."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> hayyama armaan gadii gaafachaa jira:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "Sa'aatii 24"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "Sirrii (guyyaa fi sa'aatii)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "{domain} fayyadami"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "Hunda"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "Eeyyami"
 
@@ -121,6 +117,10 @@ msgstr "Bahuu mirkanaa'oo dha? Akkaawuntii kee fayyadamuuf deebitee seenuu qabda
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Olka'aa"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Koodii mirkaneessaa"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "Fedhii cimsi"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "Fedhii cimsi"
 msgid "Cancel"
 msgstr "Haquu"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "Beeksisa kanaaf ramaddii"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "Ramaddii beeksisaa jijjiiri"
 
@@ -198,7 +199,7 @@ msgstr "Filannoo cilliisi (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "Cufi"
 
@@ -238,10 +239,6 @@ msgstr "Compact"
 msgid "Confirm"
 msgstr "Mirkaneessi"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "ittigaltee server MCP"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "Qabiyyeen hin jijjiiramne"
@@ -254,6 +251,10 @@ msgstr "Odeeffannoo fi caasaa naannoo."
 msgid "Continue"
 msgstr "Itti fufi"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "{label} waliin itti fufi"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Garagalchi"
@@ -261,6 +262,18 @@ msgstr "Garagalchi"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "Galmee kana fe'uu hin dandeenye. Booda yaali."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "Koodii erguu hin dandeenye. Maaloo irra deebiʼii yaali."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "Mirkaneessa irra deebiʼaa jalqabuu hin dandeenye. Maaloo irra deebiʼii yaali."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "Akkaawuntii sana waliin mirkaneessuun hin danda'amne. Maaloo irra deebi'ii yaali."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "Idilee"
 msgid "Default AI account"
 msgstr "Akkaawuntii AI idilee"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "Akkaawuntii kee sarvaraa durii irraa haqi"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "Dhorki"
 
@@ -310,6 +327,10 @@ msgstr "Weeb biraawsarii irraa argi"
 msgid "Direction"
 msgstr "Kallatti"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "Dhiisi"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "Cinaa moobaayilaa mul'isa."
@@ -321,6 +342,18 @@ msgstr "Buufadhu"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "Dyslexiyaa Walitti Dhufu"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "Koodii imeelii"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "Koodii imeelii kee irraa galchi"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "Koodii mirkaneessaa kee galchi"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "Akkaawuntii haquu hin dandeenye"
 msgid "Failed to send verification code"
 msgstr "Koodii mirkanaa ergamuu hin dandeenye"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "Ramaddii toattaachuu hin dandeenye"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "Akkaawuntii kee jijjiiruu fixadhu"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "Milkaa'inaan ba'e"
 msgid "Logging out…"
 msgstr "Ba'aa jiraa…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "akkaawuntii hidhame qindeessi"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "gareewwan qindeessi"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "Bu'aan hin argamne."
 msgid "No time zone found."
 msgstr "Aanaan sa'aatii hin argamne."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "Hanga ammaatti galmeen mata duree hin jiru — beeksisa itti aanu booda irra deebi'ii yaali."
 
@@ -620,7 +649,15 @@ msgstr "Biraa"
 msgid "Owner"
 msgstr "Abbaa qabeenyaa"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr ""
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "Mirkaneessi passkey hin milkoofne. Maaloo irra deebiʼii yaali."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "Iyyannoo hayyamaa"
 
@@ -638,13 +675,9 @@ msgstr "Iccitii"
 msgid "Profile"
 msgstr "Piroofaayilii"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "akkaawuntii hidhame dubbisi"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "dantaa dubbisi"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "Akkaawuntiiwan kee sarvarri kana irratti irra deebi'ii walitti hidhi"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "Itti seenumsa haquuf?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "Dantaa haqi"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "Imeelii irra deebi'ii ergi"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "Filannoo akeeka filadhu"
 msgid "Send again"
 msgstr "Ammas erguu"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "Imeelii ergi"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "Serif"
@@ -853,6 +894,10 @@ msgstr "Gareewwan/Apps"
 msgid "Terms and conditions"
 msgstr "Haalota fi tarsiimoolee"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "Koodiin sun sirrii miti yookaan yeroon isaa darbeera."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "Akeeka"
@@ -861,7 +906,7 @@ msgstr "Akeeka"
 msgid "Theme Settings"
 msgstr "Qindaa'inoota Akeeka"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Hayyamni kun qindaa'inoota app keessatti siin dandeessifamuu qaba."
 
@@ -930,7 +975,7 @@ msgstr "Barbaaduuf barreessi..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "Galaa'uutti deebi'uu hin dandeenye. Mee deebi'iitii yaali."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "Hin ramadamne"
 
@@ -946,9 +991,9 @@ msgstr "Yunaaytid Isteeths"
 msgid "Unverified"
 msgstr "Hin mirkanaa'amne"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "tajaajila AI fayyadami"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "Passkey kee fayyadami"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "Koodiin mirkaneessaa ergameera"
 msgid "Verification failed"
 msgstr "Mirkaneessuun hin milkoofne"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "Mirkaneessi"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "Teessoo iimeelii mirkaneessi"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "Suuraa duraa viidiyoo"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "Saayitiin sirreeffama jala jira!"
 msgid "Wednesday"
 msgstr "Roobii"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "dantaa barreessi"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "Akkaawuntiin kee {source} irraa as fidame. Achitti haqtee hanga fixtutti, ergaawwan fi beeksisawwan sarvara lamaaniyyuu ga'uu danda'u, qabeenyi kee tokko tokko sarvaraa durii irraa tajaajilamu itti fufa, fi hordoftonni si argachuu dhaaf daqiiqaawwan muraasa fudhachuu danda'u."

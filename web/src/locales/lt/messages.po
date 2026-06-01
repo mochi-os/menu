@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> prašo leidimo {permissionLabel}."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> prašo šio leidimo:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 valandos"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "Absoliutus (data ir laikas)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "prieiga {domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "DI"
 msgid "All"
 msgstr "Visi"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "Leisti"
 
@@ -121,6 +117,10 @@ msgstr "Ar tikrai norite atsijungti? Norėdami pasiekti paskyrą, turėsite vėl
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Did."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Autentifikatoriaus kodas"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "Padidinti susidomėjimą"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "Padidinti susidomėjimą"
 msgid "Cancel"
 msgstr "Atšaukti"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "Šio pranešimo kategorija"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "Pakeisti pranešimo kategoriją"
 
@@ -198,7 +199,7 @@ msgstr "Išvalyti pasirinkimą (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "Uždaryti"
 
@@ -238,10 +239,6 @@ msgstr "Kompaktiškas"
 msgid "Confirm"
 msgstr "Patvirtinti"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "prisijungti prie MCP serverių"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "Turinys nepakeistas"
@@ -254,6 +251,10 @@ msgstr "Kontekstinė informacija ir detalės."
 msgid "Continue"
 msgstr "Tęsti"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "Tęsti su {label}"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Kopijuoti"
@@ -261,6 +262,18 @@ msgstr "Kopijuoti"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "Nepavyko įkelti šio dokumento. Pabandykite dar kartą vėliau."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "Nepavyko išsiųsti kodo. Bandykite dar kartą."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "Nepavyko pradėti pakartotinio tapatybės patvirtinimo. Bandykite dar kartą."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "Nepavyko patvirtinti su ta paskyra. Bandykite dar kartą."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "Numatytasis"
 msgid "Default AI account"
 msgstr "Numatytoji DI paskyra"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "Ištrinkite paskyrą senajame serveryje"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "Atmesti"
 
@@ -310,6 +327,10 @@ msgstr "Aptikti iš naršyklės"
 msgid "Direction"
 msgstr "Kryptis"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "Atmesti"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "Rodo mobiliąją šoninę juostą."
@@ -321,6 +342,18 @@ msgstr "Atsisiųsti"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "Tinkama disleksijai"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "El. pašto kodas"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "Įveskite kodą iš savo el. laiško"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "Įveskite autentifikatoriaus kodą"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "Nepavyko pašalinti paskyros"
 msgid "Failed to send verification code"
 msgstr "Nepavyko išsiųsti patvirtinimo kodo"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "Nepavyko atnaujinti kategorijos"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "Užbaikite paskyros perkėlimą"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "Sėkmingai atsijungta"
 msgid "Logging out…"
 msgstr "Atsijungiama…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "valdyti susietas paskyras"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "valdyti grupes"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "Rezultatų nerasta."
 msgid "No time zone found."
 msgstr "Laiko juostų nerasta."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "Dar nėra temos įrašo — bandykite dar kartą po kito pranešimo."
 
@@ -620,7 +649,15 @@ msgstr "Kita"
 msgid "Owner"
 msgstr "Savininkas"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "Slaptaraktis"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "Slaptarakčio patvirtinimas nepavyko. Bandykite dar kartą."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "Leidimo užklausa"
 
@@ -638,13 +675,9 @@ msgstr "Privatumas"
 msgid "Profile"
 msgstr "Profilis"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "skaityti susietas paskyras"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "skaityti interesus"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "Iš naujo susiekite paskyras šiame serveryje"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "Šalinti prieigą?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "Šalinti susidomėjimą"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "Siųsti el. laišką dar kartą"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "Pasirinkite temos nustatymą"
 msgid "Send again"
 msgstr "Siųsti dar kartą"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "Siųsti el. laišką"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "Serifinis"
@@ -853,6 +894,10 @@ msgstr "Komandos / programėlės"
 msgid "Terms and conditions"
 msgstr "Sąlygos ir nuostatos"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "Šis kodas neteisingas arba nebegalioja."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "Tema"
@@ -861,7 +906,7 @@ msgstr "Tema"
 msgid "Theme Settings"
 msgstr "Temos nustatymai"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Šį leidimą turite įjungti programėlės nustatymuose."
 
@@ -930,7 +975,7 @@ msgstr "Įveskite, kad ieškotumėte..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "Nepavyko peradresuoti į prisijungimą. Bandykite dar kartą."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "Nepriskirta"
 
@@ -946,9 +991,9 @@ msgstr "Jungtinės Valstijos"
 msgid "Unverified"
 msgstr "Nepatvirtinta"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "naudoti DI paslaugas"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "Naudokite savo slaptaraktį"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "Patvirtinimo kodas išsiųstas"
 msgid "Verification failed"
 msgstr "Patvirtinimas nepavyko"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "Patvirtinti"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "Patvirtinti el. pašto adresą"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "Vaizdo įrašo miniatiūra"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "Svetainė atnaujinama!"
 msgid "Wednesday"
 msgstr "Trečiadienis"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "rašyti interesus"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "Jūsų paskyra buvo perkelta čia iš {source}. Kol jos ten neištrinate, žinutės ir pranešimai gali pasiekti abu serverius, dalis jūsų turinio toliau pateikiama iš senojo serverio, o pasekėjams gali prireikti kelių minučių jus rasti čia."

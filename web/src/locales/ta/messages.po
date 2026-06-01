@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> {permissionLabel}க்கான அனுமதியை விரும்புகிறது."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> பின்வரும் அனுமதியைக் கோருகிறது:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 மணிநேரம்"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "முழுமையானது (தேதி மற்றும் நேரம்)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "{domain}-ஐ அணுகவும்"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "அனைத்தும்"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "அனுமதி"
 
@@ -121,6 +117,10 @@ msgstr "வெளியேற விரும்புகிறீர்கள�
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "ஏறு"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "அங்கீகரிப்பு குறியீடு"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "ஆர்வத்தை அதிகரி"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "ஆர்வத்தை அதிகரி"
 msgid "Cancel"
 msgstr "ரத்துசெய்"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "இந்த அறிவிப்புக்கான வகை"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "அறிவிப்பு வகையை மாற்று"
 
@@ -198,7 +199,7 @@ msgstr "தேர்வை அழி (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "மூடு"
 
@@ -238,10 +239,6 @@ msgstr "சுருக்கமான"
 msgid "Confirm"
 msgstr "உறுதிசெய்"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "MCP சேவையகங்களுடன் இணைக்கவும்"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "உள்ளடக்கம் மாற்றப்படவில்லை"
@@ -254,6 +251,10 @@ msgstr "சூழல் சார்ந்த தகவல் மற்றும
 msgid "Continue"
 msgstr "தொடர்"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "{label} மூலம் தொடரவும்"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "நகலெடு"
@@ -261,6 +262,18 @@ msgstr "நகலெடு"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "இந்த ஆவணத்தை ஏற்ற முடியவில்லை. பிறகு மீண்டும் முயற்சிக்கவும்."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "குறியீட்டை அனுப்ப முடியவில்லை. மீண்டும் முயற்சிக்கவும்."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "மறுஅங்கீகாரத்தைத் தொடங்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "அந்தக் கணக்கைச் சரிபார்க்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "இயல்புநிலை"
 msgid "Default AI account"
 msgstr "இயல்புநிலை AI கணக்கு"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "பழைய சேவையகத்தில் உங்கள் கணக்கை நீக்கவும்"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "மறு"
 
@@ -310,6 +327,10 @@ msgstr "வலை உலாவியிலிருந்து கண்டற�
 msgid "Direction"
 msgstr "திசை"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "நிராகரி"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "மொபைல் பக்கப்பட்டியைக் காட்டுகிறது."
@@ -321,6 +342,18 @@ msgstr "பதிவிறக்கு"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "டிஸ்லெக்சியாவுக்கு உகந்தது"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "மின்னஞ்சல் குறியீடு"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "உங்கள் மின்னஞ்சலில் உள்ள குறியீட்டை உள்ளிடவும்"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "உங்கள் அங்கீகரிப்பான் குறியீட்டை உள்ளிடவும்"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "கணக்கை நீக்க முடியவில்லை"
 msgid "Failed to send verification code"
 msgstr "சரிபார்ப்பு குறியீட்டை அனுப்ப முடியவில்லை"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "வகையைப் புதுப்பிக்க முடியவில்லை"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "கணக்கை நகர்த்துவதை முடிக்கவும்"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "வெற்றிகரமாக வெளியேறியது"
 msgid "Logging out…"
 msgstr "வெளியேறுகிறது…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "இணைக்கப்பட்ட கணக்குகளை நிர்வகிக்கவும்"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "குழுக்களை நிர்வகிக்கவும்"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "முடிவுகள் எதுவும் கிடைக்க�
 msgid "No time zone found."
 msgstr "நேர மண்டலம் எதுவும் கிடைக்கவில்லை."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "தலைப்புப் பதிவு இன்னும் இல்லை — அடுத்த அறிவிப்புக்குப் பிறகு மீண்டும் முயற்சிக்கவும்."
 
@@ -620,7 +649,15 @@ msgstr "மற்றவை"
 msgid "Owner"
 msgstr "உரிமையாளர்"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr "கடவுக்குறி"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "கடவுவிசை சரிபார்ப்பு தோல்வியடைந்தது. மீண்டும் முயற்சிக்கவும்."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "அனுமதி கோரிக்கை"
 
@@ -638,13 +675,9 @@ msgstr "தனியுரிமை"
 msgid "Profile"
 msgstr "சுயவிவரம்"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "இணைக்கப்பட்ட கணக்குகளைப் படிக்கவும்"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "ஆர்வங்களைப் படிக்கவும்"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "இந்த சேவையகத்தில் உங்கள் கணக்குகளை மீண்டும் இணைக்கவும்"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "அணுகலை அகற்றவா?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "ஆர்வத்தை அகற்று"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "மின்னஞ்சலை மீண்டும் அனுப்பு"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "தீம் விருப்பத்தை தேர்ந்தெ�
 msgid "Send again"
 msgstr "மீண்டும் அனுப்பு"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "மின்னஞ்சல் அனுப்பு"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "செரிஃப்"
@@ -853,6 +894,10 @@ msgstr "டீம்கள்/ஆப்கள்"
 msgid "Terms and conditions"
 msgstr "விதிமுறைகள் மற்றும் நிபந்தனைகள்"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "அந்தக் குறியீடு தவறானது அல்லது காலாவதியாகிவிட்டது."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "தீம்"
@@ -861,7 +906,7 @@ msgstr "தீம்"
 msgid "Theme Settings"
 msgstr "தீம் அமைப்புகள்"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "இந்த அனுமதியை ஆப் அமைப்புகளில் நீங்கள் இயக்க வேண்டும்."
 
@@ -930,7 +975,7 @@ msgstr "தேட தட்டச்சு செய்..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "உள்நுழைவுக்கு திருப்பி விட முடியவில்லை. தயவுசெய்து மீண்டும் முயற்சி செய்யுங்கள்."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "ஒதுக்கப்படாதது"
 
@@ -946,9 +991,9 @@ msgstr "ஐக்கிய அமெரிக்கா"
 msgid "Unverified"
 msgstr "சரிபார்க்கப்படாதது"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "AI சேவைகளைப் பயன்படுத்தவும்"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "உங்கள் கடவுவிசையைப் பயன்படுத்தவும்"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "சரிபார்ப்பு குறியீடு அனுப�
 msgid "Verification failed"
 msgstr "சரிபார்ப்பு தோல்வியடைந்தது"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "சரிபார்"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "மின்னஞ்சல் முகவரியை சரிபார்"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "வீடியோ சிறுபடம்"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "இணையதளம் பராமரிப்பில் உள்�
 msgid "Wednesday"
 msgstr "புதன்கிழமை"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "ஆர்வங்களை எழுதவும்"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "உங்கள் கணக்கு {source} இலிருந்து இங்கே நகர்த்தப்பட்டது. நீங்கள் அதை அங்கே நீக்கும் வரை, செய்திகளும் அறிவிப்புகளும் இரண்டு சேவையகங்களையும் அடையலாம், உங்கள் சில உள்ளடக்கம் பழைய சேவையகத்தில் இருந்து தொடர்ந்து வழங்கப்படும், மேலும் உங்கள் பின்தொடர்பவர்கள் இங்கே உங்களை கண்டுபிடிக்க சில நிமிடங்கள் ஆகலாம்."

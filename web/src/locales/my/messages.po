@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> သည် {permissionLabel} ခွင့်ပြုချက်ကို တောင်းခံနေသည်။"
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> သည် အောက်ပါ ခွင့်ပြုချက်ကို တောင်းဆိုနေသည်:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "၂၄ နာရီ"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "အပြည့်အစုံ (ရက်စွဲနှင့် အချိန်)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "{domain} ကို သုံးခွင့်"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "အားလုံး"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "ခွင့်ပြုမည်"
 
@@ -121,6 +117,10 @@ msgstr "log out လုပ်မှာသေချာပါသလား? သင�
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Asc"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Authenticator ကုဒ်"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "စိတ်ဝင်စားမှု မြှင့်တင်မည်"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "စိတ်ဝင်စားမှု မြှင့်တင်မ�
 msgid "Cancel"
 msgstr "မလုပ်တော့ပါ"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "ဤအကြောင်းကြားချက်အတွက် အမျိုးအစား"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "အကြောင်းကြားချက် အမျိုးအစား ပြောင်းမည်"
 
@@ -198,7 +199,7 @@ msgstr "ရွေးချယ်မှု ရှင်းမည် (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "ပိတ်မည်"
 
@@ -238,10 +239,6 @@ msgstr "ကျစ်လျစ်"
 msgid "Confirm"
 msgstr "အတည်ပြုမည်"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "MCP ဆာဗာများသို့ ချိတ်ဆက်ပါ"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "အကြောင်းအရာ မပြောင်းပါ"
@@ -254,6 +251,10 @@ msgstr "ဆက်စပ်အချက်အလက်နှင့် အသေ�
 msgid "Continue"
 msgstr "ဆက်လက်လုပ်ဆောင်မည်"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "{label} ဖြင့် ဆက်လက်လုပ်ဆောင်ပါ"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "ကူးမည်"
@@ -261,6 +262,18 @@ msgstr "ကူးမည်"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "ဤစာရွက်စာတမ်းကို ဖွင့်၍ မရပါ။ နောက်မှ ထပ်စမ်းကြည့်ပါ။"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "ကုဒ်ကို ပို့၍မရပါ။ ကျေးဇူးပြု၍ ထပ်စမ်းကြည့်ပါ။"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "ပြန်လည်အတည်ပြုခြင်းကို စတင်၍မရပါ။ ကျေးဇူးပြု၍ ထပ်စမ်းကြည့်ပါ။"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "ထိုအကောင့်ဖြင့် အတည်ပြု၍မရပါ။ ကျေးဇူးပြု၍ ထပ်မံကြိုးစားပါ။"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "မူရင်း"
 msgid "Default AI account"
 msgstr "မူရင်း AI အကောင့်"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "ဟောင်းသောဆာဗာမှ သင်၏အကောင့်ကို ဖျက်ပါ"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "ငြင်းပယ်မည်"
 
@@ -310,6 +327,10 @@ msgstr "Web browser မှ ရှာဖွေဖော်ထုတ်မည်"
 msgid "Direction"
 msgstr "ဦးတည်ရာ"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "ပယ်မည်"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "မိုဘိုင်း ဘေးဘားကို ပြသသည်။"
@@ -321,6 +342,18 @@ msgstr "ဒေါင်းလုဒ်"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "စာဖတ်ရခက်သူများအတွက်ရိုးရှင်း"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "အီးမေးလ် ကုဒ်"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "သင့်အီးမေးလ်မှ ကုဒ်ကို ထည့်ပါ"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "သင့်အထောက်အထားစိစစ်ရေးကုဒ်ကို ထည့်ပါ"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "အကောင့် ဖယ်ရှား၍ မရပါ"
 msgid "Failed to send verification code"
 msgstr "အတည်ပြုကုဒ် ပို့၍ မရပါ"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "အမျိုးအစား ပြင်ဆင်၍ မရပါ"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "အကောင့်ရွှေ့ပြောင်းခြင်း ပြီးဆုံးပါ"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "အောင်မြင်စွာ ထွက်ပြီးပါပ�
 msgid "Logging out…"
 msgstr "ထွက်နေသည်…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "ချိတ်ဆက်အကောင့်များ စီမံပါ"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "အုပ်စုများ စီမံပါ"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "ရလဒ်များ မတွေ့ပါ။"
 msgid "No time zone found."
 msgstr "အချိန်ဇုန် မတွေ့ပါ။"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "topic မှတ်တမ်း မရှိသေးပါ — နောက်အသိပေးချက်ပြီးနောက် ထပ်စမ်းကြည့်ပါ။"
 
@@ -620,7 +649,15 @@ msgstr "အခြား"
 msgid "Owner"
 msgstr "ပိုင်ရှင်"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr ""
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "ပတ်စ်ကီးအတည်ပြုခြင်း မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ ထပ်စမ်းကြည့်ပါ။"
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "ခွင့်ပြုချက် တောင်းခံချက်"
 
@@ -638,13 +675,9 @@ msgstr "ကိုယ်ရေးကိုယ်တာ"
 msgid "Profile"
 msgstr "ပရိုဖိုင်"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "ချိတ်ဆက်အကောင့်များ ဖတ်ပါ"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "စိတ်ဝင်စားရာများ ဖတ်ပါ"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "ဤဆာဗာပေါ်တွင် သင်၏အကောင့်များကို ပြန်လည်ချိတ်ဆက်ပါ"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "ဝင်ရောက်ခွင့် ဖယ်ရှားမလာ�
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "စိတ်ဝင်စားမှု ဖယ်ရှား"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "အီးမေးလ်ပြန်ပို့ရန်"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "အပြင်အဆင် ဦးစားပေးကို ရွေ�
 msgid "Send again"
 msgstr "ထပ်ပို့ပါ"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "အီးမေးလ်ပို့ရန်"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "ဆာရစ်ဖ်"
@@ -853,6 +894,10 @@ msgstr "အဖွဲ့များ/Apps"
 msgid "Terms and conditions"
 msgstr "စည်းကမ်းချက်များ"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "ထိုကုဒ်မှားနေသည် သို့မဟုတ် သက်တမ်းကုန်သွားပြီ။"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "အပြင်အဆင်"
@@ -861,7 +906,7 @@ msgstr "အပြင်အဆင်"
 msgid "Theme Settings"
 msgstr "အပြင်အဆင် ဆက်တင်များ"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "ဤ permission ကို app ဆက်တင်တွင် သင်ဖွင့်ပေးရပါမည်။"
 
@@ -930,7 +975,7 @@ msgstr "ရှာရန် ရိုက်ပါ..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "Login သို့ redirect လုပ်၍ မရပါ။ ထပ်ကြိုးစားပါ။"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "မသတ်မှတ်ထား"
 
@@ -946,9 +991,9 @@ msgstr "United States"
 msgid "Unverified"
 msgstr "အတည်ပြုမထား"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "AI ဝန်ဆောင်မှုများ သုံးပါ"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "သင့်ပတ်စ်ကီးကို သုံးပါ"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "အတည်ပြု ကုဒ် ပို့ပြီး"
 msgid "Verification failed"
 msgstr "အတည်ပြုခြင်း မအောင်မြင်ပါ"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "အတည်ပြုမည်"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "အီးမေးလ် လိပ်စာ အတည်ပြုမည်"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "ဗီဒီယို thumbnail"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "ဝက်ဘ်ဆိုက်ကို ပြုပြင်နေပ�
 msgid "Wednesday"
 msgstr "ဗုဒ္ဓဟူး"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "စိတ်ဝင်စားရာများ ရေးပါ"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "သင်၏အကောင့်ကို {source} မှ ဤနေရာသို့ ရွှေ့ပြောင်းခဲ့သည်။ သင်ကာကိုဖျက်မသည်အထိ၊ မက်ဆေ့ချ်များနှင့် အကြောင်းကြားချက်များ ဆာဗာနှစ်ခုလုံးသို့ ရောက်နိုင်သည်၊ သင်၏အချို့သောအကြောင်းအရာများကို ဟောင်းသောဆာဗာမှ ဆက်လက်ပေးဆောင်နေမည်ဖြစ်ပြီး ကြည့်ရှုသူများ သင်ကိုဤနေရာတွင် ရှာဖွေရန် မိနစ်အနည်းငယ် ကြာနိုင်သည်။"

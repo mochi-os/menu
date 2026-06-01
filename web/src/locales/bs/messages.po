@@ -13,9 +13,9 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
-msgid "<0>{appName}</0> wants permission to {permissionLabel}."
-msgstr "<0>{appName}</0> traži dozvolu za {permissionLabel}."
+#: src/use-permission-request.tsx:166
+msgid "<0>{appName}</0> is requesting the following permission:"
+msgstr "<0>{appName}</0> traži sljedeće dopuštenje:"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:39
 msgid "12 hours"
@@ -28,10 +28,6 @@ msgstr "24 sata"
 #: ../../../lib/web/src/lib/preference-utils.ts:48
 msgid "Absolute (date and time)"
 msgstr "Apsolutno (datum i vrijeme)"
-
-#: src/use-permission-request.tsx:50
-msgid "access {domain}"
-msgstr "pristupi {domain}"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:13
 msgid "Access Forbidden"
@@ -110,7 +106,7 @@ msgstr "AI"
 msgid "All"
 msgstr "Sve"
 
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:194
 msgid "Allow"
 msgstr "Dozvoli"
 
@@ -121,6 +117,10 @@ msgstr "Jeste li sigurni da se želite odjaviti? Morat ćete se ponovo prijaviti
 #: ../../../lib/web/src/components/data-table/column-header.tsx:56
 msgid "Asc"
 msgstr "Rastuće"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:312
+msgid "Authenticator code"
+msgstr "Authenticator kod"
 
 #: ../../../lib/web/src/components/place-picker.tsx:152
 msgid "Back"
@@ -137,6 +137,7 @@ msgid "Boost interest"
 msgstr "Pojačaj interes"
 
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:64
+#: ../../../lib/web/src/components/step-up-dialog.tsx:360
 #: ../../../lib/web/src/components/travelling-picker.tsx:292
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:245
 #: ../../../lib/web/src/features/access/access-dialog.tsx:325
@@ -146,11 +147,11 @@ msgstr "Pojačaj interes"
 msgid "Cancel"
 msgstr "Otkaži"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:131
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Category for this notification"
 msgstr "Kategorija za ovo obavještenje"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:115
+#: ../../../lib/web/src/components/notification-category-button.tsx:119
 msgid "Change notification category"
 msgstr "Promijeni kategoriju obavještenja"
 
@@ -198,7 +199,7 @@ msgstr "Očisti odabir (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:172
+#: src/use-permission-request.tsx:183
 msgid "Close"
 msgstr "Zatvori"
 
@@ -238,10 +239,6 @@ msgstr "Kompaktno"
 msgid "Confirm"
 msgstr "Potvrdi"
 
-#: src/use-permission-request.tsx:40
-msgid "connect to MCP servers"
-msgstr "poveži se sa MCP serverima"
-
 #: ../../../lib/web/src/lib/query-client.ts:78
 msgid "Content not modified"
 msgstr "Sadržaj nije izmijenjen"
@@ -254,6 +251,10 @@ msgstr "Kontekstualne informacije i detalji."
 msgid "Continue"
 msgstr "Nastavi"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:349
+msgid "Continue with {label}"
+msgstr "Nastavi s {label}"
+
 #: ../../../lib/web/src/components/ui/copy-button.tsx:60
 msgid "Copy"
 msgstr "Kopiraj"
@@ -261,6 +262,18 @@ msgstr "Kopiraj"
 #: ../../../lib/web/src/features/document/document-page.tsx:81
 msgid "Could not load this document. Please try again later."
 msgstr "Nije moguće učitati ovaj dokument. Molimo pokušajte ponovo kasnije."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:181
+msgid "Couldn't send the code. Please try again."
+msgstr "Slanje koda nije uspjelo. Molimo pokušajte ponovo."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:133
+msgid "Couldn't start re-authentication. Please try again."
+msgstr "Pokretanje ponovne autentifikacije nije uspjelo. Molimo pokušajte ponovo."
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:218
+msgid "Couldn't verify with that account. Please try again."
+msgstr "Provjera s tim računom nije uspjela. Molimo pokušajte ponovo."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:205
 #: ../../../lib/web/src/lib/preference-utils.ts:17
@@ -283,7 +296,11 @@ msgstr "Podrazumijevano"
 msgid "Default AI account"
 msgstr "Podrazumijevani AI račun"
 
-#: src/use-permission-request.tsx:177
+#: ../../../lib/web/src/components/restore-banner.tsx:88
+msgid "Delete your account on the old server"
+msgstr "Obrišite račun na starom serveru"
+
+#: src/use-permission-request.tsx:188
 msgid "Deny"
 msgstr "Odbij"
 
@@ -310,6 +327,10 @@ msgstr "Detektuj iz web browsera"
 msgid "Direction"
 msgstr "Smjer"
 
+#: ../../../lib/web/src/components/restore-banner.tsx:71
+msgid "Dismiss"
+msgstr "Odbaci"
+
 #: ../../../lib/web/src/components/ui/sidebar.tsx:235
 msgid "Displays the mobile sidebar."
 msgstr "Prikazuje mobilnu bočnu traku."
@@ -321,6 +342,18 @@ msgstr "Preuzmi"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Dyslexia-friendly"
 msgstr "Prilagođeno disleksiji"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:286
+msgid "Email code"
+msgstr "Email kod"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:296
+msgid "Enter the code from your email"
+msgstr "Unesite kod iz vaše e-pošte"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:321
+msgid "Enter your authenticator code"
+msgstr "Unesite kod iz aplikacije za autentifikaciju"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:35
 msgid "Expand sidebar"
@@ -342,9 +375,13 @@ msgstr "Uklanjanje računa nije uspjelo"
 msgid "Failed to send verification code"
 msgstr "Slanje verifikacionog koda nije uspjelo"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:104
+#: ../../../lib/web/src/components/notification-category-button.tsx:108
 msgid "Failed to update category"
 msgstr "Ažuriranje kategorije nije uspjelo"
+
+#: ../../../lib/web/src/components/restore-banner.tsx:77
+msgid "Finish moving your account"
+msgstr "Završite premještanje računa"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:244
 msgid "Floating"
@@ -486,14 +523,6 @@ msgstr "Uspješno odjavljeni"
 msgid "Logging out…"
 msgstr "Odjavljivanje…"
 
-#: src/use-permission-request.tsx:38
-msgid "manage connected accounts"
-msgstr "upravljaj povezanim računima"
-
-#: src/use-permission-request.tsx:41
-msgid "manage groups"
-msgstr "upravljaj grupama"
-
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
 #: src/shell-menu.tsx:293
@@ -554,7 +583,7 @@ msgstr "Nisu pronađeni rezultati."
 msgid "No time zone found."
 msgstr "Nije pronađena vremenska zona."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:139
 msgid "No topic record yet — try again after the next notification."
 msgstr "Još nema zapisa o temi — pokušajte ponovo nakon sljedećeg obavještenja."
 
@@ -620,7 +649,15 @@ msgstr "Drugo"
 msgid "Owner"
 msgstr "Vlasnik"
 
-#: src/use-permission-request.tsx:157
+#: ../../../lib/web/src/components/step-up-dialog.tsx:331
+msgid "Passkey"
+msgstr ""
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:206
+msgid "Passkey verification failed. Please try again."
+msgstr "Provjera pristupnog ključa nije uspjela. Molimo pokušajte ponovo."
+
+#: src/use-permission-request.tsx:164
 msgid "Permission request"
 msgstr "Zahtjev za ovlaštenje"
 
@@ -638,13 +675,9 @@ msgstr "Privatnost"
 msgid "Profile"
 msgstr "Profil"
 
-#: src/use-permission-request.tsx:37
-msgid "read connected accounts"
-msgstr "čitaj povezane račune"
-
-#: src/use-permission-request.tsx:42
-msgid "read interests"
-msgstr "čitaj interesovanja"
+#: ../../../lib/web/src/components/restore-banner.tsx:96
+msgid "Re-link your accounts on this server"
+msgstr "Povežite ponovo svoje račune na ovom serveru"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
 #: ../../../lib/web/src/components/search-entity-page.tsx:191
@@ -684,6 +717,10 @@ msgstr "Ukloniti pristup?"
 #: ../../../lib/web/src/components/post-tags.tsx:190
 msgid "Remove interest"
 msgstr "Ukloni interes"
+
+#: ../../../lib/web/src/components/step-up-dialog.tsx:364
+msgid "Resend email"
+msgstr "Ponovo pošalji e-poštu"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:77
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:78
@@ -772,6 +809,10 @@ msgstr "Odaberi preferencu teme"
 msgid "Send again"
 msgstr "Pošalji ponovo"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:304
+msgid "Send email"
+msgstr "Pošalji email"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Serif"
 msgstr "Serifno"
@@ -853,6 +894,10 @@ msgstr "Timovi/Aplikacije"
 msgid "Terms and conditions"
 msgstr "Uslovi i pravila"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:192
+msgid "That code is incorrect or has expired."
+msgstr "Taj kod je netačan ili je istekao."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:181
 msgid "Theme"
 msgstr "Tema"
@@ -861,7 +906,7 @@ msgstr "Tema"
 msgid "Theme Settings"
 msgstr "Postavke teme"
 
-#: src/use-permission-request.tsx:165
+#: src/use-permission-request.tsx:176
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Ovu dozvolu morate omogućiti vi u postavkama aplikacije."
 
@@ -930,7 +975,7 @@ msgstr "Otkucaj za pretragu..."
 msgid "Unable to redirect to login. Please try again."
 msgstr "Nije moguće preusmjeriti na prijavu. Pokušaj ponovo."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "Unassigned"
 msgstr "Nedodijeljeno"
 
@@ -946,9 +991,9 @@ msgstr "Sjedinjene Države"
 msgid "Unverified"
 msgstr "Neverifikovano"
 
-#: src/use-permission-request.tsx:39
-msgid "use AI services"
-msgstr "koristi AI servise"
+#: ../../../lib/web/src/components/step-up-dialog.tsx:335
+msgid "Use your passkey"
+msgstr "Koristite svoj pristupni ključ"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
 #: src/shell-menu.tsx:270
@@ -967,6 +1012,7 @@ msgstr "Verifikacijski kod poslan"
 msgid "Verification failed"
 msgstr "Verifikacija neuspjela"
 
+#: ../../../lib/web/src/components/step-up-dialog.tsx:385
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:164
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:106
 msgid "Verify"
@@ -975,6 +1021,10 @@ msgstr "Verifikuj"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:58
 msgid "Verify email address"
 msgstr "Verifikuj email adresu"
+
+#: ../../../lib/web/src/components/attachment-gallery.tsx:63
+msgid "Video thumbnail"
+msgstr "Sličica videa"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:30
 msgid "View"
@@ -1001,6 +1051,6 @@ msgstr "Web stranica je na održavanju!"
 msgid "Wednesday"
 msgstr "Srijeda"
 
-#: src/use-permission-request.tsx:43
-msgid "write interests"
-msgstr "piši interesovanja"
+#: ../../../lib/web/src/components/restore-banner.tsx:80
+msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
+msgstr "Vaš račun je premješten ovdje s {source}. Dok ga tamo ne obrišete, poruke i obavještenja mogu stizati na oba servera, dio vašeg sadržaja nastavlja se posluživati sa starog servera, a pratiocima može trebati nekoliko minuta da vas ovdje pronađu."
