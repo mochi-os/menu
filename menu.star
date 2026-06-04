@@ -51,10 +51,10 @@ def action_notifications_topic_set_category(a):
     app = a.input("app", "").strip()
     topic = a.input("topic", "").strip()
     object = a.input("object", "")
-    cat_raw = a.input("category", "")
+    cat_raw = a.input("category", "").strip()
     category = None
-    if cat_raw != "" and cat_raw.lstrip("-").isdigit():
-        category = int(cat_raw)
+    if cat_raw != "" and len(cat_raw) <= 64:
+        category = cat_raw
     ok = mochi.service.call("notifications", "topic/set_category", app, topic, object, category)
     if not ok:
         return a.error.label(404, "errors.not_found")
