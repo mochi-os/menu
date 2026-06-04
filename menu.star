@@ -60,7 +60,45 @@ def action_notifications_topic_set_category(a):
         return a.error.label(404, "errors.not_found")
     return {"data": {}}
 
-# Push registration (replaces direct HTTP calls to notifications accounts)
+# Push registration — proxies to the notifications app's accounts/* services
+# so the shell user-menu (top window) can manage browser push subscriptions.
+
+def action_push_vapid(a):
+    """Get VAPID key for browser push subscription."""
+    result = mochi.service.call("notifications", "accounts/vapid")
+    if result == None:
+        return a.error.label(503, "errors.push_notifications_not_available")
+    return {"data": result}
+
+def action_push_accounts_list(a):
+    """List browser push accounts."""
+    capability = a.input("capability", "")
+    result = mochi.service.call("notifications", "accounts/list", capability)
+    return {"data": result or []}
+
+def action_push_accounts_add(a):
+    """Register a browser push account."""
+    type = a.input("type", "").strip()
+    if not type:
+        return a.error.label(400, "errors.type_is_required")
+
+    fields = {}
+    for key in ["label", "endpoint", "auth", "p256dh"]:
+        val = a.input(key, "")
+        if val != "":
+            fields[key] = val
+
+    result = mochi.service.call("notifications", "accounts/add", type, **fields)
+    return {"data": result or {}}
+
+def action_push_accounts_remove(a):
+    """Remove a browser push account."""
+    id = a.input("id", "").strip()
+    if not id or not id.isdigit():
+        return a.error.label(400, "errors.invalid_id")
+
+    result = mochi.service.call("notifications", "accounts/remove", int(id))
+    return {"data": result or {}}
 
 # Permission grant (shell-managed permission request dialog)
 
