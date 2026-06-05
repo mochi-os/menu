@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:166
+#: src/use-permission-request.tsx:154
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> 请求以下权限:"
 
@@ -106,9 +106,17 @@ msgstr "AI"
 msgid "All"
 msgstr "全部"
 
-#: src/use-permission-request.tsx:194
+#: src/use-permission-request.tsx:182
 msgid "Allow"
 msgstr "允许"
+
+#: ../../../lib/web/src/lib/api-client.ts:189
+msgid "An error occurred"
+msgstr "发生错误"
+
+#: ../../../lib/web/src/lib/api-client.ts:252
+msgid "An unexpected error occurred"
+msgstr "发生意外错误"
 
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:24
 msgid "Are you sure you want to log out? You will need to log in again to access your account."
@@ -199,13 +207,13 @@ msgstr "清除选择(Esc)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:171
 msgid "Close"
 msgstr "关闭"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:97
-#: src/shell-menu.tsx:364
-#: src/shell-menu.tsx:365
+#: src/shell-menu.tsx:354
+#: src/shell-menu.tsx:355
 msgid "Close navigation"
 msgstr "关闭导航"
 
@@ -300,7 +308,7 @@ msgstr "默认 AI 账户"
 msgid "Delete your account on the old server"
 msgstr "删除旧服务器上的账户"
 
-#: src/use-permission-request.tsx:188
+#: src/use-permission-request.tsx:176
 msgid "Deny"
 msgstr "拒绝"
 
@@ -445,8 +453,8 @@ msgstr "隐藏"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:142
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
-#: src/shell-menu.tsx:375
-#: src/shell-menu.tsx:443
+#: src/shell-menu.tsx:365
+#: src/shell-menu.tsx:433
 msgid "Home"
 msgstr "首页"
 
@@ -525,7 +533,7 @@ msgstr "正在退出登录…"
 
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
-#: src/shell-menu.tsx:293
+#: src/shell-menu.tsx:283
 msgid "Mark all as read"
 msgstr "全部标为已读"
 
@@ -534,7 +542,7 @@ msgid "Medium"
 msgstr "中"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
-#: src/shell-menu.tsx:414
+#: src/shell-menu.tsx:404
 msgid "Menu"
 msgstr "菜单"
 
@@ -545,6 +553,10 @@ msgstr "公制"
 #: ../../../lib/web/src/lib/preference-utils.ts:56
 msgid "Monday"
 msgstr "星期一"
+
+#: ../../../lib/web/src/lib/api-client.ts:297
+msgid "Network error"
+msgstr "网络错误"
 
 #: ../../../lib/web/src/components/ui/sort-selector.tsx:40
 msgid "New"
@@ -587,7 +599,7 @@ msgstr "未找到时区。"
 msgid "No topic record yet — try again after the next notification."
 msgstr "暂无主题记录,请在下次通知后重试。"
 
-#: src/shell-menu.tsx:317
+#: src/shell-menu.tsx:307
 msgid "No unread notifications"
 msgstr "无未读通知"
 
@@ -608,7 +620,7 @@ msgstr "标准"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:247
-#: src/shell-menu.tsx:286
+#: src/shell-menu.tsx:276
 msgid "Notifications"
 msgstr "通知"
 
@@ -621,14 +633,14 @@ msgstr "抱歉!页面未找到!"
 msgid "Open account actions"
 msgstr "打开账户操作"
 
-#: src/shell-menu.tsx:254
-#: src/shell-menu.tsx:389
+#: src/shell-menu.tsx:244
+#: src/shell-menu.tsx:379
 msgid "Open menu"
 msgstr "打开菜单"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:57
-#: src/shell-menu.tsx:364
-#: src/shell-menu.tsx:365
+#: src/shell-menu.tsx:354
+#: src/shell-menu.tsx:355
 msgid "Open navigation"
 msgstr "打开导航"
 
@@ -661,9 +673,13 @@ msgstr "通行密钥验证失败。请重试。"
 msgid "Passkeys"
 msgstr "通行密钥"
 
-#: src/use-permission-request.tsx:164
+#: src/use-permission-request.tsx:152
 msgid "Permission request"
 msgstr "权限请求"
+
+#: ../../../lib/web/src/lib/api-client.ts:298
+msgid "Please check your internet connection and try again."
+msgstr "请检查您的网络连接后重试。"
 
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:332
 msgid "Previous image"
@@ -825,6 +841,11 @@ msgstr "发送邮件"
 msgid "Serif"
 msgstr "衬线体"
 
+#: ../../../lib/web/src/lib/api-client.ts:256
+#: ../../../lib/web/src/lib/api-client.ts:281
+msgid "Server error"
+msgstr "服务器错误"
+
 #: ../../../lib/web/src/components/server-documents-footer.tsx:16
 #: ../../../lib/web/src/features/document/document-page.tsx:37
 msgid "Server rules"
@@ -914,7 +935,7 @@ msgstr "主题"
 msgid "Theme Settings"
 msgstr "主题设置"
 
-#: src/use-permission-request.tsx:176
+#: src/use-permission-request.tsx:164
 msgid "This permission must be enabled by you in the app settings."
 msgstr "此权限需要由您在应用设置中启用。"
 
@@ -978,6 +999,10 @@ msgstr "输入以搜索用户"
 msgid "Type to search..."
 msgstr "输入以搜索..."
 
+#: ../../../lib/web/src/lib/api-client.ts:277
+msgid "Unable to connect to remote server"
+msgstr "无法连接到远程服务器"
+
 #: ../../../lib/web/src/lib/auth-manager.ts:82
 #: ../../../lib/web/src/lib/auth-manager.ts:94
 msgid "Unable to redirect to login. Please try again."
@@ -1004,7 +1029,7 @@ msgid "Use your passkey"
 msgstr "使用您的通行密钥"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
-#: src/shell-menu.tsx:270
+#: src/shell-menu.tsx:260
 msgid "User"
 msgstr "用户"
 
@@ -1039,7 +1064,7 @@ msgid "View"
 msgstr "查看"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:173
-#: src/shell-menu.tsx:302
+#: src/shell-menu.tsx:292
 msgid "View all"
 msgstr "查看全部"
 

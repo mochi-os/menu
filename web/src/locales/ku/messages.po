@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:166
+#: src/use-permission-request.tsx:154
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> destûra jêrîn dixwaze:"
 
@@ -106,9 +106,17 @@ msgstr "AI"
 msgid "All"
 msgstr "Hemû"
 
-#: src/use-permission-request.tsx:194
+#: src/use-permission-request.tsx:182
 msgid "Allow"
 msgstr "Destûr bide"
+
+#: ../../../lib/web/src/lib/api-client.ts:189
+msgid "An error occurred"
+msgstr "Çewtiyek çêbû"
+
+#: ../../../lib/web/src/lib/api-client.ts:252
+msgid "An unexpected error occurred"
+msgstr "Çewtiyeke neçaverêkirî çêbû"
 
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:24
 msgid "Are you sure you want to log out? You will need to log in again to access your account."
@@ -199,13 +207,13 @@ msgstr "Hilbijartinê paqij bike (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:171
 msgid "Close"
 msgstr "Bigire"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:97
-#: src/shell-menu.tsx:364
-#: src/shell-menu.tsx:365
+#: src/shell-menu.tsx:354
+#: src/shell-menu.tsx:355
 msgid "Close navigation"
 msgstr "Gerînê bigire"
 
@@ -300,7 +308,7 @@ msgstr "Hesabê standard yê AI"
 msgid "Delete your account on the old server"
 msgstr "Hesabê xwe li ser serverê kevn jêbirin"
 
-#: src/use-permission-request.tsx:188
+#: src/use-permission-request.tsx:176
 msgid "Deny"
 msgstr "Red bike"
 
@@ -445,8 +453,8 @@ msgstr "Veşêre"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:142
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
-#: src/shell-menu.tsx:375
-#: src/shell-menu.tsx:443
+#: src/shell-menu.tsx:365
+#: src/shell-menu.tsx:433
 msgid "Home"
 msgstr "Mal"
 
@@ -525,7 +533,7 @@ msgstr "Tê derketin…"
 
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
-#: src/shell-menu.tsx:293
+#: src/shell-menu.tsx:283
 msgid "Mark all as read"
 msgstr "Hemû wek xwendî nîşan bike"
 
@@ -534,7 +542,7 @@ msgid "Medium"
 msgstr "Navîn"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
-#: src/shell-menu.tsx:414
+#: src/shell-menu.tsx:404
 msgid "Menu"
 msgstr "Menu"
 
@@ -545,6 +553,10 @@ msgstr "Mîtrîk"
 #: ../../../lib/web/src/lib/preference-utils.ts:56
 msgid "Monday"
 msgstr "Duşem"
+
+#: ../../../lib/web/src/lib/api-client.ts:297
+msgid "Network error"
+msgstr "Çewtiya torê"
 
 #: ../../../lib/web/src/components/ui/sort-selector.tsx:40
 msgid "New"
@@ -587,7 +599,7 @@ msgstr "Tu herêma demê nehat dîtin."
 msgid "No topic record yet — try again after the next notification."
 msgstr "Hêj tu tomarê mijarê tune — piştî agahdariya pêştir dîsa biceribîne."
 
-#: src/shell-menu.tsx:317
+#: src/shell-menu.tsx:307
 msgid "No unread notifications"
 msgstr "Tu agahdariyên nexwendî tune"
 
@@ -608,7 +620,7 @@ msgstr "Asayî"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:247
-#: src/shell-menu.tsx:286
+#: src/shell-menu.tsx:276
 msgid "Notifications"
 msgstr "Agahdarî"
 
@@ -621,14 +633,14 @@ msgstr "Wey! Rûpel nehat dîtin!"
 msgid "Open account actions"
 msgstr "Çalakiyên hesabê veke"
 
-#: src/shell-menu.tsx:254
-#: src/shell-menu.tsx:389
+#: src/shell-menu.tsx:244
+#: src/shell-menu.tsx:379
 msgid "Open menu"
 msgstr "Menûyê veke"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:57
-#: src/shell-menu.tsx:364
-#: src/shell-menu.tsx:365
+#: src/shell-menu.tsx:354
+#: src/shell-menu.tsx:355
 msgid "Open navigation"
 msgstr "Navîgasyonê veke"
 
@@ -651,7 +663,7 @@ msgstr "Xwedî"
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:331
 msgid "Passkey"
-msgstr ""
+msgstr "Passkey"
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:206
 msgid "Passkey verification failed. Please try again."
@@ -661,9 +673,13 @@ msgstr "Verastkirina passkey têk çû. Ji kerema xwe dîsa biceribîne."
 msgid "Passkeys"
 msgstr "Passkey"
 
-#: src/use-permission-request.tsx:164
+#: src/use-permission-request.tsx:152
 msgid "Permission request"
 msgstr "Daxwaza destûrê"
+
+#: ../../../lib/web/src/lib/api-client.ts:298
+msgid "Please check your internet connection and try again."
+msgstr "Ji kerema xwe girêdana xwe ya înternetê kontrol bike û dîsa biceribîne."
 
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:332
 msgid "Previous image"
@@ -825,6 +841,11 @@ msgstr "E-nameyê bişîne"
 msgid "Serif"
 msgstr "Serîf"
 
+#: ../../../lib/web/src/lib/api-client.ts:256
+#: ../../../lib/web/src/lib/api-client.ts:281
+msgid "Server error"
+msgstr "Çewtiya rajekarê"
+
 #: ../../../lib/web/src/components/server-documents-footer.tsx:16
 #: ../../../lib/web/src/features/document/document-page.tsx:37
 msgid "Server rules"
@@ -914,7 +935,7 @@ msgstr "Tema"
 msgid "Theme Settings"
 msgstr "Mîhengên Temayê"
 
-#: src/use-permission-request.tsx:176
+#: src/use-permission-request.tsx:164
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Ev destûr divê ji aliyê te ve di mîhengên sepanê de were çalakkirin."
 
@@ -978,6 +999,10 @@ msgstr "Ji bo lêgerîna bikarhêneran binivîse"
 msgid "Type to search..."
 msgstr "Ji bo lêgerînê binivîse..."
 
+#: ../../../lib/web/src/lib/api-client.ts:277
+msgid "Unable to connect to remote server"
+msgstr "Nikare bi rajekarê dûr ve girê bide"
+
 #: ../../../lib/web/src/lib/auth-manager.ts:82
 #: ../../../lib/web/src/lib/auth-manager.ts:94
 msgid "Unable to redirect to login. Please try again."
@@ -1004,7 +1029,7 @@ msgid "Use your passkey"
 msgstr "Passkey-ya xwe bikar bîne"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
-#: src/shell-menu.tsx:270
+#: src/shell-menu.tsx:260
 msgid "User"
 msgstr "Bikarhêner"
 
@@ -1039,7 +1064,7 @@ msgid "View"
 msgstr "Bibîne"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:173
-#: src/shell-menu.tsx:302
+#: src/shell-menu.tsx:292
 msgid "View all"
 msgstr "Hemûyan bibîne"
 

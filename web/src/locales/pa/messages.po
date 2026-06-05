@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:166
+#: src/use-permission-request.tsx:154
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> ਹੇਠ ਲਿਖੀ ਇਜਾਜ਼ਤ ਮੰਗ ਰਿਹਾ ਹੈ:"
 
@@ -106,9 +106,17 @@ msgstr "AI"
 msgid "All"
 msgstr "ਸਾਰੇ"
 
-#: src/use-permission-request.tsx:194
+#: src/use-permission-request.tsx:182
 msgid "Allow"
 msgstr "ਇਜਾਜ਼ਤ ਦਿਓ"
+
+#: ../../../lib/web/src/lib/api-client.ts:189
+msgid "An error occurred"
+msgstr "ਇੱਕ ਗੜਬੜ ਹੋਈ"
+
+#: ../../../lib/web/src/lib/api-client.ts:252
+msgid "An unexpected error occurred"
+msgstr "ਇੱਕ ਅਣਕਿਆਸੀ ਗੜਬੜ ਹੋਈ"
 
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:24
 msgid "Are you sure you want to log out? You will need to log in again to access your account."
@@ -199,13 +207,13 @@ msgstr "ਚੋਣ ਸਾਫ਼ ਕਰੋ (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:171
 msgid "Close"
 msgstr "ਬੰਦ ਕਰੋ"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:97
-#: src/shell-menu.tsx:364
-#: src/shell-menu.tsx:365
+#: src/shell-menu.tsx:354
+#: src/shell-menu.tsx:355
 msgid "Close navigation"
 msgstr "ਨੈਵੀਗੇਸ਼ਨ ਬੰਦ ਕਰੋ"
 
@@ -300,7 +308,7 @@ msgstr "ਡਿਫਾਲਟ AI ਖਾਤਾ"
 msgid "Delete your account on the old server"
 msgstr "ਪੁਰਾਣੇ ਸਰਵਰ 'ਤੇ ਆਪਣਾ ਖਾਤਾ ਮਿਟਾਓ"
 
-#: src/use-permission-request.tsx:188
+#: src/use-permission-request.tsx:176
 msgid "Deny"
 msgstr "ਇਨਕਾਰ ਕਰੋ"
 
@@ -445,8 +453,8 @@ msgstr "ਲੁਕਾਓ"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:142
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
-#: src/shell-menu.tsx:375
-#: src/shell-menu.tsx:443
+#: src/shell-menu.tsx:365
+#: src/shell-menu.tsx:433
 msgid "Home"
 msgstr "ਮੁੱਖ"
 
@@ -525,7 +533,7 @@ msgstr "ਲੌਗ ਆਊਟ ਹੋ ਰਿਹਾ ਹੈ…"
 
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
-#: src/shell-menu.tsx:293
+#: src/shell-menu.tsx:283
 msgid "Mark all as read"
 msgstr "ਸਾਰੇ ਪੜ੍ਹੇ ਵਜੋਂ ਮਾਰਕ ਕਰੋ"
 
@@ -534,7 +542,7 @@ msgid "Medium"
 msgstr "ਮੱਧਮ"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
-#: src/shell-menu.tsx:414
+#: src/shell-menu.tsx:404
 msgid "Menu"
 msgstr "ਮੇਨੂ"
 
@@ -545,6 +553,10 @@ msgstr "ਮੈਟ੍ਰਿਕ"
 #: ../../../lib/web/src/lib/preference-utils.ts:56
 msgid "Monday"
 msgstr "ਸੋਮਵਾਰ"
+
+#: ../../../lib/web/src/lib/api-client.ts:297
+msgid "Network error"
+msgstr "ਨੈੱਟਵਰਕ ਗੜਬੜ"
 
 #: ../../../lib/web/src/components/ui/sort-selector.tsx:40
 msgid "New"
@@ -587,7 +599,7 @@ msgstr "ਕੋਈ ਟਾਈਮ ਜ਼ੋਨ ਨਹੀਂ ਮਿਲਿਆ।"
 msgid "No topic record yet — try again after the next notification."
 msgstr "ਅਜੇ ਕੋਈ ਟੌਪਿਕ ਰਿਕਾਰਡ ਨਹੀਂ — ਅਗਲੇ ਨੋਟੀਫਿਕੇਸ਼ਨ ਤੋਂ ਬਾਅਦ ਫਿਰ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
 
-#: src/shell-menu.tsx:317
+#: src/shell-menu.tsx:307
 msgid "No unread notifications"
 msgstr "ਕੋਈ ਨਾ-ਪੜ੍ਹੇ ਨੋਟੀਫਿਕੇਸ਼ਨ ਨਹੀਂ"
 
@@ -608,7 +620,7 @@ msgstr "ਸਧਾਰਨ"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:247
-#: src/shell-menu.tsx:286
+#: src/shell-menu.tsx:276
 msgid "Notifications"
 msgstr "ਨੋਟੀਫਿਕੇਸ਼ਨ"
 
@@ -621,14 +633,14 @@ msgstr "ਓਹੋ! ਪੇਜ ਨਹੀਂ ਮਿਲਿਆ!"
 msgid "Open account actions"
 msgstr "ਅਕਾਊਂਟ ਐਕਸ਼ਨ ਖੋਲ੍ਹੋ"
 
-#: src/shell-menu.tsx:254
-#: src/shell-menu.tsx:389
+#: src/shell-menu.tsx:244
+#: src/shell-menu.tsx:379
 msgid "Open menu"
 msgstr "ਮੇਨੂ ਖੋਲ੍ਹੋ"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:57
-#: src/shell-menu.tsx:364
-#: src/shell-menu.tsx:365
+#: src/shell-menu.tsx:354
+#: src/shell-menu.tsx:355
 msgid "Open navigation"
 msgstr "ਨੈਵੀਗੇਸ਼ਨ ਖੋਲ੍ਹੋ"
 
@@ -661,9 +673,13 @@ msgstr "ਪਾਸਕੀ ਤਸਦੀਕ ਅਸਫਲ ਰਹੀ। ਕਿਰਪ�
 msgid "Passkeys"
 msgstr "ਪਾਸਕੀਆਂ"
 
-#: src/use-permission-request.tsx:164
+#: src/use-permission-request.tsx:152
 msgid "Permission request"
 msgstr "ਪਰਮਿਸ਼ਨ ਬੇਨਤੀ"
+
+#: ../../../lib/web/src/lib/api-client.ts:298
+msgid "Please check your internet connection and try again."
+msgstr "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣਾ ਇੰਟਰਨੈੱਟ ਕਨੈਕਸ਼ਨ ਜਾਂਚੋ ਅਤੇ ਮੁੜ ਕੋਸ਼ਿਸ਼ ਕਰੋ।"
 
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:332
 msgid "Previous image"
@@ -825,6 +841,11 @@ msgstr "ਈਮੇਲ ਭੇਜੋ"
 msgid "Serif"
 msgstr "ਸੈਰੀਫ"
 
+#: ../../../lib/web/src/lib/api-client.ts:256
+#: ../../../lib/web/src/lib/api-client.ts:281
+msgid "Server error"
+msgstr "ਸਰਵਰ ਗੜਬੜ"
+
 #: ../../../lib/web/src/components/server-documents-footer.tsx:16
 #: ../../../lib/web/src/features/document/document-page.tsx:37
 msgid "Server rules"
@@ -914,7 +935,7 @@ msgstr "theme"
 msgid "Theme Settings"
 msgstr "theme ਸੈਟਿੰਗਾਂ"
 
-#: src/use-permission-request.tsx:176
+#: src/use-permission-request.tsx:164
 msgid "This permission must be enabled by you in the app settings."
 msgstr "ਇਹ ਅਨੁਮਤੀ ਤੁਹਾਡੇ ਵੱਲੋਂ ਐਪ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਚਾਲੂ ਕਰਨੀ ਜ਼ਰੂਰੀ ਹੈ।"
 
@@ -978,6 +999,10 @@ msgstr "ਉਪਭੋਗਤਾ ਖੋਜਣ ਲਈ ਟਾਈਪ ਕਰੋ"
 msgid "Type to search..."
 msgstr "ਖੋਜਣ ਲਈ ਟਾਈਪ ਕਰੋ..."
 
+#: ../../../lib/web/src/lib/api-client.ts:277
+msgid "Unable to connect to remote server"
+msgstr "ਰਿਮੋਟ ਸਰਵਰ ਨਾਲ ਕਨੈਕਟ ਨਹੀਂ ਹੋ ਸਕਿਆ"
+
 #: ../../../lib/web/src/lib/auth-manager.ts:82
 #: ../../../lib/web/src/lib/auth-manager.ts:94
 msgid "Unable to redirect to login. Please try again."
@@ -1004,7 +1029,7 @@ msgid "Use your passkey"
 msgstr "ਆਪਣੀ ਪਾਸਕੀ ਵਰਤੋ"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
-#: src/shell-menu.tsx:270
+#: src/shell-menu.tsx:260
 msgid "User"
 msgstr "ਉਪਭੋਗਤਾ"
 
@@ -1039,7 +1064,7 @@ msgid "View"
 msgstr "ਦੇਖੋ"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:173
-#: src/shell-menu.tsx:302
+#: src/shell-menu.tsx:292
 msgid "View all"
 msgstr "ਸਭ ਦੇਖੋ"
 

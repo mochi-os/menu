@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:166
+#: src/use-permission-request.tsx:154
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> निम्नलिखित अनुमति मांगत बा:"
 
@@ -106,9 +106,17 @@ msgstr "AI"
 msgid "All"
 msgstr "सब"
 
-#: src/use-permission-request.tsx:194
+#: src/use-permission-request.tsx:182
 msgid "Allow"
 msgstr "अनुमति दीं"
+
+#: ../../../lib/web/src/lib/api-client.ts:189
+msgid "An error occurred"
+msgstr "एगो त्रुटि भइल"
+
+#: ../../../lib/web/src/lib/api-client.ts:252
+msgid "An unexpected error occurred"
+msgstr "एगो अप्रत्याशित त्रुटि भइल"
 
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:24
 msgid "Are you sure you want to log out? You will need to log in again to access your account."
@@ -199,13 +207,13 @@ msgstr "चयन साफ करीं (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:171
 msgid "Close"
 msgstr "बंद करीं"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:97
-#: src/shell-menu.tsx:364
-#: src/shell-menu.tsx:365
+#: src/shell-menu.tsx:354
+#: src/shell-menu.tsx:355
 msgid "Close navigation"
 msgstr "नेविगेशन बंद करीं"
 
@@ -300,7 +308,7 @@ msgstr "डिफ़ॉल्ट AI खाता"
 msgid "Delete your account on the old server"
 msgstr "पुरान सर्वर पर आपन खाता मेटाईं"
 
-#: src/use-permission-request.tsx:188
+#: src/use-permission-request.tsx:176
 msgid "Deny"
 msgstr "मना करीं"
 
@@ -445,8 +453,8 @@ msgstr "छिपाईं"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:142
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
-#: src/shell-menu.tsx:375
-#: src/shell-menu.tsx:443
+#: src/shell-menu.tsx:365
+#: src/shell-menu.tsx:433
 msgid "Home"
 msgstr "होम"
 
@@ -525,7 +533,7 @@ msgstr "लॉग आउट हो रहल बा…"
 
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
-#: src/shell-menu.tsx:293
+#: src/shell-menu.tsx:283
 msgid "Mark all as read"
 msgstr "सब के पढ़ल चिह्नित करीं"
 
@@ -534,7 +542,7 @@ msgid "Medium"
 msgstr "मध्यम"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
-#: src/shell-menu.tsx:414
+#: src/shell-menu.tsx:404
 msgid "Menu"
 msgstr "मेनू"
 
@@ -545,6 +553,10 @@ msgstr "मीट्रिक"
 #: ../../../lib/web/src/lib/preference-utils.ts:56
 msgid "Monday"
 msgstr "सोमवार"
+
+#: ../../../lib/web/src/lib/api-client.ts:297
+msgid "Network error"
+msgstr "नेटवर्क त्रुटि"
 
 #: ../../../lib/web/src/components/ui/sort-selector.tsx:40
 msgid "New"
@@ -587,7 +599,7 @@ msgstr "कौनो टाइम जोन ना मिलल।"
 msgid "No topic record yet — try again after the next notification."
 msgstr "अबहीं तक कौनो विषय रिकॉर्ड नइखे — अगिला सूचना के बाद फेर कोशिश करीं।"
 
-#: src/shell-menu.tsx:317
+#: src/shell-menu.tsx:307
 msgid "No unread notifications"
 msgstr "कौनो ना पढ़ल सूचना नइखे"
 
@@ -608,7 +620,7 @@ msgstr "सामान्य"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:247
-#: src/shell-menu.tsx:286
+#: src/shell-menu.tsx:276
 msgid "Notifications"
 msgstr "सूचना"
 
@@ -621,14 +633,14 @@ msgstr "ओह! पन्ना ना मिलल!"
 msgid "Open account actions"
 msgstr "खाता क्रिया खोलीं"
 
-#: src/shell-menu.tsx:254
-#: src/shell-menu.tsx:389
+#: src/shell-menu.tsx:244
+#: src/shell-menu.tsx:379
 msgid "Open menu"
 msgstr "मेनू खोलीं"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:57
-#: src/shell-menu.tsx:364
-#: src/shell-menu.tsx:365
+#: src/shell-menu.tsx:354
+#: src/shell-menu.tsx:355
 msgid "Open navigation"
 msgstr "नेविगेशन खोलीं"
 
@@ -651,7 +663,7 @@ msgstr "मालिक"
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:331
 msgid "Passkey"
-msgstr ""
+msgstr "पासकी"
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:206
 msgid "Passkey verification failed. Please try again."
@@ -661,9 +673,13 @@ msgstr "पासकी सत्यापन विफल हो गइल। �
 msgid "Passkeys"
 msgstr "Passkey"
 
-#: src/use-permission-request.tsx:164
+#: src/use-permission-request.tsx:152
 msgid "Permission request"
 msgstr "अनुमति अनुरोध"
+
+#: ../../../lib/web/src/lib/api-client.ts:298
+msgid "Please check your internet connection and try again."
+msgstr "कृपया आपन इंटरनेट कनेक्शन जाँचीं आ फेर से कोसिस करीं।"
 
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:332
 msgid "Previous image"
@@ -825,6 +841,11 @@ msgstr "ईमेल भेजीं"
 msgid "Serif"
 msgstr "सेरिफ़"
 
+#: ../../../lib/web/src/lib/api-client.ts:256
+#: ../../../lib/web/src/lib/api-client.ts:281
+msgid "Server error"
+msgstr "सर्वर त्रुटि"
+
 #: ../../../lib/web/src/components/server-documents-footer.tsx:16
 #: ../../../lib/web/src/features/document/document-page.tsx:37
 msgid "Server rules"
@@ -914,7 +935,7 @@ msgstr "थीम"
 msgid "Theme Settings"
 msgstr "थीम सेटिंग"
 
-#: src/use-permission-request.tsx:176
+#: src/use-permission-request.tsx:164
 msgid "This permission must be enabled by you in the app settings."
 msgstr "ई अनुमति आपके ऐप सेटिंग में सक्षम कइल जाए के पड़ी।"
 
@@ -978,6 +999,10 @@ msgstr "उपयोगकर्ता खोजे खातिर टाइप
 msgid "Type to search..."
 msgstr "खोजे खातिर टाइप करीं..."
 
+#: ../../../lib/web/src/lib/api-client.ts:277
+msgid "Unable to connect to remote server"
+msgstr "रिमोट सर्वर से जुड़े में असमर्थ"
+
 #: ../../../lib/web/src/lib/auth-manager.ts:82
 #: ../../../lib/web/src/lib/auth-manager.ts:94
 msgid "Unable to redirect to login. Please try again."
@@ -1004,7 +1029,7 @@ msgid "Use your passkey"
 msgstr "आपन पासकी इस्तेमाल करीं"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
-#: src/shell-menu.tsx:270
+#: src/shell-menu.tsx:260
 msgid "User"
 msgstr "उपयोगकर्ता"
 
@@ -1039,7 +1064,7 @@ msgid "View"
 msgstr "देखीं"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:173
-#: src/shell-menu.tsx:302
+#: src/shell-menu.tsx:292
 msgid "View all"
 msgstr "सब देखीं"
 

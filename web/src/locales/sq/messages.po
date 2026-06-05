@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:166
+#: src/use-permission-request.tsx:154
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> po kërkon lejen e mëposhtme:"
 
@@ -106,9 +106,17 @@ msgstr "AI"
 msgid "All"
 msgstr "Të gjitha"
 
-#: src/use-permission-request.tsx:194
+#: src/use-permission-request.tsx:182
 msgid "Allow"
 msgstr "Lejo"
+
+#: ../../../lib/web/src/lib/api-client.ts:189
+msgid "An error occurred"
+msgstr "Ndodhi një gabim"
+
+#: ../../../lib/web/src/lib/api-client.ts:252
+msgid "An unexpected error occurred"
+msgstr "Ndodhi një gabim i papritur"
 
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:24
 msgid "Are you sure you want to log out? You will need to log in again to access your account."
@@ -199,13 +207,13 @@ msgstr "Pastro përzgjedhjen (Escape)"
 #: ../../../lib/web/src/components/ui/dialog.tsx:75
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:318
 #: ../../../lib/web/src/components/ui/sheet.tsx:76
-#: src/use-permission-request.tsx:183
+#: src/use-permission-request.tsx:171
 msgid "Close"
 msgstr "Mbyll"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:97
-#: src/shell-menu.tsx:364
-#: src/shell-menu.tsx:365
+#: src/shell-menu.tsx:354
+#: src/shell-menu.tsx:355
 msgid "Close navigation"
 msgstr "Mbyll lundrimin"
 
@@ -300,7 +308,7 @@ msgstr "Llogaria e parazgjedhur AI"
 msgid "Delete your account on the old server"
 msgstr "Fshini llogarinë tuaj në serverin e vjetër"
 
-#: src/use-permission-request.tsx:188
+#: src/use-permission-request.tsx:176
 msgid "Deny"
 msgstr "Mohoj"
 
@@ -445,8 +453,8 @@ msgstr "Fshih"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:142
 #: ../../../lib/web/src/components/layout/top-bar.tsx:62
 #: ../../../lib/web/src/components/layout/top-bar.tsx:91
-#: src/shell-menu.tsx:375
-#: src/shell-menu.tsx:443
+#: src/shell-menu.tsx:365
+#: src/shell-menu.tsx:433
 msgid "Home"
 msgstr "Faqja kryesore"
 
@@ -525,7 +533,7 @@ msgstr "Duke dalë…"
 
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:86
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:220
-#: src/shell-menu.tsx:293
+#: src/shell-menu.tsx:283
 msgid "Mark all as read"
 msgstr "Shëno të gjitha si të lexuara"
 
@@ -534,7 +542,7 @@ msgid "Medium"
 msgstr "I mesëm"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:152
-#: src/shell-menu.tsx:414
+#: src/shell-menu.tsx:404
 msgid "Menu"
 msgstr "Menyja"
 
@@ -545,6 +553,10 @@ msgstr "Metrik"
 #: ../../../lib/web/src/lib/preference-utils.ts:56
 msgid "Monday"
 msgstr "E hënë"
+
+#: ../../../lib/web/src/lib/api-client.ts:297
+msgid "Network error"
+msgstr "Gabim rrjeti"
 
 #: ../../../lib/web/src/components/ui/sort-selector.tsx:40
 msgid "New"
@@ -587,7 +599,7 @@ msgstr "S'u gjet asnjë zonë kohore."
 msgid "No topic record yet — try again after the next notification."
 msgstr "Ende asnjë regjistrim teme — provoni përsëri pas njoftimit tjetër."
 
-#: src/shell-menu.tsx:317
+#: src/shell-menu.tsx:307
 msgid "No unread notifications"
 msgstr "Asnjë njoftim i palexuar"
 
@@ -608,7 +620,7 @@ msgstr "Normale"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:132
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:146
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:247
-#: src/shell-menu.tsx:286
+#: src/shell-menu.tsx:276
 msgid "Notifications"
 msgstr "Njoftime"
 
@@ -621,14 +633,14 @@ msgstr "Ups! Faqja s'u gjet!"
 msgid "Open account actions"
 msgstr "Hap veprimet e llogarisë"
 
-#: src/shell-menu.tsx:254
-#: src/shell-menu.tsx:389
+#: src/shell-menu.tsx:244
+#: src/shell-menu.tsx:379
 msgid "Open menu"
 msgstr "Hap menynë"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:57
-#: src/shell-menu.tsx:364
-#: src/shell-menu.tsx:365
+#: src/shell-menu.tsx:354
+#: src/shell-menu.tsx:355
 msgid "Open navigation"
 msgstr "Hap navigimin"
 
@@ -661,9 +673,13 @@ msgstr "Verifikimi i çelësit të hyrjes dështoi. Ju lutemi provoni përsëri.
 msgid "Passkeys"
 msgstr "Kyçet"
 
-#: src/use-permission-request.tsx:164
+#: src/use-permission-request.tsx:152
 msgid "Permission request"
 msgstr "Kërkesë për leje"
+
+#: ../../../lib/web/src/lib/api-client.ts:298
+msgid "Please check your internet connection and try again."
+msgstr "Kontrolloni lidhjen tuaj me internetin dhe provoni përsëri."
 
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:332
 msgid "Previous image"
@@ -825,6 +841,11 @@ msgstr "Dërgo email"
 msgid "Serif"
 msgstr "Me serif"
 
+#: ../../../lib/web/src/lib/api-client.ts:256
+#: ../../../lib/web/src/lib/api-client.ts:281
+msgid "Server error"
+msgstr "Gabim serveri"
+
 #: ../../../lib/web/src/components/server-documents-footer.tsx:16
 #: ../../../lib/web/src/features/document/document-page.tsx:37
 msgid "Server rules"
@@ -914,7 +935,7 @@ msgstr "Tema"
 msgid "Theme Settings"
 msgstr "Cilësimet e temës"
 
-#: src/use-permission-request.tsx:176
+#: src/use-permission-request.tsx:164
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Ky leje duhet të aktivizohet nga ti në cilësimet e aplikacionit."
 
@@ -978,6 +999,10 @@ msgstr "Shkruaj për të kërkuar përdorues"
 msgid "Type to search..."
 msgstr "Shkruaj për të kërkuar..."
 
+#: ../../../lib/web/src/lib/api-client.ts:277
+msgid "Unable to connect to remote server"
+msgstr "Nuk u lidh dot me serverin në distancë"
+
 #: ../../../lib/web/src/lib/auth-manager.ts:82
 #: ../../../lib/web/src/lib/auth-manager.ts:94
 msgid "Unable to redirect to login. Please try again."
@@ -1004,7 +1029,7 @@ msgid "Use your passkey"
 msgstr "Përdorni çelësin tuaj të hyrjes"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:155
-#: src/shell-menu.tsx:270
+#: src/shell-menu.tsx:260
 msgid "User"
 msgstr "Përdoruesi"
 
@@ -1039,7 +1064,7 @@ msgid "View"
 msgstr "Shiko"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:173
-#: src/shell-menu.tsx:302
+#: src/shell-menu.tsx:292
 msgid "View all"
 msgstr "Shiko të gjitha"
 
