@@ -432,9 +432,16 @@
         var currentApp = getAppNameFromPath(window.location.pathname);
         var navApp = getAppNameFromPath(data.path);
         if (navApp && navApp !== currentApp) return;
-        // Only push a new history entry when the path actually changed
+        // Only touch history when the path actually changed. Honor the iframe's
+        // push-vs-replace intent: a replace (URL canonicalization, filter state,
+        // the reload that fires on back) must NOT add a back-stack entry, else
+        // it buries the app-home entry and browser-back skips it.
         if (data.path !== lastNavigatedPath) {
-            history.pushState(null, '', data.path);
+            if (data.replace) {
+                history.replaceState(null, '', data.path);
+            } else {
+                history.pushState(null, '', data.path);
+            }
             lastNavigatedPath = data.path;
         }
     }
