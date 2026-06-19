@@ -49,7 +49,7 @@ function NotificationItem({
   return (
     <div
       className={cn(
-        'group flex w-full items-start gap-3 px-4 py-2 transition-colors hover:bg-muted/50',
+        'group flex w-full items-start gap-3 px-4 py-2 transition-colors hover:bg-hover',
         isUnread ? 'bg-muted/30' : 'bg-transparent'
       )}
     >
@@ -242,7 +242,7 @@ export function MochiShellMenu() {
     <button
       type='button'
       aria-label={t`Open menu`}
-      className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 hover:bg-interactive-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+      className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 hover:bg-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
     >
       <EntityAvatar fingerprint={identity || undefined} name={name} size="sm" />
       {unreadCount > 0 && (
@@ -262,7 +262,7 @@ export function MochiShellMenu() {
       <div className='flex items-center gap-1 ms-4'>
         <button
           onClick={() => { setMenuOpen(false); setTimeout(() => setSignOutOpen(true), 150) }}
-          className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-interactive-hover active:bg-interactive-active'
+          className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-hover active:bg-interactive-active'
         >
           <LogOut className='size-4' />
         </button>
@@ -279,7 +279,7 @@ export function MochiShellMenu() {
         {unreadCount > 0 && (
           <button
             onClick={() => { markAllAsRead(); setMenuOpen(false) }}
-            className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-interactive-hover active:bg-interactive-active'
+            className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-hover active:bg-interactive-active'
             title={t`Mark all as read`}
           >
             <Check className='size-4' />
@@ -288,7 +288,7 @@ export function MochiShellMenu() {
         <a
           href='/notifications/'
           onClick={() => setMenuOpen(false)}
-          className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-interactive-hover active:bg-interactive-active'
+          className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-hover active:bg-interactive-active'
           title={t`View all`}
         >
           <ExternalLink className='size-4' />
@@ -354,7 +354,7 @@ export function MochiShellMenu() {
               aria-label={sidebarState === 'expanded' ? t`Close navigation` : t`Open navigation`}
               title={sidebarState === 'expanded' ? t`Close navigation` : t`Open navigation`}
               onClick={handleSidebarToggle}
-              className='flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 hover:bg-interactive-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+              className='flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 hover:bg-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
             >
               {sidebarState === 'expanded' ? <PanelLeftClose className='size-5' /> : <PanelLeftOpen className='size-5' />}
             </button>
@@ -363,7 +363,7 @@ export function MochiShellMenu() {
           <a
             href='/'
             title={t`Home`}
-            className='flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 hover:bg-interactive-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+            className='flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 hover:bg-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
           >
             <MochiLogo />
           </a>
@@ -378,7 +378,7 @@ export function MochiShellMenu() {
             type='button'
             aria-label={t`Open menu`}
             onClick={() => setMenuOpen(true)}
-            className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 hover:bg-interactive-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+            className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 hover:bg-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
           >
             <EntityAvatar fingerprint={identity || undefined} name={name} size="sm" />
             {unreadCount > 0 && (
