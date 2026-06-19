@@ -673,6 +673,14 @@
                 // open iframe re-activates its Lingui catalog without a reload.
                 if (typeof data.language === 'string') currentLanguage = data.language;
                 postToIframe({ type: 'language-change', language: currentLanguage });
+                if (typeof data.language === 'string') {
+                    try { localStorage.setItem('mochi:language', data.language); } catch (e) {}
+                    try {
+                        var oneYear = 60 * 60 * 24 * 365;
+                        document.cookie = 'mochi_language=' + encodeURIComponent(data.language) +
+                            '; path=/; max-age=' + oneYear + '; SameSite=Lax';
+                    } catch (e) {}
+                }
                 // Flip the shell page's own direction so #menu's logical
                 // positioning lands on the correct visual side without reload.
                 (function() {
