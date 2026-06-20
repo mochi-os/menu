@@ -1,3 +1,8 @@
+// Copyright © 2026 Mochi OÜ
+// SPDX-License-Identifier: AGPL-3.0-only
+// This file is part of Mochi, licensed under the GNU AGPL v3 with the
+// Mochi Application Interface Exception - see license.txt and license-exception.md.
+
 // Handles 'shell-fetch' postMessage requests from sandboxed iframes.
 // The iframe cannot make authenticated requests directly (no cookies),
 // so it proxies them through the shell via postMessage.

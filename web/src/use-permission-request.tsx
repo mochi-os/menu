@@ -1,3 +1,8 @@
+// Copyright © 2026 Mochi OÜ
+// SPDX-License-Identifier: AGPL-3.0-only
+// This file is part of Mochi, licensed under the GNU AGPL v3 with the
+// Mochi Application Interface Exception - see license.txt and license-exception.md.
+
 // Shell-managed permission request dialog.
 // Listens for 'request-permission' postMessage from app iframes,
 // shows a dialog for the user to grant or deny the permission.

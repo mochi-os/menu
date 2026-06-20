@@ -1,3 +1,8 @@
+// Copyright © 2026 Mochi OÜ
+// SPDX-License-Identifier: AGPL-3.0-only
+// This file is part of Mochi, licensed under the GNU AGPL v3 with the
+// Mochi Application Interface Exception - see license.txt and license-exception.md.
+
 // Auto-register browser push if permission is already granted.
 // Also handles push-subscribe requests from app iframes via postMessage.
 // All API calls go through the menu's own backend (cookie auth).
