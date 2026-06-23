@@ -32,6 +32,9 @@ import {
   PopoverContent,
   PopoverTrigger,
   ScrollArea,
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
   type Notification,
 } from '@mochi/web'
 
@@ -247,7 +250,7 @@ export function MochiShellMenu() {
     <button
       type='button'
       aria-label={t`Open menu`}
-      className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 hover:bg-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+      className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
     >
       <EntityAvatar fingerprint={identity || undefined} name={name} size="sm" />
       {unreadCount > 0 && (
@@ -265,12 +268,18 @@ export function MochiShellMenu() {
         <span className='text-sm font-semibold'>{name || t`User`}</span>
       </div>
       <div className='flex items-center gap-1 ms-4'>
-        <button
-          onClick={() => { setMenuOpen(false); setTimeout(() => setSignOutOpen(true), 150) }}
-          className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-hover active:bg-interactive-active'
-        >
-          <LogOut className='size-4' />
-        </button>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button
+              onClick={() => { setMenuOpen(false); setTimeout(() => setSignOutOpen(true), 150) }}
+              aria-label={t`Log out`}
+              className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-hover active:bg-interactive-active'
+            >
+              <LogOut className='size-4' />
+            </button>
+          </TooltipTrigger>
+          <TooltipContent>{t`Log out`}</TooltipContent>
+        </Tooltip>
       </div>
     </div>
   )
@@ -282,22 +291,32 @@ export function MochiShellMenu() {
       </span>
       <div className='flex items-center gap-1'>
         {unreadCount > 0 && (
-          <button
-            onClick={() => { markAllAsRead(); setMenuOpen(false) }}
-            className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-hover active:bg-interactive-active'
-            title={t`Mark all as read`}
-          >
-            <Check className='size-4' />
-          </button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                onClick={() => { markAllAsRead(); setMenuOpen(false) }}
+                aria-label={t`Mark all as read`}
+                className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-hover active:bg-interactive-active'
+              >
+                <Check className='size-4' />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>{t`Mark all as read`}</TooltipContent>
+          </Tooltip>
         )}
-        <a
-          href='/notifications/'
-          onClick={() => setMenuOpen(false)}
-          className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-hover active:bg-interactive-active'
-          title={t`View all`}
-        >
-          <ExternalLink className='size-4' />
-        </a>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <a
+              href='/notifications/'
+              onClick={() => setMenuOpen(false)}
+              aria-label={t`View all`}
+              className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-hover active:bg-interactive-active'
+            >
+              <ExternalLink className='size-4' />
+            </a>
+          </TooltipTrigger>
+          <TooltipContent>{t`View all`}</TooltipContent>
+        </Tooltip>
       </div>
     </div>
   )
@@ -338,7 +357,12 @@ export function MochiShellMenu() {
 
   const menuControl = (
     <Popover open={menuOpen} onOpenChange={setMenuOpen}>
-      <PopoverTrigger asChild>{trigger}</PopoverTrigger>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <PopoverTrigger asChild>{trigger}</PopoverTrigger>
+        </TooltipTrigger>
+        <TooltipContent>{t`Open menu`}</TooltipContent>
+      </Tooltip>
       <PopoverContent
         align='start'
         sideOffset={8}
@@ -354,24 +378,33 @@ export function MochiShellMenu() {
       <>
         <header className='flex h-12 w-full items-center gap-1 border-b bg-background px-2'>
           {sidebarPresent && (
-            <button
-              type='button'
-              aria-label={sidebarState === 'expanded' ? t`Close navigation` : t`Open navigation`}
-              title={sidebarState === 'expanded' ? t`Close navigation` : t`Open navigation`}
-              onClick={handleSidebarToggle}
-              className='flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 hover:bg-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
-            >
-              {sidebarState === 'expanded' ? <PanelLeftClose className='size-5' /> : <PanelLeftOpen className='size-5' />}
-            </button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  type='button'
+                  aria-label={sidebarState === 'expanded' ? t`Close navigation` : t`Open navigation`}
+                  onClick={handleSidebarToggle}
+                  className='flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 hover:bg-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+                >
+                  {sidebarState === 'expanded' ? <PanelLeftClose className='size-5' /> : <PanelLeftOpen className='size-5' />}
+                </button>
+              </TooltipTrigger>
+              <TooltipContent>{sidebarState === 'expanded' ? t`Close navigation` : t`Open navigation`}</TooltipContent>
+            </Tooltip>
           )}
 
-          <a
-            href='/'
-            title={t`Home`}
-            className='flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 hover:bg-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
-          >
-            <MochiLogo />
-          </a>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <a
+                href='/'
+                aria-label={t`Home`}
+                className='flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 hover:bg-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+              >
+                <MochiLogo />
+              </a>
+            </TooltipTrigger>
+            <TooltipContent>{t`Home`}</TooltipContent>
+          </Tooltip>
 
           <div className='min-w-0 flex-1 flex items-center justify-center'>
             {isHome && (
@@ -379,19 +412,24 @@ export function MochiShellMenu() {
             )}
           </div>
 
-          <button
-            type='button'
-            aria-label={t`Open menu`}
-            onClick={() => setMenuOpen(true)}
-            className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 hover:bg-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
-          >
-            <EntityAvatar fingerprint={identity || undefined} name={name} size="sm" />
-            {unreadCount > 0 && (
-              <span className='absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-notification px-1 text-[10px] font-medium text-notification-foreground'>
-                {unreadCount > 99 ? '99+' : unreadCount}
-              </span>
-            )}
-          </button>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                type='button'
+                aria-label={t`Open menu`}
+                onClick={() => setMenuOpen(true)}
+                className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+              >
+                <EntityAvatar fingerprint={identity || undefined} name={name} size="sm" />
+                {unreadCount > 0 && (
+                  <span className='absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-notification px-1 text-[10px] font-medium text-notification-foreground'>
+                    {unreadCount > 99 ? '99+' : unreadCount}
+                  </span>
+                )}
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>{t`Open menu`}</TooltipContent>
+          </Tooltip>
         </header>
 
         {/* Custom bottom sheet — renders inside #menu (position:fixed), no Radix Dialog,
@@ -435,9 +473,14 @@ export function MochiShellMenu() {
         'flex items-center gap-2 p-2',
         isCollapsed && 'flex-col'
       )}>
-        <a href='/' title={t`Home`}>
-          <MochiLogo />
-        </a>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <a href='/' aria-label={t`Home`}>
+              <MochiLogo />
+            </a>
+          </TooltipTrigger>
+          <TooltipContent>{t`Home`}</TooltipContent>
+        </Tooltip>
 
         {menuControl}
       </div>
