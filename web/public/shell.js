@@ -379,6 +379,47 @@
         }
     }
 
+    // Download a file on the app's behalf. The sandboxed app iframe (opaque
+    // origin, no allow-same-origin) can't trigger a real save — a bare
+    // <a download> is ignored cross-origin and a blob click is blocked. The
+    // top window is same-origin and unsandboxed, so it can fetch (with cookies,
+    // so private attachments authorize) and save normally.
+    function handleDownload(data) {
+        if (navigating) return;
+        var id = data.id;
+        var url;
+        try { url = new URL(data.url, window.location.href); } catch (e) { url = null; }
+        // Only ever fetch a URL belonging to the current app on this origin —
+        // never let an app use the shell as a fetch proxy for anything else.
+        var currentApp = getAppNameFromPath(window.location.pathname);
+        if (!url || url.origin !== window.location.origin ||
+                getAppNameFromPath(url.pathname) !== currentApp) {
+            postToIframe({ type: 'download.result', id: id, ok: false });
+            return;
+        }
+        fetch(url.href, { credentials: 'same-origin' }).then(function(r) {
+            if (!r.ok) throw new Error('HTTP ' + r.status);
+            return r.blob();
+        }).then(function(blob) {
+            var objectUrl = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = objectUrl;
+            a.download = data.name || '';
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+            // Delay cleanup so the browser resolves the blob URL before it's
+            // revoked; revoking immediately races with the download.
+            setTimeout(function() {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(objectUrl);
+            }, 1000);
+            postToIframe({ type: 'download.result', id: id, ok: true });
+        }).catch(function() {
+            postToIframe({ type: 'download.result', id: id, ok: false });
+        });
+    }
+
     // WebAuthn ceremony bridge. The sandboxed app iframe has an opaque
     // origin so navigator.credentials.create()/get() fails immediately
     // with NotAllowedError. The shell runs in the top window with a real
@@ -620,6 +661,10 @@
 
             case 'clipboard.write':
                 handleClipboardWrite(data);
+                break;
+
+            case 'download':
+                handleDownload(data);
                 break;
 
             case 'sidebar-state':
