@@ -37,6 +37,7 @@
     var iframe = document.createElement('iframe');
     iframe.id = 'app-frame';
     iframe.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads');
+    iframe.setAttribute('allow', 'fullscreen');
     iframe.src = initialSrc;
     container.appendChild(iframe);
     var tokenRefreshTimer = null;
@@ -128,6 +129,21 @@
         sidebarPresent = !!present;
         if (menuEl) menuEl.setAttribute('data-sidebar-present', sidebarPresent ? 'true' : 'false');
     }
+
+    // Immersive mode: an app (e.g. a fullscreen game) asks the shell to hide its
+    // chrome. Heartbeat-driven — if the app stops sending `immersive: true` (it
+    // crashed, froze, was backgrounded, or was closed), the watchdog restores the
+    // chrome, so the menu can never be permanently lost. Cleared on navigation too.
+    var immersiveTimer = null;
+    function setImmersive(on) {
+        if (immersiveTimer) { clearTimeout(immersiveTimer); immersiveTimer = null; }
+        if (menuEl) menuEl.classList.toggle('shell-immersive', !!on);
+        if (on) immersiveTimer = setTimeout(function() { setImmersive(false); }, 6000);
+    }
+    // Dropping out of fullscreen (Esc is always permitted) restores the chrome at once.
+    document.addEventListener('fullscreenchange', function() {
+        if (!document.fullscreenElement) setImmersive(false);
+    });
 
     function setCurrentApp(appPath) {
         if (menuEl) menuEl.setAttribute('data-app', appPath);
@@ -222,10 +238,13 @@
         staleIframe.style.pointerEvents = 'none';
         staleIframe.removeAttribute('id');
 
+        setImmersive(false);   // never carry immersive chrome-hiding across an app navigation
+
         // Create the new iframe hidden behind the old one
         var next = document.createElement('iframe');
         next.id = 'app-frame';
         next.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads');
+        next.setAttribute('allow', 'fullscreen');
         next.style.visibility = 'hidden';
         next.src = shellSrc(newSrc);
         container.insertBefore(next, staleIframe);
@@ -673,6 +692,10 @@
 
             case 'sidebar-present':
                 setSidebarPresent(!!data.present);
+                break;
+
+            case 'immersive':
+                setImmersive(!!data.on);
                 break;
 
             case 'overlay': {

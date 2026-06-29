@@ -33,6 +33,8 @@
         :root { --shell-mobile-topbar-height: 3rem; }
         html, body { height: 100%; margin: 0; overflow: hidden; }
         #menu { position: fixed; top: 0; inset-inline-start: 0; z-index: 50; }
+        /* Immersive mode: an app (e.g. a fullscreen game) has asked the shell to hide its chrome. */
+        #menu.shell-immersive { display: none; }
         #menu::after {
             content: '';
             position: absolute;
