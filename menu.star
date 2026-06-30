@@ -100,7 +100,7 @@ def action_push_accounts_remove(a):
     if not id or not id.isdigit():
         return a.error.label(400, "errors.invalid_id")
 
-    result = mochi.service.call("notifications", "accounts/remove", int(id))
+    result = mochi.service.call("notifications", "accounts/remove", id)
     return {"data": result or {}}
 
 # Permission grant (shell-managed permission request dialog)
