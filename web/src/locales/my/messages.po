@@ -78,7 +78,7 @@ msgstr "အကြောင်းကြားချက်များ ရရှ�
 msgid "Add new account"
 msgstr "အကောင့်အသစ် ထည့်မည်"
 
-#: ../../../lib/web/src/components/post-tags.tsx:129
+#: ../../../lib/web/src/components/post-tags.tsx:133
 msgid "Add tag..."
 msgstr "tag ထည့်ရန်..."
 
@@ -111,11 +111,11 @@ msgstr "အားလုံး"
 msgid "Allow"
 msgstr "ခွင့်ပြုမည်"
 
-#: ../../../lib/web/src/lib/api-client.ts:192
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:159
 msgid "An error occurred"
 msgstr "အမှားတစ်ခု ဖြစ်ပွားခဲ့သည်"
 
-#: ../../../lib/web/src/lib/api-client.ts:255
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:241
 msgid "An unexpected error occurred"
 msgstr "မမျှော်လင့်ထားသော အမှားတစ်ခု ဖြစ်ပွားခဲ့သည်"
 
@@ -145,8 +145,8 @@ msgstr "နောက်သို့"
 msgid "Back to home"
 msgstr "ပင်မစာမျက်နှာ သို့ပြန်သွားရန်"
 
-#: ../../../lib/web/src/components/post-tags.tsx:172
-#: ../../../lib/web/src/components/post-tags.tsx:184
+#: ../../../lib/web/src/components/post-tags.tsx:176
+#: ../../../lib/web/src/components/post-tags.tsx:188
 msgid "Boost interest"
 msgstr "စိတ်ဝင်စားမှု မြှင့်တင်မည်"
 
@@ -219,8 +219,8 @@ msgid "Clear selection (Escape)"
 msgstr "ရွေးချယ်မှု ရှင်းမည် (Escape)"
 
 #: ../../../lib/web/src/components/ui/dialog.tsx:78
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:332
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:335
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:354
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:357
 #: ../../../lib/web/src/components/ui/sheet.tsx:79
 #: src/use-permission-request.tsx:176
 msgid "Close"
@@ -244,8 +244,8 @@ msgstr "ရှာဖွေမှု ပိတ်မည်"
 
 #: ../../../lib/web/src/components/comment-tree-layout.tsx:101
 #: ../../../lib/web/src/components/comment-tree-layout.tsx:110
-#: ../../../lib/web/src/components/tree-row.tsx:255
-#: ../../../lib/web/src/components/tree-row.tsx:269
+#: ../../../lib/web/src/components/tree-row.tsx:338
+#: ../../../lib/web/src/components/tree-row.tsx:352
 msgid "Collapse"
 msgstr "ခေါက်သိမ်းရန်"
 
@@ -376,10 +376,14 @@ msgstr "ပယ်မည်"
 msgid "Displays the mobile sidebar."
 msgstr "မိုဘိုင်း ဘေးဘားကို ပြသသည်။"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:320
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:326
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:338
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:348
 msgid "Download"
 msgstr "ဒေါင်းလုဒ်"
+
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:68
+msgid "Download failed"
+msgstr "ဒေါင်းလုဒ် မအောင်မြင်ပါ"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:146
 msgid "Dyslexia-friendly"
@@ -403,8 +407,8 @@ msgstr "သင့်အထောက်အထားစိစစ်ရေးကု
 
 #: ../../../lib/web/src/components/comment-tree-layout.tsx:101
 #: ../../../lib/web/src/components/comment-tree-layout.tsx:110
-#: ../../../lib/web/src/components/tree-row.tsx:255
-#: ../../../lib/web/src/components/tree-row.tsx:269
+#: ../../../lib/web/src/components/tree-row.tsx:338
+#: ../../../lib/web/src/components/tree-row.tsx:352
 msgid "Expand"
 msgstr "ချဲ့ရန်"
 
@@ -561,6 +565,10 @@ msgstr "အလင်း"
 msgid "Load more"
 msgstr "ထပ်တင်"
 
+#: ../../../lib/web/src/components/ui/loading-content.tsx:29
+msgid "Loading content…"
+msgstr "အကြောင်းအရာ ဖွင့်နေသည်…"
+
 #: ../../../lib/web/src/components/ui/load-more.tsx:35
 #: ../../../lib/web/src/features/document/document-page.tsx:90
 msgid "Loading…"
@@ -615,7 +623,7 @@ msgstr "မက်ထရစ်"
 msgid "Monday"
 msgstr "တနင်္လာ"
 
-#: ../../../lib/web/src/lib/api-client.ts:300
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:288
 msgid "Network error"
 msgstr "ကွန်ရက် အမှား"
 
@@ -623,8 +631,8 @@ msgstr "ကွန်ရက် အမှား"
 msgid "New"
 msgstr "အသစ်"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:366
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:371
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:388
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:393
 msgid "Next image"
 msgstr "နောက်ပုံ"
 
@@ -701,8 +709,8 @@ msgstr "အိုး! စာမျက်နှာ မတွေ့ပါ!"
 msgid "Open account actions"
 msgstr "အကောင့် လုပ်ဆောင်ချက်များကို ဖွင့်"
 
-#: ../../../lib/web/src/components/layout/nav-group.tsx:152
-#: ../../../lib/web/src/components/layout/nav-group.tsx:157
+#: ../../../lib/web/src/components/layout/nav-group.tsx:182
+#: ../../../lib/web/src/components/layout/nav-group.tsx:187
 msgid "Open actions"
 msgstr "လုပ်ဆောင်ချက်များ ဖွင့်ရန်"
 
@@ -754,12 +762,12 @@ msgstr "Passkey များ"
 msgid "Permission request"
 msgstr "ခွင့်ပြုချက် တောင်းခံချက်"
 
-#: ../../../lib/web/src/lib/api-client.ts:301
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:289
 msgid "Please check your internet connection and try again."
 msgstr "သင့်အင်တာနက်ချိတ်ဆက်မှုကို စစ်ဆေးပြီး ထပ်မံကြိုးစားပါ။"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:351
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:356
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:373
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:378
 msgid "Previous image"
 msgstr "ယခင်ပုံ"
 
@@ -794,8 +802,8 @@ msgstr "အကြံပြုထား"
 msgid "Redirecting to login."
 msgstr "Login သို့ redirect လုပ်နေသည်။"
 
-#: ../../../lib/web/src/components/post-tags.tsx:192
-#: ../../../lib/web/src/components/post-tags.tsx:204
+#: ../../../lib/web/src/components/post-tags.tsx:196
+#: ../../../lib/web/src/components/post-tags.tsx:208
 msgid "Reduce interest"
 msgstr "စိတ်ဝင်စားမှု လျှော့ချ"
 
@@ -821,8 +829,8 @@ msgstr "ဝင်ရောက်ခွင့် စည်းမျဉ်း ဖ�
 msgid "Remove access?"
 msgstr "ဝင်ရောက်ခွင့် ဖယ်ရှားမလား?"
 
-#: ../../../lib/web/src/components/post-tags.tsx:212
-#: ../../../lib/web/src/components/post-tags.tsx:224
+#: ../../../lib/web/src/components/post-tags.tsx:216
+#: ../../../lib/web/src/components/post-tags.tsx:228
 msgid "Remove interest"
 msgstr "စိတ်ဝင်စားမှု ဖယ်ရှား"
 
@@ -930,8 +938,8 @@ msgstr "အီးမေးလ်ပို့ရန်"
 msgid "Serif"
 msgstr "ဆာရစ်ဖ်"
 
-#: ../../../lib/web/src/lib/api-client.ts:259
-#: ../../../lib/web/src/lib/api-client.ts:284
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:245
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:271
 msgid "Server error"
 msgstr "ဆာဗာ အမှား"
 
@@ -940,7 +948,7 @@ msgstr "ဆာဗာ အမှား"
 msgid "Server rules"
 msgstr "ဆာဗာ စည်းမျဉ်းများ"
 
-#: ../../../lib/web/src/lib/api-client.ts:227
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:209
 msgid "Session expired"
 msgstr "Session သက်တမ်းကုန်ပြီ"
 
@@ -1014,8 +1022,8 @@ msgstr "စနစ်"
 msgid "Tag"
 msgstr "Tag"
 
-#: ../../../lib/web/src/components/post-tags.tsx:96
-#: ../../../lib/web/src/components/post-tags.tsx:107
+#: ../../../lib/web/src/components/post-tags.tsx:100
+#: ../../../lib/web/src/components/post-tags.tsx:111
 msgid "Tags"
 msgstr "တက်ဂ်များ"
 
@@ -1057,10 +1065,10 @@ msgstr "Column များ ဖွင့်/ပိတ်"
 msgid "Toggle right panel"
 msgstr "ညာဖက်ပန်နယ် ပြောင်းပါ"
 
-#: ../../../lib/web/src/components/layout/nav-group.tsx:321
-#: ../../../lib/web/src/components/layout/nav-group.tsx:328
-#: ../../../lib/web/src/components/layout/nav-group.tsx:451
-#: ../../../lib/web/src/components/layout/nav-group.tsx:458
+#: ../../../lib/web/src/components/layout/nav-group.tsx:351
+#: ../../../lib/web/src/components/layout/nav-group.tsx:358
+#: ../../../lib/web/src/components/layout/nav-group.tsx:481
+#: ../../../lib/web/src/components/layout/nav-group.tsx:488
 msgid "Toggle section"
 msgstr "အပိုင်း ဖွင့်/ပိတ်ရန်"
 
@@ -1114,7 +1122,7 @@ msgstr "သုံးစွဲသူရှာရန် ရိုက်ပါ"
 msgid "Type to search..."
 msgstr "ရှာရန် ရိုက်ပါ..."
 
-#: ../../../lib/web/src/lib/api-client.ts:280
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:267
 msgid "Unable to connect to remote server"
 msgstr "အဝေးထိန်းဆာဗာသို့ ချိတ်ဆက်၍မရပါ"
 

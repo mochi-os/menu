@@ -78,7 +78,7 @@ msgstr "ማሳወቂያዎችን ለመቀበልና አገልግሎቶችን ለ
 msgid "Add new account"
 msgstr "አዲስ መለያ ጨምር"
 
-#: ../../../lib/web/src/components/post-tags.tsx:129
+#: ../../../lib/web/src/components/post-tags.tsx:133
 msgid "Add tag..."
 msgstr "መለያ ጨምር..."
 
@@ -111,11 +111,11 @@ msgstr "ሁሉም"
 msgid "Allow"
 msgstr "ፍቀድ"
 
-#: ../../../lib/web/src/lib/api-client.ts:192
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:159
 msgid "An error occurred"
 msgstr "ስህተት ተከስቷል"
 
-#: ../../../lib/web/src/lib/api-client.ts:255
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:241
 msgid "An unexpected error occurred"
 msgstr "ያልተጠበቀ ስህተት ተከስቷል"
 
@@ -145,8 +145,8 @@ msgstr "ተመለስ"
 msgid "Back to home"
 msgstr "ወደ መነሻ ተመለስ"
 
-#: ../../../lib/web/src/components/post-tags.tsx:172
-#: ../../../lib/web/src/components/post-tags.tsx:184
+#: ../../../lib/web/src/components/post-tags.tsx:176
+#: ../../../lib/web/src/components/post-tags.tsx:188
 msgid "Boost interest"
 msgstr "ፍላጎትን አሳድግ"
 
@@ -219,8 +219,8 @@ msgid "Clear selection (Escape)"
 msgstr "ምርጫ አጽዳ (Escape)"
 
 #: ../../../lib/web/src/components/ui/dialog.tsx:78
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:332
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:335
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:354
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:357
 #: ../../../lib/web/src/components/ui/sheet.tsx:79
 #: src/use-permission-request.tsx:176
 msgid "Close"
@@ -244,8 +244,8 @@ msgstr "ፍለጋን ዝጋ"
 
 #: ../../../lib/web/src/components/comment-tree-layout.tsx:101
 #: ../../../lib/web/src/components/comment-tree-layout.tsx:110
-#: ../../../lib/web/src/components/tree-row.tsx:255
-#: ../../../lib/web/src/components/tree-row.tsx:269
+#: ../../../lib/web/src/components/tree-row.tsx:338
+#: ../../../lib/web/src/components/tree-row.tsx:352
 msgid "Collapse"
 msgstr "ሰብስብ"
 
@@ -376,10 +376,14 @@ msgstr "አጥፋ"
 msgid "Displays the mobile sidebar."
 msgstr "የሞባይል ጎንደርን ያሳያል።"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:320
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:326
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:338
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:348
 msgid "Download"
 msgstr "አውርድ"
+
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:68
+msgid "Download failed"
+msgstr "ማውረድ አልተሳካም"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:146
 msgid "Dyslexia-friendly"
@@ -403,8 +407,8 @@ msgstr "የአረጋጋጭዎን ኮድ ያስገቡ"
 
 #: ../../../lib/web/src/components/comment-tree-layout.tsx:101
 #: ../../../lib/web/src/components/comment-tree-layout.tsx:110
-#: ../../../lib/web/src/components/tree-row.tsx:255
-#: ../../../lib/web/src/components/tree-row.tsx:269
+#: ../../../lib/web/src/components/tree-row.tsx:338
+#: ../../../lib/web/src/components/tree-row.tsx:352
 msgid "Expand"
 msgstr "ዘርጋ"
 
@@ -561,6 +565,10 @@ msgstr "ብርሃን"
 msgid "Load more"
 msgstr "ተጨማሪ ጫን"
 
+#: ../../../lib/web/src/components/ui/loading-content.tsx:29
+msgid "Loading content…"
+msgstr "ይዘት በመጫን ላይ…"
+
 #: ../../../lib/web/src/components/ui/load-more.tsx:35
 #: ../../../lib/web/src/features/document/document-page.tsx:90
 msgid "Loading…"
@@ -615,7 +623,7 @@ msgstr "ሜትሪክ"
 msgid "Monday"
 msgstr "ሰኞ"
 
-#: ../../../lib/web/src/lib/api-client.ts:300
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:288
 msgid "Network error"
 msgstr "የአውታረ መረብ ስህተት"
 
@@ -623,8 +631,8 @@ msgstr "የአውታረ መረብ ስህተት"
 msgid "New"
 msgstr "አዲስ"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:366
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:371
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:388
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:393
 msgid "Next image"
 msgstr "ቀጣይ ምስል"
 
@@ -701,8 +709,8 @@ msgstr "ኦህ! ገጽ አልተገኘም!"
 msgid "Open account actions"
 msgstr "የመለያ ድርጊቶችን ክፈት"
 
-#: ../../../lib/web/src/components/layout/nav-group.tsx:152
-#: ../../../lib/web/src/components/layout/nav-group.tsx:157
+#: ../../../lib/web/src/components/layout/nav-group.tsx:182
+#: ../../../lib/web/src/components/layout/nav-group.tsx:187
 msgid "Open actions"
 msgstr "እርምጃዎችን ክፈት"
 
@@ -754,12 +762,12 @@ msgstr "ፓስኪዎች"
 msgid "Permission request"
 msgstr "የፍቃድ ጥያቄ"
 
-#: ../../../lib/web/src/lib/api-client.ts:301
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:289
 msgid "Please check your internet connection and try again."
 msgstr "እባክዎ የበይነመረብ ግንኙነትዎን አረጋግጠው እንደገና ይሞክሩ።"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:351
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:356
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:373
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:378
 msgid "Previous image"
 msgstr "ቀዳሚ ምስል"
 
@@ -794,8 +802,8 @@ msgstr "የተመከረ"
 msgid "Redirecting to login."
 msgstr "ወደ መግቢያ በማዘዋወር ላይ።"
 
-#: ../../../lib/web/src/components/post-tags.tsx:192
-#: ../../../lib/web/src/components/post-tags.tsx:204
+#: ../../../lib/web/src/components/post-tags.tsx:196
+#: ../../../lib/web/src/components/post-tags.tsx:208
 msgid "Reduce interest"
 msgstr "ፍላጎትን ቀንስ"
 
@@ -821,8 +829,8 @@ msgstr "የድረሳ ህግ አስወግድ"
 msgid "Remove access?"
 msgstr "ድረሳ ይወገድ?"
 
-#: ../../../lib/web/src/components/post-tags.tsx:212
-#: ../../../lib/web/src/components/post-tags.tsx:224
+#: ../../../lib/web/src/components/post-tags.tsx:216
+#: ../../../lib/web/src/components/post-tags.tsx:228
 msgid "Remove interest"
 msgstr "ፍላጎት አስወግድ"
 
@@ -930,8 +938,8 @@ msgstr "ኢሜይል ላክ"
 msgid "Serif"
 msgstr "ሰሪፍ"
 
-#: ../../../lib/web/src/lib/api-client.ts:259
-#: ../../../lib/web/src/lib/api-client.ts:284
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:245
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:271
 msgid "Server error"
 msgstr "የአገልጋይ ስህተት"
 
@@ -940,7 +948,7 @@ msgstr "የአገልጋይ ስህተት"
 msgid "Server rules"
 msgstr "የሰርቨር ህጎች"
 
-#: ../../../lib/web/src/lib/api-client.ts:227
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:209
 msgid "Session expired"
 msgstr "ክፍለ-ጊዜ አብቅቷል"
 
@@ -1014,8 +1022,8 @@ msgstr "ስርዓት"
 msgid "Tag"
 msgstr "መለያ"
 
-#: ../../../lib/web/src/components/post-tags.tsx:96
-#: ../../../lib/web/src/components/post-tags.tsx:107
+#: ../../../lib/web/src/components/post-tags.tsx:100
+#: ../../../lib/web/src/components/post-tags.tsx:111
 msgid "Tags"
 msgstr "መለያዎች"
 
@@ -1057,10 +1065,10 @@ msgstr "አምዶችን ቀይር"
 msgid "Toggle right panel"
 msgstr "ቀኝ ፓኔል ቀይር"
 
-#: ../../../lib/web/src/components/layout/nav-group.tsx:321
-#: ../../../lib/web/src/components/layout/nav-group.tsx:328
-#: ../../../lib/web/src/components/layout/nav-group.tsx:451
-#: ../../../lib/web/src/components/layout/nav-group.tsx:458
+#: ../../../lib/web/src/components/layout/nav-group.tsx:351
+#: ../../../lib/web/src/components/layout/nav-group.tsx:358
+#: ../../../lib/web/src/components/layout/nav-group.tsx:481
+#: ../../../lib/web/src/components/layout/nav-group.tsx:488
 msgid "Toggle section"
 msgstr "ክፍልን ቀያይር"
 
@@ -1114,7 +1122,7 @@ msgstr "ተጠቃሚዎችን ለመፈለግ ይተይቡ"
 msgid "Type to search..."
 msgstr "ለመፈለግ ይተይቡ..."
 
-#: ../../../lib/web/src/lib/api-client.ts:280
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:267
 msgid "Unable to connect to remote server"
 msgstr "ከርቀት አገልጋይ ጋር መገናኘት አልተቻለም"
 

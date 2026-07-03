@@ -78,7 +78,7 @@ msgstr "सूचना प्राप्त करण्यासाठी आ
 msgid "Add new account"
 msgstr "नवीन खाते जोडा"
 
-#: ../../../lib/web/src/components/post-tags.tsx:129
+#: ../../../lib/web/src/components/post-tags.tsx:133
 msgid "Add tag..."
 msgstr "टॅग जोडा..."
 
@@ -111,11 +111,11 @@ msgstr "सर्व"
 msgid "Allow"
 msgstr "अनुमती द्या"
 
-#: ../../../lib/web/src/lib/api-client.ts:192
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:159
 msgid "An error occurred"
 msgstr "त्रुटी आली"
 
-#: ../../../lib/web/src/lib/api-client.ts:255
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:241
 msgid "An unexpected error occurred"
 msgstr "अनपेक्षित त्रुटी आली"
 
@@ -145,8 +145,8 @@ msgstr "मागे"
 msgid "Back to home"
 msgstr "मुख्यपृष्ठावर परत जा"
 
-#: ../../../lib/web/src/components/post-tags.tsx:172
-#: ../../../lib/web/src/components/post-tags.tsx:184
+#: ../../../lib/web/src/components/post-tags.tsx:176
+#: ../../../lib/web/src/components/post-tags.tsx:188
 msgid "Boost interest"
 msgstr "रुची वाढवा"
 
@@ -219,8 +219,8 @@ msgid "Clear selection (Escape)"
 msgstr "निवड साफ करा (Escape)"
 
 #: ../../../lib/web/src/components/ui/dialog.tsx:78
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:332
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:335
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:354
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:357
 #: ../../../lib/web/src/components/ui/sheet.tsx:79
 #: src/use-permission-request.tsx:176
 msgid "Close"
@@ -244,8 +244,8 @@ msgstr "शोध बंद करा"
 
 #: ../../../lib/web/src/components/comment-tree-layout.tsx:101
 #: ../../../lib/web/src/components/comment-tree-layout.tsx:110
-#: ../../../lib/web/src/components/tree-row.tsx:255
-#: ../../../lib/web/src/components/tree-row.tsx:269
+#: ../../../lib/web/src/components/tree-row.tsx:338
+#: ../../../lib/web/src/components/tree-row.tsx:352
 msgid "Collapse"
 msgstr "संकुचित करा"
 
@@ -376,10 +376,14 @@ msgstr "काढून टाका"
 msgid "Displays the mobile sidebar."
 msgstr "मोबाइल साइडबार दाखवते."
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:320
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:326
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:338
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:348
 msgid "Download"
 msgstr "डाउनलोड"
+
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:68
+msgid "Download failed"
+msgstr "डाउनलोड अयशस्वी"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:146
 msgid "Dyslexia-friendly"
@@ -403,8 +407,8 @@ msgstr "तुमचा ऑथेंटिकेटर कोड टाका"
 
 #: ../../../lib/web/src/components/comment-tree-layout.tsx:101
 #: ../../../lib/web/src/components/comment-tree-layout.tsx:110
-#: ../../../lib/web/src/components/tree-row.tsx:255
-#: ../../../lib/web/src/components/tree-row.tsx:269
+#: ../../../lib/web/src/components/tree-row.tsx:338
+#: ../../../lib/web/src/components/tree-row.tsx:352
 msgid "Expand"
 msgstr "विस्तृत करा"
 
@@ -561,6 +565,10 @@ msgstr "हलके"
 msgid "Load more"
 msgstr "अधिक लोड करा"
 
+#: ../../../lib/web/src/components/ui/loading-content.tsx:29
+msgid "Loading content…"
+msgstr "सामग्री लोड होत आहे…"
+
 #: ../../../lib/web/src/components/ui/load-more.tsx:35
 #: ../../../lib/web/src/features/document/document-page.tsx:90
 msgid "Loading…"
@@ -615,7 +623,7 @@ msgstr "मेट्रिक"
 msgid "Monday"
 msgstr "सोमवार"
 
-#: ../../../lib/web/src/lib/api-client.ts:300
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:288
 msgid "Network error"
 msgstr "नेटवर्क त्रुटी"
 
@@ -623,8 +631,8 @@ msgstr "नेटवर्क त्रुटी"
 msgid "New"
 msgstr "नवीन"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:366
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:371
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:388
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:393
 msgid "Next image"
 msgstr "पुढील इमेज"
 
@@ -701,8 +709,8 @@ msgstr "अरेरे! पेज सापडले नाही!"
 msgid "Open account actions"
 msgstr "अकाउंट क्रिया उघडा"
 
-#: ../../../lib/web/src/components/layout/nav-group.tsx:152
-#: ../../../lib/web/src/components/layout/nav-group.tsx:157
+#: ../../../lib/web/src/components/layout/nav-group.tsx:182
+#: ../../../lib/web/src/components/layout/nav-group.tsx:187
 msgid "Open actions"
 msgstr "क्रिया उघडा"
 
@@ -754,12 +762,12 @@ msgstr "पासकीज"
 msgid "Permission request"
 msgstr "परवानगी विनंती"
 
-#: ../../../lib/web/src/lib/api-client.ts:301
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:289
 msgid "Please check your internet connection and try again."
 msgstr "कृपया तुमचे इंटरनेट कनेक्शन तपासा आणि पुन्हा प्रयत्न करा."
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:351
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:356
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:373
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:378
 msgid "Previous image"
 msgstr "मागील इमेज"
 
@@ -794,8 +802,8 @@ msgstr "शिफारस केलेले"
 msgid "Redirecting to login."
 msgstr "लॉगिनवर रीडायरेक्ट करत आहे."
 
-#: ../../../lib/web/src/components/post-tags.tsx:192
-#: ../../../lib/web/src/components/post-tags.tsx:204
+#: ../../../lib/web/src/components/post-tags.tsx:196
+#: ../../../lib/web/src/components/post-tags.tsx:208
 msgid "Reduce interest"
 msgstr "स्वारस्य कमी करा"
 
@@ -821,8 +829,8 @@ msgstr "प्रवेश नियम काढा"
 msgid "Remove access?"
 msgstr "प्रवेश काढायचा?"
 
-#: ../../../lib/web/src/components/post-tags.tsx:212
-#: ../../../lib/web/src/components/post-tags.tsx:224
+#: ../../../lib/web/src/components/post-tags.tsx:216
+#: ../../../lib/web/src/components/post-tags.tsx:228
 msgid "Remove interest"
 msgstr "स्वारस्य काढा"
 
@@ -930,8 +938,8 @@ msgstr "ईमेल पाठवा"
 msgid "Serif"
 msgstr "सेरिफ"
 
-#: ../../../lib/web/src/lib/api-client.ts:259
-#: ../../../lib/web/src/lib/api-client.ts:284
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:245
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:271
 msgid "Server error"
 msgstr "सर्व्हर त्रुटी"
 
@@ -940,7 +948,7 @@ msgstr "सर्व्हर त्रुटी"
 msgid "Server rules"
 msgstr "सर्व्हर नियम"
 
-#: ../../../lib/web/src/lib/api-client.ts:227
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:209
 msgid "Session expired"
 msgstr "सेशन कालबाह्य झाले"
 
@@ -1014,8 +1022,8 @@ msgstr "सिस्टम"
 msgid "Tag"
 msgstr "टॅग"
 
-#: ../../../lib/web/src/components/post-tags.tsx:96
-#: ../../../lib/web/src/components/post-tags.tsx:107
+#: ../../../lib/web/src/components/post-tags.tsx:100
+#: ../../../lib/web/src/components/post-tags.tsx:111
 msgid "Tags"
 msgstr "टॅग्स"
 
@@ -1057,10 +1065,10 @@ msgstr "स्तंभ टॉगल करा"
 msgid "Toggle right panel"
 msgstr "उजवे पॅनेल टॉगल करा"
 
-#: ../../../lib/web/src/components/layout/nav-group.tsx:321
-#: ../../../lib/web/src/components/layout/nav-group.tsx:328
-#: ../../../lib/web/src/components/layout/nav-group.tsx:451
-#: ../../../lib/web/src/components/layout/nav-group.tsx:458
+#: ../../../lib/web/src/components/layout/nav-group.tsx:351
+#: ../../../lib/web/src/components/layout/nav-group.tsx:358
+#: ../../../lib/web/src/components/layout/nav-group.tsx:481
+#: ../../../lib/web/src/components/layout/nav-group.tsx:488
 msgid "Toggle section"
 msgstr "विभाग टॉगल करा"
 
@@ -1114,7 +1122,7 @@ msgstr "वापरकर्ते शोधण्यासाठी टाइ�
 msgid "Type to search..."
 msgstr "शोधण्यासाठी टाइप करा..."
 
-#: ../../../lib/web/src/lib/api-client.ts:280
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:267
 msgid "Unable to connect to remote server"
 msgstr "दूरस्थ सर्व्हरशी कनेक्ट होऊ शकले नाही"
 
