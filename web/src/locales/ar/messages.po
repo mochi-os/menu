@@ -29,6 +29,10 @@ msgstr "24 ساعة"
 msgid "Absolute (date and time)"
 msgstr "مطلق (تاريخ ووقت)"
 
+#: ../../../lib/web/src/features/errors/general-error.tsx:60
+msgid "Access denied"
+msgstr "تم رفض الوصول"
+
 #: ../../../lib/web/src/features/errors/forbidden.tsx:16
 msgid "Access Forbidden"
 msgstr "الوصول ممنوع"
@@ -115,7 +119,7 @@ msgstr "السماح"
 msgid "An error occurred"
 msgstr "حدث خطأ"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:241
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:256
 msgid "An unexpected error occurred"
 msgstr "حدث خطأ غير متوقع"
 
@@ -162,12 +166,12 @@ msgstr "تعزيز الاهتمام"
 msgid "Cancel"
 msgstr "إلغاء"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:144
+#: ../../../lib/web/src/components/notification-category-button.tsx:143
 msgid "Category for this notification"
 msgstr "فئة هذا الإشعار"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:125
-#: ../../../lib/web/src/components/notification-category-button.tsx:136
+#: ../../../lib/web/src/components/notification-category-button.tsx:124
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Change notification category"
 msgstr "تغيير فئة الإشعار"
 
@@ -324,6 +328,10 @@ msgstr "داكن"
 msgid "Dark mode"
 msgstr "الوضع الداكن"
 
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:240
+msgid "Data conflict"
+msgstr "تعارض في البيانات"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:310
 msgid "Default"
 msgstr "افتراضي"
@@ -432,7 +440,7 @@ msgstr "فشل إزالة الحساب"
 msgid "Failed to send verification code"
 msgstr "فشل إرسال رمز التحقق"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:112
+#: ../../../lib/web/src/components/notification-category-button.tsx:111
 msgid "Failed to update category"
 msgstr "فشل تحديث الفئة"
 
@@ -623,7 +631,8 @@ msgstr "متري"
 msgid "Monday"
 msgstr "الاثنين"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:288
+#: ../../../lib/web/src/features/errors/general-error.tsx:53
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:303
 msgid "Network error"
 msgstr "خطأ في الشبكة"
 
@@ -665,7 +674,7 @@ msgstr "لم يتم العثور على نتائج."
 msgid "No time zone found."
 msgstr "لم يتم العثور على منطقة زمنية."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:148
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "No topic record yet — try again after the next notification."
 msgstr "لا يوجد سجل موضوع بعد — حاول مرة أخرى بعد الإشعار التالي."
 
@@ -686,6 +695,10 @@ msgstr "لا شيء"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Normal"
 msgstr "عادي"
+
+#: ../../../lib/web/src/features/errors/general-error.tsx:67
+msgid "Not found"
+msgstr "غير موجود"
 
 #: ../../../lib/web/src/components/ui/editable-field-row.tsx:146
 msgid "Not set"
@@ -762,9 +775,19 @@ msgstr "مفاتيح المرور"
 msgid "Permission request"
 msgstr "طلب إذن"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:289
+#: ../../../lib/web/src/features/errors/general-error.tsx:54
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:304
+#: ../../../lib/web/src/lib/error-normalizer.ts:201
 msgid "Please check your internet connection and try again."
 msgstr "يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى."
+
+#: ../../../lib/web/src/features/errors/general-error.tsx:83
+msgid "Please try again."
+msgstr "يرجى المحاولة مرة أخرى."
+
+#: ../../../lib/web/src/features/errors/general-error.tsx:75
+msgid "Please wait a moment and try again."
+msgstr "يرجى الانتظار قليلاً ثم إعادة المحاولة."
 
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:373
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:378
@@ -793,8 +816,8 @@ msgstr "أعد ربط حساباتك بهذا الخادم"
 msgid "Re-register your passkeys on this server"
 msgstr "أعد تسجيل مفاتيح المرور على هذا الخادم"
 
-#: ../../../lib/web/src/components/search-entity-dialog.tsx:219
-#: ../../../lib/web/src/components/search-entity-page.tsx:194
+#: ../../../lib/web/src/components/search-entity-dialog.tsx:216
+#: ../../../lib/web/src/components/search-entity-page.tsx:240
 msgid "Recommended"
 msgstr "موصى به"
 
@@ -888,8 +911,8 @@ msgstr "البحث عن مستخدمين"
 msgid "Search..."
 msgstr "بحث..."
 
-#: ../../../lib/web/src/components/search-entity-dialog.tsx:177
-#: ../../../lib/web/src/components/search-entity-page.tsx:152
+#: ../../../lib/web/src/components/search-entity-dialog.tsx:174
+#: ../../../lib/web/src/components/search-entity-page.tsx:198
 #: ../../../lib/web/src/features/access/access-dialog.tsx:202
 msgid "Searching..."
 msgstr "جاري البحث..."
@@ -938,8 +961,8 @@ msgstr "إرسال بريد إلكتروني"
 msgid "Serif"
 msgstr "سيريف"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:245
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:271
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:260
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:286
 msgid "Server error"
 msgstr "خطأ في الخادم"
 
@@ -948,9 +971,9 @@ msgstr "خطأ في الخادم"
 msgid "Server rules"
 msgstr "قواعد الخادم"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:209
-msgid "Session expired"
-msgstr "انتهت الجلسة"
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:210
+msgid "Session expired. Please log in again."
+msgstr "انتهت صلاحية الجلسة. يرجى تسجيل الدخول مرة أخرى."
 
 #: ../../../lib/web/src/components/travelling-picker.tsx:147
 msgid "Set origin and destination"
@@ -1040,6 +1063,10 @@ msgstr "الشروط والأحكام"
 msgid "That code is incorrect or has expired."
 msgstr "هذا الرمز غير صحيح أو انتهت صلاحيته."
 
+#: ../../../lib/web/src/features/errors/general-error.tsx:68
+msgid "The requested content could not be found."
+msgstr "تعذر العثور على المحتوى المطلوب."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:194
 msgid "Theme"
 msgstr "السمة"
@@ -1087,6 +1114,10 @@ msgstr "تبديل الشريط الجانبي"
 msgid "Toggle theme"
 msgstr "تبديل السمة"
 
+#: ../../../lib/web/src/features/errors/general-error.tsx:74
+msgid "Too many requests"
+msgstr "طلبات كثيرة جدًا"
+
 #: ../../../lib/web/src/components/ui/sort-selector.tsx:45
 msgid "Top"
 msgstr "الأعلى"
@@ -1095,13 +1126,13 @@ msgstr "الأعلى"
 msgid "Travelling"
 msgstr "السفر"
 
-#: ../../../lib/web/src/components/search-entity-dialog.tsx:193
-#: ../../../lib/web/src/components/search-entity-page.tsx:168
+#: ../../../lib/web/src/components/search-entity-dialog.tsx:190
+#: ../../../lib/web/src/components/search-entity-page.tsx:214
 msgid "Try adjusting your search terms"
 msgstr "حاول تعديل مصطلحات البحث"
 
-#: ../../../lib/web/src/features/errors/general-error.tsx:128
-#: ../../../lib/web/src/features/errors/general-error.tsx:168
+#: ../../../lib/web/src/features/errors/general-error.tsx:140
+#: ../../../lib/web/src/features/errors/general-error.tsx:180
 #: ../../../lib/web/src/features/errors/maintenance-error.tsx:19
 msgid "Try again"
 msgstr "حاول مرة أخرى"
@@ -1122,7 +1153,7 @@ msgstr "اكتب للبحث عن مستخدمين"
 msgid "Type to search..."
 msgstr "اكتب للبحث..."
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:267
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:282
 msgid "Unable to connect to remote server"
 msgstr "تعذّر الاتصال بالخادم البعيد"
 
@@ -1131,7 +1162,7 @@ msgstr "تعذّر الاتصال بالخادم البعيد"
 msgid "Unable to redirect to login. Please try again."
 msgstr "تعذر إعادة التوجيه إلى تسجيل الدخول. يرجى المحاولة مرة أخرى."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:156
+#: ../../../lib/web/src/components/notification-category-button.tsx:155
 msgid "Unassigned"
 msgstr "غير معين"
 
@@ -1208,6 +1239,10 @@ msgstr "الموقع قيد الصيانة!"
 #: ../../../lib/web/src/lib/preference-utils.ts:61
 msgid "Wednesday"
 msgstr "الأربعاء"
+
+#: ../../../lib/web/src/features/errors/general-error.tsx:61
+msgid "You do not have access to this section."
+msgstr "ليس لديك صلاحية الوصول إلى هذا القسم."
 
 #: ../../../lib/web/src/components/restore-banner.tsx:91
 msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."

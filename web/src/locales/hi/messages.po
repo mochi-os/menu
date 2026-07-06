@@ -29,6 +29,10 @@ msgstr "24 घंटे"
 msgid "Absolute (date and time)"
 msgstr "निरपेक्ष (दिनांक और समय)"
 
+#: ../../../lib/web/src/features/errors/general-error.tsx:60
+msgid "Access denied"
+msgstr "एक्सेस अस्वीकृत"
+
 #: ../../../lib/web/src/features/errors/forbidden.tsx:16
 msgid "Access Forbidden"
 msgstr "एक्सेस वर्जित"
@@ -115,7 +119,7 @@ msgstr "अनुमति दें"
 msgid "An error occurred"
 msgstr "एक त्रुटि हुई"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:241
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:256
 msgid "An unexpected error occurred"
 msgstr "एक अप्रत्याशित त्रुटि हुई"
 
@@ -162,12 +166,12 @@ msgstr "रुचि बढ़ाएँ"
 msgid "Cancel"
 msgstr "रद्द करें"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:144
+#: ../../../lib/web/src/components/notification-category-button.tsx:143
 msgid "Category for this notification"
 msgstr "इस नोटिफ़िकेशन की श्रेणी"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:125
-#: ../../../lib/web/src/components/notification-category-button.tsx:136
+#: ../../../lib/web/src/components/notification-category-button.tsx:124
+#: ../../../lib/web/src/components/notification-category-button.tsx:135
 msgid "Change notification category"
 msgstr "नोटिफ़िकेशन श्रेणी बदलें"
 
@@ -324,6 +328,10 @@ msgstr "डार्क"
 msgid "Dark mode"
 msgstr "डार्क मोड"
 
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:240
+msgid "Data conflict"
+msgstr "डेटा विरोध"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:310
 msgid "Default"
 msgstr "डिफ़ॉल्ट"
@@ -432,7 +440,7 @@ msgstr "खाता हटाने में विफल"
 msgid "Failed to send verification code"
 msgstr "सत्यापन कोड भेजने में विफल"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:112
+#: ../../../lib/web/src/components/notification-category-button.tsx:111
 msgid "Failed to update category"
 msgstr "श्रेणी अपडेट करने में विफल"
 
@@ -623,7 +631,8 @@ msgstr "मीट्रिक"
 msgid "Monday"
 msgstr "सोमवार"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:288
+#: ../../../lib/web/src/features/errors/general-error.tsx:53
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:303
 msgid "Network error"
 msgstr "नेटवर्क त्रुटि"
 
@@ -665,7 +674,7 @@ msgstr "कोई परिणाम नहीं मिले।"
 msgid "No time zone found."
 msgstr "कोई टाइम ज़ोन नहीं मिला।"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:148
+#: ../../../lib/web/src/components/notification-category-button.tsx:147
 msgid "No topic record yet — try again after the next notification."
 msgstr "अभी तक कोई टॉपिक रिकॉर्ड नहीं — अगले नोटिफ़िकेशन के बाद फिर से प्रयास करें।"
 
@@ -686,6 +695,10 @@ msgstr "कोई नहीं"
 #: ../../../lib/web/src/lib/preference-utils.ts:134
 msgid "Normal"
 msgstr "सामान्य"
+
+#: ../../../lib/web/src/features/errors/general-error.tsx:67
+msgid "Not found"
+msgstr "नहीं मिला"
 
 #: ../../../lib/web/src/components/ui/editable-field-row.tsx:146
 msgid "Not set"
@@ -762,9 +775,19 @@ msgstr "पासकीज़"
 msgid "Permission request"
 msgstr "अनुमति अनुरोध"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:289
+#: ../../../lib/web/src/features/errors/general-error.tsx:54
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:304
+#: ../../../lib/web/src/lib/error-normalizer.ts:201
 msgid "Please check your internet connection and try again."
 msgstr "कृपया अपना इंटरनेट कनेक्शन जाँचें और फिर से प्रयास करें।"
+
+#: ../../../lib/web/src/features/errors/general-error.tsx:83
+msgid "Please try again."
+msgstr "कृपया फिर से प्रयास करें।"
+
+#: ../../../lib/web/src/features/errors/general-error.tsx:75
+msgid "Please wait a moment and try again."
+msgstr "कृपया कुछ देर प्रतीक्षा करें और फिर से कोशिश करें।"
 
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:373
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:378
@@ -793,8 +816,8 @@ msgstr "इस सर्वर पर अपने खाते पुनः ल
 msgid "Re-register your passkeys on this server"
 msgstr "इस सर्वर पर अपनी पासकी फिर से पंजीकृत करें"
 
-#: ../../../lib/web/src/components/search-entity-dialog.tsx:219
-#: ../../../lib/web/src/components/search-entity-page.tsx:194
+#: ../../../lib/web/src/components/search-entity-dialog.tsx:216
+#: ../../../lib/web/src/components/search-entity-page.tsx:240
 msgid "Recommended"
 msgstr "सुझाया गया"
 
@@ -888,8 +911,8 @@ msgstr "यूज़र खोजें"
 msgid "Search..."
 msgstr "खोजें..."
 
-#: ../../../lib/web/src/components/search-entity-dialog.tsx:177
-#: ../../../lib/web/src/components/search-entity-page.tsx:152
+#: ../../../lib/web/src/components/search-entity-dialog.tsx:174
+#: ../../../lib/web/src/components/search-entity-page.tsx:198
 #: ../../../lib/web/src/features/access/access-dialog.tsx:202
 msgid "Searching..."
 msgstr "खोजा जा रहा है..."
@@ -938,8 +961,8 @@ msgstr "ईमेल भेजें"
 msgid "Serif"
 msgstr "सेरिफ़"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:245
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:271
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:260
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:286
 msgid "Server error"
 msgstr "सर्वर त्रुटि"
 
@@ -948,9 +971,9 @@ msgstr "सर्वर त्रुटि"
 msgid "Server rules"
 msgstr "सर्वर के नियम"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:209
-msgid "Session expired"
-msgstr "सेशन समाप्त हो गया"
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:210
+msgid "Session expired. Please log in again."
+msgstr "सत्र समाप्त हो गया है। कृपया फिर से लॉग इन करें।"
 
 #: ../../../lib/web/src/components/travelling-picker.tsx:147
 msgid "Set origin and destination"
@@ -1040,6 +1063,10 @@ msgstr "नियम और शर्तें"
 msgid "That code is incorrect or has expired."
 msgstr "वह कोड गलत है या समाप्त हो चुका है।"
 
+#: ../../../lib/web/src/features/errors/general-error.tsx:68
+msgid "The requested content could not be found."
+msgstr "अनुरोधित सामग्री नहीं मिल सकी।"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:194
 msgid "Theme"
 msgstr "थीम"
@@ -1087,6 +1114,10 @@ msgstr "साइडबार टॉगल करें"
 msgid "Toggle theme"
 msgstr "थीम टॉगल करें"
 
+#: ../../../lib/web/src/features/errors/general-error.tsx:74
+msgid "Too many requests"
+msgstr "बहुत अधिक अनुरोध"
+
 #: ../../../lib/web/src/components/ui/sort-selector.tsx:45
 msgid "Top"
 msgstr "टॉप"
@@ -1095,13 +1126,13 @@ msgstr "टॉप"
 msgid "Travelling"
 msgstr "यात्रा कर रहे हैं"
 
-#: ../../../lib/web/src/components/search-entity-dialog.tsx:193
-#: ../../../lib/web/src/components/search-entity-page.tsx:168
+#: ../../../lib/web/src/components/search-entity-dialog.tsx:190
+#: ../../../lib/web/src/components/search-entity-page.tsx:214
 msgid "Try adjusting your search terms"
 msgstr "अपने खोज शब्दों को एडजस्ट करके देखें"
 
-#: ../../../lib/web/src/features/errors/general-error.tsx:128
-#: ../../../lib/web/src/features/errors/general-error.tsx:168
+#: ../../../lib/web/src/features/errors/general-error.tsx:140
+#: ../../../lib/web/src/features/errors/general-error.tsx:180
 #: ../../../lib/web/src/features/errors/maintenance-error.tsx:19
 msgid "Try again"
 msgstr "फिर से कोशिश करें"
@@ -1122,7 +1153,7 @@ msgstr "यूज़र खोजने के लिए टाइप करे�
 msgid "Type to search..."
 msgstr "खोजने के लिए टाइप करें..."
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:267
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:282
 msgid "Unable to connect to remote server"
 msgstr "रिमोट सर्वर से कनेक्ट नहीं हो सका"
 
@@ -1131,7 +1162,7 @@ msgstr "रिमोट सर्वर से कनेक्ट नहीं �
 msgid "Unable to redirect to login. Please try again."
 msgstr "लॉगिन पर रीडायरेक्ट करने में असमर्थ। कृपया फिर से कोशिश करें।"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:156
+#: ../../../lib/web/src/components/notification-category-button.tsx:155
 msgid "Unassigned"
 msgstr "असाइन नहीं किया गया"
 
@@ -1208,6 +1239,10 @@ msgstr "वेबसाइट मेंटेनेंस के अंतर्
 #: ../../../lib/web/src/lib/preference-utils.ts:61
 msgid "Wednesday"
 msgstr "बुधवार"
+
+#: ../../../lib/web/src/features/errors/general-error.tsx:61
+msgid "You do not have access to this section."
+msgstr "आपके पास इस अनुभाग तक पहुँच नहीं है।"
 
 #: ../../../lib/web/src/components/restore-banner.tsx:91
 msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
