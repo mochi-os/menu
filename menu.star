@@ -97,7 +97,10 @@ def action_push_accounts_add(a):
 def action_push_accounts_remove(a):
     """Remove a browser push account."""
     id = a.input("id", "").strip()
-    if not id or not id.isdigit():
+    # Account ids are mochi.uid() text since the integer-id re-keying; only
+    # pre-migration rows kept digit ids, so an isdigit() check rejects every
+    # account created since.
+    if not id or len(id) > 64:
         return a.error.label(400, "errors.invalid_id")
 
     result = mochi.service.call("notifications", "accounts/remove", id)
