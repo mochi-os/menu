@@ -21,7 +21,9 @@ interface VapidKeyResponse {
 }
 
 interface Account {
-  id: number
+  // Account ids are mochi.uid() text (notifications accounts table is `id text`),
+  // not integers — a number type here made getLocalAccount reject every stored id.
+  id: string
   type: string
   identifier: string
 }
@@ -33,7 +35,7 @@ interface AccountsListResponse {
 const LOCAL_ACCOUNT_KEY = 'mochi.push.account'
 
 interface LocalAccount {
-  id: number
+  id: string
   endpoint: string
 }
 
@@ -42,7 +44,7 @@ function getLocalAccount(): LocalAccount | null {
     const raw = localStorage.getItem(LOCAL_ACCOUNT_KEY)
     if (!raw) return null
     const parsed = JSON.parse(raw)
-    if (typeof parsed?.id !== 'number' || typeof parsed?.endpoint !== 'string') return null
+    if (typeof parsed?.id !== 'string' || typeof parsed?.endpoint !== 'string') return null
     return parsed
   } catch {
     return null
@@ -58,12 +60,12 @@ function setLocalAccount(account: LocalAccount | null): void {
   }
 }
 
-async function removeAccountById(id: number): Promise<void> {
+async function removeAccountById(id: string): Promise<void> {
   try {
     await menuFetch('-/push/accounts/remove', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ id: String(id) }).toString(),
+      body: new URLSearchParams({ id }).toString(),
     })
   } catch {
     // Account may already be gone server-side; don't block the flow
@@ -97,7 +99,7 @@ async function findBrowserAccountByEndpoint(endpoint: string): Promise<Account |
   return accounts.find((a) => a.type === 'browser' && a.identifier === endpoint) || null
 }
 
-async function createBrowserAccount(sub: PushSubscription): Promise<number | null> {
+async function createBrowserAccount(sub: PushSubscription): Promise<string | null> {
   const data = push.getSubscriptionData(sub)
   await menuFetch('-/push/accounts/add', {
     method: 'POST',
@@ -115,7 +117,7 @@ async function createBrowserAccount(sub: PushSubscription): Promise<number | nul
 }
 
 /** Ensure browser push is registered for THIS device. Returns the account ID or null. */
-async function ensurePushRegistered(): Promise<number | null> {
+async function ensurePushRegistered(): Promise<string | null> {
   if (!(await push.isSupported())) return null
 
   const vapidKey = await getVapidKey()
