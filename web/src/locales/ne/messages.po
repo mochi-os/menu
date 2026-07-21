@@ -13,7 +13,12 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
+#. js-lingui-explicit-id
+#: ../../../lib/web/src/lib/error-normalizer.ts:204
+msgid "Please check your internet connection and try again."
+msgstr "कृपया आफ्नो इन्टरनेट जडान जाँच गरी पुनः प्रयास गर्नुहोस्।"
+
+#: src/use-permission-request.tsx:165
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> ले निम्न अनुमति माग्दैछ:"
 
@@ -82,7 +87,7 @@ msgstr "सूचनाहरू प्राप्त गर्न र से�
 msgid "Add new account"
 msgstr "नयाँ खाता थप्नुहोस्"
 
-#: ../../../lib/web/src/components/post-tags.tsx:133
+#: ../../../lib/web/src/components/post-tags.tsx:137
 msgid "Add tag..."
 msgstr "ट्याग थप्नुहोस्..."
 
@@ -111,7 +116,7 @@ msgstr "AI"
 msgid "All"
 msgstr "सबै"
 
-#: src/use-permission-request.tsx:187
+#: src/use-permission-request.tsx:193
 msgid "Allow"
 msgstr "अनुमति दिनुहोस्"
 
@@ -149,8 +154,8 @@ msgstr "पछाडि"
 msgid "Back to home"
 msgstr "गृहमा फर्कनुहोस्"
 
-#: ../../../lib/web/src/components/post-tags.tsx:176
-#: ../../../lib/web/src/components/post-tags.tsx:188
+#: ../../../lib/web/src/components/post-tags.tsx:180
+#: ../../../lib/web/src/components/post-tags.tsx:192
 msgid "Boost interest"
 msgstr "रुचि बढाउनुहोस्"
 
@@ -226,14 +231,14 @@ msgstr "चयन खाली गर्नुहोस् (Escape)"
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:354
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:357
 #: ../../../lib/web/src/components/ui/sheet.tsx:79
-#: src/use-permission-request.tsx:176
+#: src/use-permission-request.tsx:182
 msgid "Close"
 msgstr "बन्द गर्नुहोस्"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:107
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:112
-#: src/shell-menu.tsx:385
-#: src/shell-menu.tsx:392
+#: src/shell-menu.tsx:408
+#: src/shell-menu.tsx:415
 msgid "Close navigation"
 msgstr "नेभिगेसन बन्द गर्नुहोस्"
 
@@ -299,6 +304,10 @@ msgstr "प्रतिलिपि"
 msgid "Could not load this document. Please try again later."
 msgstr "यो कागजात लोड गर्न सकिएन। कृपया पछि फेरि प्रयास गर्नुहोस्।"
 
+#: src/shell-menu.tsx:347
+msgid "Couldn't load notifications"
+msgstr "सूचनाहरू लोड गर्न सकिएन"
+
 #: ../../../lib/web/src/components/step-up-dialog.tsx:184
 msgid "Couldn't send the code. Please try again."
 msgstr "कोड पठाउन सकिएन। कृपया फेरि प्रयास गर्नुहोस्।"
@@ -344,7 +353,7 @@ msgstr "पूर्वनिर्धारित AI खाता"
 msgid "Delete your account on the old server"
 msgstr "पुरानो सर्भरमा आफ्नो खाता मेटाउनुहोस्"
 
-#: src/use-permission-request.tsx:181
+#: src/use-permission-request.tsx:187
 msgid "Deny"
 msgstr "अस्वीकार गर्नुहोस्"
 
@@ -519,10 +528,10 @@ msgstr "पासवर्ड लुकाउनुहोस्"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:158
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:400
-#: src/shell-menu.tsx:406
-#: src/shell-menu.tsx:478
-#: src/shell-menu.tsx:482
+#: src/shell-menu.tsx:423
+#: src/shell-menu.tsx:429
+#: src/shell-menu.tsx:501
+#: src/shell-menu.tsx:505
 msgid "Home"
 msgstr "होम"
 
@@ -589,8 +598,8 @@ msgstr "लोड हुँदै…"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:275
-#: src/shell-menu.tsx:281
+#: src/shell-menu.tsx:289
+#: src/shell-menu.tsx:295
 msgid "Log out"
 msgstr "लग आउट"
 
@@ -609,8 +618,8 @@ msgstr "लग आउट हुँदै…"
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:92
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:99
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:298
-#: src/shell-menu.tsx:304
+#: src/shell-menu.tsx:312
+#: src/shell-menu.tsx:318
 msgid "Mark all as read"
 msgstr "सबै पढिएको रूपमा चिन्ह लगाउनुहोस्"
 
@@ -619,7 +628,7 @@ msgid "Medium"
 msgstr "मध्यम"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:173
-#: src/shell-menu.tsx:447
+#: src/shell-menu.tsx:470
 msgid "Menu"
 msgstr "मेनु"
 
@@ -678,7 +687,7 @@ msgstr "कुनै समय क्षेत्र भेटिएन।"
 msgid "No topic record yet — try again after the next notification."
 msgstr "अहिलेसम्म कुनै टपिक रेकर्ड छैन — अर्को सूचना पछि फेरि प्रयास गर्नुहोस्।"
 
-#: src/shell-menu.tsx:331
+#: src/shell-menu.tsx:354
 msgid "No unread notifications"
 msgstr "कुनै नपढिएको सूचना छैन"
 
@@ -709,7 +718,7 @@ msgstr "सेट गरिएको छैन"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:290
+#: src/shell-menu.tsx:304
 msgid "Notifications"
 msgstr "सूचनाहरू"
 
@@ -722,22 +731,22 @@ msgstr "ओहो! पृष्ठ भेटिएन!"
 msgid "Open account actions"
 msgstr "खाता कार्यहरू खोल्नुहोस्"
 
-#: ../../../lib/web/src/components/layout/nav-group.tsx:182
-#: ../../../lib/web/src/components/layout/nav-group.tsx:187
+#: ../../../lib/web/src/components/layout/nav-group.tsx:202
+#: ../../../lib/web/src/components/layout/nav-group.tsx:207
 msgid "Open actions"
 msgstr "कार्यहरू खोल्नुहोस्"
 
-#: src/shell-menu.tsx:252
-#: src/shell-menu.tsx:364
-#: src/shell-menu.tsx:419
-#: src/shell-menu.tsx:431
+#: src/shell-menu.tsx:266
+#: src/shell-menu.tsx:387
+#: src/shell-menu.tsx:442
+#: src/shell-menu.tsx:454
 msgid "Open menu"
 msgstr "मेनु खोल्नुहोस्"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:385
-#: src/shell-menu.tsx:392
+#: src/shell-menu.tsx:408
+#: src/shell-menu.tsx:415
 msgid "Open navigation"
 msgstr "नेभिगेसन खोल्नुहोस्"
 
@@ -771,13 +780,12 @@ msgstr "पासकी प्रमाणीकरण असफल भयो।
 msgid "Passkeys"
 msgstr "पासकीहरू"
 
-#: src/use-permission-request.tsx:157
+#: src/use-permission-request.tsx:163
 msgid "Permission request"
 msgstr "अनुमति अनुरोध"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx:54
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:304
-#: ../../../lib/web/src/lib/error-normalizer.ts:201
 msgid "Please check your internet connection and try again."
 msgstr "कृपया आफ्नो इन्टरनेट जडान जाँच गरी पुनः प्रयास गर्नुहोस्।"
 
@@ -817,7 +825,7 @@ msgid "Re-register your passkeys on this server"
 msgstr "यस सर्भरमा तपाईंका पासकीहरू पुन: दर्ता गर्नुहोस्"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
-#: ../../../lib/web/src/components/search-entity-page.tsx:240
+#: ../../../lib/web/src/components/search-entity-page.tsx:242
 msgid "Recommended"
 msgstr "सिफारिस गरिएको"
 
@@ -825,8 +833,8 @@ msgstr "सिफारिस गरिएको"
 msgid "Redirecting to login."
 msgstr "लग इनमा रिडाइरेक्ट गर्दै।"
 
-#: ../../../lib/web/src/components/post-tags.tsx:196
-#: ../../../lib/web/src/components/post-tags.tsx:208
+#: ../../../lib/web/src/components/post-tags.tsx:200
+#: ../../../lib/web/src/components/post-tags.tsx:212
 msgid "Reduce interest"
 msgstr "रुचि घटाउनुहोस्"
 
@@ -852,8 +860,8 @@ msgstr "पहुँच नियम हटाउनुहोस्"
 msgid "Remove access?"
 msgstr "पहुँच हटाउने?"
 
-#: ../../../lib/web/src/components/post-tags.tsx:216
-#: ../../../lib/web/src/components/post-tags.tsx:228
+#: ../../../lib/web/src/components/post-tags.tsx:220
+#: ../../../lib/web/src/components/post-tags.tsx:232
 msgid "Remove interest"
 msgstr "रुचि हटाउनुहोस्"
 
@@ -912,7 +920,7 @@ msgid "Search..."
 msgstr "खोज्नुहोस्..."
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:174
-#: ../../../lib/web/src/components/search-entity-page.tsx:198
+#: ../../../lib/web/src/components/search-entity-page.tsx:200
 #: ../../../lib/web/src/features/access/access-dialog.tsx:202
 msgid "Searching..."
 msgstr "खोज्दै..."
@@ -1045,8 +1053,8 @@ msgstr "प्रणाली"
 msgid "Tag"
 msgstr "ट्याग"
 
-#: ../../../lib/web/src/components/post-tags.tsx:100
-#: ../../../lib/web/src/components/post-tags.tsx:111
+#: ../../../lib/web/src/components/post-tags.tsx:101
+#: ../../../lib/web/src/components/post-tags.tsx:115
 msgid "Tags"
 msgstr "ट्यागहरू"
 
@@ -1075,7 +1083,7 @@ msgstr "थिम"
 msgid "Theme Settings"
 msgstr "थिम सेटिङहरू"
 
-#: src/use-permission-request.tsx:169
+#: src/use-permission-request.tsx:175
 msgid "This permission must be enabled by you in the app settings."
 msgstr "यो अनुमति तपाईंले एप सेटिङहरूमा सक्षम पार्नुपर्छ।"
 
@@ -1092,10 +1100,10 @@ msgstr "स्तम्भहरू टगल गर्नुहोस्"
 msgid "Toggle right panel"
 msgstr "दायाँ प्यानल टगल गर्नुहोस्"
 
-#: ../../../lib/web/src/components/layout/nav-group.tsx:351
-#: ../../../lib/web/src/components/layout/nav-group.tsx:358
-#: ../../../lib/web/src/components/layout/nav-group.tsx:481
-#: ../../../lib/web/src/components/layout/nav-group.tsx:488
+#: ../../../lib/web/src/components/layout/nav-group.tsx:373
+#: ../../../lib/web/src/components/layout/nav-group.tsx:380
+#: ../../../lib/web/src/components/layout/nav-group.tsx:503
+#: ../../../lib/web/src/components/layout/nav-group.tsx:510
 msgid "Toggle section"
 msgstr "खण्ड टगल गर्नुहोस्"
 
@@ -1127,7 +1135,7 @@ msgid "Travelling"
 msgstr "यात्रा गर्दै"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:190
-#: ../../../lib/web/src/components/search-entity-page.tsx:214
+#: ../../../lib/web/src/components/search-entity-page.tsx:216
 msgid "Try adjusting your search terms"
 msgstr "आफ्ना खोज सर्तहरू समायोजन गर्ने प्रयास गर्नुहोस्"
 
@@ -1183,7 +1191,7 @@ msgid "Use your passkey"
 msgstr "आफ्नो पासकी प्रयोग गर्नुहोस्"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:268
+#: src/shell-menu.tsx:282
 msgid "User"
 msgstr "प्रयोगकर्ता"
 
@@ -1209,7 +1217,7 @@ msgstr "प्रमाणित गर्नुहोस्"
 msgid "Verify email address"
 msgstr "इमेल ठेगाना प्रमाणित गर्नुहोस्"
 
-#: ../../../lib/web/src/components/attachment-gallery.tsx:66
+#: ../../../lib/web/src/components/attachment-gallery.tsx:79
 msgid "Video thumbnail"
 msgstr "भिडियो थम्बनेल"
 
@@ -1218,8 +1226,8 @@ msgid "View"
 msgstr "हेर्नुहोस्"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:312
-#: src/shell-menu.tsx:318
+#: src/shell-menu.tsx:326
+#: src/shell-menu.tsx:332
 msgid "View all"
 msgstr "सबै हेर्नुहोस्"
 

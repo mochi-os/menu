@@ -13,7 +13,12 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
+#. js-lingui-explicit-id
+#: ../../../lib/web/src/lib/error-normalizer.ts:204
+msgid "Please check your internet connection and try again."
+msgstr "تکایە پەیوەندی ئینتەرنێتەکەت بپشکنە و دووبارە هەوڵ بدەرەوە."
+
+#: src/use-permission-request.tsx:165
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> داوای ئەم مۆڵەتە دەکات:"
 
@@ -82,7 +87,7 @@ msgstr "هەژمارێک زیاد بکە بۆ وەرگرتنی ئاگادارک�
 msgid "Add new account"
 msgstr "زیادکردنی هەژماری نوێ"
 
-#: ../../../lib/web/src/components/post-tags.tsx:133
+#: ../../../lib/web/src/components/post-tags.tsx:137
 msgid "Add tag..."
 msgstr "زیادکردنی تاگ..."
 
@@ -111,7 +116,7 @@ msgstr "AI"
 msgid "All"
 msgstr "هەموو"
 
-#: src/use-permission-request.tsx:187
+#: src/use-permission-request.tsx:193
 msgid "Allow"
 msgstr "ڕێگەپێدان"
 
@@ -149,8 +154,8 @@ msgstr "گەڕانەوە"
 msgid "Back to home"
 msgstr "گەڕانەوە بۆ ماڵەوە"
 
-#: ../../../lib/web/src/components/post-tags.tsx:176
-#: ../../../lib/web/src/components/post-tags.tsx:188
+#: ../../../lib/web/src/components/post-tags.tsx:180
+#: ../../../lib/web/src/components/post-tags.tsx:192
 msgid "Boost interest"
 msgstr "بەهێزکردنی بایەخ"
 
@@ -226,14 +231,14 @@ msgstr "پاککردنەوەی هەڵبژاردە (Escape)"
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:354
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:357
 #: ../../../lib/web/src/components/ui/sheet.tsx:79
-#: src/use-permission-request.tsx:176
+#: src/use-permission-request.tsx:182
 msgid "Close"
 msgstr "داخستن"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:107
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:112
-#: src/shell-menu.tsx:385
-#: src/shell-menu.tsx:392
+#: src/shell-menu.tsx:408
+#: src/shell-menu.tsx:415
 msgid "Close navigation"
 msgstr "داخستنی ڕێدۆزی"
 
@@ -299,6 +304,10 @@ msgstr "کۆپیکردن"
 msgid "Could not load this document. Please try again later."
 msgstr "ئەم دۆکومێنتە نەخوێنرایەوە. تکایە دواتر هەوڵ بدە."
 
+#: src/shell-menu.tsx:347
+msgid "Couldn't load notifications"
+msgstr "نەتوانرا ئاگادارکردنەوەکان باربکرێن"
+
 #: ../../../lib/web/src/components/step-up-dialog.tsx:184
 msgid "Couldn't send the code. Please try again."
 msgstr "نەکرا کۆدەکە بنێردرێت. تکایە دووبارە هەوڵ بدەرەوە."
@@ -344,7 +353,7 @@ msgstr "هەژماری بنەڕەتی AI"
 msgid "Delete your account on the old server"
 msgstr "هەژمارەکەت لە سێرڤەری کۆنەکەوە بسڕەوە"
 
-#: src/use-permission-request.tsx:181
+#: src/use-permission-request.tsx:187
 msgid "Deny"
 msgstr "ڕەتکردنەوە"
 
@@ -519,10 +528,10 @@ msgstr "شاردنەوەی وشەی نهێنی"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:158
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:400
-#: src/shell-menu.tsx:406
-#: src/shell-menu.tsx:478
-#: src/shell-menu.tsx:482
+#: src/shell-menu.tsx:423
+#: src/shell-menu.tsx:429
+#: src/shell-menu.tsx:501
+#: src/shell-menu.tsx:505
 msgid "Home"
 msgstr "ماڵەوە"
 
@@ -589,8 +598,8 @@ msgstr "بار دەکرێت…"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:275
-#: src/shell-menu.tsx:281
+#: src/shell-menu.tsx:289
+#: src/shell-menu.tsx:295
 msgid "Log out"
 msgstr "دەرچوون"
 
@@ -609,8 +618,8 @@ msgstr "دەردەچێت…"
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:92
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:99
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:298
-#: src/shell-menu.tsx:304
+#: src/shell-menu.tsx:312
+#: src/shell-menu.tsx:318
 msgid "Mark all as read"
 msgstr "نیشانەکردنی هەمووان وەک خوێندراوە"
 
@@ -619,7 +628,7 @@ msgid "Medium"
 msgstr "مامناوەند"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:173
-#: src/shell-menu.tsx:447
+#: src/shell-menu.tsx:470
 msgid "Menu"
 msgstr "Menu"
 
@@ -678,7 +687,7 @@ msgstr "هیچ کاتزۆنێک نەدۆزرایەوە."
 msgid "No topic record yet — try again after the next notification."
 msgstr "هێشتا هیچ تۆمارێکی بابەت نییە — دوای ئاگادارکردنەوەی داهاتوو دووبارە هەوڵ بدەرەوە."
 
-#: src/shell-menu.tsx:331
+#: src/shell-menu.tsx:354
 msgid "No unread notifications"
 msgstr "هیچ ئاگادارکردنەوەیەکی نەخوێندراوە نییە"
 
@@ -709,7 +718,7 @@ msgstr "دانەنراوە"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:290
+#: src/shell-menu.tsx:304
 msgid "Notifications"
 msgstr "ئاگادارکردنەوەکان"
 
@@ -722,22 +731,22 @@ msgstr "ئۆه! پەڕە نەدۆزرایەوە!"
 msgid "Open account actions"
 msgstr "کردنەوەی کردارەکانی هەژمار"
 
-#: ../../../lib/web/src/components/layout/nav-group.tsx:182
-#: ../../../lib/web/src/components/layout/nav-group.tsx:187
+#: ../../../lib/web/src/components/layout/nav-group.tsx:202
+#: ../../../lib/web/src/components/layout/nav-group.tsx:207
 msgid "Open actions"
 msgstr "کردارەکان بکەرەوە"
 
-#: src/shell-menu.tsx:252
-#: src/shell-menu.tsx:364
-#: src/shell-menu.tsx:419
-#: src/shell-menu.tsx:431
+#: src/shell-menu.tsx:266
+#: src/shell-menu.tsx:387
+#: src/shell-menu.tsx:442
+#: src/shell-menu.tsx:454
 msgid "Open menu"
 msgstr "کردنەوەی لیست"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:385
-#: src/shell-menu.tsx:392
+#: src/shell-menu.tsx:408
+#: src/shell-menu.tsx:415
 msgid "Open navigation"
 msgstr "کردنەوەی ڕێدۆزی"
 
@@ -771,13 +780,12 @@ msgstr "پشتڕاستکردنەوەی کلیلی تێپەڕبوون سەرکە�
 msgid "Passkeys"
 msgstr "پاسکییەکان"
 
-#: src/use-permission-request.tsx:157
+#: src/use-permission-request.tsx:163
 msgid "Permission request"
 msgstr "داواکاری مۆڵەت"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx:54
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:304
-#: ../../../lib/web/src/lib/error-normalizer.ts:201
 msgid "Please check your internet connection and try again."
 msgstr "تکایە پەیوەندی ئینتەرنێتەکەت بپشکنە و دووبارە هەوڵ بدەرەوە."
 
@@ -817,7 +825,7 @@ msgid "Re-register your passkeys on this server"
 msgstr "پاسکیەکانت لەسەر ئەم ڕاژەیە دووبارە تۆمار بکە"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
-#: ../../../lib/web/src/components/search-entity-page.tsx:240
+#: ../../../lib/web/src/components/search-entity-page.tsx:242
 msgid "Recommended"
 msgstr "پێشنیازکراو"
 
@@ -825,8 +833,8 @@ msgstr "پێشنیازکراو"
 msgid "Redirecting to login."
 msgstr "ڕەوانەکردنەوە بۆ چونەژوورەوە."
 
-#: ../../../lib/web/src/components/post-tags.tsx:196
-#: ../../../lib/web/src/components/post-tags.tsx:208
+#: ../../../lib/web/src/components/post-tags.tsx:200
+#: ../../../lib/web/src/components/post-tags.tsx:212
 msgid "Reduce interest"
 msgstr "کەمکردنەوەی بەرژەوەندی"
 
@@ -852,8 +860,8 @@ msgstr "لابردنی ڕێسای دەستڕاگەیشتن"
 msgid "Remove access?"
 msgstr "دەستڕاگەیشتن لاببەیت؟"
 
-#: ../../../lib/web/src/components/post-tags.tsx:216
-#: ../../../lib/web/src/components/post-tags.tsx:228
+#: ../../../lib/web/src/components/post-tags.tsx:220
+#: ../../../lib/web/src/components/post-tags.tsx:232
 msgid "Remove interest"
 msgstr "لابردنی بەرژەوەندی"
 
@@ -912,7 +920,7 @@ msgid "Search..."
 msgstr "گەڕان..."
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:174
-#: ../../../lib/web/src/components/search-entity-page.tsx:198
+#: ../../../lib/web/src/components/search-entity-page.tsx:200
 #: ../../../lib/web/src/features/access/access-dialog.tsx:202
 msgid "Searching..."
 msgstr "گەڕان..."
@@ -1045,8 +1053,8 @@ msgstr "سیستەم"
 msgid "Tag"
 msgstr "تاگ"
 
-#: ../../../lib/web/src/components/post-tags.tsx:100
-#: ../../../lib/web/src/components/post-tags.tsx:111
+#: ../../../lib/web/src/components/post-tags.tsx:101
+#: ../../../lib/web/src/components/post-tags.tsx:115
 msgid "Tags"
 msgstr "تاگەکان"
 
@@ -1075,7 +1083,7 @@ msgstr "ڕووکار"
 msgid "Theme Settings"
 msgstr "ڕێکخستنەکانی ڕووکار"
 
-#: src/use-permission-request.tsx:169
+#: src/use-permission-request.tsx:175
 msgid "This permission must be enabled by you in the app settings."
 msgstr "ئەم ڕێگەپێدانە دەبێت لە ڕێکخستنەکانی ئەپدا لە لایەن خۆتەوە چالاکبکرێت."
 
@@ -1092,10 +1100,10 @@ msgstr "گۆڕینی ستوونەکان"
 msgid "Toggle right panel"
 msgstr "گۆڕینی پانێلی ڕاست"
 
-#: ../../../lib/web/src/components/layout/nav-group.tsx:351
-#: ../../../lib/web/src/components/layout/nav-group.tsx:358
-#: ../../../lib/web/src/components/layout/nav-group.tsx:481
-#: ../../../lib/web/src/components/layout/nav-group.tsx:488
+#: ../../../lib/web/src/components/layout/nav-group.tsx:373
+#: ../../../lib/web/src/components/layout/nav-group.tsx:380
+#: ../../../lib/web/src/components/layout/nav-group.tsx:503
+#: ../../../lib/web/src/components/layout/nav-group.tsx:510
 msgid "Toggle section"
 msgstr "بەش بگۆڕە"
 
@@ -1127,7 +1135,7 @@ msgid "Travelling"
 msgstr "گەشتکردن"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:190
-#: ../../../lib/web/src/components/search-entity-page.tsx:214
+#: ../../../lib/web/src/components/search-entity-page.tsx:216
 msgid "Try adjusting your search terms"
 msgstr "هەوڵبدە وشەکانی گەڕانت ڕێکبخەیت"
 
@@ -1183,7 +1191,7 @@ msgid "Use your passkey"
 msgstr "کلیلی تێپەڕبوونەکەت بەکاربهێنە"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:268
+#: src/shell-menu.tsx:282
 msgid "User"
 msgstr "بەکارهێنەر"
 
@@ -1209,7 +1217,7 @@ msgstr "پشتڕاستبکە"
 msgid "Verify email address"
 msgstr "ناونیشانی ئیمەیڵ پشتڕاستبکە"
 
-#: ../../../lib/web/src/components/attachment-gallery.tsx:66
+#: ../../../lib/web/src/components/attachment-gallery.tsx:79
 msgid "Video thumbnail"
 msgstr "وێنۆکەی ڤیدیۆ"
 
@@ -1218,8 +1226,8 @@ msgid "View"
 msgstr "بینین"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:312
-#: src/shell-menu.tsx:318
+#: src/shell-menu.tsx:326
+#: src/shell-menu.tsx:332
 msgid "View all"
 msgstr "هەمووی ببینە"
 

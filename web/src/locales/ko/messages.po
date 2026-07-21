@@ -13,7 +13,12 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
+#. js-lingui-explicit-id
+#: ../../../lib/web/src/lib/error-normalizer.ts:204
+msgid "Please check your internet connection and try again."
+msgstr "인터넷 연결을 확인하고 다시 시도하세요."
+
+#: src/use-permission-request.tsx:165
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0>이(가) 다음 권한을 요청합니다:"
 
@@ -82,7 +87,7 @@ msgstr "알림을 받고 서비스를 이용하려면 계정을 추가하세요.
 msgid "Add new account"
 msgstr "새 계정 추가"
 
-#: ../../../lib/web/src/components/post-tags.tsx:133
+#: ../../../lib/web/src/components/post-tags.tsx:137
 msgid "Add tag..."
 msgstr "태그 추가..."
 
@@ -111,7 +116,7 @@ msgstr "AI"
 msgid "All"
 msgstr "전체"
 
-#: src/use-permission-request.tsx:187
+#: src/use-permission-request.tsx:193
 msgid "Allow"
 msgstr "허용"
 
@@ -149,8 +154,8 @@ msgstr "뒤로"
 msgid "Back to home"
 msgstr "홈으로 돌아가기"
 
-#: ../../../lib/web/src/components/post-tags.tsx:176
-#: ../../../lib/web/src/components/post-tags.tsx:188
+#: ../../../lib/web/src/components/post-tags.tsx:180
+#: ../../../lib/web/src/components/post-tags.tsx:192
 msgid "Boost interest"
 msgstr "관심도 부스트"
 
@@ -226,14 +231,14 @@ msgstr "선택 해제 (Escape)"
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:354
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:357
 #: ../../../lib/web/src/components/ui/sheet.tsx:79
-#: src/use-permission-request.tsx:176
+#: src/use-permission-request.tsx:182
 msgid "Close"
 msgstr "닫기"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:107
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:112
-#: src/shell-menu.tsx:385
-#: src/shell-menu.tsx:392
+#: src/shell-menu.tsx:408
+#: src/shell-menu.tsx:415
 msgid "Close navigation"
 msgstr "내비게이션 닫기"
 
@@ -299,6 +304,10 @@ msgstr "복사"
 msgid "Could not load this document. Please try again later."
 msgstr "이 문서를 불러올 수 없었습니다. 잠시 후 다시 시도해 주세요."
 
+#: src/shell-menu.tsx:347
+msgid "Couldn't load notifications"
+msgstr "알림을 불러오지 못했습니다"
+
 #: ../../../lib/web/src/components/step-up-dialog.tsx:184
 msgid "Couldn't send the code. Please try again."
 msgstr "코드를 보낼 수 없습니다. 다시 시도해 주세요."
@@ -344,7 +353,7 @@ msgstr "기본 AI 계정"
 msgid "Delete your account on the old server"
 msgstr "이전 서버에서 계정 삭제"
 
-#: src/use-permission-request.tsx:181
+#: src/use-permission-request.tsx:187
 msgid "Deny"
 msgstr "거부"
 
@@ -519,10 +528,10 @@ msgstr "비밀번호 숨기기"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:158
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:400
-#: src/shell-menu.tsx:406
-#: src/shell-menu.tsx:478
-#: src/shell-menu.tsx:482
+#: src/shell-menu.tsx:423
+#: src/shell-menu.tsx:429
+#: src/shell-menu.tsx:501
+#: src/shell-menu.tsx:505
 msgid "Home"
 msgstr "홈"
 
@@ -589,8 +598,8 @@ msgstr "로딩 중…"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:275
-#: src/shell-menu.tsx:281
+#: src/shell-menu.tsx:289
+#: src/shell-menu.tsx:295
 msgid "Log out"
 msgstr "로그아웃"
 
@@ -609,8 +618,8 @@ msgstr "로그아웃 중…"
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:92
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:99
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:298
-#: src/shell-menu.tsx:304
+#: src/shell-menu.tsx:312
+#: src/shell-menu.tsx:318
 msgid "Mark all as read"
 msgstr "모두 읽음으로 표시"
 
@@ -619,7 +628,7 @@ msgid "Medium"
 msgstr "보통"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:173
-#: src/shell-menu.tsx:447
+#: src/shell-menu.tsx:470
 msgid "Menu"
 msgstr "메뉴"
 
@@ -678,7 +687,7 @@ msgstr "타임존을 찾을 수 없어요."
 msgid "No topic record yet — try again after the next notification."
 msgstr "아직 토픽 기록이 없어요 — 다음 알림 후에 다시 시도해 주세요."
 
-#: src/shell-menu.tsx:331
+#: src/shell-menu.tsx:354
 msgid "No unread notifications"
 msgstr "읽지 않은 알림이 없어요"
 
@@ -709,7 +718,7 @@ msgstr "설정되지 않음"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:290
+#: src/shell-menu.tsx:304
 msgid "Notifications"
 msgstr "알림"
 
@@ -722,22 +731,22 @@ msgstr "이런! 페이지를 찾을 수 없어요!"
 msgid "Open account actions"
 msgstr "계정 작업 열기"
 
-#: ../../../lib/web/src/components/layout/nav-group.tsx:182
-#: ../../../lib/web/src/components/layout/nav-group.tsx:187
+#: ../../../lib/web/src/components/layout/nav-group.tsx:202
+#: ../../../lib/web/src/components/layout/nav-group.tsx:207
 msgid "Open actions"
 msgstr "작업 열기"
 
-#: src/shell-menu.tsx:252
-#: src/shell-menu.tsx:364
-#: src/shell-menu.tsx:419
-#: src/shell-menu.tsx:431
+#: src/shell-menu.tsx:266
+#: src/shell-menu.tsx:387
+#: src/shell-menu.tsx:442
+#: src/shell-menu.tsx:454
 msgid "Open menu"
 msgstr "메뉴 열기"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:385
-#: src/shell-menu.tsx:392
+#: src/shell-menu.tsx:408
+#: src/shell-menu.tsx:415
 msgid "Open navigation"
 msgstr "내비게이션 열기"
 
@@ -771,13 +780,12 @@ msgstr "패스키 인증에 실패했습니다. 다시 시도해 주세요."
 msgid "Passkeys"
 msgstr "패스키"
 
-#: src/use-permission-request.tsx:157
+#: src/use-permission-request.tsx:163
 msgid "Permission request"
 msgstr "권한 요청"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx:54
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:304
-#: ../../../lib/web/src/lib/error-normalizer.ts:201
 msgid "Please check your internet connection and try again."
 msgstr "인터넷 연결을 확인하고 다시 시도하세요."
 
@@ -817,7 +825,7 @@ msgid "Re-register your passkeys on this server"
 msgstr "이 서버에서 패스키를 다시 등록하세요"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
-#: ../../../lib/web/src/components/search-entity-page.tsx:240
+#: ../../../lib/web/src/components/search-entity-page.tsx:242
 msgid "Recommended"
 msgstr "추천됨"
 
@@ -825,8 +833,8 @@ msgstr "추천됨"
 msgid "Redirecting to login."
 msgstr "로그인으로 리디렉션 중이에요."
 
-#: ../../../lib/web/src/components/post-tags.tsx:196
-#: ../../../lib/web/src/components/post-tags.tsx:208
+#: ../../../lib/web/src/components/post-tags.tsx:200
+#: ../../../lib/web/src/components/post-tags.tsx:212
 msgid "Reduce interest"
 msgstr "관심사 줄이기"
 
@@ -852,8 +860,8 @@ msgstr "접근 규칙 제거"
 msgid "Remove access?"
 msgstr "접근 권한을 제거할까요?"
 
-#: ../../../lib/web/src/components/post-tags.tsx:216
-#: ../../../lib/web/src/components/post-tags.tsx:228
+#: ../../../lib/web/src/components/post-tags.tsx:220
+#: ../../../lib/web/src/components/post-tags.tsx:232
 msgid "Remove interest"
 msgstr "관심사 제거"
 
@@ -912,7 +920,7 @@ msgid "Search..."
 msgstr "검색..."
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:174
-#: ../../../lib/web/src/components/search-entity-page.tsx:198
+#: ../../../lib/web/src/components/search-entity-page.tsx:200
 #: ../../../lib/web/src/features/access/access-dialog.tsx:202
 msgid "Searching..."
 msgstr "검색 중..."
@@ -1045,8 +1053,8 @@ msgstr "시스템"
 msgid "Tag"
 msgstr "태그"
 
-#: ../../../lib/web/src/components/post-tags.tsx:100
-#: ../../../lib/web/src/components/post-tags.tsx:111
+#: ../../../lib/web/src/components/post-tags.tsx:101
+#: ../../../lib/web/src/components/post-tags.tsx:115
 msgid "Tags"
 msgstr "태그"
 
@@ -1075,7 +1083,7 @@ msgstr "테마"
 msgid "Theme Settings"
 msgstr "테마 설정"
 
-#: src/use-permission-request.tsx:169
+#: src/use-permission-request.tsx:175
 msgid "This permission must be enabled by you in the app settings."
 msgstr "이 권한은 앱 설정에서 직접 활성화해야 해요."
 
@@ -1092,10 +1100,10 @@ msgstr "열 전환"
 msgid "Toggle right panel"
 msgstr "오른쪽 패널 토글"
 
-#: ../../../lib/web/src/components/layout/nav-group.tsx:351
-#: ../../../lib/web/src/components/layout/nav-group.tsx:358
-#: ../../../lib/web/src/components/layout/nav-group.tsx:481
-#: ../../../lib/web/src/components/layout/nav-group.tsx:488
+#: ../../../lib/web/src/components/layout/nav-group.tsx:373
+#: ../../../lib/web/src/components/layout/nav-group.tsx:380
+#: ../../../lib/web/src/components/layout/nav-group.tsx:503
+#: ../../../lib/web/src/components/layout/nav-group.tsx:510
 msgid "Toggle section"
 msgstr "섹션 전환"
 
@@ -1127,7 +1135,7 @@ msgid "Travelling"
 msgstr "이동 중"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:190
-#: ../../../lib/web/src/components/search-entity-page.tsx:214
+#: ../../../lib/web/src/components/search-entity-page.tsx:216
 msgid "Try adjusting your search terms"
 msgstr "검색어를 조정해 보세요"
 
@@ -1183,7 +1191,7 @@ msgid "Use your passkey"
 msgstr "패스키 사용"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:268
+#: src/shell-menu.tsx:282
 msgid "User"
 msgstr "사용자"
 
@@ -1209,7 +1217,7 @@ msgstr "확인"
 msgid "Verify email address"
 msgstr "이메일 주소 확인"
 
-#: ../../../lib/web/src/components/attachment-gallery.tsx:66
+#: ../../../lib/web/src/components/attachment-gallery.tsx:79
 msgid "Video thumbnail"
 msgstr "동영상 미리보기 이미지"
 
@@ -1218,8 +1226,8 @@ msgid "View"
 msgstr "보기"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:312
-#: src/shell-menu.tsx:318
+#: src/shell-menu.tsx:326
+#: src/shell-menu.tsx:332
 msgid "View all"
 msgstr "모두 보기"
 

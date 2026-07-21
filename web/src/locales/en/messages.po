@@ -13,7 +13,12 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
+#. js-lingui-explicit-id
+#: ../../../lib/web/src/lib/error-normalizer.ts:204
+msgid "Please check your internet connection and try again."
+msgstr "Please check your internet connection and try again."
+
+#: src/use-permission-request.tsx:165
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> is requesting the following permission:"
 
@@ -82,7 +87,7 @@ msgstr "Add an account to receive notifications and use services."
 msgid "Add new account"
 msgstr "Add new account"
 
-#: ../../../lib/web/src/components/post-tags.tsx:133
+#: ../../../lib/web/src/components/post-tags.tsx:137
 msgid "Add tag..."
 msgstr "Add tag..."
 
@@ -111,7 +116,7 @@ msgstr "AI"
 msgid "All"
 msgstr "All"
 
-#: src/use-permission-request.tsx:187
+#: src/use-permission-request.tsx:193
 msgid "Allow"
 msgstr "Allow"
 
@@ -149,8 +154,8 @@ msgstr "Back"
 msgid "Back to home"
 msgstr "Back to home"
 
-#: ../../../lib/web/src/components/post-tags.tsx:176
-#: ../../../lib/web/src/components/post-tags.tsx:188
+#: ../../../lib/web/src/components/post-tags.tsx:180
+#: ../../../lib/web/src/components/post-tags.tsx:192
 msgid "Boost interest"
 msgstr "Boost interest"
 
@@ -226,14 +231,14 @@ msgstr "Clear selection (Escape)"
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:354
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:357
 #: ../../../lib/web/src/components/ui/sheet.tsx:79
-#: src/use-permission-request.tsx:176
+#: src/use-permission-request.tsx:182
 msgid "Close"
 msgstr "Close"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:107
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:112
-#: src/shell-menu.tsx:385
-#: src/shell-menu.tsx:392
+#: src/shell-menu.tsx:408
+#: src/shell-menu.tsx:415
 msgid "Close navigation"
 msgstr "Close navigation"
 
@@ -299,6 +304,10 @@ msgstr "Copy"
 msgid "Could not load this document. Please try again later."
 msgstr "Could not load this document. Please try again later."
 
+#: src/shell-menu.tsx:347
+msgid "Couldn't load notifications"
+msgstr "Couldn't load notifications"
+
 #: ../../../lib/web/src/components/step-up-dialog.tsx:184
 msgid "Couldn't send the code. Please try again."
 msgstr "Couldn't send the code. Please try again."
@@ -344,7 +353,7 @@ msgstr "Default AI account"
 msgid "Delete your account on the old server"
 msgstr "Delete your account on the old server"
 
-#: src/use-permission-request.tsx:181
+#: src/use-permission-request.tsx:187
 msgid "Deny"
 msgstr "Deny"
 
@@ -519,10 +528,10 @@ msgstr "Hide password"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:158
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:400
-#: src/shell-menu.tsx:406
-#: src/shell-menu.tsx:478
-#: src/shell-menu.tsx:482
+#: src/shell-menu.tsx:423
+#: src/shell-menu.tsx:429
+#: src/shell-menu.tsx:501
+#: src/shell-menu.tsx:505
 msgid "Home"
 msgstr "Home"
 
@@ -589,8 +598,8 @@ msgstr "Loading…"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:275
-#: src/shell-menu.tsx:281
+#: src/shell-menu.tsx:289
+#: src/shell-menu.tsx:295
 msgid "Log out"
 msgstr "Log out"
 
@@ -609,8 +618,8 @@ msgstr "Logging out…"
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:92
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:99
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:298
-#: src/shell-menu.tsx:304
+#: src/shell-menu.tsx:312
+#: src/shell-menu.tsx:318
 msgid "Mark all as read"
 msgstr "Mark all as read"
 
@@ -619,7 +628,7 @@ msgid "Medium"
 msgstr "Medium"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:173
-#: src/shell-menu.tsx:447
+#: src/shell-menu.tsx:470
 msgid "Menu"
 msgstr "Menu"
 
@@ -678,7 +687,7 @@ msgstr "No time zone found."
 msgid "No topic record yet — try again after the next notification."
 msgstr "No topic record yet — try again after the next notification."
 
-#: src/shell-menu.tsx:331
+#: src/shell-menu.tsx:354
 msgid "No unread notifications"
 msgstr "No unread notifications"
 
@@ -709,7 +718,7 @@ msgstr "Not set"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:290
+#: src/shell-menu.tsx:304
 msgid "Notifications"
 msgstr "Notifications"
 
@@ -722,22 +731,22 @@ msgstr "Oops! Page Not Found!"
 msgid "Open account actions"
 msgstr "Open account actions"
 
-#: ../../../lib/web/src/components/layout/nav-group.tsx:182
-#: ../../../lib/web/src/components/layout/nav-group.tsx:187
+#: ../../../lib/web/src/components/layout/nav-group.tsx:202
+#: ../../../lib/web/src/components/layout/nav-group.tsx:207
 msgid "Open actions"
 msgstr "Open actions"
 
-#: src/shell-menu.tsx:252
-#: src/shell-menu.tsx:364
-#: src/shell-menu.tsx:419
-#: src/shell-menu.tsx:431
+#: src/shell-menu.tsx:266
+#: src/shell-menu.tsx:387
+#: src/shell-menu.tsx:442
+#: src/shell-menu.tsx:454
 msgid "Open menu"
 msgstr "Open menu"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:385
-#: src/shell-menu.tsx:392
+#: src/shell-menu.tsx:408
+#: src/shell-menu.tsx:415
 msgid "Open navigation"
 msgstr "Open navigation"
 
@@ -771,13 +780,12 @@ msgstr "Passkey verification failed. Please try again."
 msgid "Passkeys"
 msgstr "Passkeys"
 
-#: src/use-permission-request.tsx:157
+#: src/use-permission-request.tsx:163
 msgid "Permission request"
 msgstr "Permission request"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx:54
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:304
-#: ../../../lib/web/src/lib/error-normalizer.ts:201
 msgid "Please check your internet connection and try again."
 msgstr "Please check your internet connection and try again."
 
@@ -817,7 +825,7 @@ msgid "Re-register your passkeys on this server"
 msgstr "Re-register your passkeys on this server"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
-#: ../../../lib/web/src/components/search-entity-page.tsx:240
+#: ../../../lib/web/src/components/search-entity-page.tsx:242
 msgid "Recommended"
 msgstr "Recommended"
 
@@ -825,8 +833,8 @@ msgstr "Recommended"
 msgid "Redirecting to login."
 msgstr "Redirecting to login."
 
-#: ../../../lib/web/src/components/post-tags.tsx:196
-#: ../../../lib/web/src/components/post-tags.tsx:208
+#: ../../../lib/web/src/components/post-tags.tsx:200
+#: ../../../lib/web/src/components/post-tags.tsx:212
 msgid "Reduce interest"
 msgstr "Reduce interest"
 
@@ -852,8 +860,8 @@ msgstr "Remove access rule"
 msgid "Remove access?"
 msgstr "Remove access?"
 
-#: ../../../lib/web/src/components/post-tags.tsx:216
-#: ../../../lib/web/src/components/post-tags.tsx:228
+#: ../../../lib/web/src/components/post-tags.tsx:220
+#: ../../../lib/web/src/components/post-tags.tsx:232
 msgid "Remove interest"
 msgstr "Remove interest"
 
@@ -912,7 +920,7 @@ msgid "Search..."
 msgstr "Search..."
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:174
-#: ../../../lib/web/src/components/search-entity-page.tsx:198
+#: ../../../lib/web/src/components/search-entity-page.tsx:200
 #: ../../../lib/web/src/features/access/access-dialog.tsx:202
 msgid "Searching..."
 msgstr "Searching..."
@@ -1045,8 +1053,8 @@ msgstr "System"
 msgid "Tag"
 msgstr "Tag"
 
-#: ../../../lib/web/src/components/post-tags.tsx:100
-#: ../../../lib/web/src/components/post-tags.tsx:111
+#: ../../../lib/web/src/components/post-tags.tsx:101
+#: ../../../lib/web/src/components/post-tags.tsx:115
 msgid "Tags"
 msgstr "Tags"
 
@@ -1075,7 +1083,7 @@ msgstr "Theme"
 msgid "Theme Settings"
 msgstr "Theme Settings"
 
-#: src/use-permission-request.tsx:169
+#: src/use-permission-request.tsx:175
 msgid "This permission must be enabled by you in the app settings."
 msgstr "This permission must be enabled by you in the app settings."
 
@@ -1092,10 +1100,10 @@ msgstr "Toggle columns"
 msgid "Toggle right panel"
 msgstr "Toggle right panel"
 
-#: ../../../lib/web/src/components/layout/nav-group.tsx:351
-#: ../../../lib/web/src/components/layout/nav-group.tsx:358
-#: ../../../lib/web/src/components/layout/nav-group.tsx:481
-#: ../../../lib/web/src/components/layout/nav-group.tsx:488
+#: ../../../lib/web/src/components/layout/nav-group.tsx:373
+#: ../../../lib/web/src/components/layout/nav-group.tsx:380
+#: ../../../lib/web/src/components/layout/nav-group.tsx:503
+#: ../../../lib/web/src/components/layout/nav-group.tsx:510
 msgid "Toggle section"
 msgstr "Toggle section"
 
@@ -1127,7 +1135,7 @@ msgid "Travelling"
 msgstr "Travelling"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:190
-#: ../../../lib/web/src/components/search-entity-page.tsx:214
+#: ../../../lib/web/src/components/search-entity-page.tsx:216
 msgid "Try adjusting your search terms"
 msgstr "Try adjusting your search terms"
 
@@ -1183,7 +1191,7 @@ msgid "Use your passkey"
 msgstr "Use your passkey"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:268
+#: src/shell-menu.tsx:282
 msgid "User"
 msgstr "User"
 
@@ -1209,7 +1217,7 @@ msgstr "Verify"
 msgid "Verify email address"
 msgstr "Verify email address"
 
-#: ../../../lib/web/src/components/attachment-gallery.tsx:66
+#: ../../../lib/web/src/components/attachment-gallery.tsx:79
 msgid "Video thumbnail"
 msgstr "Video thumbnail"
 
@@ -1218,8 +1226,8 @@ msgid "View"
 msgstr "View"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:312
-#: src/shell-menu.tsx:318
+#: src/shell-menu.tsx:326
+#: src/shell-menu.tsx:332
 msgid "View all"
 msgstr "View all"
 

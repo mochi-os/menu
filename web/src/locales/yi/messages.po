@@ -13,7 +13,12 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/use-permission-request.tsx:159
+#. js-lingui-explicit-id
+#: ../../../lib/web/src/lib/error-normalizer.ts:204
+msgid "Please check your internet connection and try again."
+msgstr "זײַט אַזוי גוט קאָנטראָלירט אײַער אינטערנעץ פֿאַרבינדונג און פּרוּווט נאָך אַ מאָל."
+
+#: src/use-permission-request.tsx:165
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> בעט די פאלגנדע דערלויבעניש:"
 
@@ -82,7 +87,7 @@ msgstr "צולייגן אַ קאָנטע צו באַקומען נאָטיפֿי�
 msgid "Add new account"
 msgstr "צולייגן נײַע קאָנטע"
 
-#: ../../../lib/web/src/components/post-tags.tsx:133
+#: ../../../lib/web/src/components/post-tags.tsx:137
 msgid "Add tag..."
 msgstr "צולייגן טאַג..."
 
@@ -111,7 +116,7 @@ msgstr "AI"
 msgid "All"
 msgstr "אַלע"
 
-#: src/use-permission-request.tsx:187
+#: src/use-permission-request.tsx:193
 msgid "Allow"
 msgstr "דערלויבן"
 
@@ -149,8 +154,8 @@ msgstr "צוריק"
 msgid "Back to home"
 msgstr "צוריק צום הויז"
 
-#: ../../../lib/web/src/components/post-tags.tsx:176
-#: ../../../lib/web/src/components/post-tags.tsx:188
+#: ../../../lib/web/src/components/post-tags.tsx:180
+#: ../../../lib/web/src/components/post-tags.tsx:192
 msgid "Boost interest"
 msgstr "פֿאַרשטאַרקן אינטערעס"
 
@@ -226,14 +231,14 @@ msgstr "רייניקן אויסקלײַב (Escape)"
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:354
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:357
 #: ../../../lib/web/src/components/ui/sheet.tsx:79
-#: src/use-permission-request.tsx:176
+#: src/use-permission-request.tsx:182
 msgid "Close"
 msgstr "פֿאַרמאַכן"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:107
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:112
-#: src/shell-menu.tsx:385
-#: src/shell-menu.tsx:392
+#: src/shell-menu.tsx:408
+#: src/shell-menu.tsx:415
 msgid "Close navigation"
 msgstr "פֿאַרמאַכן נאַוויגאַציע"
 
@@ -299,6 +304,10 @@ msgstr "קאָפּירן"
 msgid "Could not load this document. Please try again later."
 msgstr "האָט נישט געקאָנט לאָדן דעם דאָקומענט. פּרובירט שפּעטער ווידער."
 
+#: src/shell-menu.tsx:347
+msgid "Couldn't load notifications"
+msgstr "מען האָט נישט געקענט לאָדן מעלדונגען"
+
 #: ../../../lib/web/src/components/step-up-dialog.tsx:184
 msgid "Couldn't send the code. Please try again."
 msgstr "מע האָט נישט געקענט שיקן דעם קאָד. ביטע פּרוביר ווידער."
@@ -344,7 +353,7 @@ msgstr "פֿאַרשטאַנדלעך AI קאָנטע"
 msgid "Delete your account on the old server"
 msgstr "לעש אויס דיין קאנטע אויפן אלטן סערווער"
 
-#: src/use-permission-request.tsx:181
+#: src/use-permission-request.tsx:187
 msgid "Deny"
 msgstr "אָפּזאָגן"
 
@@ -519,10 +528,10 @@ msgstr "באַהאַלטן פּאַראָל"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:158
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:400
-#: src/shell-menu.tsx:406
-#: src/shell-menu.tsx:478
-#: src/shell-menu.tsx:482
+#: src/shell-menu.tsx:423
+#: src/shell-menu.tsx:429
+#: src/shell-menu.tsx:501
+#: src/shell-menu.tsx:505
 msgid "Home"
 msgstr "היים"
 
@@ -589,8 +598,8 @@ msgstr "לאָדט…"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:275
-#: src/shell-menu.tsx:281
+#: src/shell-menu.tsx:289
+#: src/shell-menu.tsx:295
 msgid "Log out"
 msgstr "אַרויסקומען"
 
@@ -609,8 +618,8 @@ msgstr "אַרויסקומען…"
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:92
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:99
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:298
-#: src/shell-menu.tsx:304
+#: src/shell-menu.tsx:312
+#: src/shell-menu.tsx:318
 msgid "Mark all as read"
 msgstr "צייכענען אַלץ ווי געלייענט"
 
@@ -619,7 +628,7 @@ msgid "Medium"
 msgstr "מיטל"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:173
-#: src/shell-menu.tsx:447
+#: src/shell-menu.tsx:470
 msgid "Menu"
 msgstr "מעניו"
 
@@ -678,7 +687,7 @@ msgstr "קיין צײַט זאָנע ניט געפֿונען."
 msgid "No topic record yet — try again after the next notification."
 msgstr "נאָך קיין טעמע רעקאָרד — פּרוּוו ווידער נאָך דער ווײַטערדיקער מעלדונג."
 
-#: src/shell-menu.tsx:331
+#: src/shell-menu.tsx:354
 msgid "No unread notifications"
 msgstr "קיין אומגעלייענטע מעלדונגען"
 
@@ -709,7 +718,7 @@ msgstr "ניט געשטעלט"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:290
+#: src/shell-menu.tsx:304
 msgid "Notifications"
 msgstr "מעלדונגען"
 
@@ -722,22 +731,22 @@ msgstr "אױ! זײַטל ניט געפֿונען!"
 msgid "Open account actions"
 msgstr "עפֿן קאָנטע אַקציעס"
 
-#: ../../../lib/web/src/components/layout/nav-group.tsx:182
-#: ../../../lib/web/src/components/layout/nav-group.tsx:187
+#: ../../../lib/web/src/components/layout/nav-group.tsx:202
+#: ../../../lib/web/src/components/layout/nav-group.tsx:207
 msgid "Open actions"
 msgstr "עפֿענען אַקציעס"
 
-#: src/shell-menu.tsx:252
-#: src/shell-menu.tsx:364
-#: src/shell-menu.tsx:419
-#: src/shell-menu.tsx:431
+#: src/shell-menu.tsx:266
+#: src/shell-menu.tsx:387
+#: src/shell-menu.tsx:442
+#: src/shell-menu.tsx:454
 msgid "Open menu"
 msgstr "עפֿן מעניו"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:385
-#: src/shell-menu.tsx:392
+#: src/shell-menu.tsx:408
+#: src/shell-menu.tsx:415
 msgid "Open navigation"
 msgstr "עפֿן נאַוויגאַציע"
 
@@ -771,13 +780,12 @@ msgstr "די passkey פֿאַריפֿיצירונג איז דורכגעפֿאַ�
 msgid "Passkeys"
 msgstr "פּאַסקייס"
 
-#: src/use-permission-request.tsx:157
+#: src/use-permission-request.tsx:163
 msgid "Permission request"
 msgstr "דערלויבעניש פֿאָדערונג"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx:54
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:304
-#: ../../../lib/web/src/lib/error-normalizer.ts:201
 msgid "Please check your internet connection and try again."
 msgstr "זײַט אַזוי גוט קאָנטראָלירט אײַער אינטערנעץ פֿאַרבינדונג און פּרוּווט נאָך אַ מאָל."
 
@@ -817,7 +825,7 @@ msgid "Re-register your passkeys on this server"
 msgstr "רעגיסטרירט איבער אייערע צוטריט שליסלען אויף דעם סערווער"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:216
-#: ../../../lib/web/src/components/search-entity-page.tsx:240
+#: ../../../lib/web/src/components/search-entity-page.tsx:242
 msgid "Recommended"
 msgstr "רעקאָמענדירט"
 
@@ -825,8 +833,8 @@ msgstr "רעקאָמענדירט"
 msgid "Redirecting to login."
 msgstr "רעדירעקטירן צו לאָגן."
 
-#: ../../../lib/web/src/components/post-tags.tsx:196
-#: ../../../lib/web/src/components/post-tags.tsx:208
+#: ../../../lib/web/src/components/post-tags.tsx:200
+#: ../../../lib/web/src/components/post-tags.tsx:212
 msgid "Reduce interest"
 msgstr "פֿאַרמינער אינטערעס"
 
@@ -852,8 +860,8 @@ msgstr "אַראָפּנעמען צוטריט כּלל"
 msgid "Remove access?"
 msgstr "אַראָפּנעמען צוטריט?"
 
-#: ../../../lib/web/src/components/post-tags.tsx:216
-#: ../../../lib/web/src/components/post-tags.tsx:228
+#: ../../../lib/web/src/components/post-tags.tsx:220
+#: ../../../lib/web/src/components/post-tags.tsx:232
 msgid "Remove interest"
 msgstr "אַראָפּנעמען אינטערעס"
 
@@ -912,7 +920,7 @@ msgid "Search..."
 msgstr "זוך..."
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:174
-#: ../../../lib/web/src/components/search-entity-page.tsx:198
+#: ../../../lib/web/src/components/search-entity-page.tsx:200
 #: ../../../lib/web/src/features/access/access-dialog.tsx:202
 msgid "Searching..."
 msgstr "זוכן..."
@@ -1045,8 +1053,8 @@ msgstr "סיסטעם"
 msgid "Tag"
 msgstr "טאַג"
 
-#: ../../../lib/web/src/components/post-tags.tsx:100
-#: ../../../lib/web/src/components/post-tags.tsx:111
+#: ../../../lib/web/src/components/post-tags.tsx:101
+#: ../../../lib/web/src/components/post-tags.tsx:115
 msgid "Tags"
 msgstr "טאַגן"
 
@@ -1075,7 +1083,7 @@ msgstr "טעמע"
 msgid "Theme Settings"
 msgstr "טעמע־אײַנשטעלונגען"
 
-#: src/use-permission-request.tsx:169
+#: src/use-permission-request.tsx:175
 msgid "This permission must be enabled by you in the app settings."
 msgstr "די דערלויבעניש מוז ווערן ענייבלד פֿון אײַך אין די אַפּ־אײַנשטעלונגען."
 
@@ -1092,10 +1100,10 @@ msgstr "ביט זײַלן"
 msgid "Toggle right panel"
 msgstr "טאָגלען רעכט פּאַנעל"
 
-#: ../../../lib/web/src/components/layout/nav-group.tsx:351
-#: ../../../lib/web/src/components/layout/nav-group.tsx:358
-#: ../../../lib/web/src/components/layout/nav-group.tsx:481
-#: ../../../lib/web/src/components/layout/nav-group.tsx:488
+#: ../../../lib/web/src/components/layout/nav-group.tsx:373
+#: ../../../lib/web/src/components/layout/nav-group.tsx:380
+#: ../../../lib/web/src/components/layout/nav-group.tsx:503
+#: ../../../lib/web/src/components/layout/nav-group.tsx:510
 msgid "Toggle section"
 msgstr "עפֿן/פֿאַרמאַך אָפּטייל"
 
@@ -1127,7 +1135,7 @@ msgid "Travelling"
 msgstr "רײַזנדיק"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:190
-#: ../../../lib/web/src/components/search-entity-page.tsx:214
+#: ../../../lib/web/src/components/search-entity-page.tsx:216
 msgid "Try adjusting your search terms"
 msgstr "פּרוּווט באַאַרבעטן אײַערע זוך־אויסדרוקן"
 
@@ -1183,7 +1191,7 @@ msgid "Use your passkey"
 msgstr "ניצט אײַער passkey"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:268
+#: src/shell-menu.tsx:282
 msgid "User"
 msgstr "באַניצער"
 
@@ -1209,7 +1217,7 @@ msgstr "פֿאַריפֿיצירן"
 msgid "Verify email address"
 msgstr "פֿאַריפֿיצירן אי־מייל אַדרעס"
 
-#: ../../../lib/web/src/components/attachment-gallery.tsx:66
+#: ../../../lib/web/src/components/attachment-gallery.tsx:79
 msgid "Video thumbnail"
 msgstr "ווידעאָ־טאַמבניל"
 
@@ -1218,8 +1226,8 @@ msgid "View"
 msgstr "בליק"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:312
-#: src/shell-menu.tsx:318
+#: src/shell-menu.tsx:326
+#: src/shell-menu.tsx:332
 msgid "View all"
 msgstr "זע אַלץ"
 

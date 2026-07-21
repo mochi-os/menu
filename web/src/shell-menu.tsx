@@ -31,6 +31,7 @@ import {
   PopoverContent,
   PopoverTrigger,
   ScrollArea,
+  ListSkeleton,
   Tooltip,
   TooltipTrigger,
   TooltipContent,
@@ -193,7 +194,8 @@ export function MochiShellMenu() {
   const isCollapsed = sidebarPresent && sidebarState === 'collapsed'
   const currentApp = useCurrentApp()
   const isHome = currentApp === ''
-  const { notifications, markAsRead, markAllAsRead } = useMenuNotifications()
+  const { notifications, isLoading, isError, markAsRead, markAllAsRead } =
+    useMenuNotifications()
 
   // Close menu on Escape
   useEffect(() => {
@@ -336,7 +338,16 @@ export function MochiShellMenu() {
   const notificationsList = (
     <ScrollArea className='min-h-0 flex-1 overflow-y-scroll'>
       <div className='flex flex-col'>
-        {unreadNotifications.length === 0 ? (
+        {isLoading ? (
+          <ListSkeleton variant='simple' count={4} avatar className='p-3' />
+        ) : isError ? (
+          <div className='flex flex-col items-center justify-center py-8 text-center px-4'>
+            <Bell className='size-8 text-muted-foreground/20 mb-3' />
+            <p className='text-sm font-medium text-foreground'>
+              <Trans>Couldn't load notifications</Trans>
+            </p>
+          </div>
+        ) : unreadNotifications.length === 0 ? (
           <div className='flex flex-col items-center justify-center py-8 text-center px-4'>
             <Bell className='size-8 text-muted-foreground/20 mb-3' />
             <p className='text-sm font-medium text-foreground'>
