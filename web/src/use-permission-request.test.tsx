@@ -46,13 +46,21 @@ function defaultRouter(grant: () => unknown = () => ({ ok: true, json: async () 
 }
 
 // The dialog reads the menu token from useAuthStore (getMenuToken).
+// The shell hosts exactly one app iframe (#app-frame) and exposes its
+// server-resolved id as window.__mochi_shell.appId — the dialog derives the app
+// from those, never the self-asserted data.app, so the tests set both up.
+let appFrame: HTMLIFrameElement
 beforeEach(() => {
   useAuthStore.setState({ token: 'test-token' })
   mockFetch.mockReset()
   mockFetch.mockImplementation(defaultRouter())
+  appFrame = document.createElement('iframe')
+  appFrame.id = 'app-frame'
+  document.body.appendChild(appFrame)
 })
 
 afterEach(() => {
+  appFrame.remove()
   delete (window as unknown as { __mochi_shell?: unknown }).__mochi_shell
 })
 
@@ -68,26 +76,38 @@ function TestComponent() {
 
 function sendPermissionRequest(opts: {
   id: number
-  app: string
+  app: string // the authoritative loaded app — set as __mochi_shell.appId
   permission: string
   restricted: boolean
+  spoofApp?: string // an attacker-claimed data.app the dialog must ignore
 }) {
-  // Create a mock source with postMessage
-  const mockSource = { postMessage: vi.fn() }
+  // The shell's server-resolved current app.
+  ;(window as unknown as { __mochi_shell?: { appId?: string } }).__mochi_shell = {
+    appId: opts.app,
+  }
+  // Requests must arrive from the loaded app iframe; spy on its postMessage so
+  // tests can assert the permission-result sent back to it.
+  const source = appFrame.contentWindow as WindowProxy
+  const postMessage = vi
+    .spyOn(source, 'postMessage')
+    .mockImplementation(() => {})
 
   act(() => {
     window.dispatchEvent(
       new MessageEvent('message', {
         data: {
           type: 'request-permission',
-          ...opts,
+          id: opts.id,
+          app: opts.spoofApp ?? opts.app, // self-asserted — must be ignored
+          permission: opts.permission,
+          restricted: opts.restricted,
         },
-        source: mockSource as unknown as WindowProxy,
+        source,
       })
     )
   })
 
-  return mockSource
+  return { postMessage }
 }
 
 function grantCall() {
@@ -309,5 +329,79 @@ describe('usePermissionRequest', () => {
     await waitFor(() => {
       expect(screen.getByText(/Repositories/)).toBeInTheDocument()
     })
+  })
+
+  it('ignores a spoofed data.app and uses the shell-verified app', async () => {
+    const user = userEvent.setup()
+    render(<TestComponent />)
+
+    // The loaded app is "feeds" but the message claims to be "wikis".
+    sendPermissionRequest({
+      id: 20,
+      app: 'feeds',
+      spoofApp: 'wikis',
+      permission: 'accounts/read',
+      restricted: false,
+    })
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Allow' })).toBeInTheDocument()
+    })
+    // Dialog names the real loaded app, not the spoofed one.
+    expect(screen.getByText(/Feeds/)).toBeInTheDocument()
+    expect(screen.queryByText(/Wikis/)).not.toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: 'Allow' }))
+    await waitFor(() => {
+      expect(grantCall()).toBeTruthy()
+    })
+    // Grant targets the shell-verified app, never the spoofed data.app.
+    expect(new URLSearchParams(grantCall()![1].body).get('app')).toBe('feeds')
+  })
+
+  it('ignores request-permission from a frame that is not the app iframe', () => {
+    render(<TestComponent />)
+    ;(window as unknown as { __mochi_shell?: { appId?: string } }).__mochi_shell = {
+      appId: 'feeds',
+    }
+    const rogue = { postMessage: vi.fn() }
+
+    act(() => {
+      window.dispatchEvent(
+        new MessageEvent('message', {
+          data: {
+            type: 'request-permission',
+            id: 99,
+            app: 'feeds',
+            permission: 'accounts/read',
+            restricted: false,
+          },
+          source: rogue as unknown as WindowProxy,
+        })
+      )
+    })
+
+    // The source is not #app-frame, so no dialog appears.
+    expect(screen.queryByText('Permission request')).not.toBeInTheDocument()
+  })
+
+  it('does not show a dialog when the shell app id is unavailable', () => {
+    render(<TestComponent />)
+    // No __mochi_shell.appId set — the dialog cannot identify the app.
+    act(() => {
+      window.dispatchEvent(
+        new MessageEvent('message', {
+          data: {
+            type: 'request-permission',
+            id: 100,
+            app: 'feeds',
+            permission: 'accounts/read',
+            restricted: false,
+          },
+          source: appFrame.contentWindow as WindowProxy,
+        })
+      )
+    })
+    expect(screen.queryByText('Permission request')).not.toBeInTheDocument()
   })
 })

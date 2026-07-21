@@ -47,12 +47,24 @@ export function usePermissionRequest() {
       const data = event.data
       if (!data || typeof data !== 'object' || data.type !== 'request-permission') return
 
+      // Only the loaded app iframe may drive the consent dialog — reject
+      // messages from nested or sibling frames.
+      const appFrame = document.getElementById('app-frame') as HTMLIFrameElement | null
+      if (!appFrame || event.source !== appFrame.contentWindow) return
       const source = event.source as WindowProxy | null
       if (!source) return
 
+      // The app being granted comes from the shell's own server-resolved app id,
+      // never the self-asserted data.app: an app must not be able to name a
+      // different app in the dialog or grant a permission to one. The shell loads
+      // exactly one app at a time and sets __mochi_shell.appId from /_/token.
+      const appId = (window as unknown as { __mochi_shell?: { appId?: string } })
+        .__mochi_shell?.appId
+      if (!appId) return
+
       setPending({
         id: data.id,
-        app: data.app,
+        app: appId,
         permission: data.permission,
         restricted: data.restricted,
         source,
