@@ -82,6 +82,17 @@
         }
     })();
 
+    // A color theme arrives from an (untrusted) app over postMessage and is
+    // applied to the shell's own root element. Only CSS custom properties
+    // (--foo) may be set: without this an app could set standard properties such
+    // as display:none or pointer-events:none on the trusted shell root, hiding
+    // or disabling the menu and permission dialogs. clearThemeVars removes every
+    // inline --* property, so restricting writes to --* also guarantees cleanup
+    // can fully undo whatever a theme installed.
+    function isThemeVarName(name) {
+        return typeof name === 'string' && /^--[A-Za-z0-9_-]+$/.test(name);
+    }
+
     function applyThemeVars(theme) {
         clearThemeVars();
         if (!theme) { currentColorTheme = null; return; }
@@ -93,6 +104,7 @@
         }
         if (theme.overrides) {
             for (var key in theme.overrides) {
+                if (!isThemeVarName(key)) continue;
                 root.style.setProperty(key, theme.overrides[key]);
             }
         }
@@ -582,6 +594,7 @@
         }
 
         if (micSession === session) micSession = null;
+        hideMicIndicator();
 
         postToIframe(payload);
 
@@ -636,6 +649,8 @@
     }
 
     function abortMicSession() {
+        // A start waiting on its consent dialog must not record after navigation.
+        if (micGate) micGate.cancelled = true;
         // Drop any queued retry — navigation/unload must not open a new GUM.
         if (micStartQueue && micStartQueue.requestId != null) {
             postToIframe({
@@ -803,10 +818,155 @@
             return;
         }
 
+        showMicIndicator();
         postToIframe({ type: 'mic.started', requestId: session.requestId });
     }
 
+    // --- Shell-owned recording indicator ---
+    // A small pulsing marker the app cannot touch (it lives in the top window,
+    // outside the sandboxed iframe), so the user always sees when this Mochi tab
+    // is recording regardless of what the app's own UI claims. Icon-only, so no
+    // translated text is needed in the shell relay.
+    var micIndicatorEl = null;
+    function ensureMicIndicatorStyle() {
+        if (document.getElementById('mochi-mic-style')) return;
+        var s = document.createElement('style');
+        s.id = 'mochi-mic-style';
+        s.textContent = '@keyframes mochi-mic-pulse{0%{box-shadow:0 0 0 0 rgba(225,29,72,0.7)}70%{box-shadow:0 0 0 10px rgba(225,29,72,0)}100%{box-shadow:0 0 0 0 rgba(225,29,72,0)}}';
+        document.head.appendChild(s);
+    }
+    function showMicIndicator() {
+        if (micIndicatorEl) return;
+        ensureMicIndicatorStyle();
+        var el = document.createElement('div');
+        el.setAttribute('aria-hidden', 'true');
+        el.style.cssText = 'position:fixed;top:8px;left:50%;transform:translateX(-50%);' +
+            'z-index:2147483647;width:14px;height:14px;border-radius:50%;background:#e11d48;' +
+            'pointer-events:none;animation:mochi-mic-pulse 1.4s ease-out infinite;';
+        micIndicatorEl = el;
+        if (document.body) document.body.appendChild(el);
+    }
+    function hideMicIndicator() {
+        if (micIndicatorEl && micIndicatorEl.parentNode) {
+            micIndicatorEl.parentNode.removeChild(micIndicatorEl);
+        }
+        micIndicatorEl = null;
+    }
+
+    // --- Microphone permission gate ---
+    // The shell, not the app, is the enforcement point: getUserMedia runs here
+    // in the trusted top window, so a sandboxed app must never open the mic
+    // without the user's per-app Mochi grant. We resolve the grant against the
+    // server-resolved current app id and, when absent, drive the menu's own
+    // consent dialog before recording.
+    var micPermissionPending = false;
+    // Tracks a start whose consent dialog is open, so a cancel/stop/navigation
+    // arriving mid-consent prevents the recording from starting afterward.
+    var micGate = null;
+
+    function micHasPermission(appId) {
+        if (!appId) return Promise.resolve(false);
+        return shellConfigReady.then(function() {
+            var headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
+            var token = (shellConfig && shellConfig.menuToken) || '';
+            if (token) headers['Authorization'] = 'Bearer ' + token;
+            return fetch('/menu/-/permissions/check', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: headers,
+                body: 'app=' + encodeURIComponent(appId) + '&permission=microphone'
+            });
+        }).then(function(r) {
+            return r.ok ? r.json() : null;
+        }).then(function(body) {
+            return !!(body && body.data && body.data.granted);
+        }).catch(function() {
+            return false;
+        });
+    }
+
+    // Ask the menu (same top window) to show its consent dialog for the current
+    // app. The menu grants against its own server-resolved app id, not anything
+    // the shell passes, so this cannot target a different app. Resolves true if
+    // the user allowed. A same-window CustomEvent is unreachable from the
+    // sandboxed iframe, so only trusted shell code can trigger it.
+    var micConsentSeq = 0;
+    function requestMicConsent() {
+        return new Promise(function(resolve) {
+            var id = 'mic-' + (++micConsentSeq);
+            var settled = false;
+            function done(result) {
+                if (settled) return;
+                settled = true;
+                window.removeEventListener('mochi-shell-permission-result', onResult);
+                resolve(result);
+            }
+            function onResult(e) {
+                if (!e.detail || e.detail.id !== id) return;
+                done(e.detail.result === 'granted');
+            }
+            window.addEventListener('mochi-shell-permission-result', onResult);
+            window.dispatchEvent(new CustomEvent('mochi-shell-permission-request', {
+                detail: { id: id, permission: 'microphone' }
+            }));
+            // If the menu isn't mounted/listening, fail closed rather than hang.
+            setTimeout(function() { done(false); }, 60000);
+        });
+    }
+
     function handleMicStart(data) {
+        if (navigating) return;
+        if (micPermissionPending) {
+            postToIframe({
+                type: 'mic.result',
+                requestId: data.requestId,
+                ok: false,
+                error: { name: 'InvalidStateError', message: 'A microphone permission request is already open' }
+            });
+            return;
+        }
+        micPermissionPending = true;
+        var gate = { requestId: data.requestId, cancelled: false };
+        micGate = gate;
+        micHasPermission(currentAppId).then(function(granted) {
+            return granted ? true : requestMicConsent();
+        }).then(function(granted) {
+            micPermissionPending = false;
+            if (micGate === gate) micGate = null;
+            if (gate.cancelled) {
+                // A stop/cancel/navigation landed while consent was open — honor
+                // it and never open the microphone after the fact.
+                postToIframe({
+                    type: 'mic.result',
+                    requestId: data.requestId,
+                    ok: false,
+                    cancelled: true
+                });
+                return;
+            }
+            if (!granted) {
+                postToIframe({
+                    type: 'mic.result',
+                    requestId: data.requestId,
+                    ok: false,
+                    error: { name: 'NotAllowedError', message: 'Microphone permission not granted' }
+                });
+                return;
+            }
+            beginMicStart(data);
+        }).catch(function() {
+            micPermissionPending = false;
+            if (micGate === gate) micGate = null;
+            postToIframe({
+                type: 'mic.result',
+                requestId: data.requestId,
+                ok: false,
+                error: { name: 'NotAllowedError', message: 'Microphone permission not granted' }
+            });
+        });
+    }
+
+    function beginMicStart(data) {
         if (navigating) return;
         var requestId = data.requestId;
         if (micSession && !micSession.settled) {
@@ -890,6 +1050,12 @@
     function handleMicStop(data) {
         var session = micSession;
         var requestId = data.requestId;
+        if (micGate && micGate.requestId === requestId) {
+            // Stop arrived while the consent dialog is still open — cancel the
+            // pending start so it doesn't begin recording once consent resolves.
+            micGate.cancelled = true;
+            return;
+        }
         if (!session || session.settled || session.requestId !== requestId) {
             postToIframe({
                 type: 'mic.result',
@@ -938,6 +1104,11 @@
     function handleMicCancel(data) {
         var session = micSession;
         var requestId = data.requestId;
+        if (micGate && (requestId == null || micGate.requestId === requestId)) {
+            // Cancel arrived while the consent dialog is still open (e.g. the
+            // app's start-timeout) — prevent the deferred start from recording.
+            micGate.cancelled = true;
+        }
         if (!session || session.settled) {
             postToIframe({ type: 'mic.cancelled', requestId: requestId || 0 });
             return;
@@ -988,6 +1159,17 @@
     function getAppNameFromPath(path) {
         var match = path.match(/^\/([^/]+)/);
         return match ? match[1] : '';
+    }
+
+    // True only when url resolves to this same origin. Relative paths resolve
+    // against the shell origin and pass; absolute off-origin URLs (and anything
+    // unparseable, including javascript:/data:) fail closed.
+    function isSameOriginUrl(url) {
+        try {
+            return new URL(url, window.location.href).origin === window.location.origin;
+        } catch (e) {
+            return false;
+        }
     }
 
     var lastNavigatedPath = window.location.pathname + window.location.search + window.location.hash;
@@ -1150,7 +1332,16 @@
                 break;
 
             case 'navigate-top':
-                if (data.url) window.location.href = data.url;
+                // Only ever navigate the top window to a same-origin Mochi URL.
+                // Navigating the trusted top window is privileged, and an app in
+                // the sandboxed iframe is not trusted to choose an off-origin
+                // destination (that is a phishing vector). Apps that must reach
+                // an external site (e.g. Stripe checkout) navigate here to one of
+                // their own same-origin actions, which issues a server-side
+                // redirect to a destination the server — not the app — vouched for.
+                if (data.url && isSameOriginUrl(data.url)) {
+                    window.location.href = data.url;
+                }
                 break;
 
             case 'navigate-back':

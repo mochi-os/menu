@@ -26,7 +26,11 @@ interface PendingRequest {
   app: string
   permission: string
   restricted: boolean
-  source: WindowProxy
+  // Set for the normal iframe-driven request: where the result is posted back.
+  source?: WindowProxy
+  // Set for a shell-driven request (e.g. the microphone gate in shell.js): the
+  // result is returned via a same-window CustomEvent keyed by this id instead.
+  shellEventId?: string
 }
 
 export function usePermissionRequest() {
@@ -69,14 +73,52 @@ export function usePermissionRequest() {
     return () => window.removeEventListener('message', handleMessage)
   }, [])
 
+  // Shell-driven consent (same top window). shell.js dispatches this when it
+  // needs the user's grant before running a capability it hosts on an app's
+  // behalf (the microphone bridge). The sandboxed iframe can't reach the top
+  // window's event bus, so only trusted shell code can fire it. The app being
+  // granted is the shell's server-resolved current app id, never app input.
+  useEffect(() => {
+    function handleShellRequest(event: Event) {
+      const detail = (event as CustomEvent).detail
+      if (!detail || typeof detail.id !== 'string' || typeof detail.permission !== 'string') return
+      const appId = (window as unknown as { __mochi_shell?: { appId?: string } })
+        .__mochi_shell?.appId
+      if (!appId) {
+        window.dispatchEvent(
+          new CustomEvent('mochi-shell-permission-result', {
+            detail: { id: detail.id, result: 'denied' },
+          })
+        )
+        return
+      }
+      setPending({
+        id: 0,
+        app: appId,
+        permission: detail.permission,
+        restricted: false,
+        shellEventId: detail.id,
+      })
+    }
+    window.addEventListener('mochi-shell-permission-request', handleShellRequest)
+    return () => window.removeEventListener('mochi-shell-permission-request', handleShellRequest)
+  }, [])
+
   const respond = useCallback((result: string) => {
-    if (pending) {
+    if (!pending) return
+    if (pending.shellEventId) {
+      window.dispatchEvent(
+        new CustomEvent('mochi-shell-permission-result', {
+          detail: { id: pending.shellEventId, result },
+        })
+      )
+    } else if (pending.source) {
       pending.source.postMessage(
         { type: 'permission-result', id: pending.id, result },
         '*'
       )
-      setPending(null)
     }
+    setPending(null)
   }, [pending])
 
   const handleAllow = useCallback(async () => {

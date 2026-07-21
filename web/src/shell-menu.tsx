@@ -56,6 +56,18 @@ function isSafeLink(link: string): boolean {
   }
 }
 
+// Notification links are app-authored, so the menu — which runs in the trusted
+// top window — must not let one steer the whole tab off-origin (a phishing
+// vector). Same-origin links navigate within the shell; anything else is opened
+// in a new tab instead of replacing the shell.
+function isSameOriginLink(link: string): boolean {
+  try {
+    return new URL(link, window.location.origin).origin === window.location.origin
+  } catch {
+    return false
+  }
+}
+
 function NotificationItem({
   notification,
   onClick,
@@ -240,7 +252,14 @@ export function MochiShellMenu() {
     }
     if (notification.link) {
       setMenuOpen(false)
-      shellNavigateExternal(notification.link)
+      if (isSameOriginLink(notification.link)) {
+        shellNavigateExternal(notification.link)
+      } else if (isSafeLink(notification.link)) {
+        // Off-origin http(s) target — open in a new tab rather than navigating
+        // the shell away; noopener stops the opened page reaching back.
+        window.open(notification.link, '_blank', 'noopener,noreferrer')
+      }
+      // Any other scheme (javascript:/data:) is ignored.
     }
   }
 
@@ -249,7 +268,7 @@ export function MochiShellMenu() {
       markAsRead(notification.id)
     }
     if (notification.link && isSafeLink(notification.link)) {
-      window.open(notification.link, '_blank')
+      window.open(notification.link, '_blank', 'noopener,noreferrer')
     }
     if (unreadCount === 1) {
       setMenuOpen(false)

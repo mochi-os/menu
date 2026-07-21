@@ -27,6 +27,7 @@ const NAMES: Record<string, string> = {
   'groups/manage': 'Manage groups',
   'users/read': 'Read user data',
   'url:api.github.com': 'Access api.github.com',
+  microphone: 'Use the microphone',
 }
 
 function nameResponse(opts: { body?: string } | undefined) {
@@ -403,5 +404,112 @@ describe('usePermissionRequest', () => {
       )
     })
     expect(screen.queryByText('Permission request')).not.toBeInTheDocument()
+  })
+})
+
+// Shell-driven consent: shell.js (same top window) asks for the user's grant
+// before running a capability it hosts on an app's behalf — the microphone
+// bridge. It fires a same-window CustomEvent and gets the result back the same
+// way, and the granted app is always the shell's server-resolved current app.
+describe('usePermissionRequest — shell-driven consent', () => {
+  function collectShellResults() {
+    const results: Array<{ id: string; result: string }> = []
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent).detail
+      results.push({ id: detail.id, result: detail.result })
+    }
+    window.addEventListener('mochi-shell-permission-result', handler)
+    return {
+      results,
+      cleanup: () => window.removeEventListener('mochi-shell-permission-result', handler),
+    }
+  }
+
+  function dispatchShellRequest(id: string, permission: string) {
+    act(() => {
+      window.dispatchEvent(
+        new CustomEvent('mochi-shell-permission-request', {
+          detail: { id, permission },
+        })
+      )
+    })
+  }
+
+  function setShellApp(appId: string) {
+    ;(window as unknown as { __mochi_shell?: { appId?: string } }).__mochi_shell = { appId }
+  }
+
+  it('shows the dialog for the shell-resolved app on a shell request', async () => {
+    setShellApp('chat')
+    render(<TestComponent />)
+
+    dispatchShellRequest('mic-1', 'microphone')
+
+    await waitFor(() => {
+      expect(screen.getByText('Permission request')).toBeInTheDocument()
+    })
+    expect(screen.getByText(/Chat/)).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText('Use the microphone')).toBeInTheDocument()
+    })
+  })
+
+  it('grants the shell-resolved app and answers via CustomEvent on Allow', async () => {
+    const user = userEvent.setup()
+    setShellApp('chat')
+    const sink = collectShellResults()
+    render(<TestComponent />)
+
+    dispatchShellRequest('mic-2', 'microphone')
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Allow' })).toBeInTheDocument()
+    })
+    await user.click(screen.getByRole('button', { name: 'Allow' }))
+
+    await waitFor(() => {
+      expect(grantCall()).toBeTruthy()
+    })
+    const body = new URLSearchParams(grantCall()![1].body)
+    expect(body.get('app')).toBe('chat')
+    expect(body.get('permission')).toBe('microphone')
+
+    await waitFor(() => {
+      expect(sink.results).toContainEqual({ id: 'mic-2', result: 'granted' })
+    })
+    sink.cleanup()
+  })
+
+  it('answers denied via CustomEvent on Deny and never grants', async () => {
+    const user = userEvent.setup()
+    setShellApp('chat')
+    const sink = collectShellResults()
+    render(<TestComponent />)
+
+    dispatchShellRequest('mic-3', 'microphone')
+
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Deny' })).toBeInTheDocument()
+    })
+    await user.click(screen.getByRole('button', { name: 'Deny' }))
+
+    await waitFor(() => {
+      expect(sink.results).toContainEqual({ id: 'mic-3', result: 'denied' })
+    })
+    expect(grantCall()).toBeFalsy()
+    sink.cleanup()
+  })
+
+  it('answers denied immediately when no shell app id is set', async () => {
+    const sink = collectShellResults()
+    render(<TestComponent />)
+
+    dispatchShellRequest('mic-4', 'microphone')
+
+    await waitFor(() => {
+      expect(sink.results).toContainEqual({ id: 'mic-4', result: 'denied' })
+    })
+    expect(screen.queryByText('Permission request')).not.toBeInTheDocument()
+    sink.cleanup()
   })
 })

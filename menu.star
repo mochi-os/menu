@@ -123,3 +123,19 @@ def action_permissions_name(a):
         return a.error.label(400, "errors.permission_is_required")
 
     return {"data": {"name": mochi.permission.name(permission)}}
+
+def action_permissions_check(a):
+    """Report whether an app currently holds a permission for this user. Used by
+    the shell to gate capabilities it grants on an app's behalf (e.g. the
+    microphone bridge) against the server-resolved current app id."""
+    app_id = a.input("app", "").strip()
+    permission = a.input("permission", "").strip()
+    if not app_id or not permission:
+        return a.error.label(400, "errors.app_and_permission_are_required")
+
+    granted = False
+    for p in mochi.permission.list(app_id):
+        if p["permission"] == permission and p["granted"]:
+            granted = True
+            break
+    return {"data": {"granted": granted}}

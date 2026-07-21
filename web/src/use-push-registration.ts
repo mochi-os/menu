@@ -155,6 +155,12 @@ export function usePushRegistration() {
     function handleMessage(event: MessageEvent) {
       const data = event.data
       if (!data || typeof data !== 'object') return
+      // Only the currently-loaded app iframe may drive push state — mirror the
+      // permission hook's check. Without it a stale popup or nested frame that
+      // kept a handle to this window could subscribe, unsubscribe, or read the
+      // push account after the user moved on to another app.
+      const appFrame = document.getElementById('app-frame') as HTMLIFrameElement | null
+      if (!appFrame || event.source !== appFrame.contentWindow) return
       const source = event.source as WindowProxy | null
       const id = data.id
 
