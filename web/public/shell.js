@@ -441,6 +441,33 @@
         });
     }
 
+    // Save a Blob the app already holds (e.g. a generated export file) on its
+    // behalf. Structured cloning carries the Blob across the sandbox boundary;
+    // nothing is fetched, so unlike handleDownload there is no proxy risk —
+    // the bytes came from the app itself.
+    function handleDownloadContent(data) {
+        if (navigating) return;
+        var id = data.id;
+        if (!(data.blob instanceof Blob)) {
+            postToIframe({ type: 'download.result', id: id, ok: false });
+            return;
+        }
+        var objectUrl = URL.createObjectURL(data.blob);
+        var a = document.createElement('a');
+        a.href = objectUrl;
+        a.download = data.name || '';
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        // Delay cleanup so the browser resolves the blob URL before it's
+        // revoked; revoking immediately races with the download.
+        setTimeout(function() {
+            document.body.removeChild(a);
+            URL.revokeObjectURL(objectUrl);
+        }, 1000);
+        postToIframe({ type: 'download.result', id: id, ok: true });
+    }
+
     // WebAuthn ceremony bridge. The sandboxed app iframe has an opaque
     // origin so navigator.credentials.create()/get() fails immediately
     // with NotAllowedError. The shell runs in the top window with a real
@@ -1158,6 +1185,10 @@
 
             case 'download':
                 handleDownload(data);
+                break;
+
+            case 'download.content':
+                handleDownloadContent(data);
                 break;
 
             case 'sidebar-state':
