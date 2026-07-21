@@ -10,14 +10,8 @@ def action_notifications_list(a):
     """List notifications for the current user."""
     result = mochi.service.call("notifications", "list")
     if result == None:
-        return {"data": [], "count": 0, "total": 0}
-    count = 0
-    total = 0
-    for n in result:
-        if n.get("read", 0) == 0:
-            count += 1
-            total += n.get("count", 1)
-    return {"data": result, "count": count, "total": total}
+        return {"data": []}
+    return {"data": result}
 
 def action_notifications_read(a):
     """Mark a single notification as read."""

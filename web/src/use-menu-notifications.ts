@@ -13,11 +13,9 @@ import { menuFetch } from './menu-api'
 
 interface NotificationsListResponse {
   data: Notification[]
-  count: number
-  total: number
 }
 
-const EMPTY_RESPONSE: NotificationsListResponse = { data: [], count: 0, total: 0 }
+const EMPTY_RESPONSE: NotificationsListResponse = { data: [] }
 
 async function fetchNotifications(): Promise<NotificationsListResponse> {
   const response = await menuFetch<NotificationsListResponse>('-/notifications/list')
