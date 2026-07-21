@@ -240,6 +240,7 @@
         staleIframe.removeAttribute('id');
 
         setImmersive(false);   // never carry immersive chrome-hiding across an app navigation
+        abortMicSession();     // never leave microphone tracks live across app navigation
 
         // Create the new iframe hidden behind the old one
         var next = document.createElement('iframe');
@@ -482,6 +483,478 @@
                 error: { name: err && err.name || 'Error', message: err && err.message || String(err) } });
         });
     }
+
+    // --- Microphone recording bridge ---
+    // Sandboxed iframes have an opaque origin (no allow-same-origin) so
+    // getUserMedia is unavailable there. The shell records on the top-level
+    // page and posts the Blob result back. Do NOT add allow-same-origin.
+    // States: idle | requesting | recording | stopping
+    var micSession = null; // single active/requesting session
+    // Latest mic.start waiting for a cancelled permission wait to settle.
+    // Never stack concurrent getUserMedia — that floods permission prompts.
+    var micStartQueue = null;
+
+    var MIC_PREFERRED_MIME = [
+        'audio/webm;codecs=opus',
+        'audio/webm',
+        'audio/mp4',
+        'audio/ogg;codecs=opus'
+    ];
+
+    function micDurationSecs(elapsedMs) {
+        return Math.max(1, Math.round(elapsedMs / 1000));
+    }
+
+    function micFilenameForMime(mimeType) {
+        var lower = String(mimeType || '').toLowerCase();
+        if (lower.indexOf('mp4') >= 0 || lower.indexOf('m4a') >= 0 || lower.indexOf('aac') >= 0) {
+            return 'Voice Note.mp4';
+        }
+        if (lower.indexOf('ogg') >= 0) return 'Voice Note.ogg';
+        return 'Voice Note.webm';
+    }
+
+    function pickMicMimeType() {
+        if (typeof MediaRecorder === 'undefined' || typeof MediaRecorder.isTypeSupported !== 'function') {
+            return '';
+        }
+        for (var i = 0; i < MIC_PREFERRED_MIME.length; i++) {
+            if (MediaRecorder.isTypeSupported(MIC_PREFERRED_MIME[i])) return MIC_PREFERRED_MIME[i];
+        }
+        return '';
+    }
+
+    function stopMicTracks(stream) {
+        if (!stream) return;
+        try {
+            stream.getTracks().forEach(function(track) {
+                try { track.stop(); } catch (e) { /* ignore */ }
+            });
+        } catch (e) { /* ignore */ }
+    }
+
+    function settleMicSession(session, payload) {
+        if (!session || session.settled) return;
+        session.settled = true;
+        session.state = 'idle';
+
+        if (session.recorder) {
+            try {
+                session.recorder.ondataavailable = null;
+                session.recorder.onerror = null;
+                session.recorder.onstop = null;
+            } catch (e) { /* ignore */ }
+        }
+        stopMicTracks(session.stream);
+        session.stream = null;
+        session.recorder = null;
+        session.chunks = [];
+        if (typeof session.stopLevelMeter === 'function') {
+            try { session.stopLevelMeter(); } catch (e) { /* ignore */ }
+            session.stopLevelMeter = null;
+        }
+
+        if (micSession === session) micSession = null;
+
+        postToIframe(payload);
+
+        // Flush a single queued retry after the in-flight GUM settles.
+        if (!micSession && micStartQueue) {
+            var queued = micStartQueue;
+            micStartQueue = null;
+            handleMicStart(queued);
+        }
+    }
+
+    function startMicLevelMeter(session, stream) {
+        if (typeof AudioContext === 'undefined' && typeof webkitAudioContext === 'undefined') {
+            return function() {};
+        }
+        var Ctx = window.AudioContext || window.webkitAudioContext;
+        if (!Ctx) return function() {};
+        var stopped = false;
+        var raf = 0;
+        var ctx = new Ctx();
+        var source = ctx.createMediaStreamSource(stream);
+        var analyser = ctx.createAnalyser();
+        analyser.fftSize = 256;
+        analyser.smoothingTimeConstant = 0.7;
+        source.connect(analyser);
+        var data = new Uint8Array(analyser.frequencyBinCount);
+
+        function tick() {
+            if (stopped) return;
+            analyser.getByteTimeDomainData(data);
+            var sum = 0;
+            for (var i = 0; i < data.length; i++) {
+                var v = (data[i] - 128) / 128;
+                sum += v * v;
+            }
+            var level = Math.min(1, Math.sqrt(sum / data.length) * 3.2);
+            postToIframe({
+                type: 'mic.level',
+                requestId: session.requestId,
+                level: level
+            });
+            raf = requestAnimationFrame(tick);
+        }
+        raf = requestAnimationFrame(tick);
+
+        return function() {
+            stopped = true;
+            cancelAnimationFrame(raf);
+            try { source.disconnect(); analyser.disconnect(); } catch (e) { /* ignore */ }
+            try { ctx.close(); } catch (e) { /* ignore */ }
+        };
+    }
+
+    function abortMicSession() {
+        // Drop any queued retry — navigation/unload must not open a new GUM.
+        if (micStartQueue && micStartQueue.requestId != null) {
+            postToIframe({
+                type: 'mic.result',
+                requestId: micStartQueue.requestId,
+                ok: false,
+                cancelled: true,
+                error: { name: 'AbortError', message: 'Microphone session aborted' }
+            });
+        }
+        micStartQueue = null;
+
+        var session = micSession;
+        if (!session || session.settled) return;
+        session.cancelled = true;
+        if (session.recorder && session.recorder.state !== 'inactive') {
+            try { session.recorder.stop(); } catch (e) { /* ignore */ }
+        }
+        settleMicSession(session, {
+            type: 'mic.result',
+            requestId: session.requestId,
+            ok: false,
+            cancelled: true,
+            error: { name: 'AbortError', message: 'Microphone session aborted' }
+        });
+    }
+
+    function beginMicRecording(session, stream) {
+        if (session.cancelled || session.settled) {
+            stopMicTracks(stream);
+            settleMicSession(session, {
+                type: 'mic.result',
+                requestId: session.requestId,
+                ok: false,
+                cancelled: true
+            });
+            return;
+        }
+
+        if (typeof MediaRecorder === 'undefined') {
+            stopMicTracks(stream);
+            settleMicSession(session, {
+                type: 'mic.result',
+                requestId: session.requestId,
+                ok: false,
+                error: { name: 'NotSupportedError', message: 'MediaRecorder is unavailable in this browser' }
+            });
+            return;
+        }
+
+        var preferred = pickMicMimeType();
+        var recorder;
+        try {
+            recorder = preferred
+                ? new MediaRecorder(stream, { mimeType: preferred })
+                : new MediaRecorder(stream);
+        } catch (err) {
+            stopMicTracks(stream);
+            settleMicSession(session, {
+                type: 'mic.result',
+                requestId: session.requestId,
+                ok: false,
+                error: { name: err && err.name || 'NotSupportedError', message: err && err.message || String(err) }
+            });
+            return;
+        }
+
+        var mimeType = recorder.mimeType || preferred || 'audio/webm';
+        session.stream = stream;
+        session.recorder = recorder;
+        session.mimeType = mimeType;
+        session.chunks = [];
+        session.startedAt = (typeof performance !== 'undefined' && performance.now)
+            ? performance.now()
+            : Date.now();
+        session.state = 'recording';
+        session.stopLevelMeter = startMicLevelMeter(session, stream);
+
+        recorder.ondataavailable = function(e) {
+            if (e.data && e.data.size > 0) session.chunks.push(e.data);
+        };
+
+        recorder.onerror = function() {
+            if (session.settled) return;
+            session.pendingError = {
+                name: 'MediaRecorderError',
+                message: 'MediaRecorder failed while recording'
+            };
+            session.cancelled = true;
+            try {
+                if (recorder.state !== 'inactive') recorder.stop();
+                else {
+                    settleMicSession(session, {
+                        type: 'mic.result',
+                        requestId: session.requestId,
+                        ok: false,
+                        error: session.pendingError
+                    });
+                }
+            } catch (e) {
+                settleMicSession(session, {
+                    type: 'mic.result',
+                    requestId: session.requestId,
+                    ok: false,
+                    error: session.pendingError
+                });
+            }
+        };
+
+        recorder.onstop = function() {
+            if (session.settled) return;
+            if (session.pendingError) {
+                settleMicSession(session, {
+                    type: 'mic.result',
+                    requestId: session.requestId,
+                    ok: false,
+                    error: session.pendingError
+                });
+                return;
+            }
+            if (session.cancelled) {
+                settleMicSession(session, {
+                    type: 'mic.result',
+                    requestId: session.requestId,
+                    ok: false,
+                    cancelled: true
+                });
+                return;
+            }
+            var now = (typeof performance !== 'undefined' && performance.now)
+                ? performance.now()
+                : Date.now();
+            var durationSecs = micDurationSecs(now - session.startedAt);
+            var type = session.mimeType || 'audio/webm';
+            var blob = new Blob(session.chunks, { type: type });
+            if (!blob.size) {
+                settleMicSession(session, {
+                    type: 'mic.result',
+                    requestId: session.requestId,
+                    ok: false,
+                    error: { name: 'EmptyRecordingError', message: 'Recording produced no audio data' }
+                });
+                return;
+            }
+            settleMicSession(session, {
+                type: 'mic.result',
+                requestId: session.requestId,
+                ok: true,
+                blob: blob,
+                mimeType: type,
+                filename: micFilenameForMime(type),
+                durationSecs: durationSecs
+            });
+        };
+
+        try {
+            recorder.start(200);
+        } catch (err) {
+            settleMicSession(session, {
+                type: 'mic.result',
+                requestId: session.requestId,
+                ok: false,
+                error: { name: err && err.name || 'NotSupportedError', message: err && err.message || String(err) }
+            });
+            return;
+        }
+
+        postToIframe({ type: 'mic.started', requestId: session.requestId });
+    }
+
+    function handleMicStart(data) {
+        if (navigating) return;
+        var requestId = data.requestId;
+        if (micSession && !micSession.settled) {
+            // Serialize cancel→retry (e.g. start-timeout retry): keep only the
+            // latest queued start and wait for the in-flight getUserMedia to
+            // settle before opening another permission request.
+            if (micSession.cancelled && micSession.state === 'requesting') {
+                if (micStartQueue && micStartQueue.requestId != null) {
+                    postToIframe({
+                        type: 'mic.result',
+                        requestId: micStartQueue.requestId,
+                        ok: false,
+                        cancelled: true,
+                        error: { name: 'AbortError', message: 'Microphone request superseded' }
+                    });
+                }
+                micStartQueue = data;
+                return;
+            }
+            postToIframe({
+                type: 'mic.result',
+                requestId: requestId,
+                ok: false,
+                error: { name: 'InvalidStateError', message: 'A microphone session is already active' }
+            });
+            return;
+        }
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            postToIframe({
+                type: 'mic.result',
+                requestId: requestId,
+                ok: false,
+                error: {
+                    name: 'NotSupportedError',
+                    message: 'Microphone access requires a secure context (HTTPS or localhost)'
+                }
+            });
+            return;
+        }
+
+        var session = {
+            requestId: requestId,
+            state: 'requesting',
+            cancelled: false,
+            settled: false,
+            stream: null,
+            recorder: null,
+            chunks: [],
+            startedAt: 0,
+            mimeType: '',
+            pendingError: null,
+            stopLevelMeter: null
+        };
+        micSession = session;
+
+        // No transient-activation requirement for getUserMedia (unlike getDisplayMedia).
+        // Call immediately from this validated message handler.
+        navigator.mediaDevices.getUserMedia({ audio: true }).then(function(stream) {
+            if (session.cancelled || session.settled) {
+                stopMicTracks(stream);
+                settleMicSession(session, {
+                    type: 'mic.result',
+                    requestId: session.requestId,
+                    ok: false,
+                    cancelled: true
+                });
+                return;
+            }
+            beginMicRecording(session, stream);
+        }).catch(function(err) {
+            if (session.settled) return;
+            settleMicSession(session, {
+                type: 'mic.result',
+                requestId: session.requestId,
+                ok: false,
+                error: { name: err && err.name || 'NotAllowedError', message: err && err.message || String(err) }
+            });
+        });
+    }
+
+    function handleMicStop(data) {
+        var session = micSession;
+        var requestId = data.requestId;
+        if (!session || session.settled || session.requestId !== requestId) {
+            postToIframe({
+                type: 'mic.result',
+                requestId: requestId,
+                ok: false,
+                error: { name: 'InvalidStateError', message: 'No matching microphone session' }
+            });
+            return;
+        }
+        if (session.state === 'requesting') {
+            session.cancelled = true;
+            // Stream may still arrive — drop it in the getUserMedia then-handler.
+            return;
+        }
+        if (session.state === 'recording' && session.recorder) {
+            session.state = 'stopping';
+            try {
+                if (session.recorder.state !== 'inactive') session.recorder.stop();
+                else {
+                    settleMicSession(session, {
+                        type: 'mic.result',
+                        requestId: session.requestId,
+                        ok: false,
+                        cancelled: true
+                    });
+                }
+            } catch (err) {
+                settleMicSession(session, {
+                    type: 'mic.result',
+                    requestId: session.requestId,
+                    ok: false,
+                    error: { name: err && err.name || 'Error', message: err && err.message || String(err) }
+                });
+            }
+            return;
+        }
+        if (session.state === 'stopping') return;
+        settleMicSession(session, {
+            type: 'mic.result',
+            requestId: session.requestId,
+            ok: false,
+            cancelled: true
+        });
+    }
+
+    function handleMicCancel(data) {
+        var session = micSession;
+        var requestId = data.requestId;
+        if (!session || session.settled) {
+            postToIframe({ type: 'mic.cancelled', requestId: requestId || 0 });
+            return;
+        }
+        if (requestId != null && requestId !== session.requestId) {
+            postToIframe({ type: 'mic.cancelled', requestId: requestId || 0 });
+            return;
+        }
+
+        session.cancelled = true;
+
+        if (session.state === 'requesting') {
+            postToIframe({ type: 'mic.cancelled', requestId: session.requestId });
+            // Keep session until getUserMedia resolves so tracks can be stopped.
+            return;
+        }
+
+        if (session.recorder && session.recorder.state !== 'inactive') {
+            session.state = 'stopping';
+            try {
+                session.recorder.stop();
+            } catch (e) {
+                settleMicSession(session, {
+                    type: 'mic.result',
+                    requestId: session.requestId,
+                    ok: false,
+                    cancelled: true
+                });
+            }
+            postToIframe({ type: 'mic.cancelled', requestId: session.requestId });
+            return;
+        }
+
+        settleMicSession(session, {
+            type: 'mic.result',
+            requestId: session.requestId,
+            ok: false,
+            cancelled: true
+        });
+        postToIframe({ type: 'mic.cancelled', requestId: session.requestId });
+    }
+
+    window.addEventListener('pagehide', abortMicSession);
+    window.addEventListener('beforeunload', abortMicSession);
 
     // --- URL sync ---
 
@@ -740,6 +1213,26 @@
 
             case 'webauthn.get':
                 handleWebauthnCeremony(data, false);
+                break;
+
+            case 'mic.start':
+                handleMicStart(data);
+                break;
+
+            case 'mic.probe':
+                postToIframe({
+                    type: 'mic.probe.result',
+                    requestId: data.requestId,
+                    supported: true
+                });
+                break;
+
+            case 'mic.stop':
+                handleMicStop(data);
+                break;
+
+            case 'mic.cancel':
+                handleMicCancel(data);
                 break;
 
             case 'language-set':
