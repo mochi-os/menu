@@ -8,13 +8,8 @@
 
 import { useEffect } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { useAuthStore, type Notification } from '@mochi/web'
-
-const MENU_PATH = '/menu'
-
-function getMenuToken(): string {
-  return useAuthStore.getState().token || ''
-}
+import { type Notification } from '@mochi/web'
+import { menuFetch } from './menu-api'
 
 interface NotificationsListResponse {
   data: Notification[]
@@ -23,35 +18,6 @@ interface NotificationsListResponse {
 }
 
 const EMPTY_RESPONSE: NotificationsListResponse = { data: [], count: 0, total: 0 }
-
-async function menuFetch<T>(path: string, init?: RequestInit): Promise<T> {
-  const token = getMenuToken()
-  if (import.meta.env.DEV) {
-    // eslint-disable-next-line no-console
-    console.log(`[menu-fetch] ${init?.method || 'GET'} ${path} token=${token ? 'present' : 'NONE'}`)
-  }
-  const res = await fetch(`${MENU_PATH}/${path}`, {
-    credentials: 'same-origin',
-    ...init,
-    headers: {
-      ...init?.headers,
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    },
-  })
-  if (!res.ok) {
-    const body = await res.text().catch(() => '')
-    if (import.meta.env.DEV) {
-      // eslint-disable-next-line no-console
-      console.error(`[menu-fetch] ${init?.method || 'GET'} ${path} -> ${res.status} ${body}`)
-    }
-    throw new Error(`Menu API error: ${res.status}`)
-  }
-  if (import.meta.env.DEV) {
-    // eslint-disable-next-line no-console
-    console.log(`[menu-fetch] ${init?.method || 'GET'} ${path} -> ${res.status}`)
-  }
-  return res.json()
-}
 
 async function fetchNotifications(): Promise<NotificationsListResponse> {
   const response = await menuFetch<NotificationsListResponse>('-/notifications/list')

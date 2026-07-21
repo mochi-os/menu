@@ -18,14 +18,8 @@ import {
   ResponsiveDialogHeader,
   ResponsiveDialogTitle,
   Button,
-  useAuthStore,
 } from '@mochi/web'
-
-const MENU_PATH = '/menu'
-
-function getMenuToken(): string {
-  return useAuthStore.getState().token || ''
-}
+import { MENU_PATH, getMenuToken } from './menu-api'
 
 interface PendingRequest {
   id: number

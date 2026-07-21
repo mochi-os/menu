@@ -8,13 +8,8 @@
 // All API calls go through the menu's own backend (cookie auth).
 
 import { useEffect } from 'react'
-import { push, useAuthStore } from '@mochi/web'
-
-const MENU_PATH = '/menu'
-
-function getMenuToken(): string {
-  return useAuthStore.getState().token || ''
-}
+import { push } from '@mochi/web'
+import { menuFetch } from './menu-api'
 
 interface VapidKeyResponse {
   data: { key: string }
@@ -70,20 +65,6 @@ async function removeAccountById(id: string): Promise<void> {
   } catch {
     // Account may already be gone server-side; don't block the flow
   }
-}
-
-async function menuFetch<T>(path: string, init?: RequestInit): Promise<T> {
-  const token = getMenuToken()
-  const res = await fetch(`${MENU_PATH}/${path}`, {
-    credentials: 'same-origin',
-    ...init,
-    headers: {
-      ...init?.headers,
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    },
-  })
-  if (!res.ok) throw new Error(`Menu API error: ${res.status}`)
-  return res.json()
 }
 
 async function getVapidKey(): Promise<string> {
