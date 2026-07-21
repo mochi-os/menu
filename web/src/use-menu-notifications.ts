@@ -28,7 +28,7 @@ async function menuFetch<T>(path: string, init?: RequestInit): Promise<T> {
   const token = getMenuToken()
   if (import.meta.env.DEV) {
     // eslint-disable-next-line no-console
-    console.log(`[menu-fetch] ${init?.method || 'GET'} ${path} token=${token ? token.substring(0, 20) + '...' : 'NONE'}`)
+    console.log(`[menu-fetch] ${init?.method || 'GET'} ${path} token=${token ? 'present' : 'NONE'}`)
   }
   const res = await fetch(`${MENU_PATH}/${path}`, {
     credentials: 'same-origin',
