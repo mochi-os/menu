@@ -8,7 +8,6 @@ import { Trans, useLingui } from '@lingui/react/macro'
 import { usePushRegistration } from './use-push-registration'
 import { useMenuNotifications } from './use-menu-notifications'
 import { usePermissionRequest } from './use-permission-request'
-import { useShellFetch } from './use-shell-fetch'
 import {
   Bell,
   Check,
@@ -170,7 +169,6 @@ function useSidebarPresent(): boolean {
 export function MochiShellMenu() {
   const { t } = useLingui()
   usePushRegistration()
-  useShellFetch()
   const { dialog: permissionDialog } = usePermissionRequest()
   const [signOutOpen, setSignOutOpen] = useDialogState()
   const [menuOpen, setMenuOpen] = useState(false)
