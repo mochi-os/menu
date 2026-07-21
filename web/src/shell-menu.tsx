@@ -41,6 +41,20 @@ function MochiLogo() {
   return <img src='/images/logo-header.png' alt='Mochi' className='h-7 w-7' />
 }
 
+// Notification links are app-authored, so only ever open http(s) targets in a
+// new tab. A javascript:/data: link passed to window.open would execute in a
+// window that can reach window.opener (the shell, same origin), so validate the
+// scheme first. Relative Mochi paths resolve to https and pass; every other
+// scheme is rejected.
+function isSafeLink(link: string): boolean {
+  try {
+    const url = new URL(link, window.location.origin)
+    return url.protocol === 'http:' || url.protocol === 'https:'
+  } catch {
+    return false
+  }
+}
+
 function NotificationItem({
   notification,
   onClick,
@@ -232,7 +246,7 @@ export function MochiShellMenu() {
     if (notification.read === 0) {
       markAsRead(notification.id)
     }
-    if (notification.link) {
+    if (notification.link && isSafeLink(notification.link)) {
       window.open(notification.link, '_blank')
     }
     if (unreadCount === 1) {
