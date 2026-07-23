@@ -19,7 +19,7 @@ import {
   ResponsiveDialogTitle,
   Button,
 } from '@mochi/web'
-import { MENU_PATH, getMenuToken } from './menu-api'
+import { MENU_PATH, getMenuToken, menuFetch } from './menu-api'
 
 interface PendingRequest {
   id: number
@@ -37,6 +37,7 @@ export function usePermissionRequest() {
   const [pending, setPending] = useState<PendingRequest | null>(null)
   const [submitting, setSubmitting] = useState(false)
   const [permissionName, setPermissionName] = useState('')
+  const [appName, setAppName] = useState('')
 
   const open = pending !== null
 
@@ -189,7 +190,30 @@ export function usePermissionRequest() {
     }
   }, [pending])
 
-  const appName = pending ? pending.app.charAt(0).toUpperCase() + pending.app.slice(1) : ''
+  // Resolve the app id to its display name. The id is the shell's server-
+  // resolved current app id — on production installs it's an entity id, so the
+  // dialog must not show it raw. The raw id shows only briefly while the
+  // lookup is in flight, or if it fails.
+  useEffect(() => {
+    if (!pending) {
+      setAppName('')
+      return
+    }
+    setAppName(pending.app)
+    let cancelled = false
+    menuFetch<{ data?: { name?: string } }>('-/permissions/application', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({ app: pending.app }).toString(),
+    })
+      .then((body) => {
+        if (!cancelled && body?.data?.name) setAppName(body.data.name)
+      })
+      .catch(() => {})
+    return () => {
+      cancelled = true
+    }
+  }, [pending])
 
   const dialog = open ? (
     <ResponsiveDialog open={open} onOpenChange={(v) => { if (!v) respond('denied') }}>

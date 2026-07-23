@@ -124,6 +124,16 @@ def action_permissions_name(a):
 
     return {"data": {"name": mochi.permission.name(permission)}}
 
+def action_permissions_application(a):
+    """Resolve an app id to its display name in the user's language. The consent
+    dialog shows this instead of the raw id — on production installs the id is
+    an entity id, meaningless to the user."""
+    app = mochi.app.get(a.input("app", "").strip())
+    if not app:
+        return a.error.label(404, "errors.not_found")
+
+    return {"data": {"name": app["name"]}}
+
 def action_permissions_check(a):
     """Report whether an app currently holds a permission for this user. Used by
     the shell to gate capabilities it grants on an app's behalf (e.g. the

@@ -19,9 +19,10 @@ i18n.loadAndActivate({ locale: 'en', messages: {} })
 const mockFetch = vi.fn()
 globalThis.fetch = mockFetch
 
-// Permission names are owned by core and resolved via /menu/-/permissions/name.
-// The dialog fires that lookup as soon as a request arrives, then issues the
-// grant request on Allow. Route both by URL so tests can assert each.
+// Permission names are owned by core and resolved via /menu/-/permissions/name;
+// app display names via /menu/-/permissions/application. The dialog fires both
+// lookups as soon as a request arrives, then issues the grant request on Allow.
+// Route all three by URL so tests can assert each.
 const NAMES: Record<string, string> = {
   'accounts/read': 'Read connected accounts',
   'groups/manage': 'Manage groups',
@@ -30,9 +31,24 @@ const NAMES: Record<string, string> = {
   microphone: 'Use the microphone',
 }
 
+const APPS: Record<string, string> = {
+  feeds: 'Feeds',
+  wikis: 'Wikis',
+  chat: 'Chat',
+  // A production install is keyed by its entity id, not a readable path.
+  '12254aHfG39Lqrizh': 'Repositories',
+}
+
 function nameResponse(opts: { body?: string } | undefined) {
   const code = new URLSearchParams(opts?.body ?? '').get('permission') ?? ''
   return { ok: true, json: async () => ({ data: { name: NAMES[code] ?? code } }) }
+}
+
+function applicationResponse(opts: { body?: string } | undefined) {
+  const id = new URLSearchParams(opts?.body ?? '').get('app') ?? ''
+  const name = APPS[id]
+  if (!name) return { ok: false, json: async () => ({ error: 'Not found' }) }
+  return { ok: true, json: async () => ({ data: { name } }) }
 }
 
 // Default routing: name lookups resolve to the catalog name, grant succeeds.
@@ -41,6 +57,9 @@ function defaultRouter(grant: () => unknown = () => ({ ok: true, json: async () 
   return (url: string, opts?: { body?: string }) => {
     if (typeof url === 'string' && url.endsWith('/permissions/name')) {
       return Promise.resolve(nameResponse(opts))
+    }
+    if (typeof url === 'string' && url.endsWith('/permissions/application')) {
+      return Promise.resolve(applicationResponse(opts))
     }
     return Promise.resolve(grant())
   }
@@ -317,18 +336,35 @@ describe('usePermissionRequest', () => {
     })
   })
 
-  it('capitalizes app name', async () => {
+  it('shows the server-resolved display name, never the raw app id', async () => {
     render(<TestComponent />)
 
+    // A production install: the shell's app id is an entity id.
     sendPermissionRequest({
       id: 1,
-      app: 'repositories',
+      app: '12254aHfG39Lqrizh',
       permission: 'groups/manage',
       restricted: false,
     })
 
     await waitFor(() => {
       expect(screen.getByText(/Repositories/)).toBeInTheDocument()
+    })
+    expect(screen.queryByText(/12254aHfG39Lqrizh/)).not.toBeInTheDocument()
+  })
+
+  it('falls back to the raw app id when the name lookup fails', async () => {
+    render(<TestComponent />)
+
+    sendPermissionRequest({
+      id: 1,
+      app: 'unresolvable',
+      permission: 'groups/manage',
+      restricted: false,
+    })
+
+    await waitFor(() => {
+      expect(screen.getByText(/unresolvable/)).toBeInTheDocument()
     })
   })
 
