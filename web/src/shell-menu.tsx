@@ -39,7 +39,7 @@ import {
 } from '@mochi/web'
 
 function MochiLogo() {
-  return <img src='/images/logo-header.png' alt='Mochi' className='h-7 w-7' />
+  return <img src='/menu/images/logo-header.png' alt='Mochi' className='h-7 w-7' />
 }
 
 // Notification links are app-authored, so only ever open http(s) targets in a

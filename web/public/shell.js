@@ -13,7 +13,12 @@
     var menuEl = document.getElementById('menu');
     var shellConfig = null; // populated by /_/shell fetch
     var currentAppPath = getAppNameFromPath(window.location.pathname);
-    var currentAppId = currentAppPath;
+    // Server-resolved entity id of the loaded app — set by fetchToken, null
+    // until the first token resolves and while a cross-app navigation is in
+    // flight. Permission and microphone checks key on this; localStorage
+    // namespacing keys on currentAppPath so stored state survives an app's
+    // dev-id/entity-id difference between instances.
+    var currentAppEntity = null;
 
     // Title = "(N) baseTitle" where baseTitle comes from the current app
     // (via postMessage) and N comes from the menu app (via custom event).
@@ -327,7 +332,7 @@
             return r.json();
         }).then(function(data) {
             if (data.app) {
-                currentAppId = data.app;
+                currentAppEntity = data.app;
                 // Expose for menu app (e.g. subscribe-notifications needs entity ID)
                 if (!window.__mochi_shell) window.__mochi_shell = {};
                 window.__mochi_shell.appId = data.app;
@@ -364,7 +369,7 @@
 
     // --- localStorage proxy (namespaced by app ID) ---
 
-    var storagePrefix = 'app:' + currentAppId + ':';
+    var storagePrefix = 'app:' + currentAppPath + ':';
 
     function handleStorageGet(data) {
         if (navigating) return;
@@ -927,7 +932,7 @@
         micPermissionPending = true;
         var gate = { requestId: data.requestId, cancelled: false };
         micGate = gate;
-        micHasPermission(currentAppId).then(function(granted) {
+        micHasPermission(currentAppEntity).then(function(granted) {
             return granted ? true : requestMicConsent();
         }).then(function(granted) {
             micPermissionPending = false;
@@ -1174,7 +1179,8 @@
     var lastNavigatedPath = window.location.pathname + window.location.search + window.location.hash;
 
     function handleNavigate(data) {
-        if (!data.path) return;
+        // Same-origin only — don't rely on pushState throwing on foreign URLs
+        if (!data.path || !isSameOriginUrl(data.path)) return;
         // Reject navigate messages for paths outside the current app (anti-spoofing)
         var currentApp = getAppNameFromPath(window.location.pathname);
         var navApp = getAppNameFromPath(data.path);
@@ -1194,12 +1200,18 @@
     }
 
     function handleNavigateExternal(data) {
-        if (!data.url) return;
+        // Same-origin only — don't rely on pushState throwing on foreign URLs
+        if (!data.url || !isSameOriginUrl(data.url)) return;
         var newApp = getAppNameFromPath(data.url);
 
         if (newApp !== currentAppPath) {
             // Cross-app navigation: update URL, fetch new token, swap iframe
             navigating = true;
+            // Fail closed: the previous app's entity id must never survive into
+            // the next app's permission requests — the consent dialog and mic
+            // gate reject when no id is set. fetchToken repopulates it.
+            currentAppEntity = null;
+            if (window.__mochi_shell) window.__mochi_shell.appId = null;
             currentAppPath = newApp;
             setCurrentApp(newApp);
             updateFavicon(newApp);
@@ -1213,13 +1225,11 @@
             iframe.style.pointerEvents = 'none';
 
             fetchToken(newApp).then(function(token) {
-                currentAppId = newApp;
-                storagePrefix = 'app:' + currentAppId + ':';
+                storagePrefix = 'app:' + newApp + ':';
                 swapIframe(data.url);
                 scheduleTokenRefresh(newApp);
             }).catch(function() {
-                currentAppId = newApp;
-                storagePrefix = 'app:' + currentAppId + ':';
+                storagePrefix = 'app:' + newApp + ':';
                 swapIframe(data.url);
             });
         } else {
@@ -1239,6 +1249,9 @@
         if (newApp !== currentAppPath) {
             // Different app — swap iframe and fetch new token
             navigating = true;
+            // Fail closed, as in handleNavigateExternal: no stale entity id
+            currentAppEntity = null;
+            if (window.__mochi_shell) window.__mochi_shell.appId = null;
             currentAppPath = newApp;
             setCurrentApp(newApp);
             updateFavicon(newApp);
@@ -1251,13 +1264,11 @@
             iframe.style.pointerEvents = 'none';
 
             fetchToken(newApp).then(function() {
-                currentAppId = newApp;
-                storagePrefix = 'app:' + currentAppId + ':';
+                storagePrefix = 'app:' + newApp + ':';
                 swapIframe(path);
                 scheduleTokenRefresh(newApp);
             }).catch(function() {
-                currentAppId = newApp;
-                storagePrefix = 'app:' + currentAppId + ':';
+                storagePrefix = 'app:' + newApp + ':';
                 swapIframe(path);
             });
         } else {
@@ -1393,11 +1404,9 @@
                 setImmersive(!!data.on);
                 break;
 
-            case 'overlay': {
-                var menuEl = document.getElementById('menu');
+            case 'overlay':
                 if (menuEl) menuEl.classList.toggle('shell-overlay-active', !!data.open);
                 break;
-            }
 
             case 'theme-set':
                 // App changed appearance — update shell class (preference persisted server-side by the app)
@@ -1444,7 +1453,7 @@
                 postToIframe({
                     type: 'mic.probe.result',
                     requestId: data.requestId,
-                    supported: true
+                    supported: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder)
                 });
                 break;
 

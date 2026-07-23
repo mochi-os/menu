@@ -82,7 +82,7 @@ async function findBrowserAccountByEndpoint(endpoint: string): Promise<Account |
 
 async function createBrowserAccount(sub: PushSubscription): Promise<string | null> {
   const data = push.getSubscriptionData(sub)
-  await menuFetch('-/push/accounts/add', {
+  const res = await menuFetch<{ data?: { id?: string | number } }>('-/push/accounts/add', {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({
@@ -94,6 +94,10 @@ async function createBrowserAccount(sub: PushSubscription): Promise<string | nul
     }).toString(),
   })
 
+  // The add response carries the new account (mochi.account.add), so the id is
+  // normally right here; the list lookup remains as a fallback only.
+  const id = res?.data?.id
+  if (id !== undefined && id !== null && id !== '') return String(id)
   return (await findBrowserAccountByEndpoint(data.endpoint))?.id ?? null
 }
 

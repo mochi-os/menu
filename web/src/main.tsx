@@ -19,129 +19,59 @@ const catalogs: Catalogs = {
   'en-us': () => import('./locales/en-us/messages.po'),
   fr: () => import('./locales/fr/messages.po'),
   ja: () => import('./locales/ja/messages.po'),
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   jv: () => import('./locales/jv/messages.po'),
-
   sd: () => import('./locales/sd/messages.po'),
-
   bho: () => import('./locales/bho/messages.po'),
-
   su: () => import('./locales/su/messages.po'),
-
   om: () => import('./locales/om/messages.po'),
-
   yue: () => import('./locales/yue/messages.po'),
   'fr-ca': () => import('./locales/fr-ca/messages.po'),
-
   'zh-hk': () => import('./locales/zh-hk/messages.po'),
   'de-ch': () => import('./locales/de-ch/messages.po'),
-
   nn: () => import('./locales/nn/messages.po'),
   'en-ca': () => import('./locales/en-ca/messages.po'),
   'es-ar': () => import('./locales/es-ar/messages.po'),
   my: () => import('./locales/my/messages.po'),
-
   ps: () => import('./locales/ps/messages.po'),
-
   kk: () => import('./locales/kk/messages.po'),
-
   uz: () => import('./locales/uz/messages.po'),
-
   az: () => import('./locales/az/messages.po'),
-
   km: () => import('./locales/km/messages.po'),
-
   lo: () => import('./locales/lo/messages.po'),
-
   mn: () => import('./locales/mn/messages.po'),
-
   cy: () => import('./locales/cy/messages.po'),
-
   ga: () => import('./locales/ga/messages.po'),
-
   gd: () => import('./locales/gd/messages.po'),
-
   mt: () => import('./locales/mt/messages.po'),
-
   eu: () => import('./locales/eu/messages.po'),
-
   gl: () => import('./locales/gl/messages.po'),
-
   tg: () => import('./locales/tg/messages.po'),
-
   ky: () => import('./locales/ky/messages.po'),
-
   tk: () => import('./locales/tk/messages.po'),
-
   qu: () => import('./locales/qu/messages.po'),
-
   ay: () => import('./locales/ay/messages.po'),
-
   gn: () => import('./locales/gn/messages.po'),
-
   ht: () => import('./locales/ht/messages.po'),
-
   hy: () => import('./locales/hy/messages.po'),
-
   ckb: () => import('./locales/ckb/messages.po'),
-
   ku: () => import('./locales/ku/messages.po'),
-
   ka: () => import('./locales/ka/messages.po'),
   tr: () => import('./locales/tr/messages.po'),
-
   fa: () => import('./locales/fa/messages.po'),
-
   ro: () => import('./locales/ro/messages.po'),
-
   bg: () => import('./locales/bg/messages.po'),
-
   hr: () => import('./locales/hr/messages.po'),
-
   sr: () => import('./locales/sr/messages.po'),
-
   sk: () => import('./locales/sk/messages.po'),
-
   sl: () => import('./locales/sl/messages.po'),
-
   ca: () => import('./locales/ca/messages.po'),
-
   et: () => import('./locales/et/messages.po'),
-
   lv: () => import('./locales/lv/messages.po'),
-
   lt: () => import('./locales/lt/messages.po'),
-
   sq: () => import('./locales/sq/messages.po'),
-
   be: () => import('./locales/be/messages.po'),
-
   mk: () => import('./locales/mk/messages.po'),
-
   bs: () => import('./locales/bs/messages.po'),
-
   yi: () => import('./locales/yi/messages.po'),
   ne: () => import('./locales/ne/messages.po'),
   si: () => import('./locales/si/messages.po'),
@@ -183,7 +113,6 @@ const catalogs: Catalogs = {
   'pt-br': () => import('./locales/pt-br/messages.po'),
   pt: () => import('./locales/pt/messages.po'),
   'es-419': () => import('./locales/es-419/messages.po'),
-
   es: () => import('./locales/es/messages.po'),
   tl: () => import('./locales/tl/messages.po'),
   th: () => import('./locales/th/messages.po'),

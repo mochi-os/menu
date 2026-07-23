@@ -133,6 +133,10 @@ export function useMenuNotifications() {
   const { data, isLoading, isError } = useQuery<NotificationsListResponse>({
     queryKey: notificationKeys.list(),
     queryFn: fetchNotifications,
+    // WebSocket invalidation is the primary update path; poll slowly as a
+    // fallback for sessions where the WebSocket can never connect (e.g. a
+    // proxy that blocks upgrades), so the badge doesn't stay frozen.
+    refetchInterval: 5 * 60 * 1000,
   })
 
   const markAsReadMutation = useMutation({

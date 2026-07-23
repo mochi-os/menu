@@ -19,13 +19,12 @@ import {
   ResponsiveDialogTitle,
   Button,
 } from '@mochi/web'
-import { MENU_PATH, getMenuToken, menuFetch } from './menu-api'
+import { menuFetch } from './menu-api'
 
 interface PendingRequest {
   id: number
   app: string
   permission: string
-  restricted: boolean
   // Set for the normal iframe-driven request: where the result is posted back.
   source?: WindowProxy
   // Set for a shell-driven request (e.g. the microphone gate in shell.js): the
@@ -38,6 +37,12 @@ export function usePermissionRequest() {
   const [submitting, setSubmitting] = useState(false)
   const [permissionName, setPermissionName] = useState('')
   const [appName, setAppName] = useState('')
+  // Server-resolved level of the pending permission. The requesting app's
+  // self-asserted restricted flag is ignored — a lying app could otherwise
+  // steer which dialog variant renders. Grants are enforced server-side
+  // regardless, so defaulting to standard while the lookup is in flight is
+  // safe: an early Allow on a restricted permission fails as denied.
+  const [restricted, setRestricted] = useState(false)
 
   const open = pending !== null
 
@@ -65,7 +70,6 @@ export function usePermissionRequest() {
         id: data.id,
         app: appId,
         permission: data.permission,
-        restricted: data.restricted,
         source,
       })
     }
@@ -97,7 +101,6 @@ export function usePermissionRequest() {
         id: 0,
         app: appId,
         permission: detail.permission,
-        restricted: false,
         shellEventId: detail.id,
       })
     }
@@ -127,25 +130,14 @@ export function usePermissionRequest() {
     setSubmitting(true)
 
     try {
-      const token = getMenuToken()
-      const res = await fetch(`${MENU_PATH}/-/permissions/grant`, {
+      await menuFetch('-/permissions/grant', {
         method: 'POST',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          ...(token ? { Authorization: `Bearer ${token}` } : {}),
-        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({
           app: pending.app,
           permission: pending.permission,
         }).toString(),
       })
-
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}))
-        throw new Error(body.error || `Error ${res.status}`)
-      }
-
       respond('granted')
     } catch {
       respond('denied')
@@ -158,31 +150,30 @@ export function usePermissionRequest() {
     respond('denied')
   }, [respond])
 
-  // Resolve the permission code to its translated name. Names are owned by core
-  // (mochi.permission.name, exposed via the menu's permissions/name action), so
-  // the dialog carries no permission vocabulary of its own. The raw code shows
-  // only briefly while the lookup is in flight, or if it fails.
+  // Resolve the permission code to its translated name and its level. Both are
+  // owned by core (mochi.permission.name / .level, exposed via the menu's
+  // permissions/name action), so the dialog carries no permission vocabulary of
+  // its own and never trusts the requesting app's restricted claim. The raw
+  // code shows only briefly while the lookup is in flight, or if it fails.
   useEffect(() => {
     if (!pending) {
       setPermissionName('')
+      setRestricted(false)
       return
     }
     const code = pending.permission
     setPermissionName(code)
+    setRestricted(false)
     let cancelled = false
-    const token = getMenuToken()
-    fetch(`${MENU_PATH}/-/permissions/name`, {
+    menuFetch<{ data?: { name?: string; restricted?: boolean } }>('-/permissions/name', {
       method: 'POST',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      },
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({ permission: code }).toString(),
     })
-      .then((res) => (res.ok ? res.json() : null))
       .then((body) => {
-        if (!cancelled && body?.data?.name) setPermissionName(body.data.name)
+        if (cancelled) return
+        if (body?.data?.name) setPermissionName(body.data.name)
+        setRestricted(!!body?.data?.restricted)
       })
       .catch(() => {})
     return () => {
@@ -220,7 +211,7 @@ export function usePermissionRequest() {
       <ResponsiveDialogContent className="max-w-sm">
         <ResponsiveDialogHeader>
           <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-muted">
-            {pending.restricted ? (
+            {restricted ? (
               <ShieldAlert className="h-6 w-6 text-amber-500" />
             ) : (
               <Shield className="h-6 w-6 text-primary" />
@@ -236,14 +227,14 @@ export function usePermissionRequest() {
           {permissionName}
         </div>
 
-        {pending.restricted && (
+        {restricted && (
           <p className="text-sm text-amber-600 text-center">
             <Trans>This permission must be enabled by you in the app settings.</Trans>
           </p>
         )}
 
         <ResponsiveDialogFooter className="flex-row gap-2 sm:justify-end">
-          {pending.restricted ? (
+          {restricted ? (
             <Button variant="outline" className="flex-1" onClick={handleDeny}>
               <Trans>Close</Trans>
             </Button>

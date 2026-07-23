@@ -19,16 +19,16 @@ i18n.loadAndActivate({ locale: 'en', messages: {} })
 const mockFetch = vi.fn()
 globalThis.fetch = mockFetch
 
-// Permission names are owned by core and resolved via /menu/-/permissions/name;
-// app display names via /menu/-/permissions/application. The dialog fires both
-// lookups as soon as a request arrives, then issues the grant request on Allow.
-// Route all three by URL so tests can assert each.
-const NAMES: Record<string, string> = {
-  'accounts/read': 'Read connected accounts',
-  'groups/manage': 'Manage groups',
-  'users/read': 'Read user data',
-  'url:api.github.com': 'Access api.github.com',
-  microphone: 'Use the microphone',
+// Permission names and levels are owned by core and resolved via
+// /menu/-/permissions/name; app display names via /menu/-/permissions/application.
+// The dialog fires both lookups as soon as a request arrives, then issues the
+// grant request on Allow. Route all three by URL so tests can assert each.
+const NAMES: Record<string, { name: string; restricted?: boolean }> = {
+  'accounts/read': { name: 'Read connected accounts' },
+  'groups/manage': { name: 'Manage groups' },
+  'users/read': { name: 'Read user data', restricted: true },
+  'url:api.github.com': { name: 'Access api.github.com' },
+  microphone: { name: 'Use the microphone' },
 }
 
 const APPS: Record<string, string> = {
@@ -41,7 +41,13 @@ const APPS: Record<string, string> = {
 
 function nameResponse(opts: { body?: string } | undefined) {
   const code = new URLSearchParams(opts?.body ?? '').get('permission') ?? ''
-  return { ok: true, json: async () => ({ data: { name: NAMES[code] ?? code } }) }
+  const entry = NAMES[code]
+  return {
+    ok: true,
+    json: async () => ({
+      data: { name: entry?.name ?? code, restricted: !!entry?.restricted },
+    }),
+  }
 }
 
 function applicationResponse(opts: { body?: string } | undefined) {
@@ -98,6 +104,8 @@ function sendPermissionRequest(opts: {
   id: number
   app: string // the authoritative loaded app — set as __mochi_shell.appId
   permission: string
+  // Self-asserted flag still sent by the iframe shim; the dialog must ignore
+  // it and use the server-resolved level from the permissions/name lookup.
   restricted: boolean
   spoofApp?: string // an attacker-claimed data.app the dialog must ignore
 }) {
@@ -366,6 +374,25 @@ describe('usePermissionRequest', () => {
     await waitFor(() => {
       expect(screen.getByText(/unresolvable/)).toBeInTheDocument()
     })
+  })
+
+  it('uses the server-resolved level, ignoring the message restricted flag', async () => {
+    render(<TestComponent />)
+
+    // The app claims its restricted permission is standard — once the server
+    // answers, the dialog must still render the restricted variant.
+    sendPermissionRequest({
+      id: 2,
+      app: 'feeds',
+      permission: 'users/read',
+      restricted: false,
+    })
+
+    await waitFor(() => {
+      expect(screen.queryByRole('button', { name: 'Allow' })).not.toBeInTheDocument()
+      expect(screen.getAllByRole('button', { name: 'Close' }).length).toBeGreaterThanOrEqual(1)
+    })
+    expect(screen.getByText(/must be enabled/)).toBeInTheDocument()
   })
 
   it('ignores a spoofed data.app and uses the shell-verified app', async () => {

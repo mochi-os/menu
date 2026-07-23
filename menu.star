@@ -18,6 +18,8 @@ def action_notifications_read(a):
     id = a.input("id", "").strip()
     if not id:
         return a.error.label(400, "errors.id_is_required")
+    if len(id) > 64:
+        return a.error.label(400, "errors.invalid_id")
     mochi.service.call("notifications", "read", id)
     return {"data": {"ok": True}}
 
@@ -42,17 +44,20 @@ def action_notifications_topic_lookup(a):
     row = mochi.service.call("notifications", "topic/lookup", app, topic, object)
     return {"data": row}
 
-def action_notifications_topic_set_category(a):
+def action_notifications_topic_category_set(a):
     """Set the category of a topic row by (app, topic, object). app="" matches
-    server-originated topics (upgrade alerts etc.)."""
+    server-originated topics (upgrade alerts etc.). An empty category clears the
+    topic's category; anything over-long cannot name a real category and is
+    rejected rather than treated as a clear."""
     app = a.input("app", "").strip()
     topic = a.input("topic", "").strip()
-    object = a.input("object", "")
-    cat_raw = a.input("category", "").strip()
-    category = None
-    if cat_raw != "" and len(cat_raw) <= 64:
-        category = cat_raw
-    ok = mochi.service.call("notifications", "topic/set_category", app, topic, object, category)
+    object = a.input("object", "").strip()
+    category = a.input("category", "").strip()
+    if category == "":
+        category = None
+    elif len(category) > 64:
+        return a.error.label(404, "errors.not_found")
+    ok = mochi.service.call("notifications", "topic/category/set", app, topic, object, category)
     if not ok:
         return a.error.label(404, "errors.not_found")
     return {"data": {}}
@@ -109,6 +114,11 @@ def action_permissions_grant(a):
     if not app_id or not permission:
         return a.error.label(400, "errors.app_and_permission_are_required")
 
+    # Only real apps may receive grants — a grant row for an arbitrary id would
+    # become live if an app with that id were installed later
+    if not mochi.app.get(app_id):
+        return a.error.label(404, "errors.not_found")
+
     # Block non-standard permissions — they must be configured in app settings
     if mochi.permission.level(permission) != "standard":
         return a.error.label(403, "errors.restricted_permissions_disabled")
@@ -117,12 +127,17 @@ def action_permissions_grant(a):
     return {"data": {"status": "granted"}}
 
 def action_permissions_name(a):
-    """Resolve a permission code to its translated, human-readable name."""
+    """Resolve a permission code to its translated, human-readable name and its
+    level. The consent dialog uses the server-resolved restricted flag, never
+    the requesting app's self-asserted one."""
     permission = a.input("permission", "").strip()
     if not permission:
         return a.error.label(400, "errors.permission_is_required")
 
-    return {"data": {"name": mochi.permission.name(permission)}}
+    return {"data": {
+        "name": mochi.permission.name(permission),
+        "restricted": mochi.permission.level(permission) != "standard",
+    }}
 
 def action_permissions_application(a):
     """Resolve an app id to its display name in the user's language. The consent
