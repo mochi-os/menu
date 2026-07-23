@@ -37,8 +37,7 @@
     var iframe = document.createElement('iframe');
     iframe.id = 'app-frame';
     iframe.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads');
-    iframe.setAttribute('allow', 'gamepad *');   // the Gamepad API is blocked in cross-origin (opaque) iframes by default permissions policy
-    iframe.setAttribute('allow', 'fullscreen');
+    iframe.setAttribute('allow', 'gamepad *; fullscreen');   // the Gamepad API is blocked in cross-origin (opaque) iframes by default permissions policy
     iframe.src = initialSrc;
     container.appendChild(iframe);
     var tokenRefreshTimer = null;
@@ -258,7 +257,7 @@
         var next = document.createElement('iframe');
         next.id = 'app-frame';
         next.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads');
-        next.setAttribute('allow', 'fullscreen');
+        next.setAttribute('allow', 'gamepad *; fullscreen');
         next.style.visibility = 'hidden';
         next.src = shellSrc(newSrc);
         container.insertBefore(next, staleIframe);
