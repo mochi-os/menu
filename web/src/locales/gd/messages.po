@@ -18,7 +18,32 @@ msgstr ""
 msgid "Please check your internet connection and try again."
 msgstr "Thoir sùil air a' cheangal eadar-lìn agad agus feuch ris a-rithist."
 
-#: src/use-permission-request.tsx:165
+#. placeholder {0}: selectedValues.size
+#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:66
+msgid "{0, plural, one {# selected} other {# selected}}"
+msgstr "{0, plural, one {# air a thaghadh} two {# air an taghadh} few {# air an taghadh} other {# air an taghadh}}"
+
+#: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:173
+msgid "{entityLabel} name"
+msgstr "Ainm {entityLabel}"
+
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:210
+msgid "{selectedCount, plural, one {{entityName} selected} other {{manyName} selected}}"
+msgstr "{selectedCount, plural, one {{entityName} air a thaghadh} two {{manyName} air an taghadh} few {{manyName} air an taghadh} other {{manyName} air an taghadh}}"
+
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:52
+msgid "{selectedCount, plural, one {# {entityName} selected. Bulk actions toolbar is available.} other {# {manyName} selected. Bulk actions toolbar is available.}}"
+msgstr "{selectedCount, plural, one {# {entityName} air a thaghadh. Tha bàr-inneal nan gnìomhan mòr-chuid ri fhaighinn.} two {# {manyName} air an taghadh. Tha bàr-inneal nan gnìomhan mòr-chuid ri fhaighinn.} few {# {manyName} air an taghadh. Tha bàr-inneal nan gnìomhan mòr-chuid ri fhaighinn.} other {# {manyName} air an taghadh. Tha bàr-inneal nan gnìomhan mòr-chuid ri fhaighinn.}}"
+
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:202
+msgid "{selectedCount, plural, one {# selected} other {# selected}}"
+msgstr "{selectedCount, plural, one {# air an taghadh} two {# air an taghadh} few {# air an taghadh} other {# air an taghadh}}"
+
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:149
+msgid "{selectedCount, plural, one {Bulk actions for # selected {entityName}} other {Bulk actions for # selected {manyName}}}"
+msgstr "{selectedCount, plural, one {Gnìomhan mòr-chuid airson # {entityName} a thaghadh} two {Gnìomhan mòr-chuid airson # {manyName} a thaghadh} few {Gnìomhan mòr-chuid airson # {manyName} a thaghadh} other {Gnìomhan mòr-chuid airson # {manyName} a thaghadh}}"
+
+#: src/use-permission-request.tsx:222
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> ag iarraidh an cead a leanas:"
 
@@ -116,7 +141,7 @@ msgstr "AI"
 msgid "All"
 msgstr "Na h-uile"
 
-#: src/use-permission-request.tsx:193
+#: src/use-permission-request.tsx:250
 msgid "Allow"
 msgstr "Ceadaich"
 
@@ -148,9 +173,9 @@ msgstr "Còd dearbhachaidh"
 msgid "Back"
 msgstr "Air ais"
 
-#: ../../../lib/web/src/features/errors/forbidden.tsx:26
-#: ../../../lib/web/src/features/errors/not-found-error.tsx:26
-#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:26
+#: ../../../lib/web/src/features/errors/forbidden.tsx:28
+#: ../../../lib/web/src/features/errors/not-found-error.tsx:28
+#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:28
 msgid "Back to home"
 msgstr "Air ais dhan dachaigh"
 
@@ -167,7 +192,7 @@ msgstr "Brosnaich ùidh"
 #: ../../../lib/web/src/features/access/access-dialog.tsx:328
 #: ../../../lib/web/src/features/access/access-list.tsx:263
 #: ../../../lib/web/src/features/accounts/account-add.tsx:188
-#: ../../../lib/web/src/features/accounts/account-verify.tsx:89
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:91
 msgid "Cancel"
 msgstr "Sguir dheth"
 
@@ -214,31 +239,32 @@ msgstr "Falamhaich"
 msgid "Clear all"
 msgstr "Falamhaich a h-uile"
 
-#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:140
+#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:144
 msgid "Clear filters"
 msgstr "Falamhaich criathragan"
 
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:167
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:171
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:177
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:181
 msgid "Clear selection"
 msgstr "Falamhaich an taghadh"
 
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:168
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:178
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:185
 msgid "Clear selection (Escape)"
 msgstr "Falamhaich an taghadh (Escape)"
 
 #: ../../../lib/web/src/components/ui/dialog.tsx:78
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:354
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:357
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:358
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:361
 #: ../../../lib/web/src/components/ui/sheet.tsx:79
-#: src/use-permission-request.tsx:182
+#: src/use-permission-request.tsx:239
 msgid "Close"
 msgstr "Dùin"
 
-#: ../../../lib/web/src/components/layout/app-sidebar.tsx:107
-#: ../../../lib/web/src/components/layout/app-sidebar.tsx:112
-#: src/shell-menu.tsx:408
-#: src/shell-menu.tsx:415
+#: ../../../lib/web/src/components/layout/app-sidebar.tsx:108
+#: ../../../lib/web/src/components/layout/app-sidebar.tsx:113
+#: src/shell-menu.tsx:427
+#: src/shell-menu.tsx:434
 msgid "Close navigation"
 msgstr "Dùin an t-seòladaireachd"
 
@@ -304,7 +330,7 @@ msgstr "Dèan lethbhreac"
 msgid "Could not load this document. Please try again later."
 msgstr "Cha b' urrainn an sgrìobhainn seo a luchdachadh. Feuch ris a-rithist nas anmoiche."
 
-#: src/shell-menu.tsx:347
+#: src/shell-menu.tsx:366
 msgid "Couldn't load notifications"
 msgstr "Cha b' urrainn brathan a luchdadh"
 
@@ -325,6 +351,7 @@ msgid "Custom"
 msgstr "Gnàthaichte"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:218
+#: ../../../lib/web/src/components/theme-switch.tsx:52
 #: ../../../lib/web/src/lib/preference-utils.ts:20
 msgid "Dark"
 msgstr "Dorcha"
@@ -353,7 +380,7 @@ msgstr "Cunntas AI bunaiteach"
 msgid "Delete your account on the old server"
 msgstr "Sguab às do chunntas air an t-seann fhrithealaiche"
 
-#: src/use-permission-request.tsx:187
+#: src/use-permission-request.tsx:244
 msgid "Deny"
 msgstr "Diùlt"
 
@@ -393,8 +420,8 @@ msgstr "Leig seachad"
 msgid "Displays the mobile sidebar."
 msgstr "Seallaidh am bàr-thaobh fòn-làimhe."
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:338
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:348
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:342
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:352
 msgid "Download"
 msgstr "Luchdaich a-nuas"
 
@@ -441,6 +468,14 @@ msgstr "A bharrachd mòr"
 msgid "Failed to add account"
 msgstr "Cha b' urrainn an cunntas a chur ris"
 
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:263
+msgid "Failed to load image"
+msgstr "Dh'fhàillig luchdachadh an deilbh"
+
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:263
+msgid "Failed to load video"
+msgstr "Dh'fhàillig luchdachadh a' video"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:234
 msgid "Failed to remove account"
 msgstr "Cha b' urrainn an cunntas a thoirt air falbh"
@@ -486,29 +521,29 @@ msgstr "On ùrlar"
 msgid "Full layout"
 msgstr "Làn-chruth"
 
-#: ../../../lib/web/src/features/errors/forbidden.tsx:24
-#: ../../../lib/web/src/features/errors/not-found-error.tsx:24
-#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:24
+#: ../../../lib/web/src/features/errors/forbidden.tsx:26
+#: ../../../lib/web/src/features/errors/not-found-error.tsx:26
+#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:26
 msgid "Go back"
 msgstr "Air ais"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:78
+#: ../../../lib/web/src/components/data-table/pagination.tsx:82
 msgid "Go to first page"
 msgstr "Rach dhan chiad duilleag"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:124
+#: ../../../lib/web/src/components/data-table/pagination.tsx:128
 msgid "Go to last page"
 msgstr "Rach dhan duilleag mu dheireadh"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:115
+#: ../../../lib/web/src/components/data-table/pagination.tsx:119
 msgid "Go to next page"
 msgstr "Rach dhan ath dhuilleag"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:102
+#: ../../../lib/web/src/components/data-table/pagination.tsx:106
 msgid "Go to page {pageNumber}"
 msgstr "Rach gu duilleag {pageNumber}"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:87
+#: ../../../lib/web/src/components/data-table/pagination.tsx:91
 msgid "Go to previous page"
 msgstr "Rach dhan duilleag roimhe"
 
@@ -528,16 +563,21 @@ msgstr "Falaich am facal-faire"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:158
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:423
-#: src/shell-menu.tsx:429
-#: src/shell-menu.tsx:501
-#: src/shell-menu.tsx:505
+#: src/shell-menu.tsx:442
+#: src/shell-menu.tsx:448
+#: src/shell-menu.tsx:521
+#: src/shell-menu.tsx:525
 msgid "Home"
 msgstr "Dachaigh"
 
 #: ../../../lib/web/src/components/ui/sort-selector.tsx:44
 msgid "Hot"
 msgstr "Teth"
+
+#. placeholder {0}: currentMedia.name
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:247
+msgid "Image viewer: {0}"
+msgstr "Sealladair dhealbhan: {0}"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:86
 msgid "Imperial"
@@ -554,6 +594,10 @@ msgstr "Ùidhean"
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:245
 msgid "Invalid verification code"
 msgstr "Còd dearbhaidh mì-dhligheach"
+
+#: ../../../lib/web/src/features/errors/not-found-error.tsx:18
+msgid "It seems like the page you're looking for <0/>does not exist or might have been removed."
+msgstr "Tha coltas nach eil an duilleag a tha thu a' sireadh <0/>ann no gun deach a toirt air falbh."
 
 #: ../../../lib/web/src/lib/preference-utils.ts:108
 #: ../../../lib/web/src/lib/preference-utils.ts:135
@@ -574,6 +618,7 @@ msgid "Left to Right"
 msgstr "Clì gu Deas"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:213
+#: ../../../lib/web/src/components/theme-switch.tsx:45
 #: ../../../lib/web/src/lib/preference-utils.ts:19
 msgid "Light"
 msgstr "Soilleir"
@@ -588,8 +633,8 @@ msgstr "A’ luchdadh susbaint…"
 
 #: ../../../lib/web/src/components/ui/load-more.tsx:35
 #: ../../../lib/web/src/features/document/document-page.tsx:90
-msgid "Loading…"
-msgstr "A' luchdadh…"
+msgid "Loading..."
+msgstr "A' luchdadh..."
 
 #: ../../../lib/web/src/components/layout/nav-user.tsx:101
 #: ../../../lib/web/src/components/layout/nav-user.tsx:167
@@ -598,8 +643,8 @@ msgstr "A' luchdadh…"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:289
-#: src/shell-menu.tsx:295
+#: src/shell-menu.tsx:308
+#: src/shell-menu.tsx:314
 msgid "Log out"
 msgstr "Clàraich a-mach"
 
@@ -615,11 +660,11 @@ msgstr "Chaidh clàradh a-mach gu soirbheachail"
 msgid "Logging out…"
 msgstr "A' clàradh a-mach…"
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:92
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:99
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:93
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:100
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:312
-#: src/shell-menu.tsx:318
+#: src/shell-menu.tsx:331
+#: src/shell-menu.tsx:337
 msgid "Mark all as read"
 msgstr "Comharraich gach nì mar leughte"
 
@@ -628,7 +673,7 @@ msgid "Medium"
 msgstr "Meadhanach"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:173
-#: src/shell-menu.tsx:470
+#: src/shell-menu.tsx:490
 msgid "Menu"
 msgstr "Clàr-taice"
 
@@ -649,8 +694,8 @@ msgstr "Mearachd lìonraidh"
 msgid "New"
 msgstr "Ùr"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:388
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:393
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:392
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:397
 msgid "Next image"
 msgstr "An ath dhealbh"
 
@@ -675,7 +720,7 @@ msgid "No profile"
 msgstr "Gun phròifil"
 
 #: ../../../lib/web/src/components/command-menu.tsx:55
-#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:90
+#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:94
 msgid "No results found."
 msgstr "Cha deach toraidhean a lorg."
 
@@ -687,7 +732,7 @@ msgstr "Cha deach roinn-tìde a lorg."
 msgid "No topic record yet — try again after the next notification."
 msgstr "Chan eil clàradh cuspair ann fhathast — feuch a-rithist às dèidh an ath bhrath."
 
-#: src/shell-menu.tsx:354
+#: src/shell-menu.tsx:373
 msgid "No unread notifications"
 msgstr "Chan eil brathan gun leughadh"
 
@@ -718,9 +763,14 @@ msgstr "Cha deach a shuidheachadh"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:304
+#: src/shell-menu.tsx:323
 msgid "Notifications"
 msgstr "Brathan"
+
+#. placeholder {0}: unread.length
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:86
+msgid "Notifications: {0}"
+msgstr "Brathan: {0}"
 
 #: ../../../lib/web/src/features/errors/not-found-error.tsx:16
 msgid "Oops! Page Not Found!"
@@ -736,17 +786,17 @@ msgstr "Fosgail gnìomhan a' chunntais"
 msgid "Open actions"
 msgstr "Fosgail na gnìomhan"
 
-#: src/shell-menu.tsx:266
-#: src/shell-menu.tsx:387
-#: src/shell-menu.tsx:442
-#: src/shell-menu.tsx:454
+#: src/shell-menu.tsx:285
+#: src/shell-menu.tsx:406
+#: src/shell-menu.tsx:462
+#: src/shell-menu.tsx:474
 msgid "Open menu"
 msgstr "Fosgail an clàr-taice"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:408
-#: src/shell-menu.tsx:415
+#: src/shell-menu.tsx:427
+#: src/shell-menu.tsx:434
 msgid "Open navigation"
 msgstr "Fosgail seòladaireachd"
 
@@ -768,6 +818,11 @@ msgstr "Eile"
 msgid "Owner"
 msgstr "Sealbhadair"
 
+#: ../../../lib/web/src/components/data-table/pagination.tsx:43
+#: ../../../lib/web/src/components/data-table/pagination.tsx:71
+msgid "Page {currentPage} of {totalPages}"
+msgstr "Duilleag {currentPage} à {totalPages}"
+
 #: ../../../lib/web/src/components/step-up-dialog.tsx:334
 msgid "Passkey"
 msgstr "Pasgair"
@@ -780,7 +835,7 @@ msgstr "Dh'fhàillig dearbhadh na h-iuchrach-inntrigidh. Feuch ris a-rithist."
 msgid "Passkeys"
 msgstr "Pasgairean"
 
-#: src/use-permission-request.tsx:163
+#: src/use-permission-request.tsx:220
 msgid "Permission request"
 msgstr "Iarrtas cead"
 
@@ -788,6 +843,10 @@ msgstr "Iarrtas cead"
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:304
 msgid "Please check your internet connection and try again."
 msgstr "Thoir sùil air a' cheangal eadar-lìn agad agus feuch ris a-rithist."
+
+#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:18
+msgid "Please log in with the appropriate credentials <0/> to access this resource."
+msgstr "Clàraich a-steach le teisteanas iomchaidh <0/> gus an goireas seo inntrigeadh."
 
 #: ../../../lib/web/src/features/errors/general-error.tsx:83
 msgid "Please try again."
@@ -797,8 +856,8 @@ msgstr "Feuch ris a-rithist."
 msgid "Please wait a moment and try again."
 msgstr "Fuirich greiseag is feuch ris a-rithist."
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:373
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:378
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:377
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:382
 msgid "Previous image"
 msgstr "An dealbh roimhe"
 
@@ -856,6 +915,11 @@ msgstr "Thoir air falbh"
 msgid "Remove access rule"
 msgstr "Thoir an riaghailt cothraim air falbh"
 
+#. placeholder {0}: formatSubject(subject, data.name)
+#: ../../../lib/web/src/features/access/access-list.tsx:259
+msgid "Remove access rule for \"{0}\"?"
+msgstr "A bheil thu airson riaghailt inntrigidh \"{0}\" a thoirt air falbh?"
+
 #: ../../../lib/web/src/features/access/access-list.tsx:257
 msgid "Remove access?"
 msgstr "Thoir an cothrom air falbh?"
@@ -882,7 +946,7 @@ msgstr "Ath-shuidhich a h-uile roghainn chun a' bhun-tuiteamais"
 msgid "Right to Left"
 msgstr "Deas gu Clì"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:63
+#: ../../../lib/web/src/components/data-table/pagination.tsx:65
 msgid "Rows per page"
 msgstr "Sreathan gach duilleag"
 
@@ -957,7 +1021,16 @@ msgstr "Tagh comhair na làraich"
 msgid "Select theme preference"
 msgstr "Tagh roghainn an ùrlair"
 
-#: ../../../lib/web/src/features/accounts/account-verify.tsx:98
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:216
+msgid "selected"
+msgstr "air an taghadh"
+
+#. placeholder {0}: getSelectedName()
+#: ../../../lib/web/src/features/access/access-dialog.tsx:309
+msgid "Selected: <0>{0}</0>"
+msgstr "Air a thaghadh: <0>{0}</0>"
+
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:100
 msgid "Send again"
 msgstr "Cuir a-rithist"
 
@@ -1044,6 +1117,7 @@ msgid "Sunday"
 msgstr "Didòmhnaich"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:208
+#: ../../../lib/web/src/components/theme-switch.tsx:59
 #: ../../../lib/web/src/lib/preference-utils.ts:21
 #: ../../../lib/web/src/lib/preference-utils.ts:144
 msgid "System"
@@ -1075,6 +1149,10 @@ msgstr "Tha an còd sin ceàrr no air a dhol à bann."
 msgid "The requested content could not be found."
 msgstr "Cha b' urrainn dhuinn an t-susbaint a chaidh iarraidh a lorg."
 
+#: ../../../lib/web/src/features/errors/maintenance-error.tsx:15
+msgid "The site is not available at the moment."
+msgstr "Chan eil an làrach ri fhaighinn an-dràsta."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:194
 msgid "Theme"
 msgstr "Ùrlar"
@@ -1083,13 +1161,21 @@ msgstr "Ùrlar"
 msgid "Theme Settings"
 msgstr "Roghainnean an ùrlair"
 
-#: src/use-permission-request.tsx:175
+#: ../../../lib/web/src/components/coming-soon.tsx:14
+msgid "This page has not been created yet."
+msgstr "Cha deach an duilleag seo a chruthachadh fhathast."
+
+#: src/use-permission-request.tsx:232
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Feumaidh tu fhèin an cead seo a chur an comas ann an roghainnean na h-aplacaid."
 
 #: ../../../lib/web/src/lib/preference-utils.ts:62
 msgid "Thursday"
 msgstr "Diardaoin"
+
+#: ../../../lib/web/src/components/travelling-picker.tsx:220
+msgid "To"
+msgstr "Gu"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:37
 msgid "Toggle columns"
@@ -1191,11 +1277,11 @@ msgid "Use your passkey"
 msgstr "Cleachd an iuchair-inntrigidh agad"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:282
+#: src/shell-menu.tsx:301
 msgid "User"
 msgstr "Cleachdaiche"
 
-#: ../../../lib/web/src/features/accounts/account-verify.tsx:71
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:73
 msgid "Verification code"
 msgstr "Còd dearbhaidh"
 
@@ -1209,7 +1295,7 @@ msgstr "Dh'fhàillig an dearbhadh"
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:388
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:172
-#: ../../../lib/web/src/features/accounts/account-verify.tsx:109
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:111
 msgid "Verify"
 msgstr "Dearbh"
 
@@ -1221,20 +1307,30 @@ msgstr "Dearbh seòladh puist-d"
 msgid "Video thumbnail"
 msgstr "Dealbhag video"
 
+#. placeholder {0}: currentMedia.name
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:246
+msgid "Video viewer: {0}"
+msgstr "Sealladair video: {0}"
+
 #: ../../../lib/web/src/components/data-table/view-options.tsx:33
 msgid "View"
 msgstr "Seall"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:326
-#: src/shell-menu.tsx:332
+#: src/shell-menu.tsx:345
+#: src/shell-menu.tsx:351
 msgid "View all"
 msgstr "Seall a h-uile"
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:105
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:113
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:106
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:114
 msgid "View all notifications"
 msgstr "Seall a h-uile brath"
+
+#. placeholder {0}: account.identifier
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:63
+msgid "We sent a verification code to <0>{0}</0>. Enter the code below to verify your email address."
+msgstr "Chuir sinn còd dearbhaidh gu <0>{0}</0>. Cuir a-steach an còd gu h-ìosal gus an seòladh puist-d agad a dhearbhadh."
 
 #: ../../../lib/web/src/features/errors/maintenance-error.tsx:16
 msgid "We'll be back online shortly."
@@ -1251,6 +1347,10 @@ msgstr "Diciadain"
 #: ../../../lib/web/src/features/errors/general-error.tsx:61
 msgid "You do not have access to this section."
 msgstr "Chan eil cead-inntrigidh agad dhan earrann seo."
+
+#: ../../../lib/web/src/features/errors/forbidden.tsx:18
+msgid "You don't have necessary permission <0/>to view this resource."
+msgstr "Chan eil an cead riatanach agad <0/>gus an goireas seo fhaicinn."
 
 #: ../../../lib/web/src/components/restore-banner.tsx:91
 msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."

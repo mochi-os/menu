@@ -18,7 +18,32 @@ msgstr ""
 msgid "Please check your internet connection and try again."
 msgstr "مهرباني وکړئ خپل د انټرنیټ اړیکه وګورئ او بیا هڅه وکړئ."
 
-#: src/use-permission-request.tsx:165
+#. placeholder {0}: selectedValues.size
+#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:66
+msgid "{0, plural, one {# selected} other {# selected}}"
+msgstr "{0, plural, one {# ټاکل شوی} other {# ټاکل شوي}}"
+
+#: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:173
+msgid "{entityLabel} name"
+msgstr "د {entityLabel} نوم"
+
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:210
+msgid "{selectedCount, plural, one {{entityName} selected} other {{manyName} selected}}"
+msgstr "{selectedCount, plural, one {{entityName} غوره شو} other {{manyName} غوره شول}}"
+
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:52
+msgid "{selectedCount, plural, one {# {entityName} selected. Bulk actions toolbar is available.} other {# {manyName} selected. Bulk actions toolbar is available.}}"
+msgstr "{selectedCount, plural, one {# {entityName} غوره شو. د ډله ایزو کړنو توکپټه شتون لري.} other {# {manyName} غوره شول. د ډله ایزو کړنو توکپټه شتون لري.}}"
+
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:202
+msgid "{selectedCount, plural, one {# selected} other {# selected}}"
+msgstr "{selectedCount, plural, one {# غوره شوي} other {# غوره شوي}}"
+
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:149
+msgid "{selectedCount, plural, one {Bulk actions for # selected {entityName}} other {Bulk actions for # selected {manyName}}}"
+msgstr "{selectedCount, plural, one {د # غوره شوي {entityName} لپاره ډله ایز کړنې} other {د # غوره شوي {manyName} لپاره ډله ایز کړنې}}"
+
+#: src/use-permission-request.tsx:222
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> لاندې اجازه غواړي:"
 
@@ -116,7 +141,7 @@ msgstr "AI"
 msgid "All"
 msgstr "ټول"
 
-#: src/use-permission-request.tsx:193
+#: src/use-permission-request.tsx:250
 msgid "Allow"
 msgstr "اجازه ورکړه"
 
@@ -148,9 +173,9 @@ msgstr "د Authenticator کوډ"
 msgid "Back"
 msgstr "شاته"
 
-#: ../../../lib/web/src/features/errors/forbidden.tsx:26
-#: ../../../lib/web/src/features/errors/not-found-error.tsx:26
-#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:26
+#: ../../../lib/web/src/features/errors/forbidden.tsx:28
+#: ../../../lib/web/src/features/errors/not-found-error.tsx:28
+#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:28
 msgid "Back to home"
 msgstr "کور ته بېرته"
 
@@ -167,7 +192,7 @@ msgstr "دلچسپي ډیره کړه"
 #: ../../../lib/web/src/features/access/access-dialog.tsx:328
 #: ../../../lib/web/src/features/access/access-list.tsx:263
 #: ../../../lib/web/src/features/accounts/account-add.tsx:188
-#: ../../../lib/web/src/features/accounts/account-verify.tsx:89
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:91
 msgid "Cancel"
 msgstr "لغوه کول"
 
@@ -214,31 +239,32 @@ msgstr "پاک کړئ"
 msgid "Clear all"
 msgstr "ټول پاک کړئ"
 
-#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:140
+#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:144
 msgid "Clear filters"
 msgstr "فیلټرونه پاک کړئ"
 
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:167
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:171
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:177
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:181
 msgid "Clear selection"
 msgstr "ټاکل پاک کړئ"
 
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:168
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:178
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:185
 msgid "Clear selection (Escape)"
 msgstr "ټاکل پاک کړئ (Escape)"
 
 #: ../../../lib/web/src/components/ui/dialog.tsx:78
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:354
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:357
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:358
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:361
 #: ../../../lib/web/src/components/ui/sheet.tsx:79
-#: src/use-permission-request.tsx:182
+#: src/use-permission-request.tsx:239
 msgid "Close"
 msgstr "وتړئ"
 
-#: ../../../lib/web/src/components/layout/app-sidebar.tsx:107
-#: ../../../lib/web/src/components/layout/app-sidebar.tsx:112
-#: src/shell-menu.tsx:408
-#: src/shell-menu.tsx:415
+#: ../../../lib/web/src/components/layout/app-sidebar.tsx:108
+#: ../../../lib/web/src/components/layout/app-sidebar.tsx:113
+#: src/shell-menu.tsx:427
+#: src/shell-menu.tsx:434
 msgid "Close navigation"
 msgstr "نیویګیشن وتړئ"
 
@@ -304,7 +330,7 @@ msgstr "کاپي کړئ"
 msgid "Could not load this document. Please try again later."
 msgstr "دا سند نشي پورته کیدلی. مهرباني وکړئ وروسته بیا هڅه وکړئ."
 
-#: src/shell-menu.tsx:347
+#: src/shell-menu.tsx:366
 msgid "Couldn't load notifications"
 msgstr "خبرتیاوې نه شول پورته کولی"
 
@@ -325,6 +351,7 @@ msgid "Custom"
 msgstr "دودیز"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:218
+#: ../../../lib/web/src/components/theme-switch.tsx:52
 #: ../../../lib/web/src/lib/preference-utils.ts:20
 msgid "Dark"
 msgstr "تیاره"
@@ -353,7 +380,7 @@ msgstr "د AI ډیفالټ حساب"
 msgid "Delete your account on the old server"
 msgstr "د پخوانی سرور پر سر خپل حساب ړنګ کړئ"
 
-#: src/use-permission-request.tsx:187
+#: src/use-permission-request.tsx:244
 msgid "Deny"
 msgstr "رد کړئ"
 
@@ -393,8 +420,8 @@ msgstr "وردکړه"
 msgid "Displays the mobile sidebar."
 msgstr "موبایل څنګې پټۍ ښیي."
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:338
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:348
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:342
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:352
 msgid "Download"
 msgstr "ډاونلوډ"
 
@@ -441,6 +468,14 @@ msgstr "ډېر لوی"
 msgid "Failed to add account"
 msgstr "د حساب اضافه کولو پاتې راغلل"
 
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:263
+msgid "Failed to load image"
+msgstr "انځور بار نه شو"
+
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:263
+msgid "Failed to load video"
+msgstr "ویډیو بار نه شو"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:234
 msgid "Failed to remove account"
 msgstr "د حساب لیرې کولو پاتې راغلل"
@@ -486,29 +521,29 @@ msgstr "د ښکارندوی څخه"
 msgid "Full layout"
 msgstr "بشپړ ترتیب"
 
-#: ../../../lib/web/src/features/errors/forbidden.tsx:24
-#: ../../../lib/web/src/features/errors/not-found-error.tsx:24
-#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:24
+#: ../../../lib/web/src/features/errors/forbidden.tsx:26
+#: ../../../lib/web/src/features/errors/not-found-error.tsx:26
+#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:26
 msgid "Go back"
 msgstr "بېرته"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:78
+#: ../../../lib/web/src/components/data-table/pagination.tsx:82
 msgid "Go to first page"
 msgstr "لومړي پاڼې ته ولاړ شه"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:124
+#: ../../../lib/web/src/components/data-table/pagination.tsx:128
 msgid "Go to last page"
 msgstr "وروستي پاڼې ته ولاړ شه"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:115
+#: ../../../lib/web/src/components/data-table/pagination.tsx:119
 msgid "Go to next page"
 msgstr "بل پاڼې ته ولاړ شه"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:102
+#: ../../../lib/web/src/components/data-table/pagination.tsx:106
 msgid "Go to page {pageNumber}"
 msgstr "{pageNumber} پاڼې ته لاړ شئ"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:87
+#: ../../../lib/web/src/components/data-table/pagination.tsx:91
 msgid "Go to previous page"
 msgstr "تیر پاڼې ته ولاړ شه"
 
@@ -528,16 +563,21 @@ msgstr "پټنوم پټ کړئ"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:158
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:423
-#: src/shell-menu.tsx:429
-#: src/shell-menu.tsx:501
-#: src/shell-menu.tsx:505
+#: src/shell-menu.tsx:442
+#: src/shell-menu.tsx:448
+#: src/shell-menu.tsx:521
+#: src/shell-menu.tsx:525
 msgid "Home"
 msgstr "کور"
 
 #: ../../../lib/web/src/components/ui/sort-selector.tsx:44
 msgid "Hot"
 msgstr "ګرم"
+
+#. placeholder {0}: currentMedia.name
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:247
+msgid "Image viewer: {0}"
+msgstr "د انځور کتونکی: {0}"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:86
 msgid "Imperial"
@@ -554,6 +594,10 @@ msgstr "علاقې"
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:245
 msgid "Invalid verification code"
 msgstr "د تصدیق ناسم کوډ"
+
+#: ../../../lib/web/src/features/errors/not-found-error.tsx:18
+msgid "It seems like the page you're looking for <0/>does not exist or might have been removed."
+msgstr "داسې ښکاري چې هغه مخ چې تاسو یې لټوئ <0/>شتون نلري یا لرې شوی دی."
 
 #: ../../../lib/web/src/lib/preference-utils.ts:108
 #: ../../../lib/web/src/lib/preference-utils.ts:135
@@ -574,6 +618,7 @@ msgid "Left to Right"
 msgstr "له کیڼ څخه ښي"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:213
+#: ../../../lib/web/src/components/theme-switch.tsx:45
 #: ../../../lib/web/src/lib/preference-utils.ts:19
 msgid "Light"
 msgstr "روښانه"
@@ -588,8 +633,8 @@ msgstr "منځپانګه بارېږي…"
 
 #: ../../../lib/web/src/components/ui/load-more.tsx:35
 #: ../../../lib/web/src/features/document/document-page.tsx:90
-msgid "Loading…"
-msgstr "بار کیږي…"
+msgid "Loading..."
+msgstr "بار کیږي..."
 
 #: ../../../lib/web/src/components/layout/nav-user.tsx:101
 #: ../../../lib/web/src/components/layout/nav-user.tsx:167
@@ -598,8 +643,8 @@ msgstr "بار کیږي…"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:289
-#: src/shell-menu.tsx:295
+#: src/shell-menu.tsx:308
+#: src/shell-menu.tsx:314
 msgid "Log out"
 msgstr "لاګ آوټ"
 
@@ -615,11 +660,11 @@ msgstr "په بریالیتوب سره لاګ آوټ شو"
 msgid "Logging out…"
 msgstr "لاګ آوټ کیږي…"
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:92
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:99
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:93
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:100
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:312
-#: src/shell-menu.tsx:318
+#: src/shell-menu.tsx:331
+#: src/shell-menu.tsx:337
 msgid "Mark all as read"
 msgstr "ټول د لوستل شویو په توګه نښه کړئ"
 
@@ -628,7 +673,7 @@ msgid "Medium"
 msgstr "منځنی"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:173
-#: src/shell-menu.tsx:470
+#: src/shell-menu.tsx:490
 msgid "Menu"
 msgstr "مینو"
 
@@ -649,8 +694,8 @@ msgstr "د شبکې تېروتنه"
 msgid "New"
 msgstr "نوی"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:388
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:393
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:392
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:397
 msgid "Next image"
 msgstr "بله انځور"
 
@@ -675,7 +720,7 @@ msgid "No profile"
 msgstr "هیڅ پروفایل نشته"
 
 #: ../../../lib/web/src/components/command-menu.tsx:55
-#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:90
+#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:94
 msgid "No results found."
 msgstr "هیڅ پایلې ونه موندل شوې."
 
@@ -687,7 +732,7 @@ msgstr "هیڅ وخت زون ونه موندل شو."
 msgid "No topic record yet — try again after the next notification."
 msgstr "تر اوسه د موضوع هیڅ ریکارډ نشته — د راتلونکې خبرتیا وروسته بیا هڅه وکړئ."
 
-#: src/shell-menu.tsx:354
+#: src/shell-menu.tsx:373
 msgid "No unread notifications"
 msgstr "هیڅ نه لوستل شوې خبرتیاوې نشته"
 
@@ -718,9 +763,14 @@ msgstr "نه دی ټاکل شوی"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:304
+#: src/shell-menu.tsx:323
 msgid "Notifications"
 msgstr "خبرتیاوې"
+
+#. placeholder {0}: unread.length
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:86
+msgid "Notifications: {0}"
+msgstr "خبرتیاوې: {0}"
 
 #: ../../../lib/web/src/features/errors/not-found-error.tsx:16
 msgid "Oops! Page Not Found!"
@@ -736,17 +786,17 @@ msgstr "د حساب کړنې خلاصې کړئ"
 msgid "Open actions"
 msgstr "کړنې پرانیزئ"
 
-#: src/shell-menu.tsx:266
-#: src/shell-menu.tsx:387
-#: src/shell-menu.tsx:442
-#: src/shell-menu.tsx:454
+#: src/shell-menu.tsx:285
+#: src/shell-menu.tsx:406
+#: src/shell-menu.tsx:462
+#: src/shell-menu.tsx:474
 msgid "Open menu"
 msgstr "مینو خلاص کړئ"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:408
-#: src/shell-menu.tsx:415
+#: src/shell-menu.tsx:427
+#: src/shell-menu.tsx:434
 msgid "Open navigation"
 msgstr "نیویګیشن خلاص کړئ"
 
@@ -768,6 +818,11 @@ msgstr "نور"
 msgid "Owner"
 msgstr "مالک"
 
+#: ../../../lib/web/src/components/data-table/pagination.tsx:43
+#: ../../../lib/web/src/components/data-table/pagination.tsx:71
+msgid "Page {currentPage} of {totalPages}"
+msgstr "مخ {currentPage} د {totalPages}"
+
 #: ../../../lib/web/src/components/step-up-dialog.tsx:334
 msgid "Passkey"
 msgstr "پاسکي"
@@ -780,7 +835,7 @@ msgstr "د پاس کیلۍ تایید ناکام شو. مهرباني وکړئ �
 msgid "Passkeys"
 msgstr "د لاسرسي کيلۍ"
 
-#: src/use-permission-request.tsx:163
+#: src/use-permission-request.tsx:220
 msgid "Permission request"
 msgstr "د اجازې غوښتنه"
 
@@ -788,6 +843,10 @@ msgstr "د اجازې غوښتنه"
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:304
 msgid "Please check your internet connection and try again."
 msgstr "مهرباني وکړئ خپل د انټرنیټ اړیکه وګورئ او بیا هڅه وکړئ."
+
+#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:18
+msgid "Please log in with the appropriate credentials <0/> to access this resource."
+msgstr "مهرباني وکړئ د دې سرچینې لاسرسي لپاره <0/> د مناسبو اسنادو سره ننوځئ."
 
 #: ../../../lib/web/src/features/errors/general-error.tsx:83
 msgid "Please try again."
@@ -797,8 +856,8 @@ msgstr "مهرباني وکړئ بیا هڅه وکړئ."
 msgid "Please wait a moment and try again."
 msgstr "مهرباني وکړئ یوه شېبه انتظار وکړئ او بیا هڅه وکړئ."
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:373
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:378
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:377
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:382
 msgid "Previous image"
 msgstr "تېر انځور"
 
@@ -856,6 +915,11 @@ msgstr "لرې کول"
 msgid "Remove access rule"
 msgstr "د لاسرسي قاعده لرې کړئ"
 
+#. placeholder {0}: formatSubject(subject, data.name)
+#: ../../../lib/web/src/features/access/access-list.tsx:259
+msgid "Remove access rule for \"{0}\"?"
+msgstr "د \"{0}\" لپاره د لاسرسي قاعده لرې شي؟"
+
 #: ../../../lib/web/src/features/access/access-list.tsx:257
 msgid "Remove access?"
 msgstr "لاسرسی لرې کړو؟"
@@ -882,7 +946,7 @@ msgstr "ټول تنظیمات د ډیفالټ ارزښتونو ته بیرته �
 msgid "Right to Left"
 msgstr "له ښي څخه کیڼ ته"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:63
+#: ../../../lib/web/src/components/data-table/pagination.tsx:65
 msgid "Rows per page"
 msgstr "په هر پاڼه کې قطارونه"
 
@@ -957,7 +1021,16 @@ msgstr "د سایټ لوری وټاکئ"
 msgid "Select theme preference"
 msgstr "د ښکارندوی غوره توب وټاکئ"
 
-#: ../../../lib/web/src/features/accounts/account-verify.tsx:98
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:216
+msgid "selected"
+msgstr "غوره شوي"
+
+#. placeholder {0}: getSelectedName()
+#: ../../../lib/web/src/features/access/access-dialog.tsx:309
+msgid "Selected: <0>{0}</0>"
+msgstr "ټاکل شوی: <0>{0}</0>"
+
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:100
 msgid "Send again"
 msgstr "بیا ولیږئ"
 
@@ -1044,6 +1117,7 @@ msgid "Sunday"
 msgstr "یکشنبه"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:208
+#: ../../../lib/web/src/components/theme-switch.tsx:59
 #: ../../../lib/web/src/lib/preference-utils.ts:21
 #: ../../../lib/web/src/lib/preference-utils.ts:144
 msgid "System"
@@ -1075,6 +1149,10 @@ msgstr "هغه کوډ غلط دی یا یې موده تېره ده."
 msgid "The requested content could not be found."
 msgstr "غوښتل شوې منځپانګه ونه موندل شوه."
 
+#: ../../../lib/web/src/features/errors/maintenance-error.tsx:15
+msgid "The site is not available at the moment."
+msgstr "سایت دا مهال شتون نلري."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:194
 msgid "Theme"
 msgstr "ښکارندوی"
@@ -1083,13 +1161,21 @@ msgstr "ښکارندوی"
 msgid "Theme Settings"
 msgstr "د ښکارندوی ترتیبات"
 
-#: src/use-permission-request.tsx:175
+#: ../../../lib/web/src/components/coming-soon.tsx:14
+msgid "This page has not been created yet."
+msgstr "دا مخ لا تر اوسه نه دی جوړ شوی."
+
+#: src/use-permission-request.tsx:232
 msgid "This permission must be enabled by you in the app settings."
 msgstr "دا اجازه باید د اپ په ترتیباتو کې له خوا فعاله شي."
 
 #: ../../../lib/web/src/lib/preference-utils.ts:62
 msgid "Thursday"
 msgstr "پنجشنبه"
+
+#: ../../../lib/web/src/components/travelling-picker.tsx:220
+msgid "To"
+msgstr "ته"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:37
 msgid "Toggle columns"
@@ -1191,11 +1277,11 @@ msgid "Use your passkey"
 msgstr "خپله پاس کیلۍ وکاروئ"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:282
+#: src/shell-menu.tsx:301
 msgid "User"
 msgstr "کاروونکی"
 
-#: ../../../lib/web/src/features/accounts/account-verify.tsx:71
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:73
 msgid "Verification code"
 msgstr "د تصدیق کوډ"
 
@@ -1209,7 +1295,7 @@ msgstr "تصدیق ناکام شو"
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:388
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:172
-#: ../../../lib/web/src/features/accounts/account-verify.tsx:109
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:111
 msgid "Verify"
 msgstr "تصدیق"
 
@@ -1221,20 +1307,30 @@ msgstr "د ایمیل پته تصدیق کړئ"
 msgid "Video thumbnail"
 msgstr "د ویډیو thumbnail"
 
+#. placeholder {0}: currentMedia.name
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:246
+msgid "Video viewer: {0}"
+msgstr "د ویډیو کتونکی: {0}"
+
 #: ../../../lib/web/src/components/data-table/view-options.tsx:33
 msgid "View"
 msgstr "ولید"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:326
-#: src/shell-menu.tsx:332
+#: src/shell-menu.tsx:345
+#: src/shell-menu.tsx:351
 msgid "View all"
 msgstr "ټول وګورئ"
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:105
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:113
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:106
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:114
 msgid "View all notifications"
 msgstr "ټولې خبرتیاوې وګورئ"
+
+#. placeholder {0}: account.identifier
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:63
+msgid "We sent a verification code to <0>{0}</0>. Enter the code below to verify your email address."
+msgstr "موږ تصدیق کوډ <0>{0}</0> ته ولیږه. د خپل بریښنالیک پته تصدیق کولو لپاره لاندې کوډ دننه کړئ."
 
 #: ../../../lib/web/src/features/errors/maintenance-error.tsx:16
 msgid "We'll be back online shortly."
@@ -1251,6 +1347,10 @@ msgstr "چهارشنبه"
 #: ../../../lib/web/src/features/errors/general-error.tsx:61
 msgid "You do not have access to this section."
 msgstr "تاسو دې برخې ته لاسرسی نه لرئ."
+
+#: ../../../lib/web/src/features/errors/forbidden.tsx:18
+msgid "You don't have necessary permission <0/>to view this resource."
+msgstr "تاسو د دې سرچینې لیدو لپاره <0/>اړینه اجازه نه لرئ."
 
 #: ../../../lib/web/src/components/restore-banner.tsx:91
 msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."

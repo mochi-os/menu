@@ -18,7 +18,32 @@ msgstr ""
 msgid "Please check your internet connection and try again."
 msgstr "कृपया अपना इंटरनेट कनेक्शन जाँचें और फिर से प्रयास करें।"
 
-#: src/use-permission-request.tsx:165
+#. placeholder {0}: selectedValues.size
+#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:66
+msgid "{0, plural, one {# selected} other {# selected}}"
+msgstr "{0, plural, one {# चयनित} other {# चयनित}}"
+
+#: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:173
+msgid "{entityLabel} name"
+msgstr "{entityLabel} नाम"
+
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:210
+msgid "{selectedCount, plural, one {{entityName} selected} other {{manyName} selected}}"
+msgstr "{selectedCount, plural, one {{entityName} चयनित} other {{manyName} चयनित}}"
+
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:52
+msgid "{selectedCount, plural, one {# {entityName} selected. Bulk actions toolbar is available.} other {# {manyName} selected. Bulk actions toolbar is available.}}"
+msgstr "{selectedCount, plural, one {# {entityName} चयनित। बल्क कार्रवाई टूलबार उपलब्ध है।} other {# {manyName} चयनित। बल्क कार्रवाई टूलबार उपलब्ध है।}}"
+
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:202
+msgid "{selectedCount, plural, one {# selected} other {# selected}}"
+msgstr "{selectedCount, plural, one {# चयनित} other {# चयनित}}"
+
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:149
+msgid "{selectedCount, plural, one {Bulk actions for # selected {entityName}} other {Bulk actions for # selected {manyName}}}"
+msgstr "{selectedCount, plural, one {# चयनित {entityName} के लिए बल्क कार्रवाइयाँ} other {# चयनित {manyName} के लिए बल्क कार्रवाइयाँ}}"
+
+#: src/use-permission-request.tsx:222
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> निम्नलिखित अनुमति मांग रहा है:"
 
@@ -116,7 +141,7 @@ msgstr "AI"
 msgid "All"
 msgstr "सभी"
 
-#: src/use-permission-request.tsx:193
+#: src/use-permission-request.tsx:250
 msgid "Allow"
 msgstr "अनुमति दें"
 
@@ -148,9 +173,9 @@ msgstr "ऑथेंटिकेटर कोड"
 msgid "Back"
 msgstr "वापस"
 
-#: ../../../lib/web/src/features/errors/forbidden.tsx:26
-#: ../../../lib/web/src/features/errors/not-found-error.tsx:26
-#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:26
+#: ../../../lib/web/src/features/errors/forbidden.tsx:28
+#: ../../../lib/web/src/features/errors/not-found-error.tsx:28
+#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:28
 msgid "Back to home"
 msgstr "होम पर वापस जाएँ"
 
@@ -167,7 +192,7 @@ msgstr "रुचि बढ़ाएँ"
 #: ../../../lib/web/src/features/access/access-dialog.tsx:328
 #: ../../../lib/web/src/features/access/access-list.tsx:263
 #: ../../../lib/web/src/features/accounts/account-add.tsx:188
-#: ../../../lib/web/src/features/accounts/account-verify.tsx:89
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:91
 msgid "Cancel"
 msgstr "रद्द करें"
 
@@ -214,31 +239,32 @@ msgstr "साफ़ करें"
 msgid "Clear all"
 msgstr "सब साफ़ करें"
 
-#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:140
+#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:144
 msgid "Clear filters"
 msgstr "फ़िल्टर साफ़ करें"
 
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:167
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:171
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:177
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:181
 msgid "Clear selection"
 msgstr "चयन साफ़ करें"
 
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:168
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:178
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:185
 msgid "Clear selection (Escape)"
 msgstr "चयन साफ़ करें (Escape)"
 
 #: ../../../lib/web/src/components/ui/dialog.tsx:78
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:354
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:357
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:358
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:361
 #: ../../../lib/web/src/components/ui/sheet.tsx:79
-#: src/use-permission-request.tsx:182
+#: src/use-permission-request.tsx:239
 msgid "Close"
 msgstr "बंद करें"
 
-#: ../../../lib/web/src/components/layout/app-sidebar.tsx:107
-#: ../../../lib/web/src/components/layout/app-sidebar.tsx:112
-#: src/shell-menu.tsx:408
-#: src/shell-menu.tsx:415
+#: ../../../lib/web/src/components/layout/app-sidebar.tsx:108
+#: ../../../lib/web/src/components/layout/app-sidebar.tsx:113
+#: src/shell-menu.tsx:427
+#: src/shell-menu.tsx:434
 msgid "Close navigation"
 msgstr "नेविगेशन बंद करें"
 
@@ -304,7 +330,7 @@ msgstr "कॉपी करें"
 msgid "Could not load this document. Please try again later."
 msgstr "यह दस्तावेज़ लोड नहीं किया जा सका। कृपया बाद में पुनः प्रयास करें।"
 
-#: src/shell-menu.tsx:347
+#: src/shell-menu.tsx:366
 msgid "Couldn't load notifications"
 msgstr "सूचनाएँ लोड नहीं हो सकीं"
 
@@ -325,6 +351,7 @@ msgid "Custom"
 msgstr "कस्टम"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:218
+#: ../../../lib/web/src/components/theme-switch.tsx:52
 #: ../../../lib/web/src/lib/preference-utils.ts:20
 msgid "Dark"
 msgstr "डार्क"
@@ -353,7 +380,7 @@ msgstr "डिफ़ॉल्ट AI अकाउंट"
 msgid "Delete your account on the old server"
 msgstr "पुराने सर्वर पर अपना खाता हटाएं"
 
-#: src/use-permission-request.tsx:187
+#: src/use-permission-request.tsx:244
 msgid "Deny"
 msgstr "अस्वीकार करें"
 
@@ -393,8 +420,8 @@ msgstr "खारिज करें"
 msgid "Displays the mobile sidebar."
 msgstr "मोबाइल साइडबार प्रदर्शित करता है।"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:338
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:348
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:342
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:352
 msgid "Download"
 msgstr "डाउनलोड"
 
@@ -441,6 +468,14 @@ msgstr "अतिरिक्त बड़ा"
 msgid "Failed to add account"
 msgstr "खाता जोड़ने में विफल"
 
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:263
+msgid "Failed to load image"
+msgstr "छवि लोड नहीं हो सकी"
+
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:263
+msgid "Failed to load video"
+msgstr "वीडियो लोड नहीं हो सका"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:234
 msgid "Failed to remove account"
 msgstr "खाता हटाने में विफल"
@@ -486,29 +521,29 @@ msgstr "थीम से"
 msgid "Full layout"
 msgstr "पूर्ण लेआउट"
 
-#: ../../../lib/web/src/features/errors/forbidden.tsx:24
-#: ../../../lib/web/src/features/errors/not-found-error.tsx:24
-#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:24
+#: ../../../lib/web/src/features/errors/forbidden.tsx:26
+#: ../../../lib/web/src/features/errors/not-found-error.tsx:26
+#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:26
 msgid "Go back"
 msgstr "वापस जाएँ"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:78
+#: ../../../lib/web/src/components/data-table/pagination.tsx:82
 msgid "Go to first page"
 msgstr "पहले पृष्ठ पर जाएँ"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:124
+#: ../../../lib/web/src/components/data-table/pagination.tsx:128
 msgid "Go to last page"
 msgstr "अंतिम पृष्ठ पर जाएँ"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:115
+#: ../../../lib/web/src/components/data-table/pagination.tsx:119
 msgid "Go to next page"
 msgstr "अगले पृष्ठ पर जाएँ"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:102
+#: ../../../lib/web/src/components/data-table/pagination.tsx:106
 msgid "Go to page {pageNumber}"
 msgstr "पृष्ठ {pageNumber} पर जाएँ"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:87
+#: ../../../lib/web/src/components/data-table/pagination.tsx:91
 msgid "Go to previous page"
 msgstr "पिछले पृष्ठ पर जाएँ"
 
@@ -528,16 +563,21 @@ msgstr "पासवर्ड छिपाएँ"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:158
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:423
-#: src/shell-menu.tsx:429
-#: src/shell-menu.tsx:501
-#: src/shell-menu.tsx:505
+#: src/shell-menu.tsx:442
+#: src/shell-menu.tsx:448
+#: src/shell-menu.tsx:521
+#: src/shell-menu.tsx:525
 msgid "Home"
 msgstr "होम"
 
 #: ../../../lib/web/src/components/ui/sort-selector.tsx:44
 msgid "Hot"
 msgstr "हॉट"
+
+#. placeholder {0}: currentMedia.name
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:247
+msgid "Image viewer: {0}"
+msgstr "छवि व्यूअर: {0}"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:86
 msgid "Imperial"
@@ -554,6 +594,10 @@ msgstr "रुचियाँ"
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:245
 msgid "Invalid verification code"
 msgstr "अमान्य सत्यापन कोड"
+
+#: ../../../lib/web/src/features/errors/not-found-error.tsx:18
+msgid "It seems like the page you're looking for <0/>does not exist or might have been removed."
+msgstr "ऐसा लगता है कि आप जिस पृष्ठ को खोज रहे हैं <0/>वह मौजूद नहीं है या हटा दिया गया है।"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:108
 #: ../../../lib/web/src/lib/preference-utils.ts:135
@@ -574,6 +618,7 @@ msgid "Left to Right"
 msgstr "बाएँ से दाएँ"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:213
+#: ../../../lib/web/src/components/theme-switch.tsx:45
 #: ../../../lib/web/src/lib/preference-utils.ts:19
 msgid "Light"
 msgstr "लाइट"
@@ -588,8 +633,8 @@ msgstr "सामग्री लोड हो रही है…"
 
 #: ../../../lib/web/src/components/ui/load-more.tsx:35
 #: ../../../lib/web/src/features/document/document-page.tsx:90
-msgid "Loading…"
-msgstr "लोड हो रहा है…"
+msgid "Loading..."
+msgstr "लोड हो रहा है..."
 
 #: ../../../lib/web/src/components/layout/nav-user.tsx:101
 #: ../../../lib/web/src/components/layout/nav-user.tsx:167
@@ -598,8 +643,8 @@ msgstr "लोड हो रहा है…"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:289
-#: src/shell-menu.tsx:295
+#: src/shell-menu.tsx:308
+#: src/shell-menu.tsx:314
 msgid "Log out"
 msgstr "लॉग आउट"
 
@@ -615,11 +660,11 @@ msgstr "सफलतापूर्वक लॉग आउट हो गए"
 msgid "Logging out…"
 msgstr "लॉग आउट हो रहे हैं…"
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:92
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:99
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:93
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:100
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:312
-#: src/shell-menu.tsx:318
+#: src/shell-menu.tsx:331
+#: src/shell-menu.tsx:337
 msgid "Mark all as read"
 msgstr "सभी को पढ़ा हुआ मार्क करें"
 
@@ -628,7 +673,7 @@ msgid "Medium"
 msgstr "मध्यम"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:173
-#: src/shell-menu.tsx:470
+#: src/shell-menu.tsx:490
 msgid "Menu"
 msgstr "मेन्यू"
 
@@ -649,8 +694,8 @@ msgstr "नेटवर्क त्रुटि"
 msgid "New"
 msgstr "नया"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:388
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:393
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:392
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:397
 msgid "Next image"
 msgstr "अगली इमेज"
 
@@ -675,7 +720,7 @@ msgid "No profile"
 msgstr "कोई प्रोफ़ाइल नहीं"
 
 #: ../../../lib/web/src/components/command-menu.tsx:55
-#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:90
+#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:94
 msgid "No results found."
 msgstr "कोई परिणाम नहीं मिले।"
 
@@ -687,7 +732,7 @@ msgstr "कोई टाइम ज़ोन नहीं मिला।"
 msgid "No topic record yet — try again after the next notification."
 msgstr "अभी तक कोई टॉपिक रिकॉर्ड नहीं — अगले नोटिफ़िकेशन के बाद फिर से प्रयास करें।"
 
-#: src/shell-menu.tsx:354
+#: src/shell-menu.tsx:373
 msgid "No unread notifications"
 msgstr "कोई अनपढ़ी नोटिफ़िकेशन नहीं"
 
@@ -718,9 +763,14 @@ msgstr "सेट नहीं"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:304
+#: src/shell-menu.tsx:323
 msgid "Notifications"
 msgstr "नोटिफ़िकेशन"
+
+#. placeholder {0}: unread.length
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:86
+msgid "Notifications: {0}"
+msgstr "सूचनाएँ: {0}"
 
 #: ../../../lib/web/src/features/errors/not-found-error.tsx:16
 msgid "Oops! Page Not Found!"
@@ -736,17 +786,17 @@ msgstr "अकाउंट क्रियाएँ खोलें"
 msgid "Open actions"
 msgstr "ऐक्शन खोलें"
 
-#: src/shell-menu.tsx:266
-#: src/shell-menu.tsx:387
-#: src/shell-menu.tsx:442
-#: src/shell-menu.tsx:454
+#: src/shell-menu.tsx:285
+#: src/shell-menu.tsx:406
+#: src/shell-menu.tsx:462
+#: src/shell-menu.tsx:474
 msgid "Open menu"
 msgstr "मेन्यू खोलें"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:408
-#: src/shell-menu.tsx:415
+#: src/shell-menu.tsx:427
+#: src/shell-menu.tsx:434
 msgid "Open navigation"
 msgstr "नेविगेशन खोलें"
 
@@ -768,6 +818,11 @@ msgstr "अन्य"
 msgid "Owner"
 msgstr "स्वामी"
 
+#: ../../../lib/web/src/components/data-table/pagination.tsx:43
+#: ../../../lib/web/src/components/data-table/pagination.tsx:71
+msgid "Page {currentPage} of {totalPages}"
+msgstr "पृष्ठ {currentPage} / {totalPages}"
+
 #: ../../../lib/web/src/components/step-up-dialog.tsx:334
 msgid "Passkey"
 msgstr "पासकी"
@@ -780,7 +835,7 @@ msgstr "पासकी सत्यापन विफल रहा। कृ�
 msgid "Passkeys"
 msgstr "पासकीज़"
 
-#: src/use-permission-request.tsx:163
+#: src/use-permission-request.tsx:220
 msgid "Permission request"
 msgstr "अनुमति अनुरोध"
 
@@ -788,6 +843,10 @@ msgstr "अनुमति अनुरोध"
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:304
 msgid "Please check your internet connection and try again."
 msgstr "कृपया अपना इंटरनेट कनेक्शन जाँचें और फिर से प्रयास करें।"
+
+#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:18
+msgid "Please log in with the appropriate credentials <0/> to access this resource."
+msgstr "इस संसाधन तक पहुँचने के लिए <0/> कृपया उपयुक्त क्रेडेंशियल के साथ लॉग इन करें।"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx:83
 msgid "Please try again."
@@ -797,8 +856,8 @@ msgstr "कृपया फिर से प्रयास करें।"
 msgid "Please wait a moment and try again."
 msgstr "कृपया कुछ देर प्रतीक्षा करें और फिर से कोशिश करें।"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:373
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:378
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:377
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:382
 msgid "Previous image"
 msgstr "पिछली इमेज"
 
@@ -856,6 +915,11 @@ msgstr "हटाएँ"
 msgid "Remove access rule"
 msgstr "एक्सेस नियम हटाएँ"
 
+#. placeholder {0}: formatSubject(subject, data.name)
+#: ../../../lib/web/src/features/access/access-list.tsx:259
+msgid "Remove access rule for \"{0}\"?"
+msgstr "\"{0}\" के लिए पहुँच नियम हटाएँ?"
+
 #: ../../../lib/web/src/features/access/access-list.tsx:257
 msgid "Remove access?"
 msgstr "एक्सेस हटाएँ?"
@@ -882,7 +946,7 @@ msgstr "सभी सेटिंग्स को डिफ़ॉल्ट म�
 msgid "Right to Left"
 msgstr "दाएँ से बाएँ"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:63
+#: ../../../lib/web/src/components/data-table/pagination.tsx:65
 msgid "Rows per page"
 msgstr "प्रति पेज पंक्तियाँ"
 
@@ -957,7 +1021,16 @@ msgstr "साइट दिशा चुनें"
 msgid "Select theme preference"
 msgstr "थीम प्राथमिकता चुनें"
 
-#: ../../../lib/web/src/features/accounts/account-verify.tsx:98
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:216
+msgid "selected"
+msgstr "चयनित"
+
+#. placeholder {0}: getSelectedName()
+#: ../../../lib/web/src/features/access/access-dialog.tsx:309
+msgid "Selected: <0>{0}</0>"
+msgstr "चयनित: <0>{0}</0>"
+
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:100
 msgid "Send again"
 msgstr "फिर से भेजें"
 
@@ -1044,6 +1117,7 @@ msgid "Sunday"
 msgstr "रविवार"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:208
+#: ../../../lib/web/src/components/theme-switch.tsx:59
 #: ../../../lib/web/src/lib/preference-utils.ts:21
 #: ../../../lib/web/src/lib/preference-utils.ts:144
 msgid "System"
@@ -1075,6 +1149,10 @@ msgstr "वह कोड गलत है या समाप्त हो च�
 msgid "The requested content could not be found."
 msgstr "अनुरोधित सामग्री नहीं मिल सकी।"
 
+#: ../../../lib/web/src/features/errors/maintenance-error.tsx:15
+msgid "The site is not available at the moment."
+msgstr "साइट इस समय उपलब्ध नहीं है।"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:194
 msgid "Theme"
 msgstr "थीम"
@@ -1083,13 +1161,21 @@ msgstr "थीम"
 msgid "Theme Settings"
 msgstr "थीम सेटिंग्स"
 
-#: src/use-permission-request.tsx:175
+#: ../../../lib/web/src/components/coming-soon.tsx:14
+msgid "This page has not been created yet."
+msgstr "यह पृष्ठ अभी तक नहीं बनाया गया है।"
+
+#: src/use-permission-request.tsx:232
 msgid "This permission must be enabled by you in the app settings."
 msgstr "यह अनुमति आपको ऐप सेटिंग्स में सक्षम करनी होगी।"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:62
 msgid "Thursday"
 msgstr "गुरुवार"
+
+#: ../../../lib/web/src/components/travelling-picker.tsx:220
+msgid "To"
+msgstr "तक"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:37
 msgid "Toggle columns"
@@ -1191,11 +1277,11 @@ msgid "Use your passkey"
 msgstr "अपनी पासकी का उपयोग करें"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:282
+#: src/shell-menu.tsx:301
 msgid "User"
 msgstr "यूज़र"
 
-#: ../../../lib/web/src/features/accounts/account-verify.tsx:71
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:73
 msgid "Verification code"
 msgstr "वेरिफ़िकेशन कोड"
 
@@ -1209,7 +1295,7 @@ msgstr "वेरिफ़िकेशन विफल"
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:388
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:172
-#: ../../../lib/web/src/features/accounts/account-verify.tsx:109
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:111
 msgid "Verify"
 msgstr "वेरिफ़ाई करें"
 
@@ -1221,20 +1307,30 @@ msgstr "ईमेल पता वेरिफ़ाई करें"
 msgid "Video thumbnail"
 msgstr "वीडियो थंबनेल"
 
+#. placeholder {0}: currentMedia.name
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:246
+msgid "Video viewer: {0}"
+msgstr "वीडियो व्यूअर: {0}"
+
 #: ../../../lib/web/src/components/data-table/view-options.tsx:33
 msgid "View"
 msgstr "देखें"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:326
-#: src/shell-menu.tsx:332
+#: src/shell-menu.tsx:345
+#: src/shell-menu.tsx:351
 msgid "View all"
 msgstr "सभी देखें"
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:105
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:113
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:106
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:114
 msgid "View all notifications"
 msgstr "सभी नोटिफ़िकेशन देखें"
+
+#. placeholder {0}: account.identifier
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:63
+msgid "We sent a verification code to <0>{0}</0>. Enter the code below to verify your email address."
+msgstr "हमने <0>{0}</0> पर एक सत्यापन कोड भेजा है। अपना ईमेल पता सत्यापित करने के लिए नीचे कोड दर्ज करें।"
 
 #: ../../../lib/web/src/features/errors/maintenance-error.tsx:16
 msgid "We'll be back online shortly."
@@ -1251,6 +1347,10 @@ msgstr "बुधवार"
 #: ../../../lib/web/src/features/errors/general-error.tsx:61
 msgid "You do not have access to this section."
 msgstr "आपके पास इस अनुभाग तक पहुँच नहीं है।"
+
+#: ../../../lib/web/src/features/errors/forbidden.tsx:18
+msgid "You don't have necessary permission <0/>to view this resource."
+msgstr "इस संसाधन को देखने के लिए <0/>आपके पास आवश्यक अनुमति नहीं है।"
 
 #: ../../../lib/web/src/components/restore-banner.tsx:91
 msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."

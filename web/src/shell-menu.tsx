@@ -450,6 +450,7 @@ export function MochiShellMenu() {
 
           <div className='min-w-0 flex-1 flex items-center justify-center'>
             {isHome && (
+              /* jsx-text-ok: brand wordmark, verbatim in every locale */
               <span className='sm:hidden text-[1.5rem] font-light tracking-[3px] bg-linear-to-br from-foreground to-muted-foreground/30 bg-clip-text text-transparent select-none'>mochi</span>
             )}
           </div>

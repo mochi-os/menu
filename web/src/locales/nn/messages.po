@@ -18,7 +18,32 @@ msgstr ""
 msgid "Please check your internet connection and try again."
 msgstr ""
 
-#: src/use-permission-request.tsx:165
+#. placeholder {0}: selectedValues.size
+#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:66
+msgid "{0, plural, one {# selected} other {# selected}}"
+msgstr "{0, plural, one {# vald} other {# valde}}"
+
+#: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:173
+msgid "{entityLabel} name"
+msgstr "{entityLabel}-namn"
+
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:210
+msgid "{selectedCount, plural, one {{entityName} selected} other {{manyName} selected}}"
+msgstr "{selectedCount, plural, one {{entityName} vald} other {{manyName} valde}}"
+
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:52
+msgid "{selectedCount, plural, one {# {entityName} selected. Bulk actions toolbar is available.} other {# {manyName} selected. Bulk actions toolbar is available.}}"
+msgstr "{selectedCount, plural, one {# {entityName} vald. Verktøylinja for massehandlingar er tilgjengeleg.} other {# {manyName} valde. Verktøylinja for massehandlingar er tilgjengeleg.}}"
+
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:202
+msgid "{selectedCount, plural, one {# selected} other {# selected}}"
+msgstr "{selectedCount, plural, one {# valde} other {# valde}}"
+
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:149
+msgid "{selectedCount, plural, one {Bulk actions for # selected {entityName}} other {Bulk actions for # selected {manyName}}}"
+msgstr "{selectedCount, plural, one {Massehandlingar for # vald {entityName}} other {Massehandlingar for # valde {manyName}}}"
+
+#: src/use-permission-request.tsx:222
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> ber om følgjande løyve:"
 
@@ -36,7 +61,7 @@ msgstr "Absolutt (dato og tid)"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx:60
 msgid "Access denied"
-msgstr ""
+msgstr "Tilgang nekta"
 
 #: ../../../lib/web/src/features/errors/forbidden.tsx:16
 msgid "Access Forbidden"
@@ -64,7 +89,7 @@ msgstr "Konto stadfesta"
 
 #: ../../../lib/web/src/features/accounts/account-add.tsx:196
 msgid "Add"
-msgstr ""
+msgstr "Legg til"
 
 #: ../../../lib/web/src/features/accounts/account-add.tsx:120
 msgid "Add a new account"
@@ -116,7 +141,7 @@ msgstr "KI"
 msgid "All"
 msgstr "Alle"
 
-#: src/use-permission-request.tsx:193
+#: src/use-permission-request.tsx:250
 msgid "Allow"
 msgstr "Tillat"
 
@@ -142,15 +167,15 @@ msgstr ""
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:315
 msgid "Authenticator code"
-msgstr ""
+msgstr "Autentiseringskode"
 
 #: ../../../lib/web/src/components/place-picker.tsx:155
 msgid "Back"
 msgstr "Tilbake"
 
-#: ../../../lib/web/src/features/errors/forbidden.tsx:26
-#: ../../../lib/web/src/features/errors/not-found-error.tsx:26
-#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:26
+#: ../../../lib/web/src/features/errors/forbidden.tsx:28
+#: ../../../lib/web/src/features/errors/not-found-error.tsx:28
+#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:28
 msgid "Back to home"
 msgstr ""
 
@@ -167,7 +192,7 @@ msgstr "Auk interesse"
 #: ../../../lib/web/src/features/access/access-dialog.tsx:328
 #: ../../../lib/web/src/features/access/access-list.tsx:263
 #: ../../../lib/web/src/features/accounts/account-add.tsx:188
-#: ../../../lib/web/src/features/accounts/account-verify.tsx:89
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:91
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -214,31 +239,32 @@ msgstr "Tøm"
 msgid "Clear all"
 msgstr "Tøm alle"
 
-#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:140
+#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:144
 msgid "Clear filters"
 msgstr "Tøm filter"
 
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:167
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:171
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:177
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:181
 msgid "Clear selection"
 msgstr "Tøm utval"
 
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:168
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:178
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:185
 msgid "Clear selection (Escape)"
 msgstr "Tøm utval (Escape)"
 
 #: ../../../lib/web/src/components/ui/dialog.tsx:78
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:354
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:357
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:358
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:361
 #: ../../../lib/web/src/components/ui/sheet.tsx:79
-#: src/use-permission-request.tsx:182
+#: src/use-permission-request.tsx:239
 msgid "Close"
 msgstr "Lat att"
 
-#: ../../../lib/web/src/components/layout/app-sidebar.tsx:107
-#: ../../../lib/web/src/components/layout/app-sidebar.tsx:112
-#: src/shell-menu.tsx:408
-#: src/shell-menu.tsx:415
+#: ../../../lib/web/src/components/layout/app-sidebar.tsx:108
+#: ../../../lib/web/src/components/layout/app-sidebar.tsx:113
+#: src/shell-menu.tsx:427
+#: src/shell-menu.tsx:434
 msgid "Close navigation"
 msgstr "Lat att navigeringa"
 
@@ -264,7 +290,7 @@ msgstr "Klapp saman sidestolpen"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:96
 msgid "Comfortable"
-msgstr ""
+msgstr "Romsleg"
 
 #: ../../../lib/web/src/components/coming-soon.tsx:12
 msgid "Coming Soon!"
@@ -302,9 +328,9 @@ msgstr "Kopier"
 
 #: ../../../lib/web/src/features/document/document-page.tsx:84
 msgid "Could not load this document. Please try again later."
-msgstr ""
+msgstr "Kunne ikkje lasta dette dokumentet. Prøv igjen seinare."
 
-#: src/shell-menu.tsx:347
+#: src/shell-menu.tsx:366
 msgid "Couldn't load notifications"
 msgstr "Klarte ikkje lasta varsla"
 
@@ -322,9 +348,10 @@ msgstr ""
 
 #: ../../../lib/web/src/components/colour-picker.tsx:260
 msgid "Custom"
-msgstr ""
+msgstr "Tilpassa"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:218
+#: ../../../lib/web/src/components/theme-switch.tsx:52
 #: ../../../lib/web/src/lib/preference-utils.ts:20
 msgid "Dark"
 msgstr "Mørk"
@@ -351,9 +378,9 @@ msgstr "Standard KI-konto"
 
 #: ../../../lib/web/src/components/restore-banner.tsx:99
 msgid "Delete your account on the old server"
-msgstr ""
+msgstr "Slett kontoen din på den gamle tenaren"
 
-#: src/use-permission-request.tsx:187
+#: src/use-permission-request.tsx:244
 msgid "Deny"
 msgstr "Nekt"
 
@@ -387,14 +414,14 @@ msgstr "Retning"
 #: ../../../lib/web/src/components/restore-banner.tsx:79
 #: ../../../lib/web/src/components/restore-banner.tsx:85
 msgid "Dismiss"
-msgstr ""
+msgstr "Avvis"
 
 #: ../../../lib/web/src/components/ui/sidebar.tsx:238
 msgid "Displays the mobile sidebar."
 msgstr "Viser mobil sidestolpe."
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:338
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:348
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:342
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:352
 msgid "Download"
 msgstr "Last ned"
 
@@ -404,7 +431,7 @@ msgstr ""
 
 #: ../../../lib/web/src/lib/preference-utils.ts:146
 msgid "Dyslexia-friendly"
-msgstr ""
+msgstr "Dyslektikarvenleg"
 
 #: ../../../lib/web/src/components/ui/editable-field-row.tsx:154
 msgid "Edit {label}"
@@ -412,7 +439,7 @@ msgstr ""
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:289
 msgid "Email code"
-msgstr ""
+msgstr "E-postkode"
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:299
 msgid "Enter the code from your email"
@@ -435,11 +462,19 @@ msgstr "Utvid sidestolpe"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:136
 msgid "Extra large"
-msgstr ""
+msgstr "Ekstra stor"
 
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:225
 msgid "Failed to add account"
 msgstr "Klarte ikkje leggja til konto"
+
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:263
+msgid "Failed to load image"
+msgstr "Kunne ikkje lasta biletet"
+
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:263
+msgid "Failed to load video"
+msgstr "Kunne ikkje lasta videoen"
 
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:234
 msgid "Failed to remove account"
@@ -455,7 +490,7 @@ msgstr "Klarte ikkje oppdatera kategori"
 
 #: ../../../lib/web/src/components/restore-banner.tsx:88
 msgid "Finish moving your account"
-msgstr ""
+msgstr "Fullfør flyttinga av kontoen din"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:116
 msgid "Flat"
@@ -480,35 +515,35 @@ msgstr "Frå"
 #: ../../../lib/web/src/lib/preference-utils.ts:132
 #: ../../../lib/web/src/lib/preference-utils.ts:143
 msgid "From theme"
-msgstr ""
+msgstr "Frå tema"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:320
 msgid "Full layout"
 msgstr "Full layout"
 
-#: ../../../lib/web/src/features/errors/forbidden.tsx:24
-#: ../../../lib/web/src/features/errors/not-found-error.tsx:24
-#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:24
+#: ../../../lib/web/src/features/errors/forbidden.tsx:26
+#: ../../../lib/web/src/features/errors/not-found-error.tsx:26
+#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:26
 msgid "Go back"
 msgstr ""
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:78
+#: ../../../lib/web/src/components/data-table/pagination.tsx:82
 msgid "Go to first page"
 msgstr "Gå til første side"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:124
+#: ../../../lib/web/src/components/data-table/pagination.tsx:128
 msgid "Go to last page"
 msgstr "Gå til siste side"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:115
+#: ../../../lib/web/src/components/data-table/pagination.tsx:119
 msgid "Go to next page"
 msgstr "Gå til neste side"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:102
+#: ../../../lib/web/src/components/data-table/pagination.tsx:106
 msgid "Go to page {pageNumber}"
 msgstr ""
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:87
+#: ../../../lib/web/src/components/data-table/pagination.tsx:91
 msgid "Go to previous page"
 msgstr "Gå til førre side"
 
@@ -528,16 +563,21 @@ msgstr ""
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:158
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:423
-#: src/shell-menu.tsx:429
-#: src/shell-menu.tsx:501
-#: src/shell-menu.tsx:505
+#: src/shell-menu.tsx:442
+#: src/shell-menu.tsx:448
+#: src/shell-menu.tsx:521
+#: src/shell-menu.tsx:525
 msgid "Home"
 msgstr "Heim"
 
 #: ../../../lib/web/src/components/ui/sort-selector.tsx:44
 msgid "Hot"
 msgstr "Het"
+
+#. placeholder {0}: currentMedia.name
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:247
+msgid "Image viewer: {0}"
+msgstr "Biletvisar: {0}"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:86
 msgid "Imperial"
@@ -555,10 +595,14 @@ msgstr "Interesser"
 msgid "Invalid verification code"
 msgstr "Ugyldig stadfestingskode"
 
+#: ../../../lib/web/src/features/errors/not-found-error.tsx:18
+msgid "It seems like the page you're looking for <0/>does not exist or might have been removed."
+msgstr "Det ser ut til at sida du leitar etter <0/>ikkje finst eller er fjerna."
+
 #: ../../../lib/web/src/lib/preference-utils.ts:108
 #: ../../../lib/web/src/lib/preference-utils.ts:135
 msgid "Large"
-msgstr ""
+msgstr "Stor"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:286
 msgid "Layout"
@@ -574,6 +618,7 @@ msgid "Left to Right"
 msgstr "Venstre til høgre"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:213
+#: ../../../lib/web/src/components/theme-switch.tsx:45
 #: ../../../lib/web/src/lib/preference-utils.ts:19
 msgid "Light"
 msgstr "Lyst"
@@ -584,12 +629,12 @@ msgstr "Last fleire"
 
 #: ../../../lib/web/src/components/ui/loading-content.tsx:29
 msgid "Loading content…"
-msgstr ""
+msgstr "Lastar inn innhald…"
 
 #: ../../../lib/web/src/components/ui/load-more.tsx:35
 #: ../../../lib/web/src/features/document/document-page.tsx:90
-msgid "Loading…"
-msgstr "Lastar…"
+msgid "Loading..."
+msgstr "Lastar..."
 
 #: ../../../lib/web/src/components/layout/nav-user.tsx:101
 #: ../../../lib/web/src/components/layout/nav-user.tsx:167
@@ -598,8 +643,8 @@ msgstr "Lastar…"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:289
-#: src/shell-menu.tsx:295
+#: src/shell-menu.tsx:308
+#: src/shell-menu.tsx:314
 msgid "Log out"
 msgstr "Logg ut"
 
@@ -615,11 +660,11 @@ msgstr "Logga ut"
 msgid "Logging out…"
 msgstr "Loggar ut…"
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:92
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:99
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:93
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:100
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:312
-#: src/shell-menu.tsx:318
+#: src/shell-menu.tsx:331
+#: src/shell-menu.tsx:337
 msgid "Mark all as read"
 msgstr "Merk alle som lesne"
 
@@ -628,7 +673,7 @@ msgid "Medium"
 msgstr "Medium"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:173
-#: src/shell-menu.tsx:470
+#: src/shell-menu.tsx:490
 msgid "Menu"
 msgstr "Meny"
 
@@ -649,8 +694,8 @@ msgstr ""
 msgid "New"
 msgstr "Ny"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:388
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:393
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:392
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:397
 msgid "Next image"
 msgstr "Neste bilete"
 
@@ -675,7 +720,7 @@ msgid "No profile"
 msgstr "Inga profil"
 
 #: ../../../lib/web/src/components/command-menu.tsx:55
-#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:90
+#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:94
 msgid "No results found."
 msgstr "Ingen treff funne."
 
@@ -687,7 +732,7 @@ msgstr "Inga tidssone funne."
 msgid "No topic record yet — try again after the next notification."
 msgstr "Inga emneoppføring enno — prøv igjen etter neste varsel."
 
-#: src/shell-menu.tsx:354
+#: src/shell-menu.tsx:373
 msgid "No unread notifications"
 msgstr "Ingen ulesne varsel"
 
@@ -711,16 +756,21 @@ msgstr ""
 
 #: ../../../lib/web/src/components/ui/editable-field-row.tsx:146
 msgid "Not set"
-msgstr ""
+msgstr "Ikkje sett"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:136
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:150
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:304
+#: src/shell-menu.tsx:323
 msgid "Notifications"
 msgstr "Varsel"
+
+#. placeholder {0}: unread.length
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:86
+msgid "Notifications: {0}"
+msgstr "Varsel: {0}"
 
 #: ../../../lib/web/src/features/errors/not-found-error.tsx:16
 msgid "Oops! Page Not Found!"
@@ -736,17 +786,17 @@ msgstr "Opna kontohandlingar"
 msgid "Open actions"
 msgstr ""
 
-#: src/shell-menu.tsx:266
-#: src/shell-menu.tsx:387
-#: src/shell-menu.tsx:442
-#: src/shell-menu.tsx:454
+#: src/shell-menu.tsx:285
+#: src/shell-menu.tsx:406
+#: src/shell-menu.tsx:462
+#: src/shell-menu.tsx:474
 msgid "Open menu"
 msgstr "Opna meny"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:408
-#: src/shell-menu.tsx:415
+#: src/shell-menu.tsx:427
+#: src/shell-menu.tsx:434
 msgid "Open navigation"
 msgstr "Opna navigasjon"
 
@@ -768,9 +818,14 @@ msgstr "Anna"
 msgid "Owner"
 msgstr "Eigar"
 
+#: ../../../lib/web/src/components/data-table/pagination.tsx:43
+#: ../../../lib/web/src/components/data-table/pagination.tsx:71
+msgid "Page {currentPage} of {totalPages}"
+msgstr "Side {currentPage} av {totalPages}"
+
 #: ../../../lib/web/src/components/step-up-dialog.tsx:334
 msgid "Passkey"
-msgstr ""
+msgstr "Nykel"
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:209
 msgid "Passkey verification failed. Please try again."
@@ -780,7 +835,7 @@ msgstr ""
 msgid "Passkeys"
 msgstr "Tilgangsnøklar"
 
-#: src/use-permission-request.tsx:163
+#: src/use-permission-request.tsx:220
 msgid "Permission request"
 msgstr "Løyveførespurnad"
 
@@ -788,6 +843,10 @@ msgstr "Løyveførespurnad"
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:304
 msgid "Please check your internet connection and try again."
 msgstr ""
+
+#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:18
+msgid "Please log in with the appropriate credentials <0/> to access this resource."
+msgstr "Logg inn med rett legitimasjon <0/> for å få tilgang til denne ressursen."
 
 #: ../../../lib/web/src/features/errors/general-error.tsx:83
 msgid "Please try again."
@@ -797,8 +856,8 @@ msgstr ""
 msgid "Please wait a moment and try again."
 msgstr ""
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:373
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:378
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:377
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:382
 msgid "Previous image"
 msgstr "Førre bilete"
 
@@ -818,7 +877,7 @@ msgstr ""
 
 #: ../../../lib/web/src/components/restore-banner.tsx:107
 msgid "Re-link your accounts on this server"
-msgstr ""
+msgstr "Kople kontoane dine til denne tenaren på nytt"
 
 #: ../../../lib/web/src/components/restore-banner.tsx:129
 msgid "Re-register your passkeys on this server"
@@ -856,6 +915,11 @@ msgstr "Fjern"
 msgid "Remove access rule"
 msgstr "Fjern tilgangsregel"
 
+#. placeholder {0}: formatSubject(subject, data.name)
+#: ../../../lib/web/src/features/access/access-list.tsx:259
+msgid "Remove access rule for \"{0}\"?"
+msgstr "Fjerne tilgangsregel for «{0}»?"
+
 #: ../../../lib/web/src/features/access/access-list.tsx:257
 msgid "Remove access?"
 msgstr "Fjern tilgang?"
@@ -882,7 +946,7 @@ msgstr "Tilbakestill alle innstillingar til standardverdiar"
 msgid "Right to Left"
 msgstr "Høgre til venstre"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:63
+#: ../../../lib/web/src/components/data-table/pagination.tsx:65
 msgid "Rows per page"
 msgstr "Rader per side"
 
@@ -893,7 +957,7 @@ msgstr "Laurdag"
 #: ../../../lib/web/src/components/ui/editable-field-row.tsx:122
 #: ../../../lib/web/src/components/ui/secret-field.tsx:77
 msgid "Save"
-msgstr ""
+msgstr "Lagre"
 
 #: ../../../lib/web/src/components/place-picker.tsx:85
 msgid "Search for a place"
@@ -957,7 +1021,16 @@ msgstr "Vel sideretning"
 msgid "Select theme preference"
 msgstr "Vel temapreferanse"
 
-#: ../../../lib/web/src/features/accounts/account-verify.tsx:98
+#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:216
+msgid "selected"
+msgstr "valde"
+
+#. placeholder {0}: getSelectedName()
+#: ../../../lib/web/src/features/access/access-dialog.tsx:309
+msgid "Selected: <0>{0}</0>"
+msgstr "Vald: <0>{0}</0>"
+
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:100
 msgid "Send again"
 msgstr ""
 
@@ -977,7 +1050,7 @@ msgstr ""
 #: ../../../lib/web/src/components/server-documents-footer.tsx:19
 #: ../../../lib/web/src/features/document/document-page.tsx:40
 msgid "Server rules"
-msgstr ""
+msgstr "Tenarreglar"
 
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:210
 msgid "Session expired. Please log in again."
@@ -1025,11 +1098,11 @@ msgstr "Hopp til hovudinnhald"
 #: ../../../lib/web/src/lib/preference-utils.ts:106
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Small"
-msgstr ""
+msgstr "Liten"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:97
 msgid "Spacious"
-msgstr ""
+msgstr "Romsleg"
 
 #: ../../../lib/web/src/components/coming-soon.tsx:15
 msgid "Stay tuned though!"
@@ -1044,6 +1117,7 @@ msgid "Sunday"
 msgstr "Sundag"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:208
+#: ../../../lib/web/src/components/theme-switch.tsx:59
 #: ../../../lib/web/src/lib/preference-utils.ts:21
 #: ../../../lib/web/src/lib/preference-utils.ts:144
 msgid "System"
@@ -1056,7 +1130,7 @@ msgstr "Etikett"
 #: ../../../lib/web/src/components/post-tags.tsx:101
 #: ../../../lib/web/src/components/post-tags.tsx:115
 msgid "Tags"
-msgstr ""
+msgstr "Etikettar"
 
 #: ../../../lib/web/src/components/layout/team-switcher.tsx:63
 msgid "Teams/Apps"
@@ -1065,7 +1139,7 @@ msgstr "Lag/Appar"
 #: ../../../lib/web/src/components/server-documents-footer.tsx:23
 #: ../../../lib/web/src/features/document/document-page.tsx:42
 msgid "Terms and conditions"
-msgstr ""
+msgstr "Vilkår"
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:195
 msgid "That code is incorrect or has expired."
@@ -1075,6 +1149,10 @@ msgstr ""
 msgid "The requested content could not be found."
 msgstr ""
 
+#: ../../../lib/web/src/features/errors/maintenance-error.tsx:15
+msgid "The site is not available at the moment."
+msgstr "Nettstaden er ikkje tilgjengeleg for augeblinken."
+
 #: ../../../lib/web/src/components/config-drawer.tsx:194
 msgid "Theme"
 msgstr "Tema"
@@ -1083,13 +1161,21 @@ msgstr "Tema"
 msgid "Theme Settings"
 msgstr "Temainnstillingar"
 
-#: src/use-permission-request.tsx:175
+#: ../../../lib/web/src/components/coming-soon.tsx:14
+msgid "This page has not been created yet."
+msgstr "Denne sida er ikkje oppretta enno."
+
+#: src/use-permission-request.tsx:232
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Denne tilgangen må aktiverast av deg i appinnstillingane."
 
 #: ../../../lib/web/src/lib/preference-utils.ts:62
 msgid "Thursday"
 msgstr "Torsdag"
+
+#: ../../../lib/web/src/components/travelling-picker.tsx:220
+msgid "To"
+msgstr "Til"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:37
 msgid "Toggle columns"
@@ -1191,11 +1277,11 @@ msgid "Use your passkey"
 msgstr ""
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:282
+#: src/shell-menu.tsx:301
 msgid "User"
 msgstr "Brukar"
 
-#: ../../../lib/web/src/features/accounts/account-verify.tsx:71
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:73
 msgid "Verification code"
 msgstr "Stadfestingskode"
 
@@ -1209,7 +1295,7 @@ msgstr "Stadfesting mislukkast"
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:388
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:172
-#: ../../../lib/web/src/features/accounts/account-verify.tsx:109
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:111
 msgid "Verify"
 msgstr "Stadfest"
 
@@ -1219,22 +1305,32 @@ msgstr "Stadfest e-postadresse"
 
 #: ../../../lib/web/src/components/attachment-gallery.tsx:79
 msgid "Video thumbnail"
-msgstr ""
+msgstr "Videominiatyrbilete"
+
+#. placeholder {0}: currentMedia.name
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:246
+msgid "Video viewer: {0}"
+msgstr "Videovisar: {0}"
 
 #: ../../../lib/web/src/components/data-table/view-options.tsx:33
 msgid "View"
 msgstr "Vis"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:326
-#: src/shell-menu.tsx:332
+#: src/shell-menu.tsx:345
+#: src/shell-menu.tsx:351
 msgid "View all"
 msgstr "Vis alle"
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:105
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:113
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:106
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:114
 msgid "View all notifications"
 msgstr "Vis alle varsel"
+
+#. placeholder {0}: account.identifier
+#: ../../../lib/web/src/features/accounts/account-verify.tsx:63
+msgid "We sent a verification code to <0>{0}</0>. Enter the code below to verify your email address."
+msgstr "Vi sende ein stadfestingskode til <0>{0}</0>. Skriv inn koden nedanfor for å stadfeste e-postadressa di."
 
 #: ../../../lib/web/src/features/errors/maintenance-error.tsx:16
 msgid "We'll be back online shortly."
@@ -1252,6 +1348,10 @@ msgstr "Onsdag"
 msgid "You do not have access to this section."
 msgstr ""
 
+#: ../../../lib/web/src/features/errors/forbidden.tsx:18
+msgid "You don't have necessary permission <0/>to view this resource."
+msgstr "Du har ikkje nødvendig løyve <0/>til å sjå denne ressursen."
+
 #: ../../../lib/web/src/components/restore-banner.tsx:91
 msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
-msgstr ""
+msgstr "Kontoen din vart flytta hit frå {source}. Inntil du slettar han der, kan meldingar og varsel nå begge tenarane, noko av innhaldet ditt blir framleis servert frå den gamle tenaren, og følgjarar kan ta nokre minutt å finne deg her."
