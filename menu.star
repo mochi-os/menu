@@ -14,11 +14,13 @@ def action_notifications_list(a):
     return {"data": result}
 
 def action_notifications_read(a):
-    """Mark a single notification as read."""
+    """Mark a single notification as read. Ids reach ~310 bytes (app id +
+    ":" + event id, and legacy raw structured event ids), so the cap
+    matches the notifications app's own read action."""
     id = a.input("id", "").strip()
     if not id:
         return a.error.label(400, "errors.id_is_required")
-    if len(id) > 64:
+    if len(id) > 512:
         return a.error.label(400, "errors.invalid_id")
     mochi.service.call("notifications", "read", id)
     return {"data": {"ok": True}}
