@@ -90,26 +90,65 @@
     // applied to the shell's own root element. Only CSS custom properties
     // (--foo) may be set: without this an app could set standard properties such
     // as display:none or pointer-events:none on the trusted shell root, hiding
-    // or disabling the menu and permission dialogs. clearThemeVars removes every
-    // inline --* property, so restricting writes to --* also guarantees cleanup
-    // can fully undo whatever a theme installed.
+    // or disabling the menu and permission dialogs.
     function isThemeVarName(name) {
         return typeof name === 'string' && /^--[A-Za-z0-9_-]+$/.test(name);
     }
+
+    // font-size is the one standard property a theme state carries, installed by
+    // the settings font size preference. It is bounded rather than passed
+    // through: the sender is any app in the shell, and an unbounded size on the
+    // trusted chrome hides the menu as effectively as display:none would.
+    function isFontSize(value) {
+        if (typeof value !== 'string' || !/^\d{2,3}(\.\d+)?%$/.test(value)) return false;
+        var n = parseFloat(value);
+        return n >= 50 && n <= 200;
+    }
+
+    // A theme value must never make the browser fetch: custom properties are
+    // consumed in image contexts (--background-image becomes background-image),
+    // so a URL-bearing value reports every page view to whoever sent the theme.
+    // Backslash and comment syntax are refused too — they let a function name be
+    // written so it doesn't read as itself (\75rl(...) and url(h\74tp://...)
+    // both fetch). Mirrors the rule in lib/web's theme-provider and the server's
+    // themes_validate.
+    function isFetchingValue(value) {
+        return typeof value !== 'string' || /url|image|src|element|cross-fade|paint|\\|\/\*/i.test(value);
+    }
+
+    // Exactly the inline properties applyThemeVars installed, so cleanup can
+    // undo a theme without touching properties owned by anything else.
+    var installedThemeProps = [];
+    (function() {
+        var root = document.documentElement;
+        for (var i = 0; i < root.style.length; i++) {
+            if (root.style[i].startsWith('--')) installedThemeProps.push(root.style[i]);
+        }
+    })();
 
     function applyThemeVars(theme) {
         clearThemeVars();
         if (!theme) { currentColorTheme = null; return; }
         var root = document.documentElement;
+        function install(key, value) {
+            root.style.setProperty(key, value);
+            installedThemeProps.push(key);
+        }
         if (theme.hue) {
-            root.style.setProperty('--hue', theme.hue);
-            root.style.setProperty('--hue-chroma', theme.chroma);
-            root.style.setProperty('--hue-bg', theme.hueBg);
+            install('--hue', theme.hue);
+            install('--hue-chroma', theme.chroma);
+            install('--hue-bg', theme.hueBg);
         }
         if (theme.overrides) {
             for (var key in theme.overrides) {
+                var value = theme.overrides[key];
+                if (isFetchingValue(value)) continue;
+                if (key === 'font-size') {
+                    if (isFontSize(value)) install(key, value);
+                    continue;
+                }
                 if (!isThemeVarName(key)) continue;
-                root.style.setProperty(key, theme.overrides[key]);
+                install(key, value);
             }
         }
         currentColorTheme = theme;
@@ -117,14 +156,10 @@
 
     function clearThemeVars() {
         var root = document.documentElement;
-        // Remove all inline CSS custom properties
-        var props = [];
-        for (var i = 0; i < root.style.length; i++) {
-            if (root.style[i].startsWith('--')) props.push(root.style[i]);
+        for (var i = 0; i < installedThemeProps.length; i++) {
+            root.style.removeProperty(installedThemeProps[i]);
         }
-        for (var j = 0; j < props.length; j++) {
-            root.style.removeProperty(props[j]);
-        }
+        installedThemeProps = [];
         currentColorTheme = null;
     }
 
