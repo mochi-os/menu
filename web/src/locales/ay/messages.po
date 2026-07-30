@@ -52,6 +52,10 @@ msgstr "{selectedCount, plural, one {# ajllita} other {# ajllita}}"
 msgid "{selectedCount, plural, one {Bulk actions for # selected {entityName}} other {Bulk actions for # selected {manyName}}}"
 msgstr "{selectedCount, plural, one {# ajllita {entityName} taypi luräwinaka} other {# ajllita {manyName} taypi luräwinaka}}"
 
+#: ../../../lib/web/src/components/ui/upload-progress.tsx:52
+msgid "{sentLabel} of {totalLabel}"
+msgstr "{sentLabel} / {totalLabel}"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:132
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Menu jist'araña (# jan ullt'ata yatiyawi)} other {Menu jist'araña (# jan ullt'ata yatiyawinaka)}}"
@@ -254,12 +258,12 @@ msgstr "Browser yatiyäwinaka"
 msgid "Cancel"
 msgstr "Jaytaña"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:143
+#: ../../../lib/web/src/components/notification-category-button.tsx:146
 msgid "Category for this notification"
 msgstr "Aka yatiyäw kasta"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:124
-#: ../../../lib/web/src/components/notification-category-button.tsx:135
+#: ../../../lib/web/src/components/notification-category-button.tsx:127
+#: ../../../lib/web/src/components/notification-category-button.tsx:138
 msgid "Change notification category"
 msgstr "Yatiyäw kasta mayjt'ayaña"
 
@@ -526,6 +530,14 @@ msgstr "Dirección"
 msgid "Directory"
 msgstr "Katalogo"
 
+#: ../../../lib/web/src/components/comment-composer.tsx:300
+msgid "Discard"
+msgstr "Jaqsuña"
+
+#: ../../../lib/web/src/components/comment-composer.tsx:298
+msgid "Discard draft?"
+msgstr "¿Qillqäwi jaqsuñati?"
+
 #: ../../../lib/web/src/lib/chat-ui.ts:25
 #: ../../../lib/web/src/lib/chat-ui.ts:29
 msgid "Disconnected"
@@ -625,7 +637,7 @@ msgstr "Janiw cuenta apsuña atinkti"
 msgid "Failed to send verification code"
 msgstr "Janiw verificación código apayaña atinkti"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:111
+#: ../../../lib/web/src/components/notification-category-button.tsx:114
 msgid "Failed to update category"
 msgstr "Janiw categoría machaqachaña atinkti"
 
@@ -939,7 +951,7 @@ msgstr "Jan resultadonak jikxatasiti."
 msgid "No time zone found."
 msgstr "Tiempo zona jan jikxatasiti."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:147
+#: ../../../lib/web/src/components/notification-category-button.tsx:150
 msgid "No topic record yet — try again after the next notification."
 msgstr "Janira topic registro — arkiri yatiyawi qhipxaru sumat'asma."
 
@@ -1060,6 +1072,7 @@ msgstr "Permiso mayisiwi"
 msgid "Pick a date"
 msgstr "Mä uru ajlliña"
 
+#: ../../../lib/web/src/components/comment-composer.tsx:95
 #: ../../../lib/web/src/features/errors/general-error.tsx:54
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:304
 msgid "Please check your internet connection and try again."
@@ -1086,6 +1099,10 @@ msgstr "Nayrïri imagen"
 #: ../../../lib/web/src/features/document/document-page.tsx:44
 msgid "Privacy"
 msgstr "Imantawi"
+
+#: ../../../lib/web/src/components/ui/upload-progress.tsx:50
+msgid "Processing…"
+msgstr "Luraskiwa…"
 
 #: ../../../lib/web/src/components/layout/nav-user.tsx:137
 #: ../../../lib/web/src/components/profile-dropdown.tsx:114
@@ -1138,6 +1155,7 @@ msgstr "Relativo (5m, 3h, 2d)"
 msgid "Relative within 24 hours, else absolute"
 msgstr "Relativo 24 hora taypi, jan ukax absoluto"
 
+#: ../../../lib/web/src/components/comment-composer.tsx:232
 #: ../../../lib/web/src/features/access/access-list.tsx:270
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:180
 msgid "Remove"
@@ -1185,6 +1203,10 @@ msgstr "{title} wasitat qalltaña"
 #: ../../../lib/web/src/components/config-drawer.tsx:85
 msgid "Reset all settings to default values"
 msgstr "Taqi configuracionanak default valoranakar kutintayama"
+
+#: ../../../lib/web/src/components/comment-composer.tsx:249
+msgid "Retry"
+msgstr "Wasitat yant'aña"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:362
 msgid "Right to Left"
@@ -1546,7 +1568,7 @@ msgstr "Jan jaya servidorar mayachasiñjamäkiti"
 msgid "Unable to redirect to login. Please try again."
 msgstr "Feeds servicio ukamp sync lurañ janiw atkiti. Cacheata datos uñstayata."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:155
+#: ../../../lib/web/src/components/notification-category-button.tsx:158
 msgid "Unassigned"
 msgstr "Janiw permitidakit"
 
@@ -1570,6 +1592,10 @@ msgstr "Janiw yatxatat browser"
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:135
 msgid "Unverified"
 msgstr "Machaqachaña"
+
+#: ../../../lib/web/src/components/ui/upload-progress.tsx:34
+msgid "Upload progress"
+msgstr "Apkatäwi sarantawi"
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:338
 msgid "Use your passkey"
@@ -1671,3 +1697,15 @@ msgstr "Taqiw uñjxtawa!"
 #: ../../../lib/web/src/components/restore-banner.tsx:91
 msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
 msgstr "Juman cuenta {source} ukamanta achakata. Ukankiwa juchut'ayapkchama, ikirinakampi willt'awinakampi pä servdorankama chikañ atikaniwa, walja lurawinakasataki jach'a servdorpa ukatpachani uñakiparakiwa, ukhamaraki suyirinakaxa aka jichhxa jupast'aña pätpachani saräniwa."
+
+#: ../../../lib/web/src/components/comment-composer.tsx:291
+msgid "Your attachments will be lost."
+msgstr "Apkatata archivonakamax chhaqhaniwa."
+
+#: ../../../lib/web/src/components/comment-composer.tsx:289
+msgid "Your text and attachments will be lost."
+msgstr "Qillqatamasa apkatata archivonakamasa chhaqhaniwa."
+
+#: ../../../lib/web/src/components/comment-composer.tsx:292
+msgid "Your text will be lost."
+msgstr "Qillqatamax chhaqtarakini."
