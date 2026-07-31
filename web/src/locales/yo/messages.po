@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: ../../../lib/web/src/lib/error-normalizer.ts:204
+#: ../../../lib/web/src/lib/error-normalizer.ts:236
 msgid "Please check your internet connection and try again."
 msgstr "Jọ̀wọ́ ṣàyẹ̀wò ìsopọ̀ íntánẹ́ẹ̀tì rẹ kí o sì gbìyànjú lẹ́ẹ̀kan sí i."
 
@@ -60,7 +60,7 @@ msgstr "{selectedCount, plural, one {Àwọn ìṣe púpọ̀ fún {entityName} 
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{sentLabel} nínú {totalLabel}"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:132
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:148
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Ṣí àkójọ àṣàyàn (# ìfitónilétí tí a kò kà)} other {Ṣí àkójọ àṣàyàn (# ìfitónilétí tí a kò kà)}}"
 
@@ -195,11 +195,11 @@ msgstr "Gba láyè"
 msgid "Allow anyone to search for {0}"
 msgstr "Gba ẹnikẹ́ni láàyè láti wá {0}"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:159
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:178
 msgid "An error occurred"
 msgstr "Àṣìṣe kan wáyé"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:256
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:275
 msgid "An unexpected error occurred"
 msgstr "Àṣìṣe àìròtẹ́lẹ̀ kan wáyé"
 
@@ -364,8 +364,8 @@ msgstr "Tì"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:108
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:113
-#: src/shell-menu.tsx:427
-#: src/shell-menu.tsx:434
+#: src/shell-menu.tsx:449
+#: src/shell-menu.tsx:456
 msgid "Close navigation"
 msgstr "Ti ìṣíkiri"
 
@@ -459,7 +459,7 @@ msgstr "Ṣe àdàkọ"
 msgid "Could not load this document. Please try again later."
 msgstr "Kò lè kó ìwé yìí. Jọ̀wọ́ gbìyànjú lẹ́ẹ̀kan sí i."
 
-#: src/shell-menu.tsx:366
+#: src/shell-menu.tsx:388
 msgid "Couldn't load notifications"
 msgstr "Kò lè ṣe àwọn ìfitọ́nilétí"
 
@@ -506,7 +506,7 @@ msgstr "Òkùnkùn"
 msgid "Dark mode"
 msgstr "Ọ̀nà òkùnkùn"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:240
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:259
 msgid "Data conflict"
 msgstr "Ìtakora dátà"
 
@@ -761,13 +761,13 @@ msgid "Hide password"
 msgstr "Fi ọ̀rọ̀ aṣínà pamọ́"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:90
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:158
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:175
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:442
-#: src/shell-menu.tsx:448
-#: src/shell-menu.tsx:521
-#: src/shell-menu.tsx:525
+#: src/shell-menu.tsx:464
+#: src/shell-menu.tsx:470
+#: src/shell-menu.tsx:543
+#: src/shell-menu.tsx:547
 msgid "Home"
 msgstr "Ilé"
 
@@ -872,8 +872,8 @@ msgstr "Ń ṣí..."
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:308
-#: src/shell-menu.tsx:314
+#: src/shell-menu.tsx:330
+#: src/shell-menu.tsx:336
 msgid "Log out"
 msgstr "Jáde"
 
@@ -896,8 +896,8 @@ msgstr "Ṣàkóso àwọn àkáǹtì rẹ tí a ti sopọ̀ fún ìfitónilét�
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:118
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:125
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:331
-#: src/shell-menu.tsx:337
+#: src/shell-menu.tsx:353
+#: src/shell-menu.tsx:359
 msgid "Mark all as read"
 msgstr "Sàmì sí gbogbo gẹ́gẹ́ bí kíkà"
 
@@ -909,8 +909,8 @@ msgstr "Sáà MCP"
 msgid "Medium"
 msgstr "Àárín"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:173
-#: src/shell-menu.tsx:490
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:190
+#: src/shell-menu.tsx:512
 msgid "Menu"
 msgstr "Ìtòlẹ́sẹẹsẹ"
 
@@ -939,7 +939,7 @@ msgid "Name must be 1000 characters or less"
 msgstr "Orúkọ gbọ́dọ̀ jẹ́ lẹ́tà 1000 tàbí kéré"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx:53
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:303
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:322
 msgid "Network error"
 msgstr "Àṣìṣe nẹ́tíwọ́kì"
 
@@ -1008,7 +1008,7 @@ msgstr "A kò rí àgbègbè àkókò kankan."
 msgid "No topic record yet — try again after the next notification."
 msgstr "Kò sí àkọsílẹ̀ kókó síbẹ̀ — gbìyànjú lẹ́ẹ̀kan síi lẹ́yìn ìfìtọ́nisí tó kàn."
 
-#: src/shell-menu.tsx:373
+#: src/shell-menu.tsx:395
 msgid "No unread notifications"
 msgstr "Kò sí ìfìtọ́nisí tí a kò kà"
 
@@ -1040,7 +1040,7 @@ msgstr "A kò ṣètò"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:323
+#: src/shell-menu.tsx:345
 msgid "Notifications"
 msgstr "Àwọn ìfìtọ́nisí"
 
@@ -1067,18 +1067,18 @@ msgstr "Ṣí àwọn iṣẹ́ ìròyìn"
 msgid "Open actions"
 msgstr "Ṣí àwọn ìṣe"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:133
-#: src/shell-menu.tsx:285
-#: src/shell-menu.tsx:406
-#: src/shell-menu.tsx:462
-#: src/shell-menu.tsx:474
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:149
+#: src/shell-menu.tsx:307
+#: src/shell-menu.tsx:428
+#: src/shell-menu.tsx:484
+#: src/shell-menu.tsx:496
 msgid "Open menu"
 msgstr "Ṣí ìtòlẹ́sẹẹsẹ"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:427
-#: src/shell-menu.tsx:434
+#: src/shell-menu.tsx:449
+#: src/shell-menu.tsx:456
 msgid "Open navigation"
 msgstr "Ṣí ìṣàkóso"
 
@@ -1127,7 +1127,7 @@ msgstr "Yan ọjọ́"
 
 #: ../../../lib/web/src/components/comment-composer.tsx:95
 #: ../../../lib/web/src/features/errors/general-error.tsx:54
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:304
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:323
 msgid "Please check your internet connection and try again."
 msgstr "Jọ̀wọ́ ṣàyẹ̀wò ìsopọ̀ íntánẹ́ẹ̀tì rẹ kí o sì gbìyànjú lẹ́ẹ̀kan sí i."
 
@@ -1412,8 +1412,8 @@ msgstr "Fi ìránṣẹ́ ránṣẹ́"
 msgid "Serif"
 msgstr "Serif"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:260
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:286
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:279
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:305
 msgid "Server error"
 msgstr "Àṣìṣe sáfà"
 
@@ -1422,7 +1422,7 @@ msgstr "Àṣìṣe sáfà"
 msgid "Server rules"
 msgstr "Àwọn òfin sáfà"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:210
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:229
 msgid "Session expired. Please log in again."
 msgstr "Sáà náà ti parí. Jọ̀wọ́ tún wọlé lẹ́ẹ̀kansí."
 
@@ -1430,8 +1430,8 @@ msgstr "Sáà náà ti parí. Jọ̀wọ́ tún wọlé lẹ́ẹ̀kansí."
 msgid "Set origin and destination"
 msgstr "Ṣètò ibi tí o ti wá àti ibi tí o ń lọ"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:93
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:99
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:109
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:115
 #: ../../../lib/web/src/components/layout/nav-user.tsx:84
 #: ../../../lib/web/src/components/layout/nav-user.tsx:148
 #: ../../../lib/web/src/components/layout/nav-user.tsx:198
@@ -1452,8 +1452,8 @@ msgstr "Ń fi {totalShown} hàn nínú {total}"
 msgid "Sidebar"
 msgstr "Sidebar"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:105
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:111
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:121
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:127
 msgid "Sign out"
 msgstr "Jáde"
 
@@ -1531,6 +1531,14 @@ msgstr "Kóòdù yẹn kò tọ̀nà tàbí ó ti pé."
 #: ../../../lib/web/src/features/errors/general-error.tsx:68
 msgid "The requested content could not be found."
 msgstr "A kò rí àkóónú tí o béèrè fún."
+
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:152
+#~ msgid "The server returned a web page instead of data, which usually means the address was wrong."
+#~ msgstr ""
+
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:152
+msgid "The server returned a web page instead of data."
+msgstr "Olupin naa da oju-ìwé wẹ́ẹ̀bù padà dípò data."
 
 #: ../../../lib/web/src/features/errors/maintenance-error.tsx:15
 msgid "The site is not available at the moment."
@@ -1634,7 +1642,7 @@ msgstr "Tẹ láti wá àwọn user"
 msgid "Type to search..."
 msgstr "Tẹ láti wá..."
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:282
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:301
 msgid "Unable to connect to remote server"
 msgstr "Kò lè sopọ̀ mọ́ sáfà jíjìnnà"
 
@@ -1676,9 +1684,9 @@ msgstr "Ìlọsíwájú ìgbéjáde"
 msgid "Use your passkey"
 msgstr "Lo passkey rẹ"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:86
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:102
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:301
+#: src/shell-menu.tsx:323
 msgid "User"
 msgstr "User"
 
@@ -1718,8 +1726,8 @@ msgid "View"
 msgstr "Wo"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:345
-#: src/shell-menu.tsx:351
+#: src/shell-menu.tsx:367
+#: src/shell-menu.tsx:373
 msgid "View all"
 msgstr "Wo gbogbo"
 

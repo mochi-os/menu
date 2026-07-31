@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: ../../../lib/web/src/lib/error-normalizer.ts:204
+#: ../../../lib/web/src/lib/error-normalizer.ts:236
 msgid "Please check your internet connection and try again."
 msgstr "សូមពិនិត្យការតភ្ជាប់អ៊ីនធឺណិតរបស់អ្នក រួចព្យាយាមម្តងទៀត។"
 
@@ -60,7 +60,7 @@ msgstr "{selectedCount, plural, other {សកម្មភាពជាបណ្�
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{sentLabel} នៃ {totalLabel}"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:132
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:148
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, other {បើកម៉ឺនុយ (ការជូនដំណឹងមិនទាន់អាន # )}}"
 
@@ -195,11 +195,11 @@ msgstr "អនុញ្ញាត"
 msgid "Allow anyone to search for {0}"
 msgstr "អនុញ្ញាតឱ្យនរណាម្នាក់ស្វែងរក {0}"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:159
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:178
 msgid "An error occurred"
 msgstr "មានកំហុសកើតឡើង"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:256
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:275
 msgid "An unexpected error occurred"
 msgstr "មានកំហុសដែលមិនបានរំពឹងទុកកើតឡើង"
 
@@ -364,8 +364,8 @@ msgstr "បិទ"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:108
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:113
-#: src/shell-menu.tsx:427
-#: src/shell-menu.tsx:434
+#: src/shell-menu.tsx:449
+#: src/shell-menu.tsx:456
 msgid "Close navigation"
 msgstr "បិទការនាំផ្លូវ"
 
@@ -459,7 +459,7 @@ msgstr "ចម្លង"
 msgid "Could not load this document. Please try again later."
 msgstr "មិនអាចផ្ទុកឯកសារនេះ។ សូមព្យាយាមម្តងទៀតនៅពេលក្រោយ។"
 
-#: src/shell-menu.tsx:366
+#: src/shell-menu.tsx:388
 msgid "Couldn't load notifications"
 msgstr "មិនអាចផ្ទុកការជូនដំណឹងបានទេ"
 
@@ -506,7 +506,7 @@ msgstr "ងងឹត"
 msgid "Dark mode"
 msgstr "របៀបងងឹត"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:240
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:259
 msgid "Data conflict"
 msgstr "ទំនាស់ទិន្នន័យ"
 
@@ -761,13 +761,13 @@ msgid "Hide password"
 msgstr "លាក់ពាក្យសម្ងាត់"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:90
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:158
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:175
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:442
-#: src/shell-menu.tsx:448
-#: src/shell-menu.tsx:521
-#: src/shell-menu.tsx:525
+#: src/shell-menu.tsx:464
+#: src/shell-menu.tsx:470
+#: src/shell-menu.tsx:543
+#: src/shell-menu.tsx:547
 msgid "Home"
 msgstr "ដើម"
 
@@ -872,8 +872,8 @@ msgstr "កំពុងផ្ទុក..."
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:308
-#: src/shell-menu.tsx:314
+#: src/shell-menu.tsx:330
+#: src/shell-menu.tsx:336
 msgid "Log out"
 msgstr "ចាកចេញ"
 
@@ -896,8 +896,8 @@ msgstr "គ្រប់គ្រងគណនីដែលបានភ្ជាប
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:118
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:125
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:331
-#: src/shell-menu.tsx:337
+#: src/shell-menu.tsx:353
+#: src/shell-menu.tsx:359
 msgid "Mark all as read"
 msgstr "សម្គាល់ទាំងអស់ថាបានអាន"
 
@@ -909,8 +909,8 @@ msgstr "ម៉ាស៊ីនមេ MCP"
 msgid "Medium"
 msgstr "មធ្យម"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:173
-#: src/shell-menu.tsx:490
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:190
+#: src/shell-menu.tsx:512
 msgid "Menu"
 msgstr "ម៉ឺនុយ"
 
@@ -939,7 +939,7 @@ msgid "Name must be 1000 characters or less"
 msgstr "ឈ្មោះត្រូវតែមាន 1000 តួអក្សរ ឬតិចជាង"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx:53
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:303
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:322
 msgid "Network error"
 msgstr "កំហុសបណ្តាញ"
 
@@ -1008,7 +1008,7 @@ msgstr "រកមិនឃើញតំបន់ពេលវេលា។"
 msgid "No topic record yet — try again after the next notification."
 msgstr "មិនទាន់មានកំណត់ត្រាប្រធានបទ — សាកល្បងម្តងទៀតបន្ទាប់ពីការជូនដំណឹងលើកក្រោយ។"
 
-#: src/shell-menu.tsx:373
+#: src/shell-menu.tsx:395
 msgid "No unread notifications"
 msgstr "មិនមានការជូនដំណឹងដែលមិនទាន់អាន"
 
@@ -1040,7 +1040,7 @@ msgstr "មិនបានកំណត់"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:323
+#: src/shell-menu.tsx:345
 msgid "Notifications"
 msgstr "ការជូនដំណឹង"
 
@@ -1067,18 +1067,18 @@ msgstr "បើកសកម្មភាពគណនី"
 msgid "Open actions"
 msgstr "បើកសកម្មភាព"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:133
-#: src/shell-menu.tsx:285
-#: src/shell-menu.tsx:406
-#: src/shell-menu.tsx:462
-#: src/shell-menu.tsx:474
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:149
+#: src/shell-menu.tsx:307
+#: src/shell-menu.tsx:428
+#: src/shell-menu.tsx:484
+#: src/shell-menu.tsx:496
 msgid "Open menu"
 msgstr "បើកម៉ឺនុយ"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:427
-#: src/shell-menu.tsx:434
+#: src/shell-menu.tsx:449
+#: src/shell-menu.tsx:456
 msgid "Open navigation"
 msgstr "បើកការរុករក"
 
@@ -1127,7 +1127,7 @@ msgstr "ជ្រើសកាលបរិច្ឆេទ"
 
 #: ../../../lib/web/src/components/comment-composer.tsx:95
 #: ../../../lib/web/src/features/errors/general-error.tsx:54
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:304
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:323
 msgid "Please check your internet connection and try again."
 msgstr "សូមពិនិត្យការតភ្ជាប់អ៊ីនធឺណិតរបស់អ្នក រួចព្យាយាមម្តងទៀត។"
 
@@ -1412,8 +1412,8 @@ msgstr "ផ្ញើសារ"
 msgid "Serif"
 msgstr "សេរីហ្វ"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:260
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:286
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:279
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:305
 msgid "Server error"
 msgstr "កំហុសម៉ាស៊ីនមេ"
 
@@ -1422,7 +1422,7 @@ msgstr "កំហុសម៉ាស៊ីនមេ"
 msgid "Server rules"
 msgstr "ច្បាប់ម៉ាស៊ីនមេ"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:210
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:229
 msgid "Session expired. Please log in again."
 msgstr "សម័យប្រើប្រាស់បានផុតកំណត់។ សូមចូលម្តងទៀត។"
 
@@ -1430,8 +1430,8 @@ msgstr "សម័យប្រើប្រាស់បានផុតកំណត
 msgid "Set origin and destination"
 msgstr "កំណត់ចំណុចចេញដំណើរ និងគោលដៅ"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:93
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:99
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:109
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:115
 #: ../../../lib/web/src/components/layout/nav-user.tsx:84
 #: ../../../lib/web/src/components/layout/nav-user.tsx:148
 #: ../../../lib/web/src/components/layout/nav-user.tsx:198
@@ -1452,8 +1452,8 @@ msgstr "កំពុងបង្ហាញ {totalShown} នៃ {total}"
 msgid "Sidebar"
 msgstr "របារចំហៀង"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:105
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:111
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:121
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:127
 msgid "Sign out"
 msgstr "ចេញ"
 
@@ -1531,6 +1531,14 @@ msgstr "កូដនោះមិនត្រឹមត្រូវ ឬផុត�
 #: ../../../lib/web/src/features/errors/general-error.tsx:68
 msgid "The requested content could not be found."
 msgstr "រកមិនឃើញខ្លឹមសារដែលបានស្នើសុំទេ។"
+
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:152
+#~ msgid "The server returned a web page instead of data, which usually means the address was wrong."
+#~ msgstr ""
+
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:152
+msgid "The server returned a web page instead of data."
+msgstr "ម៉ាស៊ីនមេបានបញ្ជូនត្រឡប់ទំព័របណ្តាញជំនួសឱ្យទិន្នន័យ។"
 
 #: ../../../lib/web/src/features/errors/maintenance-error.tsx:15
 msgid "The site is not available at the moment."
@@ -1634,7 +1642,7 @@ msgstr "វាយដើម្បីស្វែងរកអ្នកប្រើ
 msgid "Type to search..."
 msgstr "វាយដើម្បីស្វែងរក..."
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:282
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:301
 msgid "Unable to connect to remote server"
 msgstr "មិនអាចតភ្ជាប់ទៅម៉ាស៊ីនមេពីចម្ងាយបានទេ"
 
@@ -1676,9 +1684,9 @@ msgstr "វឌ្ឍនភាពនៃការផ្ទុកឡើង"
 msgid "Use your passkey"
 msgstr "ប្រើ passkey របស់អ្នក"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:86
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:102
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:301
+#: src/shell-menu.tsx:323
 msgid "User"
 msgstr "អ្នកប្រើប្រាស់"
 
@@ -1718,8 +1726,8 @@ msgid "View"
 msgstr "មើល"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:345
-#: src/shell-menu.tsx:351
+#: src/shell-menu.tsx:367
+#: src/shell-menu.tsx:373
 msgid "View all"
 msgstr "មើលទាំងអស់"
 

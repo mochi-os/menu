@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: ../../../lib/web/src/lib/error-normalizer.ts:204
+#: ../../../lib/web/src/lib/error-normalizer.ts:236
 msgid "Please check your internet connection and try again."
 msgstr "لطفاً اتصال اینترنت خود را بررسی کرده و دوباره تلاش کنید."
 
@@ -60,7 +60,7 @@ msgstr "{selectedCount, plural, one {اقدامات گروهی برای # {entit
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{sentLabel} از {totalLabel}"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:132
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:148
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {باز کردن منو (# اعلان خوانده‌نشده)} other {باز کردن منو (# اعلان خوانده‌نشده)}}"
 
@@ -195,11 +195,11 @@ msgstr "اجازه"
 msgid "Allow anyone to search for {0}"
 msgstr "اجازه دادن به همه برای جستجوی {0}"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:159
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:178
 msgid "An error occurred"
 msgstr "خطایی رخ داد"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:256
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:275
 msgid "An unexpected error occurred"
 msgstr "خطای غیرمنتظره‌ای رخ داد"
 
@@ -364,8 +364,8 @@ msgstr "بستن"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:108
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:113
-#: src/shell-menu.tsx:427
-#: src/shell-menu.tsx:434
+#: src/shell-menu.tsx:449
+#: src/shell-menu.tsx:456
 msgid "Close navigation"
 msgstr "بستن منوی پیمایش"
 
@@ -459,7 +459,7 @@ msgstr "کپی"
 msgid "Could not load this document. Please try again later."
 msgstr "بارگذاری این سند ممکن نشد. لطفاً بعداً دوباره تلاش کنید."
 
-#: src/shell-menu.tsx:366
+#: src/shell-menu.tsx:388
 msgid "Couldn't load notifications"
 msgstr "بارگیری اعلان‌ها ممکن نشد"
 
@@ -506,7 +506,7 @@ msgstr "تیره"
 msgid "Dark mode"
 msgstr "حالت تیره"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:240
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:259
 msgid "Data conflict"
 msgstr "تعارض داده‌ها"
 
@@ -761,13 +761,13 @@ msgid "Hide password"
 msgstr "پنهان کردن رمز عبور"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:90
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:158
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:175
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:442
-#: src/shell-menu.tsx:448
-#: src/shell-menu.tsx:521
-#: src/shell-menu.tsx:525
+#: src/shell-menu.tsx:464
+#: src/shell-menu.tsx:470
+#: src/shell-menu.tsx:543
+#: src/shell-menu.tsx:547
 msgid "Home"
 msgstr "خانه"
 
@@ -872,8 +872,8 @@ msgstr "در حال بارگذاری..."
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:308
-#: src/shell-menu.tsx:314
+#: src/shell-menu.tsx:330
+#: src/shell-menu.tsx:336
 msgid "Log out"
 msgstr "خروج"
 
@@ -896,8 +896,8 @@ msgstr "حساب‌های متصل خود را برای اعلان‌ها و س�
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:118
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:125
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:331
-#: src/shell-menu.tsx:337
+#: src/shell-menu.tsx:353
+#: src/shell-menu.tsx:359
 msgid "Mark all as read"
 msgstr "علامت‌گذاری همه به‌عنوان خوانده‌شده"
 
@@ -909,8 +909,8 @@ msgstr "سرور MCP"
 msgid "Medium"
 msgstr "متوسط"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:173
-#: src/shell-menu.tsx:490
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:190
+#: src/shell-menu.tsx:512
 msgid "Menu"
 msgstr "منو"
 
@@ -939,7 +939,7 @@ msgid "Name must be 1000 characters or less"
 msgstr "نام باید ۱۰۰۰ کاراکتر یا کمتر باشد"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx:53
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:303
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:322
 msgid "Network error"
 msgstr "خطای شبکه"
 
@@ -1008,7 +1008,7 @@ msgstr "منطقه زمانی یافت نشد."
 msgid "No topic record yet — try again after the next notification."
 msgstr "هنوز هیچ رکوردی برای موضوع وجود ندارد — پس از اعلان بعدی دوباره تلاش کنید."
 
-#: src/shell-menu.tsx:373
+#: src/shell-menu.tsx:395
 msgid "No unread notifications"
 msgstr "اعلان خوانده‌نشده‌ای وجود ندارد"
 
@@ -1040,7 +1040,7 @@ msgstr "تنظیم نشده"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:323
+#: src/shell-menu.tsx:345
 msgid "Notifications"
 msgstr "اعلان‌ها"
 
@@ -1067,18 +1067,18 @@ msgstr "باز کردن اقدامات حساب"
 msgid "Open actions"
 msgstr "باز کردن عملیات"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:133
-#: src/shell-menu.tsx:285
-#: src/shell-menu.tsx:406
-#: src/shell-menu.tsx:462
-#: src/shell-menu.tsx:474
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:149
+#: src/shell-menu.tsx:307
+#: src/shell-menu.tsx:428
+#: src/shell-menu.tsx:484
+#: src/shell-menu.tsx:496
 msgid "Open menu"
 msgstr "باز کردن منو"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:427
-#: src/shell-menu.tsx:434
+#: src/shell-menu.tsx:449
+#: src/shell-menu.tsx:456
 msgid "Open navigation"
 msgstr "باز کردن ناوبری"
 
@@ -1127,7 +1127,7 @@ msgstr "تاریخی انتخاب کنید"
 
 #: ../../../lib/web/src/components/comment-composer.tsx:95
 #: ../../../lib/web/src/features/errors/general-error.tsx:54
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:304
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:323
 msgid "Please check your internet connection and try again."
 msgstr "لطفاً اتصال اینترنت خود را بررسی کرده و دوباره تلاش کنید."
 
@@ -1412,8 +1412,8 @@ msgstr "ارسال پیام"
 msgid "Serif"
 msgstr "سریف"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:260
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:286
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:279
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:305
 msgid "Server error"
 msgstr "خطای سرور"
 
@@ -1422,7 +1422,7 @@ msgstr "خطای سرور"
 msgid "Server rules"
 msgstr "قوانین سرور"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:210
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:229
 msgid "Session expired. Please log in again."
 msgstr "نشست منقضی شده است. لطفاً دوباره وارد شوید."
 
@@ -1430,8 +1430,8 @@ msgstr "نشست منقضی شده است. لطفاً دوباره وارد شو
 msgid "Set origin and destination"
 msgstr "تنظیم مبدأ و مقصد"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:93
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:99
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:109
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:115
 #: ../../../lib/web/src/components/layout/nav-user.tsx:84
 #: ../../../lib/web/src/components/layout/nav-user.tsx:148
 #: ../../../lib/web/src/components/layout/nav-user.tsx:198
@@ -1452,8 +1452,8 @@ msgstr "نمایش {totalShown} از {total}"
 msgid "Sidebar"
 msgstr "نوار کناری"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:105
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:111
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:121
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:127
 msgid "Sign out"
 msgstr "خروج"
 
@@ -1531,6 +1531,14 @@ msgstr "این کد نادرست است یا منقضی شده است."
 #: ../../../lib/web/src/features/errors/general-error.tsx:68
 msgid "The requested content could not be found."
 msgstr "محتوای درخواستی یافت نشد."
+
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:152
+#~ msgid "The server returned a web page instead of data, which usually means the address was wrong."
+#~ msgstr ""
+
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:152
+msgid "The server returned a web page instead of data."
+msgstr "سرور به‌جای داده، یک صفحهٔ وب برگرداند."
 
 #: ../../../lib/web/src/features/errors/maintenance-error.tsx:15
 msgid "The site is not available at the moment."
@@ -1634,7 +1642,7 @@ msgstr "برای جست‌وجوی کاربران تایپ کنید"
 msgid "Type to search..."
 msgstr "برای جست‌وجو تایپ کنید..."
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:282
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:301
 msgid "Unable to connect to remote server"
 msgstr "اتصال به سرور راه دور ممکن نیست"
 
@@ -1676,9 +1684,9 @@ msgstr "پیشرفت بارگذاری"
 msgid "Use your passkey"
 msgstr "از کلید عبور خود استفاده کنید"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:86
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:102
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:301
+#: src/shell-menu.tsx:323
 msgid "User"
 msgstr "کاربر"
 
@@ -1718,8 +1726,8 @@ msgid "View"
 msgstr "نمایش"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:345
-#: src/shell-menu.tsx:351
+#: src/shell-menu.tsx:367
+#: src/shell-menu.tsx:373
 msgid "View all"
 msgstr "نمایش همه"
 

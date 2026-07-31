@@ -14,7 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. js-lingui-explicit-id
-#: ../../../lib/web/src/lib/error-normalizer.ts:204
+#: ../../../lib/web/src/lib/error-normalizer.ts:236
 msgid "Please check your internet connection and try again."
 msgstr "നിങ്ങളുടെ ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക."
 
@@ -60,7 +60,7 @@ msgstr "{selectedCount, plural, one {# തിരഞ്ഞെടുത്ത {ent
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{totalLabel}-ൽ {sentLabel}"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:132
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:148
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {മെനു തുറക്കുക (# വായിക്കാത്ത അറിയിപ്പ്)} other {മെനു തുറക്കുക (# വായിക്കാത്ത അറിയിപ്പുകൾ)}}"
 
@@ -195,11 +195,11 @@ msgstr "അനുവദിക്കുക"
 msgid "Allow anyone to search for {0}"
 msgstr "ആർക്കും {0} തിരയാൻ അനുവദിക്കുക"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:159
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:178
 msgid "An error occurred"
 msgstr "ഒരു പിശക് സംഭവിച്ചു"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:256
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:275
 msgid "An unexpected error occurred"
 msgstr "അപ്രതീക്ഷിത പിശക് സംഭവിച്ചു"
 
@@ -364,8 +364,8 @@ msgstr "അടയ്ക്കുക"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:108
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:113
-#: src/shell-menu.tsx:427
-#: src/shell-menu.tsx:434
+#: src/shell-menu.tsx:449
+#: src/shell-menu.tsx:456
 msgid "Close navigation"
 msgstr "നാവിഗേഷൻ അടയ്ക്കുക"
 
@@ -459,7 +459,7 @@ msgstr "പകർത്തുക"
 msgid "Could not load this document. Please try again later."
 msgstr "ഈ ഡോക്യുമെന്റ് ലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല. ദയവായി പിന്നീട് വീണ്ടും ശ്രമിക്കുക."
 
-#: src/shell-menu.tsx:366
+#: src/shell-menu.tsx:388
 msgid "Couldn't load notifications"
 msgstr "അറിയിപ്പുകൾ ലോഡ് ചെയ്യാനായില്ല"
 
@@ -506,7 +506,7 @@ msgstr "ഇരുണ്ടത്"
 msgid "Dark mode"
 msgstr "ഡാർക്ക് മോഡ്"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:240
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:259
 msgid "Data conflict"
 msgstr "ഡാറ്റ വൈരുദ്ധ്യം"
 
@@ -761,13 +761,13 @@ msgid "Hide password"
 msgstr "പാസ്‌വേഡ് മറയ്ക്കുക"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:90
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:158
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:175
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:442
-#: src/shell-menu.tsx:448
-#: src/shell-menu.tsx:521
-#: src/shell-menu.tsx:525
+#: src/shell-menu.tsx:464
+#: src/shell-menu.tsx:470
+#: src/shell-menu.tsx:543
+#: src/shell-menu.tsx:547
 msgid "Home"
 msgstr "ഹോം"
 
@@ -872,8 +872,8 @@ msgstr "ലോഡുചെയ്യുന്നു..."
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:308
-#: src/shell-menu.tsx:314
+#: src/shell-menu.tsx:330
+#: src/shell-menu.tsx:336
 msgid "Log out"
 msgstr "ലോഗ് ഔട്ട്"
 
@@ -896,8 +896,8 @@ msgstr "അറിയിപ്പുകൾക്കും സേവനങ്ങ�
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:118
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:125
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:331
-#: src/shell-menu.tsx:337
+#: src/shell-menu.tsx:353
+#: src/shell-menu.tsx:359
 msgid "Mark all as read"
 msgstr "എല്ലാം വായിച്ചതായി അടയാളപ്പെടുത്തുക"
 
@@ -909,8 +909,8 @@ msgstr "MCP സെർവർ"
 msgid "Medium"
 msgstr "ഇടത്തരം"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:173
-#: src/shell-menu.tsx:490
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:190
+#: src/shell-menu.tsx:512
 msgid "Menu"
 msgstr "മെനു"
 
@@ -939,7 +939,7 @@ msgid "Name must be 1000 characters or less"
 msgstr "പേര് 1000 പ്രതീകങ്ങൾ അല്ലെങ്കിൽ അതിൽ കുറവായിരിക്കണം"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx:53
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:303
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:322
 msgid "Network error"
 msgstr "നെറ്റ്‌വർക്ക് പിശക്"
 
@@ -1008,7 +1008,7 @@ msgstr "സമയ മേഖലയൊന്നും കണ്ടെത്തി�
 msgid "No topic record yet — try again after the next notification."
 msgstr "വിഷയ റെക്കോർഡ് ഇതുവരെയില്ല — അടുത്ത അറിയിപ്പിന് ശേഷം വീണ്ടും ശ്രമിക്കുക."
 
-#: src/shell-menu.tsx:373
+#: src/shell-menu.tsx:395
 msgid "No unread notifications"
 msgstr "വായിക്കാത്ത അറിയിപ്പുകളൊന്നുമില്ല"
 
@@ -1040,7 +1040,7 @@ msgstr "സജ്ജമാക്കിയിട്ടില്ല"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:323
+#: src/shell-menu.tsx:345
 msgid "Notifications"
 msgstr "അറിയിപ്പുകൾ"
 
@@ -1067,18 +1067,18 @@ msgstr "അക്കൗണ്ട് പ്രവർത്തനങ്ങൾ ത�
 msgid "Open actions"
 msgstr "പ്രവർത്തനങ്ങൾ തുറക്കുക"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:133
-#: src/shell-menu.tsx:285
-#: src/shell-menu.tsx:406
-#: src/shell-menu.tsx:462
-#: src/shell-menu.tsx:474
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:149
+#: src/shell-menu.tsx:307
+#: src/shell-menu.tsx:428
+#: src/shell-menu.tsx:484
+#: src/shell-menu.tsx:496
 msgid "Open menu"
 msgstr "മെനു തുറക്കുക"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:427
-#: src/shell-menu.tsx:434
+#: src/shell-menu.tsx:449
+#: src/shell-menu.tsx:456
 msgid "Open navigation"
 msgstr "navigation തുറക്കുക"
 
@@ -1127,7 +1127,7 @@ msgstr "തീയതി തിരഞ്ഞെടുക്കുക"
 
 #: ../../../lib/web/src/components/comment-composer.tsx:95
 #: ../../../lib/web/src/features/errors/general-error.tsx:54
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:304
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:323
 msgid "Please check your internet connection and try again."
 msgstr "നിങ്ങളുടെ ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക."
 
@@ -1412,8 +1412,8 @@ msgstr "സന്ദേശം അയയ്ക്കുക"
 msgid "Serif"
 msgstr "സെരിഫ്"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:260
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:286
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:279
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:305
 msgid "Server error"
 msgstr "സെർവർ പിശക്"
 
@@ -1422,7 +1422,7 @@ msgstr "സെർവർ പിശക്"
 msgid "Server rules"
 msgstr "സെർവർ നിയമങ്ങൾ"
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:210
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:229
 msgid "Session expired. Please log in again."
 msgstr "സെഷൻ കാലഹരണപ്പെട്ടു. വീണ്ടും ലോഗിൻ ചെയ്യുക."
 
@@ -1430,8 +1430,8 @@ msgstr "സെഷൻ കാലഹരണപ്പെട്ടു. വീണ്ട
 msgid "Set origin and destination"
 msgstr "ഉത്ഭവവും ലക്ഷ്യസ്ഥാനവും സജ്ജമാക്കുക"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:93
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:99
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:109
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:115
 #: ../../../lib/web/src/components/layout/nav-user.tsx:84
 #: ../../../lib/web/src/components/layout/nav-user.tsx:148
 #: ../../../lib/web/src/components/layout/nav-user.tsx:198
@@ -1452,8 +1452,8 @@ msgstr "{total}-ൽ {totalShown} കാണിക്കുന്നു"
 msgid "Sidebar"
 msgstr "സൈഡ്ബാർ"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:105
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:111
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:121
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:127
 msgid "Sign out"
 msgstr "സൈൻ ഔട്ട് ചെയ്യുക"
 
@@ -1531,6 +1531,14 @@ msgstr "ആ കോഡ് തെറ്റാണ് അല്ലെങ്കിൽ
 #: ../../../lib/web/src/features/errors/general-error.tsx:68
 msgid "The requested content could not be found."
 msgstr "അഭ്യർത്ഥിച്ച ഉള്ളടക്കം കണ്ടെത്താനായില്ല."
+
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:152
+#~ msgid "The server returned a web page instead of data, which usually means the address was wrong."
+#~ msgstr ""
+
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:152
+msgid "The server returned a web page instead of data."
+msgstr "സെർവർ ഡാറ്റയ്ക്ക് പകരം ഒരു വെബ് പേജ് തിരികെ നൽകി."
 
 #: ../../../lib/web/src/features/errors/maintenance-error.tsx:15
 msgid "The site is not available at the moment."
@@ -1634,7 +1642,7 @@ msgstr "ഉപയോക്താക്കളെ തിരയാൻ ടൈപ്�
 msgid "Type to search..."
 msgstr "തിരയാൻ ടൈപ്പ് ചെയ്യുക..."
 
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:282
+#: ../../../lib/web/src/lib/api-response-interceptors.ts:301
 msgid "Unable to connect to remote server"
 msgstr "റിമോട്ട് സെർവറുമായി കണക്റ്റ് ചെയ്യാൻ കഴിഞ്ഞില്ല"
 
@@ -1676,9 +1684,9 @@ msgstr "അപ്‌ലോഡ് പുരോഗതി"
 msgid "Use your passkey"
 msgstr "നിങ്ങളുടെ പാസ്‌കീ ഉപയോഗിക്കുക"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:86
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:102
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:301
+#: src/shell-menu.tsx:323
 msgid "User"
 msgstr "ഉപയോക്താവ്"
 
@@ -1718,8 +1726,8 @@ msgid "View"
 msgstr "കാണുക"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:345
-#: src/shell-menu.tsx:351
+#: src/shell-menu.tsx:367
+#: src/shell-menu.tsx:373
 msgid "View all"
 msgstr "എല്ലാം കാണുക"
 
