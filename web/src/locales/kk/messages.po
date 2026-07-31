@@ -36,6 +36,10 @@ msgstr "{entityLabel} атауы"
 msgid "{entityLabel} name is required"
 msgstr "{entityLabel} атауы қажет"
 
+#: ../../../lib/web/src/components/game/game-draw-offer-banner.tsx:29
+msgid "{opponentName} offered a draw"
+msgstr "{opponentName} тең ойын ұсынды"
+
 #: ../../../lib/web/src/components/data-table/bulk-actions.tsx:210
 msgid "{selectedCount, plural, one {{entityName} selected} other {{manyName} selected}}"
 msgstr "{selectedCount, plural, one {{entityName} таңдалды} other {{manyName} таңдалды}}"
@@ -60,6 +64,11 @@ msgstr "{totalLabel} ішінен {sentLabel}"
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Мәзірді ашу (# оқылмаған хабарландыру)} other {Мәзірді ашу (# оқылмаған хабарландыру)}}"
 
+#. placeholder {0}: countDeepChildren(object.id)
+#: ../../../lib/web/src/components/entity/entity-board-card.tsx:421
+msgid "+{0} nested"
+msgstr "+{0} кірістірілген"
+
 #: src/use-permission-request.tsx:222
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> келесі рұқсатты сұрайды:"
@@ -75,6 +84,10 @@ msgstr "24 сағат"
 #: ../../../lib/web/src/lib/preference-utils.ts:51
 msgid "Absolute (date and time)"
 msgstr "Абсолютті (күн және уақыт)"
+
+#: ../../../lib/web/src/components/game/game-draw-offer-banner.tsx:45
+msgid "Accept"
+msgstr "Қабылдау"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx:60
 msgid "Access denied"
@@ -104,6 +117,7 @@ msgstr "Тіркелгі түрі"
 msgid "Account verified"
 msgstr "Тіркелгі расталды"
 
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:717
 #: ../../../lib/web/src/features/access/access-dialog.tsx:332
 #: ../../../lib/web/src/features/accounts/account-add.tsx:196
 msgid "Add"
@@ -125,6 +139,14 @@ msgstr "Тіркелгі қосу"
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:297
 msgid "Add an account to receive notifications and use services."
 msgstr "Хабарландырулар алу және қызметтерді пайдалану үшін тіркелгі қосыңыз."
+
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:687
+msgid "Add checklist item"
+msgstr "Тапсырмалар тізімінің тармағын қосу"
+
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:705
+msgid "Add item..."
+msgstr "Тармақ қосу..."
 
 #: ../../../lib/web/src/features/accounts/account-picker.tsx:102
 msgid "Add new account"
@@ -237,6 +259,11 @@ msgstr "Басты бетке оралу"
 msgid "Banner"
 msgstr "Баннер"
 
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:156
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:166
+msgid "Blocked navigation to untrusted link"
+msgstr "Сенімсіз сілтемеге өту бөгелді"
+
 #: ../../../lib/web/src/components/post-tags.tsx:180
 #: ../../../lib/web/src/components/post-tags.tsx:192
 msgid "Boost interest"
@@ -270,6 +297,10 @@ msgstr "Хабарландыру санатын өзгерту"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:198
 msgid "Check \"All\" to see your past notifications."
 msgstr "Бұрынғы хабарландыруларды көру үшін «Барлығы» таңдаңыз."
+
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:38
+msgid "Choose a game from the sidebar or start a new one."
+msgstr "Бүйір тақтадан ойынды таңдаңыз немесе жаңасын бастаңыз."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:329
 msgid "Choose between default expanded, compact icon-only, or full layout mode"
@@ -479,6 +510,10 @@ msgstr "Қараңғы режим"
 msgid "Data conflict"
 msgstr "Деректер қайшылығы"
 
+#: ../../../lib/web/src/components/game/game-draw-offer-banner.tsx:41
+msgid "Decline"
+msgstr "Қабылдамау"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:311
 msgid "Default"
 msgstr "Әдепкі"
@@ -487,7 +522,7 @@ msgstr "Әдепкі"
 msgid "Default AI account"
 msgstr "Әдепкі AI тіркелгісі"
 
-#: ../../../lib/web/src/components/restore-banner.tsx:99
+#: ../../../lib/web/src/components/restore-banner.tsx:115
 msgid "Delete your account on the old server"
 msgstr "Ескі серверден тіркелгіңізді жойыңыз"
 
@@ -543,8 +578,8 @@ msgstr "Жобаны алып тастау керек пе?"
 msgid "Disconnected"
 msgstr "Ажыратылды"
 
-#: ../../../lib/web/src/components/restore-banner.tsx:79
-#: ../../../lib/web/src/components/restore-banner.tsx:85
+#: ../../../lib/web/src/components/restore-banner.tsx:94
+#: ../../../lib/web/src/components/restore-banner.tsx:100
 msgid "Dismiss"
 msgstr "Жабу"
 
@@ -645,7 +680,7 @@ msgstr "Санатты жаңарту сәтсіз аяқталды"
 msgid "Filter..."
 msgstr "Сүзу..."
 
-#: ../../../lib/web/src/components/restore-banner.tsx:88
+#: ../../../lib/web/src/components/restore-banner.tsx:103
 msgid "Finish moving your account"
 msgstr "Тіркелгіні ауыстыруды аяқтаңыз"
 
@@ -769,6 +804,10 @@ msgstr "Ішкі"
 msgid "Interests"
 msgstr "Қызығушылықтар"
 
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:550
+msgid "Invalid date"
+msgstr "Жарамсыз күн"
+
 #: ../../../lib/web/src/components/tag-input.tsx:38
 msgid "Invalid tag: letters, numbers, spaces, hyphens, and slashes only (max 50 chars)"
 msgstr "Жарамсыз тег: тек әріптер, сандар, бос орындар, дефистер және қиғаш сызықтар (ең көбі 50 таңба)"
@@ -854,8 +893,8 @@ msgstr "Шығу…"
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Хабарландырулар мен қызметтер үшін жалғанған тіркелгілеріңізді басқарыңыз."
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:93
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:100
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:118
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:125
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
 #: src/shell-menu.tsx:331
 #: src/shell-menu.tsx:337
@@ -874,6 +913,10 @@ msgstr "Орташа"
 #: src/shell-menu.tsx:490
 msgid "Menu"
 msgstr "Мәзір"
+
+#: ../../../lib/web/src/components/game/game-chat-input.tsx:35
+msgid "Message"
+msgstr "Хабарлама"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:85
 msgid "Metric"
@@ -904,6 +947,11 @@ msgstr "Желі қатесі"
 msgid "New"
 msgstr "Жаңа"
 
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:42
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:54
+msgid "New game"
+msgstr "Жаңа ойын"
+
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:392
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:397
 msgid "Next image"
@@ -917,6 +965,10 @@ msgstr "Қатынау ережелері реттелмеген. Кімнің �
 msgid "No connected accounts"
 msgstr "Байланысқан тіркелгілер жоқ"
 
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:51
+msgid "No games yet"
+msgstr "Ойындар әлі жоқ"
+
 #: ../../../lib/web/src/features/access/access-dialog.tsx:241
 msgid "No groups available"
 msgstr "Топтар қолжетімсіз"
@@ -925,6 +977,7 @@ msgstr "Топтар қолжетімсіз"
 msgid "No notifications yet"
 msgstr "Әзірге хабарландыру жоқ"
 
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:336
 #: ../../../lib/web/src/components/person-picker.tsx:84
 msgid "No people found"
 msgstr "Адамдар табылмады"
@@ -992,7 +1045,7 @@ msgid "Notifications"
 msgstr "Хабарландырулар"
 
 #. placeholder {0}: unread.length
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:86
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:111
 msgid "Notifications: {0}"
 msgstr "Хабарландырулар: {0}"
 
@@ -1060,7 +1113,7 @@ msgstr "Кіру кілті"
 msgid "Passkey verification failed. Please try again."
 msgstr "Passkey тексеруі сәтсіз аяқталды. Қайталап көріңіз."
 
-#: ../../../lib/web/src/components/restore-banner.tsx:135
+#: ../../../lib/web/src/components/restore-banner.tsx:152
 msgid "Passkeys"
 msgstr "Passkey-лер"
 
@@ -1121,11 +1174,11 @@ msgstr "Push хабарландыруы"
 msgid "Raised"
 msgstr "Көтерілген"
 
-#: ../../../lib/web/src/components/restore-banner.tsx:107
+#: ../../../lib/web/src/components/restore-banner.tsx:124
 msgid "Re-link your accounts on this server"
 msgstr "Осы серверде тіркелгілеріңізді қайта байланыстырыңыз"
 
-#: ../../../lib/web/src/components/restore-banner.tsx:129
+#: ../../../lib/web/src/components/restore-banner.tsx:146
 msgid "Re-register your passkeys on this server"
 msgstr "Бұл серверде кіру кілттерін қайта тіркеңіз"
 
@@ -1185,6 +1238,10 @@ msgstr "Қатынауды жою керек пе?"
 #: ../../../lib/web/src/components/post-tags.tsx:232
 msgid "Remove interest"
 msgstr "Қызығушылықты жою"
+
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:671
+msgid "Remove item"
+msgstr "Элементті жою"
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:367
 msgid "Resend email"
@@ -1276,6 +1333,10 @@ msgstr "Іздеуде..."
 msgid "Select {0}"
 msgstr "{0} таңдау"
 
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:37
+msgid "Select a game"
+msgstr "Ойынды таңдау"
+
 #: ../../../lib/web/src/features/access/access-dialog.tsx:150
 msgid "Select a user, group, or other rule to grant access."
 msgstr "Қатынау беру үшін қолданушыны, топты немесе басқа ережені таңдаңыз."
@@ -1320,6 +1381,11 @@ msgstr "Сайт бағытын таңдау"
 msgid "Select theme preference"
 msgstr "Тақырып теңшелімін таңдау"
 
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:252
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:335
+msgid "Select..."
+msgstr "Таңдау..."
+
 #: ../../../lib/web/src/components/data-table/bulk-actions.tsx:216
 msgid "selected"
 msgstr "таңдалды"
@@ -1336,6 +1402,11 @@ msgstr "Қайта жіберу"
 #: ../../../lib/web/src/components/step-up-dialog.tsx:307
 msgid "Send email"
 msgstr "Электрондық пошта жіберу"
+
+#: ../../../lib/web/src/components/game/game-chat-input.tsx:52
+#: ../../../lib/web/src/components/game/game-chat-input.tsx:61
+msgid "Send message"
+msgstr "Хабар жіберу"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:145
 msgid "Serif"
@@ -1551,6 +1622,10 @@ msgstr "Сейсенбі"
 msgid "Type a command or search..."
 msgstr "Команданы теріңіз немесе іздеңіз..."
 
+#: ../../../lib/web/src/components/game/game-chat-input.tsx:39
+msgid "Type a message…"
+msgstr "Хабар теріңіз…"
+
 #: ../../../lib/web/src/features/access/access-dialog.tsx:191
 msgid "Type to search users"
 msgstr "Пайдаланушыларды іздеу үшін теріңіз"
@@ -1648,8 +1723,8 @@ msgstr "Көру"
 msgid "View all"
 msgstr "Барлығын көру"
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:106
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:114
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:131
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:139
 msgid "View all notifications"
 msgstr "Барлық хабарландыруларды көру"
 
@@ -1694,7 +1769,7 @@ msgstr "Сіз келесі мәндерді жібердіңіз:"
 msgid "You're all caught up!"
 msgstr "Барлығын көрдіңіз!"
 
-#: ../../../lib/web/src/components/restore-banner.tsx:91
+#: ../../../lib/web/src/components/restore-banner.tsx:106
 msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
 msgstr "Тіркелгіңіз {source} жерінен осында ауыстырылды. Сіз оны сол жерден жоймайынша, хабарлар мен хабарландырулар екі серверге де жетуі мүмкін, кейбір мазмұныңыз ескі серверден берілуін жалғастырады, ал жазылушылар сізді осында табу үшін бірнеше минут кетуі мүмкін."
 

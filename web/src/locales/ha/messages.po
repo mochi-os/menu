@@ -36,6 +36,10 @@ msgstr "Sunan {entityLabel}"
 msgid "{entityLabel} name is required"
 msgstr "Ana buƙatar sunan {entityLabel}"
 
+#: ../../../lib/web/src/components/game/game-draw-offer-banner.tsx:29
+msgid "{opponentName} offered a draw"
+msgstr "{opponentName} ya ba da kunnen doki"
+
 #: ../../../lib/web/src/components/data-table/bulk-actions.tsx:210
 msgid "{selectedCount, plural, one {{entityName} selected} other {{manyName} selected}}"
 msgstr "{selectedCount, plural, one {An zaɓi {entityName}} other {An zaɓi {manyName}}}"
@@ -60,6 +64,11 @@ msgstr "{sentLabel} cikin {totalLabel}"
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Buɗe menu (# sanarwar da ba a karanta ba)} other {Buɗe menu (# sanarwar da ba a karanta ba)}}"
 
+#. placeholder {0}: countDeepChildren(object.id)
+#: ../../../lib/web/src/components/entity/entity-board-card.tsx:421
+msgid "+{0} nested"
+msgstr "+{0} a ciki"
+
 #: src/use-permission-request.tsx:222
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> yana neman izinin mai zuwa:"
@@ -75,6 +84,10 @@ msgstr "Awa 24"
 #: ../../../lib/web/src/lib/preference-utils.ts:51
 msgid "Absolute (date and time)"
 msgstr "Cikakke (kwanan wata da lokaci)"
+
+#: ../../../lib/web/src/components/game/game-draw-offer-banner.tsx:45
+msgid "Accept"
+msgstr "Yarda"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx:60
 msgid "Access denied"
@@ -104,6 +117,7 @@ msgstr "Nau'in asusu"
 msgid "Account verified"
 msgstr "An tabbatar da asusu"
 
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:717
 #: ../../../lib/web/src/features/access/access-dialog.tsx:332
 #: ../../../lib/web/src/features/accounts/account-add.tsx:196
 msgid "Add"
@@ -125,6 +139,14 @@ msgstr "Ƙara asusu"
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:297
 msgid "Add an account to receive notifications and use services."
 msgstr "Ƙara asusu don karɓar sanarwa da amfani da ayyuka."
+
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:687
+msgid "Add checklist item"
+msgstr "Ƙara abun checklist"
+
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:705
+msgid "Add item..."
+msgstr "Ƙara abu..."
 
 #: ../../../lib/web/src/features/accounts/account-picker.tsx:102
 msgid "Add new account"
@@ -237,6 +259,11 @@ msgstr "Komawa gida"
 msgid "Banner"
 msgstr "Banner"
 
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:156
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:166
+msgid "Blocked navigation to untrusted link"
+msgstr "An toshe motsi zuwa ga link da ba a amince da shi ba"
+
 #: ../../../lib/web/src/components/post-tags.tsx:180
 #: ../../../lib/web/src/components/post-tags.tsx:192
 msgid "Boost interest"
@@ -270,6 +297,10 @@ msgstr "Sauya rukunin sanarwa"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:198
 msgid "Check \"All\" to see your past notifications."
 msgstr "Zaɓi \"Duk\" don ganin sanarwarka na baya."
+
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:38
+msgid "Choose a game from the sidebar or start a new one."
+msgstr "Zaɓi wasa daga sidebar ko fara sabo."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:329
 msgid "Choose between default expanded, compact icon-only, or full layout mode"
@@ -479,6 +510,10 @@ msgstr "Dark mode"
 msgid "Data conflict"
 msgstr "Rikicin bayanai"
 
+#: ../../../lib/web/src/components/game/game-draw-offer-banner.tsx:41
+msgid "Decline"
+msgstr "Ƙi"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:311
 msgid "Default"
 msgstr "Default"
@@ -487,7 +522,7 @@ msgstr "Default"
 msgid "Default AI account"
 msgstr "Default AI asusu"
 
-#: ../../../lib/web/src/components/restore-banner.tsx:99
+#: ../../../lib/web/src/components/restore-banner.tsx:115
 msgid "Delete your account on the old server"
 msgstr "Goge asusu ka akan tsohon uwar garken"
 
@@ -543,8 +578,8 @@ msgstr "A watsar da daftarin?"
 msgid "Disconnected"
 msgstr "An cire haɗi"
 
-#: ../../../lib/web/src/components/restore-banner.tsx:79
-#: ../../../lib/web/src/components/restore-banner.tsx:85
+#: ../../../lib/web/src/components/restore-banner.tsx:94
+#: ../../../lib/web/src/components/restore-banner.tsx:100
 msgid "Dismiss"
 msgstr "Kau da shi"
 
@@ -645,7 +680,7 @@ msgstr "An gaza sabunta category"
 msgid "Filter..."
 msgstr "Tace..."
 
-#: ../../../lib/web/src/components/restore-banner.tsx:88
+#: ../../../lib/web/src/components/restore-banner.tsx:103
 msgid "Finish moving your account"
 msgstr "Kammala ƙaurar asusunka"
 
@@ -769,6 +804,10 @@ msgstr "Inset"
 msgid "Interests"
 msgstr "Interests"
 
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:550
+msgid "Invalid date"
+msgstr "Kwanan wata mara inganci"
+
 #: ../../../lib/web/src/components/tag-input.tsx:38
 msgid "Invalid tag: letters, numbers, spaces, hyphens, and slashes only (max 50 chars)"
 msgstr "Tambarin da bai dace ba: haruffa, lambobi, sarari, gajerun layi da sara kawai (matsakaici haruffa 50)"
@@ -854,8 +893,8 @@ msgstr "Ana fita…"
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Sarrafa asusunku da aka haɗa don sanarwa da ayyuka."
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:93
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:100
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:118
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:125
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
 #: src/shell-menu.tsx:331
 #: src/shell-menu.tsx:337
@@ -874,6 +913,10 @@ msgstr "Matsakaici"
 #: src/shell-menu.tsx:490
 msgid "Menu"
 msgstr "Menu"
+
+#: ../../../lib/web/src/components/game/game-chat-input.tsx:35
+msgid "Message"
+msgstr "Saƙo"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:85
 msgid "Metric"
@@ -904,6 +947,11 @@ msgstr "Kuskuren hanyar sadarwa"
 msgid "New"
 msgstr "Sabon"
 
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:42
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:54
+msgid "New game"
+msgstr "Sabon wasa"
+
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:392
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:397
 msgid "Next image"
@@ -917,6 +965,10 @@ msgstr "Ba a saita ka'idojin shiga ba. Ƙara ka'idoji don sarrafa wanda zai iya 
 msgid "No connected accounts"
 msgstr "Babu accounts da aka haɗa"
 
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:51
+msgid "No games yet"
+msgstr "Babu wasanni tukuna"
+
 #: ../../../lib/web/src/features/access/access-dialog.tsx:241
 msgid "No groups available"
 msgstr "Babu ƙungiyoyi"
@@ -925,6 +977,7 @@ msgstr "Babu ƙungiyoyi"
 msgid "No notifications yet"
 msgstr "Babu sanarwa tukuna"
 
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:336
 #: ../../../lib/web/src/components/person-picker.tsx:84
 msgid "No people found"
 msgstr "Babu mutane da aka samu"
@@ -992,7 +1045,7 @@ msgid "Notifications"
 msgstr "Sanarwa"
 
 #. placeholder {0}: unread.length
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:86
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:111
 msgid "Notifications: {0}"
 msgstr "Sanarwa: {0}"
 
@@ -1060,7 +1113,7 @@ msgstr "Maɓallin shiga"
 msgid "Passkey verification failed. Please try again."
 msgstr "Tantance maɓallin shiga ya gaza. Don Allah a sake gwadawa."
 
-#: ../../../lib/web/src/components/restore-banner.tsx:135
+#: ../../../lib/web/src/components/restore-banner.tsx:152
 msgid "Passkeys"
 msgstr "Makullan shiga"
 
@@ -1121,11 +1174,11 @@ msgstr "Sanarwar push"
 msgid "Raised"
 msgstr "Ɗagaggu"
 
-#: ../../../lib/web/src/components/restore-banner.tsx:107
+#: ../../../lib/web/src/components/restore-banner.tsx:124
 msgid "Re-link your accounts on this server"
 msgstr "Sake haɗa asusunka a wannan uwar garken"
 
-#: ../../../lib/web/src/components/restore-banner.tsx:129
+#: ../../../lib/web/src/components/restore-banner.tsx:146
 msgid "Re-register your passkeys on this server"
 msgstr "Sake yin rajistar makullan shiga naka a wannan uwar garken"
 
@@ -1185,6 +1238,10 @@ msgstr "A cire damar shiga?"
 #: ../../../lib/web/src/components/post-tags.tsx:232
 msgid "Remove interest"
 msgstr "Cire sha'awa"
+
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:671
+msgid "Remove item"
+msgstr "Cire abu"
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:367
 msgid "Resend email"
@@ -1276,6 +1333,10 @@ msgstr "Ana bincike..."
 msgid "Select {0}"
 msgstr "Zaɓi {0}"
 
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:37
+msgid "Select a game"
+msgstr "Zaɓi wasa"
+
 #: ../../../lib/web/src/features/access/access-dialog.tsx:150
 msgid "Select a user, group, or other rule to grant access."
 msgstr "Zaɓi mai amfani, ƙungiya, ko wani tsari don bayar da damar shiga."
@@ -1320,6 +1381,11 @@ msgstr "Zaɓi alkiblar shafin"
 msgid "Select theme preference"
 msgstr "Zaɓi zaɓin theme"
 
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:252
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:335
+msgid "Select..."
+msgstr "Zaɓi..."
+
 #: ../../../lib/web/src/components/data-table/bulk-actions.tsx:216
 msgid "selected"
 msgstr "an zaɓa"
@@ -1336,6 +1402,11 @@ msgstr "Aika kuma"
 #: ../../../lib/web/src/components/step-up-dialog.tsx:307
 msgid "Send email"
 msgstr "Aika email"
+
+#: ../../../lib/web/src/components/game/game-chat-input.tsx:52
+#: ../../../lib/web/src/components/game/game-chat-input.tsx:61
+msgid "Send message"
+msgstr "Aika saƙo"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:145
 msgid "Serif"
@@ -1551,6 +1622,10 @@ msgstr "Talata"
 msgid "Type a command or search..."
 msgstr "Buga umarni ko bincika..."
 
+#: ../../../lib/web/src/components/game/game-chat-input.tsx:39
+msgid "Type a message…"
+msgstr "Buga saƙo…"
+
 #: ../../../lib/web/src/features/access/access-dialog.tsx:191
 msgid "Type to search users"
 msgstr "Buga don bincika masu amfani"
@@ -1648,8 +1723,8 @@ msgstr "Kalla"
 msgid "View all"
 msgstr "Kalli duka"
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:106
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:114
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:131
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:139
 msgid "View all notifications"
 msgstr "Kalli duk sanarwa"
 
@@ -1694,7 +1769,7 @@ msgstr "Ka aika da waɗannan ƙimomin:"
 msgid "You're all caught up!"
 msgstr "Ka ga komai!"
 
-#: ../../../lib/web/src/components/restore-banner.tsx:91
+#: ../../../lib/web/src/components/restore-banner.tsx:106
 msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
 msgstr "An ƙauri asusunka zuwa nan daga {source}. Sai ka goge shi a can, saƙonni da sanarwa na iya kai ga uwar garken biyu, wasu abubuwan ka suna ci gaba da samarwa daga tsohon uwar garken, kuma mabiyanka na iya ɗaukar 'yan mintoci don su same ka nan."
 

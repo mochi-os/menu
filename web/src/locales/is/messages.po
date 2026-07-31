@@ -36,6 +36,10 @@ msgstr "Nafn {entityLabel}"
 msgid "{entityLabel} name is required"
 msgstr "{entityLabel}-heiti er nauðsynlegt"
 
+#: ../../../lib/web/src/components/game/game-draw-offer-banner.tsx:29
+msgid "{opponentName} offered a draw"
+msgstr "{opponentName} bauð jafntefli"
+
 #: ../../../lib/web/src/components/data-table/bulk-actions.tsx:210
 msgid "{selectedCount, plural, one {{entityName} selected} other {{manyName} selected}}"
 msgstr "{selectedCount, plural, one {{entityName} valið} other {{manyName} valin}}"
@@ -60,6 +64,11 @@ msgstr "{sentLabel} af {totalLabel}"
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Opna valmynd (# ólesin tilkynning)} other {Opna valmynd (# ólesnar tilkynningar)}}"
 
+#. placeholder {0}: countDeepChildren(object.id)
+#: ../../../lib/web/src/components/entity/entity-board-card.tsx:421
+msgid "+{0} nested"
+msgstr "+{0} hreiðruð"
+
 #: src/use-permission-request.tsx:222
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> biður um eftirfarandi heimild:"
@@ -75,6 +84,10 @@ msgstr "24 klukkustundir"
 #: ../../../lib/web/src/lib/preference-utils.ts:51
 msgid "Absolute (date and time)"
 msgstr "Algilt (dagsetning og tími)"
+
+#: ../../../lib/web/src/components/game/game-draw-offer-banner.tsx:45
+msgid "Accept"
+msgstr "Samþykkja"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx:60
 msgid "Access denied"
@@ -104,6 +117,7 @@ msgstr "Tegund reiknings"
 msgid "Account verified"
 msgstr "Reikningur staðfestur"
 
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:717
 #: ../../../lib/web/src/features/access/access-dialog.tsx:332
 #: ../../../lib/web/src/features/accounts/account-add.tsx:196
 msgid "Add"
@@ -125,6 +139,14 @@ msgstr "Bæta við reikningi"
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:297
 msgid "Add an account to receive notifications and use services."
 msgstr "Bæta við reikningi til að fá tilkynningar og nota þjónustur."
+
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:687
+msgid "Add checklist item"
+msgstr "Bæta við gátlistaratriði"
+
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:705
+msgid "Add item..."
+msgstr "Bæta við atriði..."
 
 #: ../../../lib/web/src/features/accounts/account-picker.tsx:102
 msgid "Add new account"
@@ -237,6 +259,11 @@ msgstr "Til baka á forsíðu"
 msgid "Banner"
 msgstr "Borði"
 
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:156
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:166
+msgid "Blocked navigation to untrusted link"
+msgstr "Blokkaði leiðsögn á ótraustan tengil"
+
 #: ../../../lib/web/src/components/post-tags.tsx:180
 #: ../../../lib/web/src/components/post-tags.tsx:192
 msgid "Boost interest"
@@ -270,6 +297,10 @@ msgstr "Breyta flokki tilkynningar"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:198
 msgid "Check \"All\" to see your past notifications."
 msgstr "Veldu \"Allt\" til að sjá fyrri tilkynningar."
+
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:38
+msgid "Choose a game from the sidebar or start a new one."
+msgstr "Veldu leik úr hliðarstikunni eða byrjaðu nýjan."
 
 #: ../../../lib/web/src/components/config-drawer.tsx:329
 msgid "Choose between default expanded, compact icon-only, or full layout mode"
@@ -479,6 +510,10 @@ msgstr "Dökkur hamur"
 msgid "Data conflict"
 msgstr "Gagnaárekstur"
 
+#: ../../../lib/web/src/components/game/game-draw-offer-banner.tsx:41
+msgid "Decline"
+msgstr "Hafna"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:311
 msgid "Default"
 msgstr "Sjálfgefið"
@@ -487,7 +522,7 @@ msgstr "Sjálfgefið"
 msgid "Default AI account"
 msgstr "Sjálfgefinn gervigreindarreikningur"
 
-#: ../../../lib/web/src/components/restore-banner.tsx:99
+#: ../../../lib/web/src/components/restore-banner.tsx:115
 msgid "Delete your account on the old server"
 msgstr "Eyddu reikningnum þínum á gamla þjóninum"
 
@@ -543,8 +578,8 @@ msgstr "Henda drögum?"
 msgid "Disconnected"
 msgstr "Aftengt"
 
-#: ../../../lib/web/src/components/restore-banner.tsx:79
-#: ../../../lib/web/src/components/restore-banner.tsx:85
+#: ../../../lib/web/src/components/restore-banner.tsx:94
+#: ../../../lib/web/src/components/restore-banner.tsx:100
 msgid "Dismiss"
 msgstr "Hafna"
 
@@ -645,7 +680,7 @@ msgstr "Tókst ekki að uppfæra flokk"
 msgid "Filter..."
 msgstr "Sía..."
 
-#: ../../../lib/web/src/components/restore-banner.tsx:88
+#: ../../../lib/web/src/components/restore-banner.tsx:103
 msgid "Finish moving your account"
 msgstr "Kláraðu að færa reikninginn þinn"
 
@@ -769,6 +804,10 @@ msgstr "Innfellt"
 msgid "Interests"
 msgstr "Áhugaefni"
 
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:550
+msgid "Invalid date"
+msgstr "Ógild dagsetning"
+
 #: ../../../lib/web/src/components/tag-input.tsx:38
 msgid "Invalid tag: letters, numbers, spaces, hyphens, and slashes only (max 50 chars)"
 msgstr "Ógilt merki: aðeins bókstafir, tölur, bil, bandstrik og skástrik (að hámarki 50 stafir)"
@@ -854,8 +893,8 @@ msgstr "Útskrái…"
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Sýslaðu með tengda reikninga þína fyrir tilkynningar og þjónustur."
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:93
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:100
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:118
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:125
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
 #: src/shell-menu.tsx:331
 #: src/shell-menu.tsx:337
@@ -874,6 +913,10 @@ msgstr "Miðlungs"
 #: src/shell-menu.tsx:490
 msgid "Menu"
 msgstr "Valmynd"
+
+#: ../../../lib/web/src/components/game/game-chat-input.tsx:35
+msgid "Message"
+msgstr "Skilaboð"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:85
 msgid "Metric"
@@ -904,6 +947,11 @@ msgstr "Netvilla"
 msgid "New"
 msgstr "Nýtt"
 
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:42
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:54
+msgid "New game"
+msgstr "Nýr leikur"
+
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:392
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:397
 msgid "Next image"
@@ -917,6 +965,10 @@ msgstr "Engar aðgangsreglur stilltar. Bættu við reglum til að stjórna því
 msgid "No connected accounts"
 msgstr "Engir tengdir reikningar"
 
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:51
+msgid "No games yet"
+msgstr "Engir leikir ennþá"
+
 #: ../../../lib/web/src/features/access/access-dialog.tsx:241
 msgid "No groups available"
 msgstr "Engir hópar tiltækir"
@@ -925,6 +977,7 @@ msgstr "Engir hópar tiltækir"
 msgid "No notifications yet"
 msgstr "Engar tilkynningar enn"
 
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:336
 #: ../../../lib/web/src/components/person-picker.tsx:84
 msgid "No people found"
 msgstr "Engir notendur fundust"
@@ -992,7 +1045,7 @@ msgid "Notifications"
 msgstr "Tilkynningar"
 
 #. placeholder {0}: unread.length
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:86
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:111
 msgid "Notifications: {0}"
 msgstr "Tilkynningar: {0}"
 
@@ -1060,7 +1113,7 @@ msgstr "Aðgangslykill"
 msgid "Passkey verification failed. Please try again."
 msgstr "Staðfesting aðgangslykils mistókst. Reyndu aftur."
 
-#: ../../../lib/web/src/components/restore-banner.tsx:135
+#: ../../../lib/web/src/components/restore-banner.tsx:152
 msgid "Passkeys"
 msgstr "Aðgangslyklar"
 
@@ -1121,11 +1174,11 @@ msgstr "Ýtitilkynning"
 msgid "Raised"
 msgstr "Upphækkað"
 
-#: ../../../lib/web/src/components/restore-banner.tsx:107
+#: ../../../lib/web/src/components/restore-banner.tsx:124
 msgid "Re-link your accounts on this server"
 msgstr "Tengdu reikninga þína aftur á þessum þjóni"
 
-#: ../../../lib/web/src/components/restore-banner.tsx:129
+#: ../../../lib/web/src/components/restore-banner.tsx:146
 msgid "Re-register your passkeys on this server"
 msgstr "Skráðu aðgangslyklana þína aftur á þessum netþjóni"
 
@@ -1185,6 +1238,10 @@ msgstr "Fjarlægja aðgang?"
 #: ../../../lib/web/src/components/post-tags.tsx:232
 msgid "Remove interest"
 msgstr "Fjarlægja áhuga"
+
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:671
+msgid "Remove item"
+msgstr "Fjarlægja atriði"
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:367
 msgid "Resend email"
@@ -1276,6 +1333,10 @@ msgstr "Leita..."
 msgid "Select {0}"
 msgstr "Velja {0}"
 
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:37
+msgid "Select a game"
+msgstr "Veldu leik"
+
 #: ../../../lib/web/src/features/access/access-dialog.tsx:150
 msgid "Select a user, group, or other rule to grant access."
 msgstr "Veldu notanda, hóp eða aðra reglu til að veita aðgang."
@@ -1320,6 +1381,11 @@ msgstr "Veldu stefnu vefsvæðis"
 msgid "Select theme preference"
 msgstr "Veldu þemastillingu"
 
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:252
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx:335
+msgid "Select..."
+msgstr "Velja..."
+
 #: ../../../lib/web/src/components/data-table/bulk-actions.tsx:216
 msgid "selected"
 msgstr "valin"
@@ -1336,6 +1402,11 @@ msgstr "Senda aftur"
 #: ../../../lib/web/src/components/step-up-dialog.tsx:307
 msgid "Send email"
 msgstr "Senda tölvupóst"
+
+#: ../../../lib/web/src/components/game/game-chat-input.tsx:52
+#: ../../../lib/web/src/components/game/game-chat-input.tsx:61
+msgid "Send message"
+msgstr "Senda skilaboð"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:145
 msgid "Serif"
@@ -1551,6 +1622,10 @@ msgstr "Þriðjudagur"
 msgid "Type a command or search..."
 msgstr "Skrifaðu skipun eða leitaðu..."
 
+#: ../../../lib/web/src/components/game/game-chat-input.tsx:39
+msgid "Type a message…"
+msgstr "Skrifaðu skilaboð…"
+
 #: ../../../lib/web/src/features/access/access-dialog.tsx:191
 msgid "Type to search users"
 msgstr "Skrifaðu til að leita að notendum"
@@ -1648,8 +1723,8 @@ msgstr "Skoða"
 msgid "View all"
 msgstr "Skoða allt"
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:106
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:114
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:131
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:139
 msgid "View all notifications"
 msgstr "Skoða allar tilkynningar"
 
@@ -1694,7 +1769,7 @@ msgstr "Þú sendir inn eftirfarandi gildi:"
 msgid "You're all caught up!"
 msgstr "Þú hefur séð allt!"
 
-#: ../../../lib/web/src/components/restore-banner.tsx:91
+#: ../../../lib/web/src/components/restore-banner.tsx:106
 msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
 msgstr "Reikningurinn þinn var fluttur hingað frá {source}. Þar til þú eyðir honum þar, geta skilaboð og tilkynningar náð til beggja þjóna, hluti af efni þínu heldur áfram að vera þjónað af gamla þjóninum og fylgjendur gætu þurft nokkrar mínútur að finna þig hér."
 
