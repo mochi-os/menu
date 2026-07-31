@@ -234,8 +234,30 @@ export function MochiShellMenu() {
 
   const name = useAuthStore((s) => s.name)
   const identity = useAuthStore((s) => s.identity)
+  const avatar = useAuthStore((s) => s.avatar)
   const unreadNotifications = notifications.filter((n: Notification) => n.read === 0)
   const unreadCount = unreadNotifications.length
+
+  // The people app announces an avatar change by posting 'avatar-set' (via
+  // shellSetAvatar) to the top window. The avatar URL itself never changes and
+  // is served with a five-minute cache lifetime, so the menu re-renders with
+  // the new version token to stop the browser answering from cache. Same trust
+  // model as the permission dialog: only the loaded app iframe may drive it,
+  // and the token is only ever applied to the signed-in identity's own avatar.
+  useEffect(() => {
+    function handleMessage(event: MessageEvent) {
+      const data = event.data
+      if (!data || typeof data !== 'object' || data.type !== 'avatar-set') return
+      const appFrame = document.getElementById('app-frame') as HTMLIFrameElement | null
+      if (!appFrame || event.source !== appFrame.contentWindow) return
+      if (typeof data.version !== 'string' || data.version.length > 64) return
+      const store = useAuthStore.getState()
+      if (data.person !== store.identity) return
+      store.setAvatar(data.version)
+    }
+    window.addEventListener('message', handleMessage)
+    return () => window.removeEventListener('message', handleMessage)
+  }, [])
 
   // Publish count to shell.js so it can prefix "(N)" onto the tab title.
   useEffect(() => {
@@ -285,7 +307,7 @@ export function MochiShellMenu() {
       aria-label={t`Open menu`}
       className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
     >
-      <EntityAvatar fingerprint={identity || undefined} name={name} size="sm" />
+      <EntityAvatar fingerprint={identity || undefined} version={avatar || undefined} name={name} size="sm" />
       {unreadCount > 0 && (
         <span className='absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-notification px-1 text-[10px] font-medium text-notification-foreground'>
           {unreadCount > 99 ? '99+' : unreadCount}
@@ -297,7 +319,7 @@ export function MochiShellMenu() {
   const userSection = (
     <div className='flex items-center justify-between px-4 py-2.5'>
       <div className='flex items-center gap-2'>
-        <EntityAvatar fingerprint={identity || undefined} name={name} size="md" />
+        <EntityAvatar fingerprint={identity || undefined} version={avatar || undefined} name={name} size="md" />
         <span className='text-sm font-semibold'>{name || t`User`}</span>
       </div>
       <div className='flex items-center gap-1 ms-4'>
@@ -463,7 +485,7 @@ export function MochiShellMenu() {
                 onClick={() => setMenuOpen(true)}
                 className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
               >
-                <EntityAvatar fingerprint={identity || undefined} name={name} size="sm" />
+                <EntityAvatar fingerprint={identity || undefined} version={avatar || undefined} name={name} size="sm" />
                 {unreadCount > 0 && (
                   <span className='absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-notification px-1 text-[10px] font-medium text-notification-foreground'>
                     {unreadCount > 99 ? '99+' : unreadCount}
