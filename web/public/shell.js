@@ -134,7 +134,10 @@
             root.style.setProperty(key, value);
             installedThemeProps.push(key);
         }
-        if (theme.hue) {
+        // Same guard as the overrides below: the theme arrives from an app we
+        // do not trust, so the hue triple is validated too rather than
+        // installed on sight. Mirrors lib/web's theme-provider.
+        if (theme.hue && !isFetchingValue(theme.hue) && !isFetchingValue(theme.chroma) && !isFetchingValue(theme.hueBg)) {
             install('--hue', theme.hue);
             install('--hue-chroma', theme.chroma);
             install('--hue-bg', theme.hueBg);
