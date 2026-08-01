@@ -37,6 +37,7 @@ import {
   TooltipContent,
   type Notification,
 } from '@mochi/web'
+import { useMenuCategories } from './use-menu-categories'
 
 function MochiLogo() {
   return <img src='/menu/images/logo-header.png' alt='Mochi' className='h-7 w-7' />
@@ -72,10 +73,12 @@ function NotificationItem({
   notification,
   onClick,
   onMiddleClick,
+  categories,
 }: {
   notification: Notification
   onClick?: (notification: Notification) => void
   onMiddleClick?: (notification: Notification) => void
+  categories: ReturnType<typeof useMenuCategories>
 }) {
   const { formatTimestamp } = useFormat()
   const isUnread = notification.read === 0
@@ -118,9 +121,21 @@ function NotificationItem({
         </div>
       </button>
       <NotificationCategoryButton
-        app={notification.app}
-        topic={notification.topic}
-        object={notification.object}
+        categories={categories.categories}
+        topic={categories.topic}
+        saving={categories.saving}
+        open={
+          categories.openKey ===
+          categories.keyFor(notification.app, notification.topic, notification.object)
+        }
+        onOpenChange={(next) => {
+          if (next) {
+            void categories.open(notification.app, notification.topic, notification.object)
+          } else {
+            categories.close()
+          }
+        }}
+        onCategoryChange={categories.changeCategory}
         className='mt-0.5 shrink-0'
       />
     </div>
@@ -235,6 +250,7 @@ export function MochiShellMenu() {
   const name = useAuthStore((s) => s.name)
   const identity = useAuthStore((s) => s.identity)
   const avatar = useAuthStore((s) => s.avatar)
+  const categoryPicker = useMenuCategories()
   const unreadNotifications = notifications.filter((n: Notification) => n.read === 0)
   const unreadCount = unreadNotifications.length
 
@@ -403,6 +419,7 @@ export function MochiShellMenu() {
                 notification={notification}
                 onClick={handleNotificationClick}
                 onMiddleClick={handleNotificationMiddleClick}
+                categories={categoryPicker}
               />
             ))}
           </div>
