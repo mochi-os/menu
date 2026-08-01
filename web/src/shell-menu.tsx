@@ -9,7 +9,6 @@ import { usePushRegistration } from './use-push-registration'
 import { useMenuNotifications } from './use-menu-notifications'
 import { usePermissionRequest } from './use-permission-request'
 import {
-  Bell,
   Check,
   ExternalLink,
   LogOut,
@@ -23,15 +22,13 @@ import {
   useDialogState,
   EntityAvatar,
   NotificationCategoryButton,
-  NotificationSourceIcon,
+  NotificationList,
   SignOutDialog,
   shellNavigateExternal,
-  useFormat,
   Popover,
   PopoverContent,
   PopoverTrigger,
   ScrollArea,
-  ListSkeleton,
   Tooltip,
   TooltipTrigger,
   TooltipContent,
@@ -69,80 +66,7 @@ function isSameOriginLink(link: string): boolean {
   }
 }
 
-function NotificationItem({
-  notification,
-  onClick,
-  onMiddleClick,
-  categories,
-}: {
-  notification: Notification
-  onClick?: (notification: Notification) => void
-  onMiddleClick?: (notification: Notification) => void
-  categories: ReturnType<typeof useMenuCategories>
-}) {
-  const { formatTimestamp } = useFormat()
-  const isUnread = notification.read === 0
-
-  return (
-    <div
-      className={cn(
-        'group flex w-full items-start gap-3 px-4 py-2 transition-colors hover:bg-hover',
-        isUnread ? 'bg-muted/30' : 'bg-transparent'
-      )}
-    >
-      <button
-        type='button'
-        onClick={() => onClick?.(notification)}
-        onAuxClick={(e) => {
-          if (e.button === 1) {
-            e.preventDefault()
-            onMiddleClick?.(notification)
-          }
-        }}
-        className='flex flex-1 items-start gap-3 text-start'
-      >
-        <NotificationSourceIcon
-          app={notification.app}
-          sender={notification.sender}
-          isUnread={isUnread}
-        />
-        <div className='flex-1 min-w-0 space-y-0.5'>
-          <p
-            className={cn(
-              'text-sm leading-snug',
-              isUnread ? 'font-medium text-foreground' : 'text-muted-foreground'
-            )}
-          >
-            {notification.content}
-          </p>
-          <p className='text-[11px] text-muted-foreground/70'>
-            {formatTimestamp(notification.created)}
-          </p>
-        </div>
-      </button>
-      <NotificationCategoryButton
-        categories={categories.categories}
-        topic={categories.topic}
-        saving={categories.saving}
-        open={
-          categories.openKey ===
-          categories.keyFor(notification.app, notification.topic, notification.object)
-        }
-        onOpenChange={(next) => {
-          if (next) {
-            void categories.open(notification.app, notification.topic, notification.object)
-          } else {
-            categories.close()
-          }
-        }}
-        onCategoryChange={categories.changeCategory}
-        className='mt-0.5 shrink-0'
-      />
-    </div>
-  )
-}
-
-// Observe the data-sidebar attribute on #menu, set by shell.js
+// Observe the data-sidebar shell.js
 function useSidebarState(): 'expanded' | 'collapsed' {
   return useSyncExternalStore(
     (cb) => {
@@ -395,35 +319,37 @@ export function MochiShellMenu() {
   const notificationsList = (
     <ScrollArea className='min-h-0 flex-1 overflow-y-scroll'>
       <div className='flex flex-col'>
-        {isLoading ? (
-          <ListSkeleton variant='simple' count={4} avatar className='p-3' />
-        ) : isError ? (
-          <div className='flex flex-col items-center justify-center py-8 text-center px-4'>
-            <Bell className='size-8 text-muted-foreground/20 mb-3' />
-            <p className='text-sm font-medium text-foreground'>
-              <Trans>Couldn't load notifications</Trans>
-            </p>
-          </div>
-        ) : unreadNotifications.length === 0 ? (
-          <div className='flex flex-col items-center justify-center py-8 text-center px-4'>
-            <Bell className='size-8 text-muted-foreground/20 mb-3' />
-            <p className='text-sm font-medium text-foreground'>
-              <Trans>No unread notifications</Trans>
-            </p>
-          </div>
-        ) : (
-          <div className='divide-y divide-border/40'>
-            {unreadNotifications.map((notification: Notification) => (
-              <NotificationItem
-                key={notification.id}
-                notification={notification}
-                onClick={handleNotificationClick}
-                onMiddleClick={handleNotificationMiddleClick}
-                categories={categoryPicker}
-              />
-            ))}
-          </div>
-        )}
+        <NotificationList
+          notifications={unreadNotifications}
+          isLoading={isLoading}
+          isError={isError}
+          onClick={handleNotificationClick}
+          onMiddleClick={handleNotificationMiddleClick}
+          actions={(notification: Notification) => (
+            <NotificationCategoryButton
+              categories={categoryPicker.categories}
+              topic={categoryPicker.topic}
+              saving={categoryPicker.saving}
+              open={
+                categoryPicker.openKey ===
+                categoryPicker.keyFor(notification.app, notification.topic, notification.object)
+              }
+              onOpenChange={(next) => {
+                if (next) {
+                  void categoryPicker.open(
+                    notification.app,
+                    notification.topic,
+                    notification.object
+                  )
+                } else {
+                  categoryPicker.close()
+                }
+              }}
+              onCategoryChange={categoryPicker.changeCategory}
+              className='mt-0.5 shrink-0'
+            />
+          )}
+        />
       </div>
     </ScrollArea>
   )
