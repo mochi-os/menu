@@ -60,7 +60,7 @@ msgstr "{selectedCount, plural, one {Veprime masive për # {entityName} të zgje
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{sentLabel} nga {totalLabel}"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:148
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Hap menynë (# njoftim i palexuar)} other {Hap menynë (# njoftime të palexuara)}}"
 
@@ -109,7 +109,7 @@ msgstr "Llogaria u shtua"
 msgid "Account removed"
 msgstr "Llogaria u hoq"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:126
+#: ../../../lib/web/src/features/accounts/account-add.tsx:139
 msgid "Account type"
 msgstr "Lloji i llogarisë"
 
@@ -119,11 +119,11 @@ msgstr "Llogaria u verifikua"
 
 #: ../../../lib/web/src/components/entity/entity-field-editor.tsx:717
 #: ../../../lib/web/src/features/access/access-dialog.tsx:332
-#: ../../../lib/web/src/features/accounts/account-add.tsx:196
+#: ../../../lib/web/src/features/accounts/account-add.tsx:209
 msgid "Add"
 msgstr "Shto"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:120
+#: ../../../lib/web/src/features/accounts/account-add.tsx:133
 msgid "Add a new account"
 msgstr "Shto një llogari të re"
 
@@ -131,7 +131,7 @@ msgstr "Shto një llogari të re"
 msgid "Add access"
 msgstr "Shto qasje"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:119
+#: ../../../lib/web/src/features/accounts/account-add.tsx:132
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:288
 msgid "Add account"
 msgstr "Shto llogari"
@@ -161,7 +161,7 @@ msgstr "Shto etiketë..."
 msgid "Add team/app"
 msgstr "Shto ekip/aplikacion"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:162
+#: ../../../lib/web/src/features/accounts/account-add.tsx:175
 msgid "Add to existing notifications"
 msgstr "Shto te njoftimet ekzistuese"
 
@@ -237,6 +237,10 @@ msgstr "Përdorues të vërtetuar"
 msgid "Authenticator code"
 msgstr "Kodi i autentikuesit"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:51
+msgid "Available keyboard shortcuts"
+msgstr "Shkurtoret e disponueshme të tastierës"
+
 #: ../../../lib/web/src/components/entity-avatar.tsx:99
 msgid "Avatar"
 msgstr "Avatari"
@@ -259,8 +263,8 @@ msgstr "Kthehu në fillim"
 msgid "Banner"
 msgstr "Banner-i"
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:156
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:166
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:237
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:247
 msgid "Blocked navigation to untrusted link"
 msgstr "Lundrimi te lidhja e pabesueshme u bllokua"
 
@@ -280,17 +284,17 @@ msgstr "Njoftime të shfletuesit"
 #: ../../../lib/web/src/components/ui/editable-field-row.tsx:132
 #: ../../../lib/web/src/features/access/access-dialog.tsx:328
 #: ../../../lib/web/src/features/access/access-list.tsx:268
-#: ../../../lib/web/src/features/accounts/account-add.tsx:188
+#: ../../../lib/web/src/features/accounts/account-add.tsx:201
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:91
 msgid "Cancel"
 msgstr "Anulo"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:146
+#: ../../../lib/web/src/components/notification-category-button.tsx:102
 msgid "Category for this notification"
 msgstr "Kategoria për këtë njoftim"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:127
-#: ../../../lib/web/src/components/notification-category-button.tsx:138
+#: ../../../lib/web/src/components/notification-category-button.tsx:83
+#: ../../../lib/web/src/components/notification-category-button.tsx:94
 msgid "Change notification category"
 msgstr "Ndrysho kategorinë e njoftimit"
 
@@ -298,7 +302,7 @@ msgstr "Ndrysho kategorinë e njoftimit"
 msgid "Check \"All\" to see your past notifications."
 msgstr "Zgjidhni \"Të gjitha\" për të parë njoftimet e mëparshme."
 
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:38
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:37
 msgid "Choose a game from the sidebar or start a new one."
 msgstr "Zgjidh një lojë nga ana ose nis një të re."
 
@@ -323,8 +327,8 @@ msgstr "Zgjidh midis preferencës së sistemit, modës së ndritshme ose modës 
 msgid "Choose language"
 msgstr "Zgjidh gjuhën"
 
-#: ../../../lib/web/src/components/colour-picker.tsx:270
-#: ../../../lib/web/src/components/colour-picker.tsx:351
+#: ../../../lib/web/src/components/colour-picker.tsx:274
+#: ../../../lib/web/src/components/colour-picker.tsx:355
 #: ../../../lib/web/src/components/travelling-picker.tsx:164
 #: ../../../lib/web/src/components/travelling-picker.tsx:170
 #: ../../../lib/web/src/components/travelling-picker.tsx:231
@@ -364,8 +368,8 @@ msgstr "Mbyll"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:108
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:113
-#: src/shell-menu.tsx:449
-#: src/shell-menu.tsx:456
+#: src/shell-menu.tsx:392
+#: src/shell-menu.tsx:399
 msgid "Close navigation"
 msgstr "Mbyll lundrimin"
 
@@ -373,6 +377,10 @@ msgstr "Mbyll lundrimin"
 #: ../../../lib/web/src/components/layout/right-panel.tsx:268
 msgid "Close panel"
 msgstr "Mbyll panelin"
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:32
+msgid "Close panel / cancel"
+msgstr "Mbyll panelin / anulo"
 
 #: ../../../lib/web/src/components/header-search.tsx:54
 msgid "Close search"
@@ -459,7 +467,7 @@ msgstr "Kopjo"
 msgid "Could not load this document. Please try again later."
 msgstr "Nuk mund të ngarkohej ky dokument. Provo më vonë."
 
-#: src/shell-menu.tsx:388
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:121
 msgid "Couldn't load notifications"
 msgstr "Njoftimet nuk u ngarkuan dot"
 
@@ -480,15 +488,19 @@ msgstr "Nuk u verifikua dot me atë llogari. Ju lutemi provoni përsëri."
 msgid "Create {0}"
 msgstr "Krijo {0}"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:25
+msgid "Create new item"
+msgstr "Krijo element të ri"
+
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:258
 msgid "Creating..."
 msgstr "Po krijon..."
 
-#: ../../../lib/web/src/components/map-view.tsx:208
+#: ../../../lib/web/src/components/map-view.tsx:217
 msgid "Current location"
 msgstr "Vendndodhja aktuale"
 
-#: ../../../lib/web/src/components/colour-picker.tsx:261
+#: ../../../lib/web/src/components/colour-picker.tsx:265
 msgid "Custom"
 msgstr "Personalizuar"
 
@@ -498,9 +510,6 @@ msgstr "Personalizuar"
 msgid "Dark"
 msgstr "I errët"
 
-#: ../../../lib/web/src/components/layout/nav-user.tsx:91
-#: ../../../lib/web/src/components/layout/nav-user.tsx:154
-#: ../../../lib/web/src/components/layout/nav-user.tsx:205
 #: ../../../lib/web/src/components/profile-dropdown.tsx:87
 #: ../../../lib/web/src/components/profile-dropdown.tsx:123
 msgid "Dark mode"
@@ -518,7 +527,7 @@ msgstr "Refuzo"
 msgid "Default"
 msgstr "I parazgjedhur"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:172
+#: ../../../lib/web/src/features/accounts/account-add.tsx:185
 msgid "Default AI account"
 msgstr "Llogaria e parazgjedhur AI"
 
@@ -565,11 +574,11 @@ msgstr "Drejtimi"
 msgid "Directory"
 msgstr "Drejtoria"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:300
+#: ../../../lib/web/src/components/comment-composer.tsx:304
 msgid "Discard"
 msgstr "Hidh"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:298
+#: ../../../lib/web/src/components/comment-composer.tsx:302
 msgid "Discard draft?"
 msgstr "Ta hedhësh draftin?"
 
@@ -603,6 +612,10 @@ msgstr "I përshtatshëm për disleksi"
 #: ../../../lib/web/src/components/ui/editable-field-row.tsx:154
 msgid "Edit {label}"
 msgstr "Modifiko {label}"
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:31
+msgid "Edit selected card"
+msgstr "Modifiko kartën e zgjedhur"
 
 #: ../../../lib/web/src/features/accounts/types.ts:15
 msgid "Email"
@@ -652,13 +665,29 @@ msgstr "Shtimi i etiketës dështoi"
 msgid "Failed to copy"
 msgstr "Kopjimi dështoi"
 
+#: ../../../lib/web/src/components/options-menu.tsx:99
+msgid "Failed to create link"
+msgstr "Krijimi i lidhjes dështoi"
+
+#: ../../../lib/web/src/components/options-menu.tsx:123
+msgid "Failed to get RSS token"
+msgstr "Marrja e token RSS dështoi"
+
 #: ../../../lib/web/src/hooks/use-load-more.ts:74
 msgid "Failed to load"
 msgstr "Ngarkimi dështoi"
 
+#: ../../../lib/web/src/components/audit-timeline.tsx:72
+msgid "Failed to load history"
+msgstr "Ngarkimi i historisë dështoi"
+
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:263
 msgid "Failed to load image"
 msgstr "Ngarkimi i figurës dështoi"
+
+#: src/use-menu-categories.ts:53
+msgid "Failed to load notification categories"
+msgstr "Ngarkimi i kategorive të njoftimeve dështoi"
 
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:263
 msgid "Failed to load video"
@@ -668,11 +697,15 @@ msgstr "Ngarkimi i videos dështoi"
 msgid "Failed to remove account"
 msgstr "Heqja e llogarisë dështoi"
 
+#: ../../../lib/web/src/components/options-menu.tsx:133
+msgid "Failed to revoke RSS access"
+msgstr "Anulimi i aksesit RSS dështoi"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:257
 msgid "Failed to send verification code"
 msgstr "Dërgimi i kodit të verifikimit dështoi"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: src/use-menu-categories.ts:83
 msgid "Failed to update category"
 msgstr "Përditësimi i kategorisë dështoi"
 
@@ -760,14 +793,18 @@ msgstr "Fshih"
 msgid "Hide password"
 msgstr "Fshih fjalëkalimin"
 
+#: ../../../lib/web/src/components/audit-timeline.tsx:64
+msgid "History"
+msgstr "Historia"
+
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:90
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:175
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:192
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:464
-#: src/shell-menu.tsx:470
-#: src/shell-menu.tsx:543
-#: src/shell-menu.tsx:547
+#: src/shell-menu.tsx:407
+#: src/shell-menu.tsx:413
+#: src/shell-menu.tsx:486
+#: src/shell-menu.tsx:490
 msgid "Home"
 msgstr "Faqja kryesore"
 
@@ -824,6 +861,10 @@ msgstr "Duket se faqja që po kërkoni <0/>nuk ekziston ose është hequr."
 msgid "Just now"
 msgstr "Sapo"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:48
+msgid "Keyboard shortcuts"
+msgstr "Shkurtoret e tastierës"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:108
 #: ../../../lib/web/src/lib/preference-utils.ts:135
 msgid "Large"
@@ -852,6 +893,10 @@ msgstr "Vetëm shkronja, numra, hapësira dhe viza"
 msgid "Light"
 msgstr "E çelët"
 
+#: ../../../lib/web/src/components/options-menu.tsx:190
+msgid "Link"
+msgstr "Lidhje"
+
 #: ../../../lib/web/src/components/ui/load-more.tsx:35
 msgid "Load more"
 msgstr "Ngarko më shumë"
@@ -865,15 +910,12 @@ msgstr "Po ngarkohet përmbajtja…"
 msgid "Loading..."
 msgstr "Duke ngarkuar..."
 
-#: ../../../lib/web/src/components/layout/nav-user.tsx:101
-#: ../../../lib/web/src/components/layout/nav-user.tsx:167
-#: ../../../lib/web/src/components/layout/nav-user.tsx:215
 #: ../../../lib/web/src/components/profile-dropdown.tsx:69
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:330
-#: src/shell-menu.tsx:336
+#: src/shell-menu.tsx:270
+#: src/shell-menu.tsx:276
 msgid "Log out"
 msgstr "Dilni"
 
@@ -893,11 +935,11 @@ msgstr "Duke dalë…"
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Menaxhoni llogaritë tuaja të lidhura për njoftime dhe shërbime."
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:118
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:125
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:202
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:209
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:353
-#: src/shell-menu.tsx:359
+#: src/shell-menu.tsx:293
+#: src/shell-menu.tsx:299
 msgid "Mark all as read"
 msgstr "Shëno të gjitha si të lexuara"
 
@@ -909,8 +951,8 @@ msgstr "Server MCP"
 msgid "Medium"
 msgstr "I mesëm"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:190
-#: src/shell-menu.tsx:512
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:207
+#: src/shell-menu.tsx:455
 msgid "Menu"
 msgstr "Menyja"
 
@@ -926,9 +968,18 @@ msgstr "Metrik"
 msgid "Mochi web"
 msgstr "Mochi web"
 
+#: ../../../lib/web/src/components/options-menu.tsx:164
+msgid "Moderation"
+msgstr ""
+
 #: ../../../lib/web/src/lib/preference-utils.ts:59
 msgid "Monday"
 msgstr "E hënë"
+
+#: ../../../lib/web/src/components/options-menu.tsx:145
+#: ../../../lib/web/src/components/options-menu.tsx:152
+msgid "More options"
+msgstr "Më shumë opsione"
 
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:102
 msgid "Name cannot contain angle brackets, backslash, semicolon, quotes or backticks"
@@ -947,8 +998,8 @@ msgstr "Gabim rrjeti"
 msgid "New"
 msgstr "I ri"
 
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:42
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:54
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:41
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:53
 msgid "New game"
 msgstr "Lojë e re"
 
@@ -965,7 +1016,7 @@ msgstr "Asnjë rregull qasjeje i konfiguruar. Shto rregulla për të kontrolluar
 msgid "No connected accounts"
 msgstr "Asnjë llogari e lidhur"
 
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:51
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:50
 msgid "No games yet"
 msgstr "Ende pa lojëra"
 
@@ -1004,11 +1055,11 @@ msgstr "S'u gjet asnjë rezultat."
 msgid "No time zone found."
 msgstr "S'u gjet asnjë zonë kohore."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:150
+#: ../../../lib/web/src/components/notification-category-button.tsx:106
 msgid "No topic record yet — try again after the next notification."
 msgstr "Ende asnjë regjistrim teme — provoni përsëri pas njoftimit tjetër."
 
-#: src/shell-menu.tsx:395
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:132
 msgid "No unread notifications"
 msgstr "Asnjë njoftim i palexuar"
 
@@ -1016,7 +1067,7 @@ msgstr "Asnjë njoftim i palexuar"
 msgid "No users found"
 msgstr "S'u gjet asnjë përdorues"
 
-#: ../../../lib/web/src/components/colour-picker.tsx:345
+#: ../../../lib/web/src/components/colour-picker.tsx:349
 #: ../../../lib/web/src/components/person-picker.tsx:350
 #: ../../../lib/web/src/lib/preference-utils.ts:105
 #: ../../../lib/web/src/lib/preference-utils.ts:125
@@ -1040,12 +1091,12 @@ msgstr "I pacaktuar"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:345
+#: src/shell-menu.tsx:285
 msgid "Notifications"
 msgstr "Njoftime"
 
 #. placeholder {0}: unread.length
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:111
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:195
 msgid "Notifications: {0}"
 msgstr "Njoftimet: {0}"
 
@@ -1067,18 +1118,18 @@ msgstr "Hap veprimet e llogarisë"
 msgid "Open actions"
 msgstr "Hap veprimet"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:149
-#: src/shell-menu.tsx:307
-#: src/shell-menu.tsx:428
-#: src/shell-menu.tsx:484
-#: src/shell-menu.tsx:496
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:166
+#: src/shell-menu.tsx:247
+#: src/shell-menu.tsx:371
+#: src/shell-menu.tsx:427
+#: src/shell-menu.tsx:439
 msgid "Open menu"
 msgstr "Hap menynë"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:449
-#: src/shell-menu.tsx:456
+#: src/shell-menu.tsx:392
+#: src/shell-menu.tsx:399
 msgid "Open navigation"
 msgstr "Hap navigimin"
 
@@ -1086,6 +1137,10 @@ msgstr "Hap navigimin"
 #: ../../../lib/web/src/components/layout/top-nav.tsx:44
 msgid "Open navigation menu"
 msgstr "Hap menynë e navigimit"
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:30
+msgid "Open selected card"
+msgstr "Hap kartën e zgjedhur"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:58
 #: ../../../lib/web/src/components/config-drawer.tsx:66
@@ -1125,7 +1180,7 @@ msgstr "Kërkesë për leje"
 msgid "Pick a date"
 msgstr "Zgjidhni një datë"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:95
+#: ../../../lib/web/src/components/comment-composer.tsx:99
 #: ../../../lib/web/src/features/errors/general-error.tsx:54
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:323
 msgid "Please check your internet connection and try again."
@@ -1143,6 +1198,14 @@ msgstr "Provoni përsëri."
 msgid "Please wait a moment and try again."
 msgstr "Ju lutemi prisni një moment dhe provoni sërish."
 
+#: ../../../lib/web/src/components/options-menu.tsx:175
+msgid "Posts"
+msgstr "Postimet"
+
+#: ../../../lib/web/src/components/options-menu.tsx:178
+msgid "Posts and comments"
+msgstr "Postimet dhe komentet"
+
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:377
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:382
 msgid "Previous image"
@@ -1157,7 +1220,6 @@ msgstr "Privatësia"
 msgid "Processing…"
 msgstr "Po përpunohet…"
 
-#: ../../../lib/web/src/components/layout/nav-user.tsx:137
 #: ../../../lib/web/src/components/profile-dropdown.tsx:114
 msgid "Profile"
 msgstr "Profili"
@@ -1182,7 +1244,7 @@ msgstr "Rilinkoni llogaritë tuaja në këtë server"
 msgid "Re-register your passkeys on this server"
 msgstr "Riregjistroni çelësat tuaj të hyrjes në këtë server"
 
-#: ../../../lib/web/src/components/search-entity-dialog.tsx:217
+#: ../../../lib/web/src/components/search-entity-dialog.tsx:220
 #: ../../../lib/web/src/components/search-entity-page.tsx:243
 msgid "Recommended"
 msgstr "I rekomanduar"
@@ -1191,7 +1253,7 @@ msgstr "I rekomanduar"
 msgid "Reconnecting ({retries})..."
 msgstr "Po rilidhet ({retries})..."
 
-#: ../../../lib/web/src/components/layout/authenticated-layout.tsx:133
+#: ../../../lib/web/src/components/layout/authenticated-layout.tsx:136
 msgid "Redirecting to login."
 msgstr "Duke ridrejtuar te hyrja."
 
@@ -1208,7 +1270,7 @@ msgstr "Relative (5m, 3h, 2d)"
 msgid "Relative within 24 hours, else absolute"
 msgstr "Relative brenda 24 orëve, përndryshe absolute"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:232
+#: ../../../lib/web/src/components/comment-composer.tsx:236
 #: ../../../lib/web/src/features/access/access-list.tsx:270
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:180
 msgid "Remove"
@@ -1261,9 +1323,13 @@ msgstr "Rivendos {title}"
 msgid "Reset all settings to default values"
 msgstr "Rivendos të gjitha cilësimet në vlerat parazgjedhura"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:249
+#: ../../../lib/web/src/components/comment-composer.tsx:253
 msgid "Retry"
 msgstr "Provo përsëri"
+
+#: ../../../lib/web/src/components/options-menu.tsx:181
+msgid "Revoke access"
+msgstr "Anulo aksesin"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:362
 msgid "Right to Left"
@@ -1272,6 +1338,18 @@ msgstr "Nga e djathta në të majtë"
 #: ../../../lib/web/src/components/data-table/pagination.tsx:65
 msgid "Rows per page"
 msgstr "Rreshta për faqe"
+
+#: ../../../lib/web/src/components/options-menu.tsx:131
+msgid "RSS access revoked"
+msgstr "Aksesi RSS u anulua"
+
+#: ../../../lib/web/src/components/options-menu.tsx:171
+msgid "RSS feed"
+msgstr "Prurje RSS"
+
+#: ../../../lib/web/src/components/options-menu.tsx:121
+msgid "RSS URL copied to clipboard"
+msgstr "URL e RSS u kopjua në clipboard"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:64
 msgid "Saturday"
@@ -1322,7 +1400,7 @@ msgstr "Kërko përdorues"
 msgid "Search..."
 msgstr "Kërko..."
 
-#: ../../../lib/web/src/components/search-entity-dialog.tsx:175
+#: ../../../lib/web/src/components/search-entity-dialog.tsx:178
 #: ../../../lib/web/src/components/search-entity-page.tsx:201
 #: ../../../lib/web/src/features/access/access-dialog.tsx:202
 msgid "Searching..."
@@ -1333,7 +1411,7 @@ msgstr "Duke kërkuar..."
 msgid "Select {0}"
 msgstr "Zgjidh {0}"
 
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:37
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:36
 msgid "Select a game"
 msgstr "Zgjidh një lojë"
 
@@ -1349,7 +1427,7 @@ msgstr "Zgjidh rregullin e qasjes"
 msgid "Select account"
 msgstr "Zgjidhni një llogari"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:129
+#: ../../../lib/web/src/features/accounts/account-add.tsx:142
 msgid "Select account type"
 msgstr "Zgjidh llojin e llogarisë"
 
@@ -1365,9 +1443,17 @@ msgstr "Zgjidh stilin e paraqitjes"
 msgid "Select location"
 msgstr "Zgjidh vendndodhjen"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:28
+msgid "Select next card"
+msgstr "Zgjidh kartën tjetër"
+
 #: ../../../lib/web/src/components/person-picker.tsx:83
 msgid "Select person..."
 msgstr "Zgjidhni një person..."
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:29
+msgid "Select previous card"
+msgstr "Zgjidh kartën e mëparshme"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:247
 msgid "Select sidebar style"
@@ -1430,17 +1516,19 @@ msgstr "Sesioni ka skaduar. Ju lutemi identifikohuni sërish."
 msgid "Set origin and destination"
 msgstr "Vendos origjinën dhe destinacionin"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:109
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:115
-#: ../../../lib/web/src/components/layout/nav-user.tsx:84
-#: ../../../lib/web/src/components/layout/nav-user.tsx:148
-#: ../../../lib/web/src/components/layout/nav-user.tsx:198
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:126
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:132
+#: ../../../lib/web/src/components/options-menu.tsx:196
 msgid "Settings"
 msgstr "Cilësimet"
 
 #: ../../../lib/web/src/components/password-input.tsx:27
 msgid "Show password"
 msgstr "Shfaq fjalëkalimin"
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:33
+msgid "Show this help"
+msgstr "Shfaq këtë ndihmë"
 
 #: ../../../lib/web/src/components/ui/load-more.tsx:39
 msgid "Showing {totalShown} of {total}"
@@ -1452,12 +1540,12 @@ msgstr "Duke shfaqur {totalShown} nga {total}"
 msgid "Sidebar"
 msgstr "Shiriti anësor"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:121
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:127
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:138
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:144
 msgid "Sign out"
 msgstr "Dil"
 
-#: ../../../lib/web/src/components/layout/authenticated-layout.tsx:131
+#: ../../../lib/web/src/components/layout/authenticated-layout.tsx:134
 msgid "Signing out..."
 msgstr "Duke dalë..."
 
@@ -1469,6 +1557,10 @@ msgstr "Kapërce te kryesorja"
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Small"
 msgstr "I vogël"
+
+#: ../../../lib/web/src/components/options-menu.tsx:158
+msgid "Sources"
+msgstr "Burimet"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:97
 msgid "Spacious"
@@ -1491,6 +1583,11 @@ msgstr "Abonohu"
 msgid "Sunday"
 msgstr "E diel"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:27
+msgid "Switch to view 1-9"
+msgstr "Kalo te pamja 1-9"
+
+#: ../../../lib/web/src/components/audit-timeline.tsx:111
 #: ../../../lib/web/src/components/config-drawer.tsx:209
 #: ../../../lib/web/src/components/theme-switch.tsx:59
 #: ../../../lib/web/src/lib/preference-utils.ts:21
@@ -1531,10 +1628,6 @@ msgstr "Ai kod është i pasaktë ose ka skaduar."
 #: ../../../lib/web/src/features/errors/general-error.tsx:68
 msgid "The requested content could not be found."
 msgstr "Përmbajtja e kërkuar nuk u gjet."
-
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:152
-#~ msgid "The server returned a web page instead of data, which usually means the address was wrong."
-#~ msgstr ""
 
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:152
 msgid "The server returned a web page instead of data."
@@ -1599,6 +1692,10 @@ msgstr "Ndrysho shiritin anësor"
 msgid "Toggle theme"
 msgstr "Ndrysho temën"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:26
+msgid "Toggle view options"
+msgstr "Ndrysho opsionet e pamjes"
+
 #: ../../../lib/web/src/features/errors/general-error.tsx:74
 msgid "Too many requests"
 msgstr "Shumë kërkesa"
@@ -1611,7 +1708,7 @@ msgstr "Lart"
 msgid "Travelling"
 msgstr "Duke udhëtuar"
 
-#: ../../../lib/web/src/components/search-entity-dialog.tsx:191
+#: ../../../lib/web/src/components/search-entity-dialog.tsx:194
 #: ../../../lib/web/src/components/search-entity-page.tsx:217
 msgid "Try adjusting your search terms"
 msgstr "Provo të rregullosh termat e kërkimit"
@@ -1646,12 +1743,12 @@ msgstr "Shkruaj për të kërkuar..."
 msgid "Unable to connect to remote server"
 msgstr "Nuk u lidh dot me serverin në distancë"
 
-#: ../../../lib/web/src/lib/auth-manager.ts:85
-#: ../../../lib/web/src/lib/auth-manager.ts:97
+#: ../../../lib/web/src/lib/auth-manager.ts:92
+#: ../../../lib/web/src/lib/auth-manager.ts:104
 msgid "Unable to redirect to login. Please try again."
 msgstr "Nuk mund të ridrejtohet te hyrja. Ju lutemi provoni përsëri."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:158
+#: ../../../lib/web/src/components/notification-category-button.tsx:114
 msgid "Unassigned"
 msgstr "I pacaktuar"
 
@@ -1672,6 +1769,10 @@ msgstr "Shtetet e Bashkuara"
 msgid "Unknown"
 msgstr "I panjohur"
 
+#: ../../../lib/web/src/components/options-menu.tsx:211
+msgid "Unsubscribe"
+msgstr "Çabonohu"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:135
 msgid "Unverified"
 msgstr "I paverifikuar"
@@ -1684,9 +1785,9 @@ msgstr "Ecuria e ngarkimit"
 msgid "Use your passkey"
 msgstr "Përdorni çelësin tuaj të hyrjes"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:102
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:119
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:323
+#: src/shell-menu.tsx:263
 msgid "User"
 msgstr "Përdoruesi"
 
@@ -1726,13 +1827,13 @@ msgid "View"
 msgstr "Shiko"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:367
-#: src/shell-menu.tsx:373
+#: src/shell-menu.tsx:307
+#: src/shell-menu.tsx:313
 msgid "View all"
 msgstr "Shiko të gjitha"
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:131
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:139
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:215
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:223
 msgid "View all notifications"
 msgstr "Shiko të gjitha njoftimet"
 
@@ -1769,10 +1870,6 @@ msgstr "Nuk keni qasje në këtë seksion."
 msgid "You don't have necessary permission <0/>to view this resource."
 msgstr "Nuk keni lejen e nevojshme <0/>për ta parë këtë burim."
 
-#: ../../../lib/web/src/lib/show-submitted-data.tsx:9
-msgid "You submitted the following values:"
-msgstr "Ju dërguat vlerat e mëposhtme:"
-
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:193
 msgid "You're all caught up!"
 msgstr "I keni parë të gjitha!"
@@ -1781,14 +1878,14 @@ msgstr "I keni parë të gjitha!"
 msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
 msgstr "Llogaria juaj u zhvendos këtu nga {source}. Derisa ta fshini atje, mesazhet dhe njoftimet mund të arrijnë në të dy serverët, një pjesë e përmbajtjes suaj vazhdon të shërbejë nga serveri i vjetër dhe ndjekësit mund të kenë nevojë për disa minuta që t'ju gjejnë këtu."
 
-#: ../../../lib/web/src/components/comment-composer.tsx:291
+#: ../../../lib/web/src/components/comment-composer.tsx:295
 msgid "Your attachments will be lost."
 msgstr "Bashkëngjitjet tuaja do të humbasin."
 
-#: ../../../lib/web/src/components/comment-composer.tsx:289
+#: ../../../lib/web/src/components/comment-composer.tsx:293
 msgid "Your text and attachments will be lost."
 msgstr "Teksti dhe bashkëngjitjet tuaja do të humbasin."
 
-#: ../../../lib/web/src/components/comment-composer.tsx:292
+#: ../../../lib/web/src/components/comment-composer.tsx:296
 msgid "Your text will be lost."
 msgstr "Teksti yt do të humbasë."

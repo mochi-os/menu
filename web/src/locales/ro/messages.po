@@ -60,7 +60,7 @@ msgstr "{selectedCount, plural, one {Acțiuni în masă pentru # {entityName} se
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{sentLabel} din {totalLabel}"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:148
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Deschideți meniul (# notificare necitită)} few {Deschideți meniul (# notificări necitite)} other {Deschideți meniul (# de notificări necitite)}}"
 
@@ -109,7 +109,7 @@ msgstr "Cont adăugat"
 msgid "Account removed"
 msgstr "Cont eliminat"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:126
+#: ../../../lib/web/src/features/accounts/account-add.tsx:139
 msgid "Account type"
 msgstr "Tip de cont"
 
@@ -119,11 +119,11 @@ msgstr "Cont verificat"
 
 #: ../../../lib/web/src/components/entity/entity-field-editor.tsx:717
 #: ../../../lib/web/src/features/access/access-dialog.tsx:332
-#: ../../../lib/web/src/features/accounts/account-add.tsx:196
+#: ../../../lib/web/src/features/accounts/account-add.tsx:209
 msgid "Add"
 msgstr "Adaugă"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:120
+#: ../../../lib/web/src/features/accounts/account-add.tsx:133
 msgid "Add a new account"
 msgstr "Adaugă un cont nou"
 
@@ -131,7 +131,7 @@ msgstr "Adaugă un cont nou"
 msgid "Add access"
 msgstr "Adaugă acces"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:119
+#: ../../../lib/web/src/features/accounts/account-add.tsx:132
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:288
 msgid "Add account"
 msgstr "Adaugă cont"
@@ -161,7 +161,7 @@ msgstr "Adaugă etichetă..."
 msgid "Add team/app"
 msgstr "Adaugă echipă/aplicație"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:162
+#: ../../../lib/web/src/features/accounts/account-add.tsx:175
 msgid "Add to existing notifications"
 msgstr "Adaugă la notificările existente"
 
@@ -237,6 +237,10 @@ msgstr "Utilizatori autentificați"
 msgid "Authenticator code"
 msgstr "Cod de autentificare"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:51
+msgid "Available keyboard shortcuts"
+msgstr "Scurtături de tastatură disponibile"
+
 #: ../../../lib/web/src/components/entity-avatar.tsx:99
 msgid "Avatar"
 msgstr "Avatar"
@@ -259,8 +263,8 @@ msgstr "Înapoi la pornire"
 msgid "Banner"
 msgstr "Banner"
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:156
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:166
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:237
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:247
 msgid "Blocked navigation to untrusted link"
 msgstr "Navigare blocată către un link nesigur"
 
@@ -280,17 +284,17 @@ msgstr "Notificări de browser"
 #: ../../../lib/web/src/components/ui/editable-field-row.tsx:132
 #: ../../../lib/web/src/features/access/access-dialog.tsx:328
 #: ../../../lib/web/src/features/access/access-list.tsx:268
-#: ../../../lib/web/src/features/accounts/account-add.tsx:188
+#: ../../../lib/web/src/features/accounts/account-add.tsx:201
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:91
 msgid "Cancel"
 msgstr "Anulează"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:146
+#: ../../../lib/web/src/components/notification-category-button.tsx:102
 msgid "Category for this notification"
 msgstr "Categorie pentru această notificare"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:127
-#: ../../../lib/web/src/components/notification-category-button.tsx:138
+#: ../../../lib/web/src/components/notification-category-button.tsx:83
+#: ../../../lib/web/src/components/notification-category-button.tsx:94
 msgid "Change notification category"
 msgstr "Schimbă categoria notificării"
 
@@ -298,7 +302,7 @@ msgstr "Schimbă categoria notificării"
 msgid "Check \"All\" to see your past notifications."
 msgstr "Bifați „Toate” pentru a vedea notificările anterioare."
 
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:38
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:37
 msgid "Choose a game from the sidebar or start a new one."
 msgstr "Alege un joc din bara laterală sau începe unul nou."
 
@@ -323,8 +327,8 @@ msgstr "Alege între preferința sistemului, mod luminos sau mod întunecat"
 msgid "Choose language"
 msgstr "Alege limba"
 
-#: ../../../lib/web/src/components/colour-picker.tsx:270
-#: ../../../lib/web/src/components/colour-picker.tsx:351
+#: ../../../lib/web/src/components/colour-picker.tsx:274
+#: ../../../lib/web/src/components/colour-picker.tsx:355
 #: ../../../lib/web/src/components/travelling-picker.tsx:164
 #: ../../../lib/web/src/components/travelling-picker.tsx:170
 #: ../../../lib/web/src/components/travelling-picker.tsx:231
@@ -364,8 +368,8 @@ msgstr "Închide"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:108
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:113
-#: src/shell-menu.tsx:449
-#: src/shell-menu.tsx:456
+#: src/shell-menu.tsx:392
+#: src/shell-menu.tsx:399
 msgid "Close navigation"
 msgstr "Închide navigarea"
 
@@ -373,6 +377,10 @@ msgstr "Închide navigarea"
 #: ../../../lib/web/src/components/layout/right-panel.tsx:268
 msgid "Close panel"
 msgstr "Închide panoul"
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:32
+msgid "Close panel / cancel"
+msgstr "Închide panoul / anulează"
 
 #: ../../../lib/web/src/components/header-search.tsx:54
 msgid "Close search"
@@ -459,7 +467,7 @@ msgstr "Copiază"
 msgid "Could not load this document. Please try again later."
 msgstr "Nu s-a putut încărca acest document. Încearcă din nou mai târziu."
 
-#: src/shell-menu.tsx:388
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:121
 msgid "Couldn't load notifications"
 msgstr "Notificările nu au putut fi încărcate"
 
@@ -480,15 +488,19 @@ msgstr "Nu s-a putut verifica cu acel cont. Încearcă din nou."
 msgid "Create {0}"
 msgstr "Creați {0}"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:25
+msgid "Create new item"
+msgstr "Creează un element nou"
+
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:258
 msgid "Creating..."
 msgstr "Se creează..."
 
-#: ../../../lib/web/src/components/map-view.tsx:208
+#: ../../../lib/web/src/components/map-view.tsx:217
 msgid "Current location"
 msgstr "Locația curentă"
 
-#: ../../../lib/web/src/components/colour-picker.tsx:261
+#: ../../../lib/web/src/components/colour-picker.tsx:265
 msgid "Custom"
 msgstr "Personalizat"
 
@@ -498,9 +510,6 @@ msgstr "Personalizat"
 msgid "Dark"
 msgstr "Întunecat"
 
-#: ../../../lib/web/src/components/layout/nav-user.tsx:91
-#: ../../../lib/web/src/components/layout/nav-user.tsx:154
-#: ../../../lib/web/src/components/layout/nav-user.tsx:205
 #: ../../../lib/web/src/components/profile-dropdown.tsx:87
 #: ../../../lib/web/src/components/profile-dropdown.tsx:123
 msgid "Dark mode"
@@ -518,7 +527,7 @@ msgstr "Respinge"
 msgid "Default"
 msgstr "Implicit"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:172
+#: ../../../lib/web/src/features/accounts/account-add.tsx:185
 msgid "Default AI account"
 msgstr "Cont AI implicit"
 
@@ -565,11 +574,11 @@ msgstr "Direcție"
 msgid "Directory"
 msgstr "Director"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:300
+#: ../../../lib/web/src/components/comment-composer.tsx:304
 msgid "Discard"
 msgstr "Renunță"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:298
+#: ../../../lib/web/src/components/comment-composer.tsx:302
 msgid "Discard draft?"
 msgstr "Renunți la ciornă?"
 
@@ -603,6 +612,10 @@ msgstr "Potrivit pentru dislexie"
 #: ../../../lib/web/src/components/ui/editable-field-row.tsx:154
 msgid "Edit {label}"
 msgstr "Editează {label}"
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:31
+msgid "Edit selected card"
+msgstr "Editează cardul selectat"
 
 #: ../../../lib/web/src/features/accounts/types.ts:15
 msgid "Email"
@@ -652,13 +665,29 @@ msgstr "Adăugarea etichetei a eșuat"
 msgid "Failed to copy"
 msgstr "Copierea a eșuat"
 
+#: ../../../lib/web/src/components/options-menu.tsx:99
+msgid "Failed to create link"
+msgstr "Crearea linkului a eșuat"
+
+#: ../../../lib/web/src/components/options-menu.tsx:123
+msgid "Failed to get RSS token"
+msgstr "Obținerea tokenului RSS a eșuat"
+
 #: ../../../lib/web/src/hooks/use-load-more.ts:74
 msgid "Failed to load"
 msgstr "Încărcarea a eșuat"
 
+#: ../../../lib/web/src/components/audit-timeline.tsx:72
+msgid "Failed to load history"
+msgstr "Încărcarea istoricului a eșuat"
+
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:263
 msgid "Failed to load image"
 msgstr "Imaginea nu a putut fi încărcată"
+
+#: src/use-menu-categories.ts:53
+msgid "Failed to load notification categories"
+msgstr "Încărcarea categoriilor de notificări a eșuat"
 
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:263
 msgid "Failed to load video"
@@ -668,11 +697,15 @@ msgstr "Videoclipul nu a putut fi încărcat"
 msgid "Failed to remove account"
 msgstr "Eliminarea contului a eșuat"
 
+#: ../../../lib/web/src/components/options-menu.tsx:133
+msgid "Failed to revoke RSS access"
+msgstr "Revocarea accesului RSS a eșuat"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:257
 msgid "Failed to send verification code"
 msgstr "Trimiterea codului de verificare a eșuat"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: src/use-menu-categories.ts:83
 msgid "Failed to update category"
 msgstr "Actualizarea categoriei a eșuat"
 
@@ -760,14 +793,18 @@ msgstr "Ascunde"
 msgid "Hide password"
 msgstr "Ascunde parola"
 
+#: ../../../lib/web/src/components/audit-timeline.tsx:64
+msgid "History"
+msgstr "Istoric"
+
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:90
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:175
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:192
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:464
-#: src/shell-menu.tsx:470
-#: src/shell-menu.tsx:543
-#: src/shell-menu.tsx:547
+#: src/shell-menu.tsx:407
+#: src/shell-menu.tsx:413
+#: src/shell-menu.tsx:486
+#: src/shell-menu.tsx:490
 msgid "Home"
 msgstr "Acasă"
 
@@ -824,6 +861,10 @@ msgstr "Se pare că pagina pe care o căutați <0/>nu există sau a fost elimina
 msgid "Just now"
 msgstr "Chiar acum"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:48
+msgid "Keyboard shortcuts"
+msgstr "Scurtături de tastatură"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:108
 #: ../../../lib/web/src/lib/preference-utils.ts:135
 msgid "Large"
@@ -852,6 +893,10 @@ msgstr "Doar litere, cifre, spații și cratime"
 msgid "Light"
 msgstr "Luminos"
 
+#: ../../../lib/web/src/components/options-menu.tsx:190
+msgid "Link"
+msgstr "Link"
+
 #: ../../../lib/web/src/components/ui/load-more.tsx:35
 msgid "Load more"
 msgstr "Încarcă mai multe"
@@ -865,15 +910,12 @@ msgstr "Se încarcă conținutul…"
 msgid "Loading..."
 msgstr "Se încarcă..."
 
-#: ../../../lib/web/src/components/layout/nav-user.tsx:101
-#: ../../../lib/web/src/components/layout/nav-user.tsx:167
-#: ../../../lib/web/src/components/layout/nav-user.tsx:215
 #: ../../../lib/web/src/components/profile-dropdown.tsx:69
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:330
-#: src/shell-menu.tsx:336
+#: src/shell-menu.tsx:270
+#: src/shell-menu.tsx:276
 msgid "Log out"
 msgstr "Deconectează-te"
 
@@ -893,11 +935,11 @@ msgstr "Se deconectează…"
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Gestionați conturile conectate pentru notificări și servicii."
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:118
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:125
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:202
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:209
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:353
-#: src/shell-menu.tsx:359
+#: src/shell-menu.tsx:293
+#: src/shell-menu.tsx:299
 msgid "Mark all as read"
 msgstr "Marchează totul ca citit"
 
@@ -909,8 +951,8 @@ msgstr "Server MCP"
 msgid "Medium"
 msgstr "Mediu"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:190
-#: src/shell-menu.tsx:512
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:207
+#: src/shell-menu.tsx:455
 msgid "Menu"
 msgstr "Meniu"
 
@@ -926,9 +968,18 @@ msgstr "Metric"
 msgid "Mochi web"
 msgstr "Mochi web"
 
+#: ../../../lib/web/src/components/options-menu.tsx:164
+msgid "Moderation"
+msgstr ""
+
 #: ../../../lib/web/src/lib/preference-utils.ts:59
 msgid "Monday"
 msgstr "Luni"
+
+#: ../../../lib/web/src/components/options-menu.tsx:145
+#: ../../../lib/web/src/components/options-menu.tsx:152
+msgid "More options"
+msgstr "Mai multe opțiuni"
 
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:102
 msgid "Name cannot contain angle brackets, backslash, semicolon, quotes or backticks"
@@ -947,8 +998,8 @@ msgstr "Eroare de rețea"
 msgid "New"
 msgstr "Nou"
 
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:42
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:54
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:41
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:53
 msgid "New game"
 msgstr "Joc nou"
 
@@ -965,7 +1016,7 @@ msgstr "Nu sunt configurate reguli de acces. Adaugă reguli pentru a controla ci
 msgid "No connected accounts"
 msgstr "Niciun cont conectat"
 
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:51
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:50
 msgid "No games yet"
 msgstr "Încă niciun joc"
 
@@ -1004,11 +1055,11 @@ msgstr "Nu s-au găsit rezultate."
 msgid "No time zone found."
 msgstr "Nu s-a găsit niciun fus orar."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:150
+#: ../../../lib/web/src/components/notification-category-button.tsx:106
 msgid "No topic record yet — try again after the next notification."
 msgstr "Încă nu există înregistrare de subiect — încearcă din nou după următoarea notificare."
 
-#: src/shell-menu.tsx:395
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:132
 msgid "No unread notifications"
 msgstr "Nicio notificare necitită"
 
@@ -1016,7 +1067,7 @@ msgstr "Nicio notificare necitită"
 msgid "No users found"
 msgstr "Nu s-au găsit utilizatori"
 
-#: ../../../lib/web/src/components/colour-picker.tsx:345
+#: ../../../lib/web/src/components/colour-picker.tsx:349
 #: ../../../lib/web/src/components/person-picker.tsx:350
 #: ../../../lib/web/src/lib/preference-utils.ts:105
 #: ../../../lib/web/src/lib/preference-utils.ts:125
@@ -1040,12 +1091,12 @@ msgstr "Nesetat"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:345
+#: src/shell-menu.tsx:285
 msgid "Notifications"
 msgstr "Notificări"
 
 #. placeholder {0}: unread.length
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:111
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:195
 msgid "Notifications: {0}"
 msgstr "Notificări: {0}"
 
@@ -1067,18 +1118,18 @@ msgstr "Deschide acțiuni cont"
 msgid "Open actions"
 msgstr "Deschide acțiunile"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:149
-#: src/shell-menu.tsx:307
-#: src/shell-menu.tsx:428
-#: src/shell-menu.tsx:484
-#: src/shell-menu.tsx:496
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:166
+#: src/shell-menu.tsx:247
+#: src/shell-menu.tsx:371
+#: src/shell-menu.tsx:427
+#: src/shell-menu.tsx:439
 msgid "Open menu"
 msgstr "Deschide meniul"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:449
-#: src/shell-menu.tsx:456
+#: src/shell-menu.tsx:392
+#: src/shell-menu.tsx:399
 msgid "Open navigation"
 msgstr "Deschide navigarea"
 
@@ -1086,6 +1137,10 @@ msgstr "Deschide navigarea"
 #: ../../../lib/web/src/components/layout/top-nav.tsx:44
 msgid "Open navigation menu"
 msgstr "Deschide meniul de navigare"
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:30
+msgid "Open selected card"
+msgstr "Deschide cardul selectat"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:58
 #: ../../../lib/web/src/components/config-drawer.tsx:66
@@ -1125,7 +1180,7 @@ msgstr "Cerere de permisiune"
 msgid "Pick a date"
 msgstr "Alegeți o dată"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:95
+#: ../../../lib/web/src/components/comment-composer.tsx:99
 #: ../../../lib/web/src/features/errors/general-error.tsx:54
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:323
 msgid "Please check your internet connection and try again."
@@ -1143,6 +1198,14 @@ msgstr "Încearcă din nou."
 msgid "Please wait a moment and try again."
 msgstr "Așteptați un moment și încercați din nou."
 
+#: ../../../lib/web/src/components/options-menu.tsx:175
+msgid "Posts"
+msgstr "Postări"
+
+#: ../../../lib/web/src/components/options-menu.tsx:178
+msgid "Posts and comments"
+msgstr "Postări și comentarii"
+
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:377
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:382
 msgid "Previous image"
@@ -1157,7 +1220,6 @@ msgstr "Confidențialitate"
 msgid "Processing…"
 msgstr "Se procesează…"
 
-#: ../../../lib/web/src/components/layout/nav-user.tsx:137
 #: ../../../lib/web/src/components/profile-dropdown.tsx:114
 msgid "Profile"
 msgstr "Profil"
@@ -1182,7 +1244,7 @@ msgstr "Reconectați conturile pe acest server"
 msgid "Re-register your passkeys on this server"
 msgstr "Reînregistrați-vă cheile de acces pe acest server"
 
-#: ../../../lib/web/src/components/search-entity-dialog.tsx:217
+#: ../../../lib/web/src/components/search-entity-dialog.tsx:220
 #: ../../../lib/web/src/components/search-entity-page.tsx:243
 msgid "Recommended"
 msgstr "Recomandat"
@@ -1191,7 +1253,7 @@ msgstr "Recomandat"
 msgid "Reconnecting ({retries})..."
 msgstr "Se reconectează ({retries})..."
 
-#: ../../../lib/web/src/components/layout/authenticated-layout.tsx:133
+#: ../../../lib/web/src/components/layout/authenticated-layout.tsx:136
 msgid "Redirecting to login."
 msgstr "Se redirecționează către autentificare."
 
@@ -1208,7 +1270,7 @@ msgstr "Relativ (5m, 3h, 2z)"
 msgid "Relative within 24 hours, else absolute"
 msgstr "Relativ în 24 de ore, altfel absolut"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:232
+#: ../../../lib/web/src/components/comment-composer.tsx:236
 #: ../../../lib/web/src/features/access/access-list.tsx:270
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:180
 msgid "Remove"
@@ -1261,9 +1323,13 @@ msgstr "Resetați {title}"
 msgid "Reset all settings to default values"
 msgstr "Resetează toate setările la valorile implicite"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:249
+#: ../../../lib/web/src/components/comment-composer.tsx:253
 msgid "Retry"
 msgstr "Reîncearcă"
+
+#: ../../../lib/web/src/components/options-menu.tsx:181
+msgid "Revoke access"
+msgstr "Revocă accesul"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:362
 msgid "Right to Left"
@@ -1272,6 +1338,18 @@ msgstr "De la dreapta la stânga"
 #: ../../../lib/web/src/components/data-table/pagination.tsx:65
 msgid "Rows per page"
 msgstr "Rânduri pe pagină"
+
+#: ../../../lib/web/src/components/options-menu.tsx:131
+msgid "RSS access revoked"
+msgstr "Acces RSS revocat"
+
+#: ../../../lib/web/src/components/options-menu.tsx:171
+msgid "RSS feed"
+msgstr "Flux RSS"
+
+#: ../../../lib/web/src/components/options-menu.tsx:121
+msgid "RSS URL copied to clipboard"
+msgstr "URL RSS copiat în clipboard"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:64
 msgid "Saturday"
@@ -1322,7 +1400,7 @@ msgstr "Caută utilizatori"
 msgid "Search..."
 msgstr "Caută..."
 
-#: ../../../lib/web/src/components/search-entity-dialog.tsx:175
+#: ../../../lib/web/src/components/search-entity-dialog.tsx:178
 #: ../../../lib/web/src/components/search-entity-page.tsx:201
 #: ../../../lib/web/src/features/access/access-dialog.tsx:202
 msgid "Searching..."
@@ -1333,7 +1411,7 @@ msgstr "Se caută..."
 msgid "Select {0}"
 msgstr "Selectați {0}"
 
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:37
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:36
 msgid "Select a game"
 msgstr "Selectează un joc"
 
@@ -1349,7 +1427,7 @@ msgstr "Selectează regula de acces"
 msgid "Select account"
 msgstr "Selectați un cont"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:129
+#: ../../../lib/web/src/features/accounts/account-add.tsx:142
 msgid "Select account type"
 msgstr "Selectează tipul contului"
 
@@ -1365,9 +1443,17 @@ msgstr "Selectează stilul aspectului"
 msgid "Select location"
 msgstr "Selectează locația"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:28
+msgid "Select next card"
+msgstr "Selectează cardul următor"
+
 #: ../../../lib/web/src/components/person-picker.tsx:83
 msgid "Select person..."
 msgstr "Selectați o persoană..."
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:29
+msgid "Select previous card"
+msgstr "Selectează cardul anterior"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:247
 msgid "Select sidebar style"
@@ -1430,17 +1516,19 @@ msgstr "Sesiunea a expirat. Autentificați-vă din nou."
 msgid "Set origin and destination"
 msgstr "Setează originea și destinația"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:109
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:115
-#: ../../../lib/web/src/components/layout/nav-user.tsx:84
-#: ../../../lib/web/src/components/layout/nav-user.tsx:148
-#: ../../../lib/web/src/components/layout/nav-user.tsx:198
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:126
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:132
+#: ../../../lib/web/src/components/options-menu.tsx:196
 msgid "Settings"
 msgstr "Setări"
 
 #: ../../../lib/web/src/components/password-input.tsx:27
 msgid "Show password"
 msgstr "Arată parola"
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:33
+msgid "Show this help"
+msgstr "Arată acest ajutor"
 
 #: ../../../lib/web/src/components/ui/load-more.tsx:39
 msgid "Showing {totalShown} of {total}"
@@ -1452,12 +1540,12 @@ msgstr "Se afișează {totalShown} din {total}"
 msgid "Sidebar"
 msgstr "Bară laterală"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:121
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:127
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:138
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:144
 msgid "Sign out"
 msgstr "Deconectează-te"
 
-#: ../../../lib/web/src/components/layout/authenticated-layout.tsx:131
+#: ../../../lib/web/src/components/layout/authenticated-layout.tsx:134
 msgid "Signing out..."
 msgstr "Se deconectează..."
 
@@ -1469,6 +1557,10 @@ msgstr "Sari la conținutul principal"
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Small"
 msgstr "Mic"
+
+#: ../../../lib/web/src/components/options-menu.tsx:158
+msgid "Sources"
+msgstr "Surse"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:97
 msgid "Spacious"
@@ -1491,6 +1583,11 @@ msgstr "Abonează-te"
 msgid "Sunday"
 msgstr "Duminică"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:27
+msgid "Switch to view 1-9"
+msgstr "Comută la vizualizarea 1-9"
+
+#: ../../../lib/web/src/components/audit-timeline.tsx:111
 #: ../../../lib/web/src/components/config-drawer.tsx:209
 #: ../../../lib/web/src/components/theme-switch.tsx:59
 #: ../../../lib/web/src/lib/preference-utils.ts:21
@@ -1531,10 +1628,6 @@ msgstr "Acel cod este incorect sau a expirat."
 #: ../../../lib/web/src/features/errors/general-error.tsx:68
 msgid "The requested content could not be found."
 msgstr "Conținutul solicitat nu a putut fi găsit."
-
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:152
-#~ msgid "The server returned a web page instead of data, which usually means the address was wrong."
-#~ msgstr ""
 
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:152
 msgid "The server returned a web page instead of data."
@@ -1599,6 +1692,10 @@ msgstr "Comută bara laterală"
 msgid "Toggle theme"
 msgstr "Comută tema"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:26
+msgid "Toggle view options"
+msgstr "Comută opțiunile de vizualizare"
+
 #: ../../../lib/web/src/features/errors/general-error.tsx:74
 msgid "Too many requests"
 msgstr "Prea multe solicitări"
@@ -1611,7 +1708,7 @@ msgstr "Sus"
 msgid "Travelling"
 msgstr "În călătorie"
 
-#: ../../../lib/web/src/components/search-entity-dialog.tsx:191
+#: ../../../lib/web/src/components/search-entity-dialog.tsx:194
 #: ../../../lib/web/src/components/search-entity-page.tsx:217
 msgid "Try adjusting your search terms"
 msgstr "Încearcă să ajustezi termenii de căutare"
@@ -1646,12 +1743,12 @@ msgstr "Tastează pentru a căuta..."
 msgid "Unable to connect to remote server"
 msgstr "Nu se poate conecta la serverul la distanță"
 
-#: ../../../lib/web/src/lib/auth-manager.ts:85
-#: ../../../lib/web/src/lib/auth-manager.ts:97
+#: ../../../lib/web/src/lib/auth-manager.ts:92
+#: ../../../lib/web/src/lib/auth-manager.ts:104
 msgid "Unable to redirect to login. Please try again."
 msgstr "Nu se poate redirecționa la conectare. Încearcă din nou."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:158
+#: ../../../lib/web/src/components/notification-category-button.tsx:114
 msgid "Unassigned"
 msgstr "Neatribuit"
 
@@ -1672,6 +1769,10 @@ msgstr "Statele Unite"
 msgid "Unknown"
 msgstr "Necunoscut"
 
+#: ../../../lib/web/src/components/options-menu.tsx:211
+msgid "Unsubscribe"
+msgstr "Dezabonează-te"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:135
 msgid "Unverified"
 msgstr "Neverificat"
@@ -1684,9 +1785,9 @@ msgstr "Progresul încărcării"
 msgid "Use your passkey"
 msgstr "Folosește cheia de acces"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:102
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:119
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:323
+#: src/shell-menu.tsx:263
 msgid "User"
 msgstr "Utilizator"
 
@@ -1726,13 +1827,13 @@ msgid "View"
 msgstr "Vizualizează"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:367
-#: src/shell-menu.tsx:373
+#: src/shell-menu.tsx:307
+#: src/shell-menu.tsx:313
 msgid "View all"
 msgstr "Vizualizează tot"
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:131
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:139
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:215
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:223
 msgid "View all notifications"
 msgstr "Vizualizează toate notificările"
 
@@ -1769,10 +1870,6 @@ msgstr "Nu aveți acces la această secțiune."
 msgid "You don't have necessary permission <0/>to view this resource."
 msgstr "Nu aveți permisiunea necesară <0/>pentru a vizualiza această resursă."
 
-#: ../../../lib/web/src/lib/show-submitted-data.tsx:9
-msgid "You submitted the following values:"
-msgstr "Ați trimis următoarele valori:"
-
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:193
 msgid "You're all caught up!"
 msgstr "Sunteți la zi!"
@@ -1781,14 +1878,14 @@ msgstr "Sunteți la zi!"
 msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
 msgstr "Contul dvs. a fost mutat aici de la {source}. Până când îl ștergeți de acolo, mesajele și notificările pot ajunge pe ambele servere, o parte din conținutul dvs. continuă să fie servit de pe serverul vechi, iar urmăritorii pot avea nevoie de câteva minute pentru a vă găsi aici."
 
-#: ../../../lib/web/src/components/comment-composer.tsx:291
+#: ../../../lib/web/src/components/comment-composer.tsx:295
 msgid "Your attachments will be lost."
 msgstr "Atașamentele tale se vor pierde."
 
-#: ../../../lib/web/src/components/comment-composer.tsx:289
+#: ../../../lib/web/src/components/comment-composer.tsx:293
 msgid "Your text and attachments will be lost."
 msgstr "Textul și atașamentele tale se vor pierde."
 
-#: ../../../lib/web/src/components/comment-composer.tsx:292
+#: ../../../lib/web/src/components/comment-composer.tsx:296
 msgid "Your text will be lost."
 msgstr "Textul tău va fi pierdut."

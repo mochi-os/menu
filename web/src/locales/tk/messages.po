@@ -60,7 +60,7 @@ msgstr "{selectedCount, plural, one {# saýlanan {entityName} üçin köpçülik
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{totalLabel}-den {sentLabel}"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:148
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Menýuny aç (# okalmadyk bildiriş)} other {Menýuny aç (# okalmadyk bildiriş)}}"
 
@@ -109,7 +109,7 @@ msgstr "Hasap goşuldy"
 msgid "Account removed"
 msgstr "Hasap aýryldy"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:126
+#: ../../../lib/web/src/features/accounts/account-add.tsx:139
 msgid "Account type"
 msgstr "Hasap görnüşi"
 
@@ -119,11 +119,11 @@ msgstr "Hasap tassyklandy"
 
 #: ../../../lib/web/src/components/entity/entity-field-editor.tsx:717
 #: ../../../lib/web/src/features/access/access-dialog.tsx:332
-#: ../../../lib/web/src/features/accounts/account-add.tsx:196
+#: ../../../lib/web/src/features/accounts/account-add.tsx:209
 msgid "Add"
 msgstr "Goşmak"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:120
+#: ../../../lib/web/src/features/accounts/account-add.tsx:133
 msgid "Add a new account"
 msgstr "Täze hasap goşmak"
 
@@ -131,7 +131,7 @@ msgstr "Täze hasap goşmak"
 msgid "Add access"
 msgstr "Giriş goşmak"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:119
+#: ../../../lib/web/src/features/accounts/account-add.tsx:132
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:288
 msgid "Add account"
 msgstr "Hasap goşmak"
@@ -161,7 +161,7 @@ msgstr "Bellik goşuň..."
 msgid "Add team/app"
 msgstr "Topar/programma goşmak"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:162
+#: ../../../lib/web/src/features/accounts/account-add.tsx:175
 msgid "Add to existing notifications"
 msgstr "Bar bolan bildirişlere goşmak"
 
@@ -237,6 +237,10 @@ msgstr "Tassyklanan ulanyjylar"
 msgid "Authenticator code"
 msgstr "Autentifikator kody"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:51
+msgid "Available keyboard shortcuts"
+msgstr "Elýeterli klawiatura gysga ýollary"
+
 #: ../../../lib/web/src/components/entity-avatar.tsx:99
 msgid "Avatar"
 msgstr "Awatar"
@@ -259,8 +263,8 @@ msgstr "Baş sahypa dolan"
 msgid "Banner"
 msgstr "Banner"
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:156
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:166
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:237
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:247
 msgid "Blocked navigation to untrusted link"
 msgstr "Ynamsyz baglanyşyga geçiş gabsaldy"
 
@@ -280,17 +284,17 @@ msgstr "Brauzer bildirişleri"
 #: ../../../lib/web/src/components/ui/editable-field-row.tsx:132
 #: ../../../lib/web/src/features/access/access-dialog.tsx:328
 #: ../../../lib/web/src/features/access/access-list.tsx:268
-#: ../../../lib/web/src/features/accounts/account-add.tsx:188
+#: ../../../lib/web/src/features/accounts/account-add.tsx:201
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:91
 msgid "Cancel"
 msgstr "Ýatyrmak"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:146
+#: ../../../lib/web/src/components/notification-category-button.tsx:102
 msgid "Category for this notification"
 msgstr "Bu bildiriş üçin kategoriýa"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:127
-#: ../../../lib/web/src/components/notification-category-button.tsx:138
+#: ../../../lib/web/src/components/notification-category-button.tsx:83
+#: ../../../lib/web/src/components/notification-category-button.tsx:94
 msgid "Change notification category"
 msgstr "Bildiriş kategoriýasyny üýtgetmek"
 
@@ -298,7 +302,7 @@ msgstr "Bildiriş kategoriýasyny üýtgetmek"
 msgid "Check \"All\" to see your past notifications."
 msgstr "Öňki bildirişleri görmek üçin \"Ählisi\" saýlaň."
 
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:38
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:37
 msgid "Choose a game from the sidebar or start a new one."
 msgstr "Gapdal panelden oýun saýlaň ýa-da täzesini başlaň."
 
@@ -323,8 +327,8 @@ msgstr "Ulgam islegi, açyk görnüş ýa-da goýy görnüş arasynda saýlaň"
 msgid "Choose language"
 msgstr "Dil saýlaň"
 
-#: ../../../lib/web/src/components/colour-picker.tsx:270
-#: ../../../lib/web/src/components/colour-picker.tsx:351
+#: ../../../lib/web/src/components/colour-picker.tsx:274
+#: ../../../lib/web/src/components/colour-picker.tsx:355
 #: ../../../lib/web/src/components/travelling-picker.tsx:164
 #: ../../../lib/web/src/components/travelling-picker.tsx:170
 #: ../../../lib/web/src/components/travelling-picker.tsx:231
@@ -364,8 +368,8 @@ msgstr "Ýapmak"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:108
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:113
-#: src/shell-menu.tsx:449
-#: src/shell-menu.tsx:456
+#: src/shell-menu.tsx:392
+#: src/shell-menu.tsx:399
 msgid "Close navigation"
 msgstr "Nawigasiýany ýapmak"
 
@@ -373,6 +377,10 @@ msgstr "Nawigasiýany ýapmak"
 #: ../../../lib/web/src/components/layout/right-panel.tsx:268
 msgid "Close panel"
 msgstr "Paneli ýap"
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:32
+msgid "Close panel / cancel"
+msgstr "Paneli ýapmak / ýatyrmak"
 
 #: ../../../lib/web/src/components/header-search.tsx:54
 msgid "Close search"
@@ -459,7 +467,7 @@ msgstr "Nusgalamak"
 msgid "Could not load this document. Please try again later."
 msgstr "Bu resminamany ýüklemedi. Soň gaýtadan synanyşyň."
 
-#: src/shell-menu.tsx:388
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:121
 msgid "Couldn't load notifications"
 msgstr "Habarnamalar ýüklenip bilmedi"
 
@@ -480,15 +488,19 @@ msgstr "Şol hasap bilen barlap bolmady. Täzeden synanyşyň."
 msgid "Create {0}"
 msgstr "{0} döret"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:25
+msgid "Create new item"
+msgstr "Täze element döretmek"
+
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:258
 msgid "Creating..."
 msgstr "Döredilýär..."
 
-#: ../../../lib/web/src/components/map-view.tsx:208
+#: ../../../lib/web/src/components/map-view.tsx:217
 msgid "Current location"
 msgstr "Häzirki ýer"
 
-#: ../../../lib/web/src/components/colour-picker.tsx:261
+#: ../../../lib/web/src/components/colour-picker.tsx:265
 msgid "Custom"
 msgstr "Hususy"
 
@@ -498,9 +510,6 @@ msgstr "Hususy"
 msgid "Dark"
 msgstr "Goýy"
 
-#: ../../../lib/web/src/components/layout/nav-user.tsx:91
-#: ../../../lib/web/src/components/layout/nav-user.tsx:154
-#: ../../../lib/web/src/components/layout/nav-user.tsx:205
 #: ../../../lib/web/src/components/profile-dropdown.tsx:87
 #: ../../../lib/web/src/components/profile-dropdown.tsx:123
 msgid "Dark mode"
@@ -518,7 +527,7 @@ msgstr "Ret etmek"
 msgid "Default"
 msgstr "Adaty"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:172
+#: ../../../lib/web/src/features/accounts/account-add.tsx:185
 msgid "Default AI account"
 msgstr "Adaty AI hasap"
 
@@ -565,11 +574,11 @@ msgstr "Ugur"
 msgid "Directory"
 msgstr "Katalog"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:300
+#: ../../../lib/web/src/components/comment-composer.tsx:304
 msgid "Discard"
 msgstr "Taşla"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:298
+#: ../../../lib/web/src/components/comment-composer.tsx:302
 msgid "Discard draft?"
 msgstr "Taslamany taşlamaly?"
 
@@ -603,6 +612,10 @@ msgstr "Disleksiýa uýgunlaşan"
 #: ../../../lib/web/src/components/ui/editable-field-row.tsx:154
 msgid "Edit {label}"
 msgstr "{label} redaktirle"
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:31
+msgid "Edit selected card"
+msgstr "Saýlanan kartoçkany düzet"
 
 #: ../../../lib/web/src/features/accounts/types.ts:15
 msgid "Email"
@@ -652,13 +665,29 @@ msgstr "Bellik goşulmady"
 msgid "Failed to copy"
 msgstr "Göçürilmedi"
 
+#: ../../../lib/web/src/components/options-menu.tsx:99
+msgid "Failed to create link"
+msgstr "Baglanyşyk döredilmedi"
+
+#: ../../../lib/web/src/components/options-menu.tsx:123
+msgid "Failed to get RSS token"
+msgstr "RSS tokeni alynmady"
+
 #: ../../../lib/web/src/hooks/use-load-more.ts:74
 msgid "Failed to load"
 msgstr "Ýüklenmedi"
 
+#: ../../../lib/web/src/components/audit-timeline.tsx:72
+msgid "Failed to load history"
+msgstr "Taryh ýüklenmedi"
+
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:263
 msgid "Failed to load image"
 msgstr "Surat ýüklenip bilinmedi"
+
+#: src/use-menu-categories.ts:53
+msgid "Failed to load notification categories"
+msgstr "Bildiriş kategoriýalary ýüklenmedi"
 
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:263
 msgid "Failed to load video"
@@ -668,11 +697,15 @@ msgstr "Wideo ýüklenip bilinmedi"
 msgid "Failed to remove account"
 msgstr "Hasap aýrylmady"
 
+#: ../../../lib/web/src/components/options-menu.tsx:133
+msgid "Failed to revoke RSS access"
+msgstr "RSS elýeterliligini ýatyrmak başartmady"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:257
 msgid "Failed to send verification code"
 msgstr "Tassyklama kody iberilmedi"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: src/use-menu-categories.ts:83
 msgid "Failed to update category"
 msgstr "Kategoriýa täzelenmedi"
 
@@ -760,14 +793,18 @@ msgstr "Gizle"
 msgid "Hide password"
 msgstr "Paroly gizle"
 
+#: ../../../lib/web/src/components/audit-timeline.tsx:64
+msgid "History"
+msgstr "Taryh"
+
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:90
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:175
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:192
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:464
-#: src/shell-menu.tsx:470
-#: src/shell-menu.tsx:543
-#: src/shell-menu.tsx:547
+#: src/shell-menu.tsx:407
+#: src/shell-menu.tsx:413
+#: src/shell-menu.tsx:486
+#: src/shell-menu.tsx:490
 msgid "Home"
 msgstr "Baş sahypa"
 
@@ -824,6 +861,10 @@ msgstr "Görnüşinden, gözleýän sahypaňyz <0/>ýok ýa-da aýrylan."
 msgid "Just now"
 msgstr "Häzir"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:48
+msgid "Keyboard shortcuts"
+msgstr "Klawiatura gysga ýollary"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:108
 #: ../../../lib/web/src/lib/preference-utils.ts:135
 msgid "Large"
@@ -852,6 +893,10 @@ msgstr "Diňe harplar, sanlar, boşluklar we defisler"
 msgid "Light"
 msgstr "Açyk"
 
+#: ../../../lib/web/src/components/options-menu.tsx:190
+msgid "Link"
+msgstr "Salgy"
+
 #: ../../../lib/web/src/components/ui/load-more.tsx:35
 msgid "Load more"
 msgstr "Has köp ýükle"
@@ -865,15 +910,12 @@ msgstr "Mazmun ýüklenýär…"
 msgid "Loading..."
 msgstr "Ýüklenýär..."
 
-#: ../../../lib/web/src/components/layout/nav-user.tsx:101
-#: ../../../lib/web/src/components/layout/nav-user.tsx:167
-#: ../../../lib/web/src/components/layout/nav-user.tsx:215
 #: ../../../lib/web/src/components/profile-dropdown.tsx:69
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:330
-#: src/shell-menu.tsx:336
+#: src/shell-menu.tsx:270
+#: src/shell-menu.tsx:276
 msgid "Log out"
 msgstr "Çyk"
 
@@ -893,11 +935,11 @@ msgstr "Çykylýar…"
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Bildirişler we hyzmatlar üçin birikdirilen hasaplaryňyzy dolandyryň."
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:118
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:125
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:202
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:209
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:353
-#: src/shell-menu.tsx:359
+#: src/shell-menu.tsx:293
+#: src/shell-menu.tsx:299
 msgid "Mark all as read"
 msgstr "Hemmesini okaldy diýip belgile"
 
@@ -909,8 +951,8 @@ msgstr "MCP serweri"
 msgid "Medium"
 msgstr "Orta"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:190
-#: src/shell-menu.tsx:512
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:207
+#: src/shell-menu.tsx:455
 msgid "Menu"
 msgstr "Menýu"
 
@@ -926,9 +968,18 @@ msgstr "Metrik"
 msgid "Mochi web"
 msgstr "Mochi web"
 
+#: ../../../lib/web/src/components/options-menu.tsx:164
+msgid "Moderation"
+msgstr ""
+
 #: ../../../lib/web/src/lib/preference-utils.ts:59
 msgid "Monday"
 msgstr "Duşenbe"
+
+#: ../../../lib/web/src/components/options-menu.tsx:145
+#: ../../../lib/web/src/components/options-menu.tsx:152
+msgid "More options"
+msgstr "Köp opsiýalar"
 
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:102
 msgid "Name cannot contain angle brackets, backslash, semicolon, quotes or backticks"
@@ -947,8 +998,8 @@ msgstr "Tor ýalňyşlygy"
 msgid "New"
 msgstr "Täze"
 
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:42
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:54
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:41
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:53
 msgid "New game"
 msgstr "Täze oýun"
 
@@ -965,7 +1016,7 @@ msgstr "Giriş düzgünleri ýok. Bu çeşmä kim girip biljekdigini dolandyrmak
 msgid "No connected accounts"
 msgstr "Baglanan hasaplar ýok"
 
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:51
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:50
 msgid "No games yet"
 msgstr "Heniz oýunlar ýok"
 
@@ -1004,11 +1055,11 @@ msgstr "Netijeler tapylmady."
 msgid "No time zone found."
 msgstr "Wagt zolagy tapylmady."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:150
+#: ../../../lib/web/src/components/notification-category-button.tsx:106
 msgid "No topic record yet — try again after the next notification."
 msgstr "Heniz mowzuk ýazgysy ýok — indiki bildirişden soň gaýtadan synanyşyň."
 
-#: src/shell-menu.tsx:395
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:132
 msgid "No unread notifications"
 msgstr "Okalmadyk bildirişler ýok"
 
@@ -1016,7 +1067,7 @@ msgstr "Okalmadyk bildirişler ýok"
 msgid "No users found"
 msgstr "Ulanyjylar tapylmady"
 
-#: ../../../lib/web/src/components/colour-picker.tsx:345
+#: ../../../lib/web/src/components/colour-picker.tsx:349
 #: ../../../lib/web/src/components/person-picker.tsx:350
 #: ../../../lib/web/src/lib/preference-utils.ts:105
 #: ../../../lib/web/src/lib/preference-utils.ts:125
@@ -1040,12 +1091,12 @@ msgstr "Bellenilmedik"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:345
+#: src/shell-menu.tsx:285
 msgid "Notifications"
 msgstr "Bildirişler"
 
 #. placeholder {0}: unread.length
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:111
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:195
 msgid "Notifications: {0}"
 msgstr "Bildirişler: {0}"
 
@@ -1067,18 +1118,18 @@ msgstr "Hasap hereketlerini aç"
 msgid "Open actions"
 msgstr "Amallary aç"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:149
-#: src/shell-menu.tsx:307
-#: src/shell-menu.tsx:428
-#: src/shell-menu.tsx:484
-#: src/shell-menu.tsx:496
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:166
+#: src/shell-menu.tsx:247
+#: src/shell-menu.tsx:371
+#: src/shell-menu.tsx:427
+#: src/shell-menu.tsx:439
 msgid "Open menu"
 msgstr "Menýuny aç"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:449
-#: src/shell-menu.tsx:456
+#: src/shell-menu.tsx:392
+#: src/shell-menu.tsx:399
 msgid "Open navigation"
 msgstr "Nawigasiýany aç"
 
@@ -1086,6 +1137,10 @@ msgstr "Nawigasiýany aç"
 #: ../../../lib/web/src/components/layout/top-nav.tsx:44
 msgid "Open navigation menu"
 msgstr "Nawigasiýa menýusyny aç"
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:30
+msgid "Open selected card"
+msgstr "Saýlanan kartoçkany aç"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:58
 #: ../../../lib/web/src/components/config-drawer.tsx:66
@@ -1125,7 +1180,7 @@ msgstr "Rugsat haýyşy"
 msgid "Pick a date"
 msgstr "Sene saýlaň"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:95
+#: ../../../lib/web/src/components/comment-composer.tsx:99
 #: ../../../lib/web/src/features/errors/general-error.tsx:54
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:323
 msgid "Please check your internet connection and try again."
@@ -1143,6 +1198,14 @@ msgstr "Haýyş, gaýtadan synanyşyň."
 msgid "Please wait a moment and try again."
 msgstr "Biraz garaşyň we täzeden synanyşyň."
 
+#: ../../../lib/web/src/components/options-menu.tsx:175
+msgid "Posts"
+msgstr "Postlar"
+
+#: ../../../lib/web/src/components/options-menu.tsx:178
+msgid "Posts and comments"
+msgstr "Postlar we teswirler"
+
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:377
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:382
 msgid "Previous image"
@@ -1157,7 +1220,6 @@ msgstr "Gizlinlik"
 msgid "Processing…"
 msgstr "Işlenýär…"
 
-#: ../../../lib/web/src/components/layout/nav-user.tsx:137
 #: ../../../lib/web/src/components/profile-dropdown.tsx:114
 msgid "Profile"
 msgstr "Profil"
@@ -1182,7 +1244,7 @@ msgstr "Bu serwerde hasaplaryňyzy täzeden baglanyşdyryň"
 msgid "Re-register your passkeys on this server"
 msgstr "Bu serwerde giriş açarlaryňyzy gaýtadan hasaba alyň"
 
-#: ../../../lib/web/src/components/search-entity-dialog.tsx:217
+#: ../../../lib/web/src/components/search-entity-dialog.tsx:220
 #: ../../../lib/web/src/components/search-entity-page.tsx:243
 msgid "Recommended"
 msgstr "Maslahat berilýän"
@@ -1191,7 +1253,7 @@ msgstr "Maslahat berilýän"
 msgid "Reconnecting ({retries})..."
 msgstr "Täzeden birikdirilýär ({retries})..."
 
-#: ../../../lib/web/src/components/layout/authenticated-layout.tsx:133
+#: ../../../lib/web/src/components/layout/authenticated-layout.tsx:136
 msgid "Redirecting to login."
 msgstr "Girişe gönükdirilýär."
 
@@ -1208,7 +1270,7 @@ msgstr "Otnositel (5m, 3h, 2d)"
 msgid "Relative within 24 hours, else absolute"
 msgstr "24 sagat içinde otnositel, başga absolýut"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:232
+#: ../../../lib/web/src/components/comment-composer.tsx:236
 #: ../../../lib/web/src/features/access/access-list.tsx:270
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:180
 msgid "Remove"
@@ -1261,9 +1323,13 @@ msgstr "{title} täzeden gur"
 msgid "Reset all settings to default values"
 msgstr "Ähli sazlamalary deslapky bahalara gaýtar"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:249
+#: ../../../lib/web/src/components/comment-composer.tsx:253
 msgid "Retry"
 msgstr "Gaýtadan synanyş"
+
+#: ../../../lib/web/src/components/options-menu.tsx:181
+msgid "Revoke access"
+msgstr "Elýeterliligi ýatyr"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:362
 msgid "Right to Left"
@@ -1272,6 +1338,18 @@ msgstr "Sagdan çepe"
 #: ../../../lib/web/src/components/data-table/pagination.tsx:65
 msgid "Rows per page"
 msgstr "Sahypadaky hatarlar"
+
+#: ../../../lib/web/src/components/options-menu.tsx:131
+msgid "RSS access revoked"
+msgstr "RSS elýeterliligi ýatyryldy"
+
+#: ../../../lib/web/src/components/options-menu.tsx:171
+msgid "RSS feed"
+msgstr "RSS akymy"
+
+#: ../../../lib/web/src/components/options-menu.tsx:121
+msgid "RSS URL copied to clipboard"
+msgstr "RSS URL bufer ýadyna göçürildi"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:64
 msgid "Saturday"
@@ -1322,7 +1400,7 @@ msgstr "Ulanyjylary gözle"
 msgid "Search..."
 msgstr "Gözle..."
 
-#: ../../../lib/web/src/components/search-entity-dialog.tsx:175
+#: ../../../lib/web/src/components/search-entity-dialog.tsx:178
 #: ../../../lib/web/src/components/search-entity-page.tsx:201
 #: ../../../lib/web/src/features/access/access-dialog.tsx:202
 msgid "Searching..."
@@ -1333,7 +1411,7 @@ msgstr "Gözlenýär..."
 msgid "Select {0}"
 msgstr "{0} saýlaň"
 
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:37
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:36
 msgid "Select a game"
 msgstr "Oýun saýla"
 
@@ -1349,7 +1427,7 @@ msgstr "Giriş düzgünini saýla"
 msgid "Select account"
 msgstr "Hasap saýlaň"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:129
+#: ../../../lib/web/src/features/accounts/account-add.tsx:142
 msgid "Select account type"
 msgstr "Hasap görnüşini saýla"
 
@@ -1365,9 +1443,17 @@ msgstr "Görnüş stilini saýla"
 msgid "Select location"
 msgstr "Ýerleşýän ýerini saýla"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:28
+msgid "Select next card"
+msgstr "Indiki kartoçkany saýla"
+
 #: ../../../lib/web/src/components/person-picker.tsx:83
 msgid "Select person..."
 msgstr "Adam saýlaň..."
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:29
+msgid "Select previous card"
+msgstr "Öňki kartoçkany saýla"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:247
 msgid "Select sidebar style"
@@ -1430,17 +1516,19 @@ msgstr "Sessiýanyň möhleti gutardy. Täzeden giriň."
 msgid "Set origin and destination"
 msgstr "Başlangyç we baryljak ýeri belle"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:109
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:115
-#: ../../../lib/web/src/components/layout/nav-user.tsx:84
-#: ../../../lib/web/src/components/layout/nav-user.tsx:148
-#: ../../../lib/web/src/components/layout/nav-user.tsx:198
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:126
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:132
+#: ../../../lib/web/src/components/options-menu.tsx:196
 msgid "Settings"
 msgstr "Sazlamalar"
 
 #: ../../../lib/web/src/components/password-input.tsx:27
 msgid "Show password"
 msgstr "Paroly görkez"
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:33
+msgid "Show this help"
+msgstr "Bu kömegi görkez"
 
 #: ../../../lib/web/src/components/ui/load-more.tsx:39
 msgid "Showing {totalShown} of {total}"
@@ -1452,12 +1540,12 @@ msgstr "{total} sany {totalShown} görkezilýär"
 msgid "Sidebar"
 msgstr "Gapdal panel"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:121
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:127
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:138
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:144
 msgid "Sign out"
 msgstr "Çykyş et"
 
-#: ../../../lib/web/src/components/layout/authenticated-layout.tsx:131
+#: ../../../lib/web/src/components/layout/authenticated-layout.tsx:134
 msgid "Signing out..."
 msgstr "Çykylýar..."
 
@@ -1469,6 +1557,10 @@ msgstr "Esasy mazmuna geç"
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Small"
 msgstr "Kiçi"
+
+#: ../../../lib/web/src/components/options-menu.tsx:158
+msgid "Sources"
+msgstr "Çeşmeler"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:97
 msgid "Spacious"
@@ -1491,6 +1583,11 @@ msgstr "Abuna ýaz"
 msgid "Sunday"
 msgstr "Ýekşenbe"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:27
+msgid "Switch to view 1-9"
+msgstr "1-9 görnüşine geç"
+
+#: ../../../lib/web/src/components/audit-timeline.tsx:111
 #: ../../../lib/web/src/components/config-drawer.tsx:209
 #: ../../../lib/web/src/components/theme-switch.tsx:59
 #: ../../../lib/web/src/lib/preference-utils.ts:21
@@ -1531,10 +1628,6 @@ msgstr "Ol kod nädogry ýa-da möhleti geçen."
 #: ../../../lib/web/src/features/errors/general-error.tsx:68
 msgid "The requested content could not be found."
 msgstr "Soralan mazmun tapylmady."
-
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:152
-#~ msgid "The server returned a web page instead of data, which usually means the address was wrong."
-#~ msgstr ""
 
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:152
 msgid "The server returned a web page instead of data."
@@ -1599,6 +1692,10 @@ msgstr "Gapdal paneli geçir"
 msgid "Toggle theme"
 msgstr "Temany geçir"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:26
+msgid "Toggle view options"
+msgstr "Görnüş saýlawlaryny geçir"
+
 #: ../../../lib/web/src/features/errors/general-error.tsx:74
 msgid "Too many requests"
 msgstr "Aşa köp haýyş"
@@ -1611,7 +1708,7 @@ msgstr "Ýokarky"
 msgid "Travelling"
 msgstr "Sapar"
 
-#: ../../../lib/web/src/components/search-entity-dialog.tsx:191
+#: ../../../lib/web/src/components/search-entity-dialog.tsx:194
 #: ../../../lib/web/src/components/search-entity-page.tsx:217
 msgid "Try adjusting your search terms"
 msgstr "Gözleg sözleriňi düzelt"
@@ -1646,12 +1743,12 @@ msgstr "Gözlemek üçin ýaz..."
 msgid "Unable to connect to remote server"
 msgstr "Uzakdaky servere birikmek başartmady"
 
-#: ../../../lib/web/src/lib/auth-manager.ts:85
-#: ../../../lib/web/src/lib/auth-manager.ts:97
+#: ../../../lib/web/src/lib/auth-manager.ts:92
+#: ../../../lib/web/src/lib/auth-manager.ts:104
 msgid "Unable to redirect to login. Please try again."
 msgstr "Girişe ugradyp bolmady. Gaýtadan synanyş."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:158
+#: ../../../lib/web/src/components/notification-category-button.tsx:114
 msgid "Unassigned"
 msgstr "Bellenilmedik"
 
@@ -1672,6 +1769,10 @@ msgstr "Birleşen Ştatlar"
 msgid "Unknown"
 msgstr "Näbelli"
 
+#: ../../../lib/web/src/components/options-menu.tsx:211
+msgid "Unsubscribe"
+msgstr "Abunadan çyk"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:135
 msgid "Unverified"
 msgstr "Tassyklanmadyk"
@@ -1684,9 +1785,9 @@ msgstr "Ýükleme ýagdaýy"
 msgid "Use your passkey"
 msgstr "Giriş açaryňyzy ulanyň"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:102
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:119
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:323
+#: src/shell-menu.tsx:263
 msgid "User"
 msgstr "Ulanyjy"
 
@@ -1726,13 +1827,13 @@ msgid "View"
 msgstr "Görkez"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:367
-#: src/shell-menu.tsx:373
+#: src/shell-menu.tsx:307
+#: src/shell-menu.tsx:313
 msgid "View all"
 msgstr "Hemmesini görkez"
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:131
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:139
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:215
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:223
 msgid "View all notifications"
 msgstr "Ähli bildirişleri görkez"
 
@@ -1769,10 +1870,6 @@ msgstr "Bu bölüme girmäge rugsadyňyz ýok."
 msgid "You don't have necessary permission <0/>to view this resource."
 msgstr "Bu çeşmäni görmek üçin <0/>zerur rugsadyňyz ýok."
 
-#: ../../../lib/web/src/lib/show-submitted-data.tsx:9
-msgid "You submitted the following values:"
-msgstr "Siz şu bahalary iberdiňiz:"
-
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:193
 msgid "You're all caught up!"
 msgstr "Siz hemmesini gördüňiz!"
@@ -1781,14 +1878,14 @@ msgstr "Siz hemmesini gördüňiz!"
 msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
 msgstr "Hasabyňyz {source} serwерinden bu ýere geçirildi. Şol ýerden pozýançaňyz, habarlar we duýduryşlar iki serwere hem ýetip biler, käbir mazmunyňyz köne serweriň üsti bilen berler, yzarlaýanlar sizi bu ýerde tapmak üçin birnäçe minut gerek bolup biler."
 
-#: ../../../lib/web/src/components/comment-composer.tsx:291
+#: ../../../lib/web/src/components/comment-composer.tsx:295
 msgid "Your attachments will be lost."
 msgstr "Goşundylaryňyz ýitiriler."
 
-#: ../../../lib/web/src/components/comment-composer.tsx:289
+#: ../../../lib/web/src/components/comment-composer.tsx:293
 msgid "Your text and attachments will be lost."
 msgstr "Tekstiňiz we goşundylaryňyz ýitiriler."
 
-#: ../../../lib/web/src/components/comment-composer.tsx:292
+#: ../../../lib/web/src/components/comment-composer.tsx:296
 msgid "Your text will be lost."
 msgstr "Tekstiňiz ýitiriler."

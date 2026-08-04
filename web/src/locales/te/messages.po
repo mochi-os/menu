@@ -60,7 +60,7 @@ msgstr "{selectedCount, plural, one {# ఎంచుకున్న {entityName} 
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{totalLabel}లో {sentLabel}"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:148
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {మెనూ తెరవండి (# చదవని నోటిఫికేషన్)} other {మెనూ తెరవండి (# చదవని నోటిఫికేషన్‌లు)}}"
 
@@ -109,7 +109,7 @@ msgstr "ఖాతా జోడించబడింది"
 msgid "Account removed"
 msgstr "ఖాతా తీసివేయబడింది"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:126
+#: ../../../lib/web/src/features/accounts/account-add.tsx:139
 msgid "Account type"
 msgstr "ఖాతా రకం"
 
@@ -119,11 +119,11 @@ msgstr "ఖాతా ధృవీకరించబడింది"
 
 #: ../../../lib/web/src/components/entity/entity-field-editor.tsx:717
 #: ../../../lib/web/src/features/access/access-dialog.tsx:332
-#: ../../../lib/web/src/features/accounts/account-add.tsx:196
+#: ../../../lib/web/src/features/accounts/account-add.tsx:209
 msgid "Add"
 msgstr "జోడించండి"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:120
+#: ../../../lib/web/src/features/accounts/account-add.tsx:133
 msgid "Add a new account"
 msgstr "కొత్త ఖాతాను జోడించండి"
 
@@ -131,7 +131,7 @@ msgstr "కొత్త ఖాతాను జోడించండి"
 msgid "Add access"
 msgstr "యాక్సెస్‌ను జోడించండి"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:119
+#: ../../../lib/web/src/features/accounts/account-add.tsx:132
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:288
 msgid "Add account"
 msgstr "ఖాతాను జోడించండి"
@@ -161,7 +161,7 @@ msgstr "ట్యాగ్‌ను జోడించండి..."
 msgid "Add team/app"
 msgstr "టీమ్/యాప్‌ను జోడించండి"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:162
+#: ../../../lib/web/src/features/accounts/account-add.tsx:175
 msgid "Add to existing notifications"
 msgstr "ప్రస్తుత నోటిఫికేషన్‌లకు జోడించండి"
 
@@ -237,6 +237,10 @@ msgstr "ప్రామాణీకరించిన వినియోగద�
 msgid "Authenticator code"
 msgstr "ఆథెంటికేటర్ కోడ్"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:51
+msgid "Available keyboard shortcuts"
+msgstr "అందుబాటులో ఉన్న కీబోర్డ్ షార్ట్‌కట్‌లు"
+
 #: ../../../lib/web/src/components/entity-avatar.tsx:99
 msgid "Avatar"
 msgstr "అవతార్"
@@ -259,8 +263,8 @@ msgstr "హోమ్‌కు తిరిగి వెళ్ళండి"
 msgid "Banner"
 msgstr "బ్యానర్"
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:156
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:166
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:237
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:247
 msgid "Blocked navigation to untrusted link"
 msgstr "నమ్మదగని లింక్‌కి నావిగేషన్ నిరోధించబడింది"
 
@@ -280,17 +284,17 @@ msgstr "బ్రౌజర్ నోటిఫికేషన్‌లు"
 #: ../../../lib/web/src/components/ui/editable-field-row.tsx:132
 #: ../../../lib/web/src/features/access/access-dialog.tsx:328
 #: ../../../lib/web/src/features/access/access-list.tsx:268
-#: ../../../lib/web/src/features/accounts/account-add.tsx:188
+#: ../../../lib/web/src/features/accounts/account-add.tsx:201
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:91
 msgid "Cancel"
 msgstr "రద్దు చేయండి"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:146
+#: ../../../lib/web/src/components/notification-category-button.tsx:102
 msgid "Category for this notification"
 msgstr "ఈ నోటిఫికేషన్ కోసం వర్గం"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:127
-#: ../../../lib/web/src/components/notification-category-button.tsx:138
+#: ../../../lib/web/src/components/notification-category-button.tsx:83
+#: ../../../lib/web/src/components/notification-category-button.tsx:94
 msgid "Change notification category"
 msgstr "నోటిఫికేషన్ వర్గాన్ని మార్చండి"
 
@@ -298,7 +302,7 @@ msgstr "నోటిఫికేషన్ వర్గాన్ని మార�
 msgid "Check \"All\" to see your past notifications."
 msgstr "గత నోటిఫికేషన్‌లను చూడటానికి \"అన్నీ\" ఎంచుకోండి."
 
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:38
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:37
 msgid "Choose a game from the sidebar or start a new one."
 msgstr "సైడ్‌బార్ నుండి ఆటను ఎంచుకోండి లేదా కొత్తదాన్ని ప్రారంభించండి."
 
@@ -323,8 +327,8 @@ msgstr "సిస్టమ్ ప్రాధాన్యత, లైట్ మ�
 msgid "Choose language"
 msgstr "భాషను ఎంచుకోండి"
 
-#: ../../../lib/web/src/components/colour-picker.tsx:270
-#: ../../../lib/web/src/components/colour-picker.tsx:351
+#: ../../../lib/web/src/components/colour-picker.tsx:274
+#: ../../../lib/web/src/components/colour-picker.tsx:355
 #: ../../../lib/web/src/components/travelling-picker.tsx:164
 #: ../../../lib/web/src/components/travelling-picker.tsx:170
 #: ../../../lib/web/src/components/travelling-picker.tsx:231
@@ -364,8 +368,8 @@ msgstr "మూసివేయండి"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:108
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:113
-#: src/shell-menu.tsx:449
-#: src/shell-menu.tsx:456
+#: src/shell-menu.tsx:392
+#: src/shell-menu.tsx:399
 msgid "Close navigation"
 msgstr "నావిగేషన్‌ను మూసివేయండి"
 
@@ -373,6 +377,10 @@ msgstr "నావిగేషన్‌ను మూసివేయండి"
 #: ../../../lib/web/src/components/layout/right-panel.tsx:268
 msgid "Close panel"
 msgstr "ప్యానెల్‌ను మూసివేయండి"
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:32
+msgid "Close panel / cancel"
+msgstr "ప్యానెల్ మూసివేయి / రద్దు చేయి"
 
 #: ../../../lib/web/src/components/header-search.tsx:54
 msgid "Close search"
@@ -459,7 +467,7 @@ msgstr "కాపీ చేయండి"
 msgid "Could not load this document. Please try again later."
 msgstr "ఈ పత్రాన్ని లోడ్ చేయలేకపోయింది. దయచేసి తర్వాత మళ్లీ ప్రయత్నించండి."
 
-#: src/shell-menu.tsx:388
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:121
 msgid "Couldn't load notifications"
 msgstr "నోటిఫికేషన్‌లను లోడ్ చేయడం సాధ్యపడలేదు"
 
@@ -480,15 +488,19 @@ msgstr "ఆ ఖాతాతో ధృవీకరించడం సాధ్య
 msgid "Create {0}"
 msgstr "{0} సృష్టించండి"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:25
+msgid "Create new item"
+msgstr "కొత్త ఐటెమ్‌ను సృష్టించండి"
+
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:258
 msgid "Creating..."
 msgstr "సృష్టిస్తోంది..."
 
-#: ../../../lib/web/src/components/map-view.tsx:208
+#: ../../../lib/web/src/components/map-view.tsx:217
 msgid "Current location"
 msgstr "ప్రస్తుత స్థానం"
 
-#: ../../../lib/web/src/components/colour-picker.tsx:261
+#: ../../../lib/web/src/components/colour-picker.tsx:265
 msgid "Custom"
 msgstr "అనుకూల"
 
@@ -498,9 +510,6 @@ msgstr "అనుకూల"
 msgid "Dark"
 msgstr "డార్క్"
 
-#: ../../../lib/web/src/components/layout/nav-user.tsx:91
-#: ../../../lib/web/src/components/layout/nav-user.tsx:154
-#: ../../../lib/web/src/components/layout/nav-user.tsx:205
 #: ../../../lib/web/src/components/profile-dropdown.tsx:87
 #: ../../../lib/web/src/components/profile-dropdown.tsx:123
 msgid "Dark mode"
@@ -518,7 +527,7 @@ msgstr "తిరస్కరించండి"
 msgid "Default"
 msgstr "డిఫాల్ట్"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:172
+#: ../../../lib/web/src/features/accounts/account-add.tsx:185
 msgid "Default AI account"
 msgstr "డిఫాల్ట్ AI ఖాతా"
 
@@ -565,11 +574,11 @@ msgstr "దిశ"
 msgid "Directory"
 msgstr "డైరెక్టరీ"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:300
+#: ../../../lib/web/src/components/comment-composer.tsx:304
 msgid "Discard"
 msgstr "విస్మరించు"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:298
+#: ../../../lib/web/src/components/comment-composer.tsx:302
 msgid "Discard draft?"
 msgstr "డ్రాఫ్ట్‌ను విస్మరించాలా?"
 
@@ -603,6 +612,10 @@ msgstr "డిస్లెక్సియా-అనుకూలం"
 #: ../../../lib/web/src/components/ui/editable-field-row.tsx:154
 msgid "Edit {label}"
 msgstr "{label} సవరించు"
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:31
+msgid "Edit selected card"
+msgstr "ఎంచుకున్న కార్డును సవరించు"
 
 #: ../../../lib/web/src/features/accounts/types.ts:15
 msgid "Email"
@@ -652,13 +665,29 @@ msgstr "ట్యాగ్‌ను జోడించడంలో విఫల�
 msgid "Failed to copy"
 msgstr "కాపీ చేయడంలో విఫలమైంది"
 
+#: ../../../lib/web/src/components/options-menu.tsx:99
+msgid "Failed to create link"
+msgstr "లింక్‌ను సృష్టించడంలో విఫలమైంది"
+
+#: ../../../lib/web/src/components/options-menu.tsx:123
+msgid "Failed to get RSS token"
+msgstr "RSS టోకెన్‌ను పొందడంలో విఫలమైంది"
+
 #: ../../../lib/web/src/hooks/use-load-more.ts:74
 msgid "Failed to load"
 msgstr "లోడ్ చేయడంలో విఫలమైంది"
 
+#: ../../../lib/web/src/components/audit-timeline.tsx:72
+msgid "Failed to load history"
+msgstr "చరిత్రను లోడ్ చేయడంలో విఫలమైంది"
+
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:263
 msgid "Failed to load image"
 msgstr "చిత్రాన్ని లోడ్ చేయడంలో విఫలమైంది"
+
+#: src/use-menu-categories.ts:53
+msgid "Failed to load notification categories"
+msgstr "నోటిఫికేషన్ వర్గాలను లోడ్ చేయడంలో విఫలమైంది"
 
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:263
 msgid "Failed to load video"
@@ -668,11 +697,15 @@ msgstr "వీడియోను లోడ్ చేయడంలో విఫల
 msgid "Failed to remove account"
 msgstr "ఖాతాను తీసివేయడంలో విఫలమైంది"
 
+#: ../../../lib/web/src/components/options-menu.tsx:133
+msgid "Failed to revoke RSS access"
+msgstr "RSS యాక్సెస్ ఉపసంహరించడంలో విఫలమైంది"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:257
 msgid "Failed to send verification code"
 msgstr "ధృవీకరణ కోడ్‌ను పంపడంలో విఫలమైంది"
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: src/use-menu-categories.ts:83
 msgid "Failed to update category"
 msgstr "విభాగాన్ని నవీకరించడంలో విఫలమైంది"
 
@@ -760,14 +793,18 @@ msgstr "దాచండి"
 msgid "Hide password"
 msgstr "పాస్‌వర్డ్‌ను దాచు"
 
+#: ../../../lib/web/src/components/audit-timeline.tsx:64
+msgid "History"
+msgstr "చరిత్ర"
+
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:90
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:175
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:192
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:464
-#: src/shell-menu.tsx:470
-#: src/shell-menu.tsx:543
-#: src/shell-menu.tsx:547
+#: src/shell-menu.tsx:407
+#: src/shell-menu.tsx:413
+#: src/shell-menu.tsx:486
+#: src/shell-menu.tsx:490
 msgid "Home"
 msgstr "హోమ్"
 
@@ -824,6 +861,10 @@ msgstr "మీరు వెతుకుతున్న పేజీ <0/>లే�
 msgid "Just now"
 msgstr "ఇప్పుడే"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:48
+msgid "Keyboard shortcuts"
+msgstr "కీబోర్డ్ షార్ట్‌కట్‌లు"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:108
 #: ../../../lib/web/src/lib/preference-utils.ts:135
 msgid "Large"
@@ -852,6 +893,10 @@ msgstr "అక్షరాలు, సంఖ్యలు, ఖాళీలు, హ
 msgid "Light"
 msgstr "లైట్"
 
+#: ../../../lib/web/src/components/options-menu.tsx:190
+msgid "Link"
+msgstr "లింక్"
+
 #: ../../../lib/web/src/components/ui/load-more.tsx:35
 msgid "Load more"
 msgstr "మరింత లోడ్ చేయండి"
@@ -865,15 +910,12 @@ msgstr "కంటెంట్ లోడ్ అవుతోంది…"
 msgid "Loading..."
 msgstr "లోడ్ చేస్తోంది..."
 
-#: ../../../lib/web/src/components/layout/nav-user.tsx:101
-#: ../../../lib/web/src/components/layout/nav-user.tsx:167
-#: ../../../lib/web/src/components/layout/nav-user.tsx:215
 #: ../../../lib/web/src/components/profile-dropdown.tsx:69
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:330
-#: src/shell-menu.tsx:336
+#: src/shell-menu.tsx:270
+#: src/shell-menu.tsx:276
 msgid "Log out"
 msgstr "లాగ్ అవుట్"
 
@@ -893,11 +935,11 @@ msgstr "లాగ్ అవుట్ చేస్తోంది…"
 msgid "Manage your connected accounts for notifications and services."
 msgstr "నోటిఫికేషన్లు మరియు సేవల కోసం మీ కనెక్ట్ చేసిన ఖాతాలను నిర్వహించండి."
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:118
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:125
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:202
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:209
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:353
-#: src/shell-menu.tsx:359
+#: src/shell-menu.tsx:293
+#: src/shell-menu.tsx:299
 msgid "Mark all as read"
 msgstr "అన్నింటినీ చదివినట్లు గుర్తించండి"
 
@@ -909,8 +951,8 @@ msgstr "MCP సర్వర్"
 msgid "Medium"
 msgstr "మధ్యస్థం"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:190
-#: src/shell-menu.tsx:512
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:207
+#: src/shell-menu.tsx:455
 msgid "Menu"
 msgstr "మెను"
 
@@ -926,9 +968,18 @@ msgstr "మెట్రిక్"
 msgid "Mochi web"
 msgstr "Mochi వెబ్"
 
+#: ../../../lib/web/src/components/options-menu.tsx:164
+msgid "Moderation"
+msgstr ""
+
 #: ../../../lib/web/src/lib/preference-utils.ts:59
 msgid "Monday"
 msgstr "సోమవారం"
+
+#: ../../../lib/web/src/components/options-menu.tsx:145
+#: ../../../lib/web/src/components/options-menu.tsx:152
+msgid "More options"
+msgstr "మరిన్ని ఎంపికలు"
 
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:102
 msgid "Name cannot contain angle brackets, backslash, semicolon, quotes or backticks"
@@ -947,8 +998,8 @@ msgstr "నెట్‌వర్క్ లోపం"
 msgid "New"
 msgstr "కొత్తది"
 
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:42
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:54
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:41
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:53
 msgid "New game"
 msgstr "కొత్త గేమ్"
 
@@ -965,7 +1016,7 @@ msgstr "యాక్సెస్ నియమాలు ఏవీ కాన్ఫ
 msgid "No connected accounts"
 msgstr "కనెక్ట్ చేయబడిన ఖాతాలు లేవు"
 
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:51
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:50
 msgid "No games yet"
 msgstr "ఇంకా గేమ్‌లు లేవు"
 
@@ -1004,11 +1055,11 @@ msgstr "ఫలితాలు ఏవీ కనుగొనబడలేదు."
 msgid "No time zone found."
 msgstr "టైం జోన్ కనుగొనబడలేదు."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:150
+#: ../../../lib/web/src/components/notification-category-button.tsx:106
 msgid "No topic record yet — try again after the next notification."
 msgstr "ఇంకా టాపిక్ రికార్డ్ లేదు — తదుపరి నోటిఫికేషన్ తర్వాత మళ్లీ ప్రయత్నించండి."
 
-#: src/shell-menu.tsx:395
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:132
 msgid "No unread notifications"
 msgstr "చదవని నోటిఫికేషన్‌లు లేవు"
 
@@ -1016,7 +1067,7 @@ msgstr "చదవని నోటిఫికేషన్‌లు లేవు"
 msgid "No users found"
 msgstr "యూజర్‌లు ఎవరూ కనుగొనబడలేదు"
 
-#: ../../../lib/web/src/components/colour-picker.tsx:345
+#: ../../../lib/web/src/components/colour-picker.tsx:349
 #: ../../../lib/web/src/components/person-picker.tsx:350
 #: ../../../lib/web/src/lib/preference-utils.ts:105
 #: ../../../lib/web/src/lib/preference-utils.ts:125
@@ -1040,12 +1091,12 @@ msgstr "సెట్ చేయబడలేదు"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:345
+#: src/shell-menu.tsx:285
 msgid "Notifications"
 msgstr "నోటిఫికేషన్‌లు"
 
 #. placeholder {0}: unread.length
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:111
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:195
 msgid "Notifications: {0}"
 msgstr "నోటిఫికేషన్‌లు: {0}"
 
@@ -1067,18 +1118,18 @@ msgstr "ఖాతా చర్యలను ఓపెన్ చేయండి"
 msgid "Open actions"
 msgstr "చర్యలను తెరవండి"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:149
-#: src/shell-menu.tsx:307
-#: src/shell-menu.tsx:428
-#: src/shell-menu.tsx:484
-#: src/shell-menu.tsx:496
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:166
+#: src/shell-menu.tsx:247
+#: src/shell-menu.tsx:371
+#: src/shell-menu.tsx:427
+#: src/shell-menu.tsx:439
 msgid "Open menu"
 msgstr "మెనుని ఓపెన్ చేయండి"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:449
-#: src/shell-menu.tsx:456
+#: src/shell-menu.tsx:392
+#: src/shell-menu.tsx:399
 msgid "Open navigation"
 msgstr "నావిగేషన్‌ను ఓపెన్ చేయండి"
 
@@ -1086,6 +1137,10 @@ msgstr "నావిగేషన్‌ను ఓపెన్ చేయండి"
 #: ../../../lib/web/src/components/layout/top-nav.tsx:44
 msgid "Open navigation menu"
 msgstr "నావిగేషన్ మెనుని ఓపెన్ చేయండి"
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:30
+msgid "Open selected card"
+msgstr "ఎంచుకున్న కార్డును తెరువు"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:58
 #: ../../../lib/web/src/components/config-drawer.tsx:66
@@ -1125,7 +1180,7 @@ msgstr "పర్మిషన్ రిక్వెస్ట్"
 msgid "Pick a date"
 msgstr "తేదీని ఎంచుకోండి"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:95
+#: ../../../lib/web/src/components/comment-composer.tsx:99
 #: ../../../lib/web/src/features/errors/general-error.tsx:54
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:323
 msgid "Please check your internet connection and try again."
@@ -1143,6 +1198,14 @@ msgstr "దయచేసి మళ్లీ ప్రయత్నించండ�
 msgid "Please wait a moment and try again."
 msgstr "కాసేపు వేచి ఉండి, మళ్లీ ప్రయత్నించండి."
 
+#: ../../../lib/web/src/components/options-menu.tsx:175
+msgid "Posts"
+msgstr "పోస్ట్‌లు"
+
+#: ../../../lib/web/src/components/options-menu.tsx:178
+msgid "Posts and comments"
+msgstr "పోస్ట్‌లు మరియు కామెంట్‌లు"
+
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:377
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:382
 msgid "Previous image"
@@ -1157,7 +1220,6 @@ msgstr "గోప్యత"
 msgid "Processing…"
 msgstr "ప్రాసెస్ అవుతోంది…"
 
-#: ../../../lib/web/src/components/layout/nav-user.tsx:137
 #: ../../../lib/web/src/components/profile-dropdown.tsx:114
 msgid "Profile"
 msgstr "ప్రొఫైల్"
@@ -1182,7 +1244,7 @@ msgstr "ఈ సర్వర్‌లో మీ ఖాతాలను మళ్�
 msgid "Re-register your passkeys on this server"
 msgstr "ఈ సర్వర్‌లో మీ పాస్‌కీలను మళ్లీ నమోదు చేయండి"
 
-#: ../../../lib/web/src/components/search-entity-dialog.tsx:217
+#: ../../../lib/web/src/components/search-entity-dialog.tsx:220
 #: ../../../lib/web/src/components/search-entity-page.tsx:243
 msgid "Recommended"
 msgstr "రికమెండ్ చేయబడింది"
@@ -1191,7 +1253,7 @@ msgstr "రికమెండ్ చేయబడింది"
 msgid "Reconnecting ({retries})..."
 msgstr "మళ్లీ కనెక్ట్ అవుతోంది ({retries})..."
 
-#: ../../../lib/web/src/components/layout/authenticated-layout.tsx:133
+#: ../../../lib/web/src/components/layout/authenticated-layout.tsx:136
 msgid "Redirecting to login."
 msgstr "లాగిన్‌కు రీడైరెక్ట్ చేస్తోంది."
 
@@ -1208,7 +1270,7 @@ msgstr "సాపేక్ష (5m, 3h, 2d)"
 msgid "Relative within 24 hours, else absolute"
 msgstr "24 గంటల్లో సాపేక్ష, లేకపోతే నిరపేక్ష"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:232
+#: ../../../lib/web/src/components/comment-composer.tsx:236
 #: ../../../lib/web/src/features/access/access-list.tsx:270
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:180
 msgid "Remove"
@@ -1261,9 +1323,13 @@ msgstr "{title} రీసెట్ చేయండి"
 msgid "Reset all settings to default values"
 msgstr "అన్ని సెట్టింగ్‌లను డిఫాల్ట్ విలువలకు రీసెట్ చేయండి"
 
-#: ../../../lib/web/src/components/comment-composer.tsx:249
+#: ../../../lib/web/src/components/comment-composer.tsx:253
 msgid "Retry"
 msgstr "మళ్లీ ప్రయత్నించండి"
+
+#: ../../../lib/web/src/components/options-menu.tsx:181
+msgid "Revoke access"
+msgstr "యాక్సెస్ ఉపసంహరించు"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:362
 msgid "Right to Left"
@@ -1272,6 +1338,18 @@ msgstr "కుడి నుండి ఎడమకు"
 #: ../../../lib/web/src/components/data-table/pagination.tsx:65
 msgid "Rows per page"
 msgstr "ఒక్కో పేజీకి వరుసలు"
+
+#: ../../../lib/web/src/components/options-menu.tsx:131
+msgid "RSS access revoked"
+msgstr "RSS యాక్సెస్ ఉపసంహరించబడింది"
+
+#: ../../../lib/web/src/components/options-menu.tsx:171
+msgid "RSS feed"
+msgstr "RSS ఫీడ్"
+
+#: ../../../lib/web/src/components/options-menu.tsx:121
+msgid "RSS URL copied to clipboard"
+msgstr "RSS URL క్లిప్‌బోర్డ్‌కు కాపీ చేయబడింది"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:64
 msgid "Saturday"
@@ -1322,7 +1400,7 @@ msgstr "యూజర్లను శోధించండి"
 msgid "Search..."
 msgstr "శోధించండి..."
 
-#: ../../../lib/web/src/components/search-entity-dialog.tsx:175
+#: ../../../lib/web/src/components/search-entity-dialog.tsx:178
 #: ../../../lib/web/src/components/search-entity-page.tsx:201
 #: ../../../lib/web/src/features/access/access-dialog.tsx:202
 msgid "Searching..."
@@ -1333,7 +1411,7 @@ msgstr "శోధిస్తోంది..."
 msgid "Select {0}"
 msgstr "{0} ఎంచుకోండి"
 
-#: ../../../lib/web/src/components/game/game-empty-state.tsx:37
+#: ../../../lib/web/src/components/game/game-empty-state.tsx:36
 msgid "Select a game"
 msgstr "ఒక ఆటను ఎంచుకోండి"
 
@@ -1349,7 +1427,7 @@ msgstr "యాక్సెస్ నియమాన్ని ఎంచుకో�
 msgid "Select account"
 msgstr "ఖాతాను ఎంచుకోండి"
 
-#: ../../../lib/web/src/features/accounts/account-add.tsx:129
+#: ../../../lib/web/src/features/accounts/account-add.tsx:142
 msgid "Select account type"
 msgstr "ఖాతా రకాన్ని ఎంచుకోండి"
 
@@ -1365,9 +1443,17 @@ msgstr "లేఅవుట్ స్టైల్‌ను ఎంచుకోం�
 msgid "Select location"
 msgstr "స్థానాన్ని ఎంచుకోండి"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:28
+msgid "Select next card"
+msgstr "తదుపరి కార్డును ఎంచుకోండి"
+
 #: ../../../lib/web/src/components/person-picker.tsx:83
 msgid "Select person..."
 msgstr "వ్యక్తిని ఎంచుకోండి..."
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:29
+msgid "Select previous card"
+msgstr "మునుపటి కార్డును ఎంచుకోండి"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:247
 msgid "Select sidebar style"
@@ -1430,17 +1516,19 @@ msgstr "సెషన్ గడువు ముగిసింది. దయచ�
 msgid "Set origin and destination"
 msgstr "మూలం మరియు గమ్యస్థానాన్ని సెట్ చేయండి"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:109
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:115
-#: ../../../lib/web/src/components/layout/nav-user.tsx:84
-#: ../../../lib/web/src/components/layout/nav-user.tsx:148
-#: ../../../lib/web/src/components/layout/nav-user.tsx:198
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:126
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:132
+#: ../../../lib/web/src/components/options-menu.tsx:196
 msgid "Settings"
 msgstr "సెట్టింగ్‌లు"
 
 #: ../../../lib/web/src/components/password-input.tsx:27
 msgid "Show password"
 msgstr "పాస్‌వర్డ్‌ను చూపు"
+
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:33
+msgid "Show this help"
+msgstr "ఈ సహాయాన్ని చూపించు"
 
 #: ../../../lib/web/src/components/ui/load-more.tsx:39
 msgid "Showing {totalShown} of {total}"
@@ -1452,12 +1540,12 @@ msgstr "{total}లో {totalShown} చూపిస్తోంది"
 msgid "Sidebar"
 msgstr "సైడ్‌బార్"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:121
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:127
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:138
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:144
 msgid "Sign out"
 msgstr "సైన్ అవుట్"
 
-#: ../../../lib/web/src/components/layout/authenticated-layout.tsx:131
+#: ../../../lib/web/src/components/layout/authenticated-layout.tsx:134
 msgid "Signing out..."
 msgstr "సైన్ అవుట్ అవుతోంది..."
 
@@ -1469,6 +1557,10 @@ msgstr "మెయిన్‌కు దాటవేయండి"
 #: ../../../lib/web/src/lib/preference-utils.ts:133
 msgid "Small"
 msgstr "చిన్నది"
+
+#: ../../../lib/web/src/components/options-menu.tsx:158
+msgid "Sources"
+msgstr "సోర్స్‌లు"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:97
 msgid "Spacious"
@@ -1491,6 +1583,11 @@ msgstr "చందా చేరండి"
 msgid "Sunday"
 msgstr "ఆదివారం"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:27
+msgid "Switch to view 1-9"
+msgstr "వీక్షణ 1-9 కి మారండి"
+
+#: ../../../lib/web/src/components/audit-timeline.tsx:111
 #: ../../../lib/web/src/components/config-drawer.tsx:209
 #: ../../../lib/web/src/components/theme-switch.tsx:59
 #: ../../../lib/web/src/lib/preference-utils.ts:21
@@ -1531,10 +1628,6 @@ msgstr "ఆ కోడ్ తప్పు లేదా గడువు ముగ�
 #: ../../../lib/web/src/features/errors/general-error.tsx:68
 msgid "The requested content could not be found."
 msgstr "అభ్యర్థించిన కంటెంట్ కనుగొనబడలేదు."
-
-#: ../../../lib/web/src/lib/api-response-interceptors.ts:152
-#~ msgid "The server returned a web page instead of data, which usually means the address was wrong."
-#~ msgstr ""
 
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:152
 msgid "The server returned a web page instead of data."
@@ -1599,6 +1692,10 @@ msgstr "సైడ్‌బార్‌ను టోగుల్ చేయండ�
 msgid "Toggle theme"
 msgstr "థీమ్‌ను టోగుల్ చేయండి"
 
+#: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:26
+msgid "Toggle view options"
+msgstr "వీక్షణ ఎంపికలను టోగుల్ చేయి"
+
 #: ../../../lib/web/src/features/errors/general-error.tsx:74
 msgid "Too many requests"
 msgstr "చాలా ఎక్కువ అభ్యర్థనలు"
@@ -1611,7 +1708,7 @@ msgstr "ఎగువ"
 msgid "Travelling"
 msgstr "ప్రయాణిస్తోంది"
 
-#: ../../../lib/web/src/components/search-entity-dialog.tsx:191
+#: ../../../lib/web/src/components/search-entity-dialog.tsx:194
 #: ../../../lib/web/src/components/search-entity-page.tsx:217
 msgid "Try adjusting your search terms"
 msgstr "మీ శోధన పదాలను సర్దుబాటు చేయడం ప్రయత్నించండి"
@@ -1646,12 +1743,12 @@ msgstr "శోధించడానికి టైప్ చేయండి..."
 msgid "Unable to connect to remote server"
 msgstr "రిమోట్ సర్వర్‌కు కనెక్ట్ చేయడం సాధ్యం కాలేదు"
 
-#: ../../../lib/web/src/lib/auth-manager.ts:85
-#: ../../../lib/web/src/lib/auth-manager.ts:97
+#: ../../../lib/web/src/lib/auth-manager.ts:92
+#: ../../../lib/web/src/lib/auth-manager.ts:104
 msgid "Unable to redirect to login. Please try again."
 msgstr "లాగిన్‌కు రీడైరెక్ట్ చేయలేకపోయింది. దయచేసి మళ్ళీ ప్రయత్నించండి."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:158
+#: ../../../lib/web/src/components/notification-category-button.tsx:114
 msgid "Unassigned"
 msgstr "కేటాయించబడలేదు"
 
@@ -1672,6 +1769,10 @@ msgstr "యునైటెడ్ స్టేట్స్"
 msgid "Unknown"
 msgstr "తెలియదు"
 
+#: ../../../lib/web/src/components/options-menu.tsx:211
+msgid "Unsubscribe"
+msgstr "చందా మానివేయండి"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:135
 msgid "Unverified"
 msgstr "ధృవీకరించబడలేదు"
@@ -1684,9 +1785,9 @@ msgstr "అప్‌లోడ్ పురోగతి"
 msgid "Use your passkey"
 msgstr "మీ పాస్‌కీని ఉపయోగించండి"
 
-#: ../../../lib/web/src/components/layout/mochi-menu.tsx:102
+#: ../../../lib/web/src/components/layout/mochi-menu.tsx:119
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:323
+#: src/shell-menu.tsx:263
 msgid "User"
 msgstr "యూజర్"
 
@@ -1726,13 +1827,13 @@ msgid "View"
 msgstr "వీక్షించండి"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:367
-#: src/shell-menu.tsx:373
+#: src/shell-menu.tsx:307
+#: src/shell-menu.tsx:313
 msgid "View all"
 msgstr "అన్నీ వీక్షించండి"
 
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:131
-#: ../../../lib/web/src/components/layout/notification-menu.tsx:139
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:215
+#: ../../../lib/web/src/components/layout/notification-menu.tsx:223
 msgid "View all notifications"
 msgstr "అన్ని నోటిఫికేషన్‌లను వీక్షించండి"
 
@@ -1769,10 +1870,6 @@ msgstr "ఈ విభాగానికి మీకు యాక్సెస్
 msgid "You don't have necessary permission <0/>to view this resource."
 msgstr "ఈ వనరును వీక్షించడానికి <0/>మీకు అవసరమైన అనుమతి లేదు."
 
-#: ../../../lib/web/src/lib/show-submitted-data.tsx:9
-msgid "You submitted the following values:"
-msgstr "మీరు కింది విలువలను సమర్పించారు:"
-
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:193
 msgid "You're all caught up!"
 msgstr "మీరు అన్నీ చూశారు!"
@@ -1781,14 +1878,14 @@ msgstr "మీరు అన్నీ చూశారు!"
 msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
 msgstr "మీ ఖాతా {source} నుండి ఇక్కడికి తరలించబడింది. మీరు అక్కడ దాన్ని తొలగించే వరకు, సందేశాలు మరియు నోటిఫికేషన్లు రెండు సర్వర్లకు చేరవచ్చు, మీ కొంత కంటెంట్ పాత సర్వర్ నుండి అందించబడుతూ ఉంటుంది, మరియు ఫాలోవర్లు మిమ్మల్ని ఇక్కడ కనుగొనడానికి కొన్ని నిమిషాలు పట్టవచ్చు."
 
-#: ../../../lib/web/src/components/comment-composer.tsx:291
+#: ../../../lib/web/src/components/comment-composer.tsx:295
 msgid "Your attachments will be lost."
 msgstr "మీ జోడింపులు పోతాయి."
 
-#: ../../../lib/web/src/components/comment-composer.tsx:289
+#: ../../../lib/web/src/components/comment-composer.tsx:293
 msgid "Your text and attachments will be lost."
 msgstr "మీ వచనం మరియు జోడింపులు పోతాయి."
 
-#: ../../../lib/web/src/components/comment-composer.tsx:292
+#: ../../../lib/web/src/components/comment-composer.tsx:296
 msgid "Your text will be lost."
 msgstr "మీ వచనం పోతుంది."
