@@ -60,6 +60,10 @@ msgstr "{selectedCount, plural, one {Massa-aksies vir # gekose {entityName}} oth
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{sentLabel} van {totalLabel}"
 
+#: src/use-menu-categories.ts:83
+msgid "{topicLabel} moved to the {categoryLabel} category"
+msgstr "{topicLabel} geskuif na die {categoryLabel}-kategorie"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Open kieslys (# ongeleeste kennisgewing)} other {Open kieslys (# ongeleeste kennisgewings)}}"
@@ -290,8 +294,12 @@ msgid "Cancel"
 msgstr "Kanselleer"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:102
-msgid "Category for this notification"
-msgstr "Kategorie vir hierdie kennisgewing"
+msgid "Category for these notifications"
+msgstr "Kategorie vir hierdie kennisgewings"
+
+#: src/use-menu-categories.ts:84
+msgid "Category updated"
+msgstr "Kategorie opgedateer"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:83
 #: ../../../lib/web/src/components/notification-category-button.tsx:94
@@ -705,7 +713,7 @@ msgstr "Kon nie RSS-toegang herroep nie"
 msgid "Failed to send verification code"
 msgstr "Kon nie verifikasiekode stuur nie"
 
-#: src/use-menu-categories.ts:83
+#: src/use-menu-categories.ts:88
 msgid "Failed to update category"
 msgstr "Kon nie kategorie opdateer nie"
 
@@ -931,6 +939,10 @@ msgstr "Suksesvol afgemeld"
 msgid "Logging out…"
 msgstr "Besig om af te meld…"
 
+#: ../../../lib/web/src/components/notification-category-button.tsx:130
+msgid "Manage categories"
+msgstr "Bestuur kategorieë"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:192
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Bestuur jou gekoppelde rekeninge vir kennisgewings en dienste."
@@ -1055,7 +1067,7 @@ msgstr "Geen resultate gevind nie."
 msgid "No time zone found."
 msgstr "Geen tydsone gevind nie."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:106
+#: ../../../lib/web/src/components/notification-category-button.tsx:109
 msgid "No topic record yet — try again after the next notification."
 msgstr "Nog geen onderwerprekord nie — probeer weer na die volgende kennisgewing."
 
@@ -1748,7 +1760,7 @@ msgstr "Kan nie aan afgeleë bediener koppel nie"
 msgid "Unable to redirect to login. Please try again."
 msgstr "Kan nie na aanmelding herlei nie. Probeer asseblief weer."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: ../../../lib/web/src/components/notification-category-button.tsx:117
 msgid "Unassigned"
 msgstr "Nie toegewys nie"
 

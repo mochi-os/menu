@@ -60,6 +60,10 @@ msgstr "{selectedCount, plural, one {Skupne radnje za # odabrani {entityName}} f
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{sentLabel} od {totalLabel}"
 
+#: src/use-menu-categories.ts:83
+msgid "{topicLabel} moved to the {categoryLabel} category"
+msgstr "{topicLabel} je sada u kategoriji {categoryLabel}"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Otvori izbornik (# nepročitana obavijest)} few {Otvori izbornik (# nepročitane obavijesti)} other {Otvori izbornik (# nepročitanih obavijesti)}}"
@@ -290,8 +294,12 @@ msgid "Cancel"
 msgstr "Odustani"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:102
-msgid "Category for this notification"
-msgstr "Kategorija za ovu obavijest"
+msgid "Category for these notifications"
+msgstr "Kategorija za ove obavijesti"
+
+#: src/use-menu-categories.ts:84
+msgid "Category updated"
+msgstr "Kategorija ažurirana"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:83
 #: ../../../lib/web/src/components/notification-category-button.tsx:94
@@ -705,7 +713,7 @@ msgstr "Opoziv RSS pristupa nije uspio"
 msgid "Failed to send verification code"
 msgstr "Slanje verifikacijskog koda nije uspjelo"
 
-#: src/use-menu-categories.ts:83
+#: src/use-menu-categories.ts:88
 msgid "Failed to update category"
 msgstr "Ažuriranje kategorije nije uspjelo"
 
@@ -931,6 +939,10 @@ msgstr "Uspješno odjavljen"
 msgid "Logging out…"
 msgstr "Odjavljivanje…"
 
+#: ../../../lib/web/src/components/notification-category-button.tsx:130
+msgid "Manage categories"
+msgstr "Upravljaj kategorijama"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:192
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Upravljajte povezanim računima za obavijesti i usluge."
@@ -1055,7 +1067,7 @@ msgstr "Nema rezultata."
 msgid "No time zone found."
 msgstr "Nije pronađena nijedna vremenska zona."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:106
+#: ../../../lib/web/src/components/notification-category-button.tsx:109
 msgid "No topic record yet — try again after the next notification."
 msgstr "Još nema zapisa o temi — pokušajte ponovno nakon sljedeće obavijesti."
 
@@ -1748,7 +1760,7 @@ msgstr "Nije moguće povezati se s udaljenim poslužiteljem"
 msgid "Unable to redirect to login. Please try again."
 msgstr "Nije moguće preusmjeriti na prijavu. Pokušajte ponovno."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: ../../../lib/web/src/components/notification-category-button.tsx:117
 msgid "Unassigned"
 msgstr "Nedodijeljeno"
 

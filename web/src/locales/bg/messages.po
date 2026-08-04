@@ -60,6 +60,10 @@ msgstr "{selectedCount, plural, one {Групови действия за # из
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{sentLabel} от {totalLabel}"
 
+#: src/use-menu-categories.ts:83
+msgid "{topicLabel} moved to the {categoryLabel} category"
+msgstr "{topicLabel} вече е в категория {categoryLabel}"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Отваряне на менюто (# непрочетено известие)} other {Отваряне на менюто (# непрочетени известия)}}"
@@ -290,8 +294,12 @@ msgid "Cancel"
 msgstr "Отказ"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:102
-msgid "Category for this notification"
-msgstr "Категория за това известие"
+msgid "Category for these notifications"
+msgstr "Категория за тези известия"
+
+#: src/use-menu-categories.ts:84
+msgid "Category updated"
+msgstr "Категорията е обновена"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:83
 #: ../../../lib/web/src/components/notification-category-button.tsx:94
@@ -705,7 +713,7 @@ msgstr "Неуспешно отменяне на достъпа до RSS"
 msgid "Failed to send verification code"
 msgstr "Неуспешно изпращане на код за потвърждение"
 
-#: src/use-menu-categories.ts:83
+#: src/use-menu-categories.ts:88
 msgid "Failed to update category"
 msgstr "Неуспешна актуализация на категория"
 
@@ -931,6 +939,10 @@ msgstr "Успешен изход"
 msgid "Logging out…"
 msgstr "Излизане…"
 
+#: ../../../lib/web/src/components/notification-category-button.tsx:130
+msgid "Manage categories"
+msgstr "Управление на категориите"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:192
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Управлявайте свързаните си акаунти за известия и услуги."
@@ -1055,7 +1067,7 @@ msgstr "Не са намерени резултати."
 msgid "No time zone found."
 msgstr "Не е намерена часова зона."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:106
+#: ../../../lib/web/src/components/notification-category-button.tsx:109
 msgid "No topic record yet — try again after the next notification."
 msgstr "Все още няма запис за темата — опитайте отново след следващото известие."
 
@@ -1748,7 +1760,7 @@ msgstr "Неуспешно свързване с отдалечения сърв
 msgid "Unable to redirect to login. Please try again."
 msgstr "Не може да се пренасочи към вход. Моля, опитайте отново."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: ../../../lib/web/src/components/notification-category-button.tsx:117
 msgid "Unassigned"
 msgstr "Неприсвоено"
 

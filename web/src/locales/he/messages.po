@@ -60,6 +60,10 @@ msgstr "{selectedCount, plural, one {פעולות קבוצתיות עבור {ent
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{sentLabel} מתוך {totalLabel}"
 
+#: src/use-menu-categories.ts:83
+msgid "{topicLabel} moved to the {categoryLabel} category"
+msgstr "{topicLabel} הועבר לקטגוריה {categoryLabel}"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {פתיחת התפריט (התראה אחת שלא נקראה)} two {פתיחת התפריט (# התראות שלא נקראו)} many {פתיחת התפריט (# התראות שלא נקראו)} other {פתיחת התפריט (# התראות שלא נקראו)}}"
@@ -290,8 +294,12 @@ msgid "Cancel"
 msgstr "ביטול"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:102
-msgid "Category for this notification"
-msgstr "קטגוריה עבור התראה זו"
+msgid "Category for these notifications"
+msgstr "קטגוריה עבור התראות אלו"
+
+#: src/use-menu-categories.ts:84
+msgid "Category updated"
+msgstr "הקטגוריה עודכנה"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:83
 #: ../../../lib/web/src/components/notification-category-button.tsx:94
@@ -705,7 +713,7 @@ msgstr "ביטול גישת RSS נכשל"
 msgid "Failed to send verification code"
 msgstr "שליחת קוד האימות נכשלה"
 
-#: src/use-menu-categories.ts:83
+#: src/use-menu-categories.ts:88
 msgid "Failed to update category"
 msgstr "עדכון הקטגוריה נכשל"
 
@@ -931,6 +939,10 @@ msgstr "ההתנתקות בוצעה בהצלחה"
 msgid "Logging out…"
 msgstr "מתנתק…"
 
+#: ../../../lib/web/src/components/notification-category-button.tsx:130
+msgid "Manage categories"
+msgstr "ניהול קטגוריות"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:192
 msgid "Manage your connected accounts for notifications and services."
 msgstr "נהל את החשבונות המחוברים שלך להתראות ולשירותים."
@@ -1055,7 +1067,7 @@ msgstr "לא נמצאו תוצאות."
 msgid "No time zone found."
 msgstr "לא נמצא אזור זמן."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:106
+#: ../../../lib/web/src/components/notification-category-button.tsx:109
 msgid "No topic record yet — try again after the next notification."
 msgstr "עדיין אין רשומת נושא — נסה שוב לאחר ההתראה הבאה."
 
@@ -1748,7 +1760,7 @@ msgstr "לא ניתן להתחבר לשרת המרוחק"
 msgid "Unable to redirect to login. Please try again."
 msgstr "לא ניתן להפנות להתחברות. נסה שוב."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: ../../../lib/web/src/components/notification-category-button.tsx:117
 msgid "Unassigned"
 msgstr "לא משויך"
 

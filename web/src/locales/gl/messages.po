@@ -60,6 +60,10 @@ msgstr "{selectedCount, plural, one {Accións masivas para # {entityName} selecc
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{sentLabel} de {totalLabel}"
 
+#: src/use-menu-categories.ts:83
+msgid "{topicLabel} moved to the {categoryLabel} category"
+msgstr "{topicLabel} moveuse á categoría {categoryLabel}"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Abrir menú (# notificación sen ler)} other {Abrir menú (# notificacións sen ler)}}"
@@ -290,8 +294,12 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:102
-msgid "Category for this notification"
-msgstr "Categoría desta notificación"
+msgid "Category for these notifications"
+msgstr "Categoría destas notificacións"
+
+#: src/use-menu-categories.ts:84
+msgid "Category updated"
+msgstr "Categoría actualizada"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:83
 #: ../../../lib/web/src/components/notification-category-button.tsx:94
@@ -705,7 +713,7 @@ msgstr "Non se puido revogar o acceso RSS"
 msgid "Failed to send verification code"
 msgstr "Non se puido enviar o código de verificación"
 
-#: src/use-menu-categories.ts:83
+#: src/use-menu-categories.ts:88
 msgid "Failed to update category"
 msgstr "Non se puido actualizar a categoría"
 
@@ -931,6 +939,10 @@ msgstr "Sesión pechada correctamente"
 msgid "Logging out…"
 msgstr "Pechando sesión…"
 
+#: ../../../lib/web/src/components/notification-category-button.tsx:130
+msgid "Manage categories"
+msgstr "Xestionar categorías"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:192
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Xestiona as túas contas conectadas para notificacións e servizos."
@@ -1055,7 +1067,7 @@ msgstr "Non se atoparon resultados."
 msgid "No time zone found."
 msgstr "Non se atopou ningún fuso horario."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:106
+#: ../../../lib/web/src/components/notification-category-button.tsx:109
 msgid "No topic record yet — try again after the next notification."
 msgstr "Aínda non hai rexistro do tema — proba de novo despois da seguinte notificación."
 
@@ -1748,7 +1760,7 @@ msgstr "Non foi posible conectar co servidor remoto"
 msgid "Unable to redirect to login. Please try again."
 msgstr "Non se pode redirixir ao inicio de sesión. Téntao de novo."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: ../../../lib/web/src/components/notification-category-button.tsx:117
 msgid "Unassigned"
 msgstr "Sen asignar"
 

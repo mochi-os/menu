@@ -60,6 +60,10 @@ msgstr "{selectedCount, plural, one {# tanlangan {entityName} uchun ommaviy amal
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{totalLabel} dan {sentLabel}"
 
+#: src/use-menu-categories.ts:83
+msgid "{topicLabel} moved to the {categoryLabel} category"
+msgstr "{topicLabel} {categoryLabel} toifasiga koʻchirildi"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Menyuni ochish (# o'qilmagan bildirishnoma)} other {Menyuni ochish (# o'qilmagan bildirishnoma)}}"
@@ -290,8 +294,12 @@ msgid "Cancel"
 msgstr "Bekor qilish"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:102
-msgid "Category for this notification"
-msgstr "Bu bildirishnoma uchun toifa"
+msgid "Category for these notifications"
+msgstr "Bu bildirishnomalar uchun toifa"
+
+#: src/use-menu-categories.ts:84
+msgid "Category updated"
+msgstr "Toifa yangilandi"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:83
 #: ../../../lib/web/src/components/notification-category-button.tsx:94
@@ -705,7 +713,7 @@ msgstr "RSS kirishini bekor qilib bo'lmadi"
 msgid "Failed to send verification code"
 msgstr "Tasdiqlash kodini yuborib boʻlmadi"
 
-#: src/use-menu-categories.ts:83
+#: src/use-menu-categories.ts:88
 msgid "Failed to update category"
 msgstr "Toifani yangilab boʻlmadi"
 
@@ -931,6 +939,10 @@ msgstr "Muvaffaqiyatli chiqildi"
 msgid "Logging out…"
 msgstr "Chiqilmoqda…"
 
+#: ../../../lib/web/src/components/notification-category-button.tsx:130
+msgid "Manage categories"
+msgstr "Toifalarni boshqarish"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:192
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Bildirishnomalar va xizmatlar uchun ulangan hisoblaringizni boshqaring."
@@ -1055,7 +1067,7 @@ msgstr "Natijalar topilmadi."
 msgid "No time zone found."
 msgstr "Vaqt mintaqasi topilmadi."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:106
+#: ../../../lib/web/src/components/notification-category-button.tsx:109
 msgid "No topic record yet — try again after the next notification."
 msgstr "Hozircha mavzu yozuvi yoʻq — keyingi bildirishnomadan keyin qayta urinib koʻring."
 
@@ -1748,7 +1760,7 @@ msgstr "Masofaviy serverga ulanib bo‘lmadi"
 msgid "Unable to redirect to login. Please try again."
 msgstr "Kirish sahifasiga yoʻnaltirib boʻlmadi. Qayta urinib koʻring."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: ../../../lib/web/src/components/notification-category-button.tsx:117
 msgid "Unassigned"
 msgstr "Tayinlanmagan"
 

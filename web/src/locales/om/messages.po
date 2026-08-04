@@ -60,6 +60,10 @@ msgstr "{selectedCount, plural, one {Gochawwan waliigalaa {entityName} # filatam
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{sentLabel} / {totalLabel}"
 
+#: src/use-menu-categories.ts:83
+msgid "{topicLabel} moved to the {categoryLabel} category"
+msgstr "{topicLabel} gara ramaddii {categoryLabel} sochoofameera"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Baafata bani (# beeksisa hin dubbifamne)} other {Baafata bani (# beeksisa hin dubbifamne)}}"
@@ -290,8 +294,12 @@ msgid "Cancel"
 msgstr "Haquu"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:102
-msgid "Category for this notification"
-msgstr "Beeksisa kanaaf ramaddii"
+msgid "Category for these notifications"
+msgstr "Beeksisota kanaaf ramaddii"
+
+#: src/use-menu-categories.ts:84
+msgid "Category updated"
+msgstr "Ramaddiin haaromfame"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:83
 #: ../../../lib/web/src/components/notification-category-button.tsx:94
@@ -705,7 +713,7 @@ msgstr "Argama RSS haquun hin milkoofne"
 msgid "Failed to send verification code"
 msgstr "Koodii mirkanaa ergamuu hin dandeenye"
 
-#: src/use-menu-categories.ts:83
+#: src/use-menu-categories.ts:88
 msgid "Failed to update category"
 msgstr "Ramaddii toattaachuu hin dandeenye"
 
@@ -931,6 +939,10 @@ msgstr "Milkaa'inaan ba'e"
 msgid "Logging out…"
 msgstr "Ba'aa jiraa…"
 
+#: ../../../lib/web/src/components/notification-category-button.tsx:130
+msgid "Manage categories"
+msgstr "Ramaddilee bulchi"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:192
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Beeksisaa fi tajaajilaaf herregawwan walqabatan kee bulchi."
@@ -1055,7 +1067,7 @@ msgstr "Bu'aan hin argamne."
 msgid "No time zone found."
 msgstr "Aanaan sa'aatii hin argamne."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:106
+#: ../../../lib/web/src/components/notification-category-button.tsx:109
 msgid "No topic record yet — try again after the next notification."
 msgstr "Hanga ammaatti galmeen mata duree hin jiru — beeksisa itti aanu booda irra deebi'ii yaali."
 
@@ -1748,7 +1760,7 @@ msgstr "Sarvara fagoo waliin walqunnamuu hin dandeenye"
 msgid "Unable to redirect to login. Please try again."
 msgstr "Galaa'uutti deebi'uu hin dandeenye. Mee deebi'iitii yaali."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: ../../../lib/web/src/components/notification-category-button.tsx:117
 msgid "Unassigned"
 msgstr "Hin ramadamne"
 

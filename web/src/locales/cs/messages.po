@@ -60,6 +60,10 @@ msgstr "{selectedCount, plural, one {Hromadné akce pro # vybraný {entityName}}
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{sentLabel} z {totalLabel}"
 
+#: src/use-menu-categories.ts:83
+msgid "{topicLabel} moved to the {categoryLabel} category"
+msgstr "{topicLabel} nyní patří do kategorie {categoryLabel}"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Otevřít nabídku (# nepřečtené oznámení)} few {Otevřít nabídku (# nepřečtená oznámení)} other {Otevřít nabídku (# nepřečtených oznámení)}}"
@@ -290,8 +294,12 @@ msgid "Cancel"
 msgstr "Zrušit"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:102
-msgid "Category for this notification"
-msgstr "Kategorie pro toto oznámení"
+msgid "Category for these notifications"
+msgstr "Kategorie pro tato oznámení"
+
+#: src/use-menu-categories.ts:84
+msgid "Category updated"
+msgstr "Kategorie aktualizována"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:83
 #: ../../../lib/web/src/components/notification-category-button.tsx:94
@@ -705,7 +713,7 @@ msgstr "Zrušení přístupu RSS se nezdařilo"
 msgid "Failed to send verification code"
 msgstr "Nepodařilo se odeslat ověřovací kód"
 
-#: src/use-menu-categories.ts:83
+#: src/use-menu-categories.ts:88
 msgid "Failed to update category"
 msgstr "Nepodařilo se aktualizovat kategorii"
 
@@ -931,6 +939,10 @@ msgstr "Úspěšně odhlášeno"
 msgid "Logging out…"
 msgstr "Odhlašování…"
 
+#: ../../../lib/web/src/components/notification-category-button.tsx:130
+msgid "Manage categories"
+msgstr "Spravovat kategorie"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:192
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Spravujte připojené účty pro oznámení a služby."
@@ -1055,7 +1067,7 @@ msgstr "Žádné výsledky nenalezeny."
 msgid "No time zone found."
 msgstr "Žádné časové pásmo nenalezeno."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:106
+#: ../../../lib/web/src/components/notification-category-button.tsx:109
 msgid "No topic record yet — try again after the next notification."
 msgstr "Zatím žádný záznam o tématu — zkuste to znovu po dalším oznámení."
 
@@ -1748,7 +1760,7 @@ msgstr "Nelze se připojit ke vzdálenému serveru"
 msgid "Unable to redirect to login. Please try again."
 msgstr "Nelze přesměrovat na přihlášení. Zkuste to prosím znovu."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: ../../../lib/web/src/components/notification-category-button.tsx:117
 msgid "Unassigned"
 msgstr "Nepřiřazeno"
 

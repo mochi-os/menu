@@ -60,6 +60,10 @@ msgstr "{selectedCount, plural, other {Tumindak akeh kanggo # {manyName} sing di
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{sentLabel} saka {totalLabel}"
 
+#: src/use-menu-categories.ts:83
+msgid "{topicLabel} moved to the {categoryLabel} category"
+msgstr "{topicLabel} dipindhah menyang kategori {categoryLabel}"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, other {Bukak menu (# notifikasi sing durung diwaca)}}"
@@ -290,8 +294,12 @@ msgid "Cancel"
 msgstr "Batal"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:102
-msgid "Category for this notification"
+msgid "Category for these notifications"
 msgstr "Kategori kanggo pemberitahuan iki"
+
+#: src/use-menu-categories.ts:84
+msgid "Category updated"
+msgstr "Kategori dianyari"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:83
 #: ../../../lib/web/src/components/notification-category-button.tsx:94
@@ -705,7 +713,7 @@ msgstr "Gagal mbatalake akses RSS"
 msgid "Failed to send verification code"
 msgstr "Gagal ngirim kode verifikasi"
 
-#: src/use-menu-categories.ts:83
+#: src/use-menu-categories.ts:88
 msgid "Failed to update category"
 msgstr "Gagal nganyari kategori"
 
@@ -931,6 +939,10 @@ msgstr "Sukses metu"
 msgid "Logging out…"
 msgstr "Lagi metu…"
 
+#: ../../../lib/web/src/components/notification-category-button.tsx:130
+msgid "Manage categories"
+msgstr "Kelola kategori"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:192
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Atur akun sing wis disambungake kanggo notifikasi lan layanan."
@@ -1055,7 +1067,7 @@ msgstr "Ora ana asil ditemokaké."
 msgid "No time zone found."
 msgstr "Ora ana zona wektu ditemokaké."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:106
+#: ../../../lib/web/src/components/notification-category-button.tsx:109
 msgid "No topic record yet — try again after the next notification."
 msgstr "Durung ana cathetan topik — coba manèh sawisé notifikasi sabanjure."
 
@@ -1748,7 +1760,7 @@ msgstr "Ora bisa nyambung menyang server adoh"
 msgid "Unable to redirect to login. Please try again."
 msgstr "Ora bisa ngarahaké menyang login. Mangga coba manèh."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: ../../../lib/web/src/components/notification-category-button.tsx:117
 msgid "Unassigned"
 msgstr "Ora ditugasaké"
 

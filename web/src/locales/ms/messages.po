@@ -60,6 +60,10 @@ msgstr "{selectedCount, plural, one {Tindakan pukal untuk # {entityName} dipilih
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{sentLabel} daripada {totalLabel}"
 
+#: src/use-menu-categories.ts:83
+msgid "{topicLabel} moved to the {categoryLabel} category"
+msgstr "{topicLabel} dipindahkan ke kategori {categoryLabel}"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Buka menu (# pemberitahuan belum dibaca)} other {Buka menu (# pemberitahuan belum dibaca)}}"
@@ -290,8 +294,12 @@ msgid "Cancel"
 msgstr "Batal"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:102
-msgid "Category for this notification"
+msgid "Category for these notifications"
 msgstr "Kategori untuk pemberitahuan ini"
+
+#: src/use-menu-categories.ts:84
+msgid "Category updated"
+msgstr "Kategori dikemas kini"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:83
 #: ../../../lib/web/src/components/notification-category-button.tsx:94
@@ -705,7 +713,7 @@ msgstr "Gagal membatalkan akses RSS"
 msgid "Failed to send verification code"
 msgstr "Gagal menghantar kod pengesahan"
 
-#: src/use-menu-categories.ts:83
+#: src/use-menu-categories.ts:88
 msgid "Failed to update category"
 msgstr "Gagal mengemas kini kategori"
 
@@ -931,6 +939,10 @@ msgstr "Berjaya log keluar"
 msgid "Logging out…"
 msgstr "Sedang log keluar…"
 
+#: ../../../lib/web/src/components/notification-category-button.tsx:130
+msgid "Manage categories"
+msgstr "Urus kategori"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:192
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Urus akaun tersambung anda untuk pemberitahuan dan perkhidmatan."
@@ -1055,7 +1067,7 @@ msgstr "Tiada keputusan dijumpai."
 msgid "No time zone found."
 msgstr "Tiada zon waktu dijumpai."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:106
+#: ../../../lib/web/src/components/notification-category-button.tsx:109
 msgid "No topic record yet — try again after the next notification."
 msgstr "Tiada rekod topik lagi — cuba lagi selepas pemberitahuan seterusnya."
 
@@ -1748,7 +1760,7 @@ msgstr "Tidak dapat menyambung ke pelayan jauh"
 msgid "Unable to redirect to login. Please try again."
 msgstr "Tidak dapat mengubah hala ke log masuk. Sila cuba lagi."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: ../../../lib/web/src/components/notification-category-button.tsx:117
 msgid "Unassigned"
 msgstr "Tidak diberikan"
 

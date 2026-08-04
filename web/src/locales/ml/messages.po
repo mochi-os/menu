@@ -60,6 +60,10 @@ msgstr "{selectedCount, plural, one {# തിരഞ്ഞെടുത്ത {ent
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{totalLabel}-ൽ {sentLabel}"
 
+#: src/use-menu-categories.ts:83
+msgid "{topicLabel} moved to the {categoryLabel} category"
+msgstr "{topicLabel} {categoryLabel} വിഭാഗത്തിലേക്ക് മാറ്റി"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {മെനു തുറക്കുക (# വായിക്കാത്ത അറിയിപ്പ്)} other {മെനു തുറക്കുക (# വായിക്കാത്ത അറിയിപ്പുകൾ)}}"
@@ -290,8 +294,12 @@ msgid "Cancel"
 msgstr "റദ്ദാക്കുക"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:102
-msgid "Category for this notification"
-msgstr "ഈ അറിയിപ്പിനുള്ള വിഭാഗം"
+msgid "Category for these notifications"
+msgstr "ഈ അറിയിപ്പുകൾക്കുള്ള വിഭാഗം"
+
+#: src/use-menu-categories.ts:84
+msgid "Category updated"
+msgstr "വിഭാഗം അപ്ഡേറ്റ് ചെയ്തു"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:83
 #: ../../../lib/web/src/components/notification-category-button.tsx:94
@@ -705,7 +713,7 @@ msgstr "RSS ആക്‌സസ് പിൻവലിക്കുന്നതി�
 msgid "Failed to send verification code"
 msgstr "സ്ഥിരീകരണ കോഡ് അയയ്ക്കുന്നതിൽ പരാജയപ്പെട്ടു"
 
-#: src/use-menu-categories.ts:83
+#: src/use-menu-categories.ts:88
 msgid "Failed to update category"
 msgstr "വിഭാഗം പുതുക്കുന്നതിൽ പരാജയപ്പെട്ടു"
 
@@ -931,6 +939,10 @@ msgstr "വിജയകരമായി ലോഗ് ഔട്ട് ചെയ്
 msgid "Logging out…"
 msgstr "ലോഗ് ഔട്ട് ചെയ്യുന്നു…"
 
+#: ../../../lib/web/src/components/notification-category-button.tsx:130
+msgid "Manage categories"
+msgstr "വിഭാഗങ്ങൾ നിയന്ത്രിക്കുക"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:192
 msgid "Manage your connected accounts for notifications and services."
 msgstr "അറിയിപ്പുകൾക്കും സേവനങ്ങൾക്കുമായി നിങ്ങളുടെ കണക്റ്റ് ചെയ്ത അക്കൗണ്ടുകൾ കൈകാര്യം ചെയ്യുക."
@@ -1055,7 +1067,7 @@ msgstr "ഫലങ്ങളൊന്നും കണ്ടെത്തിയി�
 msgid "No time zone found."
 msgstr "സമയ മേഖലയൊന്നും കണ്ടെത്തിയില്ല."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:106
+#: ../../../lib/web/src/components/notification-category-button.tsx:109
 msgid "No topic record yet — try again after the next notification."
 msgstr "വിഷയ റെക്കോർഡ് ഇതുവരെയില്ല — അടുത്ത അറിയിപ്പിന് ശേഷം വീണ്ടും ശ്രമിക്കുക."
 
@@ -1748,7 +1760,7 @@ msgstr "റിമോട്ട് സെർവറുമായി കണക്റ�
 msgid "Unable to redirect to login. Please try again."
 msgstr "ലോഗിനിലേക്ക് റീഡയറക്റ്റ് ചെയ്യാൻ കഴിയുന്നില്ല. വീണ്ടും ശ്രമിക്കുക."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: ../../../lib/web/src/components/notification-category-button.tsx:117
 msgid "Unassigned"
 msgstr "നിയോഗിച്ചിട്ടില്ല"
 

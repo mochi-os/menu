@@ -60,6 +60,10 @@ msgstr "{selectedCount, plural, one {Массовые действия для # 
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{sentLabel} из {totalLabel}"
 
+#: src/use-menu-categories.ts:83
+msgid "{topicLabel} moved to the {categoryLabel} category"
+msgstr "{topicLabel} теперь в категории {categoryLabel}"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Открыть меню (# непрочитанное уведомление)} few {Открыть меню (# непрочитанных уведомления)} many {Открыть меню (# непрочитанных уведомлений)} other {Открыть меню (# непрочитанного уведомления)}}"
@@ -290,8 +294,12 @@ msgid "Cancel"
 msgstr "Отмена"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:102
-msgid "Category for this notification"
-msgstr "Категория этого уведомления"
+msgid "Category for these notifications"
+msgstr "Категория этих уведомлений"
+
+#: src/use-menu-categories.ts:84
+msgid "Category updated"
+msgstr "Категория обновлена"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:83
 #: ../../../lib/web/src/components/notification-category-button.tsx:94
@@ -705,7 +713,7 @@ msgstr "Не удалось отозвать доступ RSS"
 msgid "Failed to send verification code"
 msgstr "Не удалось отправить код подтверждения"
 
-#: src/use-menu-categories.ts:83
+#: src/use-menu-categories.ts:88
 msgid "Failed to update category"
 msgstr "Не удалось обновить категорию"
 
@@ -931,6 +939,10 @@ msgstr "Выход выполнен успешно"
 msgid "Logging out…"
 msgstr "Выход…"
 
+#: ../../../lib/web/src/components/notification-category-button.tsx:130
+msgid "Manage categories"
+msgstr "Управлять категориями"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:192
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Управляйте подключёнными аккаунтами для уведомлений и сервисов."
@@ -1055,7 +1067,7 @@ msgstr "Результаты не найдены."
 msgid "No time zone found."
 msgstr "Часовой пояс не найден."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:106
+#: ../../../lib/web/src/components/notification-category-button.tsx:109
 msgid "No topic record yet — try again after the next notification."
 msgstr "Записи о теме пока нет — попробуйте ещё раз после следующего уведомления."
 
@@ -1748,7 +1760,7 @@ msgstr "Не удалось подключиться к удалённому с�
 msgid "Unable to redirect to login. Please try again."
 msgstr "Не удалось перенаправить на страницу входа. Попробуйте снова."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: ../../../lib/web/src/components/notification-category-button.tsx:117
 msgid "Unassigned"
 msgstr "Не назначено"
 

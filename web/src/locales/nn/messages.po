@@ -60,6 +60,10 @@ msgstr "{selectedCount, plural, one {Massehandlingar for # vald {entityName}} ot
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{sentLabel} av {totalLabel}"
 
+#: src/use-menu-categories.ts:83
+msgid "{topicLabel} moved to the {categoryLabel} category"
+msgstr "{topicLabel} er flytta til kategorien {categoryLabel}"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Opne meny (# ulese varsel)} other {Opne meny (# ulesne varsel)}}"
@@ -290,8 +294,12 @@ msgid "Cancel"
 msgstr "Avbryt"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:102
-msgid "Category for this notification"
-msgstr "Kategori for dette varselet"
+msgid "Category for these notifications"
+msgstr "Kategori for desse varsla"
+
+#: src/use-menu-categories.ts:84
+msgid "Category updated"
+msgstr "Kategori oppdatert"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:83
 #: ../../../lib/web/src/components/notification-category-button.tsx:94
@@ -705,7 +713,7 @@ msgstr "Klarte ikkje trekkje tilbake RSS-tilgang"
 msgid "Failed to send verification code"
 msgstr "Klarte ikkje senda stadfestingskode"
 
-#: src/use-menu-categories.ts:83
+#: src/use-menu-categories.ts:88
 msgid "Failed to update category"
 msgstr "Klarte ikkje oppdatera kategori"
 
@@ -931,6 +939,10 @@ msgstr "Logga ut"
 msgid "Logging out…"
 msgstr "Loggar ut…"
 
+#: ../../../lib/web/src/components/notification-category-button.tsx:130
+msgid "Manage categories"
+msgstr "Handsam kategoriar"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:192
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Administrer dei tilkopla kontoane dine for varsel og tenester."
@@ -1055,7 +1067,7 @@ msgstr "Ingen treff funne."
 msgid "No time zone found."
 msgstr "Inga tidssone funne."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:106
+#: ../../../lib/web/src/components/notification-category-button.tsx:109
 msgid "No topic record yet — try again after the next notification."
 msgstr "Inga emneoppføring enno — prøv igjen etter neste varsel."
 
@@ -1748,7 +1760,7 @@ msgstr "Klarte ikkje å kople til fjerntenaren"
 msgid "Unable to redirect to login. Please try again."
 msgstr "Kunne ikkje omdirigere til innlogging. Prøv igjen."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: ../../../lib/web/src/components/notification-category-button.tsx:117
 msgid "Unassigned"
 msgstr "Ikkje tildelt"
 

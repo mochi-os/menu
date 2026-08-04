@@ -60,6 +60,10 @@ msgstr "{selectedCount, plural, one {# таңдалған {entityName} үшін 
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{totalLabel} ішінен {sentLabel}"
 
+#: src/use-menu-categories.ts:83
+msgid "{topicLabel} moved to the {categoryLabel} category"
+msgstr "{topicLabel} {categoryLabel} санатына жылжытылды"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Мәзірді ашу (# оқылмаған хабарландыру)} other {Мәзірді ашу (# оқылмаған хабарландыру)}}"
@@ -290,8 +294,12 @@ msgid "Cancel"
 msgstr "Болдырмау"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:102
-msgid "Category for this notification"
-msgstr "Осы хабарландырудың санаты"
+msgid "Category for these notifications"
+msgstr "Осы хабарландырулардың санаты"
+
+#: src/use-menu-categories.ts:84
+msgid "Category updated"
+msgstr "Санат жаңартылды"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:83
 #: ../../../lib/web/src/components/notification-category-button.tsx:94
@@ -705,7 +713,7 @@ msgstr "RSS кіру құқығын қайтарып алу сәтсіз аяқ�
 msgid "Failed to send verification code"
 msgstr "Растау кодын жіберу сәтсіз аяқталды"
 
-#: src/use-menu-categories.ts:83
+#: src/use-menu-categories.ts:88
 msgid "Failed to update category"
 msgstr "Санатты жаңарту сәтсіз аяқталды"
 
@@ -931,6 +939,10 @@ msgstr "Жүйеден сәтті шықтыңыз"
 msgid "Logging out…"
 msgstr "Шығу…"
 
+#: ../../../lib/web/src/components/notification-category-button.tsx:130
+msgid "Manage categories"
+msgstr "Санаттарды басқару"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:192
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Хабарландырулар мен қызметтер үшін жалғанған тіркелгілеріңізді басқарыңыз."
@@ -1055,7 +1067,7 @@ msgstr "Нәтижелер табылмады."
 msgid "No time zone found."
 msgstr "Уақыт белдеуі табылмады."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:106
+#: ../../../lib/web/src/components/notification-category-button.tsx:109
 msgid "No topic record yet — try again after the next notification."
 msgstr "Тақырып жазбасы әлі жоқ — келесі хабарландырудан кейін қайталап көріңіз."
 
@@ -1748,7 +1760,7 @@ msgstr "Қашықтағы серверге қосылу мүмкін болма
 msgid "Unable to redirect to login. Please try again."
 msgstr "Кіру бетіне қайта бағыттау мүмкін болмады. Қайталап көріңіз."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: ../../../lib/web/src/components/notification-category-button.tsx:117
 msgid "Unassigned"
 msgstr "Тағайындалмаған"
 

@@ -60,6 +60,10 @@ msgstr "{selectedCount, plural, one {Амалҳои оммавӣ барои # {e
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{sentLabel} аз {totalLabel}"
 
+#: src/use-menu-categories.ts:83
+msgid "{topicLabel} moved to the {categoryLabel} category"
+msgstr "{topicLabel} ба категорияи {categoryLabel} интиқол дода шуд"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Менюро кушоед (# огоҳиномаи хонданашуда)} other {Менюро кушоед (# огоҳиномаи хонданашуда)}}"
@@ -290,8 +294,12 @@ msgid "Cancel"
 msgstr "Бекор кардан"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:102
-msgid "Category for this notification"
-msgstr "Категория барои ин огоҳинома"
+msgid "Category for these notifications"
+msgstr "Категория барои ин огоҳиномаҳо"
+
+#: src/use-menu-categories.ts:84
+msgid "Category updated"
+msgstr "Категория навсозӣ шуд"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:83
 #: ../../../lib/web/src/components/notification-category-button.tsx:94
@@ -705,7 +713,7 @@ msgstr "Бекор кардани дастрасии RSS ноком шуд"
 msgid "Failed to send verification code"
 msgstr "Ирсоли рамзи тасдиқ ба анҷом нарасид"
 
-#: src/use-menu-categories.ts:83
+#: src/use-menu-categories.ts:88
 msgid "Failed to update category"
 msgstr "Навсозии категория ба анҷом нарасид"
 
@@ -931,6 +939,10 @@ msgstr "Бомуваффақият баромад"
 msgid "Logging out…"
 msgstr "Баромадан…"
 
+#: ../../../lib/web/src/components/notification-category-button.tsx:130
+msgid "Manage categories"
+msgstr "Идоракунии категорияҳо"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:192
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Ҳисобҳои пайвастшудаи худро барои огоҳиномаҳо ва хидматҳо идора кунед."
@@ -1055,7 +1067,7 @@ msgstr "Ягон натиҷа ёфт нашуд."
 msgid "No time zone found."
 msgstr "Ягон минтақаи вақт ёфт нашуд."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:106
+#: ../../../lib/web/src/components/notification-category-button.tsx:109
 msgid "No topic record yet — try again after the next notification."
 msgstr "Ягон сабти мавзӯъ ҳоло нест — пас аз огоҳиномаи навбатӣ боз кӯшиш кунед."
 
@@ -1748,7 +1760,7 @@ msgstr "Пайвастшавӣ ба сервери дурдаст имконно
 msgid "Unable to redirect to login. Please try again."
 msgstr "Ба воридшавӣ равона кардан имконнопазир аст. Лутфан дубора кӯшиш кунед."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: ../../../lib/web/src/components/notification-category-button.tsx:117
 msgid "Unassigned"
 msgstr "Таъин нашудааст"
 

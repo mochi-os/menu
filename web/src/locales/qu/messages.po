@@ -60,6 +60,10 @@ msgstr "{selectedCount, plural, one {# akllasqa {entityName} paq huñu ruwaykuna
 msgid "{sentLabel} of {totalLabel}"
 msgstr "{sentLabel} / {totalLabel}"
 
+#: src/use-menu-categories.ts:83
+msgid "{topicLabel} moved to the {categoryLabel} category"
+msgstr "{topicLabel} {categoryLabel} categoríaman astasqa"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Menuta kichay (# mana ñawinchasqa willakuy)} other {Menuta kichay (# mana ñawinchasqa willakuykuna)}}"
@@ -290,8 +294,12 @@ msgid "Cancel"
 msgstr "Mana ruway"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:102
-msgid "Category for this notification"
-msgstr "Kay willaykuna categoría"
+msgid "Category for these notifications"
+msgstr "Kay willaykunapaq categoría"
+
+#: src/use-menu-categories.ts:84
+msgid "Category updated"
+msgstr "Categoría musuqchasqa"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:83
 #: ../../../lib/web/src/components/notification-category-button.tsx:94
@@ -705,7 +713,7 @@ msgstr "Mana atikunchu RSS yaykuyta chinkachiy"
 msgid "Failed to send verification code"
 msgstr "Mana sut'inchay códigota apachiyta atinchu"
 
-#: src/use-menu-categories.ts:83
+#: src/use-menu-categories.ts:88
 msgid "Failed to update category"
 msgstr "Mana categoríata musuqyachiyta atinchu"
 
@@ -931,6 +939,10 @@ msgstr "Allinta lluqsirqun"
 msgid "Logging out…"
 msgstr "Lluqsichkan…"
 
+#: ../../../lib/web/src/components/notification-category-button.tsx:130
+msgid "Manage categories"
+msgstr "Categoríakunata kamachiy"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:192
 msgid "Manage your connected accounts for notifications and services."
 msgstr "Willakuykunapaq ruwaykunapaqpas t'inkisqa cuentaykikunata kamachiy."
@@ -1055,7 +1067,7 @@ msgstr "Mana resultadokuna tarisqachu."
 msgid "No time zone found."
 msgstr "Mana time zone tarisqachu."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:106
+#: ../../../lib/web/src/components/notification-category-button.tsx:109
 msgid "No topic record yet — try again after the next notification."
 msgstr "Manaraq topic registro — qatiqnin notificacionmanta watiqmanta ruway."
 
@@ -1748,7 +1760,7 @@ msgstr "Karu servidorman mana tinkiy atikunchu"
 msgid "Unable to redirect to login. Please try again."
 msgstr "Loginman mana tikrachiyta atikurqanchu. Ama hina kaspa kutimanta ruway."
 
-#: ../../../lib/web/src/components/notification-category-button.tsx:114
+#: ../../../lib/web/src/components/notification-category-button.tsx:117
 msgid "Unassigned"
 msgstr "Mana akllasqa"
 
