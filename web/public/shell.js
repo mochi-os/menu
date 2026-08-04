@@ -1214,33 +1214,61 @@
         }
     }
 
+    // Resolve url against the shell origin and return its origin-relative path
+    // plus the app that owns it, or null when unparseable or off-origin.
+    // The app name MUST come from the resolved pathname: an absolute or
+    // protocol-relative URL carries no leading "/<app>" for getAppNameFromPath
+    // to match, so reading it off the raw string yields '' and every app
+    // comparison made against that value passes.
+    function sameOriginTarget(url) {
+        var resolved;
+        try {
+            resolved = new URL(url, window.location.href);
+        } catch (e) {
+            return null;
+        }
+        if (resolved.origin !== window.location.origin) return null;
+        return {
+            path: resolved.pathname + resolved.search + resolved.hash,
+            app: getAppNameFromPath(resolved.pathname)
+        };
+    }
+
     var lastNavigatedPath = window.location.pathname + window.location.search + window.location.hash;
 
     function handleNavigate(data) {
-        // Same-origin only — don't rely on pushState throwing on foreign URLs
-        if (!data.path || !isSameOriginUrl(data.path)) return;
-        // Reject navigate messages for paths outside the current app (anti-spoofing)
+        // Same-origin only — don't rely on pushState throwing on foreign URLs.
+        // Reject paths outside the current app (anti-spoofing): moving the top
+        // URL to another app while this iframe stays mounted would let the next
+        // 'ready' mint that app's token and hand it to the iframe that asked.
+        if (!data.path) return;
+        var target = sameOriginTarget(data.path);
+        if (!target) return;
         var currentApp = getAppNameFromPath(window.location.pathname);
-        var navApp = getAppNameFromPath(data.path);
-        if (navApp && navApp !== currentApp) return;
+        if (target.app && target.app !== currentApp) return;
         // Only touch history when the path actually changed. Honor the iframe's
         // push-vs-replace intent: a replace (URL canonicalization, filter state,
         // the reload that fires on back) must NOT add a back-stack entry, else
         // it buries the app-home entry and browser-back skips it.
-        if (data.path !== lastNavigatedPath) {
+        if (target.path !== lastNavigatedPath) {
             if (data.replace) {
-                history.replaceState(null, '', data.path);
+                history.replaceState(null, '', target.path);
             } else {
-                history.pushState(null, '', data.path);
+                history.pushState(null, '', target.path);
             }
-            lastNavigatedPath = data.path;
+            lastNavigatedPath = target.path;
         }
     }
 
     function handleNavigateExternal(data) {
-        // Same-origin only — don't rely on pushState throwing on foreign URLs
-        if (!data.url || !isSameOriginUrl(data.url)) return;
-        var newApp = getAppNameFromPath(data.url);
+        // Same-origin only — don't rely on pushState throwing on foreign URLs.
+        // Crossing apps is the point here, but the destination must name one:
+        // an empty name keys storage on a shared 'app::' prefix that every app
+        // would then read, and asks for a token for no app at all.
+        if (!data.url) return;
+        var target = sameOriginTarget(data.url);
+        if (!target || !target.app) return;
+        var newApp = target.app;
 
         if (newApp !== currentAppPath) {
             // Cross-app navigation: update URL, fetch new token, swap iframe
@@ -1255,7 +1283,7 @@
             updateFavicon(newApp);
             baseTitle = 'Mochi';
             updateTitle();
-            history.pushState(null, '', data.url);
+            history.pushState(null, '', target.path);
 
             // Show progress bar and dim current iframe immediately (before token fetch)
             showProgress();
@@ -1264,16 +1292,16 @@
 
             fetchToken(newApp).then(function(token) {
                 storagePrefix = 'app:' + newApp + ':';
-                swapIframe(data.url);
+                swapIframe(target.path);
                 scheduleTokenRefresh(newApp);
             }).catch(function() {
                 storagePrefix = 'app:' + newApp + ':';
-                swapIframe(data.url);
+                swapIframe(target.path);
             });
         } else {
             // Same app — just update iframe location
-            history.pushState(null, '', data.url);
-            postToIframe({ type: 'popstate', path: data.url });
+            history.pushState(null, '', target.path);
+            postToIframe({ type: 'popstate', path: target.path });
         }
     }
 
