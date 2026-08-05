@@ -18,6 +18,22 @@ msgstr ""
 msgid "Please check your internet connection and try again."
 msgstr "உங்கள் இணைய இணைப்பைச் சரிபார்த்து மீண்டும் முயற்சிக்கவும்."
 
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:302
+msgid " or "
+msgstr " அல்லது "
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:228
+msgid "(edited)"
+msgstr "(திருத்தப்பட்டது)"
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:212
+msgid "(expand)"
+msgstr "(விரிவாக்கு)"
+
+#: ../../../lib/web/src/components/entity/entity-board-container.tsx:774
+msgid "[not set]"
+msgstr "[அமைக்கப்படவில்லை]"
+
 #. placeholder {0}: selectedValues.size
 #: ../../../lib/web/src/components/data-table/faceted-filter.tsx:66
 msgid "{0, plural, one {# selected} other {# selected}}"
@@ -64,6 +80,10 @@ msgstr "{totalLabel}இல் {sentLabel}"
 msgid "{topicLabel} moved to the {categoryLabel} category"
 msgstr "{topicLabel} {categoryLabel} வகைக்கு நகர்த்தப்பட்டது"
 
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:544
+msgid "{totalCount, plural, one {# item} other {# items}}"
+msgstr "{totalCount, plural, one {# உருப்படி} other {# உருப்படிகள்}}"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {மெனுவைத் திற (# படிக்காத அறிவிப்பு)} other {மெனுவைத் திற (# படிக்காத அறிவிப்புகள்)}}"
@@ -73,9 +93,17 @@ msgstr "{unreadCount, plural, one {மெனுவைத் திற (# பட�
 msgid "+{0} nested"
 msgstr "+{0} உள்ளடங்கியவை"
 
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:209
+msgid "+{totalDescendants} more replies"
+msgstr "+{totalDescendants} மேலும் பதில்கள்"
+
 #: src/use-permission-request.tsx:222
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> பின்வரும் அனுமதியைக் கோருகிறது:"
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:208
+msgid "1 reply"
+msgstr "1 பதில்"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:42
 msgid "12 hours"
@@ -127,9 +155,17 @@ msgstr "கணக்கு சரிபார்க்கப்பட்டத�
 msgid "Add"
 msgstr "சேர்"
 
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:360
+msgid "Add a comment..."
+msgstr "ஒரு கருத்து சேர்..."
+
 #: ../../../lib/web/src/features/accounts/account-add.tsx:133
 msgid "Add a new account"
 msgstr "புதிய கணக்கு சேர்"
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:106
+msgid "Add a new field to this class"
+msgstr "இந்த வகுப்பிற்கு புதிய புலம் சேர்"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:148
 msgid "Add access"
@@ -148,13 +184,30 @@ msgstr "அறிவிப்புகளைப் பெறவும் சே�
 msgid "Add checklist item"
 msgstr "சரிபார்ப்பு பட்டியல் உருப்படி சேர்"
 
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:105
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:233
+msgid "Add field"
+msgstr "புலம் சேர்"
+
 #: ../../../lib/web/src/components/entity/entity-field-editor.tsx:705
 msgid "Add item..."
 msgstr "உருப்படி சேர்..."
 
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:320
+msgid "Add link"
+msgstr "இணைப்பு சேர்"
+
 #: ../../../lib/web/src/features/accounts/account-picker.tsx:102
 msgid "Add new account"
 msgstr "புதிய கணக்கு சேர்"
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:215
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:220
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:292
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:94
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:194
+msgid "Add option"
+msgstr "விருப்பம் சேர்"
 
 #: ../../../lib/web/src/components/post-tags.tsx:137
 #: ../../../lib/web/src/components/tag-input.tsx:40
@@ -169,6 +222,8 @@ msgstr "குழு/பயன்பாடு சேர்"
 msgid "Add to existing notifications"
 msgstr "உள்ள அறிவிப்புகளுக்குச் சேர்"
 
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:264
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:519
 #: ../../../lib/web/src/components/view-tabs.tsx:87
 #: ../../../lib/web/src/components/view-tabs.tsx:93
 msgid "Add view"
@@ -199,6 +254,10 @@ msgstr "அனுமதி"
 msgid "Allow anyone to search for {0}"
 msgstr "யாரும் {0} தேட அனுமதிக்கவும்"
 
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:226
+msgid "Allow sort by"
+msgstr "வரிசைப்படுத்துதலை அனுமதி"
+
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:178
 msgid "An error occurred"
 msgstr "பிழை ஏற்பட்டது"
@@ -220,6 +279,19 @@ msgstr "எவரும்"
 msgid "Anyone who is logged in"
 msgstr "உள்நுழைந்த யாரும்"
 
+#. placeholder {0}: deleteTarget?.name
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:271
+msgid "Are you sure you want to delete \"{0}\"?"
+msgstr "\"{0}\"-ஐ நீக்க விரும்புகிறீர்களா?"
+
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:643
+msgid "Are you sure you want to delete the \"{name}\" column? This cannot be undone."
+msgstr "\"{name}\" நெடுவரிசையை நீக்க விரும்புகிறீர்களா? இதை மாற்ற முடியாது."
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:485
+msgid "Are you sure you want to delete this comment? This will also delete all replies."
+msgstr "இந்த கருத்தை நீக்க விரும்புகிறீர்களா? இது அனைத்து பதிலளிப்புகளையும் நீக்கும்."
+
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:27
 msgid "Are you sure you want to log out? You will need to log in again to access your account."
 msgstr "வெளியேற விரும்புகிறீர்களா? உங்கள் கணக்கை அணுக மீண்டும் உள்நுழைய வேண்டும்."
@@ -231,6 +303,16 @@ msgstr "ஏறு"
 #: ../../../lib/web/src/components/ui/sort-direction-button.tsx:27
 msgid "Ascending"
 msgstr "ஏறுவரிசை"
+
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:398
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:403
+msgid "Attach comment files"
+msgstr "கருத்து கோப்புகளை இணை"
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:439
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:444
+msgid "Attach reply files"
+msgstr "பதிலளிப்பு கோப்புகளை இணை"
 
 #: ../../../lib/web/src/features/access/access-list.tsx:46
 #: ../../../lib/web/src/features/access/types.ts:41
@@ -267,20 +349,41 @@ msgstr "முகப்புக்குத் திரும்பு"
 msgid "Banner"
 msgstr "பேனர்"
 
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:68
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:215
+msgid "Blocked by"
+msgstr "தடுக்கப்பட்டது"
+
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:237
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:247
 msgid "Blocked navigation to untrusted link"
 msgstr "நம்பகமற்ற இணைப்புக்கு வழிசெலுத்தல் தடுக்கப்பட்டது"
+
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:66
+msgid "Blocks"
+msgstr "தடுக்கிறது"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:318
+msgid "Board"
+msgstr "பலகை"
 
 #: ../../../lib/web/src/components/post-tags.tsx:180
 #: ../../../lib/web/src/components/post-tags.tsx:192
 msgid "Boost interest"
 msgstr "ஆர்வத்தை அதிகரி"
 
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:405
+msgid "Border colour"
+msgstr "எல்லை நிறம்"
+
 #: ../../../lib/web/src/features/accounts/types.ts:13
 msgid "Browser notifications"
 msgstr "உலாவி அறிவிப்புகள்"
 
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:628
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:249
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:169
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:186
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:67
 #: ../../../lib/web/src/components/step-up-dialog.tsx:363
 #: ../../../lib/web/src/components/travelling-picker.tsx:308
@@ -292,6 +395,16 @@ msgstr "உலாவி அறிவிப்புகள்"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:91
 msgid "Cancel"
 msgstr "ரத்துசெய்"
+
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:415
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:420
+msgid "Cancel comment"
+msgstr "கருத்தை ரத்துசெய்"
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:455
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:460
+msgid "Cancel reply"
+msgstr "பதிலளிப்பை ரத்துசெய்"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:102
 msgid "Category for these notifications"
@@ -309,6 +422,14 @@ msgstr "அறிவிப்பு வகையை மாற்று"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:198
 msgid "Check \"All\" to see your past notifications."
 msgstr "முந்தைய அறிவிப்புகளைப் பார்க்க \"அனைத்தும்\" தேர்ந்தெடுக்கவும்."
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:137
+msgid "Checkbox"
+msgstr "தேர்வுப் பெட்டி"
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:138
+msgid "Checklist"
+msgstr "சரிபார்ப்பு பட்டியல்"
 
 #: ../../../lib/web/src/components/game/game-empty-state.tsx:37
 msgid "Choose a game from the sidebar or start a new one."
@@ -366,6 +487,8 @@ msgstr "தேர்வை அழி"
 msgid "Clear selection (Escape)"
 msgstr "தேர்வை அழி (Escape)"
 
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:485
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:490
 #: ../../../lib/web/src/components/ui/dialog.tsx:78
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:358
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:361
@@ -373,6 +496,13 @@ msgstr "தேர்வை அழி (Escape)"
 #: src/use-permission-request.tsx:239
 msgid "Close"
 msgstr "மூடு"
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:109
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:113
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:269
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:273
+msgid "Close dialog"
+msgstr "உரையாடலை மூடு"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:108
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:113
@@ -405,6 +535,19 @@ msgstr "சுருக்கு"
 msgid "Collapse sidebar"
 msgstr "பக்கப்பட்டியைச் சுருக்கு"
 
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:149
+msgid "Colour"
+msgstr "நிறம்"
+
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:553
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:558
+msgid "Column actions"
+msgstr "நெடுவரிசை செயல்கள்"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:353
+msgid "Columns group by"
+msgstr "நெடுவரிசைகள் தொகுக்கப்படுகின்றன"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:96
 msgid "Comfortable"
 msgstr "வசதியான"
@@ -417,10 +560,23 @@ msgstr "விரைவில் வருகிறது!"
 msgid "Command Palette"
 msgstr "கட்டளைப் பலகை"
 
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:330
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:337
+msgid "Comment actions"
+msgstr "கருத்து செயல்கள்"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:316
 #: ../../../lib/web/src/lib/preference-utils.ts:95
 msgid "Compact"
 msgstr "சுருக்கமான"
+
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:97
+msgid "Configure option settings"
+msgstr "விருப்ப அமைப்புகளை உள்ளமைக்கவும்"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:265
+msgid "Configure view settings"
+msgstr "காட்சி அமைப்புகளை உள்ளமைக்கவும்"
 
 #: ../../../lib/web/src/components/place-picker.tsx:160
 #: ../../../lib/web/src/components/travelling-picker.tsx:316
@@ -491,6 +647,14 @@ msgstr "மறுஅங்கீகாரத்தைத் தொடங்க �
 msgid "Couldn't verify with that account. Please try again."
 msgstr "அந்தக் கணக்கைச் சரிபார்க்க முடியவில்லை. மீண்டும் முயற்சிக்கவும்."
 
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:564
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:703
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:475
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:647
+#: ../../../lib/web/src/components/entity/entity-tree-view.tsx:672
+msgid "Create"
+msgstr "உருவாக்கு"
+
 #. placeholder {0}: entityLabel.toLowerCase()
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:144
 msgid "Create {0}"
@@ -500,6 +664,12 @@ msgstr "{0} உருவாக்கு"
 msgid "Create new item"
 msgstr "புதிய உருப்படி உருவாக்கு"
 
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:56
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:498
+msgid "Created"
+msgstr "உருவாக்கப்பட்டது"
+
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:647
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:258
 msgid "Creating..."
 msgstr "உருவாக்குகிறது..."
@@ -527,6 +697,10 @@ msgstr "இருள் முறை"
 msgid "Data conflict"
 msgstr "தரவு முரண்பாடு"
 
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:139
+msgid "Date"
+msgstr "தேதி"
+
 #: ../../../lib/web/src/components/game/game-draw-offer-banner.tsx:41
 msgid "Decline"
 msgstr "மறு"
@@ -538,6 +712,52 @@ msgstr "இயல்புநிலை"
 #: ../../../lib/web/src/features/accounts/account-add.tsx:185
 msgid "Default AI account"
 msgstr "இயல்புநிலை AI கணக்கு"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:485
+msgid "Default sort"
+msgstr "இயல்புநிலை வரிசை"
+
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:583
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:644
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:318
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:361
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:486
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:173
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:178
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:227
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:272
+msgid "Delete"
+msgstr "நீக்கு"
+
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:270
+msgid "Delete attachment"
+msgstr "இணைப்பை நீக்கு"
+
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:642
+msgid "Delete column"
+msgstr "நெடுவரிசையை நீக்கு"
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:484
+msgid "Delete comment"
+msgstr "கருத்தை நீக்கு"
+
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:301
+msgid "Delete field"
+msgstr "புலத்தை நீக்கு"
+
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:119
+msgid "Delete option"
+msgstr "விருப்பத்தை நீக்கு"
+
+#. placeholder {0}: opt.name
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:279
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:284
+msgid "Delete option {0}"
+msgstr "விருப்பம் {0}-ஐ நீக்கு"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:290
+msgid "Delete view"
+msgstr "காட்சியை நீக்கு"
 
 #: ../../../lib/web/src/components/restore-banner.tsx:115
 msgid "Delete your account on the old server"
@@ -604,6 +824,12 @@ msgstr "நிராகரி"
 msgid "Displays the mobile sidebar."
 msgstr "மொபைல் பக்கப்பட்டியைக் காட்டுகிறது."
 
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:306
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:524
+msgid "Done"
+msgstr "முடிந்தது"
+
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:214
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:342
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:352
 msgid "Download"
@@ -613,17 +839,48 @@ msgstr "பதிவிறக்கு"
 msgid "Download failed"
 msgstr "பதிவிறக்கம் தோல்வியடைந்தது"
 
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:67
+msgid "Duplicates"
+msgstr "நகலெடுக்கிறது"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:146
 msgid "Dyslexia-friendly"
 msgstr "டிஸ்லெக்சியாவுக்கு உகந்தது"
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:307
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:352
+msgid "Edit"
+msgstr "திருத்து"
 
 #: ../../../lib/web/src/components/ui/editable-field-row.tsx:154
 msgid "Edit {label}"
 msgstr "{label} திருத்து"
 
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:138
+msgid "Edit field"
+msgstr "புலத்தைத் திருத்து"
+
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:139
+msgid "Edit field settings"
+msgstr "புல அமைப்புகளைத் திருத்து"
+
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:94
+msgid "Edit option"
+msgstr "விருப்பத்தை திருத்து"
+
+#. placeholder {0}: opt.name
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:264
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:269
+msgid "Edit option {0}"
+msgstr "விருப்பம் {0} திருத்து"
+
 #: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:31
 msgid "Edit selected card"
 msgstr "தேர்ந்தெடுத்த அட்டையை திருத்து"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:264
+msgid "Edit view"
+msgstr "காட்சியைத் திருத்து"
 
 #: ../../../lib/web/src/features/accounts/types.ts:15
 msgid "Email"
@@ -673,9 +930,22 @@ msgstr "டேக்கைச் சேர்க்க முடியவில�
 msgid "Failed to copy"
 msgstr "நகலெடுக்க முடியவில்லை"
 
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:137
 #: ../../../lib/web/src/components/options-menu.tsx:99
 msgid "Failed to create link"
 msgstr "இணைப்பை உருவாக்க முடியவில்லை"
+
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:110
+msgid "Failed to delete attachment"
+msgstr "இணைப்பை நீக்க முடியவில்லை"
+
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:207
+msgid "Failed to delete comment"
+msgstr "கருத்தை நீக்க முடியவில்லை"
+
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:159
+msgid "Failed to delete link"
+msgstr "இணைப்பை நீக்க முடியவில்லை"
 
 #: ../../../lib/web/src/components/options-menu.tsx:123
 msgid "Failed to get RSS token"
@@ -701,6 +971,10 @@ msgstr "அறிவிப்பு வகைகளை ஏற்ற முடி
 msgid "Failed to load video"
 msgstr "வீடியோவை ஏற்ற முடியவில்லை"
 
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:170
+msgid "Failed to post comment"
+msgstr "கருத்தைப் பதிவிட முடியவில்லை"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:234
 msgid "Failed to remove account"
 msgstr "கணக்கை நீக்க முடியவில்லை"
@@ -717,6 +991,20 @@ msgstr "சரிபார்ப்பு குறியீட்டை அன�
 msgid "Failed to update category"
 msgstr "வகையைப் புதுப்பிக்க முடியவில்லை"
 
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:190
+msgid "Failed to update comment"
+msgstr "கருத்தைப் புதுப்பிக்க முடியவில்லை"
+
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:95
+msgid "Failed to upload attachment"
+msgstr "இணைப்பைப் பதிவேற்ற முடியவில்லை"
+
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:567
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:133
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:150
+msgid "Files"
+msgstr "கோப்புகள்"
+
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:30
 msgid "Filter..."
 msgstr "வடிகட்டு..."
@@ -724,6 +1012,10 @@ msgstr "வடிகட்டு..."
 #: ../../../lib/web/src/components/restore-banner.tsx:103
 msgid "Finish moving your account"
 msgstr "கணக்கை நகர்த்துவதை முடிக்கவும்"
+
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:222
+msgid "Flags"
+msgstr "கொடிகள்"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:116
 msgid "Flat"
@@ -788,6 +1080,10 @@ msgstr "முந்தைய பக்கத்திற்குச் செ�
 msgid "Group"
 msgstr "குழு"
 
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:353
+msgid "Group by"
+msgstr "இதன்படி தொகுக்கவும்"
+
 #. placeholder {0}: name || subject.slice(1)
 #: ../../../lib/web/src/features/access/access-list.tsx:68
 msgid "Group: {0}"
@@ -819,6 +1115,10 @@ msgstr "முகப்பு"
 #: ../../../lib/web/src/components/ui/sort-selector.tsx:44
 msgid "Hot"
 msgstr "பிரபலமான"
+
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:153
+msgid "ID"
+msgstr ""
 
 #. placeholder {0}: currentMedia.name
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:247
@@ -879,6 +1179,7 @@ msgid "Large"
 msgstr "பெரியது"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:287
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:312
 msgid "Layout"
 msgstr "தளவமைப்பு"
 
@@ -904,6 +1205,14 @@ msgstr "லைட்"
 #: ../../../lib/web/src/components/options-menu.tsx:190
 msgid "Link"
 msgstr "இணைப்பு"
+
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:279
+msgid "Links"
+msgstr "இணைப்புகள்"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:324
+msgid "List"
+msgstr "பட்டியல்"
 
 #: ../../../lib/web/src/components/ui/load-more.tsx:35
 msgid "Load more"
@@ -947,6 +1256,10 @@ msgstr "வகைகளை நிர்வகி"
 msgid "Manage your connected accounts for notifications and services."
 msgstr "அறிவிப்புகள் மற்றும் சேவைகளுக்கான உங்கள் இணைக்கப்பட்ட கணக்குகளை நிர்வகிக்கவும்."
 
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:52
+msgid "Manual"
+msgstr "கைமுறை"
+
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:202
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:209
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
@@ -954,6 +1267,10 @@ msgstr "அறிவிப்புகள் மற்றும் சேவை�
 #: src/shell-menu.tsx:299
 msgid "Mark all as read"
 msgstr "அனைத்தையும் படித்ததாகக் குறிக்கவும்"
+
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:199
+msgid "Maximum length"
+msgstr "அதிகபட்ச நீளம்"
 
 #: ../../../lib/web/src/features/accounts/types.ts:17
 msgid "MCP server"
@@ -976,6 +1293,10 @@ msgstr "செய்தி"
 msgid "Metric"
 msgstr "மெட்ரிக்"
 
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:188
+msgid "Minimum length"
+msgstr "குறைந்தபட்ச நீளம்"
+
 #: ../../../lib/web/src/features/accounts/types.ts:23
 msgid "Mochi web"
 msgstr "Mochi வலை"
@@ -993,6 +1314,14 @@ msgstr "திங்கட்கிழமை"
 msgid "More options"
 msgstr "மேலும் விருப்பங்கள்"
 
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:118
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:614
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:143
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:128
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:299
+msgid "Name"
+msgstr "பெயர்"
+
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:102
 msgid "Name cannot contain angle brackets, backslash, semicolon, quotes or backticks"
 msgstr "பெயரில் கோண அடைப்புக்குறிகள், பின்சாய்வுக்கோடு, அரைப்புள்ளி, மேற்கோள் குறிகள் அல்லது பின்குறிகள் இருக்கக்கூடாது"
@@ -1006,6 +1335,7 @@ msgstr "பெயர் 1000 எழுத்துக்கள் அல்ல�
 msgid "Network error"
 msgstr "பிணையப் பிழை"
 
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:460
 #: ../../../lib/web/src/components/ui/sort-selector.tsx:43
 msgid "New"
 msgstr "புதியது"
@@ -1020,9 +1350,21 @@ msgstr "புதிய விளையாட்டு"
 msgid "Next image"
 msgstr "அடுத்த படம்"
 
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:533
+msgid "No {parentClassNames} to add to"
+msgstr "சேர்க்க {parentClassNames} இல்லை"
+
 #: ../../../lib/web/src/features/access/access-list.tsx:165
 msgid "No access rules configured. Add rules to control who can access this resource."
 msgstr "அணுகல் விதிகள் எதுவும் கட்டமைக்கப்படவில்லை. இந்த ஆதாரத்தை யார் அணுகலாம் என்பதைக் கட்டுப்படுத்த விதிகளைச் சேர்க்கவும்."
+
+#: ../../../lib/web/src/components/entity/entity-activity-list.tsx:65
+msgid "No activity yet"
+msgstr "செயல்பாடு இன்னும் இல்லை"
+
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:450
+msgid "No comments yet"
+msgstr "கருத்துகள் இன்னும் இல்லை"
 
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:295
 msgid "No connected accounts"
@@ -1035,6 +1377,14 @@ msgstr "விளையாட்டுகள் இன்னும் இல்�
 #: ../../../lib/web/src/features/access/access-dialog.tsx:241
 msgid "No groups available"
 msgstr "குழுக்கள் கிடைக்கவில்லை"
+
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:500
+msgid "No item types can be created yet. Create the required parent items first."
+msgstr "உருப்படி வகைகள் எதையும் இன்னும் உருவாக்க முடியாது. முதலில் தேவையான பெற்றோர் உருப்படிகளை உருவாக்கவும்."
+
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:360
+msgid "No matching objects"
+msgstr "பொருந்தும் ஆப்ஜெக்ட்கள் இல்லை"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:193
 msgid "No notifications yet"
@@ -1063,6 +1413,12 @@ msgstr "முடிவுகள் எதுவும் இல்லை"
 msgid "No results found."
 msgstr "முடிவுகள் எதுவும் கிடைக்கவில்லை."
 
+#: ../../../lib/web/src/components/entity/entity-board-container.tsx:845
+#: ../../../lib/web/src/components/entity/entity-board-container.tsx:890
+#: ../../../lib/web/src/components/entity/entity-tree-view.tsx:339
+msgid "No status"
+msgstr "நிலை இல்லை"
+
 #: ../../../lib/web/src/components/timezone-select.tsx:67
 msgid "No time zone found."
 msgstr "நேர மண்டலம் எதுவும் கிடைக்கவில்லை."
@@ -1079,7 +1435,21 @@ msgstr "படிக்காத அறிவிப்புகள் இல்�
 msgid "No users found"
 msgstr "பயனர்கள் எதுவும் கிடைக்கவில்லை"
 
+#: ../../../lib/web/src/components/entity/entity-design-preview.tsx:115
+msgid "No views"
+msgstr "காட்சிகள் இல்லை"
+
 #: ../../../lib/web/src/components/colour-picker.tsx:349
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:516
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:519
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:523
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:365
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:388
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:391
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:418
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:421
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:494
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:497
 #: ../../../lib/web/src/components/person-picker.tsx:350
 #: ../../../lib/web/src/lib/preference-utils.ts:105
 #: ../../../lib/web/src/lib/preference-utils.ts:125
@@ -1098,6 +1468,10 @@ msgstr "கிடைக்கவில்லை"
 msgid "Not set"
 msgstr "அமைக்கப்படவில்லை"
 
+#: ../../../lib/web/src/components/entity/entity-tree-view.tsx:668
+msgid "Nothing found"
+msgstr "எதுவும் கிடைக்கவில்லை"
+
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:136
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:150
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
@@ -1111,6 +1485,12 @@ msgstr "அறிவிப்புகள்"
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:195
 msgid "Notifications: {0}"
 msgstr "அறிவிப்புகள்: {0}"
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:140
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:54
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:499
+msgid "Number"
+msgstr "எண்"
 
 #: ../../../lib/web/src/components/filter-bar.tsx:35
 msgid "On"
@@ -1150,6 +1530,11 @@ msgstr "வழிசெலுத்தலைத் திறக்கவும�
 msgid "Open navigation menu"
 msgstr "வழிசெலுத்தல் மெனுவைத் திறக்கவும்"
 
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:108
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:114
+msgid "Open option actions"
+msgstr "விருப்பத் செயல்களைத் திறக்கவும்"
+
 #: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:30
 msgid "Open selected card"
 msgstr "தேர்ந்தெடுத்த அட்டையை திற"
@@ -1158,6 +1543,26 @@ msgstr "தேர்ந்தெடுத்த அட்டையை திற"
 #: ../../../lib/web/src/components/config-drawer.tsx:66
 msgid "Open theme settings"
 msgstr "தீம் அமைப்புகளைத் திறக்கவும்"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:280
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:285
+msgid "Open view actions"
+msgstr "காட்சி செயல்களைத் திறக்கவும்"
+
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:150
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:156
+msgid "Open view controls"
+msgstr "காட்சி கட்டுப்பாடுகளைத் திறக்கவும்"
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:200
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:158
+msgid "Option name"
+msgstr "விருப்பத்தின் பெயர்"
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:168
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:241
+msgid "Options"
+msgstr "விருப்பங்கள்"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:166
 msgid "Other"
@@ -1172,6 +1577,10 @@ msgstr "உரிமையாளர்"
 msgid "Page {currentPage} of {totalPages}"
 msgstr "பக்கம் {currentPage} / {totalPages}"
 
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:508
+msgid "Parent"
+msgstr "பெற்றோர்"
+
 #: ../../../lib/web/src/components/step-up-dialog.tsx:334
 msgid "Passkey"
 msgstr "கடவுக்குறி"
@@ -1183,6 +1592,10 @@ msgstr "கடவுவிசை சரிபார்ப்பு தோல்�
 #: ../../../lib/web/src/components/restore-banner.tsx:152
 msgid "Passkeys"
 msgstr "Passkeyக்கள்"
+
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:210
+msgid "Pattern (regex)"
+msgstr "வடிவம் (regex)"
 
 #: src/use-permission-request.tsx:220
 msgid "Permission request"
@@ -1274,6 +1687,10 @@ msgstr "உள்நுழைவுக்கு redirect ஆகிறது."
 msgid "Reduce interest"
 msgstr "ஆர்வத்தைக் குறைக்கவும்"
 
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:65
+msgid "Relates"
+msgstr "தொடர்புடையது"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:50
 msgid "Relative (5m, 3h, 2d)"
 msgstr "சார்பு (5m, 3h, 2d)"
@@ -1283,6 +1700,8 @@ msgid "Relative within 24 hours, else absolute"
 msgstr "24 மணி நேரத்திற்குள் சார்பு, இல்லையெனில் முழுமையானது"
 
 #: ../../../lib/web/src/components/comment-composer.tsx:236
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:190
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:598
 #: ../../../lib/web/src/features/access/access-list.tsx:270
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:180
 msgid "Remove"
@@ -1317,6 +1736,38 @@ msgstr "ஆர்வத்தை அகற்று"
 msgid "Remove item"
 msgstr "உருப்படியை அகற்று"
 
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:304
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:309
+msgid "Remove link"
+msgstr "இணைப்பை அகற்று"
+
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:575
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:632
+msgid "Rename"
+msgstr "பெயர் மாற்று"
+
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:610
+msgid "Rename column"
+msgstr "நெடுவரிசையின் பெயரை மாற்று"
+
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:611
+msgid "Rename this board column"
+msgstr "இந்த போர்டு நெடுவரிசையின் பெயரை மாற்று"
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:294
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:342
+msgid "Reply"
+msgstr "பதில்"
+
+#. placeholder {0}: comment.name || comment.author
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:385
+msgid "Reply to {0}..."
+msgstr "{0} க்கு பதிலளி..."
+
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:225
+msgid "Required"
+msgstr "தேவை"
+
 #: ../../../lib/web/src/components/step-up-dialog.tsx:367
 msgid "Resend email"
 msgstr "மின்னஞ்சலை மீண்டும் அனுப்பு"
@@ -1347,6 +1798,15 @@ msgstr "அணுகலை நீக்கு"
 msgid "Right to Left"
 msgstr "வலமிருந்து இடம்"
 
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:150
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:169
+msgid "Rows"
+msgstr "வரிசைகள்"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:379
+msgid "Rows group by"
+msgstr "வரிசைகள் இதன்படி குழுவாக்கம்"
+
 #: ../../../lib/web/src/components/data-table/pagination.tsx:65
 msgid "Rows per page"
 msgstr "ஒரு பக்கத்திற்கான வரிசைகள்"
@@ -1367,11 +1827,14 @@ msgstr "RSS URL clipboard-க்கு நகலெடுக்கப்பட�
 msgid "Saturday"
 msgstr "சனிக்கிழமை"
 
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:269
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:173
 #: ../../../lib/web/src/components/ui/editable-field-row.tsx:122
 #: ../../../lib/web/src/components/ui/secret-field.tsx:77
 msgid "Save"
 msgstr "சேமி"
 
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:177
 #: ../../../lib/web/src/components/filter-bar.tsx:32
 #: ../../../lib/web/src/components/header-search.tsx:22
 #: ../../../lib/web/src/components/search.tsx:18
@@ -1398,6 +1861,10 @@ msgstr "சேருமிடத்தைத் தேடு..."
 msgid "Search for origin..."
 msgstr "துவக்கத்தைத் தேடு..."
 
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:337
+msgid "Search objects..."
+msgstr "பொருள்களைத் தேடு..."
+
 #: ../../../lib/web/src/components/timezone-select.tsx:65
 msgid "Search time zone..."
 msgstr "நேர மண்டலத்தைத் தேடு..."
@@ -1406,6 +1873,12 @@ msgstr "நேர மண்டலத்தைத் தேடு..."
 msgid "Search users"
 msgstr "பயனர்களைத் தேடு"
 
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:173
+msgid "Search, watch, and sort this view."
+msgstr "இந்த காட்சியைத் தேடு, கவனி, வரிசைப்படுத்து."
+
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:181
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:257
 #: ../../../lib/web/src/components/person-picker.tsx:324
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:81
 #: ../../../lib/web/src/components/search-entity-page.tsx:72
@@ -1418,10 +1891,18 @@ msgstr "தேடு..."
 msgid "Searching..."
 msgstr "தேடுகிறது..."
 
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:141
+msgid "Select"
+msgstr "தேர்ந்தெடு"
+
 #. placeholder {0}: item.label.toLowerCase()
 #: ../../../lib/web/src/components/config-drawer.tsx:149
 msgid "Select {0}"
 msgstr "{0} தேர்ந்தெடுக்கவும்"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:362
+msgid "Select a field"
+msgstr "ஒரு புலத்தை தேர்ந்தெடு"
 
 #: ../../../lib/web/src/components/game/game-empty-state.tsx:36
 msgid "Select a game"
@@ -1534,6 +2015,14 @@ msgstr "துவக்கம் மற்றும் சேருமிடத�
 msgid "Settings"
 msgstr "அமைப்புகள்"
 
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:333
+msgid "Show classes"
+msgstr "வகுப்புகளை காட்டு"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:434
+msgid "Show fields"
+msgstr "புலங்களை காட்டு"
+
 #: ../../../lib/web/src/components/password-input.tsx:27
 msgid "Show password"
 msgstr "கடவுச்சொல்லைக் காட்டு"
@@ -1561,6 +2050,11 @@ msgstr "வெளியேறு"
 msgid "Signing out..."
 msgstr "வெளியேறுகிறது..."
 
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:161
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:180
+msgid "Single line of text only"
+msgstr "ஒரே வரி உரை மட்டும்"
+
 #: ../../../lib/web/src/components/skip-to-main.tsx:11
 msgid "Skip to Main"
 msgstr "முதன்மை பகுதிக்கு தவிர்"
@@ -1570,6 +2064,10 @@ msgstr "முதன்மை பகுதிக்கு தவிர்"
 msgid "Small"
 msgstr "சிறியது"
 
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:199
+msgid "Sort"
+msgstr "வரிசைப்படுத்து"
+
 #: ../../../lib/web/src/components/options-menu.tsx:158
 msgid "Sources"
 msgstr "மூலங்கள்"
@@ -1578,6 +2076,10 @@ msgstr "மூலங்கள்"
 msgid "Spacious"
 msgstr "விரிவான"
 
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:451
+msgid "Start the discussion by adding the first comment."
+msgstr "முதல் கருத்தை சேர்த்து விவாதத்தை தொடங்குங்கள்."
+
 #: ../../../lib/web/src/components/coming-soon.tsx:15
 msgid "Stay tuned though!"
 msgstr "எனினும் காத்திருங்கள்!"
@@ -1585,6 +2087,16 @@ msgstr "எனினும் காத்திருங்கள்!"
 #: ../../../lib/web/src/features/access/access-list.tsx:196
 msgid "Subject"
 msgstr "பொருள்"
+
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:431
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:440
+msgid "Submit comment"
+msgstr "கருத்தை சமர்ப்பி"
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:470
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:475
+msgid "Submit reply"
+msgstr "பதிலை சமர்ப்பி"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:83
 #: ../../../lib/web/src/components/search-entity-page.tsx:74
@@ -1632,6 +2144,10 @@ msgstr "டீம்கள்/ஆப்கள்"
 #: ../../../lib/web/src/features/document/document-page.tsx:42
 msgid "Terms and conditions"
 msgstr "விதிமுறைகள் மற்றும் நிபந்தனைகள்"
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:142
+msgid "Text"
+msgstr "உரை"
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:195
 msgid "That code is incorrect or has expired."
@@ -1708,6 +2224,11 @@ msgstr "தீமை மாற்று"
 msgid "Toggle view options"
 msgstr "காட்சி விருப்பங்களை மாற்று"
 
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:190
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:267
+msgid "Toggle watched filter"
+msgstr "கவனிக்கப்பட்ட வடிகட்டியை மாற்று"
+
 #: ../../../lib/web/src/features/errors/general-error.tsx:74
 msgid "Too many requests"
 msgstr "மிக அதிகமான கோரிக்கைகள்"
@@ -1734,6 +2255,11 @@ msgstr "மீண்டும் முயற்சி செய்"
 #: ../../../lib/web/src/lib/preference-utils.ts:60
 msgid "Tuesday"
 msgstr "செவ்வாய்க்கிழமை"
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:130
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:163
+msgid "Type"
+msgstr "வகை"
 
 #: ../../../lib/web/src/components/command-menu.tsx:52
 msgid "Type a command or search..."
@@ -1785,9 +2311,25 @@ msgstr "தெரியாதது"
 msgid "Unsubscribe"
 msgstr "சந்தா நீக்கு"
 
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:286
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:103
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:184
+msgid "Untitled"
+msgstr "தலைப்பிடாதது"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:135
 msgid "Unverified"
 msgstr "சரிபார்க்கப்படாதது"
+
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:57
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:500
+msgid "Updated"
+msgstr "புதுப்பிக்கப்பட்டது"
+
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:630
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:259
+msgid "Upload"
+msgstr "பதிவேற்று"
 
 #: ../../../lib/web/src/components/ui/upload-progress.tsx:34
 msgid "Upload progress"
@@ -1797,6 +2339,7 @@ msgstr "பதிவேற்ற முன்னேற்றம்"
 msgid "Use your passkey"
 msgstr "உங்கள் கடவுவிசையைப் பயன்படுத்தவும்"
 
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:143
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:119
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
 #: src/shell-menu.tsx:263
@@ -1849,9 +2392,18 @@ msgstr "அனைத்தையும் காட்டு"
 msgid "View all notifications"
 msgstr "அனைத்து அறிவிப்புகளையும் காட்டு"
 
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:172
+msgid "View controls"
+msgstr "காட்சி கட்டுப்பாடுகள்"
+
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:271
 #: ../../../lib/web/src/components/filter-bar.tsx:35
 msgid "Watched"
 msgstr "கவனிக்கப்பட்டது"
+
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:194
+msgid "Watched only"
+msgstr "கவனிக்கப்பட்டது மட்டும்"
 
 #. placeholder {0}: account.identifier
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:63

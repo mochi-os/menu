@@ -18,6 +18,22 @@ msgstr ""
 msgid "Please check your internet connection and try again."
 msgstr "നിങ്ങളുടെ ഇന്റർനെറ്റ് കണക്ഷൻ പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക."
 
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:302
+msgid " or "
+msgstr " അല്ലെങ്കിൽ "
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:228
+msgid "(edited)"
+msgstr "(എഡിറ്റ് ചെയ്തു)"
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:212
+msgid "(expand)"
+msgstr "(വിപുലീകരിക്കുക)"
+
+#: ../../../lib/web/src/components/entity/entity-board-container.tsx:774
+msgid "[not set]"
+msgstr "[സജ്ജമാക്കിയിട്ടില്ല]"
+
 #. placeholder {0}: selectedValues.size
 #: ../../../lib/web/src/components/data-table/faceted-filter.tsx:66
 msgid "{0, plural, one {# selected} other {# selected}}"
@@ -64,6 +80,10 @@ msgstr "{totalLabel}-ൽ {sentLabel}"
 msgid "{topicLabel} moved to the {categoryLabel} category"
 msgstr "{topicLabel} {categoryLabel} വിഭാഗത്തിലേക്ക് മാറ്റി"
 
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:544
+msgid "{totalCount, plural, one {# item} other {# items}}"
+msgstr "{totalCount, plural, one {# ഇനം} other {# ഇനങ്ങൾ}}"
+
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:165
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {മെനു തുറക്കുക (# വായിക്കാത്ത അറിയിപ്പ്)} other {മെനു തുറക്കുക (# വായിക്കാത്ത അറിയിപ്പുകൾ)}}"
@@ -73,9 +93,17 @@ msgstr "{unreadCount, plural, one {മെനു തുറക്കുക (# വ�
 msgid "+{0} nested"
 msgstr "+{0} നെസ്റ്റഡ്"
 
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:209
+msgid "+{totalDescendants} more replies"
+msgstr "+{totalDescendants} കൂടുതൽ മറുപടികൾ"
+
 #: src/use-permission-request.tsx:222
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> ഇനിപ്പറയുന്ന അനുമതി അഭ്യർത്ഥിക്കുന്നു:"
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:208
+msgid "1 reply"
+msgstr "1 മറുപടി"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:42
 msgid "12 hours"
@@ -127,9 +155,17 @@ msgstr "അക്കൗണ്ട് പരിശോധിച്ചുറപ്�
 msgid "Add"
 msgstr "ചേർക്കുക"
 
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:360
+msgid "Add a comment..."
+msgstr "ഒരു അഭിപ്രായം ചേർക്കുക..."
+
 #: ../../../lib/web/src/features/accounts/account-add.tsx:133
 msgid "Add a new account"
 msgstr "ഒരു പുതിയ അക്കൗണ്ട് ചേർക്കുക"
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:106
+msgid "Add a new field to this class"
+msgstr "ഈ ക്ലാസിലേക്ക് ഒരു പുതിയ ഫീൽഡ് ചേർക്കുക"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:148
 msgid "Add access"
@@ -148,13 +184,30 @@ msgstr "അറിയിപ്പുകൾ സ്വീകരിക്കാന�
 msgid "Add checklist item"
 msgstr "ചെക്ക്‌ലിസ്റ്റ് ഇനം ചേർക്കുക"
 
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:105
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:233
+msgid "Add field"
+msgstr "ഫീൽഡ് ചേർക്കുക"
+
 #: ../../../lib/web/src/components/entity/entity-field-editor.tsx:705
 msgid "Add item..."
 msgstr "ഇനം ചേർക്കുക..."
 
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:320
+msgid "Add link"
+msgstr "ലിങ്ക് ചേർക്കുക"
+
 #: ../../../lib/web/src/features/accounts/account-picker.tsx:102
 msgid "Add new account"
 msgstr "പുതിയ അക്കൗണ്ട് ചേർക്കുക"
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:215
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:220
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:292
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:94
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:194
+msgid "Add option"
+msgstr "ഓപ്ഷൻ ചേർക്കുക"
 
 #: ../../../lib/web/src/components/post-tags.tsx:137
 #: ../../../lib/web/src/components/tag-input.tsx:40
@@ -169,6 +222,8 @@ msgstr "ടീം/ആപ്പ് ചേർക്കുക"
 msgid "Add to existing notifications"
 msgstr "നിലവിലുള്ള അറിയിപ്പുകളിലേക്ക് ചേർക്കുക"
 
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:264
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:519
 #: ../../../lib/web/src/components/view-tabs.tsx:87
 #: ../../../lib/web/src/components/view-tabs.tsx:93
 msgid "Add view"
@@ -199,6 +254,10 @@ msgstr "അനുവദിക്കുക"
 msgid "Allow anyone to search for {0}"
 msgstr "ആർക്കും {0} തിരയാൻ അനുവദിക്കുക"
 
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:226
+msgid "Allow sort by"
+msgstr "സോർട്ട് ചെയ്യാൻ അനുവദിക്കുക"
+
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:178
 msgid "An error occurred"
 msgstr "ഒരു പിശക് സംഭവിച്ചു"
@@ -220,6 +279,19 @@ msgstr "ആർക്കും"
 msgid "Anyone who is logged in"
 msgstr "ലോഗിൻ ചെയ്ത ആരും"
 
+#. placeholder {0}: deleteTarget?.name
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:271
+msgid "Are you sure you want to delete \"{0}\"?"
+msgstr "\"{0}\" ഇല്ലാതാക്കണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?"
+
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:643
+msgid "Are you sure you want to delete the \"{name}\" column? This cannot be undone."
+msgstr "\"{name}\" കോളം ഇല്ലാതാക്കണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ? ഇത് പഴയപടിയാക്കാൻ കഴിയില്ല."
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:485
+msgid "Are you sure you want to delete this comment? This will also delete all replies."
+msgstr "ഈ അഭിപ്രായം ഇല്ലാതാക്കണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ? ഇത് എല്ലാ മറുപടികളും ഇല്ലാതാക്കും."
+
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:27
 msgid "Are you sure you want to log out? You will need to log in again to access your account."
 msgstr "ലോഗ് ഔട്ട് ചെയ്യണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ? നിങ്ങളുടെ അക്കൗണ്ട് ആക്സസ് ചെയ്യാൻ വീണ്ടും ലോഗിൻ ചെയ്യേണ്ടിവരും."
@@ -231,6 +303,16 @@ msgstr "Asc"
 #: ../../../lib/web/src/components/ui/sort-direction-button.tsx:27
 msgid "Ascending"
 msgstr "ആരോഹണ ക്രമം"
+
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:398
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:403
+msgid "Attach comment files"
+msgstr "അഭിപ്രായ ഫയലുകൾ അറ്റാച്ച് ചെയ്യുക"
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:439
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:444
+msgid "Attach reply files"
+msgstr "മറുപടി ഫയലുകൾ അറ്റാച്ച് ചെയ്യുക"
 
 #: ../../../lib/web/src/features/access/access-list.tsx:46
 #: ../../../lib/web/src/features/access/types.ts:41
@@ -267,20 +349,41 @@ msgstr "ഹോമിലേക്ക് മടങ്ങുക"
 msgid "Banner"
 msgstr "ബാനർ"
 
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:68
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:215
+msgid "Blocked by"
+msgstr "തടഞ്ഞത്"
+
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:237
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:247
 msgid "Blocked navigation to untrusted link"
 msgstr "വിശ്വസനീയമല്ലാത്ത ലിങ്കിലേക്കുള്ള നാവിഗേഷൻ തടഞ്ഞു"
+
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:66
+msgid "Blocks"
+msgstr "തടയുന്നു"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:318
+msgid "Board"
+msgstr "ബോർഡ്"
 
 #: ../../../lib/web/src/components/post-tags.tsx:180
 #: ../../../lib/web/src/components/post-tags.tsx:192
 msgid "Boost interest"
 msgstr "താൽപ്പര്യം വർദ്ധിപ്പിക്കുക"
 
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:405
+msgid "Border colour"
+msgstr "ബോർഡർ നിറം"
+
 #: ../../../lib/web/src/features/accounts/types.ts:13
 msgid "Browser notifications"
 msgstr "ബ്രൗസർ അറിയിപ്പുകൾ"
 
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:628
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:249
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:169
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:186
 #: ../../../lib/web/src/components/responsive-confirm-dialog.tsx:67
 #: ../../../lib/web/src/components/step-up-dialog.tsx:363
 #: ../../../lib/web/src/components/travelling-picker.tsx:308
@@ -292,6 +395,16 @@ msgstr "ബ്രൗസർ അറിയിപ്പുകൾ"
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:91
 msgid "Cancel"
 msgstr "റദ്ദാക്കുക"
+
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:415
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:420
+msgid "Cancel comment"
+msgstr "അഭിപ്രായം റദ്ദാക്കുക"
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:455
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:460
+msgid "Cancel reply"
+msgstr "മറുപടി റദ്ദാക്കുക"
 
 #: ../../../lib/web/src/components/notification-category-button.tsx:102
 msgid "Category for these notifications"
@@ -309,6 +422,14 @@ msgstr "അറിയിപ്പ് വിഭാഗം മാറ്റുക"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:198
 msgid "Check \"All\" to see your past notifications."
 msgstr "മുൻ അറിയിപ്പുകൾ കാണാൻ \"എല്ലാം\" തിരഞ്ഞെടുക്കുക."
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:137
+msgid "Checkbox"
+msgstr "ചെക്ക്ബോക്സ്"
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:138
+msgid "Checklist"
+msgstr "ചെക്ക്‌ലിസ്റ്റ്"
 
 #: ../../../lib/web/src/components/game/game-empty-state.tsx:37
 msgid "Choose a game from the sidebar or start a new one."
@@ -366,6 +487,8 @@ msgstr "തിരഞ്ഞെടുപ്പ് മായ്ക്കുക"
 msgid "Clear selection (Escape)"
 msgstr "തിരഞ്ഞെടുപ്പ് മായ്ക്കുക (Escape)"
 
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:485
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:490
 #: ../../../lib/web/src/components/ui/dialog.tsx:78
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:358
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:361
@@ -373,6 +496,13 @@ msgstr "തിരഞ്ഞെടുപ്പ് മായ്ക്കുക (Esc
 #: src/use-permission-request.tsx:239
 msgid "Close"
 msgstr "അടയ്ക്കുക"
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:109
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:113
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:269
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:273
+msgid "Close dialog"
+msgstr "ഡയലോഗ് അടയ്ക്കുക"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:108
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:113
@@ -405,6 +535,19 @@ msgstr "ചുരുക്കുക"
 msgid "Collapse sidebar"
 msgstr "സൈഡ്ബാർ ചുരുക്കുക"
 
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:149
+msgid "Colour"
+msgstr "നിറം"
+
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:553
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:558
+msgid "Column actions"
+msgstr "കോളം പ്രവർത്തനങ്ങൾ"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:353
+msgid "Columns group by"
+msgstr "കോളങ്ങൾ ഇതുപ്രകാരം ഗ്രൂപ്പുചെയ്യുക"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:96
 msgid "Comfortable"
 msgstr "സൗകര്യപ്രദം"
@@ -417,10 +560,23 @@ msgstr "ഉടൻ വരുന്നു!"
 msgid "Command Palette"
 msgstr "കമാൻഡ് പാലറ്റ്"
 
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:330
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:337
+msgid "Comment actions"
+msgstr "അഭിപ്രായ പ്രവർത്തനങ്ങൾ"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:316
 #: ../../../lib/web/src/lib/preference-utils.ts:95
 msgid "Compact"
 msgstr "കോംപാക്റ്റ്"
+
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:97
+msgid "Configure option settings"
+msgstr "ഓപ്ഷൻ ക്രമീകരണങ്ങൾ കോൺഫിഗർ ചെയ്യുക"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:265
+msgid "Configure view settings"
+msgstr "കാഴ്ച ക്രമീകരണങ്ങൾ കോൺഫിഗർ ചെയ്യുക"
 
 #: ../../../lib/web/src/components/place-picker.tsx:160
 #: ../../../lib/web/src/components/travelling-picker.tsx:316
@@ -491,6 +647,14 @@ msgstr "വീണ്ടും പരിശോധന ആരംഭിക്കാ�
 msgid "Couldn't verify with that account. Please try again."
 msgstr "ആ അക്കൗണ്ട് ഉപയോഗിച്ച് പരിശോധിക്കാനായില്ല. വീണ്ടും ശ്രമിക്കുക."
 
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:564
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:703
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:475
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:647
+#: ../../../lib/web/src/components/entity/entity-tree-view.tsx:672
+msgid "Create"
+msgstr "സൃഷ്ടിക്കുക"
+
 #. placeholder {0}: entityLabel.toLowerCase()
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:144
 msgid "Create {0}"
@@ -500,6 +664,12 @@ msgstr "{0} സൃഷ്ടിക്കുക"
 msgid "Create new item"
 msgstr "പുതിയ ഇനം സൃഷ്ടിക്കുക"
 
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:56
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:498
+msgid "Created"
+msgstr "സൃഷ്ടിച്ചു"
+
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:647
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:258
 msgid "Creating..."
 msgstr "സൃഷ്ടിക്കുന്നു..."
@@ -527,6 +697,10 @@ msgstr "ഡാർക്ക് മോഡ്"
 msgid "Data conflict"
 msgstr "ഡാറ്റ വൈരുദ്ധ്യം"
 
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:139
+msgid "Date"
+msgstr "തീയതി"
+
 #: ../../../lib/web/src/components/game/game-draw-offer-banner.tsx:41
 msgid "Decline"
 msgstr "നിരസിക്കുക"
@@ -538,6 +712,52 @@ msgstr "ഡിഫോൾട്ട്"
 #: ../../../lib/web/src/features/accounts/account-add.tsx:185
 msgid "Default AI account"
 msgstr "ഡിഫോൾട്ട് AI അക്കൗണ്ട്"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:485
+msgid "Default sort"
+msgstr "ഡിഫോൾട്ട് സോർട്ട്"
+
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:583
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:644
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:318
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:361
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:486
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:173
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:178
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:227
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:272
+msgid "Delete"
+msgstr "ഇല്ലാതാക്കുക"
+
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:270
+msgid "Delete attachment"
+msgstr "അറ്റാച്ച്മെന്റ് ഇല്ലാതാക്കുക"
+
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:642
+msgid "Delete column"
+msgstr "കോളം ഇല്ലാതാക്കുക"
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:484
+msgid "Delete comment"
+msgstr "അഭിപ്രായം ഇല്ലാതാക്കുക"
+
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:301
+msgid "Delete field"
+msgstr "ഫീൽഡ് ഇല്ലാതാക്കുക"
+
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:119
+msgid "Delete option"
+msgstr "ഓപ്ഷൻ ഇല്ലാതാക്കുക"
+
+#. placeholder {0}: opt.name
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:279
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:284
+msgid "Delete option {0}"
+msgstr "ഓപ്ഷൻ {0} ഇല്ലാതാക്കുക"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:290
+msgid "Delete view"
+msgstr "കാഴ്ച ഇല്ലാതാക്കുക"
 
 #: ../../../lib/web/src/components/restore-banner.tsx:115
 msgid "Delete your account on the old server"
@@ -604,6 +824,12 @@ msgstr "ഒഴിവാക്കുക"
 msgid "Displays the mobile sidebar."
 msgstr "മൊബൈൽ സൈഡ്‌ബാർ പ്രദർശിപ്പിക്കുന്നു."
 
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:306
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:524
+msgid "Done"
+msgstr "പൂർത്തിയായി"
+
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:214
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:342
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:352
 msgid "Download"
@@ -613,17 +839,48 @@ msgstr "ഡൗൺലോഡ്"
 msgid "Download failed"
 msgstr "ഡൗൺലോഡ് പരാജയപ്പെട്ടു"
 
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:67
+msgid "Duplicates"
+msgstr "ഡ്യൂപ്ലിക്കേറ്റ്"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:146
 msgid "Dyslexia-friendly"
 msgstr "ഡിസ്ലെക്സിയ-സൗഹൃദം"
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:307
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:352
+msgid "Edit"
+msgstr "എഡിറ്റ് ചെയ്യുക"
 
 #: ../../../lib/web/src/components/ui/editable-field-row.tsx:154
 msgid "Edit {label}"
 msgstr "{label} എഡിറ്റ് ചെയ്യുക"
 
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:138
+msgid "Edit field"
+msgstr "ഫീൽഡ് എഡിറ്റ് ചെയ്യുക"
+
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:139
+msgid "Edit field settings"
+msgstr "ഫീൽഡ് ക്രമീകരണങ്ങൾ എഡിറ്റ് ചെയ്യുക"
+
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:94
+msgid "Edit option"
+msgstr "ഓപ്ഷൻ എഡിറ്റ് ചെയ്യുക"
+
+#. placeholder {0}: opt.name
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:264
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:269
+msgid "Edit option {0}"
+msgstr "ഓപ്ഷൻ {0} എഡിറ്റ് ചെയ്യുക"
+
 #: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:31
 msgid "Edit selected card"
 msgstr "തിരഞ്ഞെടുത്ത കാർഡ് എഡിറ്റ് ചെയ്യുക"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:264
+msgid "Edit view"
+msgstr "വ്യൂ എഡിറ്റ് ചെയ്യുക"
 
 #: ../../../lib/web/src/features/accounts/types.ts:15
 msgid "Email"
@@ -673,9 +930,22 @@ msgstr "ടാഗ് ചേർക്കുന്നതിൽ പരാജയപ�
 msgid "Failed to copy"
 msgstr "പകർത്തുന്നതിൽ പരാജയപ്പെട്ടു"
 
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:137
 #: ../../../lib/web/src/components/options-menu.tsx:99
 msgid "Failed to create link"
 msgstr "ലിങ്ക് സൃഷ്ടിക്കുന്നതിൽ പരാജയപ്പെട്ടു"
+
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:110
+msgid "Failed to delete attachment"
+msgstr "അറ്റാച്ച്മെന്റ് ഇല്ലാതാക്കുന്നതിൽ പരാജയപ്പെട്ടു"
+
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:207
+msgid "Failed to delete comment"
+msgstr "അഭിപ്രായം ഇല്ലാതാക്കുന്നതിൽ പരാജയപ്പെട്ടു"
+
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:159
+msgid "Failed to delete link"
+msgstr "ലിങ്ക് ഇല്ലാതാക്കുന്നതിൽ പരാജയപ്പെട്ടു"
 
 #: ../../../lib/web/src/components/options-menu.tsx:123
 msgid "Failed to get RSS token"
@@ -701,6 +971,10 @@ msgstr "അറിയിപ്പ് വിഭാഗങ്ങൾ ലോഡുച�
 msgid "Failed to load video"
 msgstr "വീഡിയോ ലോഡ് ചെയ്യാനായില്ല"
 
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:170
+msgid "Failed to post comment"
+msgstr "അഭിപ്രായം പോസ്റ്റുചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:234
 msgid "Failed to remove account"
 msgstr "അക്കൗണ്ട് നീക്കം ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു"
@@ -717,6 +991,20 @@ msgstr "സ്ഥിരീകരണ കോഡ് അയയ്ക്കുന്�
 msgid "Failed to update category"
 msgstr "വിഭാഗം പുതുക്കുന്നതിൽ പരാജയപ്പെട്ടു"
 
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:190
+msgid "Failed to update comment"
+msgstr "അഭിപ്രായം പുതുക്കുന്നതിൽ പരാജയപ്പെട്ടു"
+
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:95
+msgid "Failed to upload attachment"
+msgstr "അറ്റാച്ച്മെന്റ് അപ്‌ലോഡ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു"
+
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:567
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:133
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:150
+msgid "Files"
+msgstr "ഫയലുകൾ"
+
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:30
 msgid "Filter..."
 msgstr "ഫിൽട്ടർ..."
@@ -724,6 +1012,10 @@ msgstr "ഫിൽട്ടർ..."
 #: ../../../lib/web/src/components/restore-banner.tsx:103
 msgid "Finish moving your account"
 msgstr "നിങ്ങളുടെ അക്കൗണ്ട് മാറ്റൽ പൂർത്തിയാക്കുക"
+
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:222
+msgid "Flags"
+msgstr "ഫ്ലാഗുകൾ"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:116
 msgid "Flat"
@@ -788,6 +1080,10 @@ msgstr "മുൻ പേജിലേക്ക് പോകുക"
 msgid "Group"
 msgstr "ഗ്രൂപ്പ്"
 
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:353
+msgid "Group by"
+msgstr "ഇത് പ്രകാരം ഗ്രൂപ്പുചെയ്യുക"
+
 #. placeholder {0}: name || subject.slice(1)
 #: ../../../lib/web/src/features/access/access-list.tsx:68
 msgid "Group: {0}"
@@ -819,6 +1115,10 @@ msgstr "ഹോം"
 #: ../../../lib/web/src/components/ui/sort-selector.tsx:44
 msgid "Hot"
 msgstr "ഹോട്ട്"
+
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:153
+msgid "ID"
+msgstr ""
 
 #. placeholder {0}: currentMedia.name
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx:247
@@ -879,6 +1179,7 @@ msgid "Large"
 msgstr "വലുത്"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:287
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:312
 msgid "Layout"
 msgstr "ലേഔട്ട്"
 
@@ -904,6 +1205,14 @@ msgstr "ലൈറ്റ്"
 #: ../../../lib/web/src/components/options-menu.tsx:190
 msgid "Link"
 msgstr "ലിങ്ക്"
+
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:279
+msgid "Links"
+msgstr "ലിങ്കുകൾ"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:324
+msgid "List"
+msgstr "ലിസ്റ്റ്"
 
 #: ../../../lib/web/src/components/ui/load-more.tsx:35
 msgid "Load more"
@@ -947,6 +1256,10 @@ msgstr "വിഭാഗങ്ങൾ നിയന്ത്രിക്കുക"
 msgid "Manage your connected accounts for notifications and services."
 msgstr "അറിയിപ്പുകൾക്കും സേവനങ്ങൾക്കുമായി നിങ്ങളുടെ കണക്റ്റ് ചെയ്ത അക്കൗണ്ടുകൾ കൈകാര്യം ചെയ്യുക."
 
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:52
+msgid "Manual"
+msgstr "മാനുവൽ"
+
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:202
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:209
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
@@ -954,6 +1267,10 @@ msgstr "അറിയിപ്പുകൾക്കും സേവനങ്ങ�
 #: src/shell-menu.tsx:299
 msgid "Mark all as read"
 msgstr "എല്ലാം വായിച്ചതായി അടയാളപ്പെടുത്തുക"
+
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:199
+msgid "Maximum length"
+msgstr "കൂടിയ നീളം"
 
 #: ../../../lib/web/src/features/accounts/types.ts:17
 msgid "MCP server"
@@ -976,6 +1293,10 @@ msgstr "സന്ദേശം"
 msgid "Metric"
 msgstr "മെട്രിക്"
 
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:188
+msgid "Minimum length"
+msgstr "കുറഞ്ഞ നീളം"
+
 #: ../../../lib/web/src/features/accounts/types.ts:23
 msgid "Mochi web"
 msgstr "Mochi വെബ്"
@@ -993,6 +1314,14 @@ msgstr "തിങ്കളാഴ്ച"
 msgid "More options"
 msgstr "കൂടുതൽ ഓപ്ഷനുകൾ"
 
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:118
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:614
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:143
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:128
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:299
+msgid "Name"
+msgstr "പേര്"
+
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:102
 msgid "Name cannot contain angle brackets, backslash, semicolon, quotes or backticks"
 msgstr "പേരിൽ ആംഗിൾ ബ്രാക്കറ്റുകൾ, ബാക്ക്‌സ്ലാഷ്, അർധവിരാമം, ഉദ്ധരണചിഹ്നങ്ങൾ അല്ലെങ്കിൽ ബാക്ക്‌ടിക്കുകൾ പാടില്ല"
@@ -1006,6 +1335,7 @@ msgstr "പേര് 1000 പ്രതീകങ്ങൾ അല്ലെങ്�
 msgid "Network error"
 msgstr "നെറ്റ്‌വർക്ക് പിശക്"
 
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:460
 #: ../../../lib/web/src/components/ui/sort-selector.tsx:43
 msgid "New"
 msgstr "പുതിയത്"
@@ -1020,9 +1350,21 @@ msgstr "പുതിയ ഗെയിം"
 msgid "Next image"
 msgstr "അടുത്ത ചിത്രം"
 
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:533
+msgid "No {parentClassNames} to add to"
+msgstr "ചേർക്കാൻ {parentClassNames} ഇല്ല"
+
 #: ../../../lib/web/src/features/access/access-list.tsx:165
 msgid "No access rules configured. Add rules to control who can access this resource."
 msgstr "ആക്സസ് നിയമങ്ങളൊന്നും കോൺഫിഗർ ചെയ്തിട്ടില്ല. ഈ റിസോഴ്സ് ആർക്കെല്ലാം ആക്സസ് ചെയ്യാമെന്ന് നിയന്ത്രിക്കാൻ നിയമങ്ങൾ ചേർക്കുക."
+
+#: ../../../lib/web/src/components/entity/entity-activity-list.tsx:65
+msgid "No activity yet"
+msgstr "പ്രവർത്തനം ഇതുവരെയില്ല"
+
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:450
+msgid "No comments yet"
+msgstr "അഭിപ്രായങ്ങളൊന്നും ഇതുവരെ ഇല്ല"
 
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:295
 msgid "No connected accounts"
@@ -1035,6 +1377,14 @@ msgstr "ഗെയിമുകളൊന്നും ഇതുവരെ ഇല്�
 #: ../../../lib/web/src/features/access/access-dialog.tsx:241
 msgid "No groups available"
 msgstr "ഗ്രൂപ്പുകളൊന്നും ലഭ്യമല്ല"
+
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:500
+msgid "No item types can be created yet. Create the required parent items first."
+msgstr "ഇതുവരെ ഒരു item type-ഉം സൃഷ്ടിക്കാൻ കഴിയില്ല. ആവശ്യമായ parent items ആദ്യം സൃഷ്ടിക്കുക."
+
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:360
+msgid "No matching objects"
+msgstr "പൊരുത്തപ്പെടുന്ന ഒബ്ജക്ടുകളൊന്നുമില്ല"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:193
 msgid "No notifications yet"
@@ -1063,6 +1413,12 @@ msgstr "ഫലങ്ങളൊന്നും കണ്ടെത്തിയി�
 msgid "No results found."
 msgstr "ഫലങ്ങളൊന്നും കണ്ടെത്തിയില്ല."
 
+#: ../../../lib/web/src/components/entity/entity-board-container.tsx:845
+#: ../../../lib/web/src/components/entity/entity-board-container.tsx:890
+#: ../../../lib/web/src/components/entity/entity-tree-view.tsx:339
+msgid "No status"
+msgstr "സ്ഥിതി ഇല്ല"
+
 #: ../../../lib/web/src/components/timezone-select.tsx:67
 msgid "No time zone found."
 msgstr "സമയ മേഖലയൊന്നും കണ്ടെത്തിയില്ല."
@@ -1079,7 +1435,21 @@ msgstr "വായിക്കാത്ത അറിയിപ്പുകളൊ�
 msgid "No users found"
 msgstr "ഉപയോക്താക്കളെ കണ്ടെത്തിയില്ല"
 
+#: ../../../lib/web/src/components/entity/entity-design-preview.tsx:115
+msgid "No views"
+msgstr "വ്യൂകളൊന്നുമില്ല"
+
 #: ../../../lib/web/src/components/colour-picker.tsx:349
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:516
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:519
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:523
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:365
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:388
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:391
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:418
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:421
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:494
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:497
 #: ../../../lib/web/src/components/person-picker.tsx:350
 #: ../../../lib/web/src/lib/preference-utils.ts:105
 #: ../../../lib/web/src/lib/preference-utils.ts:125
@@ -1098,6 +1468,10 @@ msgstr "കണ്ടെത്തിയില്ല"
 msgid "Not set"
 msgstr "സജ്ജമാക്കിയിട്ടില്ല"
 
+#: ../../../lib/web/src/components/entity/entity-tree-view.tsx:668
+msgid "Nothing found"
+msgstr "ഒന്നും കണ്ടെത്തിയില്ല"
+
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:136
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:150
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
@@ -1111,6 +1485,12 @@ msgstr "അറിയിപ്പുകൾ"
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:195
 msgid "Notifications: {0}"
 msgstr "അറിയിപ്പുകൾ: {0}"
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:140
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:54
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:499
+msgid "Number"
+msgstr "സംഖ്യ"
 
 #: ../../../lib/web/src/components/filter-bar.tsx:35
 msgid "On"
@@ -1150,6 +1530,11 @@ msgstr "navigation തുറക്കുക"
 msgid "Open navigation menu"
 msgstr "navigation മെനു തുറക്കുക"
 
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:108
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:114
+msgid "Open option actions"
+msgstr "ഓപ്ഷൻ പ്രവർത്തനങ്ങൾ തുറക്കുക"
+
 #: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:30
 msgid "Open selected card"
 msgstr "തിരഞ്ഞെടുത്ത കാർഡ് തുറക്കുക"
@@ -1158,6 +1543,26 @@ msgstr "തിരഞ്ഞെടുത്ത കാർഡ് തുറക്ക�
 #: ../../../lib/web/src/components/config-drawer.tsx:66
 msgid "Open theme settings"
 msgstr "തീം സെറ്റിങ്ങുകൾ തുറക്കുക"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:280
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:285
+msgid "Open view actions"
+msgstr "വ്യൂ പ്രവർത്തനങ്ങൾ തുറക്കുക"
+
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:150
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:156
+msgid "Open view controls"
+msgstr "വ്യൂ നിയന്ത്രണങ്ങൾ തുറക്കുക"
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:200
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:158
+msgid "Option name"
+msgstr "ഓപ്ഷൻ പേര്"
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:168
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:241
+msgid "Options"
+msgstr "ഓപ്ഷനുകൾ"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:166
 msgid "Other"
@@ -1172,6 +1577,10 @@ msgstr "ഉടമ"
 msgid "Page {currentPage} of {totalPages}"
 msgstr "പേജ് {currentPage} / {totalPages}"
 
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:508
+msgid "Parent"
+msgstr "parent"
+
 #: ../../../lib/web/src/components/step-up-dialog.tsx:334
 msgid "Passkey"
 msgstr "പാസ്കീ"
@@ -1183,6 +1592,10 @@ msgstr "പാസ്‌കീ പരിശോധന പരാജയപ്പെ�
 #: ../../../lib/web/src/components/restore-banner.tsx:152
 msgid "Passkeys"
 msgstr "പാസ്കീകൾ"
+
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:210
+msgid "Pattern (regex)"
+msgstr "പാറ്റേൺ (regex)"
 
 #: src/use-permission-request.tsx:220
 msgid "Permission request"
@@ -1274,6 +1687,10 @@ msgstr "ലോഗിനിലേക്ക് തിരിച്ചുവിട�
 msgid "Reduce interest"
 msgstr "പുതുക്കുക"
 
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:65
+msgid "Relates"
+msgstr "ബന്ധപ്പെട്ടത്"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:50
 msgid "Relative (5m, 3h, 2d)"
 msgstr "24 മണിക്കൂറിനുള്ളിൽ ആപേക്ഷികം, അല്ലാത്തപക്ഷം absolute"
@@ -1283,6 +1700,8 @@ msgid "Relative within 24 hours, else absolute"
 msgstr "24 മണിക്കൂറിനുള്ളിൽ ആപേക്ഷികം, അല്ലാത്തപക്ഷം കൃത്യം"
 
 #: ../../../lib/web/src/components/comment-composer.tsx:236
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:190
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:598
 #: ../../../lib/web/src/features/access/access-list.tsx:270
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:180
 msgid "Remove"
@@ -1317,6 +1736,38 @@ msgstr "item നീക്കം ചെയ്യുക"
 msgid "Remove item"
 msgstr "ലിസ്റ്റിങ് നീക്കം ചെയ്യുക"
 
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:304
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:309
+msgid "Remove link"
+msgstr "ലിങ്ക് നീക്കം ചെയ്യുക"
+
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:575
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:632
+msgid "Rename"
+msgstr "കോളം പുനർനാമകരണം ചെയ്യുക"
+
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:610
+msgid "Rename column"
+msgstr "പേജ് പുനർനാമകരണം ചെയ്യുക"
+
+#: ../../../lib/web/src/components/entity/entity-board-column.tsx:611
+msgid "Rename this board column"
+msgstr "design മാറ്റിസ്ഥാപിക്കണോ?"
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:294
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:342
+msgid "Reply"
+msgstr "റിപ്പോർട്ട് ചെയ്യുക"
+
+#. placeholder {0}: comment.name || comment.author
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:385
+msgid "Reply to {0}..."
+msgstr "{0} എന്നയാൾക്ക് മറുപടി..."
+
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:225
+msgid "Required"
+msgstr "Reserve പൂർത്തിയായില്ല"
+
 #: ../../../lib/web/src/components/step-up-dialog.tsx:367
 msgid "Resend email"
 msgstr "ഇമെയിൽ വീണ്ടും അയയ്ക്കുക"
@@ -1347,6 +1798,15 @@ msgstr "ആക്‌സസ് പിൻവലിക്കുക"
 msgid "Right to Left"
 msgstr "വലത്തുനിന്ന് ഇടത്തേക്ക്"
 
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:150
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:169
+msgid "Rows"
+msgstr "വരികൾ"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:379
+msgid "Rows group by"
+msgstr "വരികൾ ഗ്രൂപ്പ് ചെയ്യുന്നത്"
+
 #: ../../../lib/web/src/components/data-table/pagination.tsx:65
 msgid "Rows per page"
 msgstr "ഒരു പേജിലെ വരികൾ"
@@ -1367,11 +1827,14 @@ msgstr "RSS URL ക്ലിപ്പ്ബോർഡിലേക്ക് പക
 msgid "Saturday"
 msgstr "ശനിയാഴ്ച"
 
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:269
+#: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:173
 #: ../../../lib/web/src/components/ui/editable-field-row.tsx:122
 #: ../../../lib/web/src/components/ui/secret-field.tsx:77
 msgid "Save"
 msgstr "സേവ് ചെയ്യുക"
 
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:177
 #: ../../../lib/web/src/components/filter-bar.tsx:32
 #: ../../../lib/web/src/components/header-search.tsx:22
 #: ../../../lib/web/src/components/search.tsx:18
@@ -1398,6 +1861,10 @@ msgstr "ലക്ഷ്യസ്ഥാനം തിരയുക..."
 msgid "Search for origin..."
 msgstr "ഉത്ഭവ സ്ഥാനം തിരയുക..."
 
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:337
+msgid "Search objects..."
+msgstr "ഒബ്ജക്ടുകൾ തിരയുക..."
+
 #: ../../../lib/web/src/components/timezone-select.tsx:65
 msgid "Search time zone..."
 msgstr "സമയ മേഖല തിരയുക..."
@@ -1406,6 +1873,12 @@ msgstr "സമയ മേഖല തിരയുക..."
 msgid "Search users"
 msgstr "ഉപയോക്താക്കളെ തിരയുക"
 
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:173
+msgid "Search, watch, and sort this view."
+msgstr "ഈ കാഴ്ച തിരയുക, വാച്ച് ചെയ്യുക, അടുക്കുക."
+
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:181
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:257
 #: ../../../lib/web/src/components/person-picker.tsx:324
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:81
 #: ../../../lib/web/src/components/search-entity-page.tsx:72
@@ -1418,10 +1891,18 @@ msgstr "തിരയുക..."
 msgid "Searching..."
 msgstr "തിരയുന്നു..."
 
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:141
+msgid "Select"
+msgstr "തിരഞ്ഞെടുക്കുക"
+
 #. placeholder {0}: item.label.toLowerCase()
 #: ../../../lib/web/src/components/config-drawer.tsx:149
 msgid "Select {0}"
 msgstr "{0} തിരഞ്ഞെടുക്കുക"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:362
+msgid "Select a field"
+msgstr "ഒരു ഫീൽഡ് തിരഞ്ഞെടുക്കുക"
 
 #: ../../../lib/web/src/components/game/game-empty-state.tsx:36
 msgid "Select a game"
@@ -1534,6 +2015,14 @@ msgstr "ഉത്ഭവവും ലക്ഷ്യസ്ഥാനവും സ�
 msgid "Settings"
 msgstr "ക്രമീകരണങ്ങൾ"
 
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:333
+msgid "Show classes"
+msgstr "ക്ലാസുകൾ കാണിക്കുക"
+
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:434
+msgid "Show fields"
+msgstr "ഫീൽഡുകൾ കാണിക്കുക"
+
 #: ../../../lib/web/src/components/password-input.tsx:27
 msgid "Show password"
 msgstr "പാസ്‌വേഡ് കാണിക്കുക"
@@ -1561,6 +2050,11 @@ msgstr "സൈൻ ഔട്ട് ചെയ്യുക"
 msgid "Signing out..."
 msgstr "സൈൻ ഔട്ട് ചെയ്യുന്നു..."
 
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:161
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:180
+msgid "Single line of text only"
+msgstr "ഒറ്റ വരി ടെക്സ്റ്റ് മാത്രം"
+
 #: ../../../lib/web/src/components/skip-to-main.tsx:11
 msgid "Skip to Main"
 msgstr "പ്രധാനഭാഗത്തേക്ക് പോകുക"
@@ -1570,6 +2064,10 @@ msgstr "പ്രധാനഭാഗത്തേക്ക് പോകുക"
 msgid "Small"
 msgstr "ചെറുത്"
 
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:199
+msgid "Sort"
+msgstr "അടുക്കുക"
+
 #: ../../../lib/web/src/components/options-menu.tsx:158
 msgid "Sources"
 msgstr "സ്രോതസ്സുകൾ"
@@ -1578,6 +2076,10 @@ msgstr "സ്രോതസ്സുകൾ"
 msgid "Spacious"
 msgstr "വിശാലം"
 
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:451
+msgid "Start the discussion by adding the first comment."
+msgstr "ആദ്യത്തെ കമന്റ് ചേർത്ത് ചർച്ച ആരംഭിക്കുക."
+
 #: ../../../lib/web/src/components/coming-soon.tsx:15
 msgid "Stay tuned though!"
 msgstr "ശ്രദ്ധിച്ചുകൊണ്ടിരിക്കുക!"
@@ -1585,6 +2087,16 @@ msgstr "ശ്രദ്ധിച്ചുകൊണ്ടിരിക്കുക
 #: ../../../lib/web/src/features/access/access-list.tsx:196
 msgid "Subject"
 msgstr "വിഷയം"
+
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:431
+#: ../../../lib/web/src/components/entity/entity-comment-list.tsx:440
+msgid "Submit comment"
+msgstr "കമന്റ് സമർപ്പിക്കുക"
+
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:470
+#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:475
+msgid "Submit reply"
+msgstr "മറുപടി സമർപ്പിക്കുക"
 
 #: ../../../lib/web/src/components/search-entity-dialog.tsx:83
 #: ../../../lib/web/src/components/search-entity-page.tsx:74
@@ -1632,6 +2144,10 @@ msgstr "ടീമുകൾ/ആപ്പുകൾ"
 #: ../../../lib/web/src/features/document/document-page.tsx:42
 msgid "Terms and conditions"
 msgstr "നിബന്ധനകളും വ്യവസ്ഥകളും"
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:142
+msgid "Text"
+msgstr "ടെക്സ്റ്റ്"
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:195
 msgid "That code is incorrect or has expired."
@@ -1708,6 +2224,11 @@ msgstr "തീം ടോഗിൾ ചെയ്യുക"
 msgid "Toggle view options"
 msgstr "കാഴ്ച ഓപ്ഷനുകൾ ടോഗിൾ ചെയ്യുക"
 
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:190
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:267
+msgid "Toggle watched filter"
+msgstr "വാച്ച് ചെയ്ത ഫിൽട്ടർ ടോഗിൾ ചെയ്യുക"
+
 #: ../../../lib/web/src/features/errors/general-error.tsx:74
 msgid "Too many requests"
 msgstr "വളരെയധികം അഭ്യർത്ഥനകൾ"
@@ -1734,6 +2255,11 @@ msgstr "വീണ്ടും ശ്രമിക്കുക"
 #: ../../../lib/web/src/lib/preference-utils.ts:60
 msgid "Tuesday"
 msgstr "ചൊവ്വാഴ്ച"
+
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:130
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:163
+msgid "Type"
+msgstr "തരം"
 
 #: ../../../lib/web/src/components/command-menu.tsx:52
 msgid "Type a command or search..."
@@ -1785,9 +2311,25 @@ msgstr "അജ്ഞാതം"
 msgid "Unsubscribe"
 msgstr "അൺസബ്സ്ക്രൈബ് ചെയ്യുക"
 
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:286
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:103
+#: ../../../lib/web/src/components/entity/entity-object-links.tsx:184
+msgid "Untitled"
+msgstr "ശീർഷകമില്ലാത്തത്"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:135
 msgid "Unverified"
 msgstr "സ്ഥിരീകരിച്ചിട്ടില്ല"
+
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:57
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:500
+msgid "Updated"
+msgstr "അപ്ഡേറ്റ് ചെയ്തു"
+
+#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:630
+#: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:259
+msgid "Upload"
+msgstr "അപ്‌ലോഡ് ചെയ്യുക"
 
 #: ../../../lib/web/src/components/ui/upload-progress.tsx:34
 msgid "Upload progress"
@@ -1797,6 +2339,7 @@ msgstr "അപ്‌ലോഡ് പുരോഗതി"
 msgid "Use your passkey"
 msgstr "നിങ്ങളുടെ പാസ്‌കീ ഉപയോഗിക്കുക"
 
+#: ../../../lib/web/src/components/entity/add-field-dialog.tsx:143
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:119
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
 #: src/shell-menu.tsx:263
@@ -1849,9 +2392,18 @@ msgstr "എല്ലാം കാണുക"
 msgid "View all notifications"
 msgstr "എല്ലാ അറിയിപ്പുകളും കാണുക"
 
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:172
+msgid "View controls"
+msgstr "നിയന്ത്രണങ്ങൾ കാണുക"
+
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:271
 #: ../../../lib/web/src/components/filter-bar.tsx:35
 msgid "Watched"
 msgstr "വാച്ച് ചെയ്തു"
+
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:194
+msgid "Watched only"
+msgstr "വാച്ച് ചെയ്തവ മാത്രം"
 
 #. placeholder {0}: account.identifier
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:63
