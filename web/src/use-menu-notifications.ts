@@ -103,6 +103,10 @@ function connectWebSocket() {
     wsState.instance = ws
     ws.onmessage = handleWebSocketMessage
     ws.onclose = () => {
+      // Only the current socket may act here: a stale socket's late close
+      // event must not null out a replacement and spawn a duplicate
+      // connection alongside it.
+      if (wsState.instance !== ws) return
       wsState.instance = null
       if (wsState.subscriberCount > 0) {
         wsState.reconnectTimer = setTimeout(connectWebSocket, RECONNECT_DELAY)
@@ -122,6 +126,12 @@ function disconnectWebSocket() {
     wsState.reconnectTimer = null
   }
   if (wsState.instance) {
+    // Detach before closing: close() completes asynchronously, and a
+    // subscriber arriving in that window opens a replacement the old
+    // socket's handlers must not touch.
+    wsState.instance.onmessage = null
+    wsState.instance.onclose = null
+    wsState.instance.onerror = null
     wsState.instance.close()
     wsState.instance = null
   }
