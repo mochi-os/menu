@@ -530,7 +530,55 @@
     // PublicKeyCredential.parseCreationOptionsFromJSON /
     // parseRequestOptionsFromJSON / toJSON helpers (Chrome 119+,
     // Safari 17.4+, Firefox 119+).
+    //
+    // Hosting it is a capability, not a convenience: the ceremony runs in the
+    // top window, so the relying party is the real Mochi origin and the
+    // assertion it returns is valid for Mochi whoever asked for it. The
+    // browser's prompt names the relying party rather than the caller, so the
+    // user cannot tell which app is behind it - a hostile app would need only a
+    // challenge from an attacker-side login to have that prompt answered for
+    // it. So it takes a grant, like the microphone below: resolved against the
+    // server-resolved app id rather than any name the message carries, and
+    // refused when there is no app id yet (mid-navigation) or the check fails.
+    // The permission is restricted, so it is granted deliberately from settings
+    // and never by a dialog an app can raise at a moment of its choosing.
+    function webauthnAllowed() {
+        if (!currentAppEntity) return Promise.resolve(false);
+        return shellConfigReady.then(function() {
+            var headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
+            var token = (shellConfig && shellConfig.menuToken) || '';
+            if (token) headers['Authorization'] = 'Bearer ' + token;
+            return fetch('/menu/-/permissions/check', {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: headers,
+                body: 'app=' + encodeURIComponent(currentAppEntity) +
+                      '&permission=' + encodeURIComponent('user/authentication/sign')
+            });
+        }).then(function(r) {
+            return r.ok ? r.json() : null;
+        }).then(function(body) {
+            return !!(body && body.data && body.data.granted);
+        }).catch(function() {
+            return false;
+        });
+    }
+
     function handleWebauthnCeremony(data, create) {
+        webauthnAllowed().then(function(granted) {
+            if (!granted) {
+                postToIframe({
+                    type: create ? 'webauthn.create.result' : 'webauthn.get.result',
+                    requestId: data.requestId,
+                    error: { name: 'SecurityError', message: 'This app is not allowed to sign with your passkey. Grant it in Settings, under Permissions.' }
+                });
+                return;
+            }
+            runWebauthnCeremony(data, create);
+        });
+    }
+
+    function runWebauthnCeremony(data, create) {
         var requestId = data.requestId;
         var optionsJSON = data.optionsJSON;
         var resultType = create ? 'webauthn.create.result' : 'webauthn.get.result';
