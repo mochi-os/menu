@@ -44,6 +44,22 @@ msgstr "{0, plural, one {# নির্বাচিত} other {# নির্ব
 msgid "{0} option preview"
 msgstr "{0} বিকল্পের প্রিভিউ"
 
+#: ../../../lib/web/src/lib/locale-format.ts:121
+msgid "{count, plural, one {#d} other {#d}}"
+msgstr "{count, plural, one {#দি} other {#দি}}"
+
+#: ../../../lib/web/src/lib/locale-format.ts:117
+msgid "{count, plural, one {#h} other {#h}}"
+msgstr "{count, plural, one {#ঘ} other {#ঘ}}"
+
+#: ../../../lib/web/src/lib/locale-format.ts:113
+msgid "{count, plural, one {#m} other {#m}}"
+msgstr "{count, plural, one {#মি} other {#মি}}"
+
+#: ../../../lib/web/src/lib/locale-format.ts:125
+msgid "{count, plural, one {#w} other {#w}}"
+msgstr "{count, plural, one {#সপ্তা} other {#সপ্তা}}"
+
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:174
 msgid "{entityLabel} name"
 msgstr "{entityLabel} নাম"
@@ -203,7 +219,7 @@ msgstr "নতুন অ্যাকাউন্ট যোগ করুন"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:215
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:220
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:292
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:291
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:94
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:194
 msgid "Add option"
@@ -254,7 +270,7 @@ msgstr "অনুমতি দিন"
 msgid "Allow anyone to search for {0}"
 msgstr "যে কাউকে {0} খুঁজতে দিন"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:226
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:225
 msgid "Allow sort by"
 msgstr "অনুসারে সাজানো অনুমতি দিন"
 
@@ -741,7 +757,7 @@ msgstr "কলাম মুছুন"
 msgid "Delete comment"
 msgstr "মন্তব্য মুছুন"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:301
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:300
 msgid "Delete field"
 msgstr "ফিল্ড মুছুন"
 
@@ -750,8 +766,8 @@ msgid "Delete option"
 msgstr "অপশন মুছুন"
 
 #. placeholder {0}: opt.name
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:279
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:284
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:278
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:283
 msgid "Delete option {0}"
 msgstr "অপশন {0} মুছুন"
 
@@ -824,7 +840,7 @@ msgstr "বাতিল করুন"
 msgid "Displays the mobile sidebar."
 msgstr "মোবাইল সাইডবার প্রদর্শন করে।"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:306
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:305
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:524
 msgid "Done"
 msgstr "সম্পন্ন"
@@ -856,11 +872,11 @@ msgstr "সম্পাদনা"
 msgid "Edit {label}"
 msgstr "{label} সম্পাদনা করুন"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:138
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:137
 msgid "Edit field"
 msgstr "ফিল্ড সম্পাদনা করুন"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:139
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:138
 msgid "Edit field settings"
 msgstr "ফিল্ড সেটিংস সম্পাদনা করুন"
 
@@ -869,8 +885,8 @@ msgid "Edit option"
 msgstr "বিকল্প সম্পাদনা"
 
 #. placeholder {0}: opt.name
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:264
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:269
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:263
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:268
 msgid "Edit option {0}"
 msgstr "অপশন {0} সম্পাদনা করুন"
 
@@ -1013,7 +1029,7 @@ msgstr "ফিল্টার..."
 msgid "Finish moving your account"
 msgstr "আপনার অ্যাকাউন্ট স্থানান্তর সম্পন্ন করুন"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:222
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:221
 msgid "Flags"
 msgstr "ফ্ল্যাগসমূহ"
 
@@ -1116,7 +1132,7 @@ msgstr "হোম"
 msgid "Hot"
 msgstr "জনপ্রিয়"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:153
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:152
 msgid "ID"
 msgstr ""
 
@@ -1165,7 +1181,7 @@ msgstr "অবৈধ যাচাইকরণ কোড"
 msgid "It seems like the page you're looking for <0/>does not exist or might have been removed."
 msgstr "আপনি যে পৃষ্ঠাটি খুঁজছেন <0/>সেটি নেই বা সরিয়ে ফেলা হয়েছে।"
 
-#: ../../../lib/web/src/lib/locale-format.ts:62
+#: ../../../lib/web/src/lib/locale-format.ts:110
 msgid "Just now"
 msgstr "এইমাত্র"
 
@@ -1268,7 +1284,7 @@ msgstr "ম্যানুয়াল"
 msgid "Mark all as read"
 msgstr "সবগুলি পঠিত হিসেবে চিহ্নিত করুন"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:199
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:198
 msgid "Maximum length"
 msgstr "সর্বোচ্চ দৈর্ঘ্য"
 
@@ -1293,7 +1309,7 @@ msgstr "বার্তা"
 msgid "Metric"
 msgstr "মেট্রিক"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:188
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:187
 msgid "Minimum length"
 msgstr "ন্যূনতম দৈর্ঘ্য"
 
@@ -1316,7 +1332,7 @@ msgstr "আরও বিকল্প"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:118
 #: ../../../lib/web/src/components/entity/entity-board-column.tsx:614
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:143
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:142
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:128
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:299
 msgid "Name"
@@ -1560,7 +1576,7 @@ msgid "Option name"
 msgstr "অপশনের নাম"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:168
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:241
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:240
 msgid "Options"
 msgstr "অপশন"
 
@@ -1593,7 +1609,7 @@ msgstr "পাসকি যাচাই ব্যর্থ হয়েছে।
 msgid "Passkeys"
 msgstr "পাসকি"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:210
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:209
 msgid "Pattern (regex)"
 msgstr "প্যাটার্ন (রেজেক্স)"
 
@@ -1764,7 +1780,7 @@ msgstr "উত্তর দিন"
 msgid "Reply to {0}..."
 msgstr "{0} কে উত্তর দিন..."
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:225
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:224
 msgid "Required"
 msgstr "প্রয়োজনীয়"
 
@@ -1799,7 +1815,7 @@ msgid "Right to Left"
 msgstr "ডান থেকে বাম"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:150
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:169
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:168
 msgid "Rows"
 msgstr "সারি"
 
@@ -2051,7 +2067,7 @@ msgid "Signing out..."
 msgstr "সাইন আউট করা হচ্ছে..."
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:161
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:180
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:179
 msgid "Single line of text only"
 msgstr "শুধুমাত্র একক লাইনের টেক্সট"
 
@@ -2257,7 +2273,7 @@ msgid "Tuesday"
 msgstr "মঙ্গলবার"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:130
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:163
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:162
 msgid "Type"
 msgstr "ধরন"
 

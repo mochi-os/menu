@@ -44,6 +44,22 @@ msgstr "{0, plural, one {# ተመርጧል} other {# ተመርጠዋል}}"
 msgid "{0} option preview"
 msgstr "የ{0} አማራጭ ቅድመ እይታ"
 
+#: ../../../lib/web/src/lib/locale-format.ts:121
+msgid "{count, plural, one {#d} other {#d}}"
+msgstr "{count, plural, one {#ቀ} other {#ቀ}}"
+
+#: ../../../lib/web/src/lib/locale-format.ts:117
+msgid "{count, plural, one {#h} other {#h}}"
+msgstr "{count, plural, one {#ሰ} other {#ሰ}}"
+
+#: ../../../lib/web/src/lib/locale-format.ts:113
+msgid "{count, plural, one {#m} other {#m}}"
+msgstr "{count, plural, one {#ደ} other {#ደ}}"
+
+#: ../../../lib/web/src/lib/locale-format.ts:125
+msgid "{count, plural, one {#w} other {#w}}"
+msgstr "{count, plural, one {#ሳ} other {#ሳ}}"
+
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:174
 msgid "{entityLabel} name"
 msgstr "የ{entityLabel} ስም"
@@ -203,7 +219,7 @@ msgstr "አዲስ መለያ ጨምር"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:215
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:220
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:292
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:291
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:94
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:194
 msgid "Add option"
@@ -254,7 +270,7 @@ msgstr "ፍቀድ"
 msgid "Allow anyone to search for {0}"
 msgstr "ማንኛውም ሰው {0} እንዲፈልግ ፍቀድ"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:226
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:225
 msgid "Allow sort by"
 msgstr "ደርድር በ ፍቀድ"
 
@@ -741,7 +757,7 @@ msgstr "ዓምድ ሰርዝ"
 msgid "Delete comment"
 msgstr "አስተያየት ሰርዝ"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:301
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:300
 msgid "Delete field"
 msgstr "መስክ ሰርዝ"
 
@@ -750,8 +766,8 @@ msgid "Delete option"
 msgstr "አማራጭ ሰርዝ"
 
 #. placeholder {0}: opt.name
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:279
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:284
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:278
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:283
 msgid "Delete option {0}"
 msgstr "አማራጭ {0} ሰርዝ"
 
@@ -824,7 +840,7 @@ msgstr "አጥፋ"
 msgid "Displays the mobile sidebar."
 msgstr "የሞባይል ጎንደርን ያሳያል።"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:306
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:305
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:524
 msgid "Done"
 msgstr "ተጠናቅቋል"
@@ -856,11 +872,11 @@ msgstr "አስተካክል"
 msgid "Edit {label}"
 msgstr "{label}ን አርትዕ"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:138
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:137
 msgid "Edit field"
 msgstr "መስክ አስተካክል"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:139
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:138
 msgid "Edit field settings"
 msgstr "የመስክ ቅንብሮችን አስተካክል"
 
@@ -869,8 +885,8 @@ msgid "Edit option"
 msgstr "አማራጭን አርትዕ"
 
 #. placeholder {0}: opt.name
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:264
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:269
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:263
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:268
 msgid "Edit option {0}"
 msgstr "አማራጭ {0} አስተካክል"
 
@@ -1013,7 +1029,7 @@ msgstr "አጣራ..."
 msgid "Finish moving your account"
 msgstr "የመለያ ዝውውርን አጠናቅ"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:222
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:221
 msgid "Flags"
 msgstr "ባንዲራዎች"
 
@@ -1116,7 +1132,7 @@ msgstr "መነሻ"
 msgid "Hot"
 msgstr "ሞቅ ያለ"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:153
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:152
 msgid "ID"
 msgstr ""
 
@@ -1165,7 +1181,7 @@ msgstr "ልክ ያልሆነ የማረጋገጫ ኮድ"
 msgid "It seems like the page you're looking for <0/>does not exist or might have been removed."
 msgstr "የሚፈልጉት ገጽ <0/>የለም ወይም ተወግዷል።"
 
-#: ../../../lib/web/src/lib/locale-format.ts:62
+#: ../../../lib/web/src/lib/locale-format.ts:110
 msgid "Just now"
 msgstr "አሁን"
 
@@ -1268,7 +1284,7 @@ msgstr "በእጅ"
 msgid "Mark all as read"
 msgstr "ሁሉንም እንደተነበበ ምልክት አድርግ"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:199
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:198
 msgid "Maximum length"
 msgstr "ከፍተኛ ርዝመት"
 
@@ -1293,7 +1309,7 @@ msgstr "መልዕክት"
 msgid "Metric"
 msgstr "ሜትሪክ"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:188
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:187
 msgid "Minimum length"
 msgstr "ዝቅተኛ ርዝመት"
 
@@ -1316,7 +1332,7 @@ msgstr "ተጨማሪ አማራጮች"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:118
 #: ../../../lib/web/src/components/entity/entity-board-column.tsx:614
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:143
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:142
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:128
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:299
 msgid "Name"
@@ -1560,7 +1576,7 @@ msgid "Option name"
 msgstr "የአማራጭ ስም"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:168
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:241
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:240
 msgid "Options"
 msgstr "አማራጮች"
 
@@ -1593,7 +1609,7 @@ msgstr "የይለፍ ቁልፍ ማረጋገጫ አልተሳካም። እባክ�
 msgid "Passkeys"
 msgstr "ፓስኪዎች"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:210
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:209
 msgid "Pattern (regex)"
 msgstr "ስርዓተ-ጥለት (regex)"
 
@@ -1764,7 +1780,7 @@ msgstr "ምላሽ ስጥ"
 msgid "Reply to {0}..."
 msgstr "ለ {0} መልስ..."
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:225
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:224
 msgid "Required"
 msgstr "ያስፈልጋል"
 
@@ -1799,7 +1815,7 @@ msgid "Right to Left"
 msgstr "ከቀኝ ወደ ግራ"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:150
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:169
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:168
 msgid "Rows"
 msgstr "ረድፎች"
 
@@ -2051,7 +2067,7 @@ msgid "Signing out..."
 msgstr "በመውጣት ላይ..."
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:161
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:180
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:179
 msgid "Single line of text only"
 msgstr "የአንድ መስመር ጽሁፍ ብቻ"
 
@@ -2257,7 +2273,7 @@ msgid "Tuesday"
 msgstr "ማክሰኞ"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:130
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:163
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:162
 msgid "Type"
 msgstr "አይነት"
 

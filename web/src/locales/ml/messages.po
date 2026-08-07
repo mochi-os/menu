@@ -44,6 +44,22 @@ msgstr "{0, plural, one {# തിരഞ്ഞെടുത്തു} other {# ത
 msgid "{0} option preview"
 msgstr "{0} ഓപ്ഷന്റെ പ്രിവ്യൂ"
 
+#: ../../../lib/web/src/lib/locale-format.ts:121
+msgid "{count, plural, one {#d} other {#d}}"
+msgstr "{count, plural, one {#ദി} other {#ദി}}"
+
+#: ../../../lib/web/src/lib/locale-format.ts:117
+msgid "{count, plural, one {#h} other {#h}}"
+msgstr "{count, plural, one {#മ} other {#മ}}"
+
+#: ../../../lib/web/src/lib/locale-format.ts:113
+msgid "{count, plural, one {#m} other {#m}}"
+msgstr "{count, plural, one {#മി} other {#മി}}"
+
+#: ../../../lib/web/src/lib/locale-format.ts:125
+msgid "{count, plural, one {#w} other {#w}}"
+msgstr "{count, plural, one {#ആ} other {#ആ}}"
+
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:174
 msgid "{entityLabel} name"
 msgstr "{entityLabel} പേര്"
@@ -203,7 +219,7 @@ msgstr "പുതിയ അക്കൗണ്ട് ചേർക്കുക"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:215
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:220
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:292
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:291
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:94
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:194
 msgid "Add option"
@@ -254,7 +270,7 @@ msgstr "അനുവദിക്കുക"
 msgid "Allow anyone to search for {0}"
 msgstr "ആർക്കും {0} തിരയാൻ അനുവദിക്കുക"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:226
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:225
 msgid "Allow sort by"
 msgstr "സോർട്ട് ചെയ്യാൻ അനുവദിക്കുക"
 
@@ -741,7 +757,7 @@ msgstr "കോളം ഇല്ലാതാക്കുക"
 msgid "Delete comment"
 msgstr "അഭിപ്രായം ഇല്ലാതാക്കുക"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:301
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:300
 msgid "Delete field"
 msgstr "ഫീൽഡ് ഇല്ലാതാക്കുക"
 
@@ -750,8 +766,8 @@ msgid "Delete option"
 msgstr "ഓപ്ഷൻ ഇല്ലാതാക്കുക"
 
 #. placeholder {0}: opt.name
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:279
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:284
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:278
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:283
 msgid "Delete option {0}"
 msgstr "ഓപ്ഷൻ {0} ഇല്ലാതാക്കുക"
 
@@ -824,7 +840,7 @@ msgstr "ഒഴിവാക്കുക"
 msgid "Displays the mobile sidebar."
 msgstr "മൊബൈൽ സൈഡ്‌ബാർ പ്രദർശിപ്പിക്കുന്നു."
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:306
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:305
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:524
 msgid "Done"
 msgstr "പൂർത്തിയായി"
@@ -856,11 +872,11 @@ msgstr "എഡിറ്റ് ചെയ്യുക"
 msgid "Edit {label}"
 msgstr "{label} എഡിറ്റ് ചെയ്യുക"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:138
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:137
 msgid "Edit field"
 msgstr "ഫീൽഡ് എഡിറ്റ് ചെയ്യുക"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:139
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:138
 msgid "Edit field settings"
 msgstr "ഫീൽഡ് ക്രമീകരണങ്ങൾ എഡിറ്റ് ചെയ്യുക"
 
@@ -869,8 +885,8 @@ msgid "Edit option"
 msgstr "ഓപ്ഷൻ എഡിറ്റ് ചെയ്യുക"
 
 #. placeholder {0}: opt.name
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:264
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:269
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:263
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:268
 msgid "Edit option {0}"
 msgstr "ഓപ്ഷൻ {0} എഡിറ്റ് ചെയ്യുക"
 
@@ -1013,7 +1029,7 @@ msgstr "ഫിൽട്ടർ..."
 msgid "Finish moving your account"
 msgstr "നിങ്ങളുടെ അക്കൗണ്ട് മാറ്റൽ പൂർത്തിയാക്കുക"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:222
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:221
 msgid "Flags"
 msgstr "ഫ്ലാഗുകൾ"
 
@@ -1116,7 +1132,7 @@ msgstr "ഹോം"
 msgid "Hot"
 msgstr "ഹോട്ട്"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:153
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:152
 msgid "ID"
 msgstr ""
 
@@ -1165,7 +1181,7 @@ msgstr "അസാധുവായ സ്ഥിരീകരണ കോഡ്"
 msgid "It seems like the page you're looking for <0/>does not exist or might have been removed."
 msgstr "നിങ്ങൾ തിരയുന്ന പേജ് <0/>നിലവിലില്ല അല്ലെങ്കിൽ നീക്കംചെയ്തിരിക്കാം."
 
-#: ../../../lib/web/src/lib/locale-format.ts:62
+#: ../../../lib/web/src/lib/locale-format.ts:110
 msgid "Just now"
 msgstr "ഇപ്പോൾ"
 
@@ -1268,7 +1284,7 @@ msgstr "മാനുവൽ"
 msgid "Mark all as read"
 msgstr "എല്ലാം വായിച്ചതായി അടയാളപ്പെടുത്തുക"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:199
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:198
 msgid "Maximum length"
 msgstr "കൂടിയ നീളം"
 
@@ -1293,7 +1309,7 @@ msgstr "സന്ദേശം"
 msgid "Metric"
 msgstr "മെട്രിക്"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:188
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:187
 msgid "Minimum length"
 msgstr "കുറഞ്ഞ നീളം"
 
@@ -1316,7 +1332,7 @@ msgstr "കൂടുതൽ ഓപ്ഷനുകൾ"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:118
 #: ../../../lib/web/src/components/entity/entity-board-column.tsx:614
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:143
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:142
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:128
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:299
 msgid "Name"
@@ -1560,7 +1576,7 @@ msgid "Option name"
 msgstr "ഓപ്ഷൻ പേര്"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:168
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:241
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:240
 msgid "Options"
 msgstr "ഓപ്ഷനുകൾ"
 
@@ -1593,7 +1609,7 @@ msgstr "പാസ്‌കീ പരിശോധന പരാജയപ്പെ�
 msgid "Passkeys"
 msgstr "പാസ്കീകൾ"
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:210
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:209
 msgid "Pattern (regex)"
 msgstr "പാറ്റേൺ (regex)"
 
@@ -1764,7 +1780,7 @@ msgstr "റിപ്പോർട്ട് ചെയ്യുക"
 msgid "Reply to {0}..."
 msgstr "{0} എന്നയാൾക്ക് മറുപടി..."
 
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:225
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:224
 msgid "Required"
 msgstr "Reserve പൂർത്തിയായില്ല"
 
@@ -1799,7 +1815,7 @@ msgid "Right to Left"
 msgstr "വലത്തുനിന്ന് ഇടത്തേക്ക്"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:150
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:169
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:168
 msgid "Rows"
 msgstr "വരികൾ"
 
@@ -2051,7 +2067,7 @@ msgid "Signing out..."
 msgstr "സൈൻ ഔട്ട് ചെയ്യുന്നു..."
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:161
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:180
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:179
 msgid "Single line of text only"
 msgstr "ഒറ്റ വരി ടെക്സ്റ്റ് മാത്രം"
 
@@ -2257,7 +2273,7 @@ msgid "Tuesday"
 msgstr "ചൊവ്വാഴ്ച"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:130
-#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:163
+#: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:162
 msgid "Type"
 msgstr "തരം"
 
