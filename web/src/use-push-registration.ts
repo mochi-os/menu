@@ -133,6 +133,57 @@ async function ensurePushRegistered(): Promise<string | null> {
 }
 
 /**
+ * The app id the shell resolved for the current path, waiting briefly if it is
+ * not there yet.
+ *
+ * shell.js sets it once `/_/token` answers, which it only requests after the
+ * frame says 'ready' — so a frame that asks for push status during its first
+ * render (a direct load of the notifications page, rather than a click through
+ * to it) can beat the token by a round trip. Reading the global once would
+ * report "no permission" for what is really "not resolved yet", so wait for it,
+ * bounded, and treat a genuine absence as no.
+ */
+async function shellAppId(): Promise<string | null> {
+  for (let attempt = 0; attempt < 50; attempt++) {
+    const app = (window as { __mochi_shell?: { appId?: string | null } }).__mochi_shell?.appId
+    if (app) return app
+    await new Promise((resolve) => setTimeout(resolve, 100))
+  }
+  return null
+}
+
+/**
+ * Whether the app currently loaded in the frame may drive push state.
+ *
+ * The frame checks below establish which window is asking, not what it is
+ * allowed to do — so on their own any app in the shell could unsubscribe the
+ * account's browser notifications, or read whether it is subscribed. This
+ * resolves against the app id the SERVER picked for the current path (shell.js
+ * publishes it after fetching the token), never a name the message carries,
+ * and fails closed: no app id yet (mid-navigation), a failed check, or an
+ * absent grant all mean no.
+ *
+ * `notifications/manage` is restricted, so it is granted deliberately from the
+ * app's permission page rather than by a dialog an app can raise at a moment of
+ * its choosing. Settings holds it by default (it owns the notification UI);
+ * anything else is asked for.
+ */
+async function pushAllowed(): Promise<boolean> {
+  const app = await shellAppId()
+  if (!app) return false
+  try {
+    const res = await menuFetch<{ data?: { granted?: boolean } }>('-/permissions/check', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `app=${encodeURIComponent(app)}&permission=${encodeURIComponent('notifications/manage')}`,
+    })
+    return !!res?.data?.granted
+  } catch {
+    return false
+  }
+}
+
+/**
  * Hook that listens for push-subscribe / -unsubscribe / -status requests from
  * app iframes. Registration is driven explicitly from the settings UI — we do
  * NOT auto-register on page load, because browser permission being 'granted'
@@ -171,6 +222,10 @@ export function usePushRegistration() {
       if (data.type === 'push-subscribe') {
         ;(async () => {
           try {
+            if (!(await pushAllowed())) {
+              source?.postMessage({ type: 'push-result', id, ok: false, reason: 'forbidden' }, '*')
+              return
+            }
             const permission = await push.requestPermission()
             if (permission !== 'granted') {
               source?.postMessage({ type: 'push-result', id, ok: false, reason: 'denied' }, '*')
@@ -192,6 +247,13 @@ export function usePushRegistration() {
       if (data.type === 'push-unsubscribe') {
         ;(async () => {
           try {
+            if (!(await pushAllowed())) {
+              source?.postMessage(
+                { type: 'push-unsubscribe-result', id, ok: false, reason: 'forbidden' },
+                '*'
+              )
+              return
+            }
             await removeBrowserAccount()
             source?.postMessage({ type: 'push-unsubscribe-result', id, ok: true }, '*')
           } catch {
@@ -204,6 +266,13 @@ export function usePushRegistration() {
       if (data.type === 'push-status') {
         ;(async () => {
           try {
+            if (!(await pushAllowed())) {
+              source?.postMessage(
+                { type: 'push-status-result', id, ok: false, reason: 'forbidden' },
+                '*'
+              )
+              return
+            }
             const permission = push.getPermission()
             let subscribed = false
             if (permission === 'granted' && (await push.isSupported())) {
