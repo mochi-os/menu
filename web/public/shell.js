@@ -295,6 +295,7 @@
 
         setImmersive(false);   // never carry immersive chrome-hiding across an app navigation
         abortMicSession();     // never leave microphone tracks live across app navigation
+        abortCameraSession();  // nor the camera's — the light must follow the app that asked
 
         // Create the new iframe hidden behind the old one
         var next = document.createElement('iframe');
@@ -943,6 +944,277 @@
         micIndicatorEl = null;
     }
 
+    // --- Camera streaming bridge ---
+    // Sandboxed iframes have an opaque origin (no allow-same-origin) so
+    // getUserMedia is unavailable there — and permission grants cannot even
+    // persist against an opaque origin. The shell owns the camera exactly as
+    // it owns the microphone, with one structural difference: mic is
+    // record-then-return (one Blob), camera is a CONTINUOUS STREAM — one
+    // transferable ImageBitmap per camera frame until the app stops it,
+    // navigation aborts it, or the tab hides (the webcam light must never
+    // stay lit behind a hidden tab). Do NOT add allow-same-origin.
+    var cameraSession = null;   // single active/requesting session
+    var cameraGate = null;
+    var cameraPermissionPending = false;
+    var cameraIndicatorEl = null;
+
+    function postCameraFrame(msg, transfer) {
+        if (iframe && iframe.contentWindow) {
+            iframe.contentWindow.postMessage(msg, '*', transfer);
+        } else if (transfer) {
+            // No destination: close the bitmap now — an unposted frame would
+            // otherwise hold its texture until GC.
+            for (var i = 0; i < transfer.length; i++) {
+                try { transfer[i].close(); } catch (e) { /* ignore */ }
+            }
+        }
+    }
+
+    function ensureCameraIndicatorStyle() {
+        if (document.getElementById('mochi-camera-style')) return;
+        var s = document.createElement('style');
+        s.id = 'mochi-camera-style';
+        s.textContent = '@keyframes mochi-camera-pulse{0%{box-shadow:0 0 0 0 rgba(37,99,235,0.7)}70%{box-shadow:0 0 0 10px rgba(37,99,235,0)}100%{box-shadow:0 0 0 0 rgba(37,99,235,0)}}';
+        document.head.appendChild(s);
+    }
+    function showCameraIndicator() {
+        if (cameraIndicatorEl) return;
+        ensureCameraIndicatorStyle();
+        var el = document.createElement('div');
+        el.setAttribute('aria-hidden', 'true');
+        // Sits beside the mic dot's centre slot so both can show at once.
+        el.style.cssText = 'position:fixed;top:8px;left:calc(50% + 24px);transform:translateX(-50%);' +
+            'z-index:2147483647;width:14px;height:14px;border-radius:50%;background:#2563eb;' +
+            'pointer-events:none;animation:mochi-camera-pulse 1.4s ease-out infinite;';
+        cameraIndicatorEl = el;
+        if (document.body) document.body.appendChild(el);
+    }
+    function hideCameraIndicator() {
+        if (cameraIndicatorEl && cameraIndicatorEl.parentNode) {
+            cameraIndicatorEl.parentNode.removeChild(cameraIndicatorEl);
+        }
+        cameraIndicatorEl = null;
+    }
+
+    function stopCameraTracks(stream) {
+        if (!stream) return;
+        try {
+            stream.getTracks().forEach(function(track) {
+                try { track.stop(); } catch (e) { /* ignore */ }
+            });
+        } catch (e) { /* ignore */ }
+    }
+
+    function settleCameraSession(session, payload) {
+        if (!session || session.settled) return;
+        session.settled = true;
+        if (session.video) {
+            try { session.video.srcObject = null; } catch (e) { /* ignore */ }
+            session.video = null;
+        }
+        stopCameraTracks(session.stream);
+        session.stream = null;
+        if (cameraSession === session) cameraSession = null;
+        hideCameraIndicator();
+        if (payload) postToIframe(payload);
+    }
+
+    function abortCameraSession() {
+        if (cameraGate) cameraGate.cancelled = true;
+        var session = cameraSession;
+        if (!session || session.settled) return;
+        session.cancelled = true;
+        settleCameraSession(session, session.opened
+            ? { type: 'camera.end', requestId: session.requestId, reason: 'aborted' }
+            : { type: 'camera.result', requestId: session.requestId, ok: false, cancelled: true,
+                error: { name: 'AbortError', message: 'Camera session aborted' } });
+    }
+
+    // The webcam light must never stay lit behind a hidden tab: streaming
+    // stops outright, and the app restarts it on its own visibility return.
+    // The MIC deliberately does not do this — a voice note surviving a brief
+    // tab switch is intended.
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) abortCameraSession();
+    });
+
+    function handleCameraStart(data) {
+        if (navigating) return;
+        if (cameraPermissionPending) {
+            postToIframe({
+                type: 'camera.result',
+                requestId: data.requestId,
+                ok: false,
+                error: { name: 'InvalidStateError', message: 'A camera permission request is already open' }
+            });
+            return;
+        }
+        cameraPermissionPending = true;
+        var gate = { requestId: data.requestId, cancelled: false };
+        cameraGate = gate;
+        permissionGranted(currentAppEntity, 'camera').then(function(granted) {
+            return granted ? true : requestShellConsent('camera', 'camera');
+        }).then(function(granted) {
+            cameraPermissionPending = false;
+            if (cameraGate === gate) cameraGate = null;
+            if (gate.cancelled) {
+                postToIframe({ type: 'camera.result', requestId: data.requestId, ok: false, cancelled: true });
+                return;
+            }
+            if (!granted) {
+                postToIframe({
+                    type: 'camera.result',
+                    requestId: data.requestId,
+                    ok: false,
+                    error: { name: 'NotAllowedError', message: 'Camera permission not granted' }
+                });
+                return;
+            }
+            beginCameraStart(data);
+        }).catch(function() {
+            cameraPermissionPending = false;
+            if (cameraGate === gate) cameraGate = null;
+            postToIframe({
+                type: 'camera.result',
+                requestId: data.requestId,
+                ok: false,
+                error: { name: 'NotAllowedError', message: 'Camera permission not granted' }
+            });
+        });
+    }
+
+    function beginCameraStart(data) {
+        if (navigating) return;
+        var requestId = data.requestId;
+        if (cameraSession && !cameraSession.settled) {
+            postToIframe({
+                type: 'camera.result',
+                requestId: requestId,
+                ok: false,
+                error: { name: 'InvalidStateError', message: 'A camera session is already active' }
+            });
+            return;
+        }
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || typeof createImageBitmap === 'undefined') {
+            postToIframe({
+                type: 'camera.result',
+                requestId: requestId,
+                ok: false,
+                error: { name: 'NotSupportedError', message: 'Camera access requires a secure context (HTTPS or localhost)' }
+            });
+            return;
+        }
+
+        var session = {
+            requestId: requestId,
+            cancelled: false,
+            settled: false,
+            opened: false,
+            stream: null,
+            video: null,
+            pending: false
+        };
+        cameraSession = session;
+
+        // A requested device that has since been unplugged must not fail the
+        // whole start: retry once unconstrained rather than answer with a
+        // puzzling OverconstrainedError.
+        function open(constraints, retried) {
+            navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
+                if (session.cancelled || session.settled) {
+                    stopCameraTracks(stream);
+                    settleCameraSession(session, { type: 'camera.result', requestId: requestId, ok: false, cancelled: true });
+                    return;
+                }
+                session.stream = stream;
+                var track = stream.getVideoTracks && stream.getVideoTracks()[0];
+                if (track) {
+                    track.onended = function() {
+                        settleCameraSession(session, { type: 'camera.end', requestId: requestId, reason: 'ended' });
+                    };
+                }
+                var answer = function(devices) {
+                    if (session.cancelled || session.settled) return;
+                    session.opened = true;
+                    showCameraIndicator();
+                    postToIframe({ type: 'camera.result', requestId: requestId, ok: true, devices: devices });
+                    pumpCameraFrames(session);
+                };
+                if (navigator.mediaDevices.enumerateDevices) {
+                    navigator.mediaDevices.enumerateDevices().then(function(all) {
+                        var cameras = [];
+                        for (var i = 0; i < all.length; i++) {
+                            if (all[i].kind === 'videoinput') {
+                                cameras.push({ id: all[i].deviceId || '', label: all[i].label || '' });
+                            }
+                        }
+                        answer(cameras);
+                    }).catch(function() { answer([]); });
+                } else {
+                    answer([]);
+                }
+            }).catch(function(err) {
+                if (!retried && constraints.video && constraints.video.deviceId) {
+                    open({ video: { width: { ideal: 640 }, height: { ideal: 480 }, frameRate: { ideal: 30 } } }, true);
+                    return;
+                }
+                settleCameraSession(session, {
+                    type: 'camera.result',
+                    requestId: requestId,
+                    ok: false,
+                    error: { name: err && err.name || 'Error', message: err && err.message || String(err) }
+                });
+            });
+        }
+        var video = { width: { ideal: 640 }, height: { ideal: 480 }, frameRate: { ideal: 30 } };
+        if (data.device) video.deviceId = { exact: data.device };
+        open({ video: video }, false);
+    }
+
+    function pumpCameraFrames(session) {
+        var video = document.createElement('video');
+        video.muted = true;
+        video.playsInline = true;
+        video.srcObject = session.stream;
+        session.video = video;
+        var play = video.play();
+        if (play && play.catch) play.catch(function() { /* autoplay of a muted local stream cannot fail meaningfully */ });
+        function grab() {
+            if (session.settled || session.cancelled) return;
+            // One in-flight bitmap at a time: if the app (or this thread)
+            // lags, frames are dropped at the source instead of queueing.
+            if (!session.pending && video.readyState >= 2) {
+                session.pending = true;
+                createImageBitmap(video).then(function(bitmap) {
+                    session.pending = false;
+                    if (session.settled || session.cancelled) {
+                        try { bitmap.close(); } catch (e) { /* ignore */ }
+                        return;
+                    }
+                    postCameraFrame({ type: 'camera.frame', requestId: session.requestId, frame: bitmap }, [bitmap]);
+                }).catch(function() { session.pending = false; });
+            }
+            schedule();
+        }
+        function schedule() {
+            if (session.settled || session.cancelled) return;
+            if (video.requestVideoFrameCallback) video.requestVideoFrameCallback(grab);
+            else setTimeout(grab, 33);
+        }
+        schedule();
+    }
+
+    function handleCameraStop(data) {
+        if (cameraGate && (data.requestId == null || cameraGate.requestId === data.requestId)) {
+            cameraGate.cancelled = true;
+        }
+        var session = cameraSession;
+        if (!session || session.settled) return;
+        if (data.requestId != null && session.requestId !== data.requestId) return;
+        session.cancelled = true;
+        settleCameraSession(session, { type: 'camera.end', requestId: session.requestId, reason: 'stopped' });
+    }
+
     // --- Microphone permission gate ---
     // The shell, not the app, is the enforcement point: getUserMedia runs here
     // in the trusted top window, so a sandboxed app must never open the mic
@@ -954,7 +1226,7 @@
     // arriving mid-consent prevents the recording from starting afterward.
     var micGate = null;
 
-    function micHasPermission(appId) {
+    function permissionGranted(appId, permission) {
         if (!appId) return Promise.resolve(false);
         return shellConfigReady.then(function() {
             var headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
@@ -964,7 +1236,7 @@
                 method: 'POST',
                 credentials: 'same-origin',
                 headers: headers,
-                body: 'app=' + encodeURIComponent(appId) + '&permission=microphone'
+                body: 'app=' + encodeURIComponent(appId) + '&permission=' + encodeURIComponent(permission)
             });
         }).then(function(r) {
             return r.ok ? r.json() : null;
@@ -975,15 +1247,19 @@
         });
     }
 
+    function micHasPermission(appId) {
+        return permissionGranted(appId, 'microphone');
+    }
+
     // Ask the menu (same top window) to show its consent dialog for the current
     // app. The menu grants against its own server-resolved app id, not anything
     // the shell passes, so this cannot target a different app. Resolves true if
     // the user allowed. A same-window CustomEvent is unreachable from the
     // sandboxed iframe, so only trusted shell code can trigger it.
-    var micConsentSeq = 0;
-    function requestMicConsent() {
+    var shellConsentSeq = 0;
+    function requestShellConsent(permission, prefix) {
         return new Promise(function(resolve) {
-            var id = 'mic-' + (++micConsentSeq);
+            var id = prefix + '-' + (++shellConsentSeq);
             var settled = false;
             function done(result) {
                 if (settled) return;
@@ -997,11 +1273,15 @@
             }
             window.addEventListener('mochi-shell-permission-result', onResult);
             window.dispatchEvent(new CustomEvent('mochi-shell-permission-request', {
-                detail: { id: id, permission: 'microphone' }
+                detail: { id: id, permission: permission }
             }));
             // If the menu isn't mounted/listening, fail closed rather than hang.
             setTimeout(function() { done(false); }, 60000);
         });
+    }
+
+    function requestMicConsent() {
+        return requestShellConsent('microphone', 'mic');
     }
 
     function handleMicStart(data) {
@@ -1577,6 +1857,22 @@
 
             case 'mic.cancel':
                 handleMicCancel(data);
+                break;
+
+            case 'camera.start':
+                handleCameraStart(data);
+                break;
+
+            case 'camera.stop':
+                handleCameraStop(data);
+                break;
+
+            case 'camera.probe':
+                postToIframe({
+                    type: 'camera.probe.result',
+                    requestId: data.requestId,
+                    supported: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && typeof createImageBitmap !== 'undefined')
+                });
                 break;
 
             case 'language-set':
