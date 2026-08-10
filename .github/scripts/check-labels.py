@@ -27,7 +27,7 @@ LABELS = Path(__file__).resolve().parents[2] / "labels"
 OVERLAY = {"en", "en-us", "en-ca", "fr-ca", "es-ar", "zh-hk", "yue", "nn", "de-ch"}
 
 KEEP_WORDS = {
-    "air", "api", "apps", "chat", "chess", "comptroller", "crm",
+    "air", "api", "apps", "chat", "chess", "comptroller", "crm", "data",
     "disputes", "email", "feeds", "forums", "git", "github", "go",
     "google", "help", "home", "id", "invitations", "jwt", "libp2p",
     "market", "matcha", "mentions", "menu", "messages", "mochi",
@@ -43,7 +43,7 @@ KEEP_WORDS = {
 # monorepo's claude/scripts/i18n_glossary.py — keep the two in sync.
 KEEP_ENGLISH = frozenset({
     "API", "Air", "Apps", "CRM", "Chat", "Chess", "Comptroller",
-    "Disputes", "Email", "Feeds", "Forums", "Git", "GitHub", "Go",
+    "Data", "Disputes", "Email", "Feeds", "Forums", "Git", "GitHub", "Go",
     "Google", "Help", "Home", "ID", "Invitations", "JWT", "Market",
     "Matcha", "Mentions", "Menu", "Messages", "Mochi", "Moderation",
     "Normal", "Notifications", "OAuth", "OIDC", "Offline", "P2P", "PGN",
