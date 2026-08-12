@@ -9,7 +9,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { Trans } from '@lingui/react/macro'
-import { Shield, ShieldAlert, Loader2 } from 'lucide-react'
+import { Shield, ShieldAlert, Check, Loader2 } from 'lucide-react'
 import {
   ResponsiveDialog,
   ResponsiveDialogContent,
@@ -247,8 +247,9 @@ export function usePermissionRequest() {
                 {submitting ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
                 ) : (
-                  <Trans>Allow</Trans>
+                  <Check className="size-4" />
                 )}
+                <Trans>Allow</Trans>
               </Button>
             </>
           )}

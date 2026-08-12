@@ -381,3 +381,82 @@ describe('shell mic bridge: the remaining fail-closed paths', () => {
     expect(shell.checks).toEqual(['app-entity-id'])
   })
 })
+
+// The 'ready' handler mints a token for the app named by the CURRENT top URL
+// and posts it after two awaits. `iframe` is reassigned by a cross-app
+// navigation, so without pinning the requester the init - carrying that app's
+// JWT - was delivered to whichever iframe happened to be mounted by then. The
+// same fetch sets currentAppEntity, which names the app in the consent dialog
+// and is what a granted permission is recorded against.
+describe('shell ready: the init belongs to the iframe that asked', () => {
+  // watch_frames spies on document.createElement; unstubAllGlobals does not
+  // restore a spy, so without this it survives into the next test and replaces
+  // the postMessage stub that test relies on.
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
+  // Every iframe the shell creates, with the messages it received. The shell
+  // swaps iframes mid-flight, so watching only the first one cannot see where
+  // a stale init landed.
+  function watch_frames() {
+    const frames: { messages: Record<string, unknown>[] }[] = []
+    const create = document.createElement.bind(document)
+    vi.spyOn(document, 'createElement').mockImplementation((tag: string, ...rest: unknown[]) => {
+      const element = create(tag, ...(rest as [])) as HTMLElement
+      if (tag === 'iframe') {
+        const record = { messages: [] as Record<string, unknown>[] }
+        frames.push(record)
+        queueMicrotask(() => {
+          const window_ = (element as HTMLIFrameElement).contentWindow
+          if (window_) {
+            window_.postMessage = ((msg: Record<string, unknown>) => {
+              record.messages.push(msg)
+            }) as typeof window_.postMessage
+          }
+        })
+      }
+      return element
+    })
+    return frames
+  }
+
+  it('drops an init whose iframe was replaced while the token was in flight', async () => {
+    const frames = watch_frames()
+    const shell = boot({ app: 'feeds-entity' })
+
+    // 'ready' starts the token fetch for feeds. Do NOT settle: the race is the
+    // window between this and the fetch resolving.
+    shell.send({ type: 'ready' })
+    // Cross to another app while it is in flight — the shell mounts a new iframe.
+    shell.send({ type: 'navigate-external', url: '/settings/' })
+    await shell.settle()
+
+    // NOTHING should have received an init. The feeds iframe asked, but was
+    // replaced before the token arrived; the settings iframe that replaced it
+    // never sent 'ready', so it has asked for nothing. Before the requester
+    // was pinned, the settings iframe received the FEEDS token here.
+    const inits = frames.flatMap((f) => f.messages.filter((m) => m.type === 'init'))
+    expect(inits).toEqual([])
+  })
+
+  it('still delivers the init when nothing navigated', async () => {
+    const shell = boot({ app: 'feeds-entity' })
+    shell.send({ type: 'ready' })
+    await shell.settle()
+    expect(shell.posted.filter((m) => m.type === 'init')).toHaveLength(1)
+  })
+})
+
+// getAppNameFromPath('/') is '', and the guard read `target.app && ...`, so a
+// request to move the top URL to the root skipped the one check written to
+// stop an app relocating the URL to another app.
+describe('shell navigate: an empty app name is not a free pass', () => {
+  it('refuses a navigate to the root from inside an app', async () => {
+    const shell = boot()
+    await shell.start()
+    shell.send({ type: 'navigate', path: '/' })
+    await shell.settle()
+    expect(shell.path()).toBe(HOME)
+  })
+})

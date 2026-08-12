@@ -1573,7 +1573,11 @@
         var target = sameOriginTarget(data.path);
         if (!target) return;
         var currentApp = getAppNameFromPath(window.location.pathname);
-        if (target.app && target.app !== currentApp) return;
+        // Exact match, including the empty name. `target.app &&` skipped the
+        // check whenever the name resolved empty — and getAppNameFromPath('/')
+        // IS empty — so a request to move the top URL to the root passed the
+        // one guard written to stop exactly that.
+        if (target.app !== currentApp) return;
         // Only touch history when the path actually changed. Honor the iframe's
         // push-vs-replace intent: a replace (URL canonicalization, filter state,
         // the reload that fires on back) must NOT add a back-stack entry, else
@@ -1687,7 +1691,16 @@
                 // App is ready — fetch token and shell config, then send init.
                 navigating = false;
                 var appName = getAppNameFromPath(window.location.pathname);
+                // The iframe that ASKED. Everything below is asynchronous and
+                // `iframe` is reassigned by a navigation, so without pinning
+                // the requester the token minted for this app was posted to
+                // whichever iframe happened to be mounted when the fetch
+                // resolved — and fetchToken also sets currentAppEntity, which
+                // names the app in the camera/microphone consent dialog and is
+                // what a granted permission is RECORDED against.
+                var requester = event.source;
                 Promise.all([fetchToken(appName), shellConfigReady]).then(function(results) {
+                    if (!iframe || iframe.contentWindow !== requester) return; // navigated away: this token is not theirs
                     var tokenData = results[0];
                     var sc = shellConfig || {};
                     if (!currentLocale && sc.locale) currentLocale = sc.locale;
@@ -1710,6 +1723,7 @@
                     scheduleTokenRefresh(appName);
                     completeTransition();
                 }).catch(function() {
+                    if (!iframe || iframe.contentWindow !== requester) return; // same rule on the failure path
                     var theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
                     var initMsg = {
                         type: 'init',
