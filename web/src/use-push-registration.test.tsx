@@ -32,19 +32,42 @@ beforeEach(() => {
   vi.stubGlobal(
     'fetch',
     vi.fn(async (url: string, init?: RequestInit) => {
-      if (!String(url).endsWith('/permissions/check')) throw new Error('unexpected fetch: ' + url)
-      const body = new URLSearchParams(String(init?.body ?? ''))
-      checks.push({ app: body.get('app') ?? '', permission: body.get('permission') ?? '' })
-      return { ok: true, json: async () => ({ data: { granted } }) } as Response
+      if (String(url).endsWith('/permissions/check')) {
+        const body = new URLSearchParams(String(init?.body ?? ''))
+        checks.push({ app: body.get('app') ?? '', permission: body.get('permission') ?? '' })
+        return { ok: true, json: async () => ({ data: { granted } }) } as Response
+      }
+      // Account bookkeeping the unsubscribe path performs once it actually
+      // reaches a subscription. Left throwing, the handler would answer
+      // 'error' and the reply assertions could not tell that apart from the
+      // hang they exist to catch.
+      if (String(url).includes('/push/accounts/')) {
+        return { ok: true, json: async () => ({ data: [] }) } as Response
+      }
+      throw new Error('unexpected fetch: ' + url)
     })
   )
 
   // jsdom has no service worker; the unsubscribe path needs one to reach its end.
+  // `ready` is kept alongside getRegistration so a reintroduced `await
+  // navigator.serviceWorker.ready` still passes here rather than failing for
+  // the wrong reason — the no-registration test below is what catches it.
+  setServiceWorker({ pushManager: { getSubscription: async () => null } })
+})
+
+// Shape the service worker container. Passing null models the state a browser
+// is in when nothing was ever registered: getRegistration resolves undefined,
+// and `ready` is a promise that NEVER settles — which is precisely the hang
+// under test, so it must never settle here either.
+function setServiceWorker(registration: unknown) {
   Object.defineProperty(navigator, 'serviceWorker', {
     configurable: true,
-    value: { ready: Promise.resolve({ pushManager: { getSubscription: async () => null } }) },
+    value: {
+      ready: registration ? Promise.resolve(registration) : new Promise(() => {}),
+      getRegistration: async () => registration ?? undefined,
+    },
   })
-})
+}
 
 afterEach(() => {
   appFrame.remove()
@@ -173,6 +196,70 @@ describe('usePushRegistration permission gate', () => {
         '*'
       )
     })
+  })
+
+  it('answers push-unsubscribe when no service worker is registered', async () => {
+    // The ordinary state for anyone who never turned push on: registration
+    // happens only when the user enables it, never on page load. Unfixed, this
+    // awaited serviceWorker.ready, which never settles and never rejects — so
+    // the handler's own catch could not fire, no reply was ever posted, and the
+    // settings toggle stayed disabled behind isUnsubscribing until a reload.
+    setServiceWorker(null)
+    render(<Harness />)
+
+    const post = send({ type: 'push-unsubscribe', id: 20 })
+
+    await waitFor(() => {
+      expect(post).toHaveBeenCalledWith(
+        { type: 'push-unsubscribe-result', id: 20, ok: true },
+        '*'
+      )
+    })
+  })
+
+  it('answers push-status when permission is granted but nothing is registered', async () => {
+    // Notification permission is origin-scoped and outlives the service worker,
+    // so clearing site data leaves exactly this combination — and status is the
+    // call the settings screen makes on load.
+    setServiceWorker(null)
+    vi.spyOn(push, 'getPermission').mockReturnValue('granted')
+    vi.spyOn(push, 'isSupported').mockResolvedValue(true)
+    render(<Harness />)
+
+    const post = send({ type: 'push-status', id: 21 })
+
+    await waitFor(() => {
+      expect(post).toHaveBeenCalledWith(
+        { type: 'push-status-result', id: 21, ok: true, subscribed: false, permission: 'granted' },
+        '*'
+      )
+    })
+  })
+
+  it('still unsubscribes a live subscription when one exists', async () => {
+    // Companion to the no-registration cases: the fix must not turn the real
+    // unsubscribe into a no-op that merely answers.
+    const unsubscribe = vi.fn(async () => true)
+    setServiceWorker({
+      pushManager: {
+        getSubscription: async () => ({ endpoint: 'https://push.example/x', unsubscribe }),
+      },
+    })
+    // jsdom has no PushManager, so isSupported() is false and the subscription
+    // branch would be skipped for a reason that has nothing to do with this
+    // test. Model a browser that can actually take a subscription.
+    vi.spyOn(push, 'isSupported').mockResolvedValue(true)
+    render(<Harness />)
+
+    const post = send({ type: 'push-unsubscribe', id: 22 })
+
+    await waitFor(() => {
+      expect(post).toHaveBeenCalledWith(
+        { type: 'push-unsubscribe-result', id: 22, ok: true },
+        '*'
+      )
+    })
+    expect(unsubscribe).toHaveBeenCalled()
   })
 
   it('refuses push-subscribe when the permission check itself fails', async () => {

@@ -194,15 +194,24 @@ export function usePushRegistration() {
   useEffect(() => {
     async function removeBrowserAccount(): Promise<void> {
       const local = getLocalAccount()
-      const reg = await navigator.serviceWorker.ready
-      const sub = await reg.pushManager.getSubscription()
+      // getRegistration resolves with undefined when nothing is registered.
+      // serviceWorker.ready would instead never settle — it does not reject —
+      // so the caller's try/catch cannot save it and the requesting iframe
+      // waits for a reply that never comes. Having no service worker is the
+      // ORDINARY state here, not a broken one: registration happens only when
+      // the user turns push on, never on page load.
+      const reg = (await push.isSupported())
+        ? await navigator.serviceWorker.getRegistration()
+        : undefined
+      const sub = reg ? await reg.pushManager.getSubscription() : null
       if (sub) {
         const account = await findBrowserAccountByEndpoint(sub.endpoint)
         if (account) await removeAccountById(account.id)
         await sub.unsubscribe()
       }
       // Also remove any account remembered from a previous endpoint (e.g. Chrome
-      // rotated the endpoint since we last subscribed).
+      // rotated the endpoint since we last subscribed). Reachable now even with
+      // no registration, which is exactly when such a row is left stranded.
       if (local && local.id !== undefined) await removeAccountById(local.id)
       setLocalAccount(null)
     }
@@ -276,8 +285,14 @@ export function usePushRegistration() {
             const permission = push.getPermission()
             let subscribed = false
             if (permission === 'granted' && (await push.isSupported())) {
-              const reg = await navigator.serviceWorker.ready
-              const sub = await reg.pushManager.getSubscription()
+              // Same rule as removeBrowserAccount: granted permission does not
+              // imply a registration exists. Notification permission is
+              // origin-scoped and outlives the service worker, so after site
+              // data is cleared this branch is reached with nothing registered
+              // — and serviceWorker.ready would hang the status call the
+              // settings toggle makes on load.
+              const reg = await navigator.serviceWorker.getRegistration()
+              const sub = reg ? await reg.pushManager.getSubscription() : null
               if (sub) {
                 const account = await findBrowserAccountByEndpoint(sub.endpoint)
                 subscribed = !!account
