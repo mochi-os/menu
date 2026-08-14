@@ -9,9 +9,9 @@
 
 import { useAuthStore } from '@mochi/web'
 
-export const MENU_PATH = '/menu'
+const MENU_PATH = '/menu'
 
-export function getMenuToken(): string {
+function getMenuToken(): string {
   return useAuthStore.getState().token || ''
 }
 
