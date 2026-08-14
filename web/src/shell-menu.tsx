@@ -8,6 +8,7 @@ import { Trans, useLingui } from '@lingui/react/macro'
 import { usePushRegistration } from './use-push-registration'
 import { useMenuNotifications } from './use-menu-notifications'
 import { usePermissionRequest } from './use-permission-request'
+import { ChromeBoundary } from './chrome-boundary'
 import {
   Check,
   ExternalLink,
@@ -319,6 +320,7 @@ export function MochiShellMenu() {
   const notificationsList = (
     <ScrollArea className='min-h-0 flex-1 overflow-y-scroll'>
       <div className='flex flex-col'>
+        <ChromeBoundary>
         <NotificationList
           notifications={unreadNotifications}
           isLoading={isLoading}
@@ -349,7 +351,8 @@ export function MochiShellMenu() {
               className='mt-0.5 shrink-0'
             />
           )}
-        />
+          />
+        </ChromeBoundary>
       </div>
     </ScrollArea>
   )
@@ -464,7 +467,7 @@ export function MochiShellMenu() {
         </div>
 
         <SignOutDialog open={!!signOutOpen} onOpenChange={setSignOutOpen} />
-        {permissionDialog}
+        <ChromeBoundary>{permissionDialog}</ChromeBoundary>
       </>
     )
   }
@@ -494,7 +497,7 @@ export function MochiShellMenu() {
       </div>
 
       <SignOutDialog open={!!signOutOpen} onOpenChange={setSignOutOpen} />
-      {permissionDialog}
+      <ChromeBoundary>{permissionDialog}</ChromeBoundary>
     </>
   )
 }

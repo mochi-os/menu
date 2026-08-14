@@ -97,33 +97,8 @@
     // (--foo) may be set: without this an app could set standard properties such
     // as display:none or pointer-events:none on the trusted shell root, hiding
     // or disabling the menu and permission dialogs.
-    function isThemeVarName(name) {
-        return typeof name === 'string' && /^--[A-Za-z0-9_-]+$/.test(name);
-    }
-
-    // font-size is the one standard property a theme state carries, installed by
-    // the settings font size preference. It is bounded rather than passed
-    // through: the sender is any app in the shell, and an unbounded size on the
-    // trusted chrome hides the menu as effectively as display:none would.
-    function isFontSize(value) {
-        if (typeof value !== 'string' || !/^\d{2,3}(\.\d+)?%$/.test(value)) return false;
-        var n = parseFloat(value);
-        return n >= 50 && n <= 200;
-    }
-
-    // A theme value must never make the browser fetch: custom properties are
-    // consumed in image contexts (--background-image becomes background-image),
-    // so a URL-bearing value reports every page view to whoever sent the theme.
-    // Backslash and comment syntax are refused too — they let a function name be
-    // written so it doesn't read as itself (\75rl(...) and url(h\74tp://...)
-    // both fetch). Mirrors the rule in lib/web's theme-provider and the server's
-    // themes_validate.
-    function isFetchingValue(value) {
-        return typeof value !== 'string' || /url|image|src|element|cross-fade|paint|\\|\/\*/i.test(value);
-    }
-
-    // Exactly the inline properties applyThemeVars installed, so cleanup can
-    // undo a theme without touching properties owned by anything else.
+    // Exactly the inline properties applyThemeDeclarations installed, so cleanup
+    // can undo a theme without touching properties owned by anything else.
     var installedThemeProps = [];
     (function() {
         var root = document.documentElement;
@@ -132,35 +107,41 @@
         }
     })();
 
-    function applyThemeVars(theme) {
+    // Install the user's theme on the shell root. The text is the server's own
+    // resolved declarations — the same ones it injects into the shell page at
+    // load — and NEVER values from an app. Custom properties on this root style
+    // the trusted chrome, the consent dialog included, so an app that could
+    // write them could paint the dialog's text in its background colour and
+    // lure a click onto Allow. Apps report that the preference changed; the
+    // server says what it is.
+    function applyThemeDeclarations(text) {
         clearThemeVars();
-        if (!theme) { currentColorTheme = null; return; }
+        if (typeof text !== 'string' || !text) return;
         var root = document.documentElement;
-        function install(key, value) {
+        var parts = text.split(';');
+        for (var i = 0; i < parts.length; i++) {
+            var at = parts[i].indexOf(':');
+            if (at < 0) continue;
+            var key = parts[i].slice(0, at).trim();
+            var value = parts[i].slice(at + 1).trim();
+            if (!key || !value) continue;
             root.style.setProperty(key, value);
             installedThemeProps.push(key);
         }
-        // Same guard as the overrides below: the theme arrives from an app we
-        // do not trust, so the hue triple is validated too rather than
-        // installed on sight. Mirrors lib/web's theme-provider.
-        if (theme.hue && !isFetchingValue(theme.hue) && !isFetchingValue(theme.chroma) && !isFetchingValue(theme.hueBg)) {
-            install('--hue', theme.hue);
-            install('--hue-chroma', theme.chroma);
-            install('--hue-bg', theme.hueBg);
-        }
-        if (theme.overrides) {
-            for (var key in theme.overrides) {
-                var value = theme.overrides[key];
-                if (isFetchingValue(value)) continue;
-                if (key === 'font-size') {
-                    if (isFontSize(value)) install(key, value);
-                    continue;
-                }
-                if (!isThemeVarName(key)) continue;
-                install(key, value);
-            }
-        }
-        currentColorTheme = theme;
+    }
+
+    // Re-read the user's theme from the server and install it.
+    function refreshTheme() {
+        return fetch('/_/shell', {
+            method: 'POST',
+            credentials: 'same-origin'
+        }).then(function(r) {
+            return r.ok ? r.json() : null;
+        }).then(function(data) {
+            if (data) applyThemeDeclarations(data.theme);
+        }).catch(function() {
+            // Leave the theme installed at page load in place.
+        });
     }
 
     function clearThemeVars() {
@@ -169,7 +150,6 @@
             root.style.removeProperty(installedThemeProps[i]);
         }
         installedThemeProps = [];
-        currentColorTheme = null;
     }
 
     // --- Sidebar state ---
@@ -1857,13 +1837,14 @@
                 break;
 
             case 'color-theme-set':
-                // App changed color theme — apply and sync to iframe
-                if (data.colorTheme) {
-                    applyThemeVars(data.colorTheme);
-                } else {
-                    clearThemeVars();
-                }
-                postToIframe({ type: 'color-theme-change', colorTheme: data.colorTheme || null });
+                // The app reports that the user's theme preference changed. Its
+                // values are forwarded to iframes — an app styling its OWN
+                // document is its business — but the trusted root is refreshed
+                // from the server, which resolves the preference the user
+                // actually holds.
+                currentColorTheme = data.colorTheme || null;
+                refreshTheme();
+                postToIframe({ type: 'color-theme-change', colorTheme: currentColorTheme });
                 break;
 
             case 'locale-set':

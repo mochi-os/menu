@@ -576,3 +576,77 @@ describe('usePermissionRequest — shell-driven consent', () => {
     sink.cleanup()
   })
 })
+
+// The permission code is rendered in the TRUSTED tree while the server's
+// translated name is in flight, so a value that isn't a string throws during
+// render — and React unmounts the whole root on an escaped render error, which
+// takes the sidebar, the notification badge and sign-out with it. A sandboxed
+// app must not be able to reach that from a postMessage.
+describe('usePermissionRequest rejects a malformed request', () => {
+  // Bypasses sendPermissionRequest's typed signature: the point is the shapes
+  // a hostile app can actually put on the wire.
+  function sendRaw(data: Record<string, unknown>) {
+    ;(window as unknown as { __mochi_shell?: { appId?: string } }).__mochi_shell = {
+      appId: 'feeds',
+    }
+    const source = appFrame.contentWindow as WindowProxy
+    vi.spyOn(source, 'postMessage').mockImplementation(() => {})
+    act(() => {
+      window.dispatchEvent(
+        new MessageEvent('message', {
+          data: { type: 'request-permission', app: 'feeds', ...data },
+          source,
+        })
+      )
+    })
+  }
+
+  const MALFORMED: [string, Record<string, unknown>][] = [
+    ['an object permission', { id: 1, permission: {} }],
+    ['an array permission', { id: 1, permission: ['accounts/read'] }],
+    ['a null permission', { id: 1, permission: null }],
+    ['a numeric permission', { id: 1, permission: 42 }],
+    ['a missing permission', { id: 1 }],
+    ['an empty permission', { id: 1, permission: '   ' }],
+    ['an over-long permission', { id: 1, permission: 'x'.repeat(257) }],
+    ['a string id', { id: 'one', permission: 'accounts/read' }],
+    ['a missing id', { permission: 'accounts/read' }],
+  ]
+
+  it.each(MALFORMED)('ignores %s and keeps the chrome mounted', async (_name, data) => {
+    render(
+      <div>
+        <span data-testid='chrome'>chrome</span>
+        <TestComponent />
+      </div>
+    )
+
+    sendRaw(data)
+    await waitFor(() => {
+      expect(screen.queryByText('Permission request')).not.toBeInTheDocument()
+    })
+
+    // The real damage was never the missing dialog — it was everything ELSE
+    // disappearing with it. Unfixed, the object cases threw during render and
+    // this node went with the root.
+    expect(screen.getByTestId('chrome')).toBeInTheDocument()
+  })
+
+  it('still accepts a well-formed request', async () => {
+    // Companion to the refusals: the guard rejects malformed shapes, not every
+    // request, so the empty-dialog assertions above mean something.
+    render(<TestComponent />)
+    sendRaw({ id: 1, permission: 'accounts/read' })
+    await waitFor(() => {
+      expect(screen.getByText('Permission request')).toBeInTheDocument()
+    })
+  })
+
+  it('trims a padded permission rather than looking it up with the padding', async () => {
+    render(<TestComponent />)
+    sendRaw({ id: 1, permission: '  accounts/read  ' })
+    await waitFor(() => {
+      expect(screen.getByText('Read connected accounts')).toBeInTheDocument()
+    })
+  })
+})

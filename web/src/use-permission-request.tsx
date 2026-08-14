@@ -32,6 +32,28 @@ interface PendingRequest {
   shellEventId?: string
 }
 
+// A permission code long enough to distort the dialog is refused outright
+// rather than truncated: the dialog is a place to be sure of what is being
+// asked, not to guess at a clipped string.
+const PERMISSION_MAXIMUM = 256
+
+// Parse a request-permission message from an app iframe. Everything the app
+// sends is untrusted input into the TRUSTED tree: the permission code is
+// rendered while the server's translated name is in flight, and a non-string
+// there throws during render, which unmounts the whole menu root — chrome,
+// notification badge, sign-out and every later consent dialog with it. The
+// shell-driven path has always type-checked its detail; this is the same rule
+// on the path an app can actually reach.
+function parsePermissionRequest(data: unknown): { id: number; permission: string } | null {
+  if (!data || typeof data !== 'object') return null
+  const message = data as { id?: unknown; permission?: unknown }
+  if (typeof message.id !== 'number' || !Number.isFinite(message.id)) return null
+  if (typeof message.permission !== 'string') return null
+  const permission = message.permission.trim()
+  if (!permission || permission.length > PERMISSION_MAXIMUM) return null
+  return { id: message.id, permission }
+}
+
 export function usePermissionRequest() {
   const [pending, setPending] = useState<PendingRequest | null>(null)
   const [submitting, setSubmitting] = useState(false)
@@ -66,10 +88,13 @@ export function usePermissionRequest() {
         .__mochi_shell?.appId
       if (!appId) return
 
+      const request = parsePermissionRequest(data)
+      if (!request) return
+
       setPending({
-        id: data.id,
+        id: request.id,
         app: appId,
-        permission: data.permission,
+        permission: request.permission,
         source,
       })
     }
@@ -208,7 +233,7 @@ export function usePermissionRequest() {
 
   const dialog = open ? (
     <ResponsiveDialog open={open} onOpenChange={(v) => { if (!v) respond('denied') }}>
-      <ResponsiveDialogContent className="max-w-sm">
+      <ResponsiveDialogContent className="permission-dialog max-w-sm">
         <ResponsiveDialogHeader>
           <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-muted">
             {restricted ? (
