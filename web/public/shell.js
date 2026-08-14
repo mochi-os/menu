@@ -46,6 +46,12 @@
     iframe.src = initialSrc;
     container.appendChild(iframe);
     var tokenRefreshTimer = null;
+    // Incremented on every cross-app navigation. Token fetches and refresh
+    // timers capture it first and bail when it has moved: a response that
+    // resolves after a navigation names the PREVIOUS app, and acting on it
+    // would record permissions against the wrong entity or deliver its
+    // token to the app mounted after it.
+    var navigationEpoch = 0;
     var navigating = false; // true during cross-app navigation (blocks storage requests)
     var progressBar = document.getElementById('shell-progress');
 
@@ -361,6 +367,7 @@
     // --- Token management ---
 
     function fetchToken(appName) {
+        var epoch = navigationEpoch;
         return fetch('/_/token', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -370,7 +377,7 @@
             if (!r.ok) throw new Error('Token fetch failed');
             return r.json();
         }).then(function(data) {
-            if (data.app) {
+            if (data.app && epoch === navigationEpoch) {
                 currentAppEntity = data.app;
                 // Expose for menu app (e.g. subscribe-notifications needs entity ID)
                 if (!window.__mochi_shell) window.__mochi_shell = {};
@@ -384,8 +391,13 @@
         if (tokenRefreshTimer) clearTimeout(tokenRefreshTimer);
         // Refresh 10 minutes before expiry. JWT tokens are long-lived (1 year),
         // but we refresh periodically to handle session invalidation gracefully.
+        var epoch = navigationEpoch;
         tokenRefreshTimer = setTimeout(function() {
+            if (epoch !== navigationEpoch) return;
             fetchToken(appName).then(function(data) {
+                // Navigated while the fetch was in flight: this token belongs
+                // to the previous app, and the current iframe must not see it.
+                if (epoch !== navigationEpoch) return;
                 postToIframe({ type: 'token-refresh', token: data.token || '' });
                 scheduleTokenRefresh(appName);
             }).catch(function() {
@@ -1605,6 +1617,7 @@
         if (newApp !== currentAppPath) {
             // Cross-app navigation: update URL, fetch new token, swap iframe
             navigating = true;
+            navigationEpoch++;
             // Fail closed: the previous app's entity id must never survive into
             // the next app's permission requests — the consent dialog and mic
             // gate reject when no id is set. fetchToken repopulates it.
@@ -1622,13 +1635,20 @@
             iframe.style.opacity = '0.6';
             iframe.style.pointerEvents = 'none';
 
+            var epoch = navigationEpoch;
             fetchToken(newApp).then(function(token) {
+                if (epoch !== navigationEpoch) return; // a later navigation owns the iframe now
                 storagePrefix = 'app:' + newApp + ':';
                 swapIframe(target.path);
                 scheduleTokenRefresh(newApp);
             }).catch(function() {
+                if (epoch !== navigationEpoch) return;
                 storagePrefix = 'app:' + newApp + ':';
                 swapIframe(target.path);
+                // Re-arm even without a token: this replaces the previous
+                // app's timer, which would otherwise fire and deliver ITS
+                // token into this app's iframe.
+                scheduleTokenRefresh(newApp);
             });
         } else {
             // Same app — just update iframe location
@@ -1647,6 +1667,7 @@
         if (newApp !== currentAppPath) {
             // Different app — swap iframe and fetch new token
             navigating = true;
+            navigationEpoch++;
             // Fail closed, as in handleNavigateExternal: no stale entity id
             currentAppEntity = null;
             if (window.__mochi_shell) window.__mochi_shell.appId = null;
@@ -1661,13 +1682,19 @@
             iframe.style.opacity = '0.6';
             iframe.style.pointerEvents = 'none';
 
+            var epoch = navigationEpoch;
             fetchToken(newApp).then(function() {
+                if (epoch !== navigationEpoch) return; // a later navigation owns the iframe now
                 storagePrefix = 'app:' + newApp + ':';
                 swapIframe(path);
                 scheduleTokenRefresh(newApp);
             }).catch(function() {
+                if (epoch !== navigationEpoch) return;
                 storagePrefix = 'app:' + newApp + ':';
                 swapIframe(path);
+                // Re-arm even without a token — same reason as in
+                // handleNavigateExternal's failure path.
+                scheduleTokenRefresh(newApp);
             });
         } else {
             // Same app — reload iframe at the new path

@@ -19,7 +19,13 @@ const HOME = '/feeds/'
 // effects worth asserting: what the top URL became, which app the shell
 // switched to, and which apps it minted tokens for. The refusals under test
 // are silent - no reply is posted - so the effect is the only witness.
-function boot(options: { app?: string | null; granted?: boolean } = {}) {
+function boot(
+  options: {
+    app?: string | null
+    granted?: boolean
+    token?: (app: string) => Promise<Record<string, unknown>>
+  } = {}
+) {
   const app = options.app === undefined ? null : options.app
   const granted = options.granted ?? false
   document.body.innerHTML =
@@ -42,10 +48,20 @@ function boot(options: { app?: string | null; granted?: boolean } = {}) {
         })
       }
       if (String(url).indexOf('/_/token') >= 0) {
+        let bodyApp: string | null = null
         try {
-          tokenApps.push(JSON.parse(init?.body ?? '{}').app)
+          bodyApp = JSON.parse(init?.body ?? '{}').app ?? null
         } catch {
-          tokenApps.push(null)
+          bodyApp = null
+        }
+        tokenApps.push(bodyApp)
+        // A token handler lets a test hold responses and release them out of
+        // order — the ordering IS what the navigation-race tests exercise.
+        if (options.token) {
+          return options.token(bodyApp ?? '').then((data) => ({
+            ok: true,
+            json: () => Promise.resolve(data),
+          }))
         }
         return Promise.resolve({
           ok: true,
@@ -388,6 +404,31 @@ describe('shell mic bridge: the remaining fail-closed paths', () => {
 // JWT - was delivered to whichever iframe happened to be mounted by then. The
 // same fetch sets currentAppEntity, which names the app in the consent dialog
 // and is what a granted permission is recorded against.
+// Every iframe the shell creates, with the messages it received. The shell
+// swaps iframes mid-flight, so watching only the first one cannot see where
+// a stale init landed.
+function watch_frames() {
+  const frames: { messages: Record<string, unknown>[] }[] = []
+  const create = document.createElement.bind(document)
+  vi.spyOn(document, 'createElement').mockImplementation((tag: string, ...rest: unknown[]) => {
+    const element = create(tag, ...(rest as [])) as HTMLElement
+    if (tag === 'iframe') {
+      const record = { messages: [] as Record<string, unknown>[] }
+      frames.push(record)
+      queueMicrotask(() => {
+        const window_ = (element as HTMLIFrameElement).contentWindow
+        if (window_) {
+          window_.postMessage = ((msg: Record<string, unknown>) => {
+            record.messages.push(msg)
+          }) as typeof window_.postMessage
+        }
+      })
+    }
+    return element
+  })
+  return frames
+}
+
 describe('shell ready: the init belongs to the iframe that asked', () => {
   // watch_frames spies on document.createElement; unstubAllGlobals does not
   // restore a spy, so without this it survives into the next test and replaces
@@ -395,31 +436,6 @@ describe('shell ready: the init belongs to the iframe that asked', () => {
   afterEach(() => {
     vi.restoreAllMocks()
   })
-
-  // Every iframe the shell creates, with the messages it received. The shell
-  // swaps iframes mid-flight, so watching only the first one cannot see where
-  // a stale init landed.
-  function watch_frames() {
-    const frames: { messages: Record<string, unknown>[] }[] = []
-    const create = document.createElement.bind(document)
-    vi.spyOn(document, 'createElement').mockImplementation((tag: string, ...rest: unknown[]) => {
-      const element = create(tag, ...(rest as [])) as HTMLElement
-      if (tag === 'iframe') {
-        const record = { messages: [] as Record<string, unknown>[] }
-        frames.push(record)
-        queueMicrotask(() => {
-          const window_ = (element as HTMLIFrameElement).contentWindow
-          if (window_) {
-            window_.postMessage = ((msg: Record<string, unknown>) => {
-              record.messages.push(msg)
-            }) as typeof window_.postMessage
-          }
-        })
-      }
-      return element
-    })
-    return frames
-  }
 
   it('drops an init whose iframe was replaced while the token was in flight', async () => {
     const frames = watch_frames()
@@ -458,5 +474,139 @@ describe('shell navigate: an empty app name is not a free pass', () => {
     shell.send({ type: 'navigate', path: '/' })
     await shell.settle()
     expect(shell.path()).toBe(HOME)
+  })
+})
+
+// fetchToken's continuation set currentAppEntity whenever its HTTP response
+// happened to arrive, and the 10-minute refresh timer posted its token to
+// whichever iframe was mounted by then. Both are stale after a cross-app
+// navigation: the response names the PREVIOUS app, so acting on it records
+// permissions against the wrong entity or hands its JWT to the next app.
+// The navigation epoch makes every such continuation prove nothing navigated
+// while it was in flight.
+describe('shell token: a response from before a navigation is dead on arrival', () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+    vi.useRealTimers()
+  })
+
+  type Deferred = {
+    app: string
+    resolve: (data: Record<string, unknown>) => void
+    reject: (reason?: unknown) => void
+  }
+
+  // Holds every /_/token response for the test to release by hand — resolving
+  // them out of arrival order is the point.
+  function deferredTokens() {
+    const pending: Deferred[] = []
+    const token = (app: string) =>
+      new Promise<Record<string, unknown>>((resolve, reject) => {
+        pending.push({ app, resolve, reject })
+      })
+    const take = (app: string): Deferred => {
+      const index = pending.findIndex((p) => p.app === app)
+      if (index < 0) throw new Error('no pending token fetch for ' + app)
+      return pending.splice(index, 1)[0]
+    }
+    return { token, take }
+  }
+
+  // After a swap the shell only listens to the NEW iframe, so post-navigation
+  // messages must claim to come from whatever #app-frame is now.
+  const sendFromCurrent = (data: Record<string, unknown>) => {
+    const frame = document.getElementById('app-frame') as HTMLIFrameElement
+    const event = new MessageEvent('message', { data })
+    Object.defineProperty(event, 'source', { value: frame.contentWindow })
+    window.dispatchEvent(event)
+  }
+
+  it('ignores a stale token response that resolves after crossing apps', async () => {
+    const tokens = deferredTokens()
+    const shell = boot({ granted: true, token: tokens.token })
+
+    // 'ready' starts the feeds token fetch. Do not resolve it yet.
+    shell.send({ type: 'ready' })
+    await shell.settle()
+    // Cross to settings while feeds' mint is in flight.
+    shell.send({ type: 'navigate-external', url: '/settings/' })
+    await shell.settle()
+
+    // The settings response lands and the new iframe completes its handshake
+    // (mic.start is dropped while a navigation is still in flight).
+    tokens.take('settings').resolve({ app: 'settings-entity', token: 'settings-token' })
+    await shell.settle()
+    sendFromCurrent({ type: 'ready' })
+    await shell.settle()
+    tokens.take('settings').resolve({ app: 'settings-entity', token: 'settings-token' })
+    await shell.settle()
+
+    // Only now does the STALE feeds response arrive, out of order.
+    tokens.take('feeds').resolve({ app: 'feeds-entity', token: 'feeds-token' })
+    await shell.settle()
+
+    // The mic gate consults the grant for the app on screen. Ungated, the
+    // stale response overwrote the entity id and this check ran against
+    // feeds' grants — the same id a NEW grant would be recorded under.
+    sendFromCurrent({ type: 'mic.start', requestId: 1 })
+    await shell.settle()
+    expect(shell.checks).toEqual(['settings-entity'])
+  })
+
+  it('does not deliver a refresh token minted before the navigation', async () => {
+    vi.useFakeTimers()
+    const frames = watch_frames()
+    const tokens = deferredTokens()
+    const shell = boot({ token: tokens.token })
+
+    shell.send({ type: 'ready' })
+    await shell.settle()
+    tokens.take('feeds').resolve({ app: 'feeds-entity', token: 'feeds-token' })
+    await shell.settle() // init delivered; feeds' 10-minute refresh armed
+
+    // The refresh fires and its mint goes in flight...
+    vi.advanceTimersByTime(10 * 60 * 1000)
+    await shell.settle()
+    // ...and the user crosses to settings before it resolves.
+    shell.send({ type: 'navigate-external', url: '/settings/' })
+    await shell.settle()
+    tokens.take('settings').resolve({ app: 'settings-entity', token: 'settings-token' })
+    await shell.settle() // settings iframe mounted
+
+    // The stale refresh resolves after the swap. Ungated, this posted feeds'
+    // JWT into the settings iframe, which would adopt it for every request.
+    tokens.take('feeds').resolve({ app: 'feeds-entity', token: 'feeds-token' })
+    await shell.settle()
+
+    const refreshes = frames.flatMap((f) => f.messages.filter((m) => m.type === 'token-refresh'))
+    expect(refreshes).toEqual([])
+  })
+
+  it('re-arms the refresh for the NEW app when its token fetch fails', async () => {
+    vi.useFakeTimers()
+    const frames = watch_frames()
+    const tokens = deferredTokens()
+    const shell = boot({ token: tokens.token })
+
+    shell.send({ type: 'ready' })
+    await shell.settle()
+    tokens.take('feeds').resolve({ app: 'feeds-entity', token: 'feeds-token' })
+    await shell.settle() // feeds' refresh timer armed
+
+    shell.send({ type: 'navigate-external', url: '/settings/' })
+    await shell.settle()
+    tokens.take('settings').reject(new Error('session expired'))
+    await shell.settle() // iframe swapped anyway; the refresh must now belong to settings
+
+    // Ten minutes later the surviving timer fires. Unfixed, this was still
+    // feeds' timer: it minted a FEEDS token for the settings iframe.
+    vi.advanceTimersByTime(10 * 60 * 1000)
+    await shell.settle()
+    expect(shell.tokenApps[shell.tokenApps.length - 1]).toBe('settings')
+
+    tokens.take('settings').resolve({ app: 'settings-entity', token: 'settings-token' })
+    await shell.settle()
+    const refreshes = frames.flatMap((f) => f.messages.filter((m) => m.type === 'token-refresh'))
+    expect(refreshes).toEqual([{ type: 'token-refresh', token: 'settings-token' }])
   })
 })
