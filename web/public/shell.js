@@ -35,9 +35,9 @@
         updateTitle();
     });
 
-    // Create the initial iframe — derive src from current URL
-    var initialSrc = window.location.pathname + window.location.search + window.location.hash;
-    initialSrc += (initialSrc.indexOf('?') >= 0 ? '&' : '?') + '_shell=1';
+    // Create the initial iframe — derive src from current URL. shellSrc also
+    // sheds any _shell a polluted bookmark or stale address bar carries.
+    var initialSrc = shellSrc(window.location.pathname + window.location.search + window.location.hash);
     var container = document.getElementById('app-container');
     var iframe = document.createElement('iframe');
     iframe.id = 'app-frame';
@@ -251,11 +251,31 @@
         progressBar.style.opacity = '0';
     }
 
+    // Remove every _shell parameter from a URL. The marker is shell-private:
+    // relayed app URLs must shed it before reaching the address bar, and
+    // shellSrc strips before re-tagging. Without this, a value an app router
+    // had re-serialized (e.g. _shell=%5B1%2C1%5D) slipped past the literal
+    // '_shell=1' check, was tagged again, and the duplicate keys snowballed
+    // into ever-nesting JSON on each round trip.
+    function stripShell(url) {
+        return url.replace(/[?&]_shell=[^&#]*/g, function(match) {
+            return match.charAt(0) === '?' ? '?' : '';
+        }).replace(/\?&/, '?').replace(/\?(#|$)/, '$1');
+    }
+
     // Tag an iframe URL with _shell=1 so the server can identify it as an
-    // iframe load even when the browser doesn't send Sec-Fetch-Dest.
+    // iframe load even when the browser doesn't send Sec-Fetch-Dest. The tag
+    // goes before any fragment — appended after one it becomes part of the
+    // hash and the server never sees it.
     function shellSrc(url) {
-        if (url.indexOf('_shell=1') >= 0) return url;
-        return url + (url.indexOf('?') >= 0 ? '&' : '?') + '_shell=1';
+        url = stripShell(url);
+        var hash = '';
+        var cut = url.indexOf('#');
+        if (cut >= 0) {
+            hash = url.slice(cut);
+            url = url.slice(0, cut);
+        }
+        return url + (url.indexOf('?') >= 0 ? '&' : '?') + '_shell=1' + hash;
     }
 
     // Replace the iframe with a new one, keeping the old visible until the new
@@ -1602,7 +1622,9 @@
         // URL to another app while this iframe stays mounted would let the next
         // 'ready' mint that app's token and hand it to the iframe that asked.
         if (!data.path) return;
-        var target = sameOriginTarget(data.path);
+        // Older app bundles relay their iframe URL verbatim, _shell included;
+        // shed it here so the marker never reaches the address bar.
+        var target = sameOriginTarget(stripShell(data.path));
         if (!target) return;
         var currentApp = getAppNameFromPath(window.location.pathname);
         // Exact match, including the empty name. `target.app &&` skipped the
