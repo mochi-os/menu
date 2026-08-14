@@ -14,13 +14,42 @@ import { resolve } from 'node:path'
 // shell-*.test.ts files use.
 const SHELL = readFileSync(resolve(__dirname, '../public/shell.js'), 'utf8')
 
+// jsdom implements no matchMedia, so the harness supplies one whose value the
+// test can move — standing in for the OS switching to dark while the tab is
+// open, which is the whole point of the "auto" preference.
+function stubColorScheme(dark: boolean) {
+  const listeners: (() => void)[] = []
+  const query = {
+    matches: dark,
+    addEventListener: (_event: string, handler: () => void) => listeners.push(handler),
+    removeEventListener: () => {},
+  }
+  vi.stubGlobal('matchMedia', (text: string) => {
+    if (!String(text).includes('prefers-color-scheme')) throw new Error('unexpected query: ' + text)
+    return query
+  })
+  return {
+    set: (next: boolean) => {
+      query.matches = next
+      listeners.forEach((l) => l())
+    },
+  }
+}
+
+const appearance = () =>
+  document.documentElement.classList.contains('dark')
+    ? 'dark'
+    : document.documentElement.classList.contains('light')
+      ? 'light'
+      : 'none'
+
 // The shell root is the TRUSTED surface: the menu chrome and the permission
 // consent dialog render from its custom properties. An app that could write
 // them could paint the dialog's text in its own background colour, post a
 // request-permission, and lure a click onto an Allow button nobody can see.
 // So the root's values come from the server, which resolves the user's own
 // theme preference, and never from the app that reports the change.
-function boot(options: { theme?: string } = {}) {
+function boot(options: { theme?: string; appearance?: string } = {}) {
   document.documentElement.removeAttribute('style')
   document.body.innerHTML =
     '<div id="app-container"></div><div id="menu"></div><div id="shell-progress"></div>'
@@ -40,6 +69,7 @@ function boot(options: { theme?: string } = {}) {
             Promise.resolve({
               menuToken: 'menu-token',
               theme: options.theme ?? '',
+              appearance: options.appearance ?? 'auto',
             }),
         })
       }
@@ -85,6 +115,7 @@ afterEach(() => {
   vi.unstubAllGlobals()
   document.body.innerHTML = ''
   document.documentElement.removeAttribute('style')
+  document.documentElement.classList.remove('light', 'dark')
   window.history.replaceState({}, '', '/')
 })
 
@@ -188,5 +219,82 @@ describe('shell theme: the trusted root takes no values from an app', () => {
 
     const change = shell.posted.find((m) => m.type === 'color-theme-change')
     expect(change?.colorTheme).toEqual(HOSTILE)
+  })
+})
+
+// "auto" is the DEFAULT appearance preference, so this is the common path, not
+// a corner. It means follow the system — and the system moves while the tab is
+// open (a desktop turning dark at sunset). Resolving once left the chrome at
+// whatever the OS happened to be at page load until the user reloaded.
+describe('shell appearance: auto keeps following the system', () => {
+  it('follows a change after load', async () => {
+    const scheme = stubColorScheme(false)
+    const shell = boot({ appearance: 'auto' })
+    await shell.settle()
+    expect(appearance()).toBe('light')
+
+    scheme.set(true)
+    expect(appearance()).toBe('dark')
+
+    // And back again — this is a preference, not a one-way latch.
+    scheme.set(false)
+    expect(appearance()).toBe('light')
+  })
+
+  it('follows a change after an app reports the preference', async () => {
+    const scheme = stubColorScheme(false)
+    const shell = boot({ appearance: 'light' })
+    await shell.settle()
+
+    // The settings app switches the user to auto mid-session; the page-load
+    // resolution cannot have covered this case.
+    shell.send({ type: 'theme-set', theme: 'auto' })
+    await shell.settle()
+    expect(appearance()).toBe('light')
+
+    scheme.set(true)
+    expect(appearance()).toBe('dark')
+  })
+
+  it('stops following once the user picks an explicit appearance', async () => {
+    const scheme = stubColorScheme(false)
+    const shell = boot({ appearance: 'auto' })
+    await shell.settle()
+
+    shell.send({ type: 'theme-set', theme: 'light' })
+    await shell.settle()
+    expect(appearance()).toBe('light')
+
+    // The whole point of choosing light is that sunset does not undo it.
+    scheme.set(true)
+    expect(appearance()).toBe('light')
+  })
+
+  it('resolves an explicit preference without consulting the system', async () => {
+    const scheme = stubColorScheme(true)
+    const shell = boot({ appearance: 'dark' })
+    await shell.settle()
+    expect(appearance()).toBe('dark')
+
+    shell.send({ type: 'theme-set', theme: 'light' })
+    await shell.settle()
+    expect(appearance()).toBe('light')
+    scheme.set(false)
+    expect(appearance()).toBe('light')
+  })
+
+  it('ignores an appearance value it does not recognise', async () => {
+    // The value reaches here from an app's postMessage, so a junk string must
+    // not clear the classes and leave the chrome unstyled.
+    const scheme = stubColorScheme(true)
+    const shell = boot({ appearance: 'auto' })
+    await shell.settle()
+    expect(appearance()).toBe('dark')
+
+    shell.send({ type: 'theme-set', theme: 'chartreuse' })
+    await shell.settle()
+    expect(appearance()).toBe('dark')
+    scheme.set(false)
+    expect(appearance()).toBe('light')
   })
 })

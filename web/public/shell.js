@@ -42,7 +42,7 @@
     var iframe = document.createElement('iframe');
     iframe.id = 'app-frame';
     iframe.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads');
-    iframe.setAttribute('allow', 'gamepad *; fullscreen');   // the Gamepad API is blocked in cross-origin (opaque) iframes by default permissions policy
+    iframe.setAttribute('allow', 'gamepad *; fullscreen *');   // both need the explicit * allowlist: a bare feature name defaults to 'src', which an opaque (sandboxed) origin never matches
     iframe.src = initialSrc;
     container.appendChild(iframe);
     var tokenRefreshTimer = null;
@@ -287,7 +287,7 @@
         var next = document.createElement('iframe');
         next.id = 'app-frame';
         next.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads');
-        next.setAttribute('allow', 'gamepad *; fullscreen');
+        next.setAttribute('allow', 'gamepad *; fullscreen *');
         next.style.visibility = 'hidden';
         next.src = shellSrc(newSrc);
         container.insertBefore(next, staleIframe);
@@ -324,6 +324,45 @@
     // Set initial favicon
     updateFavicon(currentAppPath);
 
+    // --- Appearance (light / dark / follow the system) ---
+    //
+    // "auto" means follow the system, and the system changes while the tab
+    // stays open — a desktop that turns dark at sunset, a phone leaving a
+    // battery-saver mode. Resolving once (at page load, or when an app reports
+    // the preference changed) left the chrome at whatever the OS happened to be
+    // at that moment until the user reloaded. So the preference is what is
+    // remembered, and the resolution is redone whenever the system moves.
+    //
+    // matchMedia is absent in non-browser hosts, so every use is guarded rather
+    // than assumed.
+    var appearanceQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+    var appearanceFollowsSystem = false;
+
+    function applySystemAppearance() {
+        if (!appearanceFollowsSystem || !appearanceQuery) return;
+        document.documentElement.classList.remove('light', 'dark');
+        document.documentElement.classList.add(appearanceQuery.matches ? 'dark' : 'light');
+    }
+
+    // Records the preference and resolves it now. An explicit light/dark stops
+    // the following, so a user who picks one mid-session is not overridden the
+    // next time the OS flips.
+    function setAppearance(preference) {
+        if (preference !== 'auto' && preference !== 'system'
+            && preference !== 'light' && preference !== 'dark') return;
+        appearanceFollowsSystem = (preference === 'auto' || preference === 'system');
+        if (appearanceFollowsSystem) {
+            applySystemAppearance();
+        } else {
+            document.documentElement.classList.remove('light', 'dark');
+            document.documentElement.classList.add(preference);
+        }
+    }
+
+    if (appearanceQuery && appearanceQuery.addEventListener) {
+        appearanceQuery.addEventListener('change', applySystemAppearance);
+    }
+
     // --- Shell config (menuToken, domain) — fetched once on load ---
 
     var shellConfigReady = fetch('/_/shell', {
@@ -334,6 +373,7 @@
         return r.json();
     }).then(function(data) {
         shellConfig = data || {};
+        setAppearance(shellConfig.appearance);
         return shellConfig;
     }).catch(function() {
         shellConfig = {};
@@ -1837,16 +1877,12 @@
                 break;
 
             case 'theme-set':
-                // App changed appearance — update shell class (preference persisted server-side by the app)
-                var newTheme = data.theme;
-                if (newTheme === 'dark' || newTheme === 'light' || newTheme === 'auto' || newTheme === 'system') {
-                    var resolved = newTheme;
-                    if (newTheme === 'auto' || newTheme === 'system') {
-                        resolved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                    }
-                    document.documentElement.classList.remove('light', 'dark');
-                    document.documentElement.classList.add(resolved);
-                }
+                // App changed appearance — update shell class (preference
+                // persisted server-side by the app). setAppearance keeps the
+                // preference rather than only its resolution, so 'auto' goes on
+                // following the system after this message rather than freezing
+                // at whatever it resolved to here.
+                setAppearance(data.theme);
                 break;
 
             case 'color-theme-set':
