@@ -467,7 +467,7 @@ export function MochiShellMenu() {
         </div>
 
         <SignOutDialog open={!!signOutOpen} onOpenChange={setSignOutOpen} />
-        <ChromeBoundary>{permissionDialog}</ChromeBoundary>
+        {permissionDialog}
       </>
     )
   }
@@ -497,7 +497,7 @@ export function MochiShellMenu() {
       </div>
 
       <SignOutDialog open={!!signOutOpen} onOpenChange={setSignOutOpen} />
-      <ChromeBoundary>{permissionDialog}</ChromeBoundary>
+      {permissionDialog}
     </>
   )
 }

@@ -650,3 +650,77 @@ describe('usePermissionRequest rejects a malformed request', () => {
     })
   })
 })
+
+// The boundary around the dialog never clears its own failed state — that is
+// what keeps a render error from unmounting the whole menu root. So it has to
+// be a FRESH boundary per request, or the first failure silently swallows every
+// later consent request and the user's only way back is a reload.
+describe('usePermissionRequest survives a dialog that fails to render', () => {
+  // A non-string name from the server reaches {permissionName} and throws
+  // during render — a real path to the failure rather than a stubbed component.
+  let breakName: boolean
+  beforeEach(() => {
+    breakName = true
+    vi.spyOn(console, 'error').mockImplementation(() => {})
+    mockFetch.mockImplementation((url: string, opts?: { body?: string }) => {
+      if (typeof url === 'string' && url.endsWith('/permissions/name')) {
+        return Promise.resolve({
+          ok: true,
+          json: async () => ({
+            data: { name: breakName ? {} : 'Read connected accounts', restricted: false },
+          }),
+        })
+      }
+      if (typeof url === 'string' && url.endsWith('/permissions/application')) {
+        return Promise.resolve(applicationResponse(opts))
+      }
+      return Promise.resolve({ ok: true, json: async () => ({ data: { status: 'granted' } }) })
+    })
+  })
+
+  it('renders a later request after an earlier one threw', async () => {
+    render(
+      <div>
+        <span data-testid='chrome'>chrome</span>
+        <TestComponent />
+      </div>
+    )
+
+    sendPermissionRequest({ id: 1, app: 'feeds', permission: 'accounts/read', restricted: false })
+
+    // The dialog fails and disappears, but the chrome around it lives.
+    await waitFor(() => {
+      expect(screen.queryByText('Permission request')).not.toBeInTheDocument()
+    })
+    expect(screen.getByTestId('chrome')).toBeInTheDocument()
+
+    // A well-formed request afterwards must still be answerable. With a single
+    // boundary shared across requests, this rendered nothing at all.
+    breakName = false
+    sendPermissionRequest({ id: 2, app: 'feeds', permission: 'accounts/read', restricted: false })
+
+    await waitFor(() => {
+      expect(screen.getByText('Permission request')).toBeInTheDocument()
+    })
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Allow' })).toBeInTheDocument()
+    })
+  })
+
+  it('replaces the previous request\'s permission name', async () => {
+    // A guard, not a reproduction: the effect keyed on `pending` already clears
+    // the name, and act() flushes it before this can observe an intermediate
+    // render. It is here so that dropping that reset — leaving one request's
+    // permission named in the dialog that grants the next — fails loudly.
+    breakName = false
+    render(<TestComponent />)
+
+    sendPermissionRequest({ id: 1, app: 'feeds', permission: 'accounts/read', restricted: false })
+    await waitFor(() => {
+      expect(screen.getByText('Read connected accounts')).toBeInTheDocument()
+    })
+
+    sendPermissionRequest({ id: 2, app: 'feeds', permission: 'groups/manage', restricted: false })
+    expect(screen.queryByText('Read connected accounts')).not.toBeInTheDocument()
+  })
+})

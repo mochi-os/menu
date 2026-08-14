@@ -7,7 +7,7 @@
 // Listens for 'request-permission' postMessage from app iframes,
 // shows a dialog for the user to grant or deny the permission.
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { Trans } from '@lingui/react/macro'
 import { Shield, ShieldAlert, Check, Loader2 } from 'lucide-react'
 import {
@@ -20,11 +20,17 @@ import {
   Button,
 } from '@mochi/web'
 import { menuFetch } from './menu-api'
+import { ChromeBoundary } from './chrome-boundary'
 
 interface PendingRequest {
   id: number
   app: string
   permission: string
+  // Position in the sequence of accepted requests, used to key the boundary
+  // around the dialog so each request gets a fresh one. Deliberately NOT the
+  // app's `id`: an app repeating a value would stop the boundary remounting
+  // exactly when a hostile app is the reason it failed.
+  sequence: number
   // Set for the normal iframe-driven request: where the result is posted back.
   source?: WindowProxy
   // Set for a shell-driven request (e.g. the microphone gate in shell.js): the
@@ -56,6 +62,7 @@ function parsePermissionRequest(data: unknown): { id: number; permission: string
 
 export function usePermissionRequest() {
   const [pending, setPending] = useState<PendingRequest | null>(null)
+  const sequence = useRef(0)
   const [submitting, setSubmitting] = useState(false)
   const [permissionName, setPermissionName] = useState('')
   const [appName, setAppName] = useState('')
@@ -91,11 +98,13 @@ export function usePermissionRequest() {
       const request = parsePermissionRequest(data)
       if (!request) return
 
+      sequence.current += 1
       setPending({
         id: request.id,
         app: appId,
         permission: request.permission,
         source,
+        sequence: sequence.current,
       })
     }
 
@@ -122,11 +131,13 @@ export function usePermissionRequest() {
         )
         return
       }
+      sequence.current += 1
       setPending({
         id: 0,
         app: appId,
         permission: detail.permission,
         shellEventId: detail.id,
+        sequence: sequence.current,
       })
     }
     window.addEventListener('mochi-shell-permission-request', handleShellRequest)
@@ -231,7 +242,13 @@ export function usePermissionRequest() {
     }
   }, [pending])
 
+  // Keyed per request so a failure is scoped to the request that caused it. The
+  // boundary never clears its own failed state, and it is what stands between a
+  // render error here and React unmounting the whole menu root — so without a
+  // fresh instance per request, one throw would leave every later consent
+  // request rendering nothing at all until the page was reloaded.
   const dialog = open ? (
+    <ChromeBoundary key={pending.sequence}>
     <ResponsiveDialog open={open} onOpenChange={(v) => { if (!v) respond('denied') }}>
       <ResponsiveDialogContent className="permission-dialog max-w-sm">
         <ResponsiveDialogHeader>
@@ -281,6 +298,7 @@ export function usePermissionRequest() {
         </ResponsiveDialogFooter>
       </ResponsiveDialogContent>
     </ResponsiveDialog>
+    </ChromeBoundary>
   ) : null
 
   return { dialog }
