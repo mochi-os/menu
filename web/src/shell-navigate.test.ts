@@ -477,6 +477,90 @@ describe('shell navigate: an empty app name is not a free pass', () => {
   })
 })
 
+// navigate-external crossing INTO the app you are already in — the path a
+// notification click takes when the notification belongs to the current app.
+// The branch used to push the top URL and post a 'popstate' message that no
+// app has ever listened for, so the address bar moved and the iframe kept
+// rendering the page it was already on. It also left lastNavigatedPath behind,
+// which turns the app's next relay for that path into a duplicate entry.
+describe('shell navigate-external: staying inside the current app', () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
+  // After a swap the shell listens only to the NEW iframe.
+  const sendFromCurrent = (data: Record<string, unknown>) => {
+    const frame = document.getElementById('app-frame') as HTMLIFrameElement
+    const event = new MessageEvent('message', { data })
+    Object.defineProperty(event, 'source', { value: frame.contentWindow })
+    window.dispatchEvent(event)
+  }
+
+  const currentSource = () =>
+    (document.getElementById('app-frame') as HTMLIFrameElement).src
+
+  it('reloads the iframe at the new path', async () => {
+    const shell = boot({ app: 'feeds-entity' })
+    await shell.start()
+    expect(currentSource()).toContain('/feeds/')
+
+    shell.send({ type: 'navigate-external', url: '/feeds/subscriptions' })
+    await shell.settle()
+
+    expect(shell.path()).toBe('/feeds/subscriptions')
+    // The URL moving is not the point — the app has to actually go there.
+    expect(currentSource()).toContain('/feeds/subscriptions')
+  })
+
+  it('does not push a duplicate entry when the app reports the path it was moved to', async () => {
+    const shell = boot({ app: 'feeds-entity' })
+    await shell.start()
+    shell.send({ type: 'navigate-external', url: '/feeds/subscriptions' })
+    await shell.settle()
+
+    // The app's router settles on the new route and relays it back, exactly as
+    // installShellNavigationSync does for every client-side navigation.
+    const pushes = vi.spyOn(history, 'pushState')
+    sendFromCurrent({ type: 'navigate', path: '/feeds/subscriptions' })
+    await shell.settle()
+
+    // Already the current path, so there is nothing to record. A second entry
+    // here buries the one behind it and makes browser-back appear to do
+    // nothing the first time it is pressed.
+    expect(pushes).not.toHaveBeenCalled()
+    expect(shell.path()).toBe('/feeds/subscriptions')
+  })
+
+  it('does not push a duplicate entry after crossing apps either', async () => {
+    const shell = boot({ app: 'feeds-entity' })
+    await shell.start()
+    shell.send({ type: 'navigate-external', url: '/settings/' })
+    await shell.settle()
+
+    const pushes = vi.spyOn(history, 'pushState')
+    sendFromCurrent({ type: 'navigate', path: '/settings/' })
+    await shell.settle()
+
+    // The cross-app branch survived on luck: a router's first relay is usually
+    // a REPLACE, which quietly corrected the stale value. A push exposes it.
+    expect(pushes).not.toHaveBeenCalled()
+  })
+
+  it('still refuses a navigate-external that names no app', async () => {
+    // Companion: the same-app branch now reloads, so prove the guard above it
+    // still rejects rather than reloading at a pathless target.
+    const shell = boot({ app: 'feeds-entity' })
+    await shell.start()
+    const before = currentSource()
+
+    shell.send({ type: 'navigate-external', url: '/' })
+    await shell.settle()
+
+    expect(shell.path()).toBe(HOME)
+    expect(currentSource()).toBe(before)
+  })
+})
+
 // fetchToken's continuation set currentAppEntity whenever its HTTP response
 // happened to arrive, and the 10-minute refresh timer posted its token to
 // whichever iframe was mounted by then. Both are stale after a cross-app

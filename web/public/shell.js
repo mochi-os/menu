@@ -1609,6 +1609,7 @@
             baseTitle = 'Mochi';
             updateTitle();
             history.pushState(null, '', target.path);
+            lastNavigatedPath = target.path;
 
             // Show progress bar and dim current iframe immediately (before token fetch)
             showProgress();
@@ -1631,9 +1632,21 @@
                 scheduleTokenRefresh(newApp);
             });
         } else {
-            // Same app — just update iframe location
+            // Same app — move the top URL and reload the iframe there.
+            //
+            // The iframe cannot navigate itself: its origin is opaque, so
+            // pushState inside it is a no-op. That is why the popstate handler
+            // below reloads for this same case rather than messaging the app.
+            // This branch used to post a 'popstate' message instead, which no
+            // app has ever listened for — the URL moved and the iframe went on
+            // rendering the page it was already showing.
             history.pushState(null, '', target.path);
-            postToIframe({ type: 'popstate', path: target.path });
+            // Keep the dedup in handleNavigate honest: left stale, the app's
+            // own next relay for this path looks like a change and pushes a
+            // duplicate entry over the one just made.
+            lastNavigatedPath = target.path;
+            showProgress();
+            swapIframe(target.path);
         }
     }
 
