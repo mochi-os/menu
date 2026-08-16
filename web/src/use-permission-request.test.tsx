@@ -25,7 +25,7 @@ globalThis.fetch = mockFetch
 // grant request on Allow. Route all three by URL so tests can assert each.
 const NAMES: Record<string, { name: string; restricted?: boolean }> = {
   'accounts/read': { name: 'Read connected accounts' },
-  'groups/manage': { name: 'Manage groups' },
+  'groups/write': { name: 'Change groups' },
   'users/read': { name: 'Read user data', restricted: true },
   'url:api.github.com': { name: 'Access api.github.com' },
   microphone: { name: 'Use the microphone' },
@@ -351,7 +351,7 @@ describe('usePermissionRequest', () => {
     sendPermissionRequest({
       id: 1,
       app: '12254aHfG39Lqrizh',
-      permission: 'groups/manage',
+      permission: 'groups/write',
       restricted: false,
     })
 
@@ -367,7 +367,7 @@ describe('usePermissionRequest', () => {
     sendPermissionRequest({
       id: 1,
       app: 'unresolvable',
-      permission: 'groups/manage',
+      permission: 'groups/write',
       restricted: false,
     })
 
@@ -720,7 +720,7 @@ describe('usePermissionRequest survives a dialog that fails to render', () => {
       expect(screen.getByText('Read connected accounts')).toBeInTheDocument()
     })
 
-    sendPermissionRequest({ id: 2, app: 'feeds', permission: 'groups/manage', restricted: false })
+    sendPermissionRequest({ id: 2, app: 'feeds', permission: 'groups/write', restricted: false })
     expect(screen.queryByText('Read connected accounts')).not.toBeInTheDocument()
   })
 })

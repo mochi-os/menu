@@ -129,14 +129,14 @@ describe('usePushRegistration source guard', () => {
 })
 
 describe('usePushRegistration permission gate', () => {
-  it('checks notifications/manage against the shell-resolved app id', async () => {
+  it('checks notifications/write against the shell-resolved app id', async () => {
     vi.spyOn(push, 'requestPermission').mockResolvedValue('denied')
     render(<Harness />)
 
     send({ type: 'push-subscribe', id: 10 })
 
     await waitFor(() => {
-      expect(checks).toEqual([{ app: 'app-1', permission: 'notifications/manage' }])
+      expect(checks).toEqual([{ app: 'app-1', permission: 'notifications/write' }])
     })
   })
 

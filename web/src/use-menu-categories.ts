@@ -18,7 +18,7 @@ import { menuFetch } from './menu-api'
  *
  * The picker itself holds no data and issues no request: it ships in every
  * app's bundle and cannot read the notifications service on an app's behalf.
- * The menu app holds notifications/manage, so here the fetch is same-app and
+ * The menu app holds notifications/write, so here the fetch is same-app and
  * legitimate - which is why this hook lives beside the routes it calls rather
  * than inside the shared component.
  *

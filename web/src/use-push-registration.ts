@@ -163,7 +163,7 @@ async function shellAppId(): Promise<string | null> {
  * and fails closed: no app id yet (mid-navigation), a failed check, or an
  * absent grant all mean no.
  *
- * `notifications/manage` is restricted, so it is granted deliberately from the
+ * `notifications/write` is restricted, so it is granted deliberately from the
  * app's permission page rather than by a dialog an app can raise at a moment of
  * its choosing. Settings holds it by default (it owns the notification UI);
  * anything else is asked for.
@@ -175,7 +175,7 @@ async function pushAllowed(): Promise<boolean> {
     const res = await menuFetch<{ data?: { granted?: boolean } }>('-/permissions/check', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `app=${encodeURIComponent(app)}&permission=${encodeURIComponent('notifications/manage')}`,
+      body: `app=${encodeURIComponent(app)}&permission=${encodeURIComponent('notifications/write')}`,
     })
     return !!res?.data?.granted
   } catch {
