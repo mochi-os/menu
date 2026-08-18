@@ -114,7 +114,7 @@ msgstr "+{0} നെസ്റ്റഡ്"
 msgid "+{totalDescendants} more replies"
 msgstr "+{totalDescendants} കൂടുതൽ മറുപടികൾ"
 
-#: src/use-permission-request.tsx:222
+#: src/use-permission-request.tsx:264
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> ഇനിപ്പറയുന്ന അനുമതി അഭ്യർത്ഥിക്കുന്നു:"
 
@@ -266,7 +266,7 @@ msgstr "AI"
 msgid "All"
 msgstr "എല്ലാം"
 
-#: src/use-permission-request.tsx:252
+#: src/use-permission-request.tsx:294
 msgid "Allow"
 msgstr "അനുവദിക്കുക"
 
@@ -521,10 +521,10 @@ msgstr "തിരഞ്ഞെടുപ്പ് മായ്ക്കുക (Esc
 #: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:506
 #: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:511
 #: ../../../lib/web/src/components/ui/dialog.tsx:78
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:373
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:376
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:469
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:472
 #: ../../../lib/web/src/components/ui/sheet.tsx:79
-#: src/use-permission-request.tsx:239
+#: src/use-permission-request.tsx:281
 msgid "Close"
 msgstr "അടയ്ക്കുക"
 
@@ -537,8 +537,8 @@ msgstr "ഡയലോഗ് അടയ്ക്കുക"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:108
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:113
-#: src/shell-menu.tsx:392
-#: src/shell-menu.tsx:399
+#: src/shell-menu.tsx:395
+#: src/shell-menu.tsx:402
 msgid "Close navigation"
 msgstr "നാവിഗേഷൻ അടയ്ക്കുക"
 
@@ -595,6 +595,11 @@ msgstr "കമാൻഡ് പാലറ്റ്"
 #: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:338
 msgid "Comment actions"
 msgstr "അഭിപ്രായ പ്രവർത്തനങ്ങൾ"
+
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:432
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:444
+msgid "Comments"
+msgstr "അഭിപ്രായങ്ങൾ"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:316
 #: ../../../lib/web/src/lib/preference-utils.ts:95
@@ -794,7 +799,7 @@ msgstr "കാഴ്ച ഇല്ലാതാക്കുക"
 msgid "Delete your account on the old server"
 msgstr "പഴയ സെർവറിൽ നിങ്ങളുടെ അക്കൗണ്ട് ഇല്ലാതാക്കുക"
 
-#: src/use-permission-request.tsx:244
+#: src/use-permission-request.tsx:286
 msgid "Deny"
 msgstr "നിഷേധിക്കുക"
 
@@ -861,12 +866,12 @@ msgid "Done"
 msgstr "പൂർത്തിയായി"
 
 #: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:239
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:357
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:367
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:453
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:463
 msgid "Download"
 msgstr "ഡൗൺലോഡ്"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:69
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:92
 msgid "Download failed"
 msgstr "ഡൗൺലോഡ് പരാജയപ്പെട്ടു"
 
@@ -994,7 +999,7 @@ msgstr "ലോഡുചെയ്യുന്നതിൽ പരാജയപ്�
 msgid "Failed to load history"
 msgstr "ചരിത്രം ലോഡുചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:264
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:339
 msgid "Failed to load image"
 msgstr "ചിത്രം ലോഡ് ചെയ്യാനായില്ല"
 
@@ -1002,7 +1007,7 @@ msgstr "ചിത്രം ലോഡ് ചെയ്യാനായില്ല"
 msgid "Failed to load notification categories"
 msgstr "അറിയിപ്പ് വിഭാഗങ്ങൾ ലോഡുചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:264
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:339
 msgid "Failed to load video"
 msgstr "വീഡിയോ ലോഡ് ചെയ്യാനായില്ല"
 
@@ -1140,10 +1145,10 @@ msgstr "ചരിത്രം"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:192
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:407
-#: src/shell-menu.tsx:413
-#: src/shell-menu.tsx:486
-#: src/shell-menu.tsx:490
+#: src/shell-menu.tsx:410
+#: src/shell-menu.tsx:416
+#: src/shell-menu.tsx:489
+#: src/shell-menu.tsx:493
 msgid "Home"
 msgstr "ഹോം"
 
@@ -1156,7 +1161,7 @@ msgid "ID"
 msgstr "ഐഡി"
 
 #. placeholder {0}: currentMedia.name
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:248
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:317
 msgid "Image viewer: {0}"
 msgstr "ചിത്ര വ്യൂവർ: {0}"
 
@@ -1266,8 +1271,8 @@ msgstr "ലോഡുചെയ്യുന്നു..."
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:270
-#: src/shell-menu.tsx:276
+#: src/shell-menu.tsx:271
+#: src/shell-menu.tsx:277
 msgid "Log out"
 msgstr "ലോഗ് ഔട്ട്"
 
@@ -1298,8 +1303,8 @@ msgstr "മാനുവൽ"
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:202
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:209
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:293
-#: src/shell-menu.tsx:299
+#: src/shell-menu.tsx:294
+#: src/shell-menu.tsx:300
 msgid "Mark all as read"
 msgstr "എല്ലാം വായിച്ചതായി അടയാളപ്പെടുത്തുക"
 
@@ -1316,7 +1321,7 @@ msgid "Medium"
 msgstr "ഇടത്തരം"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:207
-#: src/shell-menu.tsx:455
+#: src/shell-menu.tsx:458
 msgid "Menu"
 msgstr "മെനു"
 
@@ -1380,8 +1385,8 @@ msgstr "പുതിയത്"
 msgid "New game"
 msgstr "പുതിയ ഗെയിം"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:407
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:412
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:530
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:535
 msgid "Next image"
 msgstr "അടുത്ത ചിത്രം"
 
@@ -1513,7 +1518,7 @@ msgstr "ഒന്നും കണ്ടെത്തിയില്ല"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:285
+#: src/shell-menu.tsx:286
 msgid "Notifications"
 msgstr "അറിയിപ്പുകൾ"
 
@@ -1547,17 +1552,17 @@ msgid "Open actions"
 msgstr "പ്രവർത്തനങ്ങൾ തുറക്കുക"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:166
-#: src/shell-menu.tsx:247
-#: src/shell-menu.tsx:371
-#: src/shell-menu.tsx:427
-#: src/shell-menu.tsx:439
+#: src/shell-menu.tsx:248
+#: src/shell-menu.tsx:374
+#: src/shell-menu.tsx:430
+#: src/shell-menu.tsx:442
 msgid "Open menu"
 msgstr "മെനു തുറക്കുക"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:392
-#: src/shell-menu.tsx:399
+#: src/shell-menu.tsx:395
+#: src/shell-menu.tsx:402
 msgid "Open navigation"
 msgstr "navigation തുറക്കുക"
 
@@ -1633,7 +1638,7 @@ msgstr "പാസ്കീകൾ"
 msgid "Pattern (regex)"
 msgstr "പാറ്റേൺ (regex)"
 
-#: src/use-permission-request.tsx:220
+#: src/use-permission-request.tsx:262
 msgid "Permission request"
 msgstr "അനുമതി അഭ്യർത്ഥന"
 
@@ -1667,8 +1672,8 @@ msgstr "പോസ്റ്റുകൾ"
 msgid "Posts and comments"
 msgstr "പോസ്റ്റുകളും അഭിപ്രായങ്ങളും"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:392
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:397
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:514
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:519
 msgid "Previous image"
 msgstr "മുമ്പത്തെ ഫോട്ടോ"
 
@@ -1742,6 +1747,7 @@ msgstr "24 മണിക്കൂറിനുള്ളിൽ ആപേക്ഷ�
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:180
 msgid "Remove"
 msgstr "നീക്കം ചെയ്യുക"
+
 #. placeholder {0}: filter.label
 #: ../../../lib/web/src/components/filter-bar.tsx:56
 #: ../../../lib/web/src/components/filter-bar.tsx:62
@@ -1811,6 +1817,7 @@ msgstr "ഇമെയിൽ വീണ്ടും അയയ്ക്കുക"
 #: ../../../lib/web/src/components/data-table/toolbar.tsx:82
 msgid "Reset"
 msgstr "പുനഃസജ്ജമാക്കുക"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:122
 #: ../../../lib/web/src/components/config-drawer.tsx:127
 msgid "Reset {title}"
@@ -2232,7 +2239,7 @@ msgstr "തീം ക്രമീകരണങ്ങൾ"
 msgid "This page has not been created yet."
 msgstr "ഈ പേജ് ഇതുവരെ സൃഷ്ടിച്ചിട്ടില്ല."
 
-#: src/use-permission-request.tsx:232
+#: src/use-permission-request.tsx:274
 msgid "This permission must be enabled by you in the app settings."
 msgstr "ഈ അനുമതി ആപ്പ് ക്രമീകരണങ്ങളിൽ നിങ്ങൾ പ്രവർത്തനക്ഷമമാക്കണം."
 
@@ -2397,7 +2404,7 @@ msgstr "നിങ്ങളുടെ പാസ്‌കീ ഉപയോഗിക�
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:143
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:119
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:263
+#: src/shell-menu.tsx:264
 msgid "User"
 msgstr "ഉപയോക്താവ്"
 
@@ -2423,12 +2430,12 @@ msgstr "സ്ഥിരീകരിക്കുക"
 msgid "Verify email address"
 msgstr "ഇമെയിൽ വിലാസം സ്ഥിരീകരിക്കുക"
 
-#: ../../../lib/web/src/components/attachment-gallery.tsx:85
+#: ../../../lib/web/src/components/attachment-gallery.tsx:94
 msgid "Video thumbnail"
 msgstr "വീഡിയോ തംബ്നെയിൽ"
 
 #. placeholder {0}: currentMedia.name
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:247
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:316
 msgid "Video viewer: {0}"
 msgstr "വീഡിയോ വ്യൂവർ: {0}"
 
@@ -2437,8 +2444,8 @@ msgid "View"
 msgstr "കാണുക"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:307
-#: src/shell-menu.tsx:313
+#: src/shell-menu.tsx:308
+#: src/shell-menu.tsx:314
 msgid "View all"
 msgstr "എല്ലാം കാണുക"
 

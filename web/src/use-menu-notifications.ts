@@ -170,7 +170,18 @@ export function useMenuNotifications() {
     if (wsState.subscriberCount === 1) {
       connectWebSocket()
     }
+    // A socket that drops in a background tab reconnects only through its
+    // own timer, which the browser throttles to once a minute or worse for
+    // hidden tabs - so a tab could sit with a dead socket, miss every
+    // event, and only look right again on focus because the focus refetch
+    // masked it. Reconnect the moment the tab is visible again; connect is
+    // a no-op when the socket is already up.
+    const onVisible = () => {
+      if (!document.hidden && wsState.subscriberCount > 0) connectWebSocket()
+    }
+    document.addEventListener('visibilitychange', onVisible)
     return () => {
+      document.removeEventListener('visibilitychange', onVisible)
       wsState.subscriberCount--
       if (wsState.subscriberCount === 0) {
         disconnectWebSocket()

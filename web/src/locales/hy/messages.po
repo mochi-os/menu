@@ -114,7 +114,7 @@ msgstr "+{0} ներդրված"
 msgid "+{totalDescendants} more replies"
 msgstr "+{totalDescendants} ևս պատասխան"
 
-#: src/use-permission-request.tsx:222
+#: src/use-permission-request.tsx:264
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0>-ը պահանջում է հետևյալ թույլտվությունը՝"
 
@@ -192,6 +192,7 @@ msgstr "Ավելացնել հաշիվ"
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:288
 msgid "Add account"
 msgstr "Ավելացնել հաշիվ"
+
 #: ../../../lib/web/src/features/accounts/account-manager.tsx:297
 msgid "Add an account to receive notifications and use services."
 msgstr "Ավելացնել հավելված լրացուցիչ անվտանգության համար"
@@ -233,6 +234,7 @@ msgstr "Ավելացնել անցաբառ"
 #: ../../../lib/web/src/components/tag-input.tsx:40
 msgid "Add tag..."
 msgstr "Ավելացնել պիտակ..."
+
 #: ../../../lib/web/src/components/layout/team-switcher.tsx:83
 msgid "Add team/app"
 msgstr "Ավելացնել տեղեկատու"
@@ -264,7 +266,7 @@ msgstr "AI"
 msgid "All"
 msgstr "Բոլոր CRM-երը"
 
-#: src/use-permission-request.tsx:252
+#: src/use-permission-request.tsx:294
 msgid "Allow"
 msgstr "Թույլատրել բոլորին կարդալ պահեստը"
 
@@ -376,6 +378,7 @@ msgstr "Բաններն հանված է"
 #: ../../../lib/web/src/components/entity/entity-object-links.tsx:215
 msgid "Blocked by"
 msgstr "Արգելափակված է"
+
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:237
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:247
 msgid "Blocked navigation to untrusted link"
@@ -518,10 +521,10 @@ msgstr "Կլոնավորել"
 #: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:506
 #: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:511
 #: ../../../lib/web/src/components/ui/dialog.tsx:78
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:373
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:376
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:469
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:472
 #: ../../../lib/web/src/components/ui/sheet.tsx:79
-#: src/use-permission-request.tsx:239
+#: src/use-permission-request.tsx:281
 msgid "Close"
 msgstr "Փակել վահանակը"
 
@@ -534,8 +537,8 @@ msgstr "Փակել նավարկումը"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:108
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:113
-#: src/shell-menu.tsx:392
-#: src/shell-menu.tsx:399
+#: src/shell-menu.tsx:395
+#: src/shell-menu.tsx:402
 msgid "Close navigation"
 msgstr "Փակել վահանակը / չեղարկել"
 
@@ -593,10 +596,16 @@ msgstr "Հրամանների վահանակ"
 msgid "Comment actions"
 msgstr "Մեկնաբանության գործողություններ"
 
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:432
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:444
+msgid "Comments"
+msgstr "Մեկնաբանություններ"
+
 #: ../../../lib/web/src/components/config-drawer.tsx:316
 #: ../../../lib/web/src/lib/preference-utils.ts:95
 msgid "Compact"
 msgstr "Կոմպակտ"
+
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:97
 msgid "Configure option settings"
 msgstr "Կարգավորել տեսքի կարգավորումները"
@@ -790,7 +799,7 @@ msgstr "Ջնջել տեսքը"
 msgid "Delete your account on the old server"
 msgstr "Ջնջեք ձեր հաշիվը հին սերվերում"
 
-#: src/use-permission-request.tsx:244
+#: src/use-permission-request.tsx:286
 msgid "Deny"
 msgstr "Մերժել"
 
@@ -857,12 +866,12 @@ msgid "Done"
 msgstr "Կատարված է"
 
 #: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:239
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:357
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:367
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:453
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:463
 msgid "Download"
 msgstr "Ներբեռնել"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:69
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:92
 msgid "Download failed"
 msgstr "Ներբեռնումը ձախողվեց"
 
@@ -990,7 +999,7 @@ msgstr "Չհաջողվեց բեռնել"
 msgid "Failed to load history"
 msgstr "Չհաջողվեց բեռնել պատմությունը"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:264
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:339
 msgid "Failed to load image"
 msgstr "Չհաջողվեց բեռնել պատկերը"
 
@@ -998,7 +1007,7 @@ msgstr "Չհաջողվեց բեռնել պատկերը"
 msgid "Failed to load notification categories"
 msgstr "Չհաջողվեց բեռնել ծանուցումների կատեգորիաները"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:264
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:339
 msgid "Failed to load video"
 msgstr "Չհաջողվեց բեռնել տեսանյութը"
 
@@ -1136,10 +1145,10 @@ msgstr "Պատմություն"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:192
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:407
-#: src/shell-menu.tsx:413
-#: src/shell-menu.tsx:486
-#: src/shell-menu.tsx:490
+#: src/shell-menu.tsx:410
+#: src/shell-menu.tsx:416
+#: src/shell-menu.tsx:489
+#: src/shell-menu.tsx:493
 msgid "Home"
 msgstr "Տուն"
 
@@ -1152,7 +1161,7 @@ msgid "ID"
 msgstr "ID"
 
 #. placeholder {0}: currentMedia.name
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:248
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:317
 msgid "Image viewer: {0}"
 msgstr "Պատկերի դիտիչ՝ {0}"
 
@@ -1262,8 +1271,8 @@ msgstr "Կողպել"
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:270
-#: src/shell-menu.tsx:276
+#: src/shell-menu.tsx:271
+#: src/shell-menu.tsx:277
 msgid "Log out"
 msgstr "Դուրս է եկել հաջողությամբ"
 
@@ -1294,8 +1303,8 @@ msgstr "Նշել բոլորը կարդացված"
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:202
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:209
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:293
-#: src/shell-menu.tsx:299
+#: src/shell-menu.tsx:294
+#: src/shell-menu.tsx:300
 msgid "Mark all as read"
 msgstr "Markdown-ը աջակցվում է"
 
@@ -1312,13 +1321,14 @@ msgid "Medium"
 msgstr "Միջին"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:207
-#: src/shell-menu.tsx:455
+#: src/shell-menu.tsx:458
 msgid "Menu"
 msgstr "Միաձուլման հարցումներ"
 
 #: ../../../lib/web/src/components/game/game-chat-input.tsx:35
 msgid "Message"
 msgstr "Հաղորդագրություն"
+
 #: ../../../lib/web/src/lib/preference-utils.ts:85
 msgid "Metric"
 msgstr "Microsoft վարձակալ"
@@ -1375,8 +1385,8 @@ msgstr "Նոր"
 msgid "New game"
 msgstr "Նոր խաղ"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:407
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:412
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:530
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:535
 msgid "Next image"
 msgstr "Հաջորդ նկարը"
 
@@ -1508,7 +1518,7 @@ msgstr "Ոչինչ չի գտնվել"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:285
+#: src/shell-menu.tsx:286
 msgid "Notifications"
 msgstr "Ծանուցումներ"
 
@@ -1542,17 +1552,17 @@ msgid "Open actions"
 msgstr "Բացել գործողությունները"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:166
-#: src/shell-menu.tsx:247
-#: src/shell-menu.tsx:371
-#: src/shell-menu.tsx:427
-#: src/shell-menu.tsx:439
+#: src/shell-menu.tsx:248
+#: src/shell-menu.tsx:374
+#: src/shell-menu.tsx:430
+#: src/shell-menu.tsx:442
 msgid "Open menu"
 msgstr "Բացել մենյուն"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:392
-#: src/shell-menu.tsx:399
+#: src/shell-menu.tsx:395
+#: src/shell-menu.tsx:402
 msgid "Open navigation"
 msgstr "Բացել նավիգացիան"
 
@@ -1628,7 +1638,7 @@ msgstr "Անցաբանալիներ"
 msgid "Pattern (regex)"
 msgstr "Ձևանմուշ (regex)"
 
-#: src/use-permission-request.tsx:220
+#: src/use-permission-request.tsx:262
 msgid "Permission request"
 msgstr "Թույլտվության հարցում"
 
@@ -1662,8 +1672,8 @@ msgstr "Գրառումներ"
 msgid "Posts and comments"
 msgstr "Գրառումներ և մեկնաբանություններ"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:392
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:397
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:514
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:519
 msgid "Previous image"
 msgstr "Նախորդ նկարը"
 
@@ -2229,7 +2239,7 @@ msgstr "Թեմայի կարգավորումներ"
 msgid "This page has not been created yet."
 msgstr "Այս էջը դեռ ստեղծված չէ։"
 
-#: src/use-permission-request.tsx:232
+#: src/use-permission-request.tsx:274
 msgid "This permission must be enabled by you in the app settings."
 msgstr "Այս թույլտվությունը պետք է միացված լինի ձեր կողմից հավելվածի կարգավորումներում:"
 
@@ -2394,7 +2404,7 @@ msgstr "Օգտագործեք ձեր անցաբանալին"
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:143
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:119
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:263
+#: src/shell-menu.tsx:264
 msgid "User"
 msgstr "Օգտատեր"
 
@@ -2420,12 +2430,12 @@ msgstr "Ստուգել"
 msgid "Verify email address"
 msgstr "Ստուգել էլ. փոստի հասցեն"
 
-#: ../../../lib/web/src/components/attachment-gallery.tsx:85
+#: ../../../lib/web/src/components/attachment-gallery.tsx:94
 msgid "Video thumbnail"
 msgstr "Տեսանյութի մանրապատկեր"
 
 #. placeholder {0}: currentMedia.name
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:247
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:316
 msgid "Video viewer: {0}"
 msgstr "Տեսանյութի դիտիչ՝ {0}"
 
@@ -2434,8 +2444,8 @@ msgid "View"
 msgstr "Դիտել"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:307
-#: src/shell-menu.tsx:313
+#: src/shell-menu.tsx:308
+#: src/shell-menu.tsx:314
 msgid "View all"
 msgstr "Դիտել բոլորը"
 

@@ -114,7 +114,7 @@ msgstr "+{0} नेस्टेड"
 msgid "+{totalDescendants} more replies"
 msgstr "+{totalDescendants} और उत्तर"
 
-#: src/use-permission-request.tsx:222
+#: src/use-permission-request.tsx:264
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> निम्नलिखित अनुमति मांग रहा है:"
 
@@ -266,7 +266,7 @@ msgstr "AI"
 msgid "All"
 msgstr "सभी"
 
-#: src/use-permission-request.tsx:252
+#: src/use-permission-request.tsx:294
 msgid "Allow"
 msgstr "अनुमति दें"
 
@@ -521,10 +521,10 @@ msgstr "चयन साफ़ करें (Escape)"
 #: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:506
 #: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:511
 #: ../../../lib/web/src/components/ui/dialog.tsx:78
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:373
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:376
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:469
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:472
 #: ../../../lib/web/src/components/ui/sheet.tsx:79
-#: src/use-permission-request.tsx:239
+#: src/use-permission-request.tsx:281
 msgid "Close"
 msgstr "बंद करें"
 
@@ -537,8 +537,8 @@ msgstr "डायलॉग बंद करें"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:108
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx:113
-#: src/shell-menu.tsx:392
-#: src/shell-menu.tsx:399
+#: src/shell-menu.tsx:395
+#: src/shell-menu.tsx:402
 msgid "Close navigation"
 msgstr "नेविगेशन बंद करें"
 
@@ -595,6 +595,11 @@ msgstr "कमांड पैलेट"
 #: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:338
 msgid "Comment actions"
 msgstr "टिप्पणी क्रियाएँ"
+
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:432
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:444
+msgid "Comments"
+msgstr "टिप्पणियाँ"
 
 #: ../../../lib/web/src/components/config-drawer.tsx:316
 #: ../../../lib/web/src/lib/preference-utils.ts:95
@@ -794,7 +799,7 @@ msgstr "व्यू हटाएँ"
 msgid "Delete your account on the old server"
 msgstr "पुराने सर्वर पर अपना खाता हटाएं"
 
-#: src/use-permission-request.tsx:244
+#: src/use-permission-request.tsx:286
 msgid "Deny"
 msgstr "अस्वीकार करें"
 
@@ -861,12 +866,12 @@ msgid "Done"
 msgstr "पूर्ण"
 
 #: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:239
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:357
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:367
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:453
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:463
 msgid "Download"
 msgstr "डाउनलोड"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:69
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:92
 msgid "Download failed"
 msgstr "डाउनलोड विफल"
 
@@ -994,7 +999,7 @@ msgstr "लोड करने में विफल"
 msgid "Failed to load history"
 msgstr "इतिहास लोड करने में विफल"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:264
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:339
 msgid "Failed to load image"
 msgstr "छवि लोड नहीं हो सकी"
 
@@ -1002,7 +1007,7 @@ msgstr "छवि लोड नहीं हो सकी"
 msgid "Failed to load notification categories"
 msgstr "नोटिफ़िकेशन श्रेणियाँ लोड करने में विफल"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:264
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:339
 msgid "Failed to load video"
 msgstr "वीडियो लोड नहीं हो सका"
 
@@ -1140,10 +1145,10 @@ msgstr "इतिहास"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:192
 #: ../../../lib/web/src/components/layout/top-bar.tsx:71
 #: ../../../lib/web/src/components/layout/top-bar.tsx:100
-#: src/shell-menu.tsx:407
-#: src/shell-menu.tsx:413
-#: src/shell-menu.tsx:486
-#: src/shell-menu.tsx:490
+#: src/shell-menu.tsx:410
+#: src/shell-menu.tsx:416
+#: src/shell-menu.tsx:489
+#: src/shell-menu.tsx:493
 msgid "Home"
 msgstr "होम"
 
@@ -1156,7 +1161,7 @@ msgid "ID"
 msgstr "आईडी"
 
 #. placeholder {0}: currentMedia.name
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:248
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:317
 msgid "Image viewer: {0}"
 msgstr "छवि व्यूअर: {0}"
 
@@ -1266,8 +1271,8 @@ msgstr "लोड हो रहा है..."
 #: ../../../lib/web/src/components/profile-dropdown.tsx:98
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:26
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:28
-#: src/shell-menu.tsx:270
-#: src/shell-menu.tsx:276
+#: src/shell-menu.tsx:271
+#: src/shell-menu.tsx:277
 msgid "Log out"
 msgstr "लॉग आउट"
 
@@ -1298,8 +1303,8 @@ msgstr "मैन्युअल"
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:202
 #: ../../../lib/web/src/components/layout/notification-menu.tsx:209
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:224
-#: src/shell-menu.tsx:293
-#: src/shell-menu.tsx:299
+#: src/shell-menu.tsx:294
+#: src/shell-menu.tsx:300
 msgid "Mark all as read"
 msgstr "सभी को पढ़ा हुआ मार्क करें"
 
@@ -1316,7 +1321,7 @@ msgid "Medium"
 msgstr "मध्यम"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:207
-#: src/shell-menu.tsx:455
+#: src/shell-menu.tsx:458
 msgid "Menu"
 msgstr "मेन्यू"
 
@@ -1380,8 +1385,8 @@ msgstr "नया"
 msgid "New game"
 msgstr "नया गेम"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:407
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:412
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:530
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:535
 msgid "Next image"
 msgstr "अगली इमेज"
 
@@ -1513,7 +1518,7 @@ msgstr "कुछ नहीं मिला"
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:236
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:257
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:261
-#: src/shell-menu.tsx:285
+#: src/shell-menu.tsx:286
 msgid "Notifications"
 msgstr "नोटिफ़िकेशन"
 
@@ -1547,17 +1552,17 @@ msgid "Open actions"
 msgstr "ऐक्शन खोलें"
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:166
-#: src/shell-menu.tsx:247
-#: src/shell-menu.tsx:371
-#: src/shell-menu.tsx:427
-#: src/shell-menu.tsx:439
+#: src/shell-menu.tsx:248
+#: src/shell-menu.tsx:374
+#: src/shell-menu.tsx:430
+#: src/shell-menu.tsx:442
 msgid "Open menu"
 msgstr "मेन्यू खोलें"
 
 #: ../../../lib/web/src/components/layout/top-bar.tsx:63
 #: ../../../lib/web/src/components/layout/top-bar.tsx:68
-#: src/shell-menu.tsx:392
-#: src/shell-menu.tsx:399
+#: src/shell-menu.tsx:395
+#: src/shell-menu.tsx:402
 msgid "Open navigation"
 msgstr "नेविगेशन खोलें"
 
@@ -1633,7 +1638,7 @@ msgstr "पासकीज़"
 msgid "Pattern (regex)"
 msgstr "पैटर्न (regex)"
 
-#: src/use-permission-request.tsx:220
+#: src/use-permission-request.tsx:262
 msgid "Permission request"
 msgstr "अनुमति अनुरोध"
 
@@ -1667,8 +1672,8 @@ msgstr "पोस्ट्स"
 msgid "Posts and comments"
 msgstr "पोस्ट्स और कमेंट्स"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:392
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:397
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:514
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:519
 msgid "Previous image"
 msgstr "पिछली इमेज"
 
@@ -2234,7 +2239,7 @@ msgstr "थीम सेटिंग्स"
 msgid "This page has not been created yet."
 msgstr "यह पृष्ठ अभी तक नहीं बनाया गया है।"
 
-#: src/use-permission-request.tsx:232
+#: src/use-permission-request.tsx:274
 msgid "This permission must be enabled by you in the app settings."
 msgstr "यह अनुमति आपको ऐप सेटिंग्स में सक्षम करनी होगी।"
 
@@ -2399,7 +2404,7 @@ msgstr "अपनी पासकी का उपयोग करें"
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:143
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx:119
 #: ../../../lib/web/src/features/access/access-dialog.tsx:158
-#: src/shell-menu.tsx:263
+#: src/shell-menu.tsx:264
 msgid "User"
 msgstr "यूज़र"
 
@@ -2425,12 +2430,12 @@ msgstr "वेरिफ़ाई करें"
 msgid "Verify email address"
 msgstr "ईमेल पता वेरिफ़ाई करें"
 
-#: ../../../lib/web/src/components/attachment-gallery.tsx:85
+#: ../../../lib/web/src/components/attachment-gallery.tsx:94
 msgid "Video thumbnail"
 msgstr "वीडियो थंबनेल"
 
 #. placeholder {0}: currentMedia.name
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:247
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:316
 msgid "Video viewer: {0}"
 msgstr "वीडियो व्यूअर: {0}"
 
@@ -2439,8 +2444,8 @@ msgid "View"
 msgstr "देखें"
 
 #: ../../../lib/web/src/components/notifications-dropdown.tsx:177
-#: src/shell-menu.tsx:307
-#: src/shell-menu.tsx:313
+#: src/shell-menu.tsx:308
+#: src/shell-menu.tsx:314
 msgid "View all"
 msgstr "सभी देखें"
 
