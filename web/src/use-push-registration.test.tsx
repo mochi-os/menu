@@ -199,11 +199,9 @@ describe('usePushRegistration permission gate', () => {
   })
 
   it('answers push-unsubscribe when no service worker is registered', async () => {
-    // The ordinary state for anyone who never turned push on: registration
-    // happens only when the user enables it, never on page load. Unfixed, this
-    // awaited serviceWorker.ready, which never settles and never rejects — so
-    // the handler's own catch could not fire, no reply was ever posted, and the
-    // settings toggle stayed disabled behind isUnsubscribing until a reload.
+    // No service worker is the ordinary state for anyone who never enabled
+    // push; the handler must answer rather than await serviceWorker.ready,
+    // which never settles.
     setServiceWorker(null)
     render(<Harness />)
 

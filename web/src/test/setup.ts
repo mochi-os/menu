@@ -26,11 +26,9 @@ Object.defineProperty(window, "matchMedia", {
   })),
 });
 
-// Mock the observers jsdom omits but @formkit/auto-animate constructs on
-// import (ResizeObserver + IntersectionObserver). A class is used, not
-// vi.fn().mockImplementation(() => ...), because an arrow implementation is
-// not usable as a constructor and `new ResizeObserver()` then throws.
-// MutationObserver is provided natively by jsdom, so it is left untouched.
+// jsdom omits ResizeObserver and IntersectionObserver, which
+// @formkit/auto-animate constructs on import. A class, not an arrow mock:
+// arrows are not constructible.
 class ObserverStub {
   observe() {}
   unobserve() {}

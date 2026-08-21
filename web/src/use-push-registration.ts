@@ -133,15 +133,9 @@ async function ensurePushRegistered(): Promise<string | null> {
 }
 
 /**
- * The app id the shell resolved for the current path, waiting briefly if it is
- * not there yet.
- *
- * shell.js sets it once `/_/token` answers, which it only requests after the
- * frame says 'ready' — so a frame that asks for push status during its first
- * render (a direct load of the notifications page, rather than a click through
- * to it) can beat the token by a round trip. Reading the global once would
- * report "no permission" for what is really "not resolved yet", so wait for it,
- * bounded, and treat a genuine absence as no.
+ * The app id the shell resolved for the current path, waiting up to 5s for it.
+ * shell.js sets it only after `/_/token` answers, so a frame asking during its
+ * first render can beat it - a single read would report "no permission".
  */
 async function shellAppId(): Promise<string | null> {
   for (let attempt = 0; attempt < 50; attempt++) {
@@ -153,20 +147,9 @@ async function shellAppId(): Promise<string | null> {
 }
 
 /**
- * Whether the app currently loaded in the frame may drive push state.
- *
- * The frame checks below establish which window is asking, not what it is
- * allowed to do — so on their own any app in the shell could unsubscribe the
- * account's browser notifications, or read whether it is subscribed. This
- * resolves against the app id the SERVER picked for the current path (shell.js
- * publishes it after fetching the token), never a name the message carries,
- * and fails closed: no app id yet (mid-navigation), a failed check, or an
- * absent grant all mean no.
- *
- * `notifications/write` is restricted, so it is granted deliberately from the
- * app's permission page rather than by a dialog an app can raise at a moment of
- * its choosing. Settings holds it by default (it owns the notification UI);
- * anything else is asked for.
+ * Whether the app in the frame holds `notifications/write`. Resolved against
+ * the app id the server picked for the path, never a name the message carries,
+ * and fails closed: no app id yet, a failed check, or no grant all mean no.
  */
 async function pushAllowed(): Promise<boolean> {
   const app = await shellAppId()
@@ -184,22 +167,17 @@ async function pushAllowed(): Promise<boolean> {
 }
 
 /**
- * Hook that listens for push-subscribe / -unsubscribe / -status requests from
- * app iframes. Registration is driven explicitly from the settings UI — we do
- * NOT auto-register on page load, because browser permission being 'granted'
- * does not mean the user currently wants push enabled (they may have disabled
- * it via the button, which cannot revoke browser permission).
+ * Listens for push-subscribe / -unsubscribe / -status requests from app
+ * iframes. Never auto-registers on load: browser permission 'granted' does not
+ * mean the user wants push on (disabling via the button cannot revoke the
+ * permission).
  */
 export function usePushRegistration() {
   useEffect(() => {
     async function removeBrowserAccount(): Promise<void> {
       const local = getLocalAccount()
-      // getRegistration resolves with undefined when nothing is registered.
-      // serviceWorker.ready would instead never settle — it does not reject —
-      // so the caller's try/catch cannot save it and the requesting iframe
-      // waits for a reply that never comes. Having no service worker is the
-      // ORDINARY state here, not a broken one: registration happens only when
-      // the user turns push on, never on page load.
+      // getRegistration, not serviceWorker.ready: ready never settles when
+      // nothing is registered, and no registration is the ordinary state here.
       const reg = (await push.isSupported())
         ? await navigator.serviceWorker.getRegistration()
         : undefined
@@ -285,12 +263,8 @@ export function usePushRegistration() {
             const permission = push.getPermission()
             let subscribed = false
             if (permission === 'granted' && (await push.isSupported())) {
-              // Same rule as removeBrowserAccount: granted permission does not
-              // imply a registration exists. Notification permission is
-              // origin-scoped and outlives the service worker, so after site
-              // data is cleared this branch is reached with nothing registered
-              // — and serviceWorker.ready would hang the status call the
-              // settings toggle makes on load.
+              // Granted permission does not imply a registration exists (it
+              // outlives cleared site data); serviceWorker.ready would hang.
               const reg = await navigator.serviceWorker.getRegistration()
               const sub = reg ? await reg.pushManager.getSubscription() : null
               if (sub) {

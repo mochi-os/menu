@@ -398,15 +398,9 @@ describe('shell mic bridge: the remaining fail-closed paths', () => {
   })
 })
 
-// The 'ready' handler mints a token for the app named by the CURRENT top URL
-// and posts it after two awaits. `iframe` is reassigned by a cross-app
-// navigation, so without pinning the requester the init - carrying that app's
-// JWT - was delivered to whichever iframe happened to be mounted by then. The
-// same fetch sets currentAppEntity, which names the app in the consent dialog
-// and is what a granted permission is recorded against.
-// Every iframe the shell creates, with the messages it received. The shell
-// swaps iframes mid-flight, so watching only the first one cannot see where
-// a stale init landed.
+// Every iframe the shell creates, with the messages it received: the shell
+// swaps iframes mid-flight, so watching only the first cannot see where a stale
+// init landed.
 function watch_frames() {
   const frames: { messages: Record<string, unknown>[] }[] = []
   const create = document.createElement.bind(document)
@@ -477,12 +471,8 @@ describe('shell navigate: an empty app name is not a free pass', () => {
   })
 })
 
-// navigate-external crossing INTO the app you are already in — the path a
-// notification click takes when the notification belongs to the current app.
-// The branch used to push the top URL and post a 'popstate' message that no
-// app has ever listened for, so the address bar moved and the iframe kept
-// rendering the page it was already on. It also left lastNavigatedPath behind,
-// which turns the app's next relay for that path into a duplicate entry.
+// navigate-external into the app already loaded (a notification click for the
+// current app) must move the iframe too and leave no stale lastNavigatedPath.
 describe('shell navigate-external: staying inside the current app', () => {
   afterEach(() => {
     vi.restoreAllMocks()
@@ -561,13 +551,8 @@ describe('shell navigate-external: staying inside the current app', () => {
   })
 })
 
-// fetchToken's continuation set currentAppEntity whenever its HTTP response
-// happened to arrive, and the 10-minute refresh timer posted its token to
-// whichever iframe was mounted by then. Both are stale after a cross-app
-// navigation: the response names the PREVIOUS app, so acting on it records
-// permissions against the wrong entity or hands its JWT to the next app.
-// The navigation epoch makes every such continuation prove nothing navigated
-// while it was in flight.
+// A token response or refresh timer from before a cross-app navigation names
+// the previous app; the navigation epoch must make it a no-op.
 describe('shell token: a response from before a navigation is dead on arrival', () => {
   afterEach(() => {
     vi.restoreAllMocks()

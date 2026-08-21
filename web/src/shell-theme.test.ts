@@ -43,12 +43,8 @@ const appearance = () =>
       ? 'light'
       : 'none'
 
-// The shell root is the TRUSTED surface: the menu chrome and the permission
-// consent dialog render from its custom properties. An app that could write
-// them could paint the dialog's text in its own background colour, post a
-// request-permission, and lure a click onto an Allow button nobody can see.
-// So the root's values come from the server, which resolves the user's own
-// theme preference, and never from the app that reports the change.
+// The root's theme values must come from the server, never from the app that
+// reports a change: the consent dialog renders from them.
 function boot(options: { theme?: string; appearance?: string } = {}) {
   document.documentElement.removeAttribute('style')
   document.body.innerHTML =

@@ -13,11 +13,10 @@
     var menuEl = document.getElementById('menu');
     var shellConfig = null; // populated by /_/shell fetch
     var currentAppPath = getAppNameFromPath(window.location.pathname);
-    // Server-resolved entity id of the loaded app — set by fetchToken, null
-    // until the first token resolves and while a cross-app navigation is in
-    // flight. Permission and microphone checks key on this; localStorage
-    // namespacing keys on currentAppPath so stored state survives an app's
-    // dev-id/entity-id difference between instances.
+    // Server-resolved entity id of the loaded app, set by fetchToken; null
+    // until the first token resolves and during cross-app navigation.
+    // Permission checks key on this; localStorage namespacing keys on
+    // currentAppPath.
     var currentAppEntity = null;
 
     // Title = "(N) baseTitle" where baseTitle comes from the current app
@@ -46,11 +45,9 @@
     iframe.src = initialSrc;
     container.appendChild(iframe);
     var tokenRefreshTimer = null;
-    // Incremented on every cross-app navigation. Token fetches and refresh
-    // timers capture it first and bail when it has moved: a response that
-    // resolves after a navigation names the PREVIOUS app, and acting on it
-    // would record permissions against the wrong entity or deliver its
-    // token to the app mounted after it.
+    // Incremented on every cross-app navigation; token fetches and refresh
+    // timers capture it and bail when it has moved, since a late response names
+    // the previous app.
     var navigationEpoch = 0;
     var navigating = false; // true during cross-app navigation (blocks storage requests)
     var progressBar = document.getElementById('shell-progress');
@@ -92,13 +89,10 @@
         }
     })();
 
-    // A color theme arrives from an (untrusted) app over postMessage and is
-    // applied to the shell's own root element. Only CSS custom properties
-    // (--foo) may be set: without this an app could set standard properties such
-    // as display:none or pointer-events:none on the trusted shell root, hiding
-    // or disabling the menu and permission dialogs.
-    // Exactly the inline properties applyThemeDeclarations installed, so cleanup
-    // can undo a theme without touching properties owned by anything else.
+    // Only CSS custom properties (--foo) from an app may land on the shell
+    // root; a standard property like display:none would hide the menu and
+    // permission dialogs. installedThemeProps records exactly what
+    // applyThemeDeclarations installed so cleanup touches nothing else.
     var installedThemeProps = [];
     (function() {
         var root = document.documentElement;
@@ -107,13 +101,10 @@
         }
     })();
 
-    // Install the user's theme on the shell root. The text is the server's own
-    // resolved declarations — the same ones it injects into the shell page at
-    // load — and NEVER values from an app. Custom properties on this root style
-    // the trusted chrome, the consent dialog included, so an app that could
-    // write them could paint the dialog's text in its background colour and
-    // lure a click onto Allow. Apps report that the preference changed; the
-    // server says what it is.
+    // Install the server's resolved theme declarations on the shell root -
+    // never values from an app: these properties style the consent dialog, and
+    // an app that could write them could hide its text and lure a click onto
+    // Allow.
     function applyThemeDeclarations(text) {
         clearThemeVars();
         if (typeof text !== 'string' || !text) return;
@@ -251,12 +242,9 @@
         progressBar.style.opacity = '0';
     }
 
-    // Remove every _shell parameter from a URL. The marker is shell-private:
-    // relayed app URLs must shed it before reaching the address bar, and
-    // shellSrc strips before re-tagging. Without this, a value an app router
-    // had re-serialized (e.g. _shell=%5B1%2C1%5D) slipped past the literal
-    // '_shell=1' check, was tagged again, and the duplicate keys snowballed
-    // into ever-nesting JSON on each round trip.
+    // Remove every _shell parameter, including re-serialized forms such as
+    // _shell=%5B1%2C1%5D: the marker is shell-private and must not reach the
+    // address bar or be tagged twice.
     function stripShell(url) {
         return url.replace(/[?&]_shell=[^&#]*/g, function(match) {
             return match.charAt(0) === '?' ? '?' : '';
@@ -344,17 +332,9 @@
     // Set initial favicon
     updateFavicon(currentAppPath);
 
-    // --- Appearance (light / dark / follow the system) ---
-    //
-    // "auto" means follow the system, and the system changes while the tab
-    // stays open — a desktop that turns dark at sunset, a phone leaving a
-    // battery-saver mode. Resolving once (at page load, or when an app reports
-    // the preference changed) left the chrome at whatever the OS happened to be
-    // at that moment until the user reloaded. So the preference is what is
-    // remembered, and the resolution is redone whenever the system moves.
-    //
-    // matchMedia is absent in non-browser hosts, so every use is guarded rather
-    // than assumed.
+    // --- Appearance (light / dark / follow the system) --- The preference is
+    // what is remembered; 'auto' is re-resolved whenever the OS scheme changes.
+    // matchMedia is absent in non-browser hosts, so every use is guarded.
     var appearanceQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
     var appearanceFollowsSystem = false;
 
@@ -364,9 +344,8 @@
         document.documentElement.classList.add(appearanceQuery.matches ? 'dark' : 'light');
     }
 
-    // Records the preference and resolves it now. An explicit light/dark stops
-    // the following, so a user who picks one mid-session is not overridden the
-    // next time the OS flips.
+    // An explicit light/dark stops following the system until the preference
+    // changes again.
     function setAppearance(preference) {
         if (preference !== 'auto' && preference !== 'system'
             && preference !== 'light' && preference !== 'dark') return;
@@ -507,11 +486,9 @@
         }
     }
 
-    // Download a file on the app's behalf. The sandboxed app iframe (opaque
-    // origin, no allow-same-origin) can't trigger a real save — a bare
-    // <a download> is ignored cross-origin and a blob click is blocked. The
-    // top window is same-origin and unsandboxed, so it can fetch (with cookies,
-    // so private attachments authorize) and save normally.
+    // Download on the app's behalf: the sandboxed iframe cannot save (<a
+    // download> and blob clicks are ignored); the top window fetches with
+    // cookies and saves.
     function handleDownload(data) {
         if (navigating) return;
         var id = data.id;
@@ -575,26 +552,12 @@
         postToIframe({ type: 'download.result', id: id, ok: true });
     }
 
-    // WebAuthn ceremony bridge. The sandboxed app iframe has an opaque
-    // origin so navigator.credentials.create()/get() fails immediately
-    // with NotAllowedError. The shell runs in the top window with a real
-    // origin, so it can host the ceremony on the iframe app's behalf and
-    // post the JSON-serialized response back. Uses the native
-    // PublicKeyCredential.parseCreationOptionsFromJSON /
-    // parseRequestOptionsFromJSON / toJSON helpers (Chrome 119+,
-    // Safari 17.4+, Firefox 119+).
-    //
-    // Hosting it is a capability, not a convenience: the ceremony runs in the
-    // top window, so the relying party is the real Mochi origin and the
-    // assertion it returns is valid for Mochi whoever asked for it. The
-    // browser's prompt names the relying party rather than the caller, so the
-    // user cannot tell which app is behind it - a hostile app would need only a
-    // challenge from an attacker-side login to have that prompt answered for
-    // it. So it takes a grant, like the microphone below: resolved against the
-    // server-resolved app id rather than any name the message carries, and
-    // refused when there is no app id yet (mid-navigation) or the check fails.
-    // The permission is restricted, so it is granted deliberately from settings
-    // and never by a dialog an app can raise at a moment of its choosing.
+    // WebAuthn bridge: the iframe's opaque origin makes navigator.credentials
+    // fail, so the shell hosts the ceremony (native parse*FromJSON/toJSON
+    // helpers, Chrome 119+/Safari 17.4+/Firefox 119+). The relying party is the
+    // real Mochi origin and the prompt does not name the caller, so this
+    // requires the restricted user/authentication/sign grant, resolved against
+    // the server-resolved app id and refused while unset.
     function webauthnAllowed() {
         if (!currentAppEntity) return Promise.resolve(false);
         return shellConfigReady.then(function() {
@@ -666,11 +629,10 @@
         });
     }
 
-    // --- Microphone recording bridge ---
-    // Sandboxed iframes have an opaque origin (no allow-same-origin) so
-    // getUserMedia is unavailable there. The shell records on the top-level
-    // page and posts the Blob result back. Do NOT add allow-same-origin.
-    // States: idle | requesting | recording | stopping
+    // --- Microphone recording bridge --- getUserMedia is unavailable to the
+    // sandboxed iframe, so the shell records here and posts the Blob back. Do
+    // not add allow-same-origin. States: idle | requesting | recording |
+    // stopping
     var micSession = null; // single active/requesting session
     // Latest mic.start waiting for a cancelled permission wait to settle.
     // Never stack concurrent getUserMedia — that floods permission prompts.
@@ -965,11 +927,9 @@
         postToIframe({ type: 'mic.started', requestId: session.requestId });
     }
 
-    // --- Shell-owned recording indicator ---
-    // A small pulsing marker the app cannot touch (it lives in the top window,
-    // outside the sandboxed iframe), so the user always sees when this Mochi tab
-    // is recording regardless of what the app's own UI claims. Icon-only, so no
-    // translated text is needed in the shell relay.
+    // --- Shell-owned recording indicator --- Lives in the top window where the
+    // app cannot touch it, so the user always sees when this tab is recording.
+    // Icon-only, so nothing to translate.
     var micIndicatorEl = null;
     function ensureMicIndicatorStyle() {
         if (document.getElementById('mochi-mic-style')) return;
@@ -996,15 +956,10 @@
         micIndicatorEl = null;
     }
 
-    // --- Camera streaming bridge ---
-    // Sandboxed iframes have an opaque origin (no allow-same-origin) so
-    // getUserMedia is unavailable there — and permission grants cannot even
-    // persist against an opaque origin. The shell owns the camera exactly as
-    // it owns the microphone, with one structural difference: mic is
-    // record-then-return (one Blob), camera is a CONTINUOUS STREAM — one
-    // transferable ImageBitmap per camera frame until the app stops it,
-    // navigation aborts it, or the tab hides (the webcam light must never
-    // stay lit behind a hidden tab). Do NOT add allow-same-origin.
+    // --- Camera streaming bridge --- As the microphone bridge, but a
+    // continuous stream: one transferable ImageBitmap per frame until the app
+    // stops it, navigation aborts it, or the tab hides (the webcam light must
+    // never stay lit). Do not add allow-same-origin.
     var cameraSession = null;   // single active/requesting session
     var cameraGate = null;
     var cameraPermissionPending = false;
@@ -1267,12 +1222,9 @@
         settleCameraSession(session, { type: 'camera.end', requestId: session.requestId, reason: 'stopped' });
     }
 
-    // --- Microphone permission gate ---
-    // The shell, not the app, is the enforcement point: getUserMedia runs here
-    // in the trusted top window, so a sandboxed app must never open the mic
-    // without the user's per-app Mochi grant. We resolve the grant against the
-    // server-resolved current app id and, when absent, drive the menu's own
-    // consent dialog before recording.
+    // --- Microphone permission gate --- The shell is the enforcement point:
+    // the grant is resolved against the server-resolved current app id, and the
+    // menu's consent dialog is driven when it is absent.
     var micPermissionPending = false;
     // Tracks a start whose consent dialog is open, so a cancel/stop/navigation
     // arriving mid-consent prevents the recording from starting afterward.
@@ -1303,11 +1255,9 @@
         return permissionGranted(appId, 'microphone');
     }
 
-    // Ask the menu (same top window) to show its consent dialog for the current
-    // app. The menu grants against its own server-resolved app id, not anything
-    // the shell passes, so this cannot target a different app. Resolves true if
-    // the user allowed. A same-window CustomEvent is unreachable from the
-    // sandboxed iframe, so only trusted shell code can trigger it.
+    // Ask the menu (same top window) for consent for the current app. The menu
+    // grants against its own server-resolved app id, and a same-window
+    // CustomEvent is unreachable from the sandboxed iframe.
     var shellConsentSeq = 0;
     function requestShellConsent(permission, prefix) {
         return new Promise(function(resolve) {
@@ -1594,12 +1544,10 @@
         }
     }
 
-    // Resolve url against the shell origin and return its origin-relative path
-    // plus the app that owns it, or null when unparseable or off-origin.
-    // The app name MUST come from the resolved pathname: an absolute or
-    // protocol-relative URL carries no leading "/<app>" for getAppNameFromPath
-    // to match, so reading it off the raw string yields '' and every app
-    // comparison made against that value passes.
+    // Resolve url against the shell origin; null when unparseable or
+    // off-origin. The app name must come from the resolved pathname: read off
+    // the raw string, an absolute URL yields '' and every app comparison
+    // passes.
     function sameOriginTarget(url) {
         var resolved;
         try {
@@ -1694,14 +1642,9 @@
                 scheduleTokenRefresh(newApp);
             });
         } else {
-            // Same app — move the top URL and reload the iframe there.
-            //
-            // The iframe cannot navigate itself: its origin is opaque, so
-            // pushState inside it is a no-op. That is why the popstate handler
-            // below reloads for this same case rather than messaging the app.
-            // This branch used to post a 'popstate' message instead, which no
-            // app has ever listened for — the URL moved and the iframe went on
-            // rendering the page it was already showing.
+            // Same app: move the top URL and reload the iframe. The iframe
+            // cannot navigate itself (pushState is a no-op on its opaque
+            // origin), and no app listens for a 'popstate' message.
             history.pushState(null, '', target.path);
             // Keep the dedup in handleNavigate honest: left stale, the app's
             // own next relay for this path looks like a change and pushes a
@@ -1773,13 +1716,9 @@
                 // App is ready — fetch token and shell config, then send init.
                 navigating = false;
                 var appName = getAppNameFromPath(window.location.pathname);
-                // The iframe that ASKED. Everything below is asynchronous and
-                // `iframe` is reassigned by a navigation, so without pinning
-                // the requester the token minted for this app was posted to
-                // whichever iframe happened to be mounted when the fetch
-                // resolved — and fetchToken also sets currentAppEntity, which
-                // names the app in the camera/microphone consent dialog and is
-                // what a granted permission is RECORDED against.
+                // Pin the iframe that asked: `iframe` is reassigned by a
+                // navigation, and fetchToken also sets currentAppEntity, which
+                // a granted permission is recorded against.
                 var requester = event.source;
                 Promise.all([fetchToken(appName), shellConfigReady]).then(function(results) {
                     if (!iframe || iframe.contentWindow !== requester) return; // navigated away: this token is not theirs
@@ -1832,13 +1771,10 @@
                 break;
 
             case 'navigate-top':
-                // Only ever navigate the top window to a same-origin Mochi URL.
-                // Navigating the trusted top window is privileged, and an app in
-                // the sandboxed iframe is not trusted to choose an off-origin
-                // destination (that is a phishing vector). Apps that must reach
-                // an external site (e.g. Stripe checkout) navigate here to one of
-                // their own same-origin actions, which issues a server-side
-                // redirect to a destination the server — not the app — vouched for.
+                // Only navigate the top window to a same-origin URL; an app
+                // must not choose an off-origin destination. External hops
+                // (Stripe) go through the app's own action, which issues a
+                // server-vetted redirect.
                 if (data.url && isSameOriginUrl(data.url)) {
                     window.location.href = data.url;
                 }
@@ -1899,20 +1835,14 @@
                 break;
 
             case 'theme-set':
-                // App changed appearance — update shell class (preference
-                // persisted server-side by the app). setAppearance keeps the
-                // preference rather than only its resolution, so 'auto' goes on
-                // following the system after this message rather than freezing
-                // at whatever it resolved to here.
+                // Appearance changed in the app; setAppearance keeps the
+                // preference so 'auto' goes on following the system.
                 setAppearance(data.theme);
                 break;
 
             case 'color-theme-set':
-                // The app reports that the user's theme preference changed. Its
-                // values are forwarded to iframes — an app styling its OWN
-                // document is its business — but the trusted root is refreshed
-                // from the server, which resolves the preference the user
-                // actually holds.
+                // Forward the app's values to iframes, but refresh the trusted
+                // root from the server, never from the app.
                 currentColorTheme = data.colorTheme || null;
                 refreshTheme();
                 postToIframe({ type: 'color-theme-change', colorTheme: currentColorTheme });

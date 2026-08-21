@@ -119,12 +119,8 @@ const resultOf = (posted: Record<string, unknown>[], create: boolean) =>
     (m) => m.type === (create ? 'webauthn.create.result' : 'webauthn.get.result')
   )
 
-// A sandboxed app iframe cannot call navigator.credentials itself, so this
-// bridge is what would grant it. The ceremony runs in the top window, meaning
-// the relying party is the real Mochi origin and any assertion it returns is
-// replayable against /_/auth/* - so it takes the user's grant, whichever app
-// asks. No app is privileged by name: a fork of settings earns it the same way
-// the stock app does, and the stock app only holds it by default grant.
+// The bridge takes the user's grant whichever app asks; no app is privileged by
+// name.
 describe('shell WebAuthn bridge', () => {
   afterEach(() => {
     vi.unstubAllGlobals()

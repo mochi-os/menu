@@ -5,16 +5,10 @@
 
 import { Component, type ErrorInfo, type ReactNode } from 'react'
 
-// Isolates one part of the trusted chrome from the rest. React unmounts the
-// entire root when a render error escapes, so without a boundary a throw while
-// rendering app-supplied content — a permission code, a notification title —
-// takes the sidebar, the notification badge and sign-out down with it, and the
-// user's only way back is a reload. The subtree renders nothing instead.
-//
-// Nothing is shown in its place. The chrome has no room for an error panel, and
-// a consent dialog that fails to render must leave no clickable remnant behind:
-// the requesting app simply never receives an answer, which is where every
-// other unanswered request already leaves it.
+// Error boundary for one part of the trusted chrome: a render error in
+// app-supplied content (a permission code, a notification title) would
+// otherwise unmount the whole menu root. The failed subtree renders nothing - a
+// half-rendered consent dialog must leave no clickable remnant.
 interface Props {
   children: ReactNode
 }

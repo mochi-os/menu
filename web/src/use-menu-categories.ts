@@ -14,15 +14,10 @@ import { useLingui } from '@lingui/react/macro'
 import { menuFetch } from './menu-api'
 
 /**
- * Drives the shared category picker from the menu app's own actions.
- *
- * The picker itself holds no data and issues no request: it ships in every
- * app's bundle and cannot read the notifications service on an app's behalf.
- * The menu app holds notifications/write, so here the fetch is same-app and
- * legitimate - which is why this hook lives beside the routes it calls rather
- * than inside the shared component.
- *
- * Only one picker is open at a time, so a single slot of state serves every row.
+ * Drives the shared category picker from the menu app's own actions: the picker
+ * ships in every app's bundle and cannot fetch on an app's behalf, while the
+ * menu holds notifications/write. One picker is open at a time, so a single
+ * slot of state serves every row.
  */
 export function useMenuCategories() {
   const { t } = useLingui()

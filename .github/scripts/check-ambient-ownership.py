@@ -4,41 +4,24 @@
 # This file is part of Mochi, licensed under the GNU AGPL v3 with the
 # Mochi Application Interface Exception - see license.txt and license-exception.md.
 
-"""check-ambient-ownership.py — flag Starlark access checks that grant access on
+"""check-ambient-ownership.py - flag Starlark access checks that grant access on
 entity ownership without a real authenticated-user guard.
 
-Mochi runs public actions as the entity owner (entity-scoped actions) or the first
-administrator (class-level actions) for anonymous callers — see core/server/web.go
-owner resolution and the memory note reference-public-action-runs-as-owner.
-`mochi.entity.get(id)` and an app's `owned(id)` helper both resolve ownership
-against that *thread-local* effective user, so for an anonymous request to a public
-action they return the OWNER. An access helper that short-circuits to a grant:
+Core runs a public action as the entity owner (or the first administrator for
+class-level actions) when the caller is anonymous, so `owned(id)` and
+`mochi.entity.get(id)` answer about the OWNER. `if owned(id): return True`
+therefore grants an anonymous caller everything; the fix is
+`if user and owned(id): return True`.
 
-    if mochi.entity.get(id): return True        # wikis bug, 2026-06-17
-    if owned(id): return True                   # forums bug, 2026-06-17
+Four detectors, each documented at its own rule below: that `if ...: return True`
+grant, a `return True` preceding any reference to the caller, an ownership call
+inside a `public: true` action, and a helper whose return value IS the ownership
+answer. The safe uses (`if owned(x): is_owner = ...`, display enrichment) are not
+flagged.
 
-therefore treats the anonymous caller as the owner and bypasses the access rules
-below it. The fix is to gate the short-circuit on a real authenticated user:
-
-    if user and mochi.entity.get(id): return True
-
-This detector flags exactly that shape:
-  `if <cond containing owned(...) | mochi.entity.get(...) | mochi.entity.owned(...)>: return True`
-  (single- or two-line) whose condition contains no `user` reference, AND whose
-  enclosing function has no earlier `if not a.user` / `if not user` early-return
-  (the repositories check_admin_access pattern, which is already safe).
-
-It deliberately does NOT flag the common, safe uses (`if owned(x): is_owner = ...`,
-`if not owned(x): ...`, display enrichment) — only the `return True` grant.
-
-Three further shapes are detected below, each documented at its own rule: a
-grant that consults no caller at all, an ownership call inside a `public: true`
-action, and a helper whose return value IS the ownership answer.
-
-Allowlist: `# access-ok: <reason>`. For the line-oriented rule below, on the if
-line or the line above; for the function-oriented rules, anywhere in the
-function or in the comment block immediately above its `def`. The window never
-crosses into the preceding function - see annotated().
+Allowlist: `# access-ok: <reason>` - on the if line or the line above for the
+line-oriented rule, anywhere in the function or its preceding comment block for
+the function-oriented ones.
 
 Usage:
   check-ambient-ownership.py [paths...]       # report violations (exit 0)
@@ -59,21 +42,11 @@ ANON_GUARD = re.compile(r'if\s+not\s+(a\.user|user)\b')
 DEF_RE = re.compile(r'^([\t ]*)def\s+(\w+)\s*\(')
 ALLOW = 'access-ok:'
 
-# Second detector: an access helper that reaches `return True` without ever
-# consulting the caller. The ownership rule above keys on mochi.entity.get /
-# owned(), but a grant can be spelled with no ownership call at all — the
-# repositories Critical (2026-07) read it off a database column:
-#
-#     repo = mochi.db.row("select owner from repositories where id = ?", repo_id)
-#     if repo and repo.get("owner", 1) == 0:
-#         return True                    # <- anonymous callers land here
-#     user_id = a.user.identity.id if ...  # the caller is consulted only AFTER
-#
-# Any authenticated-or-not caller passed that check, and the proxied read then
-# ran with the subscriber's identity. So: for functions whose NAME marks them as
-# access helpers, flag a `return True` that precedes every reference to the
-# caller. Naming is the scope limiter — it keeps protocol helpers like market's
-# _check_status (a stream status check, not authorization) out of the rule.
+# Second detector: an access helper that reaches `return True` before any
+# reference to the caller. A grant can be spelled with no ownership call at all
+# - an owner column read from the database - which the rule above cannot see.
+# Scoped by function NAME, which keeps protocol helpers like market's
+# _check_status out of the rule.
 ACCESS_FN = re.compile(r'^(check_access|check_\w+_access|can_\w+|\w+_can|require_\w+)$')
 # A bare `user` counts. Leaving it out made this rule flag the very shape the
 # docstring above prescribes as THE fix - `if user and owned(id): return True` -
@@ -92,15 +65,9 @@ def indent_of(line):
 def annotated(lines, fstart, fend):
     """Is this function annotated `# access-ok:`?
 
-    The window is the body plus any contiguous comment block immediately above
-    the def - the reasoning usually belongs with the explanation of WHY the
-    caller was already established, not jammed against the return.
-
-    It deliberately stops at the first non-comment line above the def. The
-    previous spelling scanned from `fstart - 8`, which reached into the
-    PRECEDING function: an annotation on one helper silenced an untouched
-    neighbour, and this is a blocking deploy preflight, so it failed open in
-    silence.
+    The window is the body plus any contiguous comment block immediately above the def,
+    stopping at the first non-comment line: a wider window reaches into the preceding
+    function and silences an untouched neighbour.
     """
     top = fstart
     while top > 0:
@@ -149,18 +116,10 @@ def body_after(lines, i):
 
 
 # Third detector: an ownership call inside a PUBLIC action that never checks the
-# caller. The two rules above key on the shape of a grant - `return True`, or a
-# bare `return True` in a helper - so they never see an assignment, which is how
-# feeds leaks it (feeds.star action_info_entity, 2026-07):
-#
-#     is_owner = owned(feed["id"])          # anonymous caller runs as the owner
-#     feed["owner"] = 1 if is_owner else 0  # so a stranger is told they own it
-#
-# Core runs an anonymous request to a `public: true` action as the entity owner
-# (web.go), so any ownership call in such an action answers about the owner
-# unless the function establishes a real caller first. Reading app.json is what
-# makes "public" knowable; without it this rule cannot be scoped and would flag
-# every authenticated action too.
+# caller. The rules above key on the shape of a grant, so they never see an
+# assignment - and an `is_owner = owned(...)` in a public action tells a
+# stranger they own it. Reading app.json is what makes "public" knowable and
+# scopes the rule.
 PUBLIC_ASSIGN = re.compile(r'^\w[\w\.\[\]"\']*\s*=\s*.*' )
 
 
@@ -216,27 +175,12 @@ def check_public_ownership(path, lines, funcs):
     return out
 
 
-# Fourth detector: a helper whose RETURN VALUE is the ownership answer, and
-# which takes a caller identity it never tests (feeds is_feed_owner, 2026-08-07):
-#
-#     def is_feed_owner(user_id, feed_data):
-#         if feed_data == None:
-#             return False
-#         return owned(feed_data.get("id"))   # <- answers about the OWNER
-#
-# The three rules above all key on the shape of a GRANT - an `if ...: return
-# True`, a bare `return True`, an ownership call inside a public action - so a
-# helper whose whole body IS the ownership test slips past every one of them.
-# In feeds this reached 26 call sites.
-#
-# The caller test is that the identity parameter is actually EXERCISED, not
-# merely declared. is_feed_owner accepted `user_id` and ignored it; a rule that
-# accepted the signature as evidence would stay blind on the very case that
-# motivated it. The fix was to add `or not user_id` to the guard.
-#
-# Taking a caller identity is also what scopes the rule: it separates an access
-# predicate from the app's own `owned()` / `owned_set()` primitives, which take
-# no identity and are the tool these helpers call rather than the defect.
+# Fourth detector: a helper whose RETURN VALUE is the ownership answer and which
+# takes a caller identity it never tests. The rules above all key on the shape
+# of a grant, so a helper whose whole body IS the ownership test slips past
+# them. The identity must be EXERCISED, not merely declared; taking one at all
+# is what separates an access predicate from the app's own owned()/owned_set()
+# primitives.
 CALLER_PARAM = re.compile(r'^(user|user_id|uid|identity|caller|viewer|member)$')
 CALLER_TESTED = (
     r'(?:^|\s)(?:if|elif|while)\s+.*\b{name}\b'      # if not user_id / if user_id and ...
@@ -407,11 +351,9 @@ def main():
     if argv:
         files = expand(argv)
     else:
-        # Recursive, matching what a directory-scoped run already does (the
-        # /deploy preflight passes apps/<app>, CI passes `.`). The two-level
-        # globs this replaces missed 15 files - every apps/settings/{system,
-        # user}/*.star and the vendored lib/attachments.star copies - so a
-        # repo-root run reported clean on files it had never opened.
+        # Recursive, matching what a directory-scoped run already does.
+        # Two-level globs miss apps/settings/{system,user}/*.star and the
+        # vendored lib copies.
         files = expand(['apps'])
 
     total = 0

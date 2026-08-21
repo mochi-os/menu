@@ -16,24 +16,10 @@ function getMenuToken(): string {
 }
 
 /**
- * A refused menu request, carrying what the server said rather than only that
- * it refused.
- *
- * Both error paths answer with the Mochi envelope — `{error: <code>, message:
- * <text in the user's language>}` from respond_error and a.error.label — and
- * `data` hands that to normalizeError in @mochi/web, which prefers the
- * localized `message` for display and keeps `error` as a code callers can
- * switch on. Throwing a bare Error instead put a hardcoded English string
- * where normalizeError looks FIRST, so it outranked both the server's
- * translation and the caller's own translated fallback.
- *
- * When the server says nothing usable — a proxy's HTML 502, an empty body —
- * the message is left EMPTY on purpose. normalizeError skips an empty
- * error.message and reaches the caller's own translated fallback, which is the
- * best text available; a technical `Menu API error: 502` in its place would
- * simply be untranslated English shown to every user. The status stays on the
- * error, and the DEV log above already carries the method, path and body, so
- * nothing diagnostic is lost.
+ * A refused menu request carrying the server's envelope ({error, message}) as
+ * `data`, so normalizeError shows the localized message and exposes `error` as
+ * a code. With no usable body the message is left empty on purpose:
+ * normalizeError then uses the caller's translated fallback.
  */
 export class MenuApiError extends Error {
   readonly status: number

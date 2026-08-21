@@ -3,11 +3,9 @@
 // This file is part of Mochi, licensed under the GNU AGPL v3 with the
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
 
-// Mochi iframe shim — injected into app HTML served inside sandboxed iframes.
-// Sandboxed iframes without allow-same-origin cannot access cookies,
-// localStorage, or sessionStorage. This shim provides in-memory fallbacks
-// so third-party libraries (TanStack Router, js-cookie, etc.) don't throw.
-// Runs before any app code; kept compact since it ships on every iframe page.
+// Mochi iframe shim, injected into app HTML in sandboxed iframes: in-memory
+// stand-ins for cookies, localStorage and sessionStorage so libraries do not
+// throw. Runs before any app code; keep it compact.
 (function () {
   var p = function () { this._d = {}; };
   p.prototype = {

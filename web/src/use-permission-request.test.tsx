@@ -577,11 +577,8 @@ describe('usePermissionRequest — shell-driven consent', () => {
   })
 })
 
-// The permission code is rendered in the TRUSTED tree while the server's
-// translated name is in flight, so a value that isn't a string throws during
-// render — and React unmounts the whole root on an escaped render error, which
-// takes the sidebar, the notification badge and sign-out with it. A sandboxed
-// app must not be able to reach that from a postMessage.
+// A non-string permission code would throw while rendering in the trusted tree
+// and unmount the whole menu root; a postMessage must not reach that.
 describe('usePermissionRequest rejects a malformed request', () => {
   // Bypasses sendPermissionRequest's typed signature: the point is the shapes
   // a hostile app can actually put on the wire.

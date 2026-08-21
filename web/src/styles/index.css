@@ -19,14 +19,10 @@
   }
 }
 
-/* The consent dialog is deliberately un-themed. Themes are authored by apps
-   and merely selected by the user, so a theme that paints foreground in the
-   background colour would make the dialog guarding a permission grant
-   invisible while leaving a clickable Allow button behind. Redeclaring the
-   palette on the dialog itself shadows whatever the root carries, for tokens
-   added later as much as the ones used today. Appearance still applies (the
-   dark variant below) and font-size is deliberately NOT pinned, so the user's
-   text-size preference continues to reach the dialog. */
+/* The consent dialog is deliberately un-themed: an app-authored theme could make it invisible while
+ * leaving Allow clickable. Appearance (dark variant below) still applies, and
+ * font-size is not pinned
+ so the user's text-size preference reaches the dialog. */
 .permission-dialog {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);

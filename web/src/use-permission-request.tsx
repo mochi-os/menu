@@ -26,10 +26,9 @@ interface PendingRequest {
   id: number
   app: string
   permission: string
-  // Position in the sequence of accepted requests, used to key the boundary
-  // around the dialog so each request gets a fresh one. Deliberately NOT the
-  // app's `id`: an app repeating a value would stop the boundary remounting
-  // exactly when a hostile app is the reason it failed.
+  // Keys the boundary around the dialog so each request gets a fresh one. Not
+  // the app's `id`: a repeated value would stop the remount exactly when a
+  // hostile app caused the failure.
   sequence: number
   // Set for the normal iframe-driven request: where the result is posted back.
   source?: WindowProxy
@@ -43,13 +42,9 @@ interface PendingRequest {
 // asked, not to guess at a clipped string.
 const PERMISSION_MAXIMUM = 256
 
-// Parse a request-permission message from an app iframe. Everything the app
-// sends is untrusted input into the TRUSTED tree: the permission code is
-// rendered while the server's translated name is in flight, and a non-string
-// there throws during render, which unmounts the whole menu root — chrome,
-// notification badge, sign-out and every later consent dialog with it. The
-// shell-driven path has always type-checked its detail; this is the same rule
-// on the path an app can actually reach.
+// Everything the app sends is untrusted input into the trusted tree: a
+// non-string permission code throws during render and unmounts the whole menu
+// root.
 function parsePermissionRequest(data: unknown): { id: number; permission: string } | null {
   if (!data || typeof data !== 'object') return null
   const message = data as { id?: unknown; permission?: unknown }
@@ -66,11 +61,9 @@ export function usePermissionRequest() {
   const [submitting, setSubmitting] = useState(false)
   const [permissionName, setPermissionName] = useState('')
   const [appName, setAppName] = useState('')
-  // Server-resolved level of the pending permission. The requesting app's
-  // self-asserted restricted flag is ignored — a lying app could otherwise
-  // steer which dialog variant renders. Grants are enforced server-side
-  // regardless, so defaulting to standard while the lookup is in flight is
-  // safe: an early Allow on a restricted permission fails as denied.
+  // Server-resolved level; the app's own restricted flag is ignored. Defaulting
+  // to standard while the lookup is in flight is safe: grants are enforced
+  // server-side.
   const [restricted, setRestricted] = useState(false)
 
   const open = pending !== null
@@ -112,11 +105,9 @@ export function usePermissionRequest() {
     return () => window.removeEventListener('message', handleMessage)
   }, [])
 
-  // Shell-driven consent (same top window). shell.js dispatches this when it
-  // needs the user's grant before running a capability it hosts on an app's
-  // behalf (the microphone bridge). The sandboxed iframe can't reach the top
-  // window's event bus, so only trusted shell code can fire it. The app being
-  // granted is the shell's server-resolved current app id, never app input.
+  // Shell-driven consent (microphone bridge): only trusted shell code can fire
+  // a same-window CustomEvent, and the app granted is the shell's
+  // server-resolved current app id.
   useEffect(() => {
     function handleShellRequest(event: Event) {
       const detail = (event as CustomEvent).detail
@@ -186,11 +177,9 @@ export function usePermissionRequest() {
     respond('denied')
   }, [respond])
 
-  // Resolve the permission code to its translated name and its level. Both are
-  // owned by core (mochi.permission.name / .level, exposed via the menu's
-  // permissions/name action), so the dialog carries no permission vocabulary of
-  // its own and never trusts the requesting app's restricted claim. The raw
-  // code shows only briefly while the lookup is in flight, or if it fails.
+  // Resolve the code to its translated name and level from core
+  // (permissions/name); the raw code shows only while the lookup is in flight
+  // or if it fails.
   useEffect(() => {
     if (!pending) {
       setPermissionName('')
@@ -242,11 +231,9 @@ export function usePermissionRequest() {
     }
   }, [pending])
 
-  // Keyed per request so a failure is scoped to the request that caused it. The
-  // boundary never clears its own failed state, and it is what stands between a
-  // render error here and React unmounting the whole menu root — so without a
-  // fresh instance per request, one throw would leave every later consent
-  // request rendering nothing at all until the page was reloaded.
+  // Keyed per request: the boundary never clears its failed state, so without a
+  // fresh instance one throw would blank every later consent dialog until
+  // reload.
   const dialog = open ? (
     <ChromeBoundary key={pending.sequence}>
     <ResponsiveDialog open={open} onOpenChange={(v) => { if (!v) respond('denied') }}>

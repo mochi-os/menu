@@ -41,11 +41,9 @@ function MochiLogo() {
   return <img src='/menu/images/logo-header.png' alt='Mochi' className='h-7 w-7' />
 }
 
-// Notification links are app-authored, so only ever open http(s) targets in a
-// new tab. A javascript:/data: link passed to window.open would execute in a
-// window that can reach window.opener (the shell, same origin), so validate the
-// scheme first. Relative Mochi paths resolve to https and pass; every other
-// scheme is rejected.
+// Notification links are app-authored: only http(s) may go to window.open,
+// since a javascript:/data: URL would run with access to window.opener (the
+// shell).
 function isSafeLink(link: string): boolean {
   try {
     const url = new URL(link, window.location.origin)
@@ -179,12 +177,9 @@ export function MochiShellMenu() {
   const unreadNotifications = notifications.filter((n: Notification) => n.read === 0)
   const unreadCount = unreadNotifications.length
 
-  // The people app announces an avatar change by posting 'avatar-set' (via
-  // shellSetAvatar) to the top window. The avatar URL itself never changes and
-  // is served with a five-minute cache lifetime, so the menu re-renders with
-  // the new version token to stop the browser answering from cache. Same trust
-  // model as the permission dialog: only the loaded app iframe may drive it,
-  // and the token is only ever applied to the signed-in identity's own avatar.
+  // 'avatar-set' from the people app: the avatar URL is cached for five
+  // minutes, so re-render with the new version token. Only the loaded app
+  // iframe may drive it, and only for the signed-in identity.
   useEffect(() => {
     function handleMessage(event: MessageEvent) {
       const data = event.data
@@ -474,12 +469,8 @@ export function MochiShellMenu() {
 
   return (
     <>
-      {/* Desktop menu overlay. Horizontal layout by default; collapse to a
-          vertical stack only when the user has explicitly collapsed an
-          existing sidebar (so the collapse animation feels intentional).
-          No-sidebar apps (home, help, notifications) keep the horizontal
-          layout so the icons don't flip orientation between pages — the
-          inner-app `md:ps-24` padding clears the ~88px-wide overlay. */}
+      {/* Desktop menu overlay: horizontal, stacking vertically only when the user collapsed an existing
+          sidebar. No-sidebar apps stay horizontal; their `md:ps-24` padding clears the overlay. */}
       <div className={cn(
         'flex items-center gap-2 p-2',
         isCollapsed && 'flex-col'
