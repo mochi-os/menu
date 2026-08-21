@@ -42,7 +42,7 @@
     var iframe = document.createElement('iframe');
     iframe.id = 'app-frame';
     iframe.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads');
-    iframe.setAttribute('allow', 'gamepad *; fullscreen *');   // both need the explicit * allowlist: a bare feature name defaults to 'src', which an opaque (sandboxed) origin never matches
+    iframe.setAttribute('allow', 'gamepad *; fullscreen *; autoplay *');   // both need the explicit * allowlist: a bare feature name defaults to 'src', which an opaque (sandboxed) origin never matches
     iframe.src = initialSrc;
     container.appendChild(iframe);
     var tokenRefreshTimer = null;
@@ -307,7 +307,7 @@
         var next = document.createElement('iframe');
         next.id = 'app-frame';
         next.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads');
-        next.setAttribute('allow', 'gamepad *; fullscreen *');
+        next.setAttribute('allow', 'gamepad *; fullscreen *; autoplay *');
         next.style.visibility = 'hidden';
         next.src = shellSrc(newSrc);
         container.insertBefore(next, staleIframe);
