@@ -42,6 +42,10 @@
     iframe.id = 'app-frame';
     iframe.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads');
     iframe.setAttribute('allow', 'gamepad *; fullscreen *; autoplay *');   // both need the explicit * allowlist: a bare feature name defaults to 'src', which an opaque (sandboxed) origin never matches
+    // The app this frame was created FOR. 'ready' mints against this, never
+    // against the top URL, which a cross-app navigation moves before the old
+    // frame is replaced.
+    iframe.dataset.app = getAppNameFromPath(window.location.pathname);
     iframe.src = initialSrc;
     container.appendChild(iframe);
     var tokenRefreshTimer = null;
@@ -297,6 +301,7 @@
         next.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads');
         next.setAttribute('allow', 'gamepad *; fullscreen *; autoplay *');
         next.style.visibility = 'hidden';
+        next.dataset.app = getAppNameFromPath(newSrc);
         next.src = shellSrc(newSrc);
         container.insertBefore(next, staleIframe);
 
@@ -1715,7 +1720,17 @@
             case 'ready':
                 // App is ready — fetch token and shell config, then send init.
                 navigating = false;
-                var appName = getAppNameFromPath(window.location.pathname);
+                // The app the REQUESTING frame was created for, not whatever
+                // the top URL now says. A cross-app navigation moves the top
+                // URL (handleNavigateExternal, popstate) and only replaces the
+                // frame once its token fetch resolves, so between the two the
+                // old app's frame is still mounted under the new app's URL - and
+                // a 'ready' sent in that window used to mint the NEW app's token
+                // and post it straight back to the OLD app. The dispatcher has
+                // already established that `iframe` is the sender.
+                // No fallback to the top URL: an unstamped frame must fail to
+                // get a token rather than quietly get someone else's.
+                var appName = iframe.dataset.app || '';
                 // Pin the iframe that asked: `iframe` is reassigned by a
                 // navigation, and fetchToken also sets currentAppEntity, which
                 // a granted permission is recorded against.

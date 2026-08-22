@@ -678,4 +678,42 @@ describe('shell token: a response from before a navigation is dead on arrival', 
     const refreshes = frames.flatMap((f) => f.messages.filter((m) => m.type === 'token-refresh'))
     expect(refreshes).toEqual([{ type: 'token-refresh', token: 'settings-token' }])
   })
+
+  it('mints for the frame that asked, not the app the top URL has moved to', async () => {
+    const tokens = deferredTokens()
+    const shell = boot({ granted: true, token: tokens.token })
+
+    // Feeds completes its handshake normally.
+    shell.send({ type: 'ready' })
+    await shell.settle()
+    tokens.take('feeds').resolve({ app: 'feeds-entity', token: 'feeds-token' })
+    await shell.settle()
+    shell.posted.length = 0
+
+    // Feeds asks the shell to cross to settings. The top URL moves at once,
+    // but the frame is replaced only when the settings mint resolves - so
+    // holding it leaves the FEEDS frame mounted under the SETTINGS URL.
+    shell.send({ type: 'navigate-external', url: '/settings/' })
+    await shell.settle()
+    expect(shell.path()).toBe('/settings/')
+    expect(document.getElementById('app-frame')).toBe(shell.iframe)
+
+    // THE ATTACK: feeds sends 'ready' inside that window. It triggered the
+    // navigation itself and nothing caps how many 'ready' messages it may
+    // send, so the window is its to pick.
+    shell.tokenApps.length = 0
+    shell.send({ type: 'ready' })
+    await shell.settle()
+
+    // THE POINT: the mint names feeds - the app this frame was created for -
+    // not settings, which is only what the address bar now says.
+    expect(shell.tokenApps).toEqual(['feeds'])
+
+    // And the credential that actually reaches the frame is feeds', so a
+    // settings-scoped token never lands in the feeds iframe.
+    tokens.take('feeds').resolve({ app: 'feeds-entity', token: 'feeds-token' })
+    await shell.settle()
+    const init = shell.posted.find((m) => m.type === 'init')
+    expect(init?.token).toBe('feeds-token')
+  })
 })
