@@ -66,9 +66,13 @@
     var currentLanguage = null;
 
     // --- Color theme state ---
-    // Read initial color theme from server-injected inline style on <html>
+    // Read the color theme from the server-injected inline style on <html>.
+    // That root is the shell's own, refreshed from /_/shell and never written
+    // by an app, so it is the only trustworthy source for a value the shell
+    // replays into every app's init.
     var currentColorTheme = null;
-    (function() {
+    function themeFromRoot() {
+        currentColorTheme = null;
         var root = document.documentElement;
         var hue = root.style.getPropertyValue('--hue');
         // Collect any overrides (non-anchor CSS variables like --radius)
@@ -91,7 +95,8 @@
             // No color theme, but has CSS var overrides (e.g. border_radius pref) — use empty hue
             currentColorTheme = { hue: '', chroma: '', hueBg: '', overrides: overrides };
         }
-    })();
+    }
+    themeFromRoot();
 
     // Only CSS custom properties (--foo) from an app may land on the shell
     // root; a standard property like display:none would hide the menu and
@@ -312,6 +317,13 @@
     // Called when the new iframe sends ready — complete the visual transition.
     // Also called by the ready-timeout watchdog if 'ready' never arrives.
     function completeTransition() {
+        // The flag is cleared here and nowhere else. It used to be cleared by
+        // the 'ready' message, which any iframe may send at any time - so any
+        // app could turn off the guard that ten handlers depend on, including
+        // handleDownload, which resolves the app from the top URL and would
+        // then fetch the NEXT app's URL with the user's cookies on behalf of
+        // the previous one.
+        navigating = false;
         clearReadyTimeout();
         hideProgress();
         iframe.style.visibility = '';
@@ -1613,6 +1625,11 @@
             // Cross-app navigation: update URL, fetch new token, swap iframe
             navigating = true;
             navigationEpoch++;
+            // Drop whatever the app we are leaving posted via color-theme-set
+            // and re-source from the shell's own root. Without this the old
+            // app's custom properties were replayed into every later app's
+            // init for the rest of the session.
+            themeFromRoot();
             // Fail closed: the previous app's entity id must never survive into
             // the next app's permission requests — the consent dialog and mic
             // gate reject when no id is set. fetchToken repopulates it.
@@ -1671,6 +1688,9 @@
             // Different app — swap iframe and fetch new token
             navigating = true;
             navigationEpoch++;
+            // Same re-source as handleNavigateExternal: an app's posted theme
+            // must not outlive the app.
+            themeFromRoot();
             // Fail closed, as in handleNavigateExternal: no stale entity id
             currentAppEntity = null;
             if (window.__mochi_shell) window.__mochi_shell.appId = null;
@@ -1719,7 +1739,9 @@
         switch (data.type) {
             case 'ready':
                 // App is ready — fetch token and shell config, then send init.
-                navigating = false;
+                // `navigating` is NOT cleared here: completeTransition owns it,
+                // and only runs once this frame is confirmed to be the one the
+                // navigation created.
                 // The app the REQUESTING frame was created for, not whatever
                 // the top URL now says. A cross-app navigation moves the top
                 // URL (handleNavigateExternal, popstate) and only replaces the
