@@ -69,7 +69,7 @@ export function useMenuCategories() {
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: params.toString(),
       })
-      setTopic({ ...row, category: parseInt(category, 10) })
+      setTopic({ ...row, category })
       const topicLabel = row.label || row.topic
       const chosen = categories?.find((c) => String(c.id) === category)
       const categoryLabel = chosen ? (chosen.display ?? chosen.label) : null
