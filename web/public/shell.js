@@ -65,6 +65,18 @@
     // language-set so all open iframes pick up the change without a reload.
     var currentLanguage = null;
 
+    // Lowercase BCP 47, matching core's valid(tag, "locale") so the two agree
+    // on what a language is, plus a length bound core's pattern lacks - its
+    // subtag repetition is unbounded, and this value reaches localStorage and
+    // every open iframe. The longest tag the project ships is "en-x-pseudo-rtl"
+    // at 15 characters.
+    var LANGUAGE_MAXIMUM = 35;
+    function language_valid(value) {
+        return typeof value === 'string' &&
+            value.length > 0 && value.length <= LANGUAGE_MAXIMUM &&
+            /^[a-z]{2,3}(-[a-z0-9]{2,8})*(-x(-[a-z0-9]{1,8})+)?$/.test(value);
+    }
+
     // --- Color theme state ---
     // Read the color theme from the server-injected inline style on <html>.
     // That root is the shell's own, refreshed from /_/shell and never written
@@ -1949,16 +1961,18 @@
             case 'language-set':
                 // App changed the i18n language — store and forward so every
                 // open iframe re-activates its Lingui catalog without a reload.
-                if (typeof data.language === 'string') currentLanguage = data.language;
+                // The value is app-supplied and reaches shared state, so it is
+                // checked first; a tag that cannot be parsed has no correct
+                // reading, and currentLanguage already holds a good one from
+                // /_/shell.
+                //
+                // No cookie is written here. mochi_language is the server's,
+                // set from /_/shell: routing it through the shell made an
+                // origin-wide cookie write reachable by any app in the frame.
+                if (!language_valid(data.language)) break;
+                currentLanguage = data.language;
                 postToIframe({ type: 'language-change', language: currentLanguage });
-                if (typeof data.language === 'string') {
-                    try { localStorage.setItem('mochi:language', data.language); } catch (e) {}
-                    try {
-                        var oneYear = 60 * 60 * 24 * 365;
-                        document.cookie = 'mochi_language=' + encodeURIComponent(data.language) +
-                            '; path=/; max-age=' + oneYear + '; SameSite=Lax';
-                    } catch (e) {}
-                }
+                try { localStorage.setItem('mochi:language', currentLanguage); } catch (e) {}
                 // Flip the shell page's own direction so #menu's logical
                 // positioning lands on the correct visual side without reload.
                 (function() {

@@ -787,3 +787,62 @@ describe('shell ready watchdog: only the navigation that armed it may complete i
     expect(progress.style.opacity).toBe('0')
   })
 })
+
+// `language-set` is sent by lib/web's shellSetLanguage, which ships in every
+// app's bundle. It used to make the shell write an origin-wide mochi_language
+// cookie — the capability a.cookie.* was removed to close. The server now
+// writes that cookie from /_/shell; the shell only broadcasts.
+describe('shell language-set: broadcasts, never writes a cookie', () => {
+  it('does not write mochi_language', async () => {
+    const shell = boot({ app: 'feeds-entity' })
+    await shell.start()
+
+    shell.send({ type: 'language-set', language: 'fr' })
+    await shell.settle()
+
+    expect(document.cookie).not.toContain('mochi_language')
+  })
+
+  it('still broadcasts the change to the iframe', async () => {
+    const shell = boot({ app: 'feeds-entity' })
+    await shell.start()
+
+    shell.send({ type: 'language-set', language: 'fr' })
+    await shell.settle()
+
+    const change = shell.posted.filter((m) => m.type === 'language-change')
+    expect(change).toEqual([{ type: 'language-change', language: 'fr' }])
+  })
+
+  it('refuses a tag it cannot parse, rather than storing it', async () => {
+    const shell = boot({ app: 'feeds-entity' })
+    await shell.start()
+    localStorage.setItem('mochi:language', 'en')
+
+    // Each of these reaches localStorage and every open iframe if accepted.
+    for (const bad of ['hello world', 'EN-GB', 'a'.repeat(1024), '', 'en' + '-aa'.repeat(1000)]) {
+      shell.send({ type: 'language-set', language: bad })
+    }
+    // A non-string would previously be stored and re-broadcast as-is.
+    shell.send({ type: 'language-set', language: { toString: () => 'en' } })
+    await shell.settle()
+
+    expect(shell.posted.filter((m) => m.type === 'language-change')).toEqual([])
+    expect(localStorage.getItem('mochi:language')).toBe('en')
+  })
+
+  it('accepts the tags the project actually ships', async () => {
+    const shell = boot({ app: 'feeds-entity' })
+    await shell.start()
+
+    for (const good of ['en', 'pt-br', 'zh-hant', 'es-419', 'en-x-pseudo-rtl']) {
+      shell.send({ type: 'language-set', language: good })
+    }
+    await shell.settle()
+
+    expect(
+      shell.posted.filter((m) => m.type === 'language-change').map((m) => m.language)
+    ).toEqual(['en', 'pt-br', 'zh-hant', 'es-419', 'en-x-pseudo-rtl'])
+    expect(localStorage.getItem('mochi:language')).toBe('en-x-pseudo-rtl')
+  })
+})
