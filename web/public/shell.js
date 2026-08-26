@@ -19,6 +19,12 @@
     // currentAppPath.
     var currentAppEntity = null;
 
+    // Entries the shell itself pushed. navigate-back may not pop past them.
+    var shellHistoryDepth = 0;
+
+    var TITLE_MAXIMUM = 200;
+    var STORAGE_MAXIMUM = 64 * 1024;
+
     // The single writer of window.__mochi_shell.appId, announcing every change.
     // The menu app's push and consent hooks need to know when the loaded app
     // changes, not merely what it currently is: an answer resolved after a
@@ -355,8 +361,7 @@
         // The flag is cleared here and nowhere else, and only by the
         // transition that owns it. It used to be cleared by the 'ready'
         // message, which any iframe may send at any time - so any app could
-        // turn off the guard that ten handlers depend on, including
-        // handleDownload, which resolves the app from the top URL. An app that
+        // turn off the guard that ten handlers depend on. An app that
         // withheld 'ready' could then reach the same state through the
         // watchdog, which fired against whatever navigation was in flight
         // rather than the one it was armed for.
@@ -480,6 +485,9 @@
 
     // --- postMessage helpers ---
 
+    // '*' is not a lapse: the iframe is sandboxed without allow-same-origin,
+    // so its origin is opaque and there is no origin string to target. The
+    // token this carries is the frame's own app's, which that app already has.
     function postToIframe(msg) {
         if (iframe && iframe.contentWindow) {
             iframe.contentWindow.postMessage(msg, '*');
@@ -509,6 +517,11 @@
 
     function handleStorageSet(data) {
         if (navigating) return;
+        if (typeof data.key !== 'string' || typeof data.value !== 'string') return;
+        // localStorage is one pool for the whole origin, shared with every
+        // other app's namespace and with the shell's own keys. Uncapped, one
+        // app can fill it and every later write anywhere fails silently.
+        if (data.key.length + data.value.length > STORAGE_MAXIMUM) return;
         try {
             localStorage.setItem(storagePrefix + data.key, data.value);
         } catch(e) { /* ignore */ }
@@ -549,8 +562,11 @@
         try { url = new URL(data.url, window.location.href); } catch (e) { url = null; }
         // Only ever fetch a URL belonging to the current app on this origin —
         // never let an app use the shell as a fetch proxy for anything else.
-        var currentApp = getAppNameFromPath(window.location.pathname);
-        if (!url || url.origin !== window.location.origin ||
+        // From the frame, not the top URL: a navigation moves the URL before
+        // it swaps the frame, so the top URL names the incoming app while the
+        // outgoing one is still mounted and still posting.
+        var currentApp = iframe && iframe.dataset ? (iframe.dataset.app || '') : '';
+        if (!currentApp || !url || url.origin !== window.location.origin ||
                 getAppNameFromPath(url.pathname) !== currentApp) {
             postToIframe({ type: 'download.result', id: id, ok: false });
             return;
@@ -1642,6 +1658,7 @@
                 history.replaceState(null, '', target.path);
             } else {
                 history.pushState(null, '', target.path);
+                shellHistoryDepth++;
             }
             lastNavigatedPath = target.path;
         }
@@ -1677,6 +1694,7 @@
             baseTitle = 'Mochi';
             updateTitle();
             history.pushState(null, '', target.path);
+            shellHistoryDepth++;
             lastNavigatedPath = target.path;
 
             // Show progress bar and dim current iframe immediately (before token fetch)
@@ -1704,6 +1722,7 @@
             // cannot navigate itself (pushState is a no-op on its opaque
             // origin), and no app listens for a 'popstate' message.
             history.pushState(null, '', target.path);
+            shellHistoryDepth++;
             // Keep the dedup in handleNavigate honest: left stale, the app's
             // own next relay for this path looks like a change and pushes a
             // duplicate entry over the one just made.
@@ -1856,13 +1875,17 @@
             case 'navigate-back':
                 // The iframe's own history is frozen (opaque origin), so the
                 // top window owns the real history. Pop here; popstate above
-                // re-renders the iframe at the previous path.
+                // re-renders the iframe at the previous path. Never below the
+                // entry the shell started at, or the app walks the user off
+                // the site.
+                if (navigating || shellHistoryDepth <= 0) break;
+                shellHistoryDepth--;
                 window.history.back();
                 break;
 
             case 'title':
-                if (data.title) {
-                    baseTitle = data.title;
+                if (typeof data.title === 'string' && data.title) {
+                    baseTitle = data.title.slice(0, TITLE_MAXIMUM);
                     updateTitle();
                 }
                 break;

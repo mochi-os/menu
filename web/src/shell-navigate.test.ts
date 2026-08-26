@@ -907,3 +907,133 @@ describe('shell app id: every change is announced', () => {
     expect(seen).toEqual([])
   })
 })
+
+describe('shell download: the app comes from the frame, not the top URL', () => {
+  // Whether the shell FETCHED is the guard's own outcome; whether the download
+  // then completes depends on blob plumbing this harness does not model.
+  function fetched(url: string) {
+    return vi.mocked(fetch).mock.calls.some(([u]) => String(u).includes(url))
+  }
+
+  it('fetches a URL in the frame stamped app', async () => {
+    const shell = boot()
+    await shell.start()
+
+    shell.send({ type: 'download', id: 1, url: '/feeds/report.csv' })
+    await shell.settle()
+
+    expect(fetched('/feeds/report.csv')).toBe(true)
+  })
+
+  it('refuses a URL naming another app', async () => {
+    const shell = boot()
+    await shell.start()
+
+    shell.send({ type: 'download', id: 2, url: '/settings/secrets.csv' })
+    await shell.settle()
+
+    expect(fetched('/settings/secrets.csv')).toBe(false)
+    expect(shell.posted).toContainEqual({ type: 'download.result', id: 2, ok: false })
+  })
+
+  it('refuses when the frame carries no app stamp', async () => {
+    const shell = boot()
+    await shell.start()
+    // An unstamped frame must get nothing rather than whatever the top URL says.
+    delete shell.iframe.dataset.app
+
+    shell.send({ type: 'download', id: 3, url: '/feeds/report.csv' })
+    await shell.settle()
+
+    expect(fetched('/feeds/report.csv')).toBe(false)
+    expect(shell.posted).toContainEqual({ type: 'download.result', id: 3, ok: false })
+  })
+})
+
+describe('shell title: typed and bounded', () => {
+  it('takes a string', async () => {
+    const shell = boot()
+    await shell.start()
+    shell.send({ type: 'title', title: 'Feeds' })
+    await shell.settle()
+    expect(document.title).toContain('Feeds')
+  })
+
+  it('ignores a non-string, rather than rendering [object Object]', async () => {
+    const shell = boot()
+    await shell.start()
+    shell.send({ type: 'title', title: 'Feeds' })
+    await shell.settle()
+
+    shell.send({ type: 'title', title: { toString: () => 'evil' } })
+    await shell.settle()
+    expect(document.title).not.toContain('[object Object]')
+    expect(document.title).toContain('Feeds')
+  })
+
+  it('caps an over-long title', async () => {
+    const shell = boot()
+    await shell.start()
+    shell.send({ type: 'title', title: 'x'.repeat(5000) })
+    await shell.settle()
+    expect(document.title.length).toBeLessThanOrEqual(300)
+  })
+})
+
+describe('shell navigate-back: never past the entry the shell started at', () => {
+  it('refuses when the shell has pushed nothing', async () => {
+    const shell = boot()
+    await shell.start()
+    const back = vi.spyOn(window.history, 'back').mockImplementation(() => {})
+
+    shell.send({ type: 'navigate-back' })
+    await shell.settle()
+
+    expect(back).not.toHaveBeenCalled()
+    back.mockRestore()
+  })
+
+  it('pops an entry the shell pushed, then refuses again', async () => {
+    const shell = boot()
+    await shell.start()
+    shell.send({ type: 'navigate', path: '/feeds/subscriptions' })
+    await shell.settle()
+
+    const back = vi.spyOn(window.history, 'back').mockImplementation(() => {})
+    shell.send({ type: 'navigate-back' })
+    await shell.settle()
+    expect(back).toHaveBeenCalledTimes(1)
+
+    // A loop must not walk the user off the site.
+    for (let i = 0; i < 5; i++) shell.send({ type: 'navigate-back' })
+    await shell.settle()
+    expect(back).toHaveBeenCalledTimes(1)
+    back.mockRestore()
+  })
+})
+
+describe('shell storage.set: bounded so one app cannot fill the origin pool', () => {
+  it('stores an ordinary value', async () => {
+    const shell = boot()
+    await shell.start()
+    shell.send({ type: 'storage.set', key: 'view', value: 'grid' })
+    await shell.settle()
+    expect(localStorage.getItem('app:feeds:view')).toBe('grid')
+  })
+
+  it('refuses a value beyond the cap', async () => {
+    const shell = boot()
+    await shell.start()
+    shell.send({ type: 'storage.set', key: 'bulk', value: 'x'.repeat(200 * 1024) })
+    await shell.settle()
+    expect(localStorage.getItem('app:feeds:bulk')).toBeNull()
+  })
+
+  it('refuses a non-string value', async () => {
+    const shell = boot()
+    await shell.start()
+    shell.send({ type: 'storage.set', key: 'n', value: 42 })
+    await shell.settle()
+    expect(localStorage.getItem('app:feeds:n')).toBeNull()
+  })
+})

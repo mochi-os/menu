@@ -71,7 +71,7 @@ export function useMenuCategories() {
       })
       setTopic({ ...row, category })
       const topicLabel = row.label || row.topic
-      const chosen = categories?.find((c) => String(c.id) === category)
+      const chosen = categories?.find((c) => c.id === category)
       const categoryLabel = chosen ? (chosen.display ?? chosen.label) : null
       toast.success(
         categoryLabel

@@ -226,6 +226,9 @@ export function MochiShellMenu() {
       markAsRead(notification.id)
     }
     if (notification.link && isSafeLink(notification.link)) {
+      // Not the two-branch form left click uses: a new tab is a top-level
+      // document GET without _shell=1, which core answers with the shell
+      // (shell_wrap_candidate), so a same-origin link already lands inside it.
       window.open(notification.link, '_blank', 'noopener,noreferrer')
     }
     if (unreadCount === 1) {

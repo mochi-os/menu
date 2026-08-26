@@ -5,7 +5,7 @@
 
 import { authManager, useAuthStore } from '@mochi/web'
 
-export type ShellBootstrapConfig = {
+type ShellBootstrapConfig = {
   menuToken?: string
 }
 

@@ -37,12 +37,23 @@ def action_notifications_categories(a):
     result = mochi.service.call("notifications", "categories")
     return {"data": result or []}
 
+# The notifications service caps these at the same lengths (function_send);
+# refuse at the boundary rather than passing on a value it will reject.
+APP_MAXIMUM = 64
+TOPIC_MAXIMUM = 128
+OBJECT_MAXIMUM = 256
+
+def topic_bounded(app, topic, object):
+    return len(app) <= APP_MAXIMUM and len(topic) <= TOPIC_MAXIMUM and len(object) <= OBJECT_MAXIMUM
+
 def action_notifications_topic_lookup(a):
     """Find the topic row matching (app, topic, object) so the picker can show
     the current category. app="" matches server-originated topics."""
     app = a.input("app", "").strip()
     topic = a.input("topic", "").strip()
     object = a.input("object", "").strip()
+    if not topic_bounded(app, topic, object):
+        return a.error.label(400, "errors.invalid_id")
     row = mochi.service.call("notifications", "topic/lookup", app, topic, object)
     return {"data": row}
 
@@ -55,6 +66,8 @@ def action_notifications_topic_category_set(a):
     topic = a.input("topic", "").strip()
     object = a.input("object", "").strip()
     category = a.input("category", "").strip()
+    if not topic_bounded(app, topic, object):
+        return a.error.label(400, "errors.invalid_id")
     if category == "":
         category = None
     elif len(category) > 64:
@@ -159,7 +172,11 @@ def action_permissions_check(a):
     permission = a.input("permission", "").strip()
     if not app_id or not permission:
         return a.error.label(400, "errors.app_and_permission_are_required")
+    if len(app_id) > APP_MAXIMUM:
+        return a.error.label(400, "errors.invalid_id")
 
+    # No mochi.app.get here, unlike action_permissions_grant: an app that does
+    # not exist holds no grants, so the answer is already granted: false.
     granted = False
     for p in mochi.permission.list(app_id):
         if p["permission"] == permission and p["granted"]:
