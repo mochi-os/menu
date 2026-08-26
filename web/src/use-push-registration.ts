@@ -132,28 +132,51 @@ async function ensurePushRegistered(): Promise<string | null> {
   return newId
 }
 
+/** How long to wait for shell.js to resolve an app id before failing closed. */
+const APP_TIMEOUT = 5000
+
 /**
- * The app id the shell resolved for the current path, waiting up to 5s for it.
- * shell.js sets it only after `/_/token` answers, so a frame asking during its
- * first render can beat it - a single read would report "no permission".
+ * The app id the shell resolved for the current path. shell.js sets it only
+ * after `/_/token` answers, so a frame asking during its first render can beat
+ * it - a single read would report "no permission". It announces every change
+ * as `mochi-shell-app-changed`, so waiting for that beats polling: a poll
+ * cannot distinguish "the id this frame was waiting for" from "the id the
+ * NEXT app installed while we waited".
  */
-async function shellAppId(): Promise<string | null> {
-  for (let attempt = 0; attempt < 50; attempt++) {
-    const app = (window as { __mochi_shell?: { appId?: string | null } }).__mochi_shell?.appId
-    if (app) return app
-    await new Promise((resolve) => setTimeout(resolve, 100))
-  }
-  return null
+function shellAppId(): Promise<string | null> {
+  const current = (window as { __mochi_shell?: { appId?: string | null } }).__mochi_shell?.appId
+  if (current) return Promise.resolve(current)
+  return new Promise((resolve) => {
+    const done = (app: string | null) => {
+      clearTimeout(timer)
+      window.removeEventListener('mochi-shell-app-changed', listener)
+      resolve(app)
+    }
+    function listener(event: Event) {
+      const app = (event as CustomEvent).detail?.app
+      if (typeof app === 'string' && app) done(app)
+    }
+    const timer = setTimeout(() => done(null), APP_TIMEOUT)
+    window.addEventListener('mochi-shell-app-changed', listener)
+  })
 }
 
 /**
  * Whether the app in the frame holds `notifications/write`. Resolved against
  * the app id the server picked for the path, never a name the message carries,
  * and fails closed: no app id yet, a failed check, or no grant all mean no.
+ *
+ * `frame` is the iframe element the request arrived from, pinned at message
+ * time. Resolving an id can take until `/_/token` answers, and a navigation in
+ * that window would install the NEXT app's id - so the frame is re-checked
+ * afterwards. shell.js builds a new element per navigation and strips the old
+ * one's id, so a frame that is no longer `#app-frame` did not survive it, and
+ * the id that arrived is not the one this request should be judged against.
  */
-async function pushAllowed(): Promise<boolean> {
+async function pushAllowed(frame: HTMLIFrameElement): Promise<boolean> {
   const app = await shellAppId()
   if (!app) return false
+  if (document.getElementById('app-frame') !== frame) return false
   try {
     const res = await menuFetch<{ data?: { granted?: boolean } }>('-/permissions/check', {
       method: 'POST',
@@ -209,7 +232,7 @@ export function usePushRegistration() {
       if (data.type === 'push-subscribe') {
         ;(async () => {
           try {
-            if (!(await pushAllowed())) {
+            if (!(await pushAllowed(appFrame))) {
               source?.postMessage({ type: 'push-result', id, ok: false, reason: 'forbidden' }, '*')
               return
             }
@@ -234,7 +257,7 @@ export function usePushRegistration() {
       if (data.type === 'push-unsubscribe') {
         ;(async () => {
           try {
-            if (!(await pushAllowed())) {
+            if (!(await pushAllowed(appFrame))) {
               source?.postMessage(
                 { type: 'push-unsubscribe-result', id, ok: false, reason: 'forbidden' },
                 '*'
@@ -253,7 +276,7 @@ export function usePushRegistration() {
       if (data.type === 'push-status') {
         ;(async () => {
           try {
-            if (!(await pushAllowed())) {
+            if (!(await pushAllowed(appFrame))) {
               source?.postMessage(
                 { type: 'push-status-result', id, ok: false, reason: 'forbidden' },
                 '*'

@@ -19,6 +19,20 @@
     // currentAppPath.
     var currentAppEntity = null;
 
+    // The single writer of window.__mochi_shell.appId, announcing every change.
+    // The menu app's push and consent hooks need to know when the loaded app
+    // changes, not merely what it currently is: an answer resolved after a
+    // navigation belongs to a different app than the one that asked. Polling
+    // for the value cannot tell those apart, so the change itself is the event.
+    function setShellAppId(app) {
+        if (!window.__mochi_shell) window.__mochi_shell = {};
+        if (window.__mochi_shell.appId === app) return;
+        window.__mochi_shell.appId = app;
+        window.dispatchEvent(new CustomEvent('mochi-shell-app-changed', {
+            detail: { app: app }
+        }));
+    }
+
     // Title = "(N) baseTitle" where baseTitle comes from the current app
     // (via postMessage) and N comes from the menu app (via custom event).
     var baseTitle = 'Mochi';
@@ -439,8 +453,7 @@
             if (data.app && epoch === navigationEpoch) {
                 currentAppEntity = data.app;
                 // Expose for menu app (e.g. subscribe-notifications needs entity ID)
-                if (!window.__mochi_shell) window.__mochi_shell = {};
-                window.__mochi_shell.appId = data.app;
+                setShellAppId(data.app);
             }
             return data;
         });
@@ -1657,7 +1670,7 @@
             // the next app's permission requests — the consent dialog and mic
             // gate reject when no id is set. fetchToken repopulates it.
             currentAppEntity = null;
-            if (window.__mochi_shell) window.__mochi_shell.appId = null;
+            setShellAppId(null);
             currentAppPath = newApp;
             setCurrentApp(newApp);
             updateFavicon(newApp);
@@ -1716,7 +1729,7 @@
             themeFromRoot();
             // Fail closed, as in handleNavigateExternal: no stale entity id
             currentAppEntity = null;
-            if (window.__mochi_shell) window.__mochi_shell.appId = null;
+            setShellAppId(null);
             currentAppPath = newApp;
             setCurrentApp(newApp);
             updateFavicon(newApp);

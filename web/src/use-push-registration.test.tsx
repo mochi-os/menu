@@ -280,3 +280,138 @@ describe('usePushRegistration permission gate', () => {
     expect(requestPermission).not.toHaveBeenCalled()
   })
 })
+
+// The app id used for the permission check used to be re-read from the global
+// long after the request arrived — up to 5s, because the resolver polled for
+// it. shell.js rewrites that global on every navigation, so an app with no
+// grant could have its request judged against the NEXT app's grant.
+describe('usePushRegistration binds the answer to the frame that asked', () => {
+  // A frame asking during its first render beats /_/token, which is the whole
+  // reason the resolver waits at all.
+  function pending() {
+    ;(window as { __mochi_shell?: { appId?: string | null } }).__mochi_shell = { appId: null }
+  }
+
+  function announce(app: string | null) {
+    window.dispatchEvent(new CustomEvent('mochi-shell-app-changed', { detail: { app } }))
+  }
+
+  // What shell.js does on a cross-app navigation: a NEW element takes the id,
+  // the old one keeps its window alive but loses #app-frame.
+  let arrived: HTMLIFrameElement[]
+  beforeEach(() => {
+    arrived = []
+  })
+  // Not inline in each test: an assertion that throws would skip the cleanup
+  // and leak a second #app-frame into the next test, where the message-time
+  // frame check would then refuse for a reason that test is not about.
+  afterEach(() => {
+    arrived.forEach((frame) => frame.remove())
+  })
+
+  function navigate() {
+    appFrame.removeAttribute('id')
+    const next = document.createElement('iframe')
+    next.id = 'app-frame'
+    document.body.appendChild(next)
+    arrived.push(next)
+    return next
+  }
+
+  it('waits for the shell to announce an id rather than polling for it', async () => {
+    const requestPermission = vi.spyOn(push, 'requestPermission').mockResolvedValue('denied')
+    pending()
+    render(<Harness />)
+
+    const post = send({ type: 'push-subscribe', id: 7 })
+    announce('app-1')
+
+    // Resolves off the announcement. A poll would still be sleeping.
+    await waitFor(() => {
+      expect(checks).toEqual([{ app: 'app-1', permission: 'notifications/write' }])
+    })
+    expect(requestPermission).toHaveBeenCalled()
+    expect(post).toHaveBeenCalledWith(
+      { type: 'push-result', id: 7, ok: false, reason: 'denied' },
+      '*'
+    )
+  })
+
+  it('refuses when the app changed while the id was being resolved', async () => {
+    const requestPermission = vi.spyOn(push, 'requestPermission').mockResolvedValue('granted')
+    pending()
+    render(<Harness />)
+
+    // App A asks on first render, then drives a navigation to app B — which it
+    // may do, navigate-external accepts any same-origin URL naming an app.
+    const post = send({ type: 'push-subscribe', id: 8 })
+    navigate()
+    announce('app-2')
+
+    await waitFor(() => {
+      expect(post).toHaveBeenCalledWith(
+        { type: 'push-result', id: 8, ok: false, reason: 'forbidden' },
+        '*'
+      )
+    })
+    // App B's grant was never even consulted on app A's behalf.
+    expect(checks).toEqual([])
+    expect(requestPermission).not.toHaveBeenCalled()
+  })
+
+  it('refuses an unsubscribe the same way, before it touches the account', async () => {
+    // This is the one that acts on the whole device: removeBrowserAccount runs
+    // regardless of where the reply goes.
+    pending()
+    render(<Harness />)
+
+    const post = send({ type: 'push-unsubscribe', id: 9 })
+    navigate()
+    announce('app-2')
+
+    await waitFor(() => {
+      expect(post).toHaveBeenCalledWith(
+        { type: 'push-unsubscribe-result', id: 9, ok: false, reason: 'forbidden' },
+        '*'
+      )
+    })
+    expect(checks).toEqual([])
+  })
+
+  it('refuses push-status the same way', async () => {
+    pending()
+    render(<Harness />)
+
+    const post = send({ type: 'push-status', id: 10 })
+    navigate()
+    announce('app-2')
+
+    await waitFor(() => {
+      expect(post).toHaveBeenCalledWith(
+        { type: 'push-status-result', id: 10, ok: false, reason: 'forbidden' },
+        '*'
+      )
+    })
+    expect(checks).toEqual([])
+  })
+
+  it('still serves a request whose frame survived the wait', async () => {
+    // The frame check must not refuse the ordinary first-render case it exists
+    // to protect: same frame throughout, id arrives late.
+    const requestPermission = vi.spyOn(push, 'requestPermission').mockResolvedValue('denied')
+    pending()
+    render(<Harness />)
+
+    const post = send({ type: 'push-status', id: 11 })
+    announce('app-1')
+
+    await waitFor(() => {
+      expect(checks).toEqual([{ app: 'app-1', permission: 'notifications/write' }])
+    })
+    expect(post).not.toHaveBeenCalledWith(
+      expect.objectContaining({ reason: 'forbidden' }),
+      '*'
+    )
+    expect(requestPermission).not.toHaveBeenCalled()
+  })
+})

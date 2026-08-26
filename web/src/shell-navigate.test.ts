@@ -4,7 +4,7 @@
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
 
 /* eslint-disable lingui/no-unlocalized-strings */
-import { describe, it, expect, vi, afterEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 
@@ -844,5 +844,66 @@ describe('shell language-set: broadcasts, never writes a cookie', () => {
       shell.posted.filter((m) => m.type === 'language-change').map((m) => m.language)
     ).toEqual(['en', 'pt-br', 'zh-hant', 'es-419', 'en-x-pseudo-rtl'])
     expect(localStorage.getItem('mochi:language')).toBe('en-x-pseudo-rtl')
+  })
+})
+
+// The menu app's push and consent hooks need to know when the loaded app
+// CHANGES, not merely what it currently is. Reading the global cannot tell an
+// answer resolved for this app from one resolved after a navigation replaced
+// it, so shell.js announces every write.
+describe('shell app id: every change is announced', () => {
+  // shell.js runs on the top window, which is jsdom's global here.
+  function record() {
+    const seen: Array<string | null> = []
+    const listener = (event: Event) => {
+      seen.push((event as CustomEvent).detail?.app ?? null)
+    }
+    window.addEventListener('mochi-shell-app-changed', listener)
+    listeners.push(listener)
+    return seen
+  }
+  let listeners: Array<(event: Event) => void> = []
+  beforeEach(() => {
+    listeners = []
+    delete (window as unknown as { __mochi_shell?: unknown }).__mochi_shell
+  })
+  afterEach(() => {
+    listeners.forEach((l) => window.removeEventListener('mochi-shell-app-changed', l))
+  })
+
+  // The default boot resolves no app id at all, so each of these names one.
+  const perApp = { token: async (app: string) => ({ app: `${app}-entity`, token: 'app-token' }) }
+
+  it('announces the id when the first token resolves', async () => {
+    const seen = record()
+    const shell = boot(perApp)
+    await shell.start()
+
+    expect(seen).toEqual(['feeds-entity'])
+  })
+
+  it('announces the null and then the next app across a navigation', async () => {
+    const shell = boot(perApp)
+    await shell.start()
+    const seen = record()
+
+    shell.send({ type: 'navigate-external', url: '/settings/' })
+    await shell.settle()
+
+    // Null first: the outgoing app's id must not survive into the incoming
+    // app's checks, and a consumer waiting on the change needs to see the gap.
+    expect(seen).toEqual([null, 'settings-entity'])
+  })
+
+  it('says nothing for a navigation within the same app', async () => {
+    const shell = boot(perApp)
+    await shell.start()
+    const seen = record()
+
+    shell.send({ type: 'navigate', path: '/feeds/subscriptions' })
+    await shell.settle()
+
+    // The app did not change, so no consumer should be told that it did.
+    expect(seen).toEqual([])
   })
 })

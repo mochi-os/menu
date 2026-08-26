@@ -940,3 +940,61 @@ describe('usePermissionRequest refuses a request it should not show', () => {
     })
   })
 })
+
+// A pending dialog used to survive a cross-app navigation: shell.js tore down
+// app A's frame and loaded app B, but nothing dismissed A's prompt. The grant
+// was correctly attributed to A, yet the user saw a modal over app B's page —
+// and a user who navigated away rather than grant it was asked again.
+describe('usePermissionRequest dismisses on a cross-app navigation', () => {
+  function navigated(app: string | null) {
+    act(() => {
+      window.dispatchEvent(new CustomEvent('mochi-shell-app-changed', { detail: { app } }))
+    })
+  }
+
+  it('closes the dialog and answers denied when the loaded app changes', async () => {
+    render(<TestComponent />)
+
+    const { postMessage } = sendPermissionRequest({
+      id: 1,
+      app: 'feeds',
+      permission: 'accounts/read',
+      restricted: false,
+    })
+    await waitFor(() => {
+      expect(screen.getByText('Permission request')).toBeInTheDocument()
+    })
+
+    navigated(null) // shell.js nulls the id first, then loads the next app
+    expect(screen.queryByText('Permission request')).not.toBeInTheDocument()
+    expect(postMessage).toHaveBeenCalledWith(
+      { type: 'permission-result', id: 1, result: 'denied' },
+      '*'
+    )
+    expect(grantCall()).toBeUndefined()
+  })
+
+  it('does not spend the denial cooldown, because the user never refused', async () => {
+    render(<TestComponent />)
+
+    sendPermissionRequest({ id: 1, app: 'feeds', permission: 'accounts/read', restricted: false })
+    await waitFor(() => {
+      expect(screen.getByText('Permission request')).toBeInTheDocument()
+    })
+    navigated(null)
+    expect(screen.queryByText('Permission request')).not.toBeInTheDocument()
+
+    // Back on the same app, the same question may be put again.
+    advance(1000)
+    sendPermissionRequest({ id: 2, app: 'feeds', permission: 'accounts/read', restricted: false })
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Allow' })).toBeInTheDocument()
+    })
+  })
+
+  it('is inert when no dialog is open', () => {
+    render(<TestComponent />)
+    navigated('wikis')
+    expect(screen.queryByText('Permission request')).not.toBeInTheDocument()
+  })
+})

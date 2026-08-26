@@ -230,6 +230,21 @@ export function usePermissionRequest() {
     respond('denied')
   }, [pending, respond])
 
+  // The loaded app changed under the dialog. A modal reads as belonging to what
+  // is on screen, so app A's prompt sitting over app B invites an answer to a
+  // question the user is no longer being asked — and a user who navigated away
+  // rather than grant it is asked again over unrelated content. Denied is the
+  // honest answer: they did not say yes.
+  //
+  // No cooldown recorded. The user never refused; the app lost its turn.
+  useEffect(() => {
+    function handleAppChange() {
+      if (active.current) respond('denied')
+    }
+    window.addEventListener('mochi-shell-app-changed', handleAppChange)
+    return () => window.removeEventListener('mochi-shell-app-changed', handleAppChange)
+  }, [respond])
+
   // The dialog died in render, so the user was never asked. Answer denied and
   // free the slot: the request cannot be granted, and leaving it occupying the
   // slot would wedge consent for the rest of the session. No cooldown recorded
