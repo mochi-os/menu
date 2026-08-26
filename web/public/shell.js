@@ -206,8 +206,16 @@
 
     function armReadyTimeout() {
         clearTimeout(readyTimeout);
+        // The navigation this timer belongs to. A cross-app navigation raises
+        // the epoch when it starts and re-arms only once its token fetch
+        // settles, so a timer armed before it is still pending across that
+        // window - and completing a transition it did not create clears
+        // `navigating` and un-dims the outgoing frame under the incoming
+        // app's URL.
+        var epoch = navigationEpoch;
         readyTimeout = setTimeout(function() {
             readyTimeout = null;
+            if (epoch !== navigationEpoch) return;
             // Force the new iframe visible and tear down the stale one;
             // the new iframe may keep loading in the background or it
             // may be broken — either way the user sees what's there now.
@@ -315,14 +323,17 @@
     }
 
     // Called when the new iframe sends ready — complete the visual transition.
-    // Also called by the ready-timeout watchdog if 'ready' never arrives.
+    // Also called by the ready-timeout watchdog if 'ready' never arrives, but
+    // only for the navigation that armed it: see armReadyTimeout's epoch guard.
     function completeTransition() {
-        // The flag is cleared here and nowhere else. It used to be cleared by
-        // the 'ready' message, which any iframe may send at any time - so any
-        // app could turn off the guard that ten handlers depend on, including
-        // handleDownload, which resolves the app from the top URL and would
-        // then fetch the NEXT app's URL with the user's cookies on behalf of
-        // the previous one.
+        // The flag is cleared here and nowhere else, and only by the
+        // transition that owns it. It used to be cleared by the 'ready'
+        // message, which any iframe may send at any time - so any app could
+        // turn off the guard that ten handlers depend on, including
+        // handleDownload, which resolves the app from the top URL. An app that
+        // withheld 'ready' could then reach the same state through the
+        // watchdog, which fired against whatever navigation was in flight
+        // rather than the one it was armed for.
         navigating = false;
         clearReadyTimeout();
         hideProgress();

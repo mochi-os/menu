@@ -717,3 +717,73 @@ describe('shell token: a response from before a navigation is dead on arrival', 
     expect(init?.token).toBe('feeds-token')
   })
 })
+
+// The watchdog exists so a frame that never sends 'ready' cannot strand the
+// user on a dimmed page. It must not also rescue a transition it did not
+// create: completeTransition clears `navigating`, and an app that simply
+// withholds 'ready' can time a cross-app navigation so the load-time timer
+// fires while the token fetch is still in flight and its own frame is still
+// the mounted one.
+describe('shell ready watchdog: only the navigation that armed it may complete it', () => {
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
+  // A /_/token that never answers, so the navigation stays parked in the
+  // window between `navigating = true` and swapIframe.
+  function heldToken() {
+    return { token: () => new Promise<Record<string, unknown>>(() => {}) }
+  }
+
+  async function watchdogFiresMidNavigation() {
+    vi.useFakeTimers()
+    const shell = boot({ app: 'feeds-entity', token: heldToken().token })
+    // Deliberately no 'ready': sending it would clear the load-time timer.
+
+    shell.send({ type: 'navigate-external', url: '/settings/' })
+    await shell.settle()
+
+    vi.advanceTimersByTime(READY_TIMEOUT_MS)
+    await shell.settle()
+    return shell
+  }
+
+  const READY_TIMEOUT_MS = 10000
+
+  it('leaves the cross-app guard up, so storage stays refused', async () => {
+    const shell = await watchdogFiresMidNavigation()
+    shell.posted.length = 0
+
+    shell.send({ type: 'storage.get', id: 1, key: 'k' })
+    await shell.settle()
+
+    // handleStorageGet returns before replying while `navigating` holds. A
+    // reply here means the guard the other nine handlers share is down.
+    expect(shell.posted.filter((m) => m.type === 'storage.result')).toEqual([])
+  })
+
+  it('leaves the outgoing frame dimmed and non-interactive', async () => {
+    const shell = await watchdogFiresMidNavigation()
+
+    // handleNavigateExternal dims the frame before the token fetch.
+    // Completing a transition it does not own resets both properties, handing
+    // the OUTGOING app an interactive frame under the INCOMING app's URL —
+    // which the address bar already shows.
+    expect(shell.iframe.style.pointerEvents).toBe('none')
+    expect(shell.iframe.style.opacity).toBe('0.6')
+  })
+
+  it('still completes the transition it DOES own', async () => {
+    vi.useFakeTimers()
+    const shell = boot()
+    const progress = document.getElementById('shell-progress') as HTMLElement
+    expect(progress.style.opacity).toBe('1')
+
+    // No navigation, so the epoch has not moved and this timer owns the
+    // transition: a frame that never sends 'ready' must still be rescued.
+    vi.advanceTimersByTime(READY_TIMEOUT_MS)
+    await shell.settle()
+
+    expect(progress.style.opacity).toBe('0')
+  })
+})
