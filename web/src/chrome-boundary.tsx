@@ -11,6 +11,11 @@ import { Component, type ErrorInfo, type ReactNode } from 'react'
 // half-rendered consent dialog must leave no clickable remnant.
 interface Props {
   children: ReactNode
+  // Called once when the subtree fails. The failed subtree renders nothing, so
+  // without this the owner cannot tell a dialog that is on screen from one that
+  // died in render - and a consent request whose dialog cannot be shown must be
+  // answered, not left occupying the slot.
+  onFailure?: () => void
 }
 
 interface State {
@@ -30,6 +35,7 @@ export class ChromeBoundary extends Component<Props, State> {
     // act on.
     // eslint-disable-next-line no-console
     console.error('[menu] chrome component failed', error, info.componentStack)
+    this.props.onFailure?.()
   }
 
   render() {

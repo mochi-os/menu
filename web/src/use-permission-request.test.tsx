@@ -50,6 +50,12 @@ function nameResponse(opts: { body?: string } | undefined) {
   }
 }
 
+function nameResponseData(opts: { body?: string } | undefined) {
+  const code = new URLSearchParams(opts?.body ?? '').get('permission') ?? ''
+  const entry = NAMES[code]
+  return { name: entry?.name ?? code, restricted: !!entry?.restricted }
+}
+
 function applicationResponse(opts: { body?: string } | undefined) {
   const id = new URLSearchParams(opts?.body ?? '').get('app') ?? ''
   const name = APPS[id]
@@ -75,17 +81,30 @@ function defaultRouter(grant: () => unknown = () => ({ ok: true, json: async () 
 // The shell hosts exactly one app iframe (#app-frame) and exposes its
 // server-resolved id as window.__mochi_shell.appId — the dialog derives the app
 // from those, never the self-asserted data.app, so the tests set both up.
+// The dialog spaces consecutive requests apart and remembers denials, both
+// against Date.now(). Offsetting the real clock rather than freezing it lets a
+// test jump past those windows while waitFor's own timeout accounting still
+// advances - a frozen clock would hang a failing waitFor instead of failing it.
+let clockOffset = 0
+function advance(milliseconds: number) {
+  clockOffset += milliseconds
+}
+
 let appFrame: HTMLIFrameElement
 beforeEach(() => {
   useAuthStore.setState({ token: 'test-token' })
   mockFetch.mockReset()
   mockFetch.mockImplementation(defaultRouter())
+  clockOffset = 0
+  const realNow = Date.now.bind(Date)
+  vi.spyOn(Date, 'now').mockImplementation(() => realNow() + clockOffset)
   appFrame = document.createElement('iframe')
   appFrame.id = 'app-frame'
   document.body.appendChild(appFrame)
 })
 
 afterEach(() => {
+  vi.mocked(Date.now).mockRestore()
   appFrame.remove()
   delete (window as unknown as { __mochi_shell?: unknown }).__mochi_shell
 })
@@ -664,7 +683,7 @@ describe('usePermissionRequest survives a dialog that fails to render', () => {
         return Promise.resolve({
           ok: true,
           json: async () => ({
-            data: { name: breakName ? {} : 'Read connected accounts', restricted: false },
+            data: breakName ? { name: {}, restricted: false } : nameResponseData(opts),
           }),
         })
       }
@@ -694,6 +713,7 @@ describe('usePermissionRequest survives a dialog that fails to render', () => {
     // A well-formed request afterwards must still be answerable. With a single
     // boundary shared across requests, this rendered nothing at all.
     breakName = false
+    advance(1000)
     sendPermissionRequest({ id: 2, app: 'feeds', permission: 'accounts/read', restricted: false })
 
     await waitFor(() => {
@@ -706,10 +726,12 @@ describe('usePermissionRequest survives a dialog that fails to render', () => {
 
   it('replaces the previous request\'s permission name', async () => {
     // A guard, not a reproduction: the effect keyed on `pending` already clears
-    // the name, and act() flushes it before this can observe an intermediate
-    // render. It is here so that dropping that reset — leaving one request's
+    // the name. It is here so that dropping that reset — leaving one request's
     // permission named in the dialog that grants the next — fails loudly.
+    // The second request has to be one the dialog will admit, so it comes after
+    // the first is answered and the inter-dialog gap has passed.
     breakName = false
+    const user = userEvent.setup()
     render(<TestComponent />)
 
     sendPermissionRequest({ id: 1, app: 'feeds', permission: 'accounts/read', restricted: false })
@@ -717,7 +739,204 @@ describe('usePermissionRequest survives a dialog that fails to render', () => {
       expect(screen.getByText('Read connected accounts')).toBeInTheDocument()
     })
 
+    await user.click(screen.getByRole('button', { name: 'Deny' }))
+    advance(1000)
+
     sendPermissionRequest({ id: 2, app: 'feeds', permission: 'groups/write', restricted: false })
+    await waitFor(() => {
+      expect(screen.getByText('Change groups')).toBeInTheDocument()
+    })
     expect(screen.queryByText('Read connected accounts')).not.toBeInTheDocument()
+  })
+})
+
+// An app can post request-permission in a loop. Each message used to replace
+// the dialog, and because the boundary is keyed on `sequence` every one was a
+// fresh mount - so the footer geometry could change under a cursor already
+// moving toward a button. The restricted footer is a single full-width Close;
+// the standard one is Deny beside Allow, putting Allow under the right half of
+// where Close was.
+describe('usePermissionRequest refuses a request it should not show', () => {
+  it('ignores a second request while one is on screen, and answers it denied', async () => {
+    render(<TestComponent />)
+
+    sendPermissionRequest({ id: 1, app: 'feeds', permission: 'users/read', restricted: false })
+    await waitFor(() => {
+      // Two match: the footer's Close and the dialog's own X.
+      expect(screen.getAllByRole('button', { name: 'Close' }).length).toBeGreaterThan(0)
+    })
+
+    // The swap: a standard permission arriving while the restricted dialog is
+    // up would remount the footer as Deny/Allow under the same cursor.
+    const { postMessage } = sendPermissionRequest({
+      id: 2,
+      app: 'feeds',
+      permission: 'accounts/read',
+      restricted: false,
+    })
+
+    expect(screen.queryByRole('button', { name: 'Allow' })).not.toBeInTheDocument()
+    expect(screen.getAllByRole('button', { name: 'Close' }).length).toBeGreaterThan(0)
+    expect(postMessage).toHaveBeenCalledWith(
+      { type: 'permission-result', id: 2, result: 'denied' },
+      '*'
+    )
+  })
+
+  it('will not open a new dialog in the instant after one closes', async () => {
+    const user = userEvent.setup()
+    render(<TestComponent />)
+
+    sendPermissionRequest({ id: 1, app: 'feeds', permission: 'accounts/read', restricted: false })
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Deny' })).toBeInTheDocument()
+    })
+    await user.click(screen.getByRole('button', { name: 'Deny' }))
+
+    // The second half of a double-click must not land on a button that was not
+    // there for the first, so a different permission still waits out the gap.
+    const { postMessage } = sendPermissionRequest({
+      id: 2,
+      app: 'feeds',
+      permission: 'groups/write',
+      restricted: false,
+    })
+    expect(screen.queryByText('Permission request')).not.toBeInTheDocument()
+    expect(postMessage).toHaveBeenCalledWith(
+      { type: 'permission-result', id: 2, result: 'denied' },
+      '*'
+    )
+  })
+
+  it('refuses the same app the same permission for a while after a denial', async () => {
+    const user = userEvent.setup()
+    render(<TestComponent />)
+
+    sendPermissionRequest({ id: 1, app: 'feeds', permission: 'accounts/read', restricted: false })
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Deny' })).toBeInTheDocument()
+    })
+    await user.click(screen.getByRole('button', { name: 'Deny' }))
+
+    // Past the inter-dialog gap, so the cooldown is the only thing refusing it.
+    advance(1000)
+    const { postMessage } = sendPermissionRequest({
+      id: 2,
+      app: 'feeds',
+      permission: 'accounts/read',
+      restricted: false,
+    })
+    expect(screen.queryByText('Permission request')).not.toBeInTheDocument()
+    expect(postMessage).toHaveBeenCalledWith(
+      { type: 'permission-result', id: 2, result: 'denied' },
+      '*'
+    )
+    expect(grantCall()).toBeUndefined()
+  })
+
+  it('lets the same pair through once the cooldown expires', async () => {
+    const user = userEvent.setup()
+    render(<TestComponent />)
+
+    sendPermissionRequest({ id: 1, app: 'feeds', permission: 'accounts/read', restricted: false })
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Deny' })).toBeInTheDocument()
+    })
+    await user.click(screen.getByRole('button', { name: 'Deny' }))
+
+    advance(61_000)
+    sendPermissionRequest({ id: 2, app: 'feeds', permission: 'accounts/read', restricted: false })
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Allow' })).toBeInTheDocument()
+    })
+  })
+
+  it('confines the cooldown to the pair that was denied', async () => {
+    const user = userEvent.setup()
+    render(<TestComponent />)
+
+    sendPermissionRequest({ id: 1, app: 'feeds', permission: 'accounts/read', restricted: false })
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Deny' })).toBeInTheDocument()
+    })
+    await user.click(screen.getByRole('button', { name: 'Deny' }))
+    advance(1000)
+
+    // A different permission from the same app is a different question.
+    sendPermissionRequest({ id: 2, app: 'feeds', permission: 'groups/write', restricted: false })
+    await waitFor(() => {
+      expect(screen.getByText('Change groups')).toBeInTheDocument()
+    })
+  })
+
+  it('does not lock out a retry when the grant itself failed', async () => {
+    const user = userEvent.setup()
+    mockFetch.mockImplementation(defaultRouter(() => Promise.reject(new Error('network'))))
+    render(<TestComponent />)
+
+    sendPermissionRequest({ id: 1, app: 'feeds', permission: 'accounts/read', restricted: false })
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Allow' })).toBeInTheDocument()
+    })
+    // The user said yes; the request died on the way to the server. That is our
+    // failure, not their answer, so it must not spend the cooldown.
+    await user.click(screen.getByRole('button', { name: 'Allow' }))
+    await waitFor(() => {
+      expect(screen.queryByText('Permission request')).not.toBeInTheDocument()
+    })
+
+    advance(1000)
+    mockFetch.mockImplementation(defaultRouter())
+    sendPermissionRequest({ id: 2, app: 'feeds', permission: 'accounts/read', restricted: false })
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Allow' })).toBeInTheDocument()
+    })
+  })
+
+  it('frees the slot when the dialog dies in render', async () => {
+    // Without this the failed dialog holds the slot forever: it renders nothing,
+    // so the user cannot dismiss it, and every later request is refused for the
+    // rest of the session.
+    vi.spyOn(console, 'error').mockImplementation(() => {})
+    let breakName = true
+    mockFetch.mockImplementation((url: string, opts?: { body?: string }) => {
+      if (typeof url === 'string' && url.endsWith('/permissions/name')) {
+        return Promise.resolve({
+          ok: true,
+          json: async () => ({
+            data: { name: breakName ? {} : 'Read connected accounts', restricted: false },
+          }),
+        })
+      }
+      if (typeof url === 'string' && url.endsWith('/permissions/application')) {
+        return Promise.resolve(applicationResponse(opts))
+      }
+      return Promise.resolve({ ok: true, json: async () => ({ data: { status: 'granted' } }) })
+    })
+    render(<TestComponent />)
+
+    const { postMessage } = sendPermissionRequest({
+      id: 1,
+      app: 'feeds',
+      permission: 'accounts/read',
+      restricted: false,
+    })
+    await waitFor(() => {
+      expect(screen.queryByText('Permission request')).not.toBeInTheDocument()
+    })
+    // The app is told, rather than left waiting out its own timeout.
+    await waitFor(() => {
+      expect(postMessage).toHaveBeenCalledWith(
+        { type: 'permission-result', id: 1, result: 'denied' },
+        '*'
+      )
+    })
+
+    breakName = false
+    advance(1000)
+    sendPermissionRequest({ id: 2, app: 'feeds', permission: 'groups/write', restricted: false })
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Allow' })).toBeInTheDocument()
+    })
   })
 })

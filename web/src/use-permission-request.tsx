@@ -42,6 +42,33 @@ interface PendingRequest {
 // asked, not to guess at a clipped string.
 const PERMISSION_MAXIMUM = 256
 
+// A denial is an answer, not an invitation to ask again. Without a cooldown an
+// app can post request-permission in a loop until a click lands on Allow, and
+// every permission the dialog can grant is worth stealing - camera, microphone,
+// accounts/read, entity/read, user/sessions/write.
+const DENIAL_COOLDOWN = 60000
+
+// A dialog may not open immediately after one closes. The footers differ by
+// level - restricted is a single full-width Close, standard is Deny beside
+// Allow - so Allow sits under the right half of where Close was. Without this
+// gap the second half of a double-click lands on a button that was not there
+// for the first.
+const DIALOG_INTERVAL = 750
+
+// NUL appears in neither an app id nor a permission code, so an app cannot
+// forge a pair by choosing a permission that spans the separator.
+function denialKey(app: string, permission: string): string {
+  return app + '\u0000' + permission
+}
+
+// Bounded by how often the user clicks Deny, but pruned on write so the map
+// cannot accumulate entries for permission codes an app invents.
+function prune(denials: Map<string, number>, now: number): void {
+  for (const [key, at] of denials) {
+    if (now - at >= DENIAL_COOLDOWN) denials.delete(key)
+  }
+}
+
 // Everything the app sends is untrusted input into the trusted tree: a
 // non-string permission code throws during render and unmounts the whole menu
 // root.
@@ -65,8 +92,24 @@ export function usePermissionRequest() {
   // to standard while the lookup is in flight is safe: grants are enforced
   // server-side.
   const [restricted, setRestricted] = useState(false)
+  // The message handlers are registered once and never see `pending` through
+  // their closure, so admission is decided against refs rather than state.
+  const active = useRef(false)
+  const closed = useRef(0)
+  const denials = useRef(new Map<string, number>())
 
   const open = pending !== null
+
+  // Whether a request may open a dialog now. Refusing is not silence: every
+  // caller answers 'denied' so the app's promise settles rather than waiting
+  // out its own timeout.
+  const admit = useCallback((app: string, permission: string): boolean => {
+    if (active.current) return false
+    const now = Date.now()
+    if (now - closed.current < DIALOG_INTERVAL) return false
+    const denied = denials.current.get(denialKey(app, permission))
+    return denied === undefined || now - denied >= DENIAL_COOLDOWN
+  }, [])
 
   useEffect(() => {
     function handleMessage(event: MessageEvent) {
@@ -91,6 +134,15 @@ export function usePermissionRequest() {
       const request = parsePermissionRequest(data)
       if (!request) return
 
+      if (!admit(appId, request.permission)) {
+        source.postMessage(
+          { type: 'permission-result', id: request.id, result: 'denied' },
+          '*'
+        )
+        return
+      }
+
+      active.current = true
       sequence.current += 1
       setPending({
         id: request.id,
@@ -103,7 +155,7 @@ export function usePermissionRequest() {
 
     window.addEventListener('message', handleMessage)
     return () => window.removeEventListener('message', handleMessage)
-  }, [])
+  }, [admit])
 
   // Shell-driven consent (microphone bridge): only trusted shell code can fire
   // a same-window CustomEvent, and the app granted is the shell's
@@ -122,6 +174,17 @@ export function usePermissionRequest() {
         )
         return
       }
+      // The shell raises this on the app's behalf (mic.open, camera.open), so
+      // it is app-triggerable too and takes the same admission gate.
+      if (!admit(appId, detail.permission)) {
+        window.dispatchEvent(
+          new CustomEvent('mochi-shell-permission-result', {
+            detail: { id: detail.id, result: 'denied' },
+          })
+        )
+        return
+      }
+      active.current = true
       sequence.current += 1
       setPending({
         id: 0,
@@ -133,7 +196,7 @@ export function usePermissionRequest() {
     }
     window.addEventListener('mochi-shell-permission-request', handleShellRequest)
     return () => window.removeEventListener('mochi-shell-permission-request', handleShellRequest)
-  }, [])
+  }, [admit])
 
   const respond = useCallback((result: string) => {
     if (!pending) return
@@ -149,8 +212,31 @@ export function usePermissionRequest() {
         '*'
       )
     }
+    active.current = false
+    closed.current = Date.now()
     setPending(null)
   }, [pending])
+
+  // The user said no. Recorded so the same app cannot ask again for the same
+  // permission until the cooldown expires. A grant that fails on the way to
+  // the server answers 'denied' through respond() instead: that is our failure,
+  // not the user's answer, and must not lock out a retry.
+  const refuse = useCallback(() => {
+    if (pending) {
+      const now = Date.now()
+      prune(denials.current, now)
+      denials.current.set(denialKey(pending.app, pending.permission), now)
+    }
+    respond('denied')
+  }, [pending, respond])
+
+  // The dialog died in render, so the user was never asked. Answer denied and
+  // free the slot: the request cannot be granted, and leaving it occupying the
+  // slot would wedge consent for the rest of the session. No cooldown recorded
+  // - a render failure is not the user's answer.
+  const handleFailure = useCallback(() => {
+    respond('denied')
+  }, [respond])
 
   const handleAllow = useCallback(async () => {
     if (!pending) return
@@ -173,9 +259,7 @@ export function usePermissionRequest() {
     }
   }, [pending, respond])
 
-  const handleDeny = useCallback(() => {
-    respond('denied')
-  }, [respond])
+  const handleDeny = refuse
 
   // Resolve the code to its translated name and level from core
   // (permissions/name); the raw code shows only while the lookup is in flight
@@ -235,8 +319,8 @@ export function usePermissionRequest() {
   // fresh instance one throw would blank every later consent dialog until
   // reload.
   const dialog = open ? (
-    <ChromeBoundary key={pending.sequence}>
-    <ResponsiveDialog open={open} onOpenChange={(v) => { if (!v) respond('denied') }}>
+    <ChromeBoundary key={pending.sequence} onFailure={handleFailure}>
+    <ResponsiveDialog open={open} onOpenChange={(v) => { if (!v) refuse() }}>
       <ResponsiveDialogContent className="permission-dialog max-w-sm">
         <ResponsiveDialogHeader>
           <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-muted">
