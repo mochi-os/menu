@@ -7,8 +7,10 @@
 # Notification display (replaces direct HTTP calls to notifications app)
 
 def action_notifications_list(a):
-    """List notifications for the current user."""
-    result = mochi.service.call("notifications", "list")
+    """List notifications for the current user. The menu is the browser bell,
+    so it asks for the web surface: a category with that switch off is not
+    shown here."""
+    result = mochi.service.call("notifications", "list", surface="web")
     if result == None:
         return {"data": []}
     return {"data": result}
