@@ -53,6 +53,7 @@ interface WebSocketState {
   reconnectTimer: ReturnType<typeof setTimeout> | null
   subscriberCount: number
   queryClientRef: ReturnType<typeof useQueryClient> | null
+  minting: boolean
 }
 
 const wsState: WebSocketState = {
@@ -60,11 +61,33 @@ const wsState: WebSocketState = {
   reconnectTimer: null,
   subscriberCount: 0,
   queryClientRef: null,
+  minting: false,
 }
 
-function getWebSocketUrl(): string {
+function getWebSocketUrl(token: string): string {
   const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
-  return `${protocol}//${window.location.host}/_/websocket?key=notifications`
+  return `${protocol}//${window.location.host}/_/websocket?key=notifications&token=${encodeURIComponent(token)}`
+}
+
+// The socket must carry a notifications-app token: delivery is scoped by the
+// SENDING app, so only a socket tagged with that app hears its events. The
+// session cookie authenticates but tags no app, and such a socket receives
+// core's own sends and nothing else - the bell sat silent on it. Minted fresh
+// on every connect so an expired token never wedges the reconnect loop.
+async function mintNotificationsToken(): Promise<string | null> {
+  try {
+    const response = await fetch('/_/token', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ app: 'notifications' }),
+    })
+    if (!response.ok) return null
+    const data = (await response.json()) as { token?: string }
+    return typeof data.token === 'string' && data.token !== '' ? data.token : null
+  } catch {
+    return null
+  }
 }
 
 function broadcastToIframes(msg: Record<string, unknown>) {
@@ -97,9 +120,25 @@ function handleWebSocketMessage(event: MessageEvent) {
 function connectWebSocket() {
   if (wsState.instance?.readyState === WebSocket.OPEN) return
   if (wsState.instance?.readyState === WebSocket.CONNECTING) return
+  if (wsState.minting) return
 
+  wsState.minting = true
+  void mintNotificationsToken().then((token) => {
+    wsState.minting = false
+    if (wsState.subscriberCount === 0) return
+    if (wsState.instance?.readyState === WebSocket.OPEN) return
+    if (wsState.instance?.readyState === WebSocket.CONNECTING) return
+    if (!token) {
+      wsState.reconnectTimer = setTimeout(connectWebSocket, RECONNECT_DELAY)
+      return
+    }
+    openWebSocket(token)
+  })
+}
+
+function openWebSocket(token: string) {
   try {
-    const ws = new WebSocket(getWebSocketUrl())
+    const ws = new WebSocket(getWebSocketUrl(token))
     wsState.instance = ws
     ws.onmessage = handleWebSocketMessage
     ws.onclose = () => {
