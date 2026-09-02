@@ -175,6 +175,24 @@
             // Leave the theme installed at page load in place.
         });
     }
+    // Re-reads the server's locale after an app reports a change. Only the
+    // server's copy is stored: it validated the values when they were saved,
+    // and an app's posted object would otherwise reach every iframe opened
+    // afterwards, whichever app that is.
+    function refreshLocale() {
+        return fetch('/_/shell', {
+            method: 'POST',
+            credentials: 'same-origin'
+        }).then(function(r) {
+            return r.ok ? r.json() : null;
+        }).then(function(data) {
+            if (!data) return;
+            currentLocale = data.locale || null;
+            postToIframe({ type: 'locale-change', locale: currentLocale });
+        }).catch(function() {
+            // Keep the locale installed at page load.
+        });
+    }
 
     function clearThemeVars() {
         var root = document.documentElement;
@@ -212,6 +230,16 @@
         if (immersiveTimer) { clearTimeout(immersiveTimer); immersiveTimer = null; }
         if (menuEl) menuEl.classList.toggle('shell-immersive', !!on);
         if (on) immersiveTimer = setTimeout(function() { setImmersive(false); }, 6000);
+    }
+    // Overlay: an app dims the menu behind a panel of its own. Heartbeat-driven
+    // like immersive, on a longer fuse: a frame that stops re-asserting it
+    // (crashed, frozen, navigated away) releases the menu by itself, and
+    // swapIframe clears it outright.
+    var overlayTimer = null;
+    function setOverlay(on) {
+        if (overlayTimer) { clearTimeout(overlayTimer); overlayTimer = null; }
+        if (menuEl) menuEl.classList.toggle('shell-overlay-active', !!on);
+        if (on) overlayTimer = setTimeout(function() { setOverlay(false); }, 15000);
     }
     // Dropping out of fullscreen (Esc is always permitted) restores the chrome at once.
     document.addEventListener('fullscreenchange', function() {
@@ -337,6 +365,7 @@
         staleIframe.removeAttribute('id');
 
         setImmersive(false);   // never carry immersive chrome-hiding across an app navigation
+        setOverlay(false);     // nor the previous app's overlay over the menu
         abortMicSession();     // never leave microphone tracks live across app navigation
         abortCameraSession();  // nor the camera's — the light must follow the app that asked
 
@@ -1927,7 +1956,7 @@
                 break;
 
             case 'overlay':
-                if (menuEl) menuEl.classList.toggle('shell-overlay-active', !!data.open);
+                setOverlay(!!data.open);
                 break;
 
             case 'theme-set':
@@ -1945,9 +1974,10 @@
                 break;
 
             case 'locale-set':
-                // App changed locale prefs — store and forward to iframe
-                if (data.locale) currentLocale = data.locale;
-                postToIframe({ type: 'locale-change', locale: data.locale || null });
+                // The app's values never enter shared state: the settings app
+                // saved them server-side, so re-source from /_/shell (as
+                // color-theme-set does for the theme) and broadcast that copy.
+                refreshLocale();
                 break;
 
             case 'webauthn.create':
