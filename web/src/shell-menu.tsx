@@ -173,6 +173,9 @@ export function MochiShellMenu() {
   const name = useAuthStore((s) => s.name)
   const identity = useAuthStore((s) => s.identity)
   const avatar = useAuthStore((s) => s.avatar)
+  // Own avatar and accent through the menu's proxy, never the people app.
+  const personAsset = (asset: 'avatar' | 'style', version?: string | null) =>
+    identity ? `/menu/-/person/asset/${asset}${version ? `?version=${encodeURIComponent(version)}` : ''}` : undefined
   const categoryPicker = useMenuCategories()
   const unreadNotifications = notifications.filter((n: Notification) => n.read === 0)
   const unreadCount = unreadNotifications.length
@@ -246,7 +249,7 @@ export function MochiShellMenu() {
       aria-label={t`Open menu`}
       className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
     >
-      <EntityAvatar fingerprint={identity || undefined} version={avatar || undefined} name={name} size="sm" />
+      <EntityAvatar src={personAsset('avatar', avatar)} styleUrl={personAsset('style')} seed={identity || undefined} name={name} size="sm" />
       {unreadCount > 0 && (
         <span className='absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-notification px-1 text-[10px] font-medium text-notification-foreground'>
           {unreadCount > 99 ? '99+' : unreadCount}
@@ -258,7 +261,7 @@ export function MochiShellMenu() {
   const userSection = (
     <div className='flex items-center justify-between px-4 py-2.5'>
       <div className='flex items-center gap-2'>
-        <EntityAvatar fingerprint={identity || undefined} version={avatar || undefined} name={name} size="md" />
+        <EntityAvatar src={personAsset('avatar', avatar)} styleUrl={personAsset('style')} seed={identity || undefined} name={name} size="md" />
         <span className='text-sm font-semibold'>{name || t`User`}</span>
       </div>
       <div className='flex items-center gap-1 ms-4'>
@@ -429,7 +432,7 @@ export function MochiShellMenu() {
                 onClick={() => setMenuOpen(true)}
                 className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
               >
-                <EntityAvatar fingerprint={identity || undefined} version={avatar || undefined} name={name} size="sm" />
+                <EntityAvatar src={personAsset('avatar', avatar)} styleUrl={personAsset('style')} seed={identity || undefined} name={name} size="sm" />
                 {unreadCount > 0 && (
                   <span className='absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-notification px-1 text-[10px] font-medium text-notification-foreground'>
                     {unreadCount > 99 ? '99+' : unreadCount}
