@@ -21,6 +21,21 @@
 
     // Entries the shell itself pushed. navigate-back may not pop past them.
     var shellHistoryDepth = 0;
+    // Each entry the shell pushes records its own depth, so a browser
+    // back/forward (popstate) restores the count instead of leaving it at
+    // whatever the pushes summed to - which let navigate-back pop past the
+    // entry the shell started at.
+    function historyPush(path) {
+        shellHistoryDepth++;
+        history.pushState({ depth: shellHistoryDepth }, '', path);
+    }
+    function historyReplace(path) {
+        history.replaceState({ depth: shellHistoryDepth }, '', path);
+    }
+    function historyDepthRestore() {
+        var state = history.state;
+        shellHistoryDepth = (state && typeof state.depth === 'number' && state.depth > 0) ? state.depth : 0;
+    }
 
     var TITLE_MAXIMUM = 200;
     var STORAGE_MAXIMUM = 64 * 1024;
@@ -117,15 +132,18 @@
         }
         var hasOverrides = Object.keys(overrides).length > 0;
         if (hue) {
+            var background = (root.style.getPropertyValue('--hue-bg') || '').trim();
             currentColorTheme = {
                 hue: hue.trim(),
                 chroma: (root.style.getPropertyValue('--hue-chroma') || '').trim(),
-                hueBg: (root.style.getPropertyValue('--hue-bg') || '').trim()
+                background: background,
+                // Read by app builds older than lib/web 2026-09; drop after one release.
+                hueBg: background
             };
             if (hasOverrides) currentColorTheme.overrides = overrides;
         } else if (hasOverrides) {
             // No color theme, but has CSS var overrides (e.g. border_radius pref) — use empty hue
-            currentColorTheme = { hue: '', chroma: '', hueBg: '', overrides: overrides };
+            currentColorTheme = { hue: '', chroma: '', background: '', hueBg: '', overrides: overrides };
         }
     }
     themeFromRoot();
@@ -484,7 +502,12 @@
             if (!r.ok) throw new Error('Token fetch failed');
             return r.json();
         }).then(function(data) {
-            if (data.app && epoch === navigationEpoch) {
+            // Only a mint for the app the top URL names installs the id. The
+            // epoch alone does not settle that: an outgoing frame that posts
+            // a second 'ready' after a navigation bumped the epoch mints
+            // under the NEW epoch, and its late answer would otherwise become
+            // the mounted app's identity for every permission gate.
+            if (data.app && epoch === navigationEpoch && appName === currentAppPath) {
                 currentAppEntity = data.app;
                 // Expose for menu app (e.g. subscribe-notifications needs entity ID)
                 setShellAppId(data.app);
@@ -530,13 +553,45 @@
     // --- localStorage proxy (namespaced by app ID) ---
 
     var storagePrefix = 'app:' + currentAppPath + ':';
+    // Characters this app holds under its prefix, summed on first use and
+    // kept current by set/remove. STORAGE_MAXIMUM bounds one write; this
+    // bounds the app, so the origin's pool cannot be filled with a few
+    // hundred writes to fresh keys.
+    var STORAGE_APP_MAXIMUM = 256 * 1024;
+    var storageUsed = -1;
+
+    function storageSelect(app) {
+        storagePrefix = 'app:' + app + ':';
+        storageUsed = -1;
+    }
+
+    function storageUsage() {
+        if (storageUsed >= 0) return storageUsed;
+        var total = 0;
+        try {
+            for (var i = 0; i < localStorage.length; i++) {
+                var name = localStorage.key(i);
+                if (name && name.indexOf(storagePrefix) === 0) {
+                    total += name.length - storagePrefix.length + (localStorage.getItem(name) || '').length;
+                }
+            }
+        } catch(e) { /* ignore */ }
+        storageUsed = total;
+        return total;
+    }
+
+    function storageKey(data) {
+        return typeof data.key === 'string' && data.key.length <= STORAGE_MAXIMUM;
+    }
 
     function handleStorageGet(data) {
         if (navigating) return;
         var value = null;
-        try {
-            value = localStorage.getItem(storagePrefix + data.key);
-        } catch(e) { /* ignore */ }
+        if (storageKey(data)) {
+            try {
+                value = localStorage.getItem(storagePrefix + data.key);
+            } catch(e) { /* ignore */ }
+        }
         postToIframe({
             type: 'storage.result',
             id: data.id,
@@ -546,20 +601,29 @@
 
     function handleStorageSet(data) {
         if (navigating) return;
-        if (typeof data.key !== 'string' || typeof data.value !== 'string') return;
+        if (!storageKey(data) || typeof data.value !== 'string') return;
         // localStorage is one pool for the whole origin, shared with every
         // other app's namespace and with the shell's own keys. Uncapped, one
         // app can fill it and every later write anywhere fails silently.
         if (data.key.length + data.value.length > STORAGE_MAXIMUM) return;
         try {
-            localStorage.setItem(storagePrefix + data.key, data.value);
+            var name = storagePrefix + data.key;
+            var existing = localStorage.getItem(name);
+            var next = storageUsage() - (existing === null ? 0 : data.key.length + existing.length)
+                + data.key.length + data.value.length;
+            if (next > STORAGE_APP_MAXIMUM) return;
+            localStorage.setItem(name, data.value);
+            storageUsed = next;
         } catch(e) { /* ignore */ }
     }
 
     function handleStorageRemove(data) {
-        if (navigating) return;
+        if (navigating || !storageKey(data)) return;
         try {
-            localStorage.removeItem(storagePrefix + data.key);
+            var name = storagePrefix + data.key;
+            var existing = localStorage.getItem(name);
+            localStorage.removeItem(name);
+            if (existing !== null && storageUsed >= 0) storageUsed -= data.key.length + existing.length;
         } catch(e) { /* ignore */ }
     }
 
@@ -567,10 +631,19 @@
     // Sandboxed iframes can't access navigator.clipboard (opaque origin).
     // The shell proxies clipboard writes on behalf of the app.
 
+    var CLIPBOARD_MAXIMUM = 256 * 1024;
+
     function handleClipboardWrite(data) {
         if (navigating) return;
         var id = data.id;
-        if (navigator.clipboard && navigator.clipboard.writeText) {
+        // The top document may be allowed to write without a gesture where
+        // the sandboxed frame never is, so the gesture is checked here: a
+        // click inside the frame activates this window too. Without it a
+        // hostile app replaces the clipboard whenever it likes.
+        var activation = navigator.userActivation;
+        var allowed = typeof data.text === 'string' && data.text.length <= CLIPBOARD_MAXIMUM
+            && !!(activation && activation.isActive);
+        if (allowed && navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(data.text).then(function() {
                 postToIframe({ type: 'clipboard.result', id: id, ok: true });
             }).catch(function() {
@@ -684,7 +757,10 @@
                 postToIframe({
                     type: create ? 'webauthn.create.result' : 'webauthn.get.result',
                     requestId: data.requestId,
-                    error: { name: 'SecurityError', message: 'This app is not allowed to sign with your passkey. Grant it in Settings, under Permissions.' }
+                    // Bridge errors carry a DOMException-style name and nothing
+                    // else: lib/web maps the name to a translated message, and
+                    // this file has no catalog to draw one from.
+                    error: { name: 'SecurityError' }
                 });
                 return;
             }
@@ -698,7 +774,7 @@
         var resultType = create ? 'webauthn.create.result' : 'webauthn.get.result';
         if (typeof PublicKeyCredential === 'undefined') {
             postToIframe({ type: resultType, requestId: requestId,
-                error: { name: 'NotSupportedError', message: 'WebAuthn unavailable in this browser' } });
+                error: { name: 'NotSupportedError' } });
             return;
         }
         var publicKey;
@@ -717,7 +793,7 @@
         promise.then(function(cred) {
             if (!cred || typeof cred.toJSON !== 'function') {
                 postToIframe({ type: resultType, requestId: requestId,
-                    error: { name: 'NotSupportedError', message: 'Credential JSON serialisation unavailable' } });
+                    error: { name: 'NotSupportedError' } });
                 return;
             }
             postToIframe({ type: resultType, requestId: requestId, credential: cred.toJSON() });
@@ -861,7 +937,7 @@
                 requestId: micStartQueue.requestId,
                 ok: false,
                 cancelled: true,
-                error: { name: 'AbortError', message: 'Microphone session aborted' }
+                error: { name: 'AbortError' }
             });
         }
         micStartQueue = null;
@@ -877,7 +953,7 @@
             requestId: session.requestId,
             ok: false,
             cancelled: true,
-            error: { name: 'AbortError', message: 'Microphone session aborted' }
+            error: { name: 'AbortError' }
         });
     }
 
@@ -899,7 +975,7 @@
                 type: 'mic.result',
                 requestId: session.requestId,
                 ok: false,
-                error: { name: 'NotSupportedError', message: 'MediaRecorder is unavailable in this browser' }
+                error: { name: 'NotSupportedError' }
             });
             return;
         }
@@ -939,8 +1015,7 @@
         recorder.onerror = function() {
             if (session.settled) return;
             session.pendingError = {
-                name: 'MediaRecorderError',
-                message: 'MediaRecorder failed while recording'
+                name: 'MediaRecorderError'
             };
             session.cancelled = true;
             try {
@@ -986,7 +1061,7 @@
             var now = (typeof performance !== 'undefined' && performance.now)
                 ? performance.now()
                 : Date.now();
-            var durationSecs = micDurationSecs(now - session.startedAt);
+            var duration = micDurationSecs(now - session.startedAt);
             var type = session.mimeType || 'audio/webm';
             var blob = new Blob(session.chunks, { type: type });
             if (!blob.size) {
@@ -994,7 +1069,7 @@
                     type: 'mic.result',
                     requestId: session.requestId,
                     ok: false,
-                    error: { name: 'EmptyRecordingError', message: 'Recording produced no audio data' }
+                    error: { name: 'EmptyRecordingError' }
                 });
                 return;
             }
@@ -1005,7 +1080,9 @@
                 blob: blob,
                 mimeType: type,
                 filename: micFilenameForMime(type),
-                durationSecs: durationSecs
+                duration: duration,
+                // Read by app builds older than lib/web 2026-09; drop after one release.
+                durationSecs: duration
             });
         };
 
@@ -1132,7 +1209,7 @@
         settleCameraSession(session, session.opened
             ? { type: 'camera.end', requestId: session.requestId, reason: 'aborted' }
             : { type: 'camera.result', requestId: session.requestId, ok: false, cancelled: true,
-                error: { name: 'AbortError', message: 'Camera session aborted' } });
+                error: { name: 'AbortError' } });
     }
 
     // The webcam light must never stay lit behind a hidden tab: streaming
@@ -1150,7 +1227,7 @@
                 type: 'camera.result',
                 requestId: data.requestId,
                 ok: false,
-                error: { name: 'InvalidStateError', message: 'A camera permission request is already open' }
+                error: { name: 'InvalidStateError' }
             });
             return;
         }
@@ -1171,7 +1248,7 @@
                     type: 'camera.result',
                     requestId: data.requestId,
                     ok: false,
-                    error: { name: 'NotAllowedError', message: 'Camera permission not granted' }
+                    error: { name: 'NotAllowedError' }
                 });
                 return;
             }
@@ -1183,7 +1260,7 @@
                 type: 'camera.result',
                 requestId: data.requestId,
                 ok: false,
-                error: { name: 'NotAllowedError', message: 'Camera permission not granted' }
+                error: { name: 'NotAllowedError' }
             });
         });
     }
@@ -1196,7 +1273,7 @@
                 type: 'camera.result',
                 requestId: requestId,
                 ok: false,
-                error: { name: 'InvalidStateError', message: 'A camera session is already active' }
+                error: { name: 'InvalidStateError' }
             });
             return;
         }
@@ -1205,7 +1282,7 @@
                 type: 'camera.result',
                 requestId: requestId,
                 ok: false,
-                error: { name: 'NotSupportedError', message: 'Camera access requires a secure context (HTTPS or localhost)' }
+                error: { name: 'NotSupportedError' }
             });
             return;
         }
@@ -1391,7 +1468,7 @@
                 type: 'mic.result',
                 requestId: data.requestId,
                 ok: false,
-                error: { name: 'InvalidStateError', message: 'A microphone permission request is already open' }
+                error: { name: 'InvalidStateError' }
             });
             return;
         }
@@ -1419,7 +1496,7 @@
                     type: 'mic.result',
                     requestId: data.requestId,
                     ok: false,
-                    error: { name: 'NotAllowedError', message: 'Microphone permission not granted' }
+                    error: { name: 'NotAllowedError' }
                 });
                 return;
             }
@@ -1431,7 +1508,7 @@
                 type: 'mic.result',
                 requestId: data.requestId,
                 ok: false,
-                error: { name: 'NotAllowedError', message: 'Microphone permission not granted' }
+                error: { name: 'NotAllowedError' }
             });
         });
     }
@@ -1450,7 +1527,7 @@
                         requestId: micStartQueue.requestId,
                         ok: false,
                         cancelled: true,
-                        error: { name: 'AbortError', message: 'Microphone request superseded' }
+                        error: { name: 'AbortError' }
                     });
                 }
                 micStartQueue = data;
@@ -1460,7 +1537,7 @@
                 type: 'mic.result',
                 requestId: requestId,
                 ok: false,
-                error: { name: 'InvalidStateError', message: 'A microphone session is already active' }
+                error: { name: 'InvalidStateError' }
             });
             return;
         }
@@ -1470,8 +1547,7 @@
                 requestId: requestId,
                 ok: false,
                 error: {
-                    name: 'NotSupportedError',
-                    message: 'Microphone access requires a secure context (HTTPS or localhost)'
+                    name: 'NotSupportedError'
                 }
             });
             return;
@@ -1531,7 +1607,7 @@
                 type: 'mic.result',
                 requestId: requestId,
                 ok: false,
-                error: { name: 'InvalidStateError', message: 'No matching microphone session' }
+                error: { name: 'InvalidStateError' }
             });
             return;
         }
@@ -1684,10 +1760,9 @@
         // it buries the app-home entry and browser-back skips it.
         if (target.path !== lastNavigatedPath) {
             if (data.replace) {
-                history.replaceState(null, '', target.path);
+                historyReplace(target.path);
             } else {
-                history.pushState(null, '', target.path);
-                shellHistoryDepth++;
+                historyPush(target.path);
             }
             lastNavigatedPath = target.path;
         }
@@ -1722,8 +1797,7 @@
             updateFavicon(newApp);
             baseTitle = 'Mochi';
             updateTitle();
-            history.pushState(null, '', target.path);
-            shellHistoryDepth++;
+            historyPush(target.path);
             lastNavigatedPath = target.path;
 
             // Show progress bar and dim current iframe immediately (before token fetch)
@@ -1734,12 +1808,12 @@
             var epoch = navigationEpoch;
             fetchToken(newApp).then(function(token) {
                 if (epoch !== navigationEpoch) return; // a later navigation owns the iframe now
-                storagePrefix = 'app:' + newApp + ':';
+                storageSelect(newApp);
                 swapIframe(target.path);
                 scheduleTokenRefresh(newApp);
             }).catch(function() {
                 if (epoch !== navigationEpoch) return;
-                storagePrefix = 'app:' + newApp + ':';
+                storageSelect(newApp);
                 swapIframe(target.path);
                 // Re-arm even without a token: this replaces the previous
                 // app's timer, which would otherwise fire and deliver ITS
@@ -1750,8 +1824,7 @@
             // Same app: move the top URL and reload the iframe. The iframe
             // cannot navigate itself (pushState is a no-op on its opaque
             // origin), and no app listens for a 'popstate' message.
-            history.pushState(null, '', target.path);
-            shellHistoryDepth++;
+            historyPush(target.path);
             // Keep the dedup in handleNavigate honest: left stale, the app's
             // own next relay for this path looks like a change and pushes a
             // duplicate entry over the one just made.
@@ -1766,6 +1839,7 @@
     window.addEventListener('popstate', function() {
         var path = window.location.pathname + window.location.search + window.location.hash;
         lastNavigatedPath = path;
+        historyDepthRestore();
         var newApp = getAppNameFromPath(path);
 
         if (newApp !== currentAppPath) {
@@ -1792,12 +1866,12 @@
             var epoch = navigationEpoch;
             fetchToken(newApp).then(function() {
                 if (epoch !== navigationEpoch) return; // a later navigation owns the iframe now
-                storagePrefix = 'app:' + newApp + ':';
+                storageSelect(newApp);
                 swapIframe(path);
                 scheduleTokenRefresh(newApp);
             }).catch(function() {
                 if (epoch !== navigationEpoch) return;
-                storagePrefix = 'app:' + newApp + ':';
+                storageSelect(newApp);
                 swapIframe(path);
                 // Re-arm even without a token — same reason as in
                 // handleNavigateExternal's failure path.
@@ -1856,9 +1930,10 @@
                         sidebarOpen: sidebarOpen,
                         domain: sc.domain || null,
                         locale: currentLocale || null,
-                        language: currentLanguage || null,
-                        restoreSource: sc.restoreSource || null,
-                        relinks: sc.relinks || null
+                        language: currentLanguage || null
+                        // No restore-banner state here: the re-link list names
+                        // e-mail addresses, and only the app that renders the
+                        // banner may ask (a.user.restore(), under its grant).
                     };
                     if (currentColorTheme) initMsg.colorTheme = currentColorTheme;
                     postToIframe(initMsg);

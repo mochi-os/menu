@@ -1037,3 +1037,247 @@ describe('shell storage.set: bounded so one app cannot fill the origin pool', ()
     expect(localStorage.getItem('app:feeds:n')).toBeNull()
   })
 })
+
+// ---------------------------------------------------------------------------
+// Token mints held until the test releases them, per app and in request
+// order: the order in which late answers land is what the identity race
+// exercises.
+function deferredTokens() {
+  const pending = new Map<string, Array<(data: Record<string, unknown>) => void>>()
+  const token = (app: string) =>
+    new Promise<Record<string, unknown>>((resolve) => {
+      const queue = pending.get(app) ?? []
+      queue.push(resolve)
+      pending.set(app, queue)
+    })
+  const release = (app: string) => {
+    const resolve = pending.get(app)?.shift()
+    if (!resolve) throw new Error('no pending mint for ' + app)
+    resolve({ app: app + '-entity', token: app + '-token' })
+  }
+  const waiting = (app: string) => pending.get(app)?.length ?? 0
+  return { token, release, waiting }
+}
+
+const shellAppId = () =>
+  (window as { __mochi_shell?: { appId?: string | null } }).__mochi_shell?.appId ?? null
+
+// The app id every permission gate reads (mic, camera, passkeys, the consent
+// dialog) is whatever the last token mint installed. An outgoing frame that
+// posts 'ready' again during a navigation mints under the NEW epoch, so the
+// epoch guard alone let its late answer overwrite the mounted app's id.
+describe('shell ready: a late ready from the outgoing frame cannot re-install its app id', () => {
+  afterEach(() => vi.restoreAllMocks())
+
+  it("keeps the mounted app's id when the previous app's mint lands last", async () => {
+    const mints = deferredTokens()
+    const shell = boot({ token: mints.token })
+    shell.send({ type: 'ready' })
+    mints.release('feeds')
+    await shell.settle()
+    expect(shellAppId()).toBe('feeds-entity')
+
+    // Cross to settings. The shell mints for settings and swaps the frame
+    // only once that resolves, so until then the feeds frame is still the
+    // mounted one - and still the one the shell listens to.
+    shell.send({ type: 'navigate-external', url: '/settings/' })
+    await shell.settle()
+    expect(mints.waiting('settings')).toBe(1)
+    // The outgoing frame posts ready again inside that window (a document
+    // reload, or a hostile app): a second feeds mint, under the new epoch.
+    shell.send({ type: 'ready' })
+    await shell.settle()
+    expect(mints.waiting('feeds')).toBe(1)
+
+    mints.release('settings')
+    await shell.settle()
+    expect(shellAppId()).toBe('settings-entity')
+
+    // The late feeds answer lands after settings is mounted.
+    mints.release('feeds')
+    await shell.settle()
+    expect(shellAppId()).toBe('settings-entity')
+  })
+})
+
+// The shell counts only its own pushes, but the browser's Back button pops
+// entries too. Left uncounted, a navigate-back after the user already went
+// back pops past the entry the shell started at - off the site.
+describe('shell navigate-back: never below the entry the shell started at', () => {
+  const popped = () =>
+    new Promise<void>((resolve) => {
+      window.addEventListener('popstate', () => resolve(), { once: true })
+    })
+
+  // A popstate may re-create the iframe; post from whichever frame is mounted.
+  const sendFromMounted = (data: Record<string, unknown>) => {
+    const frame = document.getElementById('app-frame') as HTMLIFrameElement
+    const event = new MessageEvent('message', { data })
+    Object.defineProperty(event, 'source', { value: frame.contentWindow })
+    window.dispatchEvent(event)
+  }
+
+  it('does not pop again after the user already went back to the start', async () => {
+    const shell = boot({ app: 'feeds-entity' })
+    await shell.start()
+    shell.send({ type: 'navigate', path: '/feeds/deeper' })
+    await shell.settle()
+    expect(shell.path()).toBe('/feeds/deeper')
+
+    // The user presses Back: the top window pops on its own, and the shell
+    // only learns of it through popstate.
+    const back = popped()
+    window.history.back()
+    await back
+    await shell.settle()
+    expect(shell.path()).toBe(HOME)
+
+    const backs = vi.spyOn(window.history, 'back').mockImplementation(() => {})
+    sendFromMounted({ type: 'navigate-back' })
+    await shell.settle()
+    expect(backs).not.toHaveBeenCalled()
+    backs.mockRestore()
+  })
+
+  it('still pops an entry the app itself pushed', async () => {
+    const shell = boot({ app: 'feeds-entity' })
+    await shell.start()
+    shell.send({ type: 'navigate', path: '/feeds/deeper' })
+    await shell.settle()
+
+    const backs = vi.spyOn(window.history, 'back').mockImplementation(() => {})
+    shell.send({ type: 'navigate-back' })
+    await shell.settle()
+    expect(backs).toHaveBeenCalledTimes(1)
+    backs.mockRestore()
+  })
+})
+
+// The clipboard proxy writes from the trusted top document, which some
+// engines allow without a gesture where the sandboxed frame never is. The
+// frame's own click activates this window too, so the gesture is checkable.
+describe('shell clipboard proxy', () => {
+  function stubClipboard(activation: boolean | undefined) {
+    const writes: unknown[] = []
+    Object.defineProperty(navigator, 'clipboard', {
+      value: {
+        writeText: (text: unknown) => {
+          writes.push(text)
+          return Promise.resolve()
+        },
+      },
+      configurable: true,
+    })
+    if (activation === undefined) {
+      delete (navigator as { userActivation?: unknown }).userActivation
+    } else {
+      Object.defineProperty(navigator, 'userActivation', {
+        value: { isActive: activation },
+        configurable: true,
+      })
+    }
+    return writes
+  }
+
+  afterEach(() => {
+    delete (navigator as { clipboard?: unknown }).clipboard
+    delete (navigator as { userActivation?: unknown }).userActivation
+  })
+
+  const answer = (posted: Record<string, unknown>[], id: number) =>
+    posted.find((m) => m.type === 'clipboard.result' && m.id === id) as
+      | { ok: boolean }
+      | undefined
+
+  it('writes when the request rides on a user gesture', async () => {
+    const writes = stubClipboard(true)
+    const shell = boot()
+    shell.send({ type: 'clipboard.write', id: 1, text: 'copied' })
+    await shell.settle()
+    expect(writes).toEqual(['copied'])
+    expect(answer(shell.posted, 1)?.ok).toBe(true)
+  })
+
+  it('refuses without a gesture, and still answers so the app does not hang', async () => {
+    const writes = stubClipboard(false)
+    const shell = boot()
+    shell.send({ type: 'clipboard.write', id: 2, text: 'planted' })
+    await shell.settle()
+    expect(writes).toEqual([])
+    expect(answer(shell.posted, 2)?.ok).toBe(false)
+  })
+
+  it('refuses where the browser cannot vouch for a gesture at all', async () => {
+    const writes = stubClipboard(undefined)
+    const shell = boot()
+    shell.send({ type: 'clipboard.write', id: 3, text: 'planted' })
+    await shell.settle()
+    expect(writes).toEqual([])
+    expect(answer(shell.posted, 3)?.ok).toBe(false)
+  })
+
+  it('refuses a payload that is not a string, or is oversized', async () => {
+    const writes = stubClipboard(true)
+    const shell = boot()
+    shell.send({ type: 'clipboard.write', id: 4 })
+    shell.send({ type: 'clipboard.write', id: 5, text: 'x'.repeat(256 * 1024 + 1) })
+    await shell.settle()
+    // Before the type check, a missing text reached writeText as undefined
+    // and landed on the clipboard as the string "undefined".
+    expect(writes).toEqual([])
+    expect(answer(shell.posted, 4)?.ok).toBe(false)
+    expect(answer(shell.posted, 5)?.ok).toBe(false)
+  })
+})
+
+// The per-write cap bounds one message; the per-app quota bounds what an app
+// holds in total, so a loop over fresh keys cannot fill the origin's pool
+// and fail every later write - the shell's own included.
+describe('shell storage proxy bounds each app', () => {
+  afterEach(() => localStorage.clear())
+  // Four of these fit under the 256 KB quota; a fifth does not.
+  const big = 'v'.repeat(60 * 1024)
+
+  it('refuses a write past the quota and admits it again after a remove', async () => {
+    const shell = boot()
+    for (let i = 0; i < 4; i++) shell.send({ type: 'storage.set', key: 'k' + i, value: big })
+    await shell.settle()
+    expect(localStorage.getItem('app:feeds:k3')).toBe(big)
+
+    shell.send({ type: 'storage.set', key: 'k4', value: big })
+    await shell.settle()
+    expect(localStorage.getItem('app:feeds:k4')).toBeNull()
+
+    shell.send({ type: 'storage.remove', key: 'k0' })
+    shell.send({ type: 'storage.set', key: 'k4', value: big })
+    await shell.settle()
+    expect(localStorage.getItem('app:feeds:k4')).toBe(big)
+  })
+
+  it('counts what the app already held before this shell loaded', async () => {
+    for (let i = 0; i < 4; i++) localStorage.setItem('app:feeds:old' + i, big)
+    const shell = boot()
+    shell.send({ type: 'storage.set', key: 'more', value: big })
+    await shell.settle()
+    expect(localStorage.getItem('app:feeds:more')).toBeNull()
+  })
+
+  it("does not charge one app for another's keys", async () => {
+    for (let i = 0; i < 4; i++) localStorage.setItem('app:settings:old' + i, big)
+    const shell = boot()
+    shell.send({ type: 'storage.set', key: 'mine', value: big })
+    await shell.settle()
+    expect(localStorage.getItem('app:feeds:mine')).toBe(big)
+  })
+
+  it('charges an overwrite for the difference, not the sum', async () => {
+    const shell = boot()
+    for (let i = 0; i < 4; i++) shell.send({ type: 'storage.set', key: 'k' + i, value: big })
+    // Same size, different bytes: a refused overwrite leaves the old value,
+    // which the assertion must be able to tell from the new one.
+    const replacement = 'w'.repeat(big.length)
+    shell.send({ type: 'storage.set', key: 'k3', value: replacement })
+    await shell.settle()
+    expect(localStorage.getItem('app:feeds:k3')).toBe(replacement)
+  })
+})

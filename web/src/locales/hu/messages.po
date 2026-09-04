@@ -18,10 +18,6 @@ msgstr ""
 msgid "Please check your internet connection and try again."
 msgstr "Ellenőrizze az internetkapcsolatát, és próbálja újra."
 
-#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:301
-#~ msgid " or "
-#~ msgstr " vagy "
-
 #: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:189
 msgid "(edited)"
 msgstr "(szerkesztve)"
@@ -35,7 +31,7 @@ msgid "[not set]"
 msgstr "[nincs beállítva]"
 
 #. placeholder {0}: displayInfo.count
-#: ../../../lib/web/src/components/person-picker.tsx:257
+#: ../../../lib/web/src/components/person-picker.tsx:260
 msgid "{0, plural, one {# selected} other {# selected}}"
 msgstr "{0, plural, one {# kiválasztva} other {# kiválasztva}}"
 
@@ -44,23 +40,19 @@ msgstr "{0, plural, one {# kiválasztva} other {# kiválasztva}}"
 msgid "{0, plural, one {+# nested} other {+# nested}}"
 msgstr "{0, plural, one {+# beágyazott} other {+# beágyazott}}"
 
-#: ../../../lib/web/src/components/config-drawer.tsx:160
-#~ msgid "{0} option preview"
-#~ msgstr "{0} beállítás előnézete"
-
-#: ../../../lib/web/src/lib/locale-format.ts:176
+#: ../../../lib/web/src/lib/locale-format.ts:191
 msgid "{count, plural, one {#d} other {#d}}"
 msgstr "{count, plural, one {#n} other {#n}}"
 
-#: ../../../lib/web/src/lib/locale-format.ts:172
+#: ../../../lib/web/src/lib/locale-format.ts:187
 msgid "{count, plural, one {#h} other {#h}}"
 msgstr "{count, plural, one {#ó} other {#ó}}"
 
-#: ../../../lib/web/src/lib/locale-format.ts:168
+#: ../../../lib/web/src/lib/locale-format.ts:183
 msgid "{count, plural, one {#m} other {#m}}"
 msgstr "{count, plural, one {#p} other {#p}}"
 
-#: ../../../lib/web/src/lib/locale-format.ts:180
+#: ../../../lib/web/src/lib/locale-format.ts:195
 msgid "{count, plural, one {#w} other {#w}}"
 msgstr "{count, plural, one {#hét} other {#hét}}"
 
@@ -68,29 +60,9 @@ msgstr "{count, plural, one {#hét} other {#hét}}"
 msgid "{entityLabel} name"
 msgstr "{entityLabel} neve"
 
-#: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:99
-#~ msgid "{entityLabel} name is required"
-#~ msgstr "A(z) {entityLabel} neve kötelező"
-
 #: ../../../lib/web/src/components/game/game-draw-offer-banner.tsx:29
 msgid "{opponentName} offered a draw"
 msgstr "{opponentName} döntetlent ajánlott"
-
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:210
-#~ msgid "{selectedCount, plural, one {{entityName} selected} other {{manyName} selected}}"
-#~ msgstr "{selectedCount, plural, one {{entityName} kiválasztva} other {{manyName} kiválasztva}}"
-
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:52
-#~ msgid "{selectedCount, plural, one {# {entityName} selected. Bulk actions toolbar is available.} other {# {manyName} selected. Bulk actions toolbar is available.}}"
-#~ msgstr "{selectedCount, plural, one {# {entityName} kiválasztva. A tömeges műveletek eszköztára elérhető.} other {# {manyName} kiválasztva. A tömeges műveletek eszköztára elérhető.}}"
-
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:202
-#~ msgid "{selectedCount, plural, one {# selected} other {# selected}}"
-#~ msgstr "{selectedCount, plural, one {# kiválasztva} other {# kiválasztva}}"
-
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:149
-#~ msgid "{selectedCount, plural, one {Bulk actions for # selected {entityName}} other {Bulk actions for # selected {manyName}}}"
-#~ msgstr "{selectedCount, plural, one {Tömeges műveletek # kiválasztott {entityName} elemre} other {Tömeges műveletek # kiválasztott {manyName} elemre}}"
 
 #: ../../../lib/web/src/components/attachment-composer.tsx:248
 #: ../../../lib/web/src/components/ui/upload-progress.tsx:52
@@ -113,21 +85,9 @@ msgstr "{totalDescendants, plural, one {# válasz} other {+# további válasz}}"
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
 msgstr "{unreadCount, plural, one {Menü megnyitása (# olvasatlan értesítés)} other {Menü megnyitása (# olvasatlan értesítés)}}"
 
-#: ../../../lib/web/src/components/entity/entity-board-card.tsx:418
-#~ msgid "+{0} nested"
-#~ msgstr "+{0} beágyazott"
-
-#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:171
-#~ msgid "+{totalDescendants} more replies"
-#~ msgstr "+{totalDescendants} további válasz"
-
 #: src/use-permission-request.tsx:350
 msgid "<0>{appName}</0> is requesting the following permission:"
 msgstr "<0>{appName}</0> a következő engedélyt kéri:"
-
-#: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:170
-#~ msgid "1 reply"
-#~ msgstr "1 válasz"
 
 #: ../../../lib/web/src/lib/preference-utils.ts:37
 msgid "12 hours"
@@ -136,6 +96,10 @@ msgstr "12 óra"
 #: ../../../lib/web/src/lib/preference-utils.ts:36
 msgid "24 hours"
 msgstr "24 óra"
+
+#: ../../../lib/web/src/lib/shell-errors.ts:35
+msgid "A recording is already in progress."
+msgstr "Már folyamatban van egy felvétel."
 
 #: ../../../lib/web/src/lib/preference-utils.ts:46
 msgid "Absolute (date and time)"
@@ -150,29 +114,13 @@ msgstr "Elfogadás"
 msgid "Access denied"
 msgstr "Hozzáférés megtagadva"
 
-#: ../../../lib/web/src/features/errors/forbidden.tsx:16
-#~ msgid "Access Forbidden"
-#~ msgstr "Hozzáférés tiltva"
-
 #: ../../../lib/web/src/features/access/access-list.tsx:197
 msgid "Access level"
 msgstr "Hozzáférési szint"
 
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:216
-#~ msgid "Account added"
-#~ msgstr "Fiók hozzáadva"
-
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:232
-#~ msgid "Account removed"
-#~ msgstr "Fiók eltávolítva"
-
 #: ../../../lib/web/src/features/accounts/account-add.tsx:139
 msgid "Account type"
 msgstr "Fióktípus"
-
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:242
-#~ msgid "Account verified"
-#~ msgstr "Fiók ellenőrizve"
 
 #: ../../../lib/web/src/components/entity/entity-field-editor.tsx:758
 #: ../../../lib/web/src/features/access/access-dialog.tsx:332
@@ -200,10 +148,6 @@ msgstr "Hozzáférés hozzáadása"
 msgid "Add account"
 msgstr "Fiók hozzáadása"
 
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:297
-#~ msgid "Add an account to receive notifications and use services."
-#~ msgstr "Adjon hozzá egy fiókot az értesítések fogadásához és a szolgáltatások használatához."
-
 #: ../../../lib/web/src/components/attachment-composer.tsx:291
 msgid "Add caption"
 msgstr "Képaláírás hozzáadása"
@@ -225,10 +169,6 @@ msgstr "Elem hozzáadása..."
 msgid "Add link"
 msgstr "Hivatkozás hozzáadása"
 
-#: ../../../lib/web/src/features/accounts/account-picker.tsx:102
-#~ msgid "Add new account"
-#~ msgstr "Új fiók hozzáadása"
-
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:217
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:222
 #: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:295
@@ -240,10 +180,6 @@ msgstr "Beállítás hozzáadása"
 #: ../../../lib/web/src/components/post-tags.tsx:138
 msgid "Add tag..."
 msgstr "Címke hozzáadása..."
-
-#: ../../../lib/web/src/components/layout/team-switcher.tsx:83
-#~ msgid "Add team/app"
-#~ msgstr "Csapat/alkalmazás hozzáadása"
 
 #: ../../../lib/web/src/features/accounts/account-add.tsx:175
 msgid "Add to existing notifications"
@@ -260,25 +196,13 @@ msgstr "Nézet hozzáadása"
 msgid "Adding..."
 msgstr "Hozzáadás..."
 
-#: ../../../lib/web/src/components/config-drawer.tsx:72
-#~ msgid "Adjust the appearance and layout to suit your preferences."
-#~ msgstr "Igazítsa a megjelenést és az elrendezést a saját igényei szerint."
-
 #: ../../../lib/web/src/components/ui/sort-selector.tsx:41
 msgid "AI"
 msgstr "MI"
 
-#: ../../../lib/web/src/components/notifications-dropdown.tsx:163
-#~ msgid "All"
-#~ msgstr "Összes"
-
 #: src/use-permission-request.tsx:380
 msgid "Allow"
 msgstr "Engedélyezés"
-
-#: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:85
-#~ msgid "Allow anyone to search for {0}"
-#~ msgstr "Bárki kereshessen {0} elemre"
 
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:87
 msgid "Allow anyone to search for {entityLabel}"
@@ -330,10 +254,6 @@ msgstr "Biztosan törli ezt a megjegyzést? Ez az összes választ is törli."
 #: ../../../lib/web/src/components/sign-out-dialog.tsx:27
 msgid "Are you sure you want to log out? You will need to log in again to access your account."
 msgstr "Biztosan kijelentkezik? A fiók eléréséhez újra be kell jelentkeznie."
-
-#: ../../../lib/web/src/components/data-table/column-header.tsx:59
-#~ msgid "Asc"
-#~ msgstr "Növekvő"
 
 #: ../../../lib/web/src/components/ui/sort-direction-button.tsx:27
 msgid "Ascending"
@@ -412,6 +332,14 @@ msgstr "Szegélyszín"
 msgid "Browser notifications"
 msgstr "Böngészőértesítések"
 
+#: ../../../lib/web/src/lib/shell-errors.ts:48
+msgid "Camera permission denied"
+msgstr "A kameraengedély elutasítva"
+
+#: ../../../lib/web/src/lib/shell-errors.ts:56
+msgid "Camera unavailable"
+msgstr "A kamera nem érhető el"
+
 #: ../../../lib/web/src/components/attachment-composer.tsx:426
 #: ../../../lib/web/src/components/entity/entity-board-column.tsx:616
 #: ../../../lib/web/src/components/entity/entity-comment-thread.tsx:211
@@ -436,6 +364,12 @@ msgstr "Megjegyzés elvetése"
 #: ../../../lib/web/src/components/comment-composer.tsx:429
 msgid "Cancel reply"
 msgstr "Válasz elvetése"
+
+#: ../../../lib/web/src/lib/shell-errors.ts:24
+#: ../../../lib/web/src/lib/shell-errors.ts:37
+#: ../../../lib/web/src/lib/shell-errors.ts:52
+msgid "Cancelled"
+msgstr "Visszavonva"
 
 #: ../../../lib/web/src/components/attachment-composer.tsx:386
 #: ../../../lib/web/src/components/attachment-composer.tsx:421
@@ -463,10 +397,6 @@ msgstr "Módosítva"
 msgid "Changed {field}"
 msgstr "{field} módosítva"
 
-#: ../../../lib/web/src/components/notifications-dropdown.tsx:198
-#~ msgid "Check \"All\" to see your past notifications."
-#~ msgstr "Jelölje be az „Összes” lehetőséget a korábbi értesítésekhez."
-
 #: ../../../lib/web/src/hooks/use-field-type-labels.ts:12
 msgid "Checkbox"
 msgstr "Jelölőnégyzet"
@@ -478,22 +408,6 @@ msgstr "Ellenőrzőlista"
 #: ../../../lib/web/src/components/game/game-empty-state.tsx:35
 msgid "Choose a game from the sidebar or start a new one."
 msgstr "Válasszon egy játékot az oldalsávból, vagy kezdjen újat."
-
-#: ../../../lib/web/src/components/config-drawer.tsx:329
-#~ msgid "Choose between default expanded, compact icon-only, or full layout mode"
-#~ msgstr "Választhat alapértelmezett kibontott, kompakt csak ikonos vagy teljes elrendezési mód között"
-
-#: ../../../lib/web/src/components/config-drawer.tsx:271
-#~ msgid "Choose between inset, floating, or standard sidebar layout"
-#~ msgstr "Választhat beágyazott, lebegő vagy szabványos oldalsáv-elrendezés között"
-
-#: ../../../lib/web/src/components/config-drawer.tsx:372
-#~ msgid "Choose between left-to-right or right-to-left site direction"
-#~ msgstr "Választhat balról jobbra vagy jobbról balra olvasási irány között"
-
-#: ../../../lib/web/src/components/config-drawer.tsx:227
-#~ msgid "Choose between system preference, light mode, or dark mode"
-#~ msgstr "Választhat rendszerbeállítás, világos vagy sötét mód között"
 
 #: ../../../lib/web/src/components/language-picker.tsx:267
 #: ../../../lib/web/src/components/language-picker.tsx:274
@@ -513,29 +427,15 @@ msgstr "Törlés"
 msgid "Clear all"
 msgstr "Összes törlése"
 
-#: ../../../lib/web/src/components/data-table/faceted-filter.tsx:144
-#~ msgid "Clear filters"
-#~ msgstr "Szűrők törlése"
-
 #: ../../../lib/web/src/components/search-input.tsx:26
 msgid "Clear search"
 msgstr "Keresés törlése"
 
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:177
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:181
-#~ msgid "Clear selection"
-#~ msgstr "Kijelölés törlése"
-
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:178
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:185
-#~ msgid "Clear selection (Escape)"
-#~ msgstr "Kijelölés törlése (Esc)"
-
 #: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:523
 #: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:528
 #: ../../../lib/web/src/components/ui/dialog.tsx:78
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:479
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:482
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:480
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:483
 #: ../../../lib/web/src/components/ui/sheet.tsx:79
 #: src/use-permission-request.tsx:367
 msgid "Close"
@@ -596,10 +496,6 @@ msgstr "Oszlopok csoportosítása"
 msgid "Comfortable"
 msgstr "Kényelmes"
 
-#: ../../../lib/web/src/components/coming-soon.tsx:12
-#~ msgid "Coming Soon!"
-#~ msgstr "Hamarosan!"
-
 #: ../../../lib/web/src/components/ui/command.tsx:34
 msgid "Command Palette"
 msgstr "Parancspaletta"
@@ -609,8 +505,8 @@ msgstr "Parancspaletta"
 msgid "Comment actions"
 msgstr "Megjegyzésműveletek"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:442
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:454
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:443
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:455
 msgid "Comments"
 msgstr "Megjegyzések"
 
@@ -634,10 +530,6 @@ msgstr "Megerősítés"
 #: ../../../lib/web/src/lib/chat-ui.ts:18
 msgid "Connected"
 msgstr "Csatlakoztatva"
-
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:191
-#~ msgid "Connected accounts"
-#~ msgstr "Csatlakoztatott fiókok"
 
 #: ../../../lib/web/src/lib/chat-ui.ts:21
 msgid "Connecting..."
@@ -703,10 +595,6 @@ msgstr "Nem sikerült ellenőrizni azzal a fiókkal. Kérjük, próbálja újra.
 msgid "Create"
 msgstr "Létrehozás"
 
-#: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:144
-#~ msgid "Create {0}"
-#~ msgstr "{0} létrehozása"
-
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:146
 msgid "Create {entityLabel}"
 msgstr "{entityLabel} létrehozása"
@@ -742,11 +630,6 @@ msgstr "Egyéni"
 #: ../../../lib/web/src/lib/preference-utils.ts:15
 msgid "Dark"
 msgstr "Sötét"
-
-#: ../../../lib/web/src/components/profile-dropdown.tsx:87
-#: ../../../lib/web/src/components/profile-dropdown.tsx:123
-#~ msgid "Dark mode"
-#~ msgstr "Sötét mód"
 
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:250
 msgid "Data conflict"
@@ -814,7 +697,7 @@ msgstr "{0} beállítás törlése"
 msgid "Delete view"
 msgstr "Nézet törlése"
 
-#: ../../../lib/web/src/components/restore-banner.tsx:95
+#: ../../../lib/web/src/components/restore-banner.tsx:101
 msgid "Delete your account on the old server"
 msgstr "Törölje fiókját a régi szerveren"
 
@@ -829,10 +712,6 @@ msgstr "{field} törölve"
 #: src/use-permission-request.tsx:372
 msgid "Deny"
 msgstr "Megtagadás"
-
-#: ../../../lib/web/src/components/data-table/column-header.tsx:63
-#~ msgid "Desc"
-#~ msgstr "Csökkenő"
 
 #: ../../../lib/web/src/components/ui/sort-direction-button.tsx:27
 msgid "Descending"
@@ -857,11 +736,7 @@ msgstr "Részletek panel"
 msgid "Detect from web browser"
 msgstr "Felismerés a böngészőből"
 
-#: ../../../lib/web/src/components/config-drawer.tsx:341
-#~ msgid "Direction"
-#~ msgstr "Irány"
-
-#: ../../../lib/web/src/components/person-picker.tsx:190
+#: ../../../lib/web/src/components/person-picker.tsx:193
 msgid "Directory"
 msgstr "Címtár"
 
@@ -878,8 +753,8 @@ msgstr "Elveted a piszkozatot?"
 msgid "Disconnected"
 msgstr "Leválasztva"
 
-#: ../../../lib/web/src/components/restore-banner.tsx:74
 #: ../../../lib/web/src/components/restore-banner.tsx:80
+#: ../../../lib/web/src/components/restore-banner.tsx:86
 msgid "Dismiss"
 msgstr "Elvetés"
 
@@ -897,8 +772,8 @@ msgid "Done"
 msgstr "Kész"
 
 #: ../../../lib/web/src/components/entity/entity-object-attachments.tsx:243
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:463
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:473
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:464
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:474
 msgid "Download"
 msgstr "Letöltés"
 
@@ -993,10 +868,6 @@ msgstr "Extra nagy"
 msgid "Failed to add account"
 msgstr "Nem sikerült hozzáadni a fiókot"
 
-#: ../../../lib/web/src/components/tag-input.tsx:39
-#~ msgid "Failed to add tag"
-#~ msgstr "Nem sikerült hozzáadni a címkét"
-
 #: ../../../lib/web/src/components/ui/copy-button.tsx:26
 #: ../../../lib/web/src/lib/toast-utils.ts:44
 msgid "Failed to copy"
@@ -1031,7 +902,7 @@ msgstr "Nem sikerült betölteni"
 msgid "Failed to load history"
 msgstr "Nem sikerült betölteni az előzményeket"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:349
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:350
 msgid "Failed to load image"
 msgstr "A kép betöltése sikertelen"
 
@@ -1043,17 +914,21 @@ msgstr "Nem sikerült betölteni az értesítési kategóriákat"
 msgid "Failed to load prompts"
 msgstr "Nem sikerült betölteni az utasításokat"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:349
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:350
 msgid "Failed to load video"
 msgstr "A videó betöltése sikertelen"
+
+#: src/use-menu-notifications.ts:211
+msgid "Failed to mark all notifications as read"
+msgstr "Nem sikerült olvasottként megjelölni az összes értesítést"
+
+#: src/use-menu-notifications.ts:201
+msgid "Failed to mark notification as read"
+msgstr "Nem sikerült olvasottként megjelölni az értesítést"
 
 #: ../../../lib/web/src/components/entity/entity-comment-list.tsx:155
 msgid "Failed to post comment"
 msgstr "Nem sikerült közzétenni a hozzászólást"
-
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:234
-#~ msgid "Failed to remove account"
-#~ msgstr "Nem sikerült eltávolítani a fiókot"
 
 #: ../../../lib/web/src/components/ai-prompts-editor.tsx:90
 msgid "Failed to reset prompt"
@@ -1066,10 +941,6 @@ msgstr "Az RSS-hozzáférés visszavonása sikertelen"
 #: ../../../lib/web/src/components/ai-prompts-editor.tsx:111
 msgid "Failed to save prompt"
 msgstr "Nem sikerült menteni az utasítást"
-
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:257
-#~ msgid "Failed to send verification code"
-#~ msgstr "Nem sikerült elküldeni az ellenőrző kódot"
 
 #: src/use-menu-categories.ts:83
 msgid "Failed to update category"
@@ -1089,11 +960,7 @@ msgstr "Nem sikerült feltölteni a mellékletet"
 msgid "Files"
 msgstr "Fájlok"
 
-#: ../../../lib/web/src/components/data-table/toolbar.tsx:30
-#~ msgid "Filter..."
-#~ msgstr "Szűrés…"
-
-#: ../../../lib/web/src/components/restore-banner.tsx:83
+#: ../../../lib/web/src/components/restore-banner.tsx:89
 msgid "Finish moving your account"
 msgstr "Fejezze be a fiók áthelyezését"
 
@@ -1105,15 +972,11 @@ msgstr "Jelzések"
 msgid "Flat"
 msgstr "Lapos"
 
-#: ../../../lib/web/src/components/config-drawer.tsx:258
-#~ msgid "Floating"
-#~ msgstr "Lebegő"
-
 #: ../../../lib/web/src/lib/preference-utils.ts:58
 msgid "Friday"
 msgstr "Péntek"
 
-#: ../../../lib/web/src/components/person-picker.tsx:183
+#: ../../../lib/web/src/components/person-picker.tsx:186
 msgid "Friends"
 msgstr "Barátok"
 
@@ -1129,34 +992,10 @@ msgstr "Kezdete"
 msgid "From theme"
 msgstr "Témából"
 
-#: ../../../lib/web/src/components/config-drawer.tsx:321
-#~ msgid "Full layout"
-#~ msgstr "Teljes elrendezés"
-
 #: ../../../lib/web/src/features/errors/access-denied-error.tsx:25
 #: ../../../lib/web/src/features/errors/not-found-error.tsx:26
 msgid "Go back"
 msgstr "Vissza"
-
-#: ../../../lib/web/src/components/data-table/pagination.tsx:82
-#~ msgid "Go to first page"
-#~ msgstr "Ugrás az első oldalra"
-
-#: ../../../lib/web/src/components/data-table/pagination.tsx:128
-#~ msgid "Go to last page"
-#~ msgstr "Ugrás az utolsó oldalra"
-
-#: ../../../lib/web/src/components/data-table/pagination.tsx:119
-#~ msgid "Go to next page"
-#~ msgstr "Ugrás a következő oldalra"
-
-#: ../../../lib/web/src/components/data-table/pagination.tsx:106
-#~ msgid "Go to page {pageNumber}"
-#~ msgstr "Ugrás a(z) {pageNumber}. oldalra"
-
-#: ../../../lib/web/src/components/data-table/pagination.tsx:91
-#~ msgid "Go to previous page"
-#~ msgstr "Ugrás az előző oldalra"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx:162
 msgid "Group"
@@ -1170,14 +1009,6 @@ msgstr "Csoportosítás"
 #: ../../../lib/web/src/features/access/access-list.tsx:68
 msgid "Group: {0}"
 msgstr "Csoport: {0}"
-
-#: ../../../lib/web/src/components/data-table/column-header.tsx:70
-#~ msgid "Hide"
-#~ msgstr "Elrejtés"
-
-#: ../../../lib/web/src/components/password-input.tsx:27
-#~ msgid "Hide password"
-#~ msgstr "Jelszó elrejtése"
 
 #: ../../../lib/web/src/components/audit-timeline.tsx:61
 msgid "History"
@@ -1203,7 +1034,7 @@ msgid "ID"
 msgstr "Azonosító"
 
 #. placeholder {0}: currentMedia.name
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:327
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:328
 msgid "Image viewer: {0}"
 msgstr "Képnézegető: {0}"
 
@@ -1223,10 +1054,6 @@ msgstr "Monogramos profilkép"
 msgid "Initials avatar for {name}"
 msgstr "{name} monogramos profilképe"
 
-#: ../../../lib/web/src/components/config-drawer.tsx:253
-#~ msgid "Inset"
-#~ msgstr "Beillesztett"
-
 #: ../../../lib/web/src/components/post-tags.tsx:168
 msgid "Interest {weight}"
 msgstr "Érdeklődés: {weight}"
@@ -1239,19 +1066,11 @@ msgstr "Érdeklődések"
 msgid "Invalid date"
 msgstr "Érvénytelen dátum"
 
-#: ../../../lib/web/src/components/tag-input.tsx:38
-#~ msgid "Invalid tag: letters, numbers, spaces, hyphens, and slashes only (max 50 chars)"
-#~ msgstr "Érvénytelen címke: csak betűk, számok, szóközök, kötőjelek és perjelek (legfeljebb 50 karakter)"
-
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:245
-#~ msgid "Invalid verification code"
-#~ msgstr "Érvénytelen ellenőrző kód"
-
 #: ../../../lib/web/src/features/errors/not-found-error.tsx:18
 msgid "It seems like the page you're looking for <0/>does not exist or might have been removed."
 msgstr "Úgy tűnik, a keresett oldal <0/>nem létezik, vagy eltávolították."
 
-#: ../../../lib/web/src/lib/locale-format.ts:165
+#: ../../../lib/web/src/lib/locale-format.ts:180
 msgid "Just now"
 msgstr "Épp most"
 
@@ -1267,19 +1086,6 @@ msgstr "Nagy"
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:309
 msgid "Layout"
 msgstr "Elrendezés"
-
-#: ../../../lib/web/src/components/learn-more.tsx:33
-#: ../../../lib/web/src/components/learn-more.tsx:38
-#~ msgid "Learn more"
-#~ msgstr "Tudjon meg többet"
-
-#: ../../../lib/web/src/components/config-drawer.tsx:355
-#~ msgid "Left to Right"
-#~ msgstr "Balról jobbra"
-
-#: ../../../lib/web/src/components/post-tags.tsx:72
-#~ msgid "Letters, numbers, spaces, and hyphens only"
-#~ msgstr "Csak betűk, számok, szóközök és kötőjelek"
 
 #: ../../../lib/web/src/components/post-tags.tsx:73
 msgid "Letters, numbers, spaces, hyphens, and slashes only"
@@ -1337,10 +1143,6 @@ msgstr "Kijelentkezés…"
 msgid "Manage categories"
 msgstr "Kategóriák kezelése"
 
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:192
-#~ msgid "Manage your connected accounts for notifications and services."
-#~ msgstr "Kezelje csatlakoztatott fiókjait az értesítésekhez és szolgáltatásokhoz."
-
 #: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:52
 msgid "Manual"
 msgstr "Kézikönyv"
@@ -1380,6 +1182,10 @@ msgstr "Üzenet"
 #: ../../../lib/web/src/lib/preference-utils.ts:80
 msgid "Metric"
 msgstr "Metrika"
+
+#: ../../../lib/web/src/lib/shell-errors.ts:31
+msgid "Microphone permission denied"
+msgstr "Mikrofonengedély megtagadva"
 
 #: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:191
 msgid "Minimum length"
@@ -1422,10 +1228,6 @@ msgstr "Név"
 msgid "Name cannot contain < or > characters"
 msgstr "A név nem tartalmazhat < vagy > karaktereket"
 
-#: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:102
-#~ msgid "Name cannot contain angle brackets, backslash, semicolon, quotes or backticks"
-#~ msgstr "A név nem tartalmazhat szögletes zárójelet, fordított perjelet, pontosvesszőt, idézőjelet vagy visszafelé dőlő aposztrófot"
-
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx:101
 msgid "Name is required"
 msgstr "A név kötelező"
@@ -1449,8 +1251,8 @@ msgstr "Új"
 msgid "New game"
 msgstr "Új játék"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:536
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:541
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:537
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:542
 msgid "Next image"
 msgstr "Következő kép"
 
@@ -1470,10 +1272,6 @@ msgstr "Még nincs tevékenység"
 msgid "No comments yet"
 msgstr "Még nincsenek hozzászólások"
 
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:295
-#~ msgid "No connected accounts"
-#~ msgstr "Nincsenek csatlakoztatott fiókok"
-
 #: ../../../lib/web/src/components/game/game-empty-state.tsx:48
 msgid "No games yet"
 msgstr "Még nincsenek játékok"
@@ -1490,10 +1288,6 @@ msgstr "Egyetlen elemtípus sem hozható még létre. Először hozza létre a s
 msgid "No matching objects"
 msgstr "Nincs egyező objektum"
 
-#: ../../../lib/web/src/components/notifications-dropdown.tsx:193
-#~ msgid "No notifications yet"
-#~ msgstr "Még nincsenek értesítések"
-
 #: ../../../lib/web/src/components/entity/entity-field-editor.tsx:382
 #: ../../../lib/web/src/components/person-picker.tsx:71
 msgid "No people found"
@@ -1502,10 +1296,6 @@ msgstr "Nem találhatók személyek"
 #: ../../../lib/web/src/components/place-picker.tsx:120
 msgid "No places found"
 msgstr "Nem találhatók helyek"
-
-#: ../../../lib/web/src/components/profile-dropdown.tsx:58
-#~ msgid "No profile"
-#~ msgstr "Nincs profil"
 
 #: ../../../lib/web/src/components/inline-entity-search.tsx:65
 #: ../../../lib/web/src/components/search-entity-page.tsx:73
@@ -1553,7 +1343,7 @@ msgstr "Nincsenek nézetek"
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:418
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:491
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:494
-#: ../../../lib/web/src/components/person-picker.tsx:326
+#: ../../../lib/web/src/components/person-picker.tsx:329
 #: ../../../lib/web/src/lib/preference-utils.ts:100
 msgid "None"
 msgstr "Nincs"
@@ -1598,11 +1388,6 @@ msgstr "Be"
 msgid "Oops! Page Not Found!"
 msgstr "Hopp! Az oldal nem található!"
 
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:156
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:166
-#~ msgid "Open account actions"
-#~ msgstr "Fiókműveletek megnyitása"
-
 #: ../../../lib/web/src/components/layout/nav-group.tsx:227
 #: ../../../lib/web/src/components/layout/nav-group.tsx:232
 msgid "Open actions"
@@ -1623,11 +1408,6 @@ msgstr "Menü megnyitása"
 msgid "Open navigation"
 msgstr "Navigáció megnyitása"
 
-#: ../../../lib/web/src/components/layout/top-nav.tsx:38
-#: ../../../lib/web/src/components/layout/top-nav.tsx:44
-#~ msgid "Open navigation menu"
-#~ msgstr "Navigációs menü megnyitása"
-
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:106
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx:112
 msgid "Open option actions"
@@ -1636,11 +1416,6 @@ msgstr "Opcióműveletek megnyitása"
 #: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:30
 msgid "Open selected card"
 msgstr "Kijelölt kártya megnyitása"
-
-#: ../../../lib/web/src/components/config-drawer.tsx:58
-#: ../../../lib/web/src/components/config-drawer.tsx:66
-#~ msgid "Open theme settings"
-#~ msgstr "Téma beállításainak megnyitása"
 
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:277
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:282
@@ -1670,11 +1445,6 @@ msgstr "Egyéb"
 msgid "Owner"
 msgstr "Tulajdonos"
 
-#: ../../../lib/web/src/components/data-table/pagination.tsx:43
-#: ../../../lib/web/src/components/data-table/pagination.tsx:71
-#~ msgid "Page {currentPage} of {totalPages}"
-#~ msgstr "{currentPage}. oldal, összesen {totalPages}"
-
 #: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx:552
 msgid "Parent"
 msgstr "Szülő"
@@ -1684,18 +1454,23 @@ msgid "Passkey"
 msgstr "Azonosítókulcs"
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx:195
+#: ../../../lib/web/src/lib/shell-errors.ts:26
 msgid "Passkey verification failed. Please try again."
 msgstr "A hozzáférési kulcs ellenőrzése sikertelen. Próbálja újra."
 
-#: ../../../lib/web/src/components/restore-banner.tsx:132
+#: ../../../lib/web/src/components/restore-banner.tsx:138
 msgid "Passkeys"
 msgstr "Passkey-ek"
+
+#: ../../../lib/web/src/lib/shell-errors.ts:19
+msgid "Passkeys are not available in this browser"
+msgstr "A passkey-ek nem érhetők el ebben a böngészőben"
 
 #: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:213
 msgid "Pattern (regex)"
 msgstr "Minta (regex)"
 
-#: ../../../lib/web/src/components/person-picker.tsx:176
+#: ../../../lib/web/src/components/person-picker.tsx:179
 msgid "People"
 msgstr "Személyek"
 
@@ -1703,19 +1478,11 @@ msgstr "Személyek"
 msgid "Permission request"
 msgstr "Engedélykérés"
 
-#: ../../../lib/web/src/components/date-picker.tsx:20
-#~ msgid "Pick a date"
-#~ msgstr "Válasszon dátumot"
-
 #: ../../../lib/web/src/components/comment-composer.tsx:89
 #: ../../../lib/web/src/features/errors/general-error.tsx:52
 #: ../../../lib/web/src/lib/api-response-interceptors.ts:314
 msgid "Please check your internet connection and try again."
 msgstr "Ellenőrizze az internetkapcsolatát, és próbálja újra."
-
-#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:18
-#~ msgid "Please log in with the appropriate credentials <0/> to access this resource."
-#~ msgstr "Jelentkezzen be a megfelelő hitelesítő adatokkal, <0/> hogy hozzáférjen ehhez az erőforráshoz."
 
 #: ../../../lib/web/src/features/errors/general-error.tsx:81
 msgid "Please try again."
@@ -1733,8 +1500,8 @@ msgstr "Bejegyzések"
 msgid "Posts and comments"
 msgstr "Bejegyzések és hozzászólások"
 
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:520
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:525
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:521
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:526
 msgid "Previous image"
 msgstr "Előző kép"
 
@@ -1746,14 +1513,6 @@ msgstr "Adatvédelem"
 #: ../../../lib/web/src/components/ui/upload-progress.tsx:50
 msgid "Processing…"
 msgstr "Feldolgozás…"
-
-#: ../../../lib/web/src/components/profile-dropdown.tsx:114
-#~ msgid "Profile"
-#~ msgstr "Profil"
-
-#: ../../../lib/web/src/components/person-picker.tsx:200
-#~ msgid "Project members"
-#~ msgstr "Projekttagok"
 
 #: ../../../lib/web/src/components/ai-prompts-editor.tsx:108
 msgid "Prompt saved"
@@ -1767,11 +1526,11 @@ msgstr "Push értesítés"
 msgid "Raised"
 msgstr "Kiemelt"
 
-#: ../../../lib/web/src/components/restore-banner.tsx:104
+#: ../../../lib/web/src/components/restore-banner.tsx:110
 msgid "Re-link your accounts on this server"
 msgstr "Kapcsolja újra össze fiókjait ezen a szerveren"
 
-#: ../../../lib/web/src/components/restore-banner.tsx:126
+#: ../../../lib/web/src/components/restore-banner.tsx:132
 msgid "Re-register your passkeys on this server"
 msgstr "Regisztrálja újra a hozzáférési kulcsait ezen a kiszolgálón"
 
@@ -1782,6 +1541,14 @@ msgstr "Ajánlott"
 #: ../../../lib/web/src/lib/chat-ui.ts:21
 msgid "Reconnecting ({retries})..."
 msgstr "Újracsatlakozás ({retries})…"
+
+#: ../../../lib/web/src/lib/shell-errors.ts:43
+msgid "Recording failed. Please try again."
+msgstr "A felvétel nem sikerült. Próbálja újra."
+
+#: ../../../lib/web/src/lib/shell-errors.ts:39
+msgid "Recording produced no audio"
+msgstr "A felvétel nem tartalmaz hangot"
 
 #: ../../../lib/web/src/components/layout/authenticated-layout.tsx:135
 msgid "Redirecting to login."
@@ -1884,20 +1651,6 @@ msgstr "Kötelező"
 msgid "Resend email"
 msgstr "E-mail újraküldése"
 
-#: ../../../lib/web/src/components/config-drawer.tsx:87
-#: ../../../lib/web/src/components/data-table/toolbar.tsx:82
-#~ msgid "Reset"
-#~ msgstr "Visszaállítás"
-
-#: ../../../lib/web/src/components/config-drawer.tsx:122
-#: ../../../lib/web/src/components/config-drawer.tsx:127
-#~ msgid "Reset {title}"
-#~ msgstr "{title} visszaállítása"
-
-#: ../../../lib/web/src/components/config-drawer.tsx:85
-#~ msgid "Reset all settings to default values"
-#~ msgstr "Minden beállítás visszaállítása alapértelmezett értékekre"
-
 #: ../../../lib/web/src/components/attachment-composer.tsx:348
 msgid "Retry"
 msgstr "Újra"
@@ -1914,10 +1667,6 @@ msgstr "Hozzáférés visszavonása"
 msgid "Revoke RSS access?"
 msgstr "Visszavonja az RSS-hozzáférést?"
 
-#: ../../../lib/web/src/components/config-drawer.tsx:362
-#~ msgid "Right to Left"
-#~ msgstr "Jobbról balra"
-
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx:152
 #: ../../../lib/web/src/components/entity/entity-field-dialog.tsx:172
 msgid "Rows"
@@ -1926,10 +1675,6 @@ msgstr "Sorok"
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:376
 msgid "Rows group by"
 msgstr "Sorok csoportosítása"
-
-#: ../../../lib/web/src/components/data-table/pagination.tsx:65
-#~ msgid "Rows per page"
-#~ msgstr "Sorok oldalanként"
 
 #: ../../../lib/web/src/components/options-menu.tsx:131
 msgid "RSS access revoked"
@@ -2006,7 +1751,7 @@ msgstr "Keressen, figyeljen és rendezzen ebben a nézetben."
 #: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:179
 #: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:255
 #: ../../../lib/web/src/components/inline-entity-search.tsx:64
-#: ../../../lib/web/src/components/person-picker.tsx:300
+#: ../../../lib/web/src/components/person-picker.tsx:303
 #: ../../../lib/web/src/components/search-entity-page.tsx:72
 msgid "Search..."
 msgstr "Keresés..."
@@ -2019,10 +1764,6 @@ msgstr "Keresés folyamatban..."
 #: ../../../lib/web/src/hooks/use-field-type-labels.ts:16
 msgid "Select"
 msgstr "Kiválasztás"
-
-#: ../../../lib/web/src/components/config-drawer.tsx:149
-#~ msgid "Select {0}"
-#~ msgstr "{0} kiválasztása"
 
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx:359
 msgid "Select a field"
@@ -2040,10 +1781,6 @@ msgstr "Válasszon felhasználót, csoportot vagy más szabályt a hozzáférés
 msgid "Select access rule"
 msgstr "Hozzáférési szabály kiválasztása"
 
-#: ../../../lib/web/src/features/accounts/account-picker.tsx:34
-#~ msgid "Select account"
-#~ msgstr "Válasszon fiókot"
-
 #: ../../../lib/web/src/features/accounts/account-add.tsx:142
 msgid "Select account type"
 msgstr "Fióktípus kiválasztása"
@@ -2051,10 +1788,6 @@ msgstr "Fióktípus kiválasztása"
 #: ../../../lib/web/src/features/access/access-dialog.tsx:231
 msgid "Select group"
 msgstr "Csoport kiválasztása"
-
-#: ../../../lib/web/src/components/config-drawer.tsx:305
-#~ msgid "Select layout style"
-#~ msgstr "Elrendezési stílus kiválasztása"
 
 #: ../../../lib/web/src/components/place-picker.tsx:36
 msgid "Select location"
@@ -2072,26 +1805,10 @@ msgstr "Válasszon személyt…"
 msgid "Select previous card"
 msgstr "Előző kártya kijelölése"
 
-#: ../../../lib/web/src/components/config-drawer.tsx:247
-#~ msgid "Select sidebar style"
-#~ msgstr "Oldalsáv stílusának kiválasztása"
-
-#: ../../../lib/web/src/components/config-drawer.tsx:349
-#~ msgid "Select site direction"
-#~ msgstr "Oldalirány kiválasztása"
-
-#: ../../../lib/web/src/components/config-drawer.tsx:203
-#~ msgid "Select theme preference"
-#~ msgstr "Téma beállításának kiválasztása"
-
 #: ../../../lib/web/src/components/entity/entity-field-editor.tsx:289
 #: ../../../lib/web/src/components/entity/entity-field-editor.tsx:381
 msgid "Select..."
 msgstr "Kiválasztás..."
-
-#: ../../../lib/web/src/components/data-table/bulk-actions.tsx:216
-#~ msgid "selected"
-#~ msgstr "kiválasztva"
 
 #. placeholder {0}: getSelectedName()
 #: ../../../lib/web/src/features/access/access-dialog.tsx:309
@@ -2147,10 +1864,6 @@ msgstr "Osztályok megjelenítése"
 msgid "Show fields"
 msgstr "Mezők megjelenítése"
 
-#: ../../../lib/web/src/components/password-input.tsx:27
-#~ msgid "Show password"
-#~ msgstr "Jelszó megjelenítése"
-
 #: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:33
 msgid "Show this help"
 msgstr "Súgó megjelenítése"
@@ -2181,10 +1894,6 @@ msgstr "Kijelentkezés..."
 msgid "Single line of text only"
 msgstr "Csak egy sornyi szöveg"
 
-#: ../../../lib/web/src/components/skip-to-main.tsx:11
-#~ msgid "Skip to Main"
-#~ msgstr "Ugrás a fő tartalomra"
-
 #: ../../../lib/web/src/lib/preference-utils.ts:101
 #: ../../../lib/web/src/lib/preference-utils.ts:121
 msgid "Small"
@@ -2205,10 +1914,6 @@ msgstr "Tágas"
 #: ../../../lib/web/src/components/entity/entity-comment-list.tsx:325
 msgid "Start the discussion by adding the first comment."
 msgstr "Indítsa el a beszélgetést az első hozzászólás hozzáadásával."
-
-#: ../../../lib/web/src/components/coming-soon.tsx:15
-#~ msgid "Stay tuned though!"
-#~ msgstr "De maradjon velünk!"
 
 #: ../../../lib/web/src/features/access/access-list.tsx:196
 msgid "Subject"
@@ -2242,10 +1947,6 @@ msgstr "Váltás 1-9 nézetre"
 msgid "System"
 msgstr "Rendszer"
 
-#: ../../../lib/web/src/components/tag-input.tsx:95
-#~ msgid "Tag"
-#~ msgstr "Címke"
-
 #: ../../../lib/web/src/components/post-tags.tsx:77
 msgid "Tag already exists"
 msgstr "A címke már létezik"
@@ -2258,10 +1959,6 @@ msgstr "A címke legfeljebb 50 karakter lehet"
 #: ../../../lib/web/src/components/post-tags.tsx:116
 msgid "Tags"
 msgstr "Címkék"
-
-#: ../../../lib/web/src/components/layout/team-switcher.tsx:63
-#~ msgid "Teams/Apps"
-#~ msgstr "Csapatok/Alkalmazások"
 
 #: ../../../lib/web/src/components/server-documents-footer.tsx:19
 #: ../../../lib/web/src/features/document/document-page.tsx:42
@@ -2285,6 +1982,22 @@ msgstr "Nem sikerült elküldeni. A fájlok túl nagyok lehetnek, vagy a kapcsol
 msgid "That was too large to upload. Remove or shrink files and try again."
 msgstr "Túl nagy volt a feltöltéshez. Távolítson el vagy kicsinyítsen fájlokat, és próbálja újra."
 
+#: ../../../lib/web/src/lib/shell-errors.ts:50
+msgid "The camera is already in use"
+msgstr "A kamera már használatban van"
+
+#: ../../../lib/web/src/lib/shell-errors.ts:54
+msgid "The camera request was not answered"
+msgstr "A kamerakérésre nem érkezett válasz"
+
+#: ../../../lib/web/src/lib/shell-errors.ts:41
+msgid "The microphone request was not answered"
+msgstr "A mikrofonkérésre nem érkezett válasz"
+
+#: ../../../lib/web/src/lib/shell-errors.ts:21
+msgid "The passkey request was not answered"
+msgstr "A passkey-kérésre nem érkezett válasz"
+
 #: ../../../lib/web/src/features/errors/general-error.tsx:66
 msgid "The requested content could not be found."
 msgstr "A kért tartalom nem található."
@@ -2293,21 +2006,9 @@ msgstr "A kért tartalom nem található."
 msgid "The server returned a web page instead of data."
 msgstr "A kiszolgáló weboldalt adott vissza adatok helyett."
 
-#: ../../../lib/web/src/features/errors/maintenance-error.tsx:15
-#~ msgid "The site is not available at the moment."
-#~ msgstr "Az oldal jelenleg nem érhető el."
-
-#: ../../../lib/web/src/components/config-drawer.tsx:195
-#~ msgid "Theme"
-#~ msgstr "Téma"
-
-#: ../../../lib/web/src/components/config-drawer.tsx:70
-#~ msgid "Theme Settings"
-#~ msgstr "Témabeállítások"
-
-#: ../../../lib/web/src/components/coming-soon.tsx:14
-#~ msgid "This page has not been created yet."
-#~ msgstr "Ez az oldal még nem jött létre."
+#: ../../../lib/web/src/lib/shell-errors.ts:17
+msgid "This app is not allowed to use your passkey. Allow it in Settings, under Permissions."
+msgstr "Ez az alkalmazás nem használhatja az Ön passkey-ét. Engedélyezze a Beállításokban, az Engedélyek alatt."
 
 #: src/use-permission-request.tsx:360
 msgid "This permission must be enabled by you in the app settings."
@@ -2320,15 +2021,6 @@ msgstr "Csütörtök"
 #: ../../../lib/web/src/components/travelling-picker.tsx:201
 msgid "To"
 msgstr "Ide"
-
-#: ../../../lib/web/src/components/data-table/view-options.tsx:37
-#~ msgid "Toggle columns"
-#~ msgstr "Oszlopok váltása"
-
-#: ../../../lib/web/src/components/layout/right-panel.tsx:233
-#: ../../../lib/web/src/components/layout/right-panel.tsx:236
-#~ msgid "Toggle right panel"
-#~ msgstr "Jobb panel váltása"
 
 #: ../../../lib/web/src/components/layout/nav-group.tsx:393
 #: ../../../lib/web/src/components/layout/nav-group.tsx:400
@@ -2343,16 +2035,6 @@ msgstr "Szakasz be- és kikapcsolása"
 #: ../../../lib/web/src/components/ui/sidebar.tsx:355
 msgid "Toggle sidebar"
 msgstr "Oldalsáv váltása"
-
-#: ../../../lib/web/src/components/ui/sidebar.tsx:352
-#: ../../../lib/web/src/components/ui/sidebar.tsx:355
-#~ msgid "Toggle Sidebar"
-#~ msgstr "Oldalsáv váltása"
-
-#: ../../../lib/web/src/components/theme-switch.tsx:37
-#: ../../../lib/web/src/components/theme-switch.tsx:41
-#~ msgid "Toggle theme"
-#~ msgstr "Téma váltása"
 
 #: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx:26
 msgid "Toggle view options"
@@ -2422,10 +2104,6 @@ msgstr "Nem sikerült átirányítani a bejelentkezésre. Próbálja újra."
 msgid "Unassigned"
 msgstr "Hozzárendelés nélküli"
 
-#: ../../../lib/web/src/features/errors/unauthorized-error.tsx:16
-#~ msgid "Unauthorized Access"
-#~ msgstr "Engedély nélküli hozzáférés"
-
 #: ../../../lib/web/src/components/attachment-image.tsx:50
 msgid "Unavailable"
 msgstr "Nem elérhető"
@@ -2457,10 +2135,6 @@ msgstr "Leiratkozás"
 #: ../../../lib/web/src/components/entity/entity-object-links.tsx:184
 msgid "Untitled"
 msgstr "Cím nélküli"
-
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:135
-#~ msgid "Unverified"
-#~ msgstr "Nem ellenőrzött"
 
 #: ../../../lib/web/src/components/entity/entity-activity-list.tsx:56
 #: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:57
@@ -2500,14 +2174,6 @@ msgstr "Változók: {variables}"
 msgid "Verification code"
 msgstr "Ellenőrző kód"
 
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:255
-#~ msgid "Verification code sent"
-#~ msgstr "Ellenőrző kód elküldve"
-
-#: ../../../lib/web/src/features/accounts/account-manager.tsx:248
-#~ msgid "Verification failed"
-#~ msgstr "Az ellenőrzés sikertelen"
-
 #: ../../../lib/web/src/components/step-up-dialog.tsx:379
 #: ../../../lib/web/src/features/accounts/account-verify.tsx:111
 msgid "Verify"
@@ -2522,13 +2188,9 @@ msgid "Video thumbnail"
 msgstr "Videó indexképe"
 
 #. placeholder {0}: currentMedia.name
-#: ../../../lib/web/src/components/ui/image-lightbox.tsx:326
+#: ../../../lib/web/src/components/ui/image-lightbox.tsx:327
 msgid "Video viewer: {0}"
 msgstr "Videónézegető: {0}"
-
-#: ../../../lib/web/src/components/data-table/view-options.tsx:33
-#~ msgid "View"
-#~ msgstr "Megtekintés"
 
 #: src/shell-menu.tsx:309
 #: src/shell-menu.tsx:315
@@ -2544,6 +2206,10 @@ msgstr "Összes értesítés megtekintése"
 msgid "View controls"
 msgstr "Vezérlők megtekintése"
 
+#: ../../../lib/web/src/lib/shell-errors.ts:33
+msgid "Voice recording is not supported in this browser"
+msgstr "A hangfelvétel nem támogatott ebben a böngészőben"
+
 #: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx:269
 #: ../../../lib/web/src/components/filter-bar.tsx:35
 msgid "Watched"
@@ -2558,18 +2224,6 @@ msgstr "Csak figyelt"
 msgid "We sent a verification code to <0>{0}</0>. Enter the code below to verify your email address."
 msgstr "Küldtünk egy ellenőrző kódot ide: <0>{0}</0>. Adja meg a kódot alább az e-mail-cím megerősítéséhez."
 
-#: ../../../lib/web/src/features/errors/maintenance-error.tsx:16
-#~ msgid "We'll be back online shortly."
-#~ msgstr "Hamarosan újra elérhetők leszünk."
-
-#: ../../../lib/web/src/components/notifications-dropdown.tsx:197
-#~ msgid "We'll notify you when something important happens."
-#~ msgstr "Értesítjük, ha valami fontos történik."
-
-#: ../../../lib/web/src/features/errors/maintenance-error.tsx:13
-#~ msgid "Website is under maintenance!"
-#~ msgstr "A webhely karbantartás alatt áll!"
-
 #: ../../../lib/web/src/lib/preference-utils.ts:56
 msgid "Wednesday"
 msgstr "Szerda"
@@ -2578,15 +2232,7 @@ msgstr "Szerda"
 msgid "You do not have access to this section."
 msgstr "Nincs hozzáférése ehhez a részhez."
 
-#: ../../../lib/web/src/features/errors/forbidden.tsx:18
-#~ msgid "You don't have necessary permission <0/>to view this resource."
-#~ msgstr "Nincs meg a szükséges engedélye <0/>az erőforrás megtekintéséhez."
-
-#: ../../../lib/web/src/components/notifications-dropdown.tsx:193
-#~ msgid "You're all caught up!"
-#~ msgstr "Mindent elolvasott!"
-
-#: ../../../lib/web/src/components/restore-banner.tsx:86
+#: ../../../lib/web/src/components/restore-banner.tsx:92
 msgid "Your account was moved here from {source}. Until you delete it there, messages and notifications may reach both servers, some of your content keeps being served from the old server, and followers may take a few minutes to find you here."
 msgstr "Fiókja ide lett áthelyezve innen: {source}. Amíg nem törli onnan, az üzenetek és értesítések mindkét szerverre eljuthatnak, tartalmának egy része továbbra is a régi szerverről lesz kiszolgálva, és a követőknek néhány percbe telhet, mire megtalálják Önt itt."
 

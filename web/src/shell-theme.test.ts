@@ -45,8 +45,11 @@ const appearance = () =>
 
 // The root's theme values must come from the server, never from the app that
 // reports a change: the consent dialog renders from them.
-function boot(options: { theme?: string; appearance?: string } = {}) {
+function boot(options: { theme?: string; appearance?: string; root?: string } = {}) {
   document.documentElement.removeAttribute('style')
+  // The server renders the user's theme inline on the shell page before any
+  // script runs; `root` stands in for that.
+  if (options.root) document.documentElement.style.cssText = options.root
   document.body.innerHTML =
     '<div id="app-container"></div><div id="menu"></div><div id="shell-progress"></div>'
   window.history.replaceState({}, '', '/feeds/')
@@ -121,7 +124,7 @@ afterEach(() => {
 const HOSTILE = {
   hue: '250',
   chroma: '0.1',
-  hueBg: '250',
+  background: '250',
   overrides: {
     '--background': 'rgb(17, 17, 17)',
     '--foreground': 'rgb(17, 17, 17)',
@@ -292,5 +295,21 @@ describe('shell appearance: auto keeps following the system', () => {
     expect(appearance()).toBe('dark')
     scheme.set(false)
     expect(appearance()).toBe('light')
+  })
+})
+
+// The colour theme crosses the postMessage boundary, so its keys are full
+// words. `hueBg` rides along for one release for app builds that still read
+// it.
+describe('shell theme: the colour theme names the background hue in full', () => {
+  it('sends `background` in init, with the old key beside it for now', async () => {
+    const shell = boot({ root: '--hue: 250; --hue-chroma: 0.1; --hue-bg: 250' })
+    shell.send({ type: 'ready' })
+    await shell.settle()
+    const init = shell.posted.find((m) => m.type === 'init') as
+      | { colorTheme?: Record<string, unknown> }
+      | undefined
+    expect(init?.colorTheme?.background).toBe('250')
+    expect(init?.colorTheme?.hueBg).toBe('250')
   })
 })

@@ -8,7 +8,8 @@
 
 import { useEffect } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { type Notification } from '@mochi/web'
+import { useLingui } from '@lingui/react/macro'
+import { toast, getErrorMessage, type Notification } from '@mochi/web'
 import { menuFetch } from './menu-api'
 
 interface NotificationsListResponse {
@@ -178,6 +179,7 @@ function disconnectWebSocket() {
 
 export function useMenuNotifications() {
   const queryClient = useQueryClient()
+  const { t } = useLingui()
 
   const { data, isLoading, isError } = useQuery<NotificationsListResponse>({
     queryKey: notificationKeys.list(),
@@ -188,10 +190,15 @@ export function useMenuNotifications() {
     refetchInterval: 5 * 60 * 1000,
   })
 
+  // A refused read leaves the badge as it was, so the failure has to be said:
+  // silent, it reads as the click having done nothing.
   const markAsReadMutation = useMutation({
     mutationFn: markAsRead,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: notificationKeys.all() })
+    },
+    onError: (error) => {
+      toast.error(getErrorMessage(error, t`Failed to mark notification as read`))
     },
   })
 
@@ -199,6 +206,9 @@ export function useMenuNotifications() {
     mutationFn: markAllAsRead,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: notificationKeys.all() })
+    },
+    onError: (error) => {
+      toast.error(getErrorMessage(error, t`Failed to mark all notifications as read`))
     },
   })
 

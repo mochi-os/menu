@@ -44,6 +44,9 @@ def action_notifications_categories(a):
 APP_MAXIMUM = 64
 TOPIC_MAXIMUM = 128
 OBJECT_MAXIMUM = 256
+# The consent dialog caps a permission code at the same length
+# (use-permission-request.tsx); a grant row must never carry a longer one.
+PERMISSION_MAXIMUM = 256
 
 def topic_bounded(app, topic, object):
     return len(app) <= APP_MAXIMUM and len(topic) <= TOPIC_MAXIMUM and len(object) <= OBJECT_MAXIMUM
@@ -130,6 +133,9 @@ def action_permissions_grant(a):
     permission = a.input("permission", "").strip()
     if not app_id or not permission:
         return a.error.label(400, "errors.app_and_permission_are_required")
+    # Bounded before any lookup: core checks only that both are non-empty.
+    if len(app_id) > APP_MAXIMUM or len(permission) > PERMISSION_MAXIMUM:
+        return a.error.label(400, "errors.invalid_id")
 
     # Only real apps may receive grants — a grant row for an arbitrary id would
     # become live if an app with that id were installed later

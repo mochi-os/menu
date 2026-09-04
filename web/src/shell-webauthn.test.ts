@@ -228,3 +228,21 @@ describe('shell WebAuthn bridge', () => {
     for (const check of shell.checks) expect(check.app).toBe('the-real-entity')
   })
 })
+
+// shell.js has no catalog: a bridge error is a DOMException-style name, and
+// lib/web maps it to a translated message. English prose here used to reach
+// the settings app's toast verbatim.
+describe('shell bridge errors carry a name only', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals()
+    document.body.innerHTML = ''
+  })
+
+  it('posts the passkey refusal without a message', async () => {
+    const shell = boot({ granted: false })
+    await shell.start()
+    shell.send({ type: 'webauthn.get', requestId: 11, optionsJSON: OPTIONS })
+    await shell.settle()
+    expect(resultOf(shell.posted, false)?.error).toEqual({ name: 'SecurityError' })
+  })
+})
