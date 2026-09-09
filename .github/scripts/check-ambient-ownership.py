@@ -36,6 +36,9 @@ import re
 import sys
 from pathlib import Path
 
+REPO = Path(__file__).resolve().parents[2]
+GATE = 'check-ambient-ownership'
+
 OWNERSHIP = re.compile(r'(\bowned\(|mochi\.entity\.(get|owned)\()')
 IF_RE = re.compile(r'if\s+(.*?):\s*(.*)$')
 ANON_GUARD = re.compile(r'if\s+not\s+(a\.user|user)\b')
@@ -329,15 +332,22 @@ def check_file(path):
 
 
 def expand(args):
+    """Starlark files named by args: directories recursively, globs, files.
+    A relative argument is anchored at the repo root, so a run from an app
+    directory scans the same tree as one from the root, and every argument
+    must name something that exists - a flag or a typo that became a "path"
+    used to expand to nothing and pass."""
     paths = []
     for a in args:
-        p = Path(a)
+        p = Path(a) if Path(a).is_absolute() else REPO / a
         if p.is_dir():
             paths += sorted(p.rglob('*.star'))
         elif any(ch in a for ch in '*?['):
-            paths += sorted(Path('.').glob(a))
-        else:
+            paths += sorted(REPO.glob(a) if not Path(a).is_absolute() else Path('/').glob(a.lstrip('/')))
+        elif p.exists():
             paths.append(p)
+        else:
+            raise FileNotFoundError(a)
     # apps/test is internal assertions, not user-facing access control - exempt
     # per CLAUDE.md, the same way the i18n and attachment gates treat it.
     return [p for p in paths
@@ -348,19 +358,26 @@ def main():
     argv = sys.argv[1:]
     check = '--check' in argv
     argv = [a for a in argv if a != '--check']
-    if argv:
-        files = expand(argv)
-    else:
+    try:
         # Recursive, matching what a directory-scoped run already does.
         # Two-level globs miss apps/settings/{system,user}/*.star and the
         # vendored lib copies.
-        files = expand(['apps'])
+        files = expand(argv or ['apps'])
+    except FileNotFoundError as e:
+        print(f'{GATE}: no such path: {e}', file=sys.stderr)
+        sys.exit(2)
+    files = sorted(set(files))
+    if not files:
+        print(f'{GATE}: scanned 0 files - nothing was checked', file=sys.stderr)
+        sys.exit(2)
+    print(f'{GATE}: scanned {len(files)} files', file=sys.stderr)
 
     total = 0
-    for f in sorted(set(files)):
+    for f in files:
+        rel = f.relative_to(REPO) if f.is_relative_to(REPO) else f
         for lineno, func, text in check_file(f):
             total += 1
-            print(f'{f}:{lineno}: ownership grant without a.user guard '
+            print(f'{rel}:{lineno}: ownership grant without a.user guard '
                   f'in {func}(): {text}')
 
     if total:
