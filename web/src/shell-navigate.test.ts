@@ -2,10 +2,9 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // This file is part of Mochi, licensed under the GNU AGPL v3 with the
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
-
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
 // Same approach as shell-webauthn.test.ts: public/shell.js runs in the top
 // window, outside the React tree and outside the bundler, so it is loaded as
@@ -64,10 +63,16 @@ function boot(
         }
         return Promise.resolve({
           ok: true,
-          json: () => Promise.resolve(app ? { app, token: 'app-token' } : { token: 'app-token' }),
+          json: () =>
+            Promise.resolve(
+              app ? { app, token: 'app-token' } : { token: 'app-token' }
+            ),
         })
       }
-      return Promise.resolve({ ok: true, json: () => Promise.resolve({ data: {} }) })
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ data: {} }),
+      })
     })
   )
 
@@ -94,7 +99,8 @@ function boot(
     for (let i = 0; i < 50; i++) await Promise.resolve()
   }
 
-  const path = () => window.location.pathname + window.location.search + window.location.hash
+  const path = () =>
+    window.location.pathname + window.location.search + window.location.hash
 
   // 'ready' is what makes the shell fetch the token, which is the only thing
   // that resolves the app id the mic gate later checks a grant against.
@@ -139,15 +145,18 @@ describe('shell navigate: stays inside the current app', () => {
     expect(shell.path()).toBe('/feeds/subscriptions')
   })
 
-  it.each(OTHER_APP)('refuses a %s path that resolves to another app', async (_name, url) => {
-    const shell = boot()
-    shell.send({ type: 'navigate', path: url })
-    await shell.settle()
-    // Moving the top URL to another app while this iframe stays mounted would
-    // let the next 'ready' mint THAT app's token and hand it to the iframe
-    // that asked - the cross-app token theft this check exists to stop.
-    expect(shell.path()).toBe(HOME)
-  })
+  it.each(OTHER_APP)(
+    'refuses a %s path that resolves to another app',
+    async (_name, url) => {
+      const shell = boot()
+      shell.send({ type: 'navigate', path: url })
+      await shell.settle()
+      // Moving the top URL to another app while this iframe stays mounted would
+      // let the next 'ready' mint THAT app's token and hand it to the iframe
+      // that asked - the cross-app token theft this check exists to stop.
+      expect(shell.path()).toBe(HOME)
+    }
+  )
 
   it.each(OFF_ORIGIN)('refuses an %s URL', async (_name, url) => {
     const shell = boot()
@@ -161,7 +170,10 @@ describe('shell navigate: stays inside the current app', () => {
     // The trap sameOriginTarget was written for: an absolute URL carries no
     // leading "/<app>" for getAppNameFromPath to match, so reading the app off
     // the raw string yields '' - and every comparison against '' passes.
-    shell.send({ type: 'navigate', path: 'http://localhost:3000/settings/danger' })
+    shell.send({
+      type: 'navigate',
+      path: 'http://localhost:3000/settings/danger',
+    })
     await shell.settle()
     expect(shell.path()).toBe(HOME)
   })
@@ -197,17 +209,20 @@ describe('shell navigate-external: crosses apps, but the target must name one', 
 })
 
 describe('shell navigate-top: same-origin only', () => {
-  it.each(OFF_ORIGIN)('does not send the top window to an %s URL', async (_name, url) => {
-    const shell = boot()
-    const before = shell.path()
-    shell.send({ type: 'navigate-top', url })
-    await shell.settle()
-    // Navigating the trusted top window is privileged; an app in the sandboxed
-    // iframe does not get to choose an off-origin destination. This is the
-    // handler market's checkout reaches, which is why a rejected Stripe URL
-    // surfaces as a dead button rather than a redirect.
-    expect(shell.path()).toBe(before)
-  })
+  it.each(OFF_ORIGIN)(
+    'does not send the top window to an %s URL',
+    async (_name, url) => {
+      const shell = boot()
+      const before = shell.path()
+      shell.send({ type: 'navigate-top', url })
+      await shell.settle()
+      // Navigating the trusted top window is privileged; an app in the sandboxed
+      // iframe does not get to choose an off-origin destination. This is the
+      // handler market's checkout reaches, which is why a rejected Stripe URL
+      // surfaces as a dead button rather than a redirect.
+      expect(shell.path()).toBe(before)
+    }
+  )
 })
 
 describe('shell navigate handlers ignore a message with no target', () => {
@@ -248,7 +263,7 @@ describe('shell storage proxy namespaces by app', () => {
     expect(localStorage.getItem('app:feeds:draft')).toBeNull()
   })
 
-  it('does not read another app\'s value', async () => {
+  it("does not read another app's value", async () => {
     const shell = boot()
     localStorage.setItem('app:settings:secret', 'other-app-value')
     localStorage.setItem('app:feeds:secret', 'mine')
@@ -291,8 +306,7 @@ describe('shell mic bridge fails closed', () => {
 
   const micResult = (posted: Record<string, unknown>[]) =>
     posted.find((m) => m.type === 'mic.result') as
-      | { ok: boolean; error?: { name: string }; cancelled?: boolean }
-      | undefined
+      { ok: boolean; error?: { name: string }; cancelled?: boolean } | undefined
 
   it('refuses when the user denies consent', async () => {
     const shell = boot()
@@ -321,8 +335,7 @@ describe('shell mic bridge fails closed', () => {
 describe('shell mic bridge: the remaining fail-closed paths', () => {
   const micResult = (posted: Record<string, unknown>[], requestId: number) =>
     posted.find((m) => m.type === 'mic.result' && m.requestId === requestId) as
-      | { ok: boolean; cancelled?: boolean; error?: { name: string } }
-      | undefined
+      { ok: boolean; cancelled?: boolean; error?: { name: string } } | undefined
 
   let consentListeners: EventListener[] = []
   afterEach(() => {
@@ -342,7 +355,9 @@ describe('shell mic bridge: the remaining fail-closed paths', () => {
 
   function answer(id: unknown, result: 'granted' | 'denied') {
     window.dispatchEvent(
-      new CustomEvent('mochi-shell-permission-result', { detail: { id, result } })
+      new CustomEvent('mochi-shell-permission-result', {
+        detail: { id, result },
+      })
     )
   }
 
@@ -403,22 +418,24 @@ describe('shell mic bridge: the remaining fail-closed paths', () => {
 function watch_frames() {
   const frames: { messages: Record<string, unknown>[] }[] = []
   const create = document.createElement.bind(document)
-  vi.spyOn(document, 'createElement').mockImplementation((tag: string, ...rest: unknown[]) => {
-    const element = create(tag, ...(rest as [])) as HTMLElement
-    if (tag === 'iframe') {
-      const record = { messages: [] as Record<string, unknown>[] }
-      frames.push(record)
-      queueMicrotask(() => {
-        const window_ = (element as HTMLIFrameElement).contentWindow
-        if (window_) {
-          window_.postMessage = ((msg: Record<string, unknown>) => {
-            record.messages.push(msg)
-          }) as typeof window_.postMessage
-        }
-      })
+  vi.spyOn(document, 'createElement').mockImplementation(
+    (tag: string, ...rest: unknown[]) => {
+      const element = create(tag, ...(rest as [])) as HTMLElement
+      if (tag === 'iframe') {
+        const record = { messages: [] as Record<string, unknown>[] }
+        frames.push(record)
+        queueMicrotask(() => {
+          const window_ = (element as HTMLIFrameElement).contentWindow
+          if (window_) {
+            window_.postMessage = ((msg: Record<string, unknown>) => {
+              record.messages.push(msg)
+            }) as typeof window_.postMessage
+          }
+        })
+      }
+      return element
     }
-    return element
-  })
+  )
   return frames
 }
 
@@ -445,7 +462,9 @@ describe('shell ready: the init belongs to the iframe that asked', () => {
     // replaced before the token arrived; the settings iframe that replaced it
     // never sent 'ready', so it has asked for nothing. Before the requester
     // was pinned, the settings iframe received the FEEDS token here.
-    const inits = frames.flatMap((f) => f.messages.filter((m) => m.type === 'init'))
+    const inits = frames.flatMap((f) =>
+      f.messages.filter((m) => m.type === 'init')
+    )
     expect(inits).toEqual([])
   })
 
@@ -602,11 +621,15 @@ describe('shell token: a response from before a navigation is dead on arrival', 
 
     // The settings response lands and the new iframe completes its handshake
     // (mic.start is dropped while a navigation is still in flight).
-    tokens.take('settings').resolve({ app: 'settings-entity', token: 'settings-token' })
+    tokens
+      .take('settings')
+      .resolve({ app: 'settings-entity', token: 'settings-token' })
     await shell.settle()
     sendFromCurrent({ type: 'ready' })
     await shell.settle()
-    tokens.take('settings').resolve({ app: 'settings-entity', token: 'settings-token' })
+    tokens
+      .take('settings')
+      .resolve({ app: 'settings-entity', token: 'settings-token' })
     await shell.settle()
 
     // Only now does the STALE feeds response arrive, out of order.
@@ -638,7 +661,9 @@ describe('shell token: a response from before a navigation is dead on arrival', 
     // ...and the user crosses to settings before it resolves.
     shell.send({ type: 'navigate-external', url: '/settings/' })
     await shell.settle()
-    tokens.take('settings').resolve({ app: 'settings-entity', token: 'settings-token' })
+    tokens
+      .take('settings')
+      .resolve({ app: 'settings-entity', token: 'settings-token' })
     await shell.settle() // settings iframe mounted
 
     // The stale refresh resolves after the swap. Ungated, this posted feeds'
@@ -646,7 +671,9 @@ describe('shell token: a response from before a navigation is dead on arrival', 
     tokens.take('feeds').resolve({ app: 'feeds-entity', token: 'feeds-token' })
     await shell.settle()
 
-    const refreshes = frames.flatMap((f) => f.messages.filter((m) => m.type === 'token-refresh'))
+    const refreshes = frames.flatMap((f) =>
+      f.messages.filter((m) => m.type === 'token-refresh')
+    )
     expect(refreshes).toEqual([])
   })
 
@@ -672,10 +699,16 @@ describe('shell token: a response from before a navigation is dead on arrival', 
     await shell.settle()
     expect(shell.tokenApps[shell.tokenApps.length - 1]).toBe('settings')
 
-    tokens.take('settings').resolve({ app: 'settings-entity', token: 'settings-token' })
+    tokens
+      .take('settings')
+      .resolve({ app: 'settings-entity', token: 'settings-token' })
     await shell.settle()
-    const refreshes = frames.flatMap((f) => f.messages.filter((m) => m.type === 'token-refresh'))
-    expect(refreshes).toEqual([{ type: 'token-refresh', token: 'settings-token' }])
+    const refreshes = frames.flatMap((f) =>
+      f.messages.filter((m) => m.type === 'token-refresh')
+    )
+    expect(refreshes).toEqual([
+      { type: 'token-refresh', token: 'settings-token' },
+    ])
   })
 
   it('mints for the frame that asked, not the app the top URL has moved to', async () => {
@@ -819,7 +852,13 @@ describe('shell language-set: broadcasts, never writes a cookie', () => {
     localStorage.setItem('mochi:language', 'en')
 
     // Each of these reaches localStorage and every open iframe if accepted.
-    for (const bad of ['hello world', 'EN-GB', 'a'.repeat(1024), '', 'en' + '-aa'.repeat(1000)]) {
+    for (const bad of [
+      'hello world',
+      'EN-GB',
+      'a'.repeat(1024),
+      '',
+      'en' + '-aa'.repeat(1000),
+    ]) {
       shell.send({ type: 'language-set', language: bad })
     }
     // A non-string would previously be stored and re-broadcast as-is.
@@ -834,13 +873,21 @@ describe('shell language-set: broadcasts, never writes a cookie', () => {
     const shell = boot({ app: 'feeds-entity' })
     await shell.start()
 
-    for (const good of ['en', 'pt-br', 'zh-hant', 'es-419', 'en-x-pseudo-rtl']) {
+    for (const good of [
+      'en',
+      'pt-br',
+      'zh-hant',
+      'es-419',
+      'en-x-pseudo-rtl',
+    ]) {
       shell.send({ type: 'language-set', language: good })
     }
     await shell.settle()
 
     expect(
-      shell.posted.filter((m) => m.type === 'language-change').map((m) => m.language)
+      shell.posted
+        .filter((m) => m.type === 'language-change')
+        .map((m) => m.language)
     ).toEqual(['en', 'pt-br', 'zh-hant', 'es-419', 'en-x-pseudo-rtl'])
     expect(localStorage.getItem('mochi:language')).toBe('en-x-pseudo-rtl')
   })
@@ -867,11 +914,18 @@ describe('shell app id: every change is announced', () => {
     delete (window as unknown as { __mochi_shell?: unknown }).__mochi_shell
   })
   afterEach(() => {
-    listeners.forEach((l) => window.removeEventListener('mochi-shell-app-changed', l))
+    listeners.forEach((l) =>
+      window.removeEventListener('mochi-shell-app-changed', l)
+    )
   })
 
   // The default boot resolves no app id at all, so each of these names one.
-  const perApp = { token: async (app: string) => ({ app: `${app}-entity`, token: 'app-token' }) }
+  const perApp = {
+    token: async (app: string) => ({
+      app: `${app}-entity`,
+      token: 'app-token',
+    }),
+  }
 
   it('announces the id when the first token resolves', async () => {
     const seen = record()
@@ -932,7 +986,11 @@ describe('shell download: the app comes from the frame, not the top URL', () => 
     await shell.settle()
 
     expect(fetched('/settings/secrets.csv')).toBe(false)
-    expect(shell.posted).toContainEqual({ type: 'download.result', id: 2, ok: false })
+    expect(shell.posted).toContainEqual({
+      type: 'download.result',
+      id: 2,
+      ok: false,
+    })
   })
 
   it('refuses when the frame carries no app stamp', async () => {
@@ -945,7 +1003,11 @@ describe('shell download: the app comes from the frame, not the top URL', () => 
     await shell.settle()
 
     expect(fetched('/feeds/report.csv')).toBe(false)
-    expect(shell.posted).toContainEqual({ type: 'download.result', id: 3, ok: false })
+    expect(shell.posted).toContainEqual({
+      type: 'download.result',
+      id: 3,
+      ok: false,
+    })
   })
 })
 
@@ -1023,7 +1085,11 @@ describe('shell storage.set: bounded so one app cannot fill the origin pool', ()
   it('refuses a value beyond the cap', async () => {
     const shell = boot()
     await shell.start()
-    shell.send({ type: 'storage.set', key: 'bulk', value: 'x'.repeat(200 * 1024) })
+    shell.send({
+      type: 'storage.set',
+      key: 'bulk',
+      value: 'x'.repeat(200 * 1024),
+    })
     await shell.settle()
     expect(localStorage.getItem('app:feeds:bulk')).toBeNull()
   })
@@ -1042,7 +1108,10 @@ describe('shell storage.set: bounded so one app cannot fill the origin pool', ()
 // order: the order in which late answers land is what the identity race
 // exercises.
 function deferredTokens() {
-  const pending = new Map<string, Array<(data: Record<string, unknown>) => void>>()
+  const pending = new Map<
+    string,
+    Array<(data: Record<string, unknown>) => void>
+  >()
   const token = (app: string) =>
     new Promise<Record<string, unknown>>((resolve) => {
       const queue = pending.get(app) ?? []
@@ -1059,7 +1128,8 @@ function deferredTokens() {
 }
 
 const shellAppId = () =>
-  (window as { __mochi_shell?: { appId?: string | null } }).__mochi_shell?.appId ?? null
+  (window as { __mochi_shell?: { appId?: string | null } }).__mochi_shell
+    ?.appId ?? null
 
 // The app id every permission gate reads (mic, camera, passkeys, the consent
 // dialog) is whatever the last token mint installed. An outgoing frame that
@@ -1185,8 +1255,7 @@ describe('shell clipboard proxy', () => {
 
   const answer = (posted: Record<string, unknown>[], id: number) =>
     posted.find((m) => m.type === 'clipboard.result' && m.id === id) as
-      | { ok: boolean }
-      | undefined
+      { ok: boolean } | undefined
 
   it('writes when the request rides on a user gesture', async () => {
     const writes = stubClipboard(true)
@@ -1219,7 +1288,11 @@ describe('shell clipboard proxy', () => {
     const writes = stubClipboard(true)
     const shell = boot()
     shell.send({ type: 'clipboard.write', id: 4 })
-    shell.send({ type: 'clipboard.write', id: 5, text: 'x'.repeat(256 * 1024 + 1) })
+    shell.send({
+      type: 'clipboard.write',
+      id: 5,
+      text: 'x'.repeat(256 * 1024 + 1),
+    })
     await shell.settle()
     // Before the type check, a missing text reached writeText as undefined
     // and landed on the clipboard as the string "undefined".
@@ -1239,7 +1312,8 @@ describe('shell storage proxy bounds each app', () => {
 
   it('refuses a write past the quota and admits it again after a remove', async () => {
     const shell = boot()
-    for (let i = 0; i < 4; i++) shell.send({ type: 'storage.set', key: 'k' + i, value: big })
+    for (let i = 0; i < 4; i++)
+      shell.send({ type: 'storage.set', key: 'k' + i, value: big })
     await shell.settle()
     expect(localStorage.getItem('app:feeds:k3')).toBe(big)
 
@@ -1262,7 +1336,8 @@ describe('shell storage proxy bounds each app', () => {
   })
 
   it("does not charge one app for another's keys", async () => {
-    for (let i = 0; i < 4; i++) localStorage.setItem('app:settings:old' + i, big)
+    for (let i = 0; i < 4; i++)
+      localStorage.setItem('app:settings:old' + i, big)
     const shell = boot()
     shell.send({ type: 'storage.set', key: 'mine', value: big })
     await shell.settle()
@@ -1271,7 +1346,8 @@ describe('shell storage proxy bounds each app', () => {
 
   it('charges an overwrite for the difference, not the sum', async () => {
     const shell = boot()
-    for (let i = 0; i < 4; i++) shell.send({ type: 'storage.set', key: 'k' + i, value: big })
+    for (let i = 0; i < 4; i++)
+      shell.send({ type: 'storage.set', key: 'k' + i, value: big })
     // Same size, different bytes: a refused overwrite leaves the old value,
     // which the assertion must be able to tell from the new one.
     const replacement = 'w'.repeat(big.length)

@@ -2,14 +2,13 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // This file is part of Mochi, licensed under the GNU AGPL v3 with the
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
-
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { renderHook, act, waitFor } from '@testing-library/react'
+import type { ReactNode } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { i18n } from '@lingui/core'
 import { I18nProvider } from '@lingui/react'
 import { toast } from '@mochi/web'
-import type { ReactNode } from 'react'
+import { renderHook, act, waitFor } from '@testing-library/react'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { menuFetch } from './menu-api'
 import { useMenuNotifications } from './use-menu-notifications'
 
@@ -17,7 +16,10 @@ i18n.loadAndActivate({ locale: 'en', messages: {} })
 
 vi.mock('@mochi/web', async (importOriginal) => {
   const actual = await importOriginal<typeof import('@mochi/web')>()
-  return { ...actual, toast: { ...actual.toast, error: vi.fn(), success: vi.fn() } }
+  return {
+    ...actual,
+    toast: { ...actual.toast, error: vi.fn(), success: vi.fn() },
+  }
 })
 vi.mock('./menu-api', () => ({ menuFetch: vi.fn() }))
 
@@ -50,7 +52,10 @@ beforeEach(() => {
   vi.stubGlobal('WebSocket', SilentSocket)
   vi.stubGlobal(
     'fetch',
-    vi.fn(async () => ({ ok: true, json: async () => ({ token: 'socket-token' }) }))
+    vi.fn(async () => ({
+      ok: true,
+      json: async () => ({ token: 'socket-token' }),
+    }))
   )
   vi.mocked(toast.error).mockReset()
   // The list loads; every read is refused.

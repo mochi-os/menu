@@ -2,10 +2,8 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // This file is part of Mochi, licensed under the GNU AGPL v3 with the
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
-
 // Notification fetching for the menu app — uses the menu's own backend
 // instead of cross-app HTTP calls to the notifications app.
-
 import { useEffect } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useLingui } from '@lingui/react/macro'
@@ -19,7 +17,9 @@ interface NotificationsListResponse {
 const EMPTY_RESPONSE: NotificationsListResponse = { data: [] }
 
 async function fetchNotifications(): Promise<NotificationsListResponse> {
-  const response = await menuFetch<NotificationsListResponse>('-/notifications/list')
+  const response = await menuFetch<NotificationsListResponse>(
+    '-/notifications/list'
+  )
   if (!response || !Array.isArray(response.data)) return EMPTY_RESPONSE
   return response
 }
@@ -85,7 +85,9 @@ async function mintNotificationsToken(): Promise<string | null> {
     })
     if (!response.ok) return null
     const data = (await response.json()) as { token?: string }
-    return typeof data.token === 'string' && data.token !== '' ? data.token : null
+    return typeof data.token === 'string' && data.token !== ''
+      ? data.token
+      : null
   } catch {
     return null
   }
@@ -109,7 +111,9 @@ function handleWebSocketMessage(event: MessageEvent) {
       case 'clear_all':
       case 'clear_app':
       case 'clear_object':
-        wsState.queryClientRef.invalidateQueries({ queryKey: notificationKeys.list() })
+        wsState.queryClientRef.invalidateQueries({
+          queryKey: notificationKeys.list(),
+        })
         broadcastToIframes({ type: 'notification-update', event: data.type })
         break
     }
@@ -198,7 +202,9 @@ export function useMenuNotifications() {
       queryClient.invalidateQueries({ queryKey: notificationKeys.all() })
     },
     onError: (error) => {
-      toast.error(getErrorMessage(error, t`Failed to mark notification as read`))
+      toast.error(
+        getErrorMessage(error, t`Failed to mark notification as read`)
+      )
     },
   })
 
@@ -208,7 +214,9 @@ export function useMenuNotifications() {
       queryClient.invalidateQueries({ queryKey: notificationKeys.all() })
     },
     onError: (error) => {
-      toast.error(getErrorMessage(error, t`Failed to mark all notifications as read`))
+      toast.error(
+        getErrorMessage(error, t`Failed to mark all notifications as read`)
+      )
     },
   })
 

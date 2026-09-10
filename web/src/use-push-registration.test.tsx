@@ -2,10 +2,9 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // This file is part of Mochi, licensed under the GNU AGPL v3 with the
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
-
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { render, waitFor } from '@testing-library/react'
 import { push } from '@mochi/web'
+import { render, waitFor } from '@testing-library/react'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { usePushRegistration } from './use-push-registration'
 
 // The hook only installs a window 'message' listener; render it bare.
@@ -24,7 +23,9 @@ beforeEach(() => {
   document.body.appendChild(appFrame)
 
   // shell.js publishes the app id the SERVER resolved for the current path.
-  ;(window as { __mochi_shell?: { appId?: string | null } }).__mochi_shell = { appId: 'app-1' }
+  ;(window as { __mochi_shell?: { appId?: string | null } }).__mochi_shell = {
+    appId: 'app-1',
+  }
 
   granted = true
   checks = []
@@ -33,8 +34,14 @@ beforeEach(() => {
     vi.fn(async (url: string, init?: RequestInit) => {
       if (String(url).endsWith('/permissions/check')) {
         const body = new URLSearchParams(String(init?.body ?? ''))
-        checks.push({ app: body.get('app') ?? '', permission: body.get('permission') ?? '' })
-        return { ok: true, json: async () => ({ data: { granted } }) } as Response
+        checks.push({
+          app: body.get('app') ?? '',
+          permission: body.get('permission') ?? '',
+        })
+        return {
+          ok: true,
+          json: async () => ({ data: { granted } }),
+        } as Response
       }
       // Account bookkeeping the unsubscribe path performs once it actually
       // reaches a subscription. Left throwing, the handler would answer
@@ -62,7 +69,9 @@ function setServiceWorker(registration: unknown) {
   Object.defineProperty(navigator, 'serviceWorker', {
     configurable: true,
     value: {
-      ready: registration ? Promise.resolve(registration) : new Promise(() => {}),
+      ready: registration
+        ? Promise.resolve(registration)
+        : new Promise(() => {}),
       getRegistration: async () => registration ?? undefined,
     },
   })
@@ -135,7 +144,9 @@ describe('usePushRegistration permission gate', () => {
     send({ type: 'push-subscribe', id: 10 })
 
     await waitFor(() => {
-      expect(checks).toEqual([{ app: 'app-1', permission: 'notifications/write' }])
+      expect(checks).toEqual([
+        { app: 'app-1', permission: 'notifications/write' },
+      ])
     })
   })
 
@@ -147,7 +158,12 @@ describe('usePushRegistration permission gate', () => {
 
     await waitFor(() => {
       expect(post).toHaveBeenCalledWith(
-        { type: 'push-unsubscribe-result', id: 11, ok: false, reason: 'forbidden' },
+        {
+          type: 'push-unsubscribe-result',
+          id: 11,
+          ok: false,
+          reason: 'forbidden',
+        },
         '*'
       )
     })
@@ -191,7 +207,13 @@ describe('usePushRegistration permission gate', () => {
 
     await waitFor(() => {
       expect(post).toHaveBeenCalledWith(
-        { type: 'push-status-result', id: 14, ok: true, subscribed: false, permission: 'default' },
+        {
+          type: 'push-status-result',
+          id: 14,
+          ok: true,
+          subscribed: false,
+          permission: 'default',
+        },
         '*'
       )
     })
@@ -227,7 +249,13 @@ describe('usePushRegistration permission gate', () => {
 
     await waitFor(() => {
       expect(post).toHaveBeenCalledWith(
-        { type: 'push-status-result', id: 21, ok: true, subscribed: false, permission: 'granted' },
+        {
+          type: 'push-status-result',
+          id: 21,
+          ok: true,
+          subscribed: false,
+          permission: 'granted',
+        },
         '*'
       )
     })
@@ -239,7 +267,10 @@ describe('usePushRegistration permission gate', () => {
     const unsubscribe = vi.fn(async () => true)
     setServiceWorker({
       pushManager: {
-        getSubscription: async () => ({ endpoint: 'https://push.example/x', unsubscribe }),
+        getSubscription: async () => ({
+          endpoint: 'https://push.example/x',
+          unsubscribe,
+        }),
       },
     })
     // jsdom has no PushManager, so isSupported() is false and the subscription
@@ -263,9 +294,14 @@ describe('usePushRegistration permission gate', () => {
     // Fail closed: a server that will not answer is not a grant.
     vi.stubGlobal(
       'fetch',
-      vi.fn(async () => ({ ok: false, status: 500, text: async () => '' }) as Response)
+      vi.fn(
+        async () =>
+          ({ ok: false, status: 500, text: async () => '' }) as Response
+      )
     )
-    const requestPermission = vi.spyOn(push, 'requestPermission').mockResolvedValue('granted')
+    const requestPermission = vi
+      .spyOn(push, 'requestPermission')
+      .mockResolvedValue('granted')
     render(<Harness />)
 
     const post = send({ type: 'push-subscribe', id: 15 })
@@ -288,11 +324,15 @@ describe('usePushRegistration binds the answer to the frame that asked', () => {
   // A frame asking during its first render beats /_/token, which is the whole
   // reason the resolver waits at all.
   function pending() {
-    ;(window as { __mochi_shell?: { appId?: string | null } }).__mochi_shell = { appId: null }
+    ;(window as { __mochi_shell?: { appId?: string | null } }).__mochi_shell = {
+      appId: null,
+    }
   }
 
   function announce(app: string | null) {
-    window.dispatchEvent(new CustomEvent('mochi-shell-app-changed', { detail: { app } }))
+    window.dispatchEvent(
+      new CustomEvent('mochi-shell-app-changed', { detail: { app } })
+    )
   }
 
   // What shell.js does on a cross-app navigation: a NEW element takes the id,
@@ -318,7 +358,9 @@ describe('usePushRegistration binds the answer to the frame that asked', () => {
   }
 
   it('waits for the shell to announce an id rather than polling for it', async () => {
-    const requestPermission = vi.spyOn(push, 'requestPermission').mockResolvedValue('denied')
+    const requestPermission = vi
+      .spyOn(push, 'requestPermission')
+      .mockResolvedValue('denied')
     pending()
     render(<Harness />)
 
@@ -327,7 +369,9 @@ describe('usePushRegistration binds the answer to the frame that asked', () => {
 
     // Resolves off the announcement. A poll would still be sleeping.
     await waitFor(() => {
-      expect(checks).toEqual([{ app: 'app-1', permission: 'notifications/write' }])
+      expect(checks).toEqual([
+        { app: 'app-1', permission: 'notifications/write' },
+      ])
     })
     expect(requestPermission).toHaveBeenCalled()
     expect(post).toHaveBeenCalledWith(
@@ -337,7 +381,9 @@ describe('usePushRegistration binds the answer to the frame that asked', () => {
   })
 
   it('refuses when the app changed while the id was being resolved', async () => {
-    const requestPermission = vi.spyOn(push, 'requestPermission').mockResolvedValue('granted')
+    const requestPermission = vi
+      .spyOn(push, 'requestPermission')
+      .mockResolvedValue('granted')
     pending()
     render(<Harness />)
 
@@ -370,7 +416,12 @@ describe('usePushRegistration binds the answer to the frame that asked', () => {
 
     await waitFor(() => {
       expect(post).toHaveBeenCalledWith(
-        { type: 'push-unsubscribe-result', id: 9, ok: false, reason: 'forbidden' },
+        {
+          type: 'push-unsubscribe-result',
+          id: 9,
+          ok: false,
+          reason: 'forbidden',
+        },
         '*'
       )
     })
@@ -397,7 +448,9 @@ describe('usePushRegistration binds the answer to the frame that asked', () => {
   it('still serves a request whose frame survived the wait', async () => {
     // The frame check must not refuse the ordinary first-render case it exists
     // to protect: same frame throughout, id arrives late.
-    const requestPermission = vi.spyOn(push, 'requestPermission').mockResolvedValue('denied')
+    const requestPermission = vi
+      .spyOn(push, 'requestPermission')
+      .mockResolvedValue('denied')
     pending()
     render(<Harness />)
 
@@ -405,7 +458,9 @@ describe('usePushRegistration binds the answer to the frame that asked', () => {
     announce('app-1')
 
     await waitFor(() => {
-      expect(checks).toEqual([{ app: 'app-1', permission: 'notifications/write' }])
+      expect(checks).toEqual([
+        { app: 'app-1', permission: 'notifications/write' },
+      ])
     })
     expect(post).not.toHaveBeenCalledWith(
       expect.objectContaining({ reason: 'forbidden' }),

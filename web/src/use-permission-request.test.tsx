@@ -2,13 +2,12 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // This file is part of Mochi, licensed under the GNU AGPL v3 with the
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
-
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { render, screen, waitFor, act } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import { i18n } from '@lingui/core'
 import { I18nProvider } from '@lingui/react'
 import { useAuthStore } from '@mochi/web'
+import { render, screen, waitFor, act } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { usePermissionRequest } from './use-permission-request'
 
 // <Trans> needs an active i18n; an empty catalog renders the source message.
@@ -64,7 +63,12 @@ function applicationResponse(opts: { body?: string } | undefined) {
 
 // Default routing: name lookups resolve to the catalog name, grant succeeds.
 // Individual tests override grant behaviour by re-implementing the router.
-function defaultRouter(grant: () => unknown = () => ({ ok: true, json: async () => ({ data: { status: 'granted' } }) })) {
+function defaultRouter(
+  grant: () => unknown = () => ({
+    ok: true,
+    json: async () => ({ data: { status: 'granted' } }),
+  })
+) {
   return (url: string, opts?: { body?: string }) => {
     if (typeof url === 'string' && url.endsWith('/permissions/name')) {
       return Promise.resolve(nameResponse(opts))
@@ -128,9 +132,10 @@ function sendPermissionRequest(opts: {
   spoofApp?: string // an attacker-claimed data.app the dialog must ignore
 }) {
   // The shell's server-resolved current app.
-  ;(window as unknown as { __mochi_shell?: { appId?: string } }).__mochi_shell = {
-    appId: opts.app,
-  }
+  ;(window as unknown as { __mochi_shell?: { appId?: string } }).__mochi_shell =
+    {
+      appId: opts.app,
+    }
   // Requests must arrive from the loaded app iframe; spy on its postMessage so
   // tests can assert the permission-result sent back to it.
   const source = appFrame.contentWindow as WindowProxy
@@ -217,8 +222,12 @@ describe('usePermissionRequest', () => {
       // The dialog footer has our Close button; the dialog also has an X close button
       const closeButtons = screen.getAllByRole('button', { name: 'Close' })
       expect(closeButtons.length).toBeGreaterThanOrEqual(1)
-      expect(screen.queryByRole('button', { name: 'Allow' })).not.toBeInTheDocument()
-      expect(screen.queryByRole('button', { name: 'Deny' })).not.toBeInTheDocument()
+      expect(
+        screen.queryByRole('button', { name: 'Allow' })
+      ).not.toBeInTheDocument()
+      expect(
+        screen.queryByRole('button', { name: 'Deny' })
+      ).not.toBeInTheDocument()
     })
     expect(screen.getByText(/must be enabled/)).toBeInTheDocument()
   })
@@ -262,12 +271,16 @@ describe('usePermissionRequest', () => {
     })
 
     await waitFor(() => {
-      expect(screen.getAllByRole('button', { name: 'Close' }).length).toBeGreaterThanOrEqual(1)
+      expect(
+        screen.getAllByRole('button', { name: 'Close' }).length
+      ).toBeGreaterThanOrEqual(1)
     })
 
     // Click the footer Close button (the one with data-slot="button", not the X close)
     const closeButtons = screen.getAllByRole('button', { name: 'Close' })
-    const footerClose = closeButtons.find(btn => btn.getAttribute('data-slot') === 'button')!
+    const footerClose = closeButtons.find(
+      (btn) => btn.getAttribute('data-slot') === 'button'
+    )!
     await user.click(footerClose)
 
     expect(mockSource.postMessage).toHaveBeenCalledWith(
@@ -320,7 +333,9 @@ describe('usePermissionRequest', () => {
     mockFetch.mockImplementation(
       defaultRouter(() => ({
         ok: false,
-        json: async () => ({ error: 'Restricted permissions must be enabled in app settings' }),
+        json: async () => ({
+          error: 'Restricted permissions must be enabled in app settings',
+        }),
       }))
     )
 
@@ -407,8 +422,12 @@ describe('usePermissionRequest', () => {
     })
 
     await waitFor(() => {
-      expect(screen.queryByRole('button', { name: 'Allow' })).not.toBeInTheDocument()
-      expect(screen.getAllByRole('button', { name: 'Close' }).length).toBeGreaterThanOrEqual(1)
+      expect(
+        screen.queryByRole('button', { name: 'Allow' })
+      ).not.toBeInTheDocument()
+      expect(
+        screen.getAllByRole('button', { name: 'Close' }).length
+      ).toBeGreaterThanOrEqual(1)
     })
     expect(screen.getByText(/must be enabled/)).toBeInTheDocument()
   })
@@ -443,7 +462,9 @@ describe('usePermissionRequest', () => {
 
   it('ignores request-permission from a frame that is not the app iframe', () => {
     render(<TestComponent />)
-    ;(window as unknown as { __mochi_shell?: { appId?: string } }).__mochi_shell = {
+    ;(
+      window as unknown as { __mochi_shell?: { appId?: string } }
+    ).__mochi_shell = {
       appId: 'feeds',
     }
     const rogue = { postMessage: vi.fn() }
@@ -502,7 +523,8 @@ describe('usePermissionRequest — shell-driven consent', () => {
     window.addEventListener('mochi-shell-permission-result', handler)
     return {
       results,
-      cleanup: () => window.removeEventListener('mochi-shell-permission-result', handler),
+      cleanup: () =>
+        window.removeEventListener('mochi-shell-permission-result', handler),
     }
   }
 
@@ -517,7 +539,9 @@ describe('usePermissionRequest — shell-driven consent', () => {
   }
 
   function setShellApp(appId: string) {
-    ;(window as unknown as { __mochi_shell?: { appId?: string } }).__mochi_shell = { appId }
+    ;(
+      window as unknown as { __mochi_shell?: { appId?: string } }
+    ).__mochi_shell = { appId }
   }
 
   it('shows the dialog for the shell-resolved app on a shell request', async () => {
@@ -601,7 +625,9 @@ describe('usePermissionRequest rejects a malformed request', () => {
   // Bypasses sendPermissionRequest's typed signature: the point is the shapes
   // a hostile app can actually put on the wire.
   function sendRaw(data: Record<string, unknown>) {
-    ;(window as unknown as { __mochi_shell?: { appId?: string } }).__mochi_shell = {
+    ;(
+      window as unknown as { __mochi_shell?: { appId?: string } }
+    ).__mochi_shell = {
       appId: 'feeds',
     }
     const source = appFrame.contentWindow as WindowProxy
@@ -628,24 +654,27 @@ describe('usePermissionRequest rejects a malformed request', () => {
     ['a missing id', { permission: 'accounts/read' }],
   ]
 
-  it.each(MALFORMED)('ignores %s and keeps the chrome mounted', async (_name, data) => {
-    render(
-      <div>
-        <span data-testid='chrome'>chrome</span>
-        <TestComponent />
-      </div>
-    )
+  it.each(MALFORMED)(
+    'ignores %s and keeps the chrome mounted',
+    async (_name, data) => {
+      render(
+        <div>
+          <span data-testid='chrome'>chrome</span>
+          <TestComponent />
+        </div>
+      )
 
-    sendRaw(data)
-    await waitFor(() => {
-      expect(screen.queryByText('Permission request')).not.toBeInTheDocument()
-    })
+      sendRaw(data)
+      await waitFor(() => {
+        expect(screen.queryByText('Permission request')).not.toBeInTheDocument()
+      })
 
-    // The real damage was never the missing dialog — it was everything ELSE
-    // disappearing with it. Unfixed, the object cases threw during render and
-    // this node went with the root.
-    expect(screen.getByTestId('chrome')).toBeInTheDocument()
-  })
+      // The real damage was never the missing dialog — it was everything ELSE
+      // disappearing with it. Unfixed, the object cases threw during render and
+      // this node went with the root.
+      expect(screen.getByTestId('chrome')).toBeInTheDocument()
+    }
+  )
 
   it('still accepts a well-formed request', async () => {
     // Companion to the refusals: the guard rejects malformed shapes, not every
@@ -682,14 +711,19 @@ describe('usePermissionRequest survives a dialog that fails to render', () => {
         return Promise.resolve({
           ok: true,
           json: async () => ({
-            data: breakName ? { name: {}, restricted: false } : nameResponseData(opts),
+            data: breakName
+              ? { name: {}, restricted: false }
+              : nameResponseData(opts),
           }),
         })
       }
       if (typeof url === 'string' && url.endsWith('/permissions/application')) {
         return Promise.resolve(applicationResponse(opts))
       }
-      return Promise.resolve({ ok: true, json: async () => ({ data: { status: 'granted' } }) })
+      return Promise.resolve({
+        ok: true,
+        json: async () => ({ data: { status: 'granted' } }),
+      })
     })
   })
 
@@ -701,7 +735,12 @@ describe('usePermissionRequest survives a dialog that fails to render', () => {
       </div>
     )
 
-    sendPermissionRequest({ id: 1, app: 'feeds', permission: 'accounts/read', restricted: false })
+    sendPermissionRequest({
+      id: 1,
+      app: 'feeds',
+      permission: 'accounts/read',
+      restricted: false,
+    })
 
     // The dialog fails and disappears, but the chrome around it lives.
     await waitFor(() => {
@@ -713,7 +752,12 @@ describe('usePermissionRequest survives a dialog that fails to render', () => {
     // boundary shared across requests, this rendered nothing at all.
     breakName = false
     advance(1000)
-    sendPermissionRequest({ id: 2, app: 'feeds', permission: 'accounts/read', restricted: false })
+    sendPermissionRequest({
+      id: 2,
+      app: 'feeds',
+      permission: 'accounts/read',
+      restricted: false,
+    })
 
     await waitFor(() => {
       expect(screen.getByText('Permission request')).toBeInTheDocument()
@@ -723,7 +767,7 @@ describe('usePermissionRequest survives a dialog that fails to render', () => {
     })
   })
 
-  it('replaces the previous request\'s permission name', async () => {
+  it("replaces the previous request's permission name", async () => {
     // A guard, not a reproduction: the effect keyed on `pending` already clears
     // the name. It is here so that dropping that reset — leaving one request's
     // permission named in the dialog that grants the next — fails loudly.
@@ -733,7 +777,12 @@ describe('usePermissionRequest survives a dialog that fails to render', () => {
     const user = userEvent.setup()
     render(<TestComponent />)
 
-    sendPermissionRequest({ id: 1, app: 'feeds', permission: 'accounts/read', restricted: false })
+    sendPermissionRequest({
+      id: 1,
+      app: 'feeds',
+      permission: 'accounts/read',
+      restricted: false,
+    })
     await waitFor(() => {
       expect(screen.getByText('Read connected accounts')).toBeInTheDocument()
     })
@@ -741,11 +790,18 @@ describe('usePermissionRequest survives a dialog that fails to render', () => {
     await user.click(screen.getByRole('button', { name: 'Deny' }))
     advance(1000)
 
-    sendPermissionRequest({ id: 2, app: 'feeds', permission: 'groups/write', restricted: false })
+    sendPermissionRequest({
+      id: 2,
+      app: 'feeds',
+      permission: 'groups/write',
+      restricted: false,
+    })
     await waitFor(() => {
       expect(screen.getByText('Change groups')).toBeInTheDocument()
     })
-    expect(screen.queryByText('Read connected accounts')).not.toBeInTheDocument()
+    expect(
+      screen.queryByText('Read connected accounts')
+    ).not.toBeInTheDocument()
   })
 })
 
@@ -759,10 +815,17 @@ describe('usePermissionRequest refuses a request it should not show', () => {
   it('ignores a second request while one is on screen, and answers it denied', async () => {
     render(<TestComponent />)
 
-    sendPermissionRequest({ id: 1, app: 'feeds', permission: 'users/read', restricted: false })
+    sendPermissionRequest({
+      id: 1,
+      app: 'feeds',
+      permission: 'users/read',
+      restricted: false,
+    })
     await waitFor(() => {
       // Two match: the footer's Close and the dialog's own X.
-      expect(screen.getAllByRole('button', { name: 'Close' }).length).toBeGreaterThan(0)
+      expect(
+        screen.getAllByRole('button', { name: 'Close' }).length
+      ).toBeGreaterThan(0)
     })
 
     // The swap: a standard permission arriving while the restricted dialog is
@@ -774,8 +837,12 @@ describe('usePermissionRequest refuses a request it should not show', () => {
       restricted: false,
     })
 
-    expect(screen.queryByRole('button', { name: 'Allow' })).not.toBeInTheDocument()
-    expect(screen.getAllByRole('button', { name: 'Close' }).length).toBeGreaterThan(0)
+    expect(
+      screen.queryByRole('button', { name: 'Allow' })
+    ).not.toBeInTheDocument()
+    expect(
+      screen.getAllByRole('button', { name: 'Close' }).length
+    ).toBeGreaterThan(0)
     expect(postMessage).toHaveBeenCalledWith(
       { type: 'permission-result', id: 2, result: 'denied' },
       '*'
@@ -786,7 +853,12 @@ describe('usePermissionRequest refuses a request it should not show', () => {
     const user = userEvent.setup()
     render(<TestComponent />)
 
-    sendPermissionRequest({ id: 1, app: 'feeds', permission: 'accounts/read', restricted: false })
+    sendPermissionRequest({
+      id: 1,
+      app: 'feeds',
+      permission: 'accounts/read',
+      restricted: false,
+    })
     await waitFor(() => {
       expect(screen.getByRole('button', { name: 'Deny' })).toBeInTheDocument()
     })
@@ -811,7 +883,12 @@ describe('usePermissionRequest refuses a request it should not show', () => {
     const user = userEvent.setup()
     render(<TestComponent />)
 
-    sendPermissionRequest({ id: 1, app: 'feeds', permission: 'accounts/read', restricted: false })
+    sendPermissionRequest({
+      id: 1,
+      app: 'feeds',
+      permission: 'accounts/read',
+      restricted: false,
+    })
     await waitFor(() => {
       expect(screen.getByRole('button', { name: 'Deny' })).toBeInTheDocument()
     })
@@ -837,14 +914,24 @@ describe('usePermissionRequest refuses a request it should not show', () => {
     const user = userEvent.setup()
     render(<TestComponent />)
 
-    sendPermissionRequest({ id: 1, app: 'feeds', permission: 'accounts/read', restricted: false })
+    sendPermissionRequest({
+      id: 1,
+      app: 'feeds',
+      permission: 'accounts/read',
+      restricted: false,
+    })
     await waitFor(() => {
       expect(screen.getByRole('button', { name: 'Deny' })).toBeInTheDocument()
     })
     await user.click(screen.getByRole('button', { name: 'Deny' }))
 
     advance(61_000)
-    sendPermissionRequest({ id: 2, app: 'feeds', permission: 'accounts/read', restricted: false })
+    sendPermissionRequest({
+      id: 2,
+      app: 'feeds',
+      permission: 'accounts/read',
+      restricted: false,
+    })
     await waitFor(() => {
       expect(screen.getByRole('button', { name: 'Allow' })).toBeInTheDocument()
     })
@@ -854,7 +941,12 @@ describe('usePermissionRequest refuses a request it should not show', () => {
     const user = userEvent.setup()
     render(<TestComponent />)
 
-    sendPermissionRequest({ id: 1, app: 'feeds', permission: 'accounts/read', restricted: false })
+    sendPermissionRequest({
+      id: 1,
+      app: 'feeds',
+      permission: 'accounts/read',
+      restricted: false,
+    })
     await waitFor(() => {
       expect(screen.getByRole('button', { name: 'Deny' })).toBeInTheDocument()
     })
@@ -862,7 +954,12 @@ describe('usePermissionRequest refuses a request it should not show', () => {
     advance(1000)
 
     // A different permission from the same app is a different question.
-    sendPermissionRequest({ id: 2, app: 'feeds', permission: 'groups/write', restricted: false })
+    sendPermissionRequest({
+      id: 2,
+      app: 'feeds',
+      permission: 'groups/write',
+      restricted: false,
+    })
     await waitFor(() => {
       expect(screen.getByText('Change groups')).toBeInTheDocument()
     })
@@ -870,10 +967,17 @@ describe('usePermissionRequest refuses a request it should not show', () => {
 
   it('does not lock out a retry when the grant itself failed', async () => {
     const user = userEvent.setup()
-    mockFetch.mockImplementation(defaultRouter(() => Promise.reject(new Error('network'))))
+    mockFetch.mockImplementation(
+      defaultRouter(() => Promise.reject(new Error('network')))
+    )
     render(<TestComponent />)
 
-    sendPermissionRequest({ id: 1, app: 'feeds', permission: 'accounts/read', restricted: false })
+    sendPermissionRequest({
+      id: 1,
+      app: 'feeds',
+      permission: 'accounts/read',
+      restricted: false,
+    })
     await waitFor(() => {
       expect(screen.getByRole('button', { name: 'Allow' })).toBeInTheDocument()
     })
@@ -886,7 +990,12 @@ describe('usePermissionRequest refuses a request it should not show', () => {
 
     advance(1000)
     mockFetch.mockImplementation(defaultRouter())
-    sendPermissionRequest({ id: 2, app: 'feeds', permission: 'accounts/read', restricted: false })
+    sendPermissionRequest({
+      id: 2,
+      app: 'feeds',
+      permission: 'accounts/read',
+      restricted: false,
+    })
     await waitFor(() => {
       expect(screen.getByRole('button', { name: 'Allow' })).toBeInTheDocument()
     })
@@ -903,14 +1012,20 @@ describe('usePermissionRequest refuses a request it should not show', () => {
         return Promise.resolve({
           ok: true,
           json: async () => ({
-            data: { name: breakName ? {} : 'Read connected accounts', restricted: false },
+            data: {
+              name: breakName ? {} : 'Read connected accounts',
+              restricted: false,
+            },
           }),
         })
       }
       if (typeof url === 'string' && url.endsWith('/permissions/application')) {
         return Promise.resolve(applicationResponse(opts))
       }
-      return Promise.resolve({ ok: true, json: async () => ({ data: { status: 'granted' } }) })
+      return Promise.resolve({
+        ok: true,
+        json: async () => ({ data: { status: 'granted' } }),
+      })
     })
     render(<TestComponent />)
 
@@ -933,7 +1048,12 @@ describe('usePermissionRequest refuses a request it should not show', () => {
 
     breakName = false
     advance(1000)
-    sendPermissionRequest({ id: 2, app: 'feeds', permission: 'groups/write', restricted: false })
+    sendPermissionRequest({
+      id: 2,
+      app: 'feeds',
+      permission: 'groups/write',
+      restricted: false,
+    })
     await waitFor(() => {
       expect(screen.getByRole('button', { name: 'Allow' })).toBeInTheDocument()
     })
@@ -947,7 +1067,9 @@ describe('usePermissionRequest refuses a request it should not show', () => {
 describe('usePermissionRequest dismisses on a cross-app navigation', () => {
   function navigated(app: string | null) {
     act(() => {
-      window.dispatchEvent(new CustomEvent('mochi-shell-app-changed', { detail: { app } }))
+      window.dispatchEvent(
+        new CustomEvent('mochi-shell-app-changed', { detail: { app } })
+      )
     })
   }
 
@@ -976,7 +1098,12 @@ describe('usePermissionRequest dismisses on a cross-app navigation', () => {
   it('does not spend the denial cooldown, because the user never refused', async () => {
     render(<TestComponent />)
 
-    sendPermissionRequest({ id: 1, app: 'feeds', permission: 'accounts/read', restricted: false })
+    sendPermissionRequest({
+      id: 1,
+      app: 'feeds',
+      permission: 'accounts/read',
+      restricted: false,
+    })
     await waitFor(() => {
       expect(screen.getByText('Permission request')).toBeInTheDocument()
     })
@@ -985,7 +1112,12 @@ describe('usePermissionRequest dismisses on a cross-app navigation', () => {
 
     // Back on the same app, the same question may be put again.
     advance(1000)
-    sendPermissionRequest({ id: 2, app: 'feeds', permission: 'accounts/read', restricted: false })
+    sendPermissionRequest({
+      id: 2,
+      app: 'feeds',
+      permission: 'accounts/read',
+      restricted: false,
+    })
     await waitFor(() => {
       expect(screen.getByRole('button', { name: 'Allow' })).toBeInTheDocument()
     })

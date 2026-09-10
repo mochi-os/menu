@@ -2,14 +2,18 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // This file is part of Mochi, licensed under the GNU AGPL v3 with the
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
-
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { QueryClientProvider } from '@tanstack/react-query'
-import { ThemeProvider, createQueryClient, I18nProvider, type Catalogs } from '@mochi/web'
+import {
+  ThemeProvider,
+  createQueryClient,
+  I18nProvider,
+  type Catalogs,
+} from '@mochi/web'
 import { Toaster } from '@mochi/web/components/ui/sonner'
-import { MochiShellMenu } from './shell-menu'
 import { bootstrapShellAuth } from './shell-auth'
+import { MochiShellMenu } from './shell-menu'
 import './styles/index.css'
 
 // Lingui catalogs bundled by @lingui/vite-plugin (compiled from
@@ -124,9 +128,11 @@ const catalogs: Catalogs = {
 }
 
 async function init() {
-  const shellReady = (window as unknown as {
-    __mochi_shell_ready?: Promise<{ menuToken?: string }>
-  }).__mochi_shell_ready
+  const shellReady = (
+    window as unknown as {
+      __mochi_shell_ready?: Promise<{ menuToken?: string }>
+    }
+  ).__mochi_shell_ready
 
   const config = shellReady ? await shellReady : undefined
   await bootstrapShellAuth(config)

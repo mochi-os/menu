@@ -2,14 +2,11 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // This file is part of Mochi, licensed under the GNU AGPL v3 with the
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
-
 // Shell-managed permission request dialog.
 // Listens for 'request-permission' postMessage from app iframes,
 // shows a dialog for the user to grant or deny the permission.
-
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { Trans } from '@lingui/react/macro'
-import { Shield, ShieldAlert, Check, Loader2 } from 'lucide-react'
 import {
   ResponsiveDialog,
   ResponsiveDialogContent,
@@ -19,8 +16,9 @@ import {
   ResponsiveDialogTitle,
   Button,
 } from '@mochi/web'
-import { menuFetch } from './menu-api'
+import { Shield, ShieldAlert, Check, Loader2 } from 'lucide-react'
 import { ChromeBoundary } from './chrome-boundary'
+import { menuFetch } from './menu-api'
 
 interface PendingRequest {
   id: number
@@ -72,10 +70,13 @@ function prune(denials: Map<string, number>, now: number): void {
 // Everything the app sends is untrusted input into the trusted tree: a
 // non-string permission code throws during render and unmounts the whole menu
 // root.
-function parsePermissionRequest(data: unknown): { id: number; permission: string } | null {
+function parsePermissionRequest(
+  data: unknown
+): { id: number; permission: string } | null {
   if (!data || typeof data !== 'object') return null
   const message = data as { id?: unknown; permission?: unknown }
-  if (typeof message.id !== 'number' || !Number.isFinite(message.id)) return null
+  if (typeof message.id !== 'number' || !Number.isFinite(message.id))
+    return null
   if (typeof message.permission !== 'string') return null
   const permission = message.permission.trim()
   if (!permission || permission.length > PERMISSION_MAXIMUM) return null
@@ -114,11 +115,18 @@ export function usePermissionRequest() {
   useEffect(() => {
     function handleMessage(event: MessageEvent) {
       const data = event.data
-      if (!data || typeof data !== 'object' || data.type !== 'request-permission') return
+      if (
+        !data ||
+        typeof data !== 'object' ||
+        data.type !== 'request-permission'
+      )
+        return
 
       // Only the loaded app iframe may drive the consent dialog — reject
       // messages from nested or sibling frames.
-      const appFrame = document.getElementById('app-frame') as HTMLIFrameElement | null
+      const appFrame = document.getElementById(
+        'app-frame'
+      ) as HTMLIFrameElement | null
       if (!appFrame || event.source !== appFrame.contentWindow) return
       const source = event.source as WindowProxy | null
       if (!source) return
@@ -127,8 +135,9 @@ export function usePermissionRequest() {
       // never the self-asserted data.app: an app must not be able to name a
       // different app in the dialog or grant a permission to one. The shell loads
       // exactly one app at a time and sets __mochi_shell.appId from /_/token.
-      const appId = (window as unknown as { __mochi_shell?: { appId?: string } })
-        .__mochi_shell?.appId
+      const appId = (
+        window as unknown as { __mochi_shell?: { appId?: string } }
+      ).__mochi_shell?.appId
       if (!appId) return
 
       const request = parsePermissionRequest(data)
@@ -163,9 +172,15 @@ export function usePermissionRequest() {
   useEffect(() => {
     function handleShellRequest(event: Event) {
       const detail = (event as CustomEvent).detail
-      if (!detail || typeof detail.id !== 'string' || typeof detail.permission !== 'string') return
-      const appId = (window as unknown as { __mochi_shell?: { appId?: string } })
-        .__mochi_shell?.appId
+      if (
+        !detail ||
+        typeof detail.id !== 'string' ||
+        typeof detail.permission !== 'string'
+      )
+        return
+      const appId = (
+        window as unknown as { __mochi_shell?: { appId?: string } }
+      ).__mochi_shell?.appId
       if (!appId) {
         window.dispatchEvent(
           new CustomEvent('mochi-shell-permission-result', {
@@ -194,28 +209,38 @@ export function usePermissionRequest() {
         sequence: sequence.current,
       })
     }
-    window.addEventListener('mochi-shell-permission-request', handleShellRequest)
-    return () => window.removeEventListener('mochi-shell-permission-request', handleShellRequest)
+    window.addEventListener(
+      'mochi-shell-permission-request',
+      handleShellRequest
+    )
+    return () =>
+      window.removeEventListener(
+        'mochi-shell-permission-request',
+        handleShellRequest
+      )
   }, [admit])
 
-  const respond = useCallback((result: string) => {
-    if (!pending) return
-    if (pending.shellEventId) {
-      window.dispatchEvent(
-        new CustomEvent('mochi-shell-permission-result', {
-          detail: { id: pending.shellEventId, result },
-        })
-      )
-    } else if (pending.source) {
-      pending.source.postMessage(
-        { type: 'permission-result', id: pending.id, result },
-        '*'
-      )
-    }
-    active.current = false
-    closed.current = Date.now()
-    setPending(null)
-  }, [pending])
+  const respond = useCallback(
+    (result: string) => {
+      if (!pending) return
+      if (pending.shellEventId) {
+        window.dispatchEvent(
+          new CustomEvent('mochi-shell-permission-result', {
+            detail: { id: pending.shellEventId, result },
+          })
+        )
+      } else if (pending.source) {
+        pending.source.postMessage(
+          { type: 'permission-result', id: pending.id, result },
+          '*'
+        )
+      }
+      active.current = false
+      closed.current = Date.now()
+      setPending(null)
+    },
+    [pending]
+  )
 
   // The user said no. Recorded so the same app cannot ask again for the same
   // permission until the cooldown expires. A grant that fails on the way to
@@ -242,7 +267,8 @@ export function usePermissionRequest() {
       if (active.current) respond('denied')
     }
     window.addEventListener('mochi-shell-app-changed', handleAppChange)
-    return () => window.removeEventListener('mochi-shell-app-changed', handleAppChange)
+    return () =>
+      window.removeEventListener('mochi-shell-app-changed', handleAppChange)
   }, [respond])
 
   // The dialog died in render, so the user was never asked. Answer denied and
@@ -289,11 +315,14 @@ export function usePermissionRequest() {
     setPermissionName(code)
     setRestricted(false)
     let cancelled = false
-    menuFetch<{ data?: { name?: string; restricted?: boolean } }>('-/permissions/name', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ permission: code }).toString(),
-    })
+    menuFetch<{ data?: { name?: string; restricted?: boolean } }>(
+      '-/permissions/name',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ permission: code }).toString(),
+      }
+    )
       .then((body) => {
         if (cancelled) return
         if (body?.data?.name) setPermissionName(body.data.name)
@@ -335,55 +364,76 @@ export function usePermissionRequest() {
   // reload.
   const dialog = open ? (
     <ChromeBoundary key={pending.sequence} onFailure={handleFailure}>
-    <ResponsiveDialog open={open} onOpenChange={(v) => { if (!v) refuse() }}>
-      <ResponsiveDialogContent className="permission-dialog max-w-sm">
-        <ResponsiveDialogHeader>
-          <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-muted">
-            {restricted ? (
-              <ShieldAlert className="h-6 w-6 text-amber-500" />
-            ) : (
-              <Shield className="h-6 w-6 text-primary" />
-            )}
+      <ResponsiveDialog
+        open={open}
+        onOpenChange={(v) => {
+          if (!v) refuse()
+        }}
+      >
+        <ResponsiveDialogContent className='permission-dialog max-w-sm'>
+          <ResponsiveDialogHeader>
+            <div className='bg-muted mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full'>
+              {restricted ? (
+                <ShieldAlert className='h-6 w-6 text-amber-500' />
+              ) : (
+                <Shield className='text-primary h-6 w-6' />
+              )}
+            </div>
+            <ResponsiveDialogTitle className='text-center'>
+              <Trans>Permission request</Trans>
+            </ResponsiveDialogTitle>
+            <ResponsiveDialogDescription className='text-center'>
+              <Trans>
+                <span className='font-medium'>{appName}</span> is requesting the
+                following permission:
+              </Trans>
+            </ResponsiveDialogDescription>
+          </ResponsiveDialogHeader>
+
+          <div className='rounded-lg border px-4 py-3 text-center text-sm font-medium'>
+            {permissionName}
           </div>
-          <ResponsiveDialogTitle className="text-center"><Trans>Permission request</Trans></ResponsiveDialogTitle>
-          <ResponsiveDialogDescription className="text-center">
-            <Trans><span className="font-medium">{appName}</span> is requesting the following permission:</Trans>
-          </ResponsiveDialogDescription>
-        </ResponsiveDialogHeader>
 
-        <div className="rounded-lg border px-4 py-3 text-center text-sm font-medium">
-          {permissionName}
-        </div>
-
-        {restricted && (
-          <p className="text-sm text-amber-600 text-center">
-            <Trans>This permission must be enabled by you in the app settings.</Trans>
-          </p>
-        )}
-
-        <ResponsiveDialogFooter className="flex-row gap-2 sm:justify-end">
-          {restricted ? (
-            <Button variant="outline" className="flex-1" onClick={handleDeny}>
-              <Trans>Close</Trans>
-            </Button>
-          ) : (
-            <>
-              <Button variant="outline" className="flex-1" onClick={handleDeny} disabled={submitting}>
-                <Trans>Deny</Trans>
-              </Button>
-              <Button className="flex-1" onClick={handleAllow} disabled={submitting}>
-                {submitting ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  <Check className="size-4" />
-                )}
-                <Trans>Allow</Trans>
-              </Button>
-            </>
+          {restricted && (
+            <p className='text-center text-sm text-amber-600'>
+              <Trans>
+                This permission must be enabled by you in the app settings.
+              </Trans>
+            </p>
           )}
-        </ResponsiveDialogFooter>
-      </ResponsiveDialogContent>
-    </ResponsiveDialog>
+
+          <ResponsiveDialogFooter className='flex-row gap-2 sm:justify-end'>
+            {restricted ? (
+              <Button variant='outline' className='flex-1' onClick={handleDeny}>
+                <Trans>Close</Trans>
+              </Button>
+            ) : (
+              <>
+                <Button
+                  variant='outline'
+                  className='flex-1'
+                  onClick={handleDeny}
+                  disabled={submitting}
+                >
+                  <Trans>Deny</Trans>
+                </Button>
+                <Button
+                  className='flex-1'
+                  onClick={handleAllow}
+                  disabled={submitting}
+                >
+                  {submitting ? (
+                    <Loader2 className='h-4 w-4 animate-spin' />
+                  ) : (
+                    <Check className='size-4' />
+                  )}
+                  <Trans>Allow</Trans>
+                </Button>
+              </>
+            )}
+          </ResponsiveDialogFooter>
+        </ResponsiveDialogContent>
+      </ResponsiveDialog>
     </ChromeBoundary>
   ) : null
 

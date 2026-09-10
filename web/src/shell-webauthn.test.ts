@@ -2,10 +2,9 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // This file is part of Mochi, licensed under the GNU AGPL v3 with the
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
-
-import { describe, it, expect, vi, afterEach } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
+import { describe, it, expect, vi, afterEach } from 'vitest'
 
 // public/shell.js runs in the top-level shell window, outside the React tree
 // and outside the bundler, so it is loaded here as source and evaluated
@@ -40,8 +39,12 @@ function boot(options: Options = {}) {
     vi.fn((url: string, init?: { body?: string }) => {
       if (String(url).indexOf('/menu/-/permissions/check') >= 0) {
         const body = new URLSearchParams(init?.body ?? '')
-        checks.push({ app: body.get('app'), permission: body.get('permission') })
-        if (granted === 'error') return Promise.reject(new Error('network down'))
+        checks.push({
+          app: body.get('app'),
+          permission: body.get('permission'),
+        })
+        if (granted === 'error')
+          return Promise.reject(new Error('network down'))
         return Promise.resolve({
           ok: true,
           json: () => Promise.resolve({ data: { granted } }),
@@ -56,7 +59,10 @@ function boot(options: Options = {}) {
         })
       }
       // /_/shell: shape enough to not reject.
-      return Promise.resolve({ ok: true, json: () => Promise.resolve({ data: {} }) })
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ data: {} }),
+      })
     })
   )
 
@@ -115,7 +121,8 @@ function boot(options: Options = {}) {
 
 const resultOf = (posted: Record<string, unknown>[], create: boolean) =>
   posted.find(
-    (m) => m.type === (create ? 'webauthn.create.result' : 'webauthn.get.result')
+    (m) =>
+      m.type === (create ? 'webauthn.create.result' : 'webauthn.get.result')
   )
 
 // The bridge takes the user's grant whichever app asks; no app is privileged by
@@ -146,7 +153,9 @@ describe('shell WebAuthn bridge', () => {
     shell.send({ type: 'webauthn.create', requestId: 8, optionsJSON: OPTIONS })
     await shell.settle()
 
-    expect(resultOf(shell.posted, true)?.error).toMatchObject({ name: 'SecurityError' })
+    expect(resultOf(shell.posted, true)?.error).toMatchObject({
+      name: 'SecurityError',
+    })
     expect(shell.ceremonies.create).toBe(0)
   })
 
@@ -192,7 +201,9 @@ describe('shell WebAuthn bridge', () => {
     shell.send({ type: 'webauthn.get', requestId: 12, optionsJSON: OPTIONS })
     await shell.settle()
 
-    expect(resultOf(shell.posted, false)?.error).toMatchObject({ name: 'SecurityError' })
+    expect(resultOf(shell.posted, false)?.error).toMatchObject({
+      name: 'SecurityError',
+    })
     expect(shell.ceremonies.get).toBe(0)
     // No app to ask about, so it must not even reach the server.
     expect(shell.checks).toHaveLength(0)
@@ -204,7 +215,9 @@ describe('shell WebAuthn bridge', () => {
     shell.send({ type: 'webauthn.get', requestId: 13, optionsJSON: OPTIONS })
     await shell.settle()
 
-    expect(resultOf(shell.posted, false)?.error).toMatchObject({ name: 'SecurityError' })
+    expect(resultOf(shell.posted, false)?.error).toMatchObject({
+      name: 'SecurityError',
+    })
     expect(shell.ceremonies.get).toBe(0)
   })
 
@@ -222,7 +235,9 @@ describe('shell WebAuthn bridge', () => {
     })
     await shell.settle()
 
-    expect(resultOf(shell.posted, false)?.error).toMatchObject({ name: 'SecurityError' })
+    expect(resultOf(shell.posted, false)?.error).toMatchObject({
+      name: 'SecurityError',
+    })
     expect(shell.ceremonies.get).toBe(0)
     for (const check of shell.checks) expect(check.app).toBe('the-real-entity')
   })
@@ -242,6 +257,8 @@ describe('shell bridge errors carry a name only', () => {
     await shell.start()
     shell.send({ type: 'webauthn.get', requestId: 11, optionsJSON: OPTIONS })
     await shell.settle()
-    expect(resultOf(shell.posted, false)?.error).toEqual({ name: 'SecurityError' })
+    expect(resultOf(shell.posted, false)?.error).toEqual({
+      name: 'SecurityError',
+    })
   })
 })

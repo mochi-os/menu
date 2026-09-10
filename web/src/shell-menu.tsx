@@ -2,20 +2,8 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // This file is part of Mochi, licensed under the GNU AGPL v3 with the
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
-
 import { useState, useEffect, useSyncExternalStore } from 'react'
 import { Trans, useLingui } from '@lingui/react/macro'
-import { usePushRegistration } from './use-push-registration'
-import { useMenuNotifications } from './use-menu-notifications'
-import { usePermissionRequest } from './use-permission-request'
-import { ChromeBoundary } from './chrome-boundary'
-import {
-  Check,
-  ExternalLink,
-  LogOut,
-  PanelLeftClose,
-  PanelLeftOpen,
-} from 'lucide-react'
 import {
   cn,
   useAuthStore,
@@ -35,10 +23,23 @@ import {
   TooltipContent,
   type Notification,
 } from '@mochi/web'
+import {
+  Check,
+  ExternalLink,
+  LogOut,
+  PanelLeftClose,
+  PanelLeftOpen,
+} from 'lucide-react'
+import { ChromeBoundary } from './chrome-boundary'
 import { useMenuCategories } from './use-menu-categories'
+import { useMenuNotifications } from './use-menu-notifications'
+import { usePermissionRequest } from './use-permission-request'
+import { usePushRegistration } from './use-push-registration'
 
 function MochiLogo() {
-  return <img src='/menu/images/logo-header.png' alt='Mochi' className='h-7 w-7' />
+  return (
+    <img src='/menu/images/logo-header.png' alt='Mochi' className='h-7 w-7' />
+  )
 }
 
 // Notification links are app-authored: only http(s) may go to window.open,
@@ -59,7 +60,9 @@ function isSafeLink(link: string): boolean {
 // in a new tab instead of replacing the shell.
 function isSameOriginLink(link: string): boolean {
   try {
-    return new URL(link, window.location.origin).origin === window.location.origin
+    return (
+      new URL(link, window.location.origin).origin === window.location.origin
+    )
   } catch {
     return false
   }
@@ -70,7 +73,7 @@ function useSidebarState(): 'expanded' | 'collapsed' {
   return useSyncExternalStore(
     (cb) => {
       const el = document.getElementById('menu')
-      if (!el) return () => { }
+      if (!el) return () => {}
       const observer = new MutationObserver(cb)
       observer.observe(el, {
         attributes: true,
@@ -94,7 +97,7 @@ function useCurrentApp(): string {
   return useSyncExternalStore(
     (cb) => {
       const el = document.getElementById('menu')
-      if (!el) return () => { }
+      if (!el) return () => {}
       const observer = new MutationObserver(cb)
       observer.observe(el, {
         attributes: true,
@@ -116,7 +119,7 @@ function useSidebarPresent(): boolean {
   return useSyncExternalStore(
     (cb) => {
       const el = document.getElementById('menu')
-      if (!el) return () => { }
+      if (!el) return () => {}
       const observer = new MutationObserver(cb)
       observer.observe(el, {
         attributes: true,
@@ -175,9 +178,13 @@ export function MochiShellMenu() {
   const avatar = useAuthStore((s) => s.avatar)
   // Own avatar and accent through the menu's proxy, never the people app.
   const personAsset = (asset: 'avatar' | 'style', version?: string | null) =>
-    identity ? `/menu/-/person/asset/${asset}${version ? `?version=${encodeURIComponent(version)}` : ''}` : undefined
+    identity
+      ? `/menu/-/person/asset/${asset}${version ? `?version=${encodeURIComponent(version)}` : ''}`
+      : undefined
   const categoryPicker = useMenuCategories()
-  const unreadNotifications = notifications.filter((n: Notification) => n.read === 0)
+  const unreadNotifications = notifications.filter(
+    (n: Notification) => n.read === 0
+  )
   const unreadCount = unreadNotifications.length
 
   // 'avatar-set' from the people app: the avatar URL is cached for five
@@ -186,8 +193,11 @@ export function MochiShellMenu() {
   useEffect(() => {
     function handleMessage(event: MessageEvent) {
       const data = event.data
-      if (!data || typeof data !== 'object' || data.type !== 'avatar-set') return
-      const appFrame = document.getElementById('app-frame') as HTMLIFrameElement | null
+      if (!data || typeof data !== 'object' || data.type !== 'avatar-set')
+        return
+      const appFrame = document.getElementById(
+        'app-frame'
+      ) as HTMLIFrameElement | null
       if (!appFrame || event.source !== appFrame.contentWindow) return
       if (typeof data.version !== 'string' || data.version.length > 64) return
       const store = useAuthStore.getState()
@@ -200,13 +210,19 @@ export function MochiShellMenu() {
 
   // Publish count to shell.js so it can prefix "(N)" onto the tab title.
   useEffect(() => {
-    window.dispatchEvent(new CustomEvent('mochi-notification-count', { detail: unreadCount }))
+    window.dispatchEvent(
+      new CustomEvent('mochi-notification-count', { detail: unreadCount })
+    )
   }, [unreadCount])
 
   const handleNotificationClick = (notification: Notification) => {
     if (import.meta.env.DEV) {
       // eslint-disable-next-line no-console
-      console.log('[notif-click]', { id: notification.id, read: notification.read, link: notification.link })
+      console.log('[notif-click]', {
+        id: notification.id,
+        read: notification.read,
+        link: notification.link,
+      })
     }
     if (notification.read === 0) {
       markAsRead(notification.id)
@@ -247,11 +263,17 @@ export function MochiShellMenu() {
     <button
       type='button'
       aria-label={t`Open menu`}
-      className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+      className='focus-visible:ring-ring relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none'
     >
-      <EntityAvatar src={personAsset('avatar', avatar)} styleUrl={personAsset('style')} seed={identity || undefined} name={name} size="sm" />
+      <EntityAvatar
+        src={personAsset('avatar', avatar)}
+        styleUrl={personAsset('style')}
+        seed={identity || undefined}
+        name={name}
+        size='sm'
+      />
       {unreadCount > 0 && (
-        <span className='absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-notification px-1 text-[10px] font-medium text-notification-foreground'>
+        <span className='bg-notification text-notification-foreground absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[10px] font-medium'>
           {unreadCount > 99 ? '99+' : unreadCount}
         </span>
       )}
@@ -261,16 +283,25 @@ export function MochiShellMenu() {
   const userSection = (
     <div className='flex items-center justify-between px-4 py-2.5'>
       <div className='flex items-center gap-2'>
-        <EntityAvatar src={personAsset('avatar', avatar)} styleUrl={personAsset('style')} seed={identity || undefined} name={name} size="md" />
+        <EntityAvatar
+          src={personAsset('avatar', avatar)}
+          styleUrl={personAsset('style')}
+          seed={identity || undefined}
+          name={name}
+          size='md'
+        />
         <span className='text-sm font-semibold'>{name || t`User`}</span>
       </div>
-      <div className='flex items-center gap-1 ms-4'>
+      <div className='ms-4 flex items-center gap-1'>
         <Tooltip>
           <TooltipTrigger asChild>
             <button
-              onClick={() => { setMenuOpen(false); setTimeout(() => setSignOutOpen(true), 150) }}
+              onClick={() => {
+                setMenuOpen(false)
+                setTimeout(() => setSignOutOpen(true), 150)
+              }}
               aria-label={t`Log out`}
-              className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-hover active:bg-interactive-active'
+              className='hover:bg-hover active:bg-interactive-active flex items-center justify-center rounded-md p-1.5 transition-colors'
             >
               <LogOut className='size-4' />
             </button>
@@ -282,18 +313,22 @@ export function MochiShellMenu() {
   )
 
   const notificationsHeader = (
-    <div className='flex items-center justify-between border-b bg-muted/30 px-4 py-2.5'>
-      <span className='font-semibold text-sm'>
-        <Trans>Notifications</Trans>{unreadCount > 0 && ` (${unreadCount})`}
+    <div className='bg-muted/30 flex items-center justify-between border-b px-4 py-2.5'>
+      <span className='text-sm font-semibold'>
+        <Trans>Notifications</Trans>
+        {unreadCount > 0 && ` (${unreadCount})`}
       </span>
       <div className='flex items-center gap-1'>
         {unreadCount > 0 && (
           <Tooltip>
             <TooltipTrigger asChild>
               <button
-                onClick={() => { markAllAsRead(); setMenuOpen(false) }}
+                onClick={() => {
+                  markAllAsRead()
+                  setMenuOpen(false)
+                }}
                 aria-label={t`Mark all as read`}
-                className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-hover active:bg-interactive-active'
+                className='hover:bg-hover active:bg-interactive-active flex items-center justify-center rounded-md p-1.5 transition-colors'
               >
                 <Check className='size-4' />
               </button>
@@ -307,7 +342,7 @@ export function MochiShellMenu() {
               href='/notifications/'
               onClick={() => setMenuOpen(false)}
               aria-label={t`View all`}
-              className='flex items-center justify-center rounded-md p-1.5 transition-colors hover:bg-hover active:bg-interactive-active'
+              className='hover:bg-hover active:bg-interactive-active flex items-center justify-center rounded-md p-1.5 transition-colors'
             >
               <ExternalLink className='size-4' />
             </a>
@@ -322,36 +357,40 @@ export function MochiShellMenu() {
     <ScrollArea className='min-h-0 flex-1 overflow-y-scroll'>
       <div className='flex flex-col'>
         <ChromeBoundary>
-        <NotificationList
-          notifications={unreadNotifications}
-          isLoading={isLoading}
-          isError={isError}
-          onClick={handleNotificationClick}
-          onMiddleClick={handleNotificationMiddleClick}
-          actions={(notification: Notification) => (
-            <NotificationCategoryButton
-              categories={categoryPicker.categories}
-              topic={categoryPicker.topic}
-              saving={categoryPicker.saving}
-              open={
-                categoryPicker.openKey ===
-                categoryPicker.keyFor(notification.app, notification.topic, notification.object)
-              }
-              onOpenChange={(next) => {
-                if (next) {
-                  void categoryPicker.open(
+          <NotificationList
+            notifications={unreadNotifications}
+            isLoading={isLoading}
+            isError={isError}
+            onClick={handleNotificationClick}
+            onMiddleClick={handleNotificationMiddleClick}
+            actions={(notification: Notification) => (
+              <NotificationCategoryButton
+                categories={categoryPicker.categories}
+                topic={categoryPicker.topic}
+                saving={categoryPicker.saving}
+                open={
+                  categoryPicker.openKey ===
+                  categoryPicker.keyFor(
                     notification.app,
                     notification.topic,
                     notification.object
                   )
-                } else {
-                  categoryPicker.close()
                 }
-              }}
-              onCategoryChange={categoryPicker.changeCategory}
-              className='mt-0.5 shrink-0'
-            />
-          )}
+                onOpenChange={(next) => {
+                  if (next) {
+                    void categoryPicker.open(
+                      notification.app,
+                      notification.topic,
+                      notification.object
+                    )
+                  } else {
+                    categoryPicker.close()
+                  }
+                }}
+                onCategoryChange={categoryPicker.changeCategory}
+                className='mt-0.5 shrink-0'
+              />
+            )}
           />
         </ChromeBoundary>
       </div>
@@ -377,7 +416,7 @@ export function MochiShellMenu() {
       <PopoverContent
         align='start'
         sideOffset={8}
-        className='flex w-80 max-h-(--radix-popover-content-available-height) flex-col p-0 overflow-hidden shadow-lg border-border sm:w-96'
+        className='border-border flex max-h-(--radix-popover-content-available-height) w-80 flex-col overflow-hidden p-0 shadow-lg sm:w-96'
       >
         {menuContent}
       </PopoverContent>
@@ -387,20 +426,32 @@ export function MochiShellMenu() {
   if (isCompact) {
     return (
       <>
-        <header className='flex h-12 w-full items-center gap-1 border-b bg-background px-2'>
+        <header className='bg-background flex h-12 w-full items-center gap-1 border-b px-2'>
           {sidebarPresent && (
             <Tooltip>
               <TooltipTrigger asChild>
                 <button
                   type='button'
-                  aria-label={sidebarState === 'expanded' ? t`Close navigation` : t`Open navigation`}
+                  aria-label={
+                    sidebarState === 'expanded'
+                      ? t`Close navigation`
+                      : t`Open navigation`
+                  }
                   onClick={handleSidebarToggle}
-                  className='flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 hover:bg-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+                  className='hover:bg-hover active:bg-interactive-active focus-visible:ring-ring flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none'
                 >
-                  {sidebarState === 'expanded' ? <PanelLeftClose className='size-5' /> : <PanelLeftOpen className='size-5' />}
+                  {sidebarState === 'expanded' ? (
+                    <PanelLeftClose className='size-5' />
+                  ) : (
+                    <PanelLeftOpen className='size-5' />
+                  )}
                 </button>
               </TooltipTrigger>
-              <TooltipContent>{sidebarState === 'expanded' ? t`Close navigation` : t`Open navigation`}</TooltipContent>
+              <TooltipContent>
+                {sidebarState === 'expanded'
+                  ? t`Close navigation`
+                  : t`Open navigation`}
+              </TooltipContent>
             </Tooltip>
           )}
 
@@ -409,7 +460,7 @@ export function MochiShellMenu() {
               <a
                 href='/'
                 aria-label={t`Home`}
-                className='flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 hover:bg-hover active:bg-interactive-active focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+                className='hover:bg-hover active:bg-interactive-active focus-visible:ring-ring flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none'
               >
                 <MochiLogo />
               </a>
@@ -417,10 +468,12 @@ export function MochiShellMenu() {
             <TooltipContent>{t`Home`}</TooltipContent>
           </Tooltip>
 
-          <div className='min-w-0 flex-1 flex items-center justify-center'>
+          <div className='flex min-w-0 flex-1 items-center justify-center'>
             {isHome && (
               /* jsx-text-ok: brand wordmark, verbatim in every locale */
-              <span className='sm:hidden text-[1.5rem] font-light tracking-[3px] bg-linear-to-br from-foreground to-muted-foreground/30 bg-clip-text text-transparent select-none'>mochi</span>
+              <span className='from-foreground to-muted-foreground/30 bg-linear-to-br bg-clip-text text-[1.5rem] font-light tracking-[3px] text-transparent select-none sm:hidden'>
+                mochi
+              </span>
             )}
           </div>
 
@@ -430,11 +483,17 @@ export function MochiShellMenu() {
                 type='button'
                 aria-label={t`Open menu`}
                 onClick={() => setMenuOpen(true)}
-                className='relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+                className='focus-visible:ring-ring relative flex size-9 items-center justify-center rounded-md transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none'
               >
-                <EntityAvatar src={personAsset('avatar', avatar)} styleUrl={personAsset('style')} seed={identity || undefined} name={name} size="sm" />
+                <EntityAvatar
+                  src={personAsset('avatar', avatar)}
+                  styleUrl={personAsset('style')}
+                  seed={identity || undefined}
+                  name={name}
+                  size='sm'
+                />
                 {unreadCount > 0 && (
-                  <span className='absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-notification px-1 text-[10px] font-medium text-notification-foreground'>
+                  <span className='bg-notification text-notification-foreground absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[10px] font-medium'>
                     {unreadCount > 99 ? '99+' : unreadCount}
                   </span>
                 )}
@@ -450,7 +509,7 @@ export function MochiShellMenu() {
           aria-hidden='true'
           className={cn(
             'fixed inset-0 bg-black/50 transition-opacity duration-300',
-            menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            menuOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
           )}
           onClick={() => setMenuOpen(false)}
         />
@@ -459,11 +518,11 @@ export function MochiShellMenu() {
           aria-label={t`Menu`}
           aria-modal='true'
           className={cn(
-            'fixed bottom-0 inset-x-0 bg-background rounded-t-lg border-t flex flex-col max-h-[80dvh] overflow-hidden transition-transform duration-300 ease-out',
-            menuOpen ? 'translate-y-0' : 'translate-y-full pointer-events-none'
+            'bg-background fixed inset-x-0 bottom-0 flex max-h-[80dvh] flex-col overflow-hidden rounded-t-lg border-t transition-transform duration-300 ease-out',
+            menuOpen ? 'translate-y-0' : 'pointer-events-none translate-y-full'
           )}
         >
-          <div className='mx-auto mt-4 mb-1 h-2 w-25 shrink-0 rounded-full bg-muted' />
+          <div className='bg-muted mx-auto mt-4 mb-1 h-2 w-25 shrink-0 rounded-full' />
           {menuContent}
         </div>
 
@@ -477,10 +536,9 @@ export function MochiShellMenu() {
     <>
       {/* Desktop menu overlay: horizontal, stacking vertically only when the user collapsed an existing
           sidebar. No-sidebar apps stay horizontal; their `md:ps-24` padding clears the overlay. */}
-      <div className={cn(
-        'flex items-center gap-2 p-2',
-        isCollapsed && 'flex-col'
-      )}>
+      <div
+        className={cn('flex items-center gap-2 p-2', isCollapsed && 'flex-col')}
+      >
         <Tooltip>
           <TooltipTrigger asChild>
             <a href='/' aria-label={t`Home`}>

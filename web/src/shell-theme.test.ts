@@ -2,10 +2,9 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // This file is part of Mochi, licensed under the GNU AGPL v3 with the
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
-
-import { describe, it, expect, vi, afterEach } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
+import { describe, it, expect, vi, afterEach } from 'vitest'
 
 // public/shell.js runs in the top-level shell window, outside the React tree
 // and outside the bundler, so it is loaded as source and evaluated against a
@@ -20,11 +19,13 @@ function stubColorScheme(dark: boolean) {
   const listeners: (() => void)[] = []
   const query = {
     matches: dark,
-    addEventListener: (_event: string, handler: () => void) => listeners.push(handler),
+    addEventListener: (_event: string, handler: () => void) =>
+      listeners.push(handler),
     removeEventListener: () => {},
   }
   vi.stubGlobal('matchMedia', (text: string) => {
-    if (!String(text).includes('prefers-color-scheme')) throw new Error('unexpected query: ' + text)
+    if (!String(text).includes('prefers-color-scheme'))
+      throw new Error('unexpected query: ' + text)
     return query
   })
   return {
@@ -44,7 +45,9 @@ const appearance = () =>
 
 // The root's theme values must come from the server, never from the app that
 // reports a change: the consent dialog renders from them.
-function boot(options: { theme?: string; appearance?: string; root?: string } = {}) {
+function boot(
+  options: { theme?: string; appearance?: string; root?: string } = {}
+) {
   document.documentElement.removeAttribute('style')
   // The server renders the user's theme inline on the shell page before any
   // script runs; `root` stands in for that.
@@ -74,10 +77,14 @@ function boot(options: { theme?: string; appearance?: string; root?: string } = 
       if (String(url).indexOf('/_/token') >= 0) {
         return Promise.resolve({
           ok: true,
-          json: () => Promise.resolve({ app: 'feeds-entity', token: 'app-token' }),
+          json: () =>
+            Promise.resolve({ app: 'feeds-entity', token: 'app-token' }),
         })
       }
-      return Promise.resolve({ ok: true, json: () => Promise.resolve({ data: {} }) })
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ data: {} }),
+      })
     })
   )
 
@@ -104,7 +111,8 @@ function boot(options: { theme?: string; appearance?: string; root?: string } = 
     for (let i = 0; i < 50; i++) await Promise.resolve()
   }
 
-  const property = (name: string) => document.documentElement.style.getPropertyValue(name)
+  const property = (name: string) =>
+    document.documentElement.style.getPropertyValue(name)
 
   return { send, settle, posted, property, shellCalls: () => shellCalls }
 }
@@ -208,7 +216,7 @@ describe('shell theme: the trusted root takes no values from an app', () => {
     expect(shell.property('font-size')).toBe('112.5%')
   })
 
-  it('still forwards the app\'s theme to the iframe', async () => {
+  it("still forwards the app's theme to the iframe", async () => {
     // An app styling its OWN document is its business, and cross-app theme
     // propagation depends on this relay — the fix must not break it.
     const shell = boot({ theme: '--hue: 140' })
@@ -306,8 +314,7 @@ describe('shell theme: the colour theme names the background hue in full', () =>
     shell.send({ type: 'ready' })
     await shell.settle()
     const init = shell.posted.find((m) => m.type === 'init') as
-      | { colorTheme?: Record<string, unknown> }
-      | undefined
+      { colorTheme?: Record<string, unknown> } | undefined
     expect(init?.colorTheme?.background).toBe('250')
     expect(init?.colorTheme?.hueBg).toBe('250')
   })

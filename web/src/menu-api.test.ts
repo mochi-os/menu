@@ -2,16 +2,16 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // This file is part of Mochi, licensed under the GNU AGPL v3 with the
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
-
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { getErrorMessage, useAuthStore } from '@mochi/web'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { menuFetch, MenuApiError } from './menu-api'
 
 // What the caller actually shows the user. The menu's own call sites do
 // `toast.error(getErrorMessage(error, t`...`))`, so asserting on this is
 // asserting on the toast — a test against the thrown Error's own .message
 // would miss that normalizeError prefers a payload message over it.
-const shown = (error: unknown, fallback: string) => getErrorMessage(error, fallback)
+const shown = (error: unknown, fallback: string) =>
+  getErrorMessage(error, fallback)
 
 const FALLBACK = 'Failed to load notification categories'
 
@@ -30,12 +30,15 @@ async function failure(path: string): Promise<MenuApiError> {
 function respond(status: number, body: string) {
   vi.stubGlobal(
     'fetch',
-    vi.fn(async () => ({
-      ok: status >= 200 && status < 300,
-      status,
-      text: async () => body,
-      json: async () => JSON.parse(body),
-    }) as Response)
+    vi.fn(
+      async () =>
+        ({
+          ok: status >= 200 && status < 300,
+          status,
+          text: async () => body,
+          json: async () => JSON.parse(body),
+        }) as Response
+    )
   )
 }
 
@@ -48,10 +51,16 @@ afterEach(() => {
 })
 
 describe('menuFetch surfaces what the server said', () => {
-  it('shows the server\'s localized message, not a status string', async () => {
+  it("shows the server's localized message, not a status string", async () => {
     // The Mochi envelope from respond_error / a.error.label, already resolved
     // into the request's language by the server.
-    respond(403, JSON.stringify({ error: 'restricted_permissions_disabled', message: 'Autorisation restreinte refusée' }))
+    respond(
+      403,
+      JSON.stringify({
+        error: 'restricted_permissions_disabled',
+        message: 'Autorisation restreinte refusée',
+      })
+    )
 
     const error = await failure('-/permissions/grant')
     expect(error).toBeInstanceOf(MenuApiError)
@@ -65,14 +74,20 @@ describe('menuFetch surfaces what the server said', () => {
   })
 
   it('keeps the machine-readable code so callers can branch on it', async () => {
-    respond(403, JSON.stringify({ error: 'restricted_permissions_disabled', message: 'Refusé' }))
+    respond(
+      403,
+      JSON.stringify({
+        error: 'restricted_permissions_disabled',
+        message: 'Refusé',
+      })
+    )
     const error = await failure('-/permissions/grant')
 
     expect(error.code).toBe('restricted_permissions_disabled')
     expect(error.status).toBe(403)
   })
 
-  it('falls back to the caller\'s translated string when the body carries no message', async () => {
+  it("falls back to the caller's translated string when the body carries no message", async () => {
     // A proxy answering with HTML, or an empty body: there is nothing to show,
     // so the caller's own translated fallback should win rather than a
     // hardcoded English status line.
@@ -104,6 +119,8 @@ describe('menuFetch surfaces what the server said', () => {
     // Companion: the error path is what changed, so prove the success path
     // still hands the caller its data.
     respond(200, JSON.stringify({ data: { granted: true } }))
-    await expect(menuFetch('-/permissions/check')).resolves.toEqual({ data: { granted: true } })
+    await expect(menuFetch('-/permissions/check')).resolves.toEqual({
+      data: { granted: true },
+    })
   })
 })

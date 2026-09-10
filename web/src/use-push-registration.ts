@@ -2,11 +2,9 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // This file is part of Mochi, licensed under the GNU AGPL v3 with the
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
-
 // Auto-register browser push if permission is already granted.
 // Also handles push-subscribe requests from app iframes via postMessage.
 // All API calls go through the menu's own backend (cookie auth).
-
 import { useEffect } from 'react'
 import { push } from '@mochi/web'
 import { menuFetch } from './menu-api'
@@ -39,7 +37,8 @@ function getLocalAccount(): LocalAccount | null {
     const raw = localStorage.getItem(LOCAL_ACCOUNT_KEY)
     if (!raw) return null
     const parsed = JSON.parse(raw)
-    if (typeof parsed?.id !== 'string' || typeof parsed?.endpoint !== 'string') return null
+    if (typeof parsed?.id !== 'string' || typeof parsed?.endpoint !== 'string')
+      return null
     return parsed
   } catch {
     return null
@@ -48,7 +47,8 @@ function getLocalAccount(): LocalAccount | null {
 
 function setLocalAccount(account: LocalAccount | null): void {
   try {
-    if (account) localStorage.setItem(LOCAL_ACCOUNT_KEY, JSON.stringify(account))
+    if (account)
+      localStorage.setItem(LOCAL_ACCOUNT_KEY, JSON.stringify(account))
     else localStorage.removeItem(LOCAL_ACCOUNT_KEY)
   } catch {
     // localStorage unavailable (private mode, etc.) — skip
@@ -72,27 +72,37 @@ async function getVapidKey(): Promise<string> {
   return res?.data?.key || ''
 }
 
-async function findBrowserAccountByEndpoint(endpoint: string): Promise<Account | null> {
+async function findBrowserAccountByEndpoint(
+  endpoint: string
+): Promise<Account | null> {
   const res = await menuFetch<AccountsListResponse>(
     '-/push/accounts/list?capability=notify'
   )
   const accounts = res?.data || []
-  return accounts.find((a) => a.type === 'browser' && a.identifier === endpoint) || null
+  return (
+    accounts.find((a) => a.type === 'browser' && a.identifier === endpoint) ||
+    null
+  )
 }
 
-async function createBrowserAccount(sub: PushSubscription): Promise<string | null> {
+async function createBrowserAccount(
+  sub: PushSubscription
+): Promise<string | null> {
   const data = push.getSubscriptionData(sub)
-  const res = await menuFetch<{ data?: { id?: string | number } }>('-/push/accounts/add', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      type: 'browser',
-      endpoint: data.endpoint,
-      auth: data.auth,
-      p256dh: data.p256dh,
-      label: push.getBrowserName(),
-    }).toString(),
-  })
+  const res = await menuFetch<{ data?: { id?: string | number } }>(
+    '-/push/accounts/add',
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        type: 'browser',
+        endpoint: data.endpoint,
+        auth: data.auth,
+        p256dh: data.p256dh,
+        label: push.getBrowserName(),
+      }).toString(),
+    }
+  )
 
   // The add response carries the new account (mochi.account.add), so the id is
   // normally right here; the list lookup remains as a fallback only.
@@ -144,7 +154,8 @@ const APP_TIMEOUT = 5000
  * NEXT app installed while we waited".
  */
 function shellAppId(): Promise<string | null> {
-  const current = (window as { __mochi_shell?: { appId?: string | null } }).__mochi_shell?.appId
+  const current = (window as { __mochi_shell?: { appId?: string | null } })
+    .__mochi_shell?.appId
   if (current) return Promise.resolve(current)
   return new Promise((resolve) => {
     const done = (app: string | null) => {
@@ -178,11 +189,14 @@ async function pushAllowed(frame: HTMLIFrameElement): Promise<boolean> {
   if (!app) return false
   if (document.getElementById('app-frame') !== frame) return false
   try {
-    const res = await menuFetch<{ data?: { granted?: boolean } }>('-/permissions/check', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `app=${encodeURIComponent(app)}&permission=${encodeURIComponent('notifications/write')}`,
-    })
+    const res = await menuFetch<{ data?: { granted?: boolean } }>(
+      '-/permissions/check',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `app=${encodeURIComponent(app)}&permission=${encodeURIComponent('notifications/write')}`,
+      }
+    )
     return !!res?.data?.granted
   } catch {
     return false
@@ -224,7 +238,9 @@ export function usePushRegistration() {
       // permission hook's check. Without it a stale popup or nested frame that
       // kept a handle to this window could subscribe, unsubscribe, or read the
       // push account after the user moved on to another app.
-      const appFrame = document.getElementById('app-frame') as HTMLIFrameElement | null
+      const appFrame = document.getElementById(
+        'app-frame'
+      ) as HTMLIFrameElement | null
       if (!appFrame || event.source !== appFrame.contentWindow) return
       const source = event.source as WindowProxy | null
       const id = data.id
@@ -233,22 +249,37 @@ export function usePushRegistration() {
         ;(async () => {
           try {
             if (!(await pushAllowed(appFrame))) {
-              source?.postMessage({ type: 'push-result', id, ok: false, reason: 'forbidden' }, '*')
+              source?.postMessage(
+                { type: 'push-result', id, ok: false, reason: 'forbidden' },
+                '*'
+              )
               return
             }
             const permission = await push.requestPermission()
             if (permission !== 'granted') {
-              source?.postMessage({ type: 'push-result', id, ok: false, reason: 'denied' }, '*')
+              source?.postMessage(
+                { type: 'push-result', id, ok: false, reason: 'denied' },
+                '*'
+              )
               return
             }
             const accountId = await ensurePushRegistered()
             if (accountId != null) {
-              source?.postMessage({ type: 'push-result', id, ok: true, accountId }, '*')
+              source?.postMessage(
+                { type: 'push-result', id, ok: true, accountId },
+                '*'
+              )
             } else {
-              source?.postMessage({ type: 'push-result', id, ok: false, reason: 'failed' }, '*')
+              source?.postMessage(
+                { type: 'push-result', id, ok: false, reason: 'failed' },
+                '*'
+              )
             }
           } catch {
-            source?.postMessage({ type: 'push-result', id, ok: false, reason: 'error' }, '*')
+            source?.postMessage(
+              { type: 'push-result', id, ok: false, reason: 'error' },
+              '*'
+            )
           }
         })()
         return
@@ -259,15 +290,31 @@ export function usePushRegistration() {
           try {
             if (!(await pushAllowed(appFrame))) {
               source?.postMessage(
-                { type: 'push-unsubscribe-result', id, ok: false, reason: 'forbidden' },
+                {
+                  type: 'push-unsubscribe-result',
+                  id,
+                  ok: false,
+                  reason: 'forbidden',
+                },
                 '*'
               )
               return
             }
             await removeBrowserAccount()
-            source?.postMessage({ type: 'push-unsubscribe-result', id, ok: true }, '*')
+            source?.postMessage(
+              { type: 'push-unsubscribe-result', id, ok: true },
+              '*'
+            )
           } catch {
-            source?.postMessage({ type: 'push-unsubscribe-result', id, ok: false, reason: 'error' }, '*')
+            source?.postMessage(
+              {
+                type: 'push-unsubscribe-result',
+                id,
+                ok: false,
+                reason: 'error',
+              },
+              '*'
+            )
           }
         })()
         return
@@ -278,7 +325,12 @@ export function usePushRegistration() {
           try {
             if (!(await pushAllowed(appFrame))) {
               source?.postMessage(
-                { type: 'push-status-result', id, ok: false, reason: 'forbidden' },
+                {
+                  type: 'push-status-result',
+                  id,
+                  ok: false,
+                  reason: 'forbidden',
+                },
                 '*'
               )
               return
@@ -304,11 +356,20 @@ export function usePushRegistration() {
               }
             }
             source?.postMessage(
-              { type: 'push-status-result', id, ok: true, subscribed, permission },
+              {
+                type: 'push-status-result',
+                id,
+                ok: true,
+                subscribed,
+                permission,
+              },
               '*'
             )
           } catch {
-            source?.postMessage({ type: 'push-status-result', id, ok: false, reason: 'error' }, '*')
+            source?.postMessage(
+              { type: 'push-status-result', id, ok: false, reason: 'error' },
+              '*'
+            )
           }
         })()
         return

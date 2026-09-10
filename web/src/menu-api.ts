@@ -2,11 +2,9 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // This file is part of Mochi, licensed under the GNU AGPL v3 with the
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
-
 // Shared helpers for calling the menu app's own backend. The shell chrome runs
 // in the top window, so it fetches /menu/-/... directly with the session cookie
 // plus the menu's bearer token.
-
 import { useAuthStore } from '@mochi/web'
 
 const MENU_PATH = '/menu'
@@ -38,7 +36,11 @@ export class MenuApiError extends Error {
 // Pull the envelope out of an error body. Anything that is not JSON with a
 // usable message — a proxy's HTML 502, an empty body — yields nothing, and the
 // caller falls back to the status.
-function parseErrorBody(body: string): { data?: unknown; message?: string; code?: string } {
+function parseErrorBody(body: string): {
+  data?: unknown
+  message?: string
+  code?: string
+} {
   if (!body) return {}
   let parsed: unknown
   try {
@@ -48,16 +50,27 @@ function parseErrorBody(body: string): { data?: unknown; message?: string; code?
   }
   if (!parsed || typeof parsed !== 'object') return {}
   const envelope = parsed as { error?: unknown; message?: unknown }
-  const message = typeof envelope.message === 'string' && envelope.message ? envelope.message : undefined
-  const code = typeof envelope.error === 'string' && envelope.error ? envelope.error : undefined
+  const message =
+    typeof envelope.message === 'string' && envelope.message
+      ? envelope.message
+      : undefined
+  const code =
+    typeof envelope.error === 'string' && envelope.error
+      ? envelope.error
+      : undefined
   return { data: parsed, message, code }
 }
 
-export async function menuFetch<T>(path: string, init?: RequestInit): Promise<T> {
+export async function menuFetch<T>(
+  path: string,
+  init?: RequestInit
+): Promise<T> {
   const token = getMenuToken()
   if (import.meta.env.DEV) {
     // eslint-disable-next-line no-console
-    console.log(`[menu-fetch] ${init?.method || 'GET'} ${path} token=${token ? 'present' : 'NONE'}`)
+    console.log(
+      `[menu-fetch] ${init?.method || 'GET'} ${path} token=${token ? 'present' : 'NONE'}`
+    )
   }
   const res = await fetch(`${MENU_PATH}/${path}`, {
     credentials: 'same-origin',
@@ -71,14 +84,18 @@ export async function menuFetch<T>(path: string, init?: RequestInit): Promise<T>
     const body = await res.text().catch(() => '')
     if (import.meta.env.DEV) {
       // eslint-disable-next-line no-console
-      console.error(`[menu-fetch] ${init?.method || 'GET'} ${path} -> ${res.status} ${body}`)
+      console.error(
+        `[menu-fetch] ${init?.method || 'GET'} ${path} -> ${res.status} ${body}`
+      )
     }
     const { data, message, code } = parseErrorBody(body)
     throw new MenuApiError(res.status, data, message ?? '', code)
   }
   if (import.meta.env.DEV) {
     // eslint-disable-next-line no-console
-    console.log(`[menu-fetch] ${init?.method || 'GET'} ${path} -> ${res.status}`)
+    console.log(
+      `[menu-fetch] ${init?.method || 'GET'} ${path} -> ${res.status}`
+    )
   }
   return res.json()
 }

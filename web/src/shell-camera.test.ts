@@ -2,10 +2,9 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // This file is part of Mochi, licensed under the GNU AGPL v3 with the
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
-
-import { describe, it, expect, vi, afterEach } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
+import { describe, it, expect, vi, afterEach } from 'vitest'
 
 // public/shell.js runs in the top-level shell window, outside the React tree
 // and outside the bundler, so it is loaded here as source and evaluated
@@ -34,7 +33,10 @@ function boot(options: Options = {}) {
     vi.fn((url: string, init?: { body?: string }) => {
       if (String(url).indexOf('/menu/-/permissions/check') >= 0) {
         const body = new URLSearchParams(init?.body ?? '')
-        checks.push({ app: body.get('app'), permission: body.get('permission') })
+        checks.push({
+          app: body.get('app'),
+          permission: body.get('permission'),
+        })
         return Promise.resolve({
           ok: true,
           json: () => Promise.resolve({ data: { granted } }),
@@ -43,24 +45,35 @@ function boot(options: Options = {}) {
       if (String(url).indexOf('/_/token') >= 0) {
         return Promise.resolve({
           ok: true,
-          json: () => Promise.resolve({ app: 'app-entity-id', token: 'menu-token' }),
+          json: () =>
+            Promise.resolve({ app: 'app-entity-id', token: 'menu-token' }),
         })
       }
-      return Promise.resolve({ ok: true, json: () => Promise.resolve({ data: {} }) })
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ data: {} }),
+      })
     })
   )
 
   // The menu's consent dialog, reduced to its event contract. One handler at
   // a time: the window persists across tests in this file, and a previous
   // boot's deny-handler would otherwise answer the next test's dialog first.
-  if (lastConsentHandler) window.removeEventListener('mochi-shell-permission-request', lastConsentHandler)
+  if (lastConsentHandler)
+    window.removeEventListener(
+      'mochi-shell-permission-request',
+      lastConsentHandler
+    )
   const consents: string[] = []
   const consentHandler = ((e: Event) => {
     const detail = (e as CustomEvent).detail
     consents.push(detail.permission)
     window.dispatchEvent(
       new CustomEvent('mochi-shell-permission-result', {
-        detail: { id: detail.id, result: options.consent ? 'granted' : 'denied' },
+        detail: {
+          id: detail.id,
+          result: options.consent ? 'granted' : 'denied',
+        },
       })
     )
   }) as EventListener
@@ -68,7 +81,11 @@ function boot(options: Options = {}) {
   window.addEventListener('mochi-shell-permission-request', consentHandler)
 
   // Camera hardware, reduced to its contract.
-  const track = { kind: 'video', stop: vi.fn(), onended: null as null | (() => void) }
+  const track = {
+    kind: 'video',
+    stop: vi.fn(),
+    onended: null as null | (() => void),
+  }
   const stream = {
     getTracks: () => [track],
     getVideoTracks: () => [track],
@@ -137,7 +154,8 @@ function boot(options: Options = {}) {
 }
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
-const resultOf = (posted: Record<string, unknown>[]) => posted.find((m) => m.type === 'camera.result')
+const resultOf = (posted: Record<string, unknown>[]) =>
+  posted.find((m) => m.type === 'camera.result')
 
 afterEach(() => {
   vi.unstubAllGlobals()
@@ -160,7 +178,11 @@ describe('shell camera bridge', () => {
     expect(shell.gum).not.toHaveBeenCalled()
     // The grant was checked for the camera permission, against the
     // server-resolved app id — and the consent dialog was offered.
-    expect(shell.checks.some((c) => c.permission === 'camera' && c.app === 'app-entity-id')).toBe(true)
+    expect(
+      shell.checks.some(
+        (c) => c.permission === 'camera' && c.app === 'app-entity-id'
+      )
+    ).toBe(true)
     expect(shell.consents).toContain('camera')
   })
 
@@ -199,13 +221,22 @@ describe('shell camera bridge', () => {
     shell.send({ type: 'camera.start', requestId: 10 })
     await shell.settle()
     expect((resultOf(shell.posted) as Record<string, unknown>).ok).toBe(true)
-    Object.defineProperty(document, 'hidden', { configurable: true, get: () => true })
+    Object.defineProperty(document, 'hidden', {
+      configurable: true,
+      get: () => true,
+    })
     document.dispatchEvent(new Event('visibilitychange'))
     await shell.settle()
     expect(shell.track.stop).toHaveBeenCalled()
-    const end = shell.posted.find((m) => m.type === 'camera.end') as Record<string, unknown>
+    const end = shell.posted.find((m) => m.type === 'camera.end') as Record<
+      string,
+      unknown
+    >
     expect(end.reason).toBe('aborted')
-    Object.defineProperty(document, 'hidden', { configurable: true, get: () => false })
+    Object.defineProperty(document, 'hidden', {
+      configurable: true,
+      get: () => false,
+    })
   })
 
   it('reports probe support', async () => {
@@ -213,7 +244,9 @@ describe('shell camera bridge', () => {
     await shell.start()
     shell.send({ type: 'camera.probe', requestId: 11 })
     await shell.settle()
-    const probe = shell.posted.find((m) => m.type === 'camera.probe.result') as Record<string, unknown>
+    const probe = shell.posted.find(
+      (m) => m.type === 'camera.probe.result'
+    ) as Record<string, unknown>
     expect(probe.supported).toBe(true)
   })
 })
