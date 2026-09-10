@@ -85,6 +85,9 @@ export default defineConfig(
   },
   {
     files: ['**/*.{ts,tsx}'],
+    // Tests are excluded, as in lib/web: their strings are fixtures and
+    // it() descriptions, never rendered.
+    ignores: ['src/**/*.test.{ts,tsx}', 'src/**/*.spec.{ts,tsx}'],
     ...i18nConfig,
     // menu has zero unwrapped strings — promote rule to error.
     rules: {
