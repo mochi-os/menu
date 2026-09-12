@@ -84,3 +84,73 @@ describe('useMenuNotifications reports a refused read', () => {
     await waitFor(() => expect(toast.error).toHaveBeenCalledTimes(1))
   })
 })
+
+// A notification for the chat or game already on screen has been read by the
+// time it arrives: the reader is looking at it. Retiring it here keeps it out
+// of the bell and off their other devices. A container must not do the same -
+// being on a feed says nothing about its posts.
+describe('useMenuNotifications retires what is on screen', () => {
+  const row = (id: string, link: string) => ({
+    id,
+    app: 'chat',
+    topic: 'message',
+    object: 'o1',
+    content: 'Hello',
+    link,
+    count: 1,
+    created: 1,
+    read: 0,
+  })
+
+  function listing(rows: ReturnType<typeof row>[]) {
+    vi.mocked(menuFetch).mockImplementation(async (path: string) => {
+      if (path === '-/notifications/list') return { data: rows }
+      return {}
+    })
+  }
+
+  it('marks a notification naming the open page read', async () => {
+    window.history.pushState({}, '', '/chat/c1')
+    listing([row('n1', '/chat/c1')])
+    renderHook(() => useMenuNotifications(), { wrapper })
+    await waitFor(() =>
+      expect(vi.mocked(menuFetch)).toHaveBeenCalledWith(
+        '-/notifications/read',
+        expect.objectContaining({ body: 'id=n1' })
+      )
+    )
+  })
+
+  it('leaves a notification about something under the open page alone', async () => {
+    window.history.pushState({}, '', '/feeds/f1')
+    listing([row('n2', '/feeds/f1/posts/p1')])
+    const { result } = renderHook(() => useMenuNotifications(), { wrapper })
+    await waitFor(() => expect(result.current.notifications).toHaveLength(1))
+    expect(vi.mocked(menuFetch)).not.toHaveBeenCalledWith(
+      '-/notifications/read',
+      expect.anything()
+    )
+  })
+
+  it('leaves a notification for another page alone', async () => {
+    window.history.pushState({}, '', '/chat/c1')
+    listing([row('n3', '/chat/c2')])
+    const { result } = renderHook(() => useMenuNotifications(), { wrapper })
+    await waitFor(() => expect(result.current.notifications).toHaveLength(1))
+    expect(vi.mocked(menuFetch)).not.toHaveBeenCalledWith(
+      '-/notifications/read',
+      expect.anything()
+    )
+  })
+
+  it('retires nothing from an app listing with no entity', async () => {
+    window.history.pushState({}, '', '/chat')
+    listing([row('n4', '/chat')])
+    const { result } = renderHook(() => useMenuNotifications(), { wrapper })
+    await waitFor(() => expect(result.current.notifications).toHaveLength(1))
+    expect(vi.mocked(menuFetch)).not.toHaveBeenCalledWith(
+      '-/notifications/read',
+      expect.anything()
+    )
+  })
+})

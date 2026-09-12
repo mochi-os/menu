@@ -4,7 +4,7 @@
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
 // Notification fetching for the menu app — uses the menu's own backend
 // instead of cross-app HTTP calls to the notifications app.
-import { useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useLingui } from '@lingui/react/macro'
 import { toast, getErrorMessage, type Notification } from '@mochi/web'
@@ -181,6 +181,28 @@ function disconnectWebSocket() {
   }
 }
 
+/**
+ * The path the shell is showing, as segments. The menu runs in the top window,
+ * so its own location is the one the reader sees.
+ */
+function shownPath(): string[] {
+  return window.location.pathname.split('/').filter(Boolean)
+}
+
+/**
+ * Whether a notification names exactly what the shell is showing.
+ *
+ * Only an exact match counts. Being in a chat or a game means the message it
+ * announces has been read; sitting on a feed does not mean its posts have,
+ * which is why a container must not retire anything under it.
+ */
+function readsOnSight(link: string, showing: string[]): boolean {
+  if (showing.length < 2) return false
+  const target = link.split('/').filter(Boolean)
+  if (target.length !== showing.length) return false
+  return target.every((segment, index) => segment === showing[index])
+}
+
 export function useMenuNotifications() {
   const queryClient = useQueryClient()
   const { t } = useLingui()
@@ -245,6 +267,44 @@ export function useMenuNotifications() {
   }, [queryClient])
 
   const notifications = data?.data ?? []
+
+  // Retire what the reader is already looking at, here and on their other
+  // devices, so a notification for the open chat or game is never left waiting
+  // in the bell. The shell owns the read endpoint and holds the list, so this
+  // needs nothing from the app in the frame below.
+  //
+  // The iframe's own navigation only reaches the top window as a message, and
+  // a pushState fires no popstate, so both are watched along with the list
+  // itself: any of the three can be what makes a row match.
+  const [shown, setShown] = useState<string[]>(shownPath)
+  useEffect(() => {
+    const follow = () => setShown(shownPath())
+    const onMessage = (event: MessageEvent) => {
+      const type = (event.data as { type?: string } | null)?.type
+      if (type === 'navigate' || type === 'navigate-top') follow()
+    }
+    window.addEventListener('popstate', follow)
+    window.addEventListener('message', onMessage)
+    return () => {
+      window.removeEventListener('popstate', follow)
+      window.removeEventListener('message', onMessage)
+    }
+  }, [])
+
+  const markAsReadRef = useRef(markAsReadMutation.mutate)
+  markAsReadRef.current = markAsReadMutation.mutate
+  const retiring = useRef(new Set<string>())
+  useEffect(() => {
+    for (const notification of notifications) {
+      if (notification.read) continue
+      if (!readsOnSight(notification.link, shown)) continue
+      // One attempt per row: the list is refetched after the read lands, and a
+      // failed read must not spin.
+      if (retiring.current.has(notification.id)) continue
+      retiring.current.add(notification.id)
+      markAsReadRef.current(notification.id)
+    }
+  }, [notifications, shown])
 
   return {
     notifications,
