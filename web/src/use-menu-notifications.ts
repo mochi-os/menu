@@ -7,7 +7,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useLingui } from '@lingui/react/macro'
-import { toast, getErrorMessage, type Notification } from '@mochi/web'
+import {
+  toast,
+  getErrorMessage,
+  websocketFailed,
+  websocketOpened,
+  websocketProtocols,
+  websocketQueryToken,
+  type Notification,
+} from '@mochi/web'
 import { menuFetch } from './menu-api'
 
 interface NotificationsListResponse {
@@ -65,9 +73,14 @@ const wsState: WebSocketState = {
   minting: false,
 }
 
+// The token rides in the subprotocol, so it stays out of the URL and out of
+// every access log; only a page that has fallen back for a server which
+// ignores it puts the token back in the query string.
 function getWebSocketUrl(token: string): string {
   const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
-  return `${protocol}//${window.location.host}/_/websocket?key=notifications&token=${encodeURIComponent(token)}`
+  const query = websocketQueryToken(token)
+  const parameter = query ? `&token=${encodeURIComponent(query)}` : ''
+  return `${protocol}//${window.location.host}/_/websocket?key=notifications${parameter}`
 }
 
 // The socket must carry a notifications-app token: delivery is scoped by the
@@ -143,10 +156,19 @@ function connectWebSocket() {
 
 function openWebSocket(token: string) {
   try {
-    const ws = new WebSocket(getWebSocketUrl(token))
+    const protocols = websocketProtocols(token)
+    const ws = new WebSocket(getWebSocketUrl(token), protocols)
     wsState.instance = ws
+    // A handshake that never opens is how a server that ignores the token
+    // subprotocol presents itself, and the next attempt then falls back.
+    let established = false
+    ws.onopen = () => {
+      established = true
+      websocketOpened(protocols)
+    }
     ws.onmessage = handleWebSocketMessage
     ws.onclose = () => {
+      if (!established) websocketFailed(protocols)
       // Only the current socket may act here: a stale socket's late close
       // event must not null out a replacement and spawn a duplicate
       // connection alongside it.

@@ -527,7 +527,7 @@
                 // Navigated while the fetch was in flight: this token belongs
                 // to the previous app, and the current iframe must not see it.
                 if (epoch !== navigationEpoch) return;
-                postToIframe({ type: 'token-refresh', token: data.token || '' });
+                postToIframe({ type: 'token-refresh', token: data.token || '', asset: data.asset || '' });
                 scheduleTokenRefresh(appName);
             }).catch(function() {
                 // Token refresh failed — session may be expired
@@ -1925,6 +1925,11 @@
                     var initMsg = {
                         type: 'init',
                         token: tokenData.token || '',
+                        // The short-lived, read-only token the app puts in image
+                        // and attachment URLs, where the app token would sit for
+                        // a year in anything that keeps a URL. Refreshed on the
+                        // same timer as the app token below.
+                        asset: tokenData.asset || '',
                         theme: theme,
                         inShell: true,
                         sidebarOpen: sidebarOpen,

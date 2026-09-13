@@ -706,8 +706,52 @@ describe('shell token: a response from before a navigation is dead on arrival', 
     const refreshes = frames.flatMap((f) =>
       f.messages.filter((m) => m.type === 'token-refresh')
     )
+    // The asset token rides with every refresh: it expires in half an hour, so
+    // an iframe that never navigates depends on this timer to keep its image
+    // URLs working. This mint answered without one, hence the empty string.
     expect(refreshes).toEqual([
-      { type: 'token-refresh', token: 'settings-token' },
+      { type: 'token-refresh', token: 'settings-token', asset: '' },
+    ])
+  })
+
+  it('relays the asset token to the iframe on init and on every refresh', async () => {
+    vi.useFakeTimers()
+    const frames = watch_frames()
+    const tokens = deferredTokens()
+    const shell = boot({ token: tokens.token })
+
+    shell.send({ type: 'ready' })
+    await shell.settle()
+    tokens.take('feeds').resolve({
+      app: 'feeds-entity',
+      token: 'feeds-token',
+      asset: 'feeds-asset',
+    })
+    await shell.settle()
+
+    const init = frames
+      .flatMap((f) => f.messages.filter((m) => m.type === 'init'))
+      .pop()
+    expect(init?.asset).toBe('feeds-asset')
+
+    vi.advanceTimersByTime(10 * 60 * 1000)
+    await shell.settle()
+    tokens.take('feeds').resolve({
+      app: 'feeds-entity',
+      token: 'feeds-token',
+      asset: 'fresher-asset',
+    })
+    await shell.settle()
+
+    const refreshes = frames.flatMap((f) =>
+      f.messages.filter((m) => m.type === 'token-refresh')
+    )
+    expect(refreshes).toEqual([
+      {
+        type: 'token-refresh',
+        token: 'feeds-token',
+        asset: 'fresher-asset',
+      },
     ])
   })
 
