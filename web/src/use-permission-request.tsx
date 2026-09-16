@@ -16,7 +16,7 @@ import {
   ResponsiveDialogTitle,
   Button,
 } from '@mochi/web'
-import { Shield, ShieldAlert, Check, Loader2 } from 'lucide-react'
+import { Shield, ShieldAlert, Check } from 'lucide-react'
 import { ChromeBoundary } from './chrome-boundary'
 import { menuFetch } from './menu-api'
 
@@ -420,13 +420,9 @@ export function usePermissionRequest() {
                 <Button
                   className='flex-1'
                   onClick={handleAllow}
-                  disabled={submitting}
+                  loading={submitting}
+                  icon={<Check className='size-4' />}
                 >
-                  {submitting ? (
-                    <Loader2 className='h-4 w-4 animate-spin' />
-                  ) : (
-                    <Check className='size-4' />
-                  )}
                   <Trans>Allow</Trans>
                 </Button>
               </>
