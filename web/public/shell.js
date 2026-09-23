@@ -470,9 +470,22 @@
 
     // --- Shell config (menuToken, domain) — fetched once on load ---
 
+    // The device's zone rides on the boot request: the server keeps it as the
+    // user's zone while the preference is "auto", so recurrences and reminders
+    // follow the device the user last used.
+    function deviceTimezone() {
+        try {
+            return Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        } catch (e) {
+            return '';
+        }
+    }
+
     var shellConfigReady = fetch('/_/shell', {
         method: 'POST',
-        credentials: 'same-origin'
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ timezone: deviceTimezone() })
     }).then(function(r) {
         if (!r.ok) return {};
         return r.json();
