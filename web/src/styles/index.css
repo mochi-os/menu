@@ -2,6 +2,10 @@
 @import 'tw-animate-css';
 @import '../../../../../lib/web/src/styles/theme.css';
 
+@theme {
+  --color-primary-light: oklch(0.74 calc(var(--hue-chroma) * 0.85) var(--hue));
+}
+
 @source "../../../../../lib/web/src/**/*.{ts,tsx}";
 
 @custom-variant dark (&:is(.dark *));

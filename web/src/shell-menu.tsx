@@ -26,6 +26,7 @@ import {
 import {
   Check,
   ExternalLink,
+  House,
   LogOut,
   PanelLeftClose,
   PanelLeftOpen,
@@ -36,9 +37,38 @@ import { useMenuNotifications } from './use-menu-notifications'
 import { usePermissionRequest } from './use-permission-request'
 import { usePushRegistration } from './use-push-registration'
 
+// Lucide's house, stroked with the colours the first letter of the home app's
+// wordmark carries: the word's 165° gradient from primary to primary-light
+// runs from 24% to 56% across that letter's ink, here across the house's.
 function MochiLogo() {
   return (
-    <img src='/menu/images/logo-header.png' alt='Mochi' className='h-7 w-7' />
+    <House className='size-7' color='url(#menu-home)' aria-hidden='true'>
+      <defs>
+        <linearGradient
+          id='menu-home'
+          gradientUnits='userSpaceOnUse'
+          x1='8.71'
+          y1='-0.8'
+          x2='15.29'
+          y2='23.8'
+        >
+          <stop
+            offset='0'
+            style={{
+              stopColor:
+                'color-mix(in oklab, var(--primary), var(--color-primary-light) 24%)',
+            }}
+          />
+          <stop
+            offset='1'
+            style={{
+              stopColor:
+                'color-mix(in oklab, var(--primary), var(--color-primary-light) 56%)',
+            }}
+          />
+        </linearGradient>
+      </defs>
+    </House>
   )
 }
 
@@ -457,28 +487,6 @@ export function MochiShellMenu() {
 
           <Tooltip>
             <TooltipTrigger asChild>
-              <a
-                href='/'
-                aria-label={t`Home`}
-                className='hover:bg-hover active:bg-interactive-active focus-visible:ring-ring flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none'
-              >
-                <MochiLogo />
-              </a>
-            </TooltipTrigger>
-            <TooltipContent>{t`Home`}</TooltipContent>
-          </Tooltip>
-
-          <div className='flex min-w-0 flex-1 items-center justify-center'>
-            {isHome && (
-              /* jsx-text-ok: brand wordmark, verbatim in every locale */
-              <span className='from-foreground to-muted-foreground/30 bg-linear-to-br bg-clip-text text-[1.5rem] font-light tracking-[3px] text-transparent select-none sm:hidden'>
-                mochi
-              </span>
-            )}
-          </div>
-
-          <Tooltip>
-            <TooltipTrigger asChild>
               <button
                 type='button'
                 aria-label={t`Open menu`}
@@ -500,6 +508,28 @@ export function MochiShellMenu() {
               </button>
             </TooltipTrigger>
             <TooltipContent>{t`Open menu`}</TooltipContent>
+          </Tooltip>
+
+          <div className='flex min-w-0 flex-1 items-center justify-center'>
+            {isHome && (
+              /* jsx-text-ok: brand wordmark, verbatim in every locale */
+              <span className='from-foreground to-muted-foreground/30 bg-linear-to-br bg-clip-text text-[1.5rem] font-light tracking-[3px] text-transparent select-none sm:hidden'>
+                mochi
+              </span>
+            )}
+          </div>
+
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <a
+                href='/'
+                aria-label={t`Home`}
+                className='hover:bg-hover active:bg-interactive-active focus-visible:ring-ring flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none'
+              >
+                <MochiLogo />
+              </a>
+            </TooltipTrigger>
+            <TooltipContent>{t`Home`}</TooltipContent>
           </Tooltip>
         </header>
 
@@ -539,6 +569,8 @@ export function MochiShellMenu() {
       <div
         className={cn('flex items-center gap-2 p-2', isCollapsed && 'flex-col')}
       >
+        {menuControl}
+
         <Tooltip>
           <TooltipTrigger asChild>
             <a href='/' aria-label={t`Home`}>
@@ -547,8 +579,6 @@ export function MochiShellMenu() {
           </TooltipTrigger>
           <TooltipContent>{t`Home`}</TooltipContent>
         </Tooltip>
-
-        {menuControl}
       </div>
 
       <SignOutDialog open={!!signOutOpen} onOpenChange={setSignOutOpen} />
