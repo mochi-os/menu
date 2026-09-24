@@ -2,18 +2,10 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // This file is part of Mochi, licensed under the GNU AGPL v3 with the
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
-// The app grid in the shell menu, and the shortcuts beside the avatar.
+// The app shortcuts beside the avatar in the shell menu.
 import type { CSSProperties, ReactNode } from 'react'
 import { useLingui } from '@lingui/react/macro'
-import {
-  cn,
-  getErrorMessage,
-  naturalCompare,
-  Skeleton,
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from '@mochi/web'
+import { cn, Tooltip, TooltipContent, TooltipTrigger } from '@mochi/web'
 import { House } from 'lucide-react'
 import { type MenuApp, type useMenuApps } from './use-menu-apps'
 
@@ -120,51 +112,6 @@ function AppLink({
         )}
       </span>
     </IconLink>
-  )
-}
-
-export function MenuApps({ query }: { query: ReturnType<typeof useMenuApps> }) {
-  const { t } = useLingui()
-  const { data, isLoading, isError, error } = query
-
-  if (isLoading) {
-    return (
-      <div className='grid grid-cols-[repeat(auto-fill,minmax(3rem,1fr))] gap-1 p-2'>
-        {Array.from({ length: 10 }).map((_, i) => (
-          <div key={i} className='flex h-11 items-center justify-center'>
-            <Skeleton className='size-8 rounded-md' />
-          </div>
-        ))}
-      </div>
-    )
-  }
-
-  if (isError) {
-    return (
-      <p className='text-muted-foreground px-4 py-3 text-sm'>
-        {getErrorMessage(error, t`Failed to load apps`)}
-      </p>
-    )
-  }
-
-  // Consumer-side sort: core's ordering is accent- and numeric-blind.
-  const apps = [...(data?.icons ?? [])].sort((a, b) =>
-    naturalCompare(a.name, b.name)
-  )
-  if (apps.length === 0) return null
-
-  return (
-    <div className='grid grid-cols-[repeat(auto-fill,minmax(3rem,1fr))] gap-1 p-2'>
-      {apps.map((app) => (
-        <AppLink
-          key={`${app.id}:${app.path}:${app.file}`}
-          app={app}
-          mask={data?.icon_mask}
-          background={data?.icon_background}
-          className='h-11 min-w-0'
-        />
-      ))}
-    </div>
   )
 }
 

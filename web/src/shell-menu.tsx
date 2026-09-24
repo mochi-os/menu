@@ -31,7 +31,7 @@ import {
   PanelLeftOpen,
 } from 'lucide-react'
 import { ChromeBoundary } from './chrome-boundary'
-import { MenuApps, MenuShortcuts } from './menu-apps'
+import { MenuShortcuts } from './menu-apps'
 import { useMenuApps } from './use-menu-apps'
 import { useMenuCategories } from './use-menu-categories'
 import { useMenuNotifications } from './use-menu-notifications'
@@ -320,17 +320,27 @@ export function MochiShellMenu() {
     </div>
   )
 
-  const appsSection = (
-    <div className='max-h-[50dvh] shrink-0 overflow-y-auto border-t'>
-      <MenuApps query={apps} />
-    </div>
-  )
+  // Nothing unread: the header says so and the empty list below it goes.
+  const empty = !isLoading && !isError && unreadCount === 0
 
+  // The heading starts where the name above it does: past the row's padding,
+  // the 32px avatar and the gap after it.
   const notificationsHeader = (
-    <div className='bg-muted/30 flex items-center justify-between border-y px-4 py-2.5'>
-      <span className='text-sm font-semibold'>
-        <Trans>Notifications</Trans>
-        {unreadCount > 0 && ` (${unreadCount})`}
+    <div
+      className={cn(
+        'bg-muted/30 flex items-center justify-between py-2.5 ps-[calc(var(--spacing)*6+32px)] pe-4',
+        !empty && 'border-b'
+      )}
+    >
+      <span className={cn('text-sm', !empty && 'font-semibold')}>
+        {empty ? (
+          <Trans>No unread notifications</Trans>
+        ) : (
+          <>
+            <Trans>Notifications</Trans>
+            {unreadCount > 0 && ` (${unreadCount})`}
+          </>
+        )}
       </span>
       <div className='flex items-center gap-1'>
         {unreadCount > 0 && (
@@ -414,9 +424,8 @@ export function MochiShellMenu() {
   const menuContent = (
     <>
       {userSection}
-      {appsSection}
       {notificationsHeader}
-      {notificationsList}
+      {!empty && notificationsList}
     </>
   )
 
