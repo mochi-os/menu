@@ -31,11 +31,13 @@ import {
   PanelLeftOpen,
 } from 'lucide-react'
 import { ChromeBoundary } from './chrome-boundary'
-import { MenuApps, useMenuApps } from './menu-apps'
+import { MenuApps, MenuShortcuts } from './menu-apps'
+import { useMenuApps } from './use-menu-apps'
 import { useMenuCategories } from './use-menu-categories'
 import { useMenuNotifications } from './use-menu-notifications'
 import { usePermissionRequest } from './use-permission-request'
 import { usePushRegistration } from './use-push-registration'
+import { useRecentApps } from './use-recent-apps'
 
 // Notification links are app-authored: only http(s) may go to window.open,
 // since a javascript:/data: URL would run with access to window.opener (the
@@ -107,10 +109,9 @@ function useCurrentApp(): string {
   )
 }
 
-// Observe data-sidebar-present on #menu. True when the currently loaded app
-// has a sidebar; when false, the menu should ignore the persisted collapse
-// state and render horizontally (e.g. on the home page).
-function useSidebarPresent(): boolean {
+// Observe data-sidebar-present on #menu: whether the loaded app has a sidebar,
+// or null while a newly loaded app has yet to say.
+function useSidebarPresent(): boolean | null {
   return useSyncExternalStore(
     (cb) => {
       const el = document.getElementById('menu')
@@ -123,8 +124,10 @@ function useSidebarPresent(): boolean {
       return () => observer.disconnect()
     },
     () => {
-      const el = document.getElementById('menu')
-      return el?.getAttribute('data-sidebar-present') === 'true'
+      const value = document
+        .getElementById('menu')
+        ?.getAttribute('data-sidebar-present')
+      return value === 'true' ? true : value === 'false' ? false : null
     }
   )
 }
@@ -139,9 +142,17 @@ export function MochiShellMenu() {
   const isCompact = !isDesktop
   const sidebarState = useSidebarState()
   const sidebarPresent = useSidebarPresent()
-  const isCollapsed = sidebarPresent && sidebarState === 'collapsed'
   const currentApp = useCurrentApp()
   const isHome = currentApp === ''
+  // The desktop overlay's shape, from the last app that said whether it has a
+  // sidebar: kept while a newly loaded one has yet to, and before any has,
+  // taken as though it had one.
+  const shape =
+    sidebarPresent === null
+      ? null
+      : (sidebarPresent || isHome) && sidebarState === 'expanded'
+  const [row, setRow] = useState(shape ?? sidebarState === 'expanded')
+  if (shape !== null && shape !== row) setRow(shape)
   const { notifications, isLoading, isError, markAsRead, markAllAsRead } =
     useMenuNotifications()
 
@@ -178,6 +189,7 @@ export function MochiShellMenu() {
       : undefined
   const categoryPicker = useMenuCategories()
   const apps = useMenuApps()
+  const recent = useRecentApps(currentApp, identity)
   const unreadNotifications = notifications.filter(
     (n: Notification) => n.read === 0
   )
@@ -429,7 +441,7 @@ export function MochiShellMenu() {
   if (isCompact) {
     return (
       <>
-        <header className='bg-background flex h-12 w-full items-center gap-1 border-b px-2'>
+        <header className='bg-background relative flex h-12 w-full items-center gap-1 border-b px-2'>
           {sidebarPresent && (
             <Tooltip>
               <TooltipTrigger asChild>
@@ -483,16 +495,14 @@ export function MochiShellMenu() {
             <TooltipContent>{t`Open menu`}</TooltipContent>
           </Tooltip>
 
-          <div className='flex min-w-0 flex-1 items-center justify-center'>
-            {isHome && (
-              /* jsx-text-ok: brand wordmark, verbatim in every locale */
-              <span className='from-foreground to-muted-foreground/30 bg-linear-to-br bg-clip-text text-[1.5rem] font-light tracking-[3px] text-transparent select-none sm:hidden'>
-                mochi
-              </span>
-            )}
-          </div>
+          <MenuShortcuts query={apps} current={currentApp} recent={recent} />
 
-          <div className='size-9 shrink-0' aria-hidden='true' />
+          {isHome && (
+            /* jsx-text-ok: brand wordmark, verbatim in every locale */
+            <span className='from-foreground to-muted-foreground/30 pointer-events-none absolute left-1/2 -translate-x-1/2 bg-linear-to-br bg-clip-text text-[1.5rem] font-light tracking-[3px] text-transparent select-none sm:hidden'>
+              mochi
+            </span>
+          )}
         </header>
 
         {/* Custom bottom sheet — renders inside #menu (position:fixed), no Radix Dialog,
@@ -526,12 +536,16 @@ export function MochiShellMenu() {
 
   return (
     <>
-      {/* Desktop menu overlay: horizontal, stacking vertically only when the user collapsed an existing
-          sidebar. No-sidebar apps stay horizontal; their `md:ps-24` padding clears the overlay. */}
+      {/* Desktop menu overlay: a row across the top of an expanded sidebar, otherwise a column. Apps
+          without a sidebar clear it with their `md:ps-24` padding; a collapsed sidebar with the
+          height its header reserves (app-sidebar.tsx). Home has no sidebar but a centred page with
+          room for either, so it follows the sidebar setting and the menu keeps its shape between
+          Home and the other apps. */}
       <div
-        className={cn('flex items-center gap-2 p-2', isCollapsed && 'flex-col')}
+        className={cn('flex items-center gap-2 p-2', !row && 'flex-col gap-1')}
       >
         {menuControl}
+        <MenuShortcuts query={apps} current={currentApp} recent={recent} />
       </div>
 
       <SignOutDialog open={!!signOutOpen} onOpenChange={setSignOutOpen} />

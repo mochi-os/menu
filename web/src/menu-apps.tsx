@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 // This file is part of Mochi, licensed under the GNU AGPL v3 with the
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
-// The app grid in the shell menu, fed by the menu's own apps action.
-import type { CSSProperties } from 'react'
-import { useQuery } from '@tanstack/react-query'
+// The app grid in the shell menu, and the shortcuts beside the avatar.
+import type { CSSProperties, ReactNode } from 'react'
 import { useLingui } from '@lingui/react/macro'
 import {
+  cn,
   getErrorMessage,
   naturalCompare,
   Skeleton,
@@ -14,22 +14,8 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@mochi/web'
-import { menuFetch } from './menu-api'
-
-interface MenuApp {
-  id: string
-  path: string
-  name: string
-  file: string
-  link: string
-  highlight?: boolean
-}
-
-interface AppsResponse {
-  icons: MenuApp[]
-  icon_mask?: string
-  icon_background?: string
-}
+import { House } from 'lucide-react'
+import { type MenuApp, type useMenuApps } from './use-menu-apps'
 
 // Theme icon masks, as the home screen draws them.
 const maskBorderRadius: Record<string, string> = {
@@ -39,25 +25,47 @@ const maskBorderRadius: Record<string, string> = {
   squircle: '28%',
 }
 
-export function useMenuApps() {
-  return useQuery({
-    queryKey: ['menu', 'apps'],
-    queryFn: () =>
-      menuFetch<{ data: AppsResponse }>('-/apps').then(
-        (response) => response.data
-      ),
-    staleTime: 5 * 60 * 1000,
-  })
+// Icons alone: the label names the link and is its tooltip.
+function IconLink({
+  href,
+  label,
+  className,
+  children,
+}: {
+  href: string
+  label: string
+  className?: string
+  children: ReactNode
+}) {
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <a
+          href={href}
+          aria-label={label}
+          className={cn(
+            'group hover:bg-hover active:bg-interactive-active focus-visible:ring-ring flex items-center justify-center rounded-md transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none',
+            className
+          )}
+        >
+          {children}
+        </a>
+      </TooltipTrigger>
+      <TooltipContent>{label}</TooltipContent>
+    </Tooltip>
+  )
 }
 
 function AppLink({
   app,
   mask,
   background,
+  className,
 }: {
   app: MenuApp
   mask?: string
   background?: string
+  className?: string
 }) {
   // Home is served at the root, so its path and link are empty; joining them
   // blindly would give a protocol-relative //images/... URL.
@@ -73,55 +81,47 @@ function AppLink({
     WebkitMaskPosition: 'center',
   } as CSSProperties
   const radius = mask ? maskBorderRadius[mask] : undefined
-  // Icons alone: the name is the link's label and its tooltip.
   return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <a
-          href={app.link ? `/${app.link}/` : '/'}
-          aria-label={app.name}
-          className='group hover:bg-hover active:bg-interactive-active focus-visible:ring-ring flex h-11 min-w-0 items-center justify-center rounded-md transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none'
-        >
-          <span className='relative flex size-8 items-center justify-center'>
-            {radius !== undefined ? (
-              <span
-                className='flex size-8 items-center justify-center'
-                style={{
-                  backgroundColor: background || 'var(--primary)',
-                  borderRadius: radius,
-                }}
-              >
-                <span
-                  className='size-5 bg-white'
-                  style={glyph}
-                  aria-hidden='true'
-                />
-              </span>
-            ) : (
-              <span
-                className='bg-primary/70 group-hover:bg-primary size-6 transition-colors duration-150'
-                style={glyph}
-                aria-hidden='true'
-              />
-            )}
-            {app.highlight && (
-              <span
-                className='absolute -top-0.5 -right-0.5 flex size-2.5'
-                aria-hidden='true'
-              >
-                <span className='bg-primary absolute inline-flex size-full animate-ping rounded-full opacity-75' />
-                <span className='bg-primary relative inline-flex size-2.5 rounded-full' />
-              </span>
-            )}
+    <IconLink
+      href={app.link ? `/${app.link}/` : '/'}
+      label={app.name}
+      className={className}
+    >
+      <span className='relative flex size-8 items-center justify-center'>
+        {radius !== undefined ? (
+          <span
+            className='flex size-8 items-center justify-center'
+            style={{
+              backgroundColor: background || 'var(--primary)',
+              borderRadius: radius,
+            }}
+          >
+            <span
+              className='size-5 bg-white'
+              style={glyph}
+              aria-hidden='true'
+            />
           </span>
-        </a>
-      </TooltipTrigger>
-      <TooltipContent>{app.name}</TooltipContent>
-    </Tooltip>
+        ) : (
+          <span
+            className='bg-primary/70 group-hover:bg-primary size-6 transition-colors duration-150'
+            style={glyph}
+            aria-hidden='true'
+          />
+        )}
+        {app.highlight && (
+          <span
+            className='absolute -top-0.5 -right-0.5 flex size-2.5'
+            aria-hidden='true'
+          >
+            <span className='bg-primary absolute inline-flex size-full animate-ping rounded-full opacity-75' />
+            <span className='bg-primary relative inline-flex size-2.5 rounded-full' />
+          </span>
+        )}
+      </span>
+    </IconLink>
   )
 }
-
-const grid = 'grid grid-cols-[repeat(auto-fill,minmax(3rem,1fr))] gap-1'
 
 export function MenuApps({ query }: { query: ReturnType<typeof useMenuApps> }) {
   const { t } = useLingui()
@@ -129,7 +129,7 @@ export function MenuApps({ query }: { query: ReturnType<typeof useMenuApps> }) {
 
   if (isLoading) {
     return (
-      <div className={`${grid} p-2`}>
+      <div className='grid grid-cols-[repeat(auto-fill,minmax(3rem,1fr))] gap-1 p-2'>
         {Array.from({ length: 10 }).map((_, i) => (
           <div key={i} className='flex h-11 items-center justify-center'>
             <Skeleton className='size-8 rounded-md' />
@@ -154,15 +154,65 @@ export function MenuApps({ query }: { query: ReturnType<typeof useMenuApps> }) {
   if (apps.length === 0) return null
 
   return (
-    <div className={`${grid} p-2`}>
+    <div className='grid grid-cols-[repeat(auto-fill,minmax(3rem,1fr))] gap-1 p-2'>
       {apps.map((app) => (
         <AppLink
           key={`${app.id}:${app.path}:${app.file}`}
           app={app}
           mask={data?.icon_mask}
           background={data?.icon_background}
+          className='h-11 min-w-0'
         />
       ))}
     </div>
+  )
+}
+
+/**
+ * Home, then the second most recent and the most recent app, beside the
+ * avatar. The app on screen is never offered, Home included. recent is
+ * app paths, most recent first.
+ */
+export function MenuShortcuts({
+  query,
+  current,
+  recent,
+}: {
+  query: ReturnType<typeof useMenuApps>
+  current: string
+  recent: string[]
+}) {
+  const { t } = useLingui()
+  const icons = query.data?.icons ?? []
+  const home = icons.find((app) => app.link === '')
+  const latest = recent
+    .filter((path) => path !== current && path !== '')
+    .map((path) => icons.find((app) => app.link === path))
+    .filter((app): app is MenuApp => app !== undefined)
+    .slice(0, 2)
+    .reverse()
+  const shortcut = (app: MenuApp) => (
+    <AppLink
+      key={`${app.id}:${app.path}:${app.file}`}
+      app={app}
+      mask={query.data?.icon_mask}
+      background={query.data?.icon_background}
+      className='size-9 shrink-0'
+    />
+  )
+
+  return (
+    <>
+      {current !== '' &&
+        (home ? (
+          shortcut(home)
+        ) : (
+          // A home app older than its icon is still reachable.
+          <IconLink href='/' label={t`Home`} className='size-9 shrink-0'>
+            <House className='text-primary/70 group-hover:text-primary size-6 transition-colors duration-150' />
+          </IconLink>
+        ))}
+      {latest.map(shortcut)}
+    </>
   )
 }
