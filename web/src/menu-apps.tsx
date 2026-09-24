@@ -5,7 +5,7 @@
 // The app grid in the shell menu, fed by the menu's own apps action.
 import type { CSSProperties } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import { Trans, useLingui } from '@lingui/react/macro'
+import { useLingui } from '@lingui/react/macro'
 import {
   getErrorMessage,
   naturalCompare,
@@ -22,7 +22,6 @@ interface MenuApp {
   name: string
   file: string
   link: string
-  development: boolean
   highlight?: boolean
 }
 
@@ -153,34 +152,17 @@ export function MenuApps({ query }: { query: ReturnType<typeof useMenuApps> }) {
     naturalCompare(a.name, b.name)
   )
   if (apps.length === 0) return null
-  const installed = apps.filter((app) => !app.development)
-  const development = apps.filter((app) => app.development)
-  const link = (app: MenuApp) => (
-    <AppLink
-      key={`${app.id}:${app.path}:${app.file}`}
-      app={app}
-      mask={data?.icon_mask}
-      background={data?.icon_background}
-    />
-  )
 
   return (
-    <div className='p-2'>
-      {installed.length > 0 && (
-        <div className={grid}>{installed.map(link)}</div>
-      )}
-      {development.length > 0 && (
-        <>
-          <div className='my-2 flex items-center gap-3 px-2'>
-            <div className='bg-border h-px flex-1' />
-            <h2 className='text-muted-foreground text-xs font-medium tracking-wider uppercase'>
-              <Trans>Development</Trans>
-            </h2>
-            <div className='bg-border h-px flex-1' />
-          </div>
-          <div className={grid}>{development.map(link)}</div>
-        </>
-      )}
+    <div className={`${grid} p-2`}>
+      {apps.map((app) => (
+        <AppLink
+          key={`${app.id}:${app.path}:${app.file}`}
+          app={app}
+          mask={data?.icon_mask}
+          background={data?.icon_background}
+        />
+      ))}
     </div>
   )
 }
