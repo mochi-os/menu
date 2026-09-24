@@ -508,7 +508,7 @@ export function MochiShellMenu() {
 
           {isHome && (
             /* jsx-text-ok: brand wordmark, verbatim in every locale */
-            <span className='from-foreground to-muted-foreground/30 pointer-events-none absolute left-1/2 -translate-x-1/2 bg-linear-to-br bg-clip-text text-[1.5rem] font-light tracking-[3px] text-transparent select-none sm:hidden'>
+            <span className='from-primary to-primary-light pointer-events-none absolute left-1/2 -translate-x-1/2 bg-linear-165 bg-clip-text text-[1.5rem] font-light tracking-[3px] text-transparent select-none sm:hidden'>
               mochi
             </span>
           )}
