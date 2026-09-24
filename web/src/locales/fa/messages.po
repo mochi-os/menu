@@ -65,9 +65,23 @@ msgstr "{count, plural, one {#د} other {#د}}"
 msgid "{count, plural, one {#w} other {#w}}"
 msgstr "{count, plural, one {#ه} other {#ه}}"
 
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/tooltip.ts
+msgid "{day}, {from} to {to}"
+msgstr "{day}، {from} تا {to}"
+
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx
 msgid "{entityLabel} name"
 msgstr "نام {entityLabel}"
+
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/tooltip.ts
+msgid "{from} to {to}"
+msgstr "{from} تا {to}"
+
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+msgid "{hidden, plural, one {+# more} other {+# more}}"
+msgstr "{hidden, plural, one {+# مورد دیگر} other {+# مورد دیگر}}"
 
 #: ../../../lib/web/src/components/game/game-draw-offer-banner.tsx
 msgid "{opponentName} offered a draw"
@@ -209,6 +223,11 @@ msgstr "افزودن نما"
 msgid "AI"
 msgstr "هوش مصنوعی"
 
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "All day"
+msgstr "تمام‌روز"
+
 #: src/use-permission-request.tsx
 msgid "Allow"
 msgstr "اجازه"
@@ -279,6 +298,10 @@ msgstr "آیا از تسلیم شدن مطمئن هستید؟ {opponentName} ب�
 #: ../../../lib/web/src/components/ui/sort-direction-button.tsx
 msgid "Ascending"
 msgstr "صعودی"
+
+#: ../../../lib/web/src/components/timezone-select.tsx
+msgid "At sea"
+msgstr "در دریا"
 
 #: ../../../lib/web/src/components/comment-composer.tsx
 msgid "Attach comment files"
@@ -432,6 +455,11 @@ msgstr "تغییر کرد"
 msgid "Changed {field}"
 msgstr "{field} تغییر کرد"
 
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Changed occurrence"
+msgstr "رخداد تغییریافته"
+
 #: ../../../lib/web/src/hooks/use-field-type-labels.ts
 msgid "Checkbox"
 msgstr "کادر انتخاب"
@@ -439,6 +467,10 @@ msgstr "کادر انتخاب"
 #: ../../../lib/web/src/hooks/use-field-type-labels.ts
 msgid "Checklist"
 msgstr "چک‌لیست"
+
+#: ../../../lib/web/src/components/ui/date-picker.tsx
+msgid "Choose a date"
+msgstr "یک تاریخ انتخاب کنید"
 
 #: ../../../lib/web/src/components/game/game-empty-state.tsx
 msgid "Choose a game from the sidebar or start a new one."
@@ -516,6 +548,7 @@ msgid "Collapse sidebar"
 msgstr "جمع کردن نوار کناری"
 
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx
+#: ../../../lib/web/src/components/ui/create-entity-dialog.tsx
 msgid "Colour"
 msgstr "رنگ"
 
@@ -602,6 +635,10 @@ msgstr "کپی شد"
 msgid "Copied to clipboard"
 msgstr "در کلیپ‌بورد کپی شد"
 
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
 #: ../../../lib/web/src/components/ui/copy-button.tsx
 msgid "Copy"
 msgstr "کپی"
@@ -782,6 +819,10 @@ msgstr "پنل جزئیات"
 msgid "Detect from web browser"
 msgstr "تشخیص از مرورگر وب"
 
+#: src/menu-apps.tsx
+msgid "Development"
+msgstr "توسعه"
+
 #: ../../../lib/web/src/components/person-picker.tsx
 msgid "Directory"
 msgstr "فهرست"
@@ -884,6 +925,10 @@ msgstr "ایمیل"
 msgid "Email code"
 msgstr "کد ایمیل"
 
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Ends before it starts"
+msgstr "پیش از شروع پایان می‌یابد"
+
 #: ../../../lib/web/src/components/banner-section.tsx
 msgid "Enter banner text (markdown supported)..."
 msgstr "متن بنر را وارد کنید (markdown پشتیبانی می‌شود)..."
@@ -956,6 +1001,10 @@ msgstr "دریافت توکن RSS ناموفق بود"
 #: ../../../lib/web/src/hooks/use-load-more.ts
 msgid "Failed to load"
 msgstr "بارگذاری ناموفق بود"
+
+#: src/menu-apps.tsx
+msgid "Failed to load apps"
+msgstr "بارگذاری برنامه‌ها ناموفق بود"
 
 #: ../../../lib/web/src/components/banner-section.tsx
 msgid "Failed to load banner"
@@ -1102,10 +1151,6 @@ msgstr "تاریخچه"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx
 #: ../../../lib/web/src/components/layout/top-bar.tsx
 #: ../../../lib/web/src/components/layout/top-bar.tsx
-#: src/shell-menu.tsx
-#: src/shell-menu.tsx
-#: src/shell-menu.tsx
-#: src/shell-menu.tsx
 msgid "Home"
 msgstr "خانه"
 
@@ -1298,6 +1343,10 @@ msgstr "نظارت"
 msgid "Monday"
 msgstr "دوشنبه"
 
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Month"
+msgstr "ماه"
+
 #: ../../../lib/web/src/components/options-menu.tsx
 msgid "More options"
 msgstr "گزینه‌های بیشتر"
@@ -1309,6 +1358,13 @@ msgstr "جابه‌جا شد"
 #: ../../../lib/web/src/components/entity/entity-activity-list.tsx
 msgid "Moved {field}"
 msgstr "{field} جابه‌جا شد"
+
+#. placeholder {0}: dayName(current.day)
+#. placeholder {0}: dayName(dragging.day)
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Moving to {0}"
+msgstr "در حال جابه‌جایی به {0}"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx
 #: ../../../lib/web/src/components/entity/entity-board-column.tsx
@@ -1349,6 +1405,14 @@ msgstr "بازی جدید"
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx
 msgid "Next image"
 msgstr "تصویر بعدی"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Next month"
+msgstr "ماه بعد"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Next year"
+msgstr "سال بعد"
 
 #: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx
 msgid "No {parentClassNames} to add to"
@@ -1603,6 +1667,14 @@ msgstr "پست‌ها و نظرات"
 msgid "Previous image"
 msgstr "تصویر قبلی"
 
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Previous month"
+msgstr "ماه قبل"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Previous year"
+msgstr "سال قبل"
+
 #: ../../../lib/web/src/components/server-documents-footer.tsx
 #: ../../../lib/web/src/features/document/document-page.tsx
 msgid "Privacy"
@@ -1739,6 +1811,11 @@ msgstr "تغییر نام ستون"
 #: ../../../lib/web/src/components/entity/entity-board-column.tsx
 msgid "Rename this board column"
 msgstr "تغییر نام این ستون تخته"
+
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Repeats"
+msgstr "تکرار می‌شود"
 
 #: ../../../lib/web/src/components/entity/entity-comment-thread.tsx
 #: ../../../lib/web/src/components/entity/entity-comment-thread.tsx
@@ -2356,6 +2433,10 @@ msgstr "کد تأیید را به <0>{0}</0> ارسال کردیم. برای ت�
 #: ../../../lib/web/src/lib/preference-utils.ts
 msgid "Wednesday"
 msgstr "چهارشنبه"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Year"
+msgstr "سال"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx
 msgid "You do not have access to this section."

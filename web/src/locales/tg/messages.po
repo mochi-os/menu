@@ -65,9 +65,23 @@ msgstr "{count, plural, one {#дақ} other {#дақ}}"
 msgid "{count, plural, one {#w} other {#w}}"
 msgstr "{count, plural, one {#ҳаф} other {#ҳаф}}"
 
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/tooltip.ts
+msgid "{day}, {from} to {to}"
+msgstr "{day}, аз {from} то {to}"
+
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx
 msgid "{entityLabel} name"
 msgstr "Номи {entityLabel}"
+
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/tooltip.ts
+msgid "{from} to {to}"
+msgstr "аз {from} то {to}"
+
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+msgid "{hidden, plural, one {+# more} other {+# more}}"
+msgstr "{hidden, plural, one {+# бештар} other {+# бештар}}"
 
 #: ../../../lib/web/src/components/game/game-draw-offer-banner.tsx
 msgid "{opponentName} offered a draw"
@@ -209,6 +223,11 @@ msgstr "Иловаи намуд"
 msgid "AI"
 msgstr "AI"
 
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "All day"
+msgstr "Тамоми рӯз"
+
 #: src/use-permission-request.tsx
 msgid "Allow"
 msgstr "Иҷозат додан"
@@ -279,6 +298,10 @@ msgstr "Шумо мутмаин ҳастед, ки мехоҳед таслим �
 #: ../../../lib/web/src/components/ui/sort-direction-button.tsx
 msgid "Ascending"
 msgstr "Афзоишёбанда"
+
+#: ../../../lib/web/src/components/timezone-select.tsx
+msgid "At sea"
+msgstr "Дар баҳр"
 
 #: ../../../lib/web/src/components/comment-composer.tsx
 msgid "Attach comment files"
@@ -432,6 +455,11 @@ msgstr "Тағйир дода шуд"
 msgid "Changed {field}"
 msgstr "{field} тағйир дода шуд"
 
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Changed occurrence"
+msgstr "Такрори тағйирёфта"
+
 #: ../../../lib/web/src/hooks/use-field-type-labels.ts
 msgid "Checkbox"
 msgstr "Парчаминтихоб"
@@ -439,6 +467,10 @@ msgstr "Парчаминтихоб"
 #: ../../../lib/web/src/hooks/use-field-type-labels.ts
 msgid "Checklist"
 msgstr "Рӯйхат"
+
+#: ../../../lib/web/src/components/ui/date-picker.tsx
+msgid "Choose a date"
+msgstr "Санаро интихоб кунед"
 
 #: ../../../lib/web/src/components/game/game-empty-state.tsx
 msgid "Choose a game from the sidebar or start a new one."
@@ -516,6 +548,7 @@ msgid "Collapse sidebar"
 msgstr "Ҷамъ кардани панели канорӣ"
 
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx
+#: ../../../lib/web/src/components/ui/create-entity-dialog.tsx
 msgid "Colour"
 msgstr "Ранг"
 
@@ -602,6 +635,10 @@ msgstr "Нусхабардорӣ шуд"
 msgid "Copied to clipboard"
 msgstr "Ба буфер нусхабардорӣ шуд"
 
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
 #: ../../../lib/web/src/components/ui/copy-button.tsx
 msgid "Copy"
 msgstr "Нусхабардорӣ"
@@ -782,6 +819,10 @@ msgstr "Панели тафсилот"
 msgid "Detect from web browser"
 msgstr "Аз браузери веб муайян кардан"
 
+#: src/menu-apps.tsx
+msgid "Development"
+msgstr "Таҳия"
+
 #: ../../../lib/web/src/components/person-picker.tsx
 msgid "Directory"
 msgstr "Феҳрист"
@@ -884,6 +925,10 @@ msgstr "Имейл"
 msgid "Email code"
 msgstr "Рамзи email"
 
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Ends before it starts"
+msgstr "Пеш аз оғоз ба анҷом мерасад"
+
 #: ../../../lib/web/src/components/banner-section.tsx
 msgid "Enter banner text (markdown supported)..."
 msgstr "Матни баннерро ворид кунед (markdown дастгирӣ мешавад)..."
@@ -956,6 +1001,10 @@ msgstr "Гирифтани токени RSS ба анҷом нарасид"
 #: ../../../lib/web/src/hooks/use-load-more.ts
 msgid "Failed to load"
 msgstr "Боркунӣ ба анҷом нарасид"
+
+#: src/menu-apps.tsx
+msgid "Failed to load apps"
+msgstr "Боркунии барномаҳо ба анҷом нарасид"
 
 #: ../../../lib/web/src/components/banner-section.tsx
 msgid "Failed to load banner"
@@ -1102,10 +1151,6 @@ msgstr "Таърих"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx
 #: ../../../lib/web/src/components/layout/top-bar.tsx
 #: ../../../lib/web/src/components/layout/top-bar.tsx
-#: src/shell-menu.tsx
-#: src/shell-menu.tsx
-#: src/shell-menu.tsx
-#: src/shell-menu.tsx
 msgid "Home"
 msgstr "Хона"
 
@@ -1298,6 +1343,10 @@ msgstr "Модератсия"
 msgid "Monday"
 msgstr "Душанбе"
 
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Month"
+msgstr "Моҳ"
+
 #: ../../../lib/web/src/components/options-menu.tsx
 msgid "More options"
 msgstr "Имконоти бештар"
@@ -1309,6 +1358,13 @@ msgstr "Кӯчонида шуд"
 #: ../../../lib/web/src/components/entity/entity-activity-list.tsx
 msgid "Moved {field}"
 msgstr "{field} кӯчонида шуд"
+
+#. placeholder {0}: dayName(current.day)
+#. placeholder {0}: dayName(dragging.day)
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Moving to {0}"
+msgstr "Ба {0} интиқол дода мешавад"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx
 #: ../../../lib/web/src/components/entity/entity-board-column.tsx
@@ -1349,6 +1405,14 @@ msgstr "Бозии нав"
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx
 msgid "Next image"
 msgstr "Тасвири навбатӣ"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Next month"
+msgstr "Моҳи оянда"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Next year"
+msgstr "Соли оянда"
 
 #: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx
 msgid "No {parentClassNames} to add to"
@@ -1603,6 +1667,14 @@ msgstr "Постҳо ва шарҳҳо"
 msgid "Previous image"
 msgstr "Тасвири қаблӣ"
 
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Previous month"
+msgstr "Моҳи гузашта"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Previous year"
+msgstr "Соли гузашта"
+
 #: ../../../lib/web/src/components/server-documents-footer.tsx
 #: ../../../lib/web/src/features/document/document-page.tsx
 msgid "Privacy"
@@ -1739,6 +1811,11 @@ msgstr "Тағйири номи сутун"
 #: ../../../lib/web/src/components/entity/entity-board-column.tsx
 msgid "Rename this board column"
 msgstr "Тағйири номи ин сутуни тахта"
+
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Repeats"
+msgstr "Такрор мешавад"
 
 #: ../../../lib/web/src/components/entity/entity-comment-thread.tsx
 #: ../../../lib/web/src/components/entity/entity-comment-thread.tsx
@@ -2356,6 +2433,10 @@ msgstr "Мо рамзи тасдиқро ба <0>{0}</0> фиристодем. �
 #: ../../../lib/web/src/lib/preference-utils.ts
 msgid "Wednesday"
 msgstr "Чоршанбе"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Year"
+msgstr "Сол"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx
 msgid "You do not have access to this section."

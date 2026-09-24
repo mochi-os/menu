@@ -65,9 +65,23 @@ msgstr "{count, plural, one {#منٹ} other {#منٹ}}"
 msgid "{count, plural, one {#w} other {#w}}"
 msgstr "{count, plural, one {#ہف} other {#ہف}}"
 
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/tooltip.ts
+msgid "{day}, {from} to {to}"
+msgstr "{day}، {from} سے {to} تک"
+
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx
 msgid "{entityLabel} name"
 msgstr "{entityLabel} کا نام"
+
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/tooltip.ts
+msgid "{from} to {to}"
+msgstr "{from} سے {to} تک"
+
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+msgid "{hidden, plural, one {+# more} other {+# more}}"
+msgstr "{hidden, plural, one {+# مزید} other {+# مزید}}"
 
 #: ../../../lib/web/src/components/game/game-draw-offer-banner.tsx
 msgid "{opponentName} offered a draw"
@@ -209,6 +223,11 @@ msgstr "ویو شامل کریں"
 msgid "AI"
 msgstr "AI"
 
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "All day"
+msgstr "پورا دن"
+
 #: src/use-permission-request.tsx
 msgid "Allow"
 msgstr "اجازت دیں"
@@ -279,6 +298,10 @@ msgstr "کیا آپ واقعی ہار ماننا چاہتے ہیں؟ {opponentNa
 #: ../../../lib/web/src/components/ui/sort-direction-button.tsx
 msgid "Ascending"
 msgstr "صعودی"
+
+#: ../../../lib/web/src/components/timezone-select.tsx
+msgid "At sea"
+msgstr "سمندر میں"
 
 #: ../../../lib/web/src/components/comment-composer.tsx
 msgid "Attach comment files"
@@ -432,6 +455,11 @@ msgstr "تبدیل ہوا"
 msgid "Changed {field}"
 msgstr "{field} تبدیل ہوا"
 
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Changed occurrence"
+msgstr "تبدیل شدہ تکرار"
+
 #: ../../../lib/web/src/hooks/use-field-type-labels.ts
 msgid "Checkbox"
 msgstr "چیک باکس"
@@ -439,6 +467,10 @@ msgstr "چیک باکس"
 #: ../../../lib/web/src/hooks/use-field-type-labels.ts
 msgid "Checklist"
 msgstr "چیک لسٹ"
+
+#: ../../../lib/web/src/components/ui/date-picker.tsx
+msgid "Choose a date"
+msgstr "تاریخ منتخب کریں"
 
 #: ../../../lib/web/src/components/game/game-empty-state.tsx
 msgid "Choose a game from the sidebar or start a new one."
@@ -516,6 +548,7 @@ msgid "Collapse sidebar"
 msgstr "سائڈ بار سکیڑیں"
 
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx
+#: ../../../lib/web/src/components/ui/create-entity-dialog.tsx
 msgid "Colour"
 msgstr "رنگ"
 
@@ -602,6 +635,10 @@ msgstr "کاپی ہو گیا"
 msgid "Copied to clipboard"
 msgstr "Clipboard پر کاپی ہو گیا"
 
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
 #: ../../../lib/web/src/components/ui/copy-button.tsx
 msgid "Copy"
 msgstr "کاپی کریں"
@@ -782,6 +819,10 @@ msgstr "تفصیلات کا پینل"
 msgid "Detect from web browser"
 msgstr "ویب براؤزر سے پتہ لگائیں"
 
+#: src/menu-apps.tsx
+msgid "Development"
+msgstr "ڈیولپمنٹ"
+
 #: ../../../lib/web/src/components/person-picker.tsx
 msgid "Directory"
 msgstr "ڈائریکٹری"
@@ -884,6 +925,10 @@ msgstr "ای میل"
 msgid "Email code"
 msgstr "ای میل کوڈ"
 
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Ends before it starts"
+msgstr "شروع ہونے سے پہلے ختم ہو جاتا ہے"
+
 #: ../../../lib/web/src/components/banner-section.tsx
 msgid "Enter banner text (markdown supported)..."
 msgstr "بینر کا متن درج کریں (مارک ڈاؤن سپورٹڈ)..."
@@ -956,6 +1001,10 @@ msgstr "RSS ٹوکن حاصل کرنے میں ناکامی"
 #: ../../../lib/web/src/hooks/use-load-more.ts
 msgid "Failed to load"
 msgstr "لوڈ کرنے میں ناکامی"
+
+#: src/menu-apps.tsx
+msgid "Failed to load apps"
+msgstr "ایپس لوڈ کرنے میں ناکامی"
 
 #: ../../../lib/web/src/components/banner-section.tsx
 msgid "Failed to load banner"
@@ -1102,10 +1151,6 @@ msgstr "تاریخ"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx
 #: ../../../lib/web/src/components/layout/top-bar.tsx
 #: ../../../lib/web/src/components/layout/top-bar.tsx
-#: src/shell-menu.tsx
-#: src/shell-menu.tsx
-#: src/shell-menu.tsx
-#: src/shell-menu.tsx
 msgid "Home"
 msgstr "ہوم"
 
@@ -1298,6 +1343,10 @@ msgstr "نگرانی"
 msgid "Monday"
 msgstr "پیر"
 
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Month"
+msgstr "مہینہ"
+
 #: ../../../lib/web/src/components/options-menu.tsx
 msgid "More options"
 msgstr "مزید اختیارات"
@@ -1309,6 +1358,13 @@ msgstr "منتقل ہوا"
 #: ../../../lib/web/src/components/entity/entity-activity-list.tsx
 msgid "Moved {field}"
 msgstr "{field} منتقل ہوا"
+
+#. placeholder {0}: dayName(current.day)
+#. placeholder {0}: dayName(dragging.day)
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Moving to {0}"
+msgstr "{0} پر منتقل کیا جا رہا ہے"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx
 #: ../../../lib/web/src/components/entity/entity-board-column.tsx
@@ -1349,6 +1405,14 @@ msgstr "نیا گیم"
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx
 msgid "Next image"
 msgstr "اگلی تصویر"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Next month"
+msgstr "اگلا مہینہ"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Next year"
+msgstr "اگلا سال"
 
 #: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx
 msgid "No {parentClassNames} to add to"
@@ -1603,6 +1667,14 @@ msgstr "پوسٹس اور تبصرے"
 msgid "Previous image"
 msgstr "پچھلی تصویر"
 
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Previous month"
+msgstr "پچھلا مہینہ"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Previous year"
+msgstr "پچھلا سال"
+
 #: ../../../lib/web/src/components/server-documents-footer.tsx
 #: ../../../lib/web/src/features/document/document-page.tsx
 msgid "Privacy"
@@ -1739,6 +1811,11 @@ msgstr "کالم کا نام تبدیل کریں"
 #: ../../../lib/web/src/components/entity/entity-board-column.tsx
 msgid "Rename this board column"
 msgstr "اس board کالم کا نام تبدیل کریں"
+
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Repeats"
+msgstr "دہرایا جاتا ہے"
 
 #: ../../../lib/web/src/components/entity/entity-comment-thread.tsx
 #: ../../../lib/web/src/components/entity/entity-comment-thread.tsx
@@ -2356,6 +2433,10 @@ msgstr "ہم نے <0>{0}</0> پر ایک تصدیقی کوڈ بھیجا ہے۔ �
 #: ../../../lib/web/src/lib/preference-utils.ts
 msgid "Wednesday"
 msgstr "بدھ"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Year"
+msgstr "سال"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx
 msgid "You do not have access to this section."

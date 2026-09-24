@@ -65,9 +65,23 @@ msgstr "{count, plural, one {#min} other {#min}}"
 msgid "{count, plural, one {#w} other {#w}}"
 msgstr "{count, plural, one {#ġim} other {#ġim}}"
 
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/tooltip.ts
+msgid "{day}, {from} to {to}"
+msgstr "{day}, minn {from} sa {to}"
+
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx
 msgid "{entityLabel} name"
 msgstr "Isem ta' {entityLabel}"
+
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/tooltip.ts
+msgid "{from} to {to}"
+msgstr "minn {from} sa {to}"
+
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+msgid "{hidden, plural, one {+# more} other {+# more}}"
+msgstr "{hidden, plural, one {+# ieħor} two {+# oħra} few {+# oħra} many {+# oħra} other {+# oħra}}"
 
 #: ../../../lib/web/src/components/game/game-draw-offer-banner.tsx
 msgid "{opponentName} offered a draw"
@@ -209,6 +223,11 @@ msgstr "Żid view"
 msgid "AI"
 msgstr "AI"
 
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "All day"
+msgstr "Il-ġurnata kollha"
+
 #: src/use-permission-request.tsx
 msgid "Allow"
 msgstr "Ippermetti"
@@ -279,6 +298,10 @@ msgstr "Żgur trid tirriżenja? {opponentName} tirbaħ il-logħba."
 #: ../../../lib/web/src/components/ui/sort-direction-button.tsx
 msgid "Ascending"
 msgstr "Axxendenti"
+
+#: ../../../lib/web/src/components/timezone-select.tsx
+msgid "At sea"
+msgstr "Fuq il-baħar"
 
 #: ../../../lib/web/src/components/comment-composer.tsx
 msgid "Attach comment files"
@@ -432,6 +455,11 @@ msgstr "Inbidel"
 msgid "Changed {field}"
 msgstr "Inbidel {field}"
 
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Changed occurrence"
+msgstr "Okkorrenza mibdula"
+
 #: ../../../lib/web/src/hooks/use-field-type-labels.ts
 msgid "Checkbox"
 msgstr "Checkbox"
@@ -439,6 +467,10 @@ msgstr "Checkbox"
 #: ../../../lib/web/src/hooks/use-field-type-labels.ts
 msgid "Checklist"
 msgstr "Checklist"
+
+#: ../../../lib/web/src/components/ui/date-picker.tsx
+msgid "Choose a date"
+msgstr "Agħżel data"
 
 #: ../../../lib/web/src/components/game/game-empty-state.tsx
 msgid "Choose a game from the sidebar or start a new one."
@@ -516,6 +548,7 @@ msgid "Collapse sidebar"
 msgstr "Iġbed il-barra tal-ġenb"
 
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx
+#: ../../../lib/web/src/components/ui/create-entity-dialog.tsx
 msgid "Colour"
 msgstr "Kulur"
 
@@ -602,6 +635,10 @@ msgstr "Ikkupjat"
 msgid "Copied to clipboard"
 msgstr "Ikkupjat fil-clipboard"
 
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
 #: ../../../lib/web/src/components/ui/copy-button.tsx
 msgid "Copy"
 msgstr "Ikkupja"
@@ -782,6 +819,10 @@ msgstr "Pannell tad-Dettalji"
 msgid "Detect from web browser"
 msgstr "Iskopri mill-browser"
 
+#: src/menu-apps.tsx
+msgid "Development"
+msgstr "Żvilupp"
+
 #: ../../../lib/web/src/components/person-picker.tsx
 msgid "Directory"
 msgstr "Direttorju"
@@ -884,6 +925,10 @@ msgstr "Email"
 msgid "Email code"
 msgstr "Kodiċi tal-email"
 
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Ends before it starts"
+msgstr "Jispiċċa qabel ma jibda"
+
 #: ../../../lib/web/src/components/banner-section.tsx
 msgid "Enter banner text (markdown supported)..."
 msgstr "Daħħal it-test tal-banner (markdown sapportit)..."
@@ -956,6 +1001,10 @@ msgstr "Ma rnexxiex jinkiseb it-token tar-RSS"
 #: ../../../lib/web/src/hooks/use-load-more.ts
 msgid "Failed to load"
 msgstr "Ma rnexxiex jitgħabba"
+
+#: src/menu-apps.tsx
+msgid "Failed to load apps"
+msgstr "Ma rnexxiex jitgħabbew l-apps"
 
 #: ../../../lib/web/src/components/banner-section.tsx
 msgid "Failed to load banner"
@@ -1102,10 +1151,6 @@ msgstr "Storja"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx
 #: ../../../lib/web/src/components/layout/top-bar.tsx
 #: ../../../lib/web/src/components/layout/top-bar.tsx
-#: src/shell-menu.tsx
-#: src/shell-menu.tsx
-#: src/shell-menu.tsx
-#: src/shell-menu.tsx
 msgid "Home"
 msgstr "Home"
 
@@ -1298,6 +1343,10 @@ msgstr "Moderazzjoni"
 msgid "Monday"
 msgstr "It-Tnejn"
 
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Month"
+msgstr "Xahar"
+
 #: ../../../lib/web/src/components/options-menu.tsx
 msgid "More options"
 msgstr "Aktar għażliet"
@@ -1309,6 +1358,13 @@ msgstr "Ġie mċaqlaq"
 #: ../../../lib/web/src/components/entity/entity-activity-list.tsx
 msgid "Moved {field}"
 msgstr "Ġie mċaqlaq {field}"
+
+#. placeholder {0}: dayName(current.day)
+#. placeholder {0}: dayName(dragging.day)
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Moving to {0}"
+msgstr "Qed jiġi mċaqlaq għal {0}"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx
 #: ../../../lib/web/src/components/entity/entity-board-column.tsx
@@ -1349,6 +1405,14 @@ msgstr "Logħba ġdida"
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx
 msgid "Next image"
 msgstr "Stampa li jmiss"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Next month"
+msgstr "Ix-xahar li ġej"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Next year"
+msgstr "Is-sena li ġejja"
 
 #: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx
 msgid "No {parentClassNames} to add to"
@@ -1603,6 +1667,14 @@ msgstr "Posts u kummenti"
 msgid "Previous image"
 msgstr "Stampa preċedenti"
 
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Previous month"
+msgstr "Ix-xahar preċedenti"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Previous year"
+msgstr "Is-sena preċedenti"
+
 #: ../../../lib/web/src/components/server-documents-footer.tsx
 #: ../../../lib/web/src/features/document/document-page.tsx
 msgid "Privacy"
@@ -1739,6 +1811,11 @@ msgstr "Irrinomina kolonna"
 #: ../../../lib/web/src/components/entity/entity-board-column.tsx
 msgid "Rename this board column"
 msgstr "Irrinomina din il-kolonna tal-bord"
+
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Repeats"
+msgstr "Jirrepeti"
 
 #: ../../../lib/web/src/components/entity/entity-comment-thread.tsx
 #: ../../../lib/web/src/components/entity/entity-comment-thread.tsx
@@ -2356,6 +2433,10 @@ msgstr "Bgħatna kodiċi ta' verifika lil <0>{0}</0>. Daħħal il-kodiċi hawn t
 #: ../../../lib/web/src/lib/preference-utils.ts
 msgid "Wednesday"
 msgstr "L-Erbgħa"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Year"
+msgstr "Sena"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx
 msgid "You do not have access to this section."

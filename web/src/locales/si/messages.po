@@ -65,9 +65,23 @@ msgstr "{count, plural, one {#මි} other {#මි}}"
 msgid "{count, plural, one {#w} other {#w}}"
 msgstr "{count, plural, one {#සති} other {#සති}}"
 
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/tooltip.ts
+msgid "{day}, {from} to {to}"
+msgstr "{day}, {from} සිට {to} දක්වා"
+
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx
 msgid "{entityLabel} name"
 msgstr "{entityLabel} නම"
+
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/tooltip.ts
+msgid "{from} to {to}"
+msgstr "{from} සිට {to} දක්වා"
+
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+msgid "{hidden, plural, one {+# more} other {+# more}}"
+msgstr "{hidden, plural, one {තවත් +#ක්} other {තවත් +#ක්}}"
 
 #: ../../../lib/web/src/components/game/game-draw-offer-banner.tsx
 msgid "{opponentName} offered a draw"
@@ -209,6 +223,11 @@ msgstr "දැක්මක් එක් කරන්න"
 msgid "AI"
 msgstr "AI"
 
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "All day"
+msgstr "මුළු දිනය"
+
 #: src/use-permission-request.tsx
 msgid "Allow"
 msgstr "අවසර දෙන්න"
@@ -279,6 +298,10 @@ msgstr "ඔබට ඉල්ලා අස්වීමට අවශ්‍ය බ�
 #: ../../../lib/web/src/components/ui/sort-direction-button.tsx
 msgid "Ascending"
 msgstr "ආරෝහණ"
+
+#: ../../../lib/web/src/components/timezone-select.tsx
+msgid "At sea"
+msgstr "මුහුදේ"
 
 #: ../../../lib/web/src/components/comment-composer.tsx
 msgid "Attach comment files"
@@ -432,6 +455,11 @@ msgstr "වෙනස් කරන ලදී"
 msgid "Changed {field}"
 msgstr "{field} වෙනස් කරන ලදී"
 
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Changed occurrence"
+msgstr "වෙනස් කළ පුනරාවර්තනය"
+
 #: ../../../lib/web/src/hooks/use-field-type-labels.ts
 msgid "Checkbox"
 msgstr "පරීක්ෂා පෙට්ටිය"
@@ -439,6 +467,10 @@ msgstr "පරීක්ෂා පෙට්ටිය"
 #: ../../../lib/web/src/hooks/use-field-type-labels.ts
 msgid "Checklist"
 msgstr "පරීක්ෂා ලැයිස්තුව"
+
+#: ../../../lib/web/src/components/ui/date-picker.tsx
+msgid "Choose a date"
+msgstr "දිනයක් තෝරන්න"
 
 #: ../../../lib/web/src/components/game/game-empty-state.tsx
 msgid "Choose a game from the sidebar or start a new one."
@@ -516,6 +548,7 @@ msgid "Collapse sidebar"
 msgstr "පැති තීරුව හකුළන්න"
 
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx
+#: ../../../lib/web/src/components/ui/create-entity-dialog.tsx
 msgid "Colour"
 msgstr "වර්ණය"
 
@@ -602,6 +635,10 @@ msgstr "පිටපත් කළා"
 msgid "Copied to clipboard"
 msgstr "Clipboard එකට පිටපත් කරන ලදී"
 
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
 #: ../../../lib/web/src/components/ui/copy-button.tsx
 msgid "Copy"
 msgstr "පිටපත් කරන්න"
@@ -782,6 +819,10 @@ msgstr "විස්තර Panel"
 msgid "Detect from web browser"
 msgstr "වෙබ් බ්‍රවුසරයෙන් හඳුනාගන්න"
 
+#: src/menu-apps.tsx
+msgid "Development"
+msgstr "සංවර්ධනය"
+
 #: ../../../lib/web/src/components/person-picker.tsx
 msgid "Directory"
 msgstr "නාමාවලිය"
@@ -884,6 +925,10 @@ msgstr "ඊමේල්"
 msgid "Email code"
 msgstr "ඊමේල් කේතය"
 
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Ends before it starts"
+msgstr "ආරම්භ වීමට පෙර අවසන් වේ"
+
 #: ../../../lib/web/src/components/banner-section.tsx
 msgid "Enter banner text (markdown supported)..."
 msgstr "බැනර් පෙළ ඇතුළු කරන්න (markdown සහාය දක්වයි)..."
@@ -956,6 +1001,10 @@ msgstr "RSS ටෝකනය ලබා ගැනීමට අසමත් වි�
 #: ../../../lib/web/src/hooks/use-load-more.ts
 msgid "Failed to load"
 msgstr "පූරණය කිරීමට අසමත් විය"
+
+#: src/menu-apps.tsx
+msgid "Failed to load apps"
+msgstr "යෙදුම් පූරණය කිරීමට අසමත් විය"
 
 #: ../../../lib/web/src/components/banner-section.tsx
 msgid "Failed to load banner"
@@ -1102,10 +1151,6 @@ msgstr "ඉතිහාසය"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx
 #: ../../../lib/web/src/components/layout/top-bar.tsx
 #: ../../../lib/web/src/components/layout/top-bar.tsx
-#: src/shell-menu.tsx
-#: src/shell-menu.tsx
-#: src/shell-menu.tsx
-#: src/shell-menu.tsx
 msgid "Home"
 msgstr "මුල් පිටුව"
 
@@ -1298,6 +1343,10 @@ msgstr "පාලනය"
 msgid "Monday"
 msgstr "සඳුදා"
 
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Month"
+msgstr "මාසය"
+
 #: ../../../lib/web/src/components/options-menu.tsx
 msgid "More options"
 msgstr "තවත් විකල්ප"
@@ -1309,6 +1358,13 @@ msgstr "ගෙන යන ලදී"
 #: ../../../lib/web/src/components/entity/entity-activity-list.tsx
 msgid "Moved {field}"
 msgstr "{field} ගෙන යන ලදී"
+
+#. placeholder {0}: dayName(current.day)
+#. placeholder {0}: dayName(dragging.day)
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Moving to {0}"
+msgstr "{0} වෙත ගෙන යමින්"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx
 #: ../../../lib/web/src/components/entity/entity-board-column.tsx
@@ -1349,6 +1405,14 @@ msgstr "නව ක්‍රීඩාවක්"
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx
 msgid "Next image"
 msgstr "ඊළඟ පින්තූරය"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Next month"
+msgstr "ඊළඟ මාසය"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Next year"
+msgstr "ඊළඟ වර්ෂය"
 
 #: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx
 msgid "No {parentClassNames} to add to"
@@ -1603,6 +1667,14 @@ msgstr "පළ කිරීම් සහ අදහස්"
 msgid "Previous image"
 msgstr "පෙර පින්තූරය"
 
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Previous month"
+msgstr "පෙර මාසය"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Previous year"
+msgstr "පෙර වර්ෂය"
+
 #: ../../../lib/web/src/components/server-documents-footer.tsx
 #: ../../../lib/web/src/features/document/document-page.tsx
 msgid "Privacy"
@@ -1739,6 +1811,11 @@ msgstr "තීරුව නැවත නම් කරන්න"
 #: ../../../lib/web/src/components/entity/entity-board-column.tsx
 msgid "Rename this board column"
 msgstr "මෙම board තීරුව නැවත නම් කරන්න"
+
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Repeats"
+msgstr "පුනරාවර්තනය වේ"
 
 #: ../../../lib/web/src/components/entity/entity-comment-thread.tsx
 #: ../../../lib/web/src/components/entity/entity-comment-thread.tsx
@@ -2356,6 +2433,10 @@ msgstr "අපි <0>{0}</0> වෙත සත්‍යාපන කේතයක�
 #: ../../../lib/web/src/lib/preference-utils.ts
 msgid "Wednesday"
 msgstr "බදාදා"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Year"
+msgstr "වර්ෂය"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx
 msgid "You do not have access to this section."

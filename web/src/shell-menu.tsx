@@ -26,51 +26,16 @@ import {
 import {
   Check,
   ExternalLink,
-  House,
   LogOut,
   PanelLeftClose,
   PanelLeftOpen,
 } from 'lucide-react'
 import { ChromeBoundary } from './chrome-boundary'
+import { MenuApps, useMenuApps } from './menu-apps'
 import { useMenuCategories } from './use-menu-categories'
 import { useMenuNotifications } from './use-menu-notifications'
 import { usePermissionRequest } from './use-permission-request'
 import { usePushRegistration } from './use-push-registration'
-
-// Lucide's house, stroked with the colours the first letter of the home app's
-// wordmark carries: the word's 165° gradient from primary to primary-light
-// runs from 24% to 56% across that letter's ink, here across the house's.
-function MochiLogo() {
-  return (
-    <House className='size-7' color='url(#menu-home)' aria-hidden='true'>
-      <defs>
-        <linearGradient
-          id='menu-home'
-          gradientUnits='userSpaceOnUse'
-          x1='8.71'
-          y1='-0.8'
-          x2='15.29'
-          y2='23.8'
-        >
-          <stop
-            offset='0'
-            style={{
-              stopColor:
-                'color-mix(in oklab, var(--primary), var(--color-primary-light) 24%)',
-            }}
-          />
-          <stop
-            offset='1'
-            style={{
-              stopColor:
-                'color-mix(in oklab, var(--primary), var(--color-primary-light) 56%)',
-            }}
-          />
-        </linearGradient>
-      </defs>
-    </House>
-  )
-}
 
 // Notification links are app-authored: only http(s) may go to window.open,
 // since a javascript:/data: URL would run with access to window.opener (the
@@ -212,6 +177,7 @@ export function MochiShellMenu() {
       ? `/menu/-/person/asset/${asset}${version ? `?version=${encodeURIComponent(version)}` : ''}`
       : undefined
   const categoryPicker = useMenuCategories()
+  const apps = useMenuApps()
   const unreadNotifications = notifications.filter(
     (n: Notification) => n.read === 0
   )
@@ -342,8 +308,14 @@ export function MochiShellMenu() {
     </div>
   )
 
+  const appsSection = (
+    <div className='max-h-[50dvh] shrink-0 overflow-y-auto border-t'>
+      <MenuApps query={apps} />
+    </div>
+  )
+
   const notificationsHeader = (
-    <div className='bg-muted/30 flex items-center justify-between border-b px-4 py-2.5'>
+    <div className='bg-muted/30 flex items-center justify-between border-y px-4 py-2.5'>
       <span className='text-sm font-semibold'>
         <Trans>Notifications</Trans>
         {unreadCount > 0 && ` (${unreadCount})`}
@@ -430,6 +402,7 @@ export function MochiShellMenu() {
   const menuContent = (
     <>
       {userSection}
+      {appsSection}
       {notificationsHeader}
       {notificationsList}
     </>
@@ -519,18 +492,7 @@ export function MochiShellMenu() {
             )}
           </div>
 
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <a
-                href='/'
-                aria-label={t`Home`}
-                className='hover:bg-hover active:bg-interactive-active focus-visible:ring-ring flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none'
-              >
-                <MochiLogo />
-              </a>
-            </TooltipTrigger>
-            <TooltipContent>{t`Home`}</TooltipContent>
-          </Tooltip>
+          <div className='size-9 shrink-0' aria-hidden='true' />
         </header>
 
         {/* Custom bottom sheet — renders inside #menu (position:fixed), no Radix Dialog,
@@ -570,15 +532,6 @@ export function MochiShellMenu() {
         className={cn('flex items-center gap-2 p-2', isCollapsed && 'flex-col')}
       >
         {menuControl}
-
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <a href='/' aria-label={t`Home`}>
-              <MochiLogo />
-            </a>
-          </TooltipTrigger>
-          <TooltipContent>{t`Home`}</TooltipContent>
-        </Tooltip>
       </div>
 
       <SignOutDialog open={!!signOutOpen} onOpenChange={setSignOutOpen} />

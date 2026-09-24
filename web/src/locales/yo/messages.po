@@ -65,9 +65,23 @@ msgstr "{count, plural, one {#ìṣ} other {#ìṣ}}"
 msgid "{count, plural, one {#w} other {#w}}"
 msgstr "{count, plural, one {#ọs} other {#ọs}}"
 
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/tooltip.ts
+msgid "{day}, {from} to {to}"
+msgstr "{day}, láti {from} sí {to}"
+
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx
 msgid "{entityLabel} name"
 msgstr "Orúkọ {entityLabel}"
+
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/tooltip.ts
+msgid "{from} to {to}"
+msgstr "láti {from} sí {to}"
+
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+msgid "{hidden, plural, one {+# more} other {+# more}}"
+msgstr "{hidden, plural, other {+# mìíràn}}"
 
 #: ../../../lib/web/src/components/game/game-draw-offer-banner.tsx
 msgid "{opponentName} offered a draw"
@@ -209,6 +223,11 @@ msgstr "Fi ìran kún"
 msgid "AI"
 msgstr "AI"
 
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "All day"
+msgstr "Gbogbo ọjọ́"
+
 #: src/use-permission-request.tsx
 msgid "Allow"
 msgstr "Gba láyè"
@@ -279,6 +298,10 @@ msgstr "Ǹjẹ́ ó dájú pé o fẹ́ jọ̀wọ́? {opponentName} yóò ṣ�
 #: ../../../lib/web/src/components/ui/sort-direction-button.tsx
 msgid "Ascending"
 msgstr "Gòkè"
+
+#: ../../../lib/web/src/components/timezone-select.tsx
+msgid "At sea"
+msgstr "Lórí òkun"
 
 #: ../../../lib/web/src/components/comment-composer.tsx
 msgid "Attach comment files"
@@ -432,6 +455,11 @@ msgstr "A yí padà"
 msgid "Changed {field}"
 msgstr "A yí {field} padà"
 
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Changed occurrence"
+msgstr "Ìgbà tí a yípadà"
+
 #: ../../../lib/web/src/hooks/use-field-type-labels.ts
 msgid "Checkbox"
 msgstr "Àpótí àyẹ̀wò"
@@ -440,9 +468,13 @@ msgstr "Àpótí àyẹ̀wò"
 msgid "Checklist"
 msgstr "Àkọsílẹ̀ àyẹ̀wò"
 
+#: ../../../lib/web/src/components/ui/date-picker.tsx
+msgid "Choose a date"
+msgstr "Yan ọjọ́ kan"
+
 #: ../../../lib/web/src/components/game/game-empty-state.tsx
 msgid "Choose a game from the sidebar or start a new one."
-msgstr "Yan eré kan láti sidebar tàbí bẹ̀rẹ̀ ọ̀kan tuntun."
+msgstr "Yan eré kan láti ọ̀pá ẹ̀gbẹ́ tàbí bẹ̀rẹ̀ ọ̀kan tuntun."
 
 #: ../../../lib/web/src/components/language-picker.tsx
 #: ../../../lib/web/src/components/language-picker.tsx
@@ -513,9 +545,10 @@ msgstr "Ká jọ"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx
 msgid "Collapse sidebar"
-msgstr "Hó sidebar"
+msgstr "Ká ọ̀pá ẹ̀gbẹ́"
 
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx
+#: ../../../lib/web/src/components/ui/create-entity-dialog.tsx
 msgid "Colour"
 msgstr "Àwọ̀"
 
@@ -602,6 +635,10 @@ msgstr "Ti dàkọ"
 msgid "Copied to clipboard"
 msgstr "A ti ṣe àdàkọ sí clipboard"
 
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
 #: ../../../lib/web/src/components/ui/copy-button.tsx
 msgid "Copy"
 msgstr "Ṣe àdàkọ"
@@ -782,6 +819,10 @@ msgstr "Pánẹ́ẹ̀lì Àwọn Ẹ̀kúnrẹ́rẹ́"
 msgid "Detect from web browser"
 msgstr "Ṣàwárí láti web browser"
 
+#: src/menu-apps.tsx
+msgid "Development"
+msgstr "Ìdàgbàsókè"
+
 #: ../../../lib/web/src/components/person-picker.tsx
 msgid "Directory"
 msgstr "Àtòjọ"
@@ -806,7 +847,7 @@ msgstr "Mú kúrò"
 
 #: ../../../lib/web/src/components/ui/sidebar.tsx
 msgid "Displays the mobile sidebar."
-msgstr "Ó ń fi sidebar fóònù hàn."
+msgstr "Ó ń fi ọ̀pá ẹ̀gbẹ́ fóònù hàn."
 
 #: ../../../lib/web/src/components/entity/entity-field-editor.tsx
 msgid "Does not match the required pattern"
@@ -884,6 +925,10 @@ msgstr "Ímẹ́ẹ̀lì"
 msgid "Email code"
 msgstr "Kóòdù ímẹ́ẹ̀lì"
 
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Ends before it starts"
+msgstr "Ó parí kí ó tó bẹ̀rẹ̀"
+
 #: ../../../lib/web/src/components/banner-section.tsx
 msgid "Enter banner text (markdown supported)..."
 msgstr "Tẹ ọ̀rọ̀ banner (a gba markdown)..."
@@ -909,7 +954,7 @@ msgstr "Ṣílẹ̀kùn"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx
 msgid "Expand sidebar"
-msgstr "Fẹ̀ sidebar"
+msgstr "Fẹ̀ ọ̀pá ẹ̀gbẹ́"
 
 #: ../../../lib/web/src/features/accounts/types.ts
 msgid "External URL"
@@ -956,6 +1001,10 @@ msgstr "Kò lè rí token RSS"
 #: ../../../lib/web/src/hooks/use-load-more.ts
 msgid "Failed to load"
 msgstr "Kò lè ṣílọ̀"
+
+#: src/menu-apps.tsx
+msgid "Failed to load apps"
+msgstr "Kò lè gbé àwọn app wọlé"
 
 #: ../../../lib/web/src/components/banner-section.tsx
 msgid "Failed to load banner"
@@ -1102,10 +1151,6 @@ msgstr "Ìtàn"
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx
 #: ../../../lib/web/src/components/layout/top-bar.tsx
 #: ../../../lib/web/src/components/layout/top-bar.tsx
-#: src/shell-menu.tsx
-#: src/shell-menu.tsx
-#: src/shell-menu.tsx
-#: src/shell-menu.tsx
 msgid "Home"
 msgstr "Ilé"
 
@@ -1298,6 +1343,10 @@ msgstr "Ìṣàkóso"
 msgid "Monday"
 msgstr "Ọjọ́ Ajé"
 
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Month"
+msgstr "Oṣù"
+
 #: ../../../lib/web/src/components/options-menu.tsx
 msgid "More options"
 msgstr "Awọn aṣayan diẹ sii"
@@ -1309,6 +1358,13 @@ msgstr "A gbé lọ"
 #: ../../../lib/web/src/components/entity/entity-activity-list.tsx
 msgid "Moved {field}"
 msgstr "A gbé {field} lọ"
+
+#. placeholder {0}: dayName(current.day)
+#. placeholder {0}: dayName(dragging.day)
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Moving to {0}"
+msgstr "Ń kó lọ sí {0}"
 
 #: ../../../lib/web/src/components/entity/add-field-dialog.tsx
 #: ../../../lib/web/src/components/entity/entity-board-column.tsx
@@ -1349,6 +1405,14 @@ msgstr "Eré tuntun"
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx
 msgid "Next image"
 msgstr "Àwòrán tó kàn"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Next month"
+msgstr "Oṣù tó ń bọ̀"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Next year"
+msgstr "Ọdún tó ń bọ̀"
 
 #: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx
 msgid "No {parentClassNames} to add to"
@@ -1603,6 +1667,14 @@ msgstr "Àwọn ìfìránṣẹ́ àti àlàyé"
 msgid "Previous image"
 msgstr "Àwòrán tó kọjá"
 
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Previous month"
+msgstr "Oṣù tó kọjá"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Previous year"
+msgstr "Ọdún tó kọjá"
+
 #: ../../../lib/web/src/components/server-documents-footer.tsx
 #: ../../../lib/web/src/features/document/document-page.tsx
 msgid "Privacy"
@@ -1739,6 +1811,11 @@ msgstr "Tún ọ̀wọ́n sọ orúkọ"
 #: ../../../lib/web/src/components/entity/entity-board-column.tsx
 msgid "Rename this board column"
 msgstr "Tún ọ̀wọ́n bóòdù yìí sọ orúkọ"
+
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
+msgid "Repeats"
+msgstr "Ó máa ń tún wáyé"
 
 #: ../../../lib/web/src/components/entity/entity-comment-thread.tsx
 #: ../../../lib/web/src/components/entity/entity-comment-thread.tsx
@@ -1986,7 +2063,7 @@ msgstr "Ń fi {totalShown} hàn nínú {total}"
 
 #: ../../../lib/web/src/components/ui/sidebar.tsx
 msgid "Sidebar"
-msgstr "Sidebar"
+msgstr "Ọ̀pá ẹ̀gbẹ́"
 
 #: ../../../lib/web/src/features/errors/access-denied-error.tsx
 msgid "Sign in with an account that has access <0/> to this resource."
@@ -2356,6 +2433,10 @@ msgstr "A rán kóòdù ìjẹ́rìísí sí <0>{0}</0>. Tẹ kóòdù náà sí
 #: ../../../lib/web/src/lib/preference-utils.ts
 msgid "Wednesday"
 msgstr "Ọjọ́rú"
+
+#: ../../../lib/web/src/components/calendar/date-header.tsx
+msgid "Year"
+msgstr "Ọdún"
 
 #: ../../../lib/web/src/features/errors/general-error.tsx
 msgid "You do not have access to this section."

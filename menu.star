@@ -32,6 +32,25 @@ def action_notifications_read_all(a):
     mochi.service.call("notifications", "read/all")
     return {"data": {"ok": True}}
 
+# App grid
+
+def action_apps(a):
+    """The apps the user can open, for the menu's app grid. As on the home
+    screen, help is highlighted until the user first visits it."""
+    result = mochi.app.icons()
+    unvisited = a.user.preference.get("help.visited") != "true"
+    icons = []
+    for icon in result["icons"]:
+        if unvisited and icon.get("link") == "help":
+            icon["highlight"] = True
+        icons.append(icon)
+    response = {"icons": icons}
+    if "icon_mask" in result:
+        response["icon_mask"] = result["icon_mask"]
+    if "icon_background" in result:
+        response["icon_background"] = result["icon_background"]
+    return {"data": response}
+
 # Per-notification category picker support
 
 def action_notifications_categories(a):
