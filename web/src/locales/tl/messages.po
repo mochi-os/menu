@@ -588,7 +588,7 @@ msgstr "Mga komento ({0})"
 
 #: ../../../lib/web/src/lib/preference-utils.ts
 msgid "Compact"
-msgstr "Compact"
+msgstr "Siksik"
 
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx
 msgid "Configure option settings"
@@ -814,7 +814,7 @@ msgstr "Paglalarawan"
 
 #: ../../../lib/web/src/components/layout/right-panel.tsx
 msgid "Details Panel"
-msgstr "Details Panel"
+msgstr "Panel ng mga detalye"
 
 #: ../../../lib/web/src/components/language-picker.tsx
 #: ../../../lib/web/src/components/timezone-select.tsx
@@ -1132,7 +1132,7 @@ msgstr "Bumalik"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx
 msgid "Group"
-msgstr "Group"
+msgstr "Grupo"
 
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx
 msgid "Group by"
@@ -1157,7 +1157,7 @@ msgstr "Home"
 
 #: ../../../lib/web/src/components/ui/sort-selector.tsx
 msgid "Hot"
-msgstr "Hot"
+msgstr "Sikat"
 
 #: ../../../lib/web/src/components/entity/entity-field-dialog.tsx
 msgid "ID"
@@ -1166,11 +1166,11 @@ msgstr "ID"
 #. placeholder {0}: currentMedia.name
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx
 msgid "Image viewer: {0}"
-msgstr "Image viewer: {0}"
+msgstr "Tagatingin ng larawan: {0}"
 
 #: ../../../lib/web/src/lib/preference-utils.ts
 msgid "Imperial"
-msgstr "Imperial"
+msgstr "Imperyal"
 
 #: ../../../lib/web/src/features/access/types.ts
 msgid "Including anonymous users"
@@ -1178,7 +1178,7 @@ msgstr "Kasama ang mga anonymous na user"
 
 #: ../../../lib/web/src/components/faceless-avatar.tsx
 msgid "Initials avatar"
-msgstr "Initials avatar"
+msgstr "Avatar na inisyal"
 
 #: ../../../lib/web/src/components/faceless-avatar.tsx
 msgid "Initials avatar for {name}"
@@ -1227,7 +1227,7 @@ msgstr "Mga titik, numero, espasyo, gitling, at slash lamang"
 
 #: ../../../lib/web/src/lib/preference-utils.ts
 msgid "Light"
-msgstr "Light"
+msgstr "Maliwanag"
 
 #: ../../../lib/web/src/components/options-menu.tsx
 msgid "Link"
@@ -1322,7 +1322,7 @@ msgstr "Mensahe"
 
 #: ../../../lib/web/src/lib/preference-utils.ts
 msgid "Metric"
-msgstr "Metric"
+msgstr "Metriko"
 
 #: ../../../lib/web/src/lib/shell-errors.ts
 msgid "Microphone permission denied"
@@ -1393,9 +1393,13 @@ msgid "Network error"
 msgstr "Error sa network"
 
 #: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx
-#: ../../../lib/web/src/components/ui/sort-selector.tsx
 msgid "New"
 msgstr "Bago"
+
+#: ../../../lib/web/src/components/ui/sort-selector.tsx
+msgctxt "sort order"
+msgid "New"
+msgstr "Pinakabago"
 
 #: ../../../lib/web/src/components/game/game-empty-state.tsx
 #: ../../../lib/web/src/components/game/game-empty-state.tsx
@@ -1538,9 +1542,13 @@ msgstr "Mga Notification"
 msgid "Notifications: {0}"
 msgstr "Mga notification: {0}"
 
+#: ../../../lib/web/src/hooks/use-field-type-labels.ts
+msgid "Number"
+msgstr "Numero"
+
 #: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx
-#: ../../../lib/web/src/hooks/use-field-type-labels.ts
+msgctxt "item number"
 msgid "Number"
 msgstr "Numero"
 
@@ -1954,7 +1962,7 @@ msgstr "Naghahanap..."
 
 #: ../../../lib/web/src/hooks/use-field-type-labels.ts
 msgid "Select"
-msgstr "Pumili"
+msgstr "Pagpipilian"
 
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx
 msgid "Select a field"
@@ -2113,7 +2121,7 @@ msgstr "Itigil ang pagmamasid"
 
 #: ../../../lib/web/src/features/access/access-list.tsx
 msgid "Subject"
-msgstr "Paksa"
+msgstr "User o grupo"
 
 #: ../../../lib/web/src/components/comment-composer.tsx
 msgid "Submit comment"
@@ -2137,11 +2145,15 @@ msgstr "Linggo"
 msgid "Switch to view 1-9"
 msgstr "Lumipat sa view 1-9"
 
-#: ../../../lib/web/src/components/audit-timeline.tsx
 #: ../../../lib/web/src/lib/preference-utils.ts
 #: ../../../lib/web/src/lib/preference-utils.ts
 msgid "System"
 msgstr "System"
+
+#: ../../../lib/web/src/components/audit-timeline.tsx
+msgctxt "actor"
+msgid "System"
+msgstr "Sistema"
 
 #: ../../../lib/web/src/components/post-tags.tsx
 msgid "Tag already exists"
@@ -2251,7 +2263,7 @@ msgstr "Masyadong maraming request"
 
 #: ../../../lib/web/src/components/ui/sort-selector.tsx
 msgid "Top"
-msgstr "Itaas"
+msgstr "Pinakamahusay"
 
 #: ../../../lib/web/src/components/travelling-picker.tsx
 msgid "Travelling"
@@ -2315,7 +2327,7 @@ msgstr "Hindi inaasahang API error"
 
 #: ../../../lib/web/src/lib/preference-utils.ts
 msgid "United States"
-msgstr "United States"
+msgstr "Estados Unidos"
 
 #: ../../../lib/web/src/components/audit-timeline.tsx
 #: ../../../lib/web/src/components/entity/entity-field-dialog.tsx
@@ -2389,7 +2401,7 @@ msgstr "Thumbnail ng video"
 #. placeholder {0}: currentMedia.name
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx
 msgid "Video viewer: {0}"
-msgstr "Video viewer: {0}"
+msgstr "Tagapanood ng video: {0}"
 
 #: src/shell-menu.tsx
 #: src/shell-menu.tsx

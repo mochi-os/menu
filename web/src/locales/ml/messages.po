@@ -318,7 +318,7 @@ msgstr "പ്രാമാണീകരിച്ച ഉപയോക്താക�
 
 #: ../../../lib/web/src/components/step-up-dialog.tsx
 msgid "Authenticator code"
-msgstr "Authenticator കോഡ്"
+msgstr "ഓതന്റിക്കേറ്റർ കോഡ്"
 
 #: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx
 msgid "Available keyboard shortcuts"
@@ -867,7 +867,7 @@ msgstr "പൂർത്തിയായി"
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx
 msgid "Download"
-msgstr "ഡൗൺലോഡ്"
+msgstr "ഡൗൺലോഡ് ചെയ്യുക"
 
 #: ../../../lib/web/src/components/entity/entity-object-attachments.tsx
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx
@@ -1393,9 +1393,13 @@ msgid "Network error"
 msgstr "നെറ്റ്‌വർക്ക് പിശക്"
 
 #: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx
-#: ../../../lib/web/src/components/ui/sort-selector.tsx
 msgid "New"
 msgstr "പുതിയത്"
+
+#: ../../../lib/web/src/components/ui/sort-selector.tsx
+msgctxt "sort order"
+msgid "New"
+msgstr "ഏറ്റവും പുതിയത്"
 
 #: ../../../lib/web/src/components/game/game-empty-state.tsx
 #: ../../../lib/web/src/components/game/game-empty-state.tsx
@@ -1441,7 +1445,7 @@ msgstr "ഗ്രൂപ്പുകളൊന്നും ലഭ്യമല്�
 
 #: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx
 msgid "No item types can be created yet. Create the required parent items first."
-msgstr "ഇതുവരെ ഒരു item type-ഉം സൃഷ്ടിക്കാൻ കഴിയില്ല. ആവശ്യമായ parent items ആദ്യം സൃഷ്ടിക്കുക."
+msgstr "ഇതുവരെ ഒരു ഇന തരവും സൃഷ്ടിക്കാൻ കഴിയില്ല. ആവശ്യമായ പാരന്റ് ഇനങ്ങൾ ആദ്യം സൃഷ്ടിക്കുക."
 
 #: ../../../lib/web/src/components/entity/entity-object-links.tsx
 msgid "No matching objects"
@@ -1538,11 +1542,15 @@ msgstr "അറിയിപ്പുകൾ"
 msgid "Notifications: {0}"
 msgstr "അറിയിപ്പുകൾ: {0}"
 
-#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx
-#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx
 #: ../../../lib/web/src/hooks/use-field-type-labels.ts
 msgid "Number"
 msgstr "സംഖ്യ"
+
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx
+#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx
+msgctxt "item number"
+msgid "Number"
+msgstr "നമ്പർ"
 
 #: ../../../lib/web/src/components/filter-bar.tsx
 msgid "On"
@@ -1569,7 +1577,7 @@ msgstr "മെനു തുറക്കുക"
 #: src/shell-menu.tsx
 #: src/shell-menu.tsx
 msgid "Open navigation"
-msgstr "navigation തുറക്കുക"
+msgstr "നാവിഗേഷൻ തുറക്കുക"
 
 #: ../../../lib/web/src/components/entity/entity-option-dialog.tsx
 msgid "Open option actions"
@@ -1954,7 +1962,7 @@ msgstr "തിരയുന്നു..."
 
 #: ../../../lib/web/src/hooks/use-field-type-labels.ts
 msgid "Select"
-msgstr "തിരഞ്ഞെടുക്കുക"
+msgstr "തിരഞ്ഞെടുപ്പ്"
 
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx
 msgid "Select a field"
@@ -2113,7 +2121,7 @@ msgstr "നിരീക്ഷണം നിർത്തുക"
 
 #: ../../../lib/web/src/features/access/access-list.tsx
 msgid "Subject"
-msgstr "വിഷയം"
+msgstr "ഉപയോക്താവ് അല്ലെങ്കിൽ ഗ്രൂപ്പ്"
 
 #: ../../../lib/web/src/components/comment-composer.tsx
 msgid "Submit comment"
@@ -2137,9 +2145,13 @@ msgstr "ഞായറാഴ്ച"
 msgid "Switch to view 1-9"
 msgstr "കാഴ്ച 1-9 ലേക്ക് മാറുക"
 
+#: ../../../lib/web/src/lib/preference-utils.ts
+#: ../../../lib/web/src/lib/preference-utils.ts
+msgid "System"
+msgstr "സിസ്റ്റം"
+
 #: ../../../lib/web/src/components/audit-timeline.tsx
-#: ../../../lib/web/src/lib/preference-utils.ts
-#: ../../../lib/web/src/lib/preference-utils.ts
+msgctxt "actor"
 msgid "System"
 msgstr "സിസ്റ്റം"
 
@@ -2251,7 +2263,7 @@ msgstr "വളരെയധികം അഭ്യർത്ഥനകൾ"
 
 #: ../../../lib/web/src/components/ui/sort-selector.tsx
 msgid "Top"
-msgstr "മുകളിൽ"
+msgstr "മികച്ചവ"
 
 #: ../../../lib/web/src/components/travelling-picker.tsx
 msgid "Travelling"
