@@ -31,16 +31,13 @@ import {
   PanelLeftOpen,
 } from 'lucide-react'
 import { ChromeBoundary } from './chrome-boundary'
+import { MenuShortcuts } from './menu-apps'
+import { useMenuApps } from './use-menu-apps'
 import { useMenuCategories } from './use-menu-categories'
 import { useMenuNotifications } from './use-menu-notifications'
 import { usePermissionRequest } from './use-permission-request'
 import { usePushRegistration } from './use-push-registration'
-
-function MochiLogo() {
-  return (
-    <img src='/menu/images/logo-header.png' alt='Mochi' className='h-7 w-7' />
-  )
-}
+import { useRecentApps } from './use-recent-apps'
 
 // Notification links are app-authored: only http(s) may go to window.open,
 // since a javascript:/data: URL would run with access to window.opener (the
@@ -112,10 +109,9 @@ function useCurrentApp(): string {
   )
 }
 
-// Observe data-sidebar-present on #menu. True when the currently loaded app
-// has a sidebar; when false, the menu should ignore the persisted collapse
-// state and render horizontally (e.g. on the home page).
-function useSidebarPresent(): boolean {
+// Observe data-sidebar-present on #menu: whether the loaded app has a sidebar,
+// or null while a newly loaded app has yet to say.
+function useSidebarPresent(): boolean | null {
   return useSyncExternalStore(
     (cb) => {
       const el = document.getElementById('menu')
@@ -128,8 +124,10 @@ function useSidebarPresent(): boolean {
       return () => observer.disconnect()
     },
     () => {
-      const el = document.getElementById('menu')
-      return el?.getAttribute('data-sidebar-present') === 'true'
+      const value = document
+        .getElementById('menu')
+        ?.getAttribute('data-sidebar-present')
+      return value === 'true' ? true : value === 'false' ? false : null
     }
   )
 }
@@ -144,9 +142,17 @@ export function MochiShellMenu() {
   const isCompact = !isDesktop
   const sidebarState = useSidebarState()
   const sidebarPresent = useSidebarPresent()
-  const isCollapsed = sidebarPresent && sidebarState === 'collapsed'
   const currentApp = useCurrentApp()
   const isHome = currentApp === ''
+  // The desktop overlay's shape, from the last app that said whether it has a
+  // sidebar: kept while a newly loaded one has yet to, and before any has,
+  // taken as though it had one.
+  const shape =
+    sidebarPresent === null
+      ? null
+      : (sidebarPresent || isHome) && sidebarState === 'expanded'
+  const [row, setRow] = useState(shape ?? sidebarState === 'expanded')
+  if (shape !== null && shape !== row) setRow(shape)
   const { notifications, isLoading, isError, markAsRead, markAllAsRead } =
     useMenuNotifications()
 
@@ -182,6 +188,8 @@ export function MochiShellMenu() {
       ? `/menu/-/person/asset/${asset}${version ? `?version=${encodeURIComponent(version)}` : ''}`
       : undefined
   const categoryPicker = useMenuCategories()
+  const apps = useMenuApps()
+  const recent = useRecentApps(currentApp, identity)
   const unreadNotifications = notifications.filter(
     (n: Notification) => n.read === 0
   )
@@ -312,11 +320,27 @@ export function MochiShellMenu() {
     </div>
   )
 
+  // Nothing unread: the header says so and the empty list below it goes.
+  const empty = !isLoading && !isError && unreadCount === 0
+
+  // The heading starts where the name above it does: past the row's padding,
+  // the 32px avatar and the gap after it.
   const notificationsHeader = (
-    <div className='bg-muted/30 flex items-center justify-between border-b px-4 py-2.5'>
-      <span className='text-sm font-semibold'>
-        <Trans>Notifications</Trans>
-        {unreadCount > 0 && ` (${unreadCount})`}
+    <div
+      className={cn(
+        'bg-muted/30 flex items-center justify-between py-2.5 ps-[calc(var(--spacing)*6+32px)] pe-4',
+        !empty && 'border-b'
+      )}
+    >
+      <span className={cn('text-sm', !empty && 'font-semibold')}>
+        {empty ? (
+          <Trans>No unread notifications</Trans>
+        ) : (
+          <>
+            <Trans>Notifications</Trans>
+            {unreadCount > 0 && ` (${unreadCount})`}
+          </>
+        )}
       </span>
       <div className='flex items-center gap-1'>
         {unreadCount > 0 && (
@@ -401,7 +425,7 @@ export function MochiShellMenu() {
     <>
       {userSection}
       {notificationsHeader}
-      {notificationsList}
+      {!empty && notificationsList}
     </>
   )
 
@@ -426,7 +450,7 @@ export function MochiShellMenu() {
   if (isCompact) {
     return (
       <>
-        <header className='bg-background flex h-12 w-full items-center gap-1 border-b px-2'>
+        <header className='bg-background relative flex h-12 w-full items-center gap-1 border-b px-2'>
           {sidebarPresent && (
             <Tooltip>
               <TooltipTrigger asChild>
@@ -457,28 +481,6 @@ export function MochiShellMenu() {
 
           <Tooltip>
             <TooltipTrigger asChild>
-              <a
-                href='/'
-                aria-label={t`Home`}
-                className='hover:bg-hover active:bg-interactive-active focus-visible:ring-ring flex size-10 shrink-0 items-center justify-center rounded-md transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none'
-              >
-                <MochiLogo />
-              </a>
-            </TooltipTrigger>
-            <TooltipContent>{t`Home`}</TooltipContent>
-          </Tooltip>
-
-          <div className='flex min-w-0 flex-1 items-center justify-center'>
-            {isHome && (
-              /* jsx-text-ok: brand wordmark, verbatim in every locale */
-              <span className='from-foreground to-muted-foreground/30 bg-linear-to-br bg-clip-text text-[1.5rem] font-light tracking-[3px] text-transparent select-none sm:hidden'>
-                mochi
-              </span>
-            )}
-          </div>
-
-          <Tooltip>
-            <TooltipTrigger asChild>
               <button
                 type='button'
                 aria-label={t`Open menu`}
@@ -501,6 +503,15 @@ export function MochiShellMenu() {
             </TooltipTrigger>
             <TooltipContent>{t`Open menu`}</TooltipContent>
           </Tooltip>
+
+          <MenuShortcuts query={apps} current={currentApp} recent={recent} />
+
+          {isHome && (
+            /* jsx-text-ok: brand wordmark, verbatim in every locale */
+            <span className='from-primary to-primary-light pointer-events-none absolute left-1/2 -translate-x-1/2 bg-linear-165 bg-clip-text text-[1.5rem] font-light tracking-[3px] text-transparent select-none sm:hidden'>
+              mochi
+            </span>
+          )}
         </header>
 
         {/* Custom bottom sheet — renders inside #menu (position:fixed), no Radix Dialog,
@@ -534,21 +545,16 @@ export function MochiShellMenu() {
 
   return (
     <>
-      {/* Desktop menu overlay: horizontal, stacking vertically only when the user collapsed an existing
-          sidebar. No-sidebar apps stay horizontal; their `md:ps-24` padding clears the overlay. */}
+      {/* Desktop menu overlay: a row across the top of an expanded sidebar, otherwise a column. Apps
+          without a sidebar clear it with their `md:ps-24` padding; a collapsed sidebar with the
+          height its header reserves (app-sidebar.tsx). Home has no sidebar but a centred page with
+          room for either, so it follows the sidebar setting and the menu keeps its shape between
+          Home and the other apps. */}
       <div
-        className={cn('flex items-center gap-2 p-2', isCollapsed && 'flex-col')}
+        className={cn('flex items-center gap-2 p-2', !row && 'flex-col gap-1')}
       >
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <a href='/' aria-label={t`Home`}>
-              <MochiLogo />
-            </a>
-          </TooltipTrigger>
-          <TooltipContent>{t`Home`}</TooltipContent>
-        </Tooltip>
-
         {menuControl}
+        <MenuShortcuts query={apps} current={currentApp} recent={recent} />
       </div>
 
       <SignOutDialog open={!!signOutOpen} onOpenChange={setSignOutOpen} />

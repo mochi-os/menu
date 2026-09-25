@@ -1,0 +1,165 @@
+// Copyright © 2026 Mochisoft OÜ
+// SPDX-License-Identifier: AGPL-3.0-only
+// This file is part of Mochi, licensed under the GNU AGPL v3 with the
+// Mochi Application Interface Exception - see license.txt and license-exception.md.
+// The app shortcuts beside the avatar in the shell menu.
+import type { CSSProperties, ReactNode } from 'react'
+import { useLingui } from '@lingui/react/macro'
+import { cn, Tooltip, TooltipContent, TooltipTrigger } from '@mochi/web'
+import { House } from 'lucide-react'
+import { type MenuApp, type useMenuApps } from './use-menu-apps'
+
+// Theme icon masks, as the home screen draws them.
+const maskBorderRadius: Record<string, string> = {
+  circle: '50%',
+  square: '0',
+  rounded: '22%',
+  squircle: '28%',
+}
+
+// Icons alone: the label names the link and is its tooltip.
+function IconLink({
+  href,
+  label,
+  className,
+  children,
+}: {
+  href: string
+  label: string
+  className?: string
+  children: ReactNode
+}) {
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <a
+          href={href}
+          aria-label={label}
+          className={cn(
+            'group hover:bg-hover active:bg-interactive-active focus-visible:ring-ring flex items-center justify-center rounded-md transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none',
+            className
+          )}
+        >
+          {children}
+        </a>
+      </TooltipTrigger>
+      <TooltipContent>{label}</TooltipContent>
+    </Tooltip>
+  )
+}
+
+function AppLink({
+  app,
+  mask,
+  background,
+  className,
+}: {
+  app: MenuApp
+  mask?: string
+  background?: string
+  className?: string
+}) {
+  // Home is served at the root, so its path and link are empty; joining them
+  // blindly would give a protocol-relative //images/... URL.
+  const url = `url(/${app.path ? `${app.path}/` : ''}${app.file})`
+  const glyph = {
+    maskImage: url,
+    maskSize: 'contain',
+    maskRepeat: 'no-repeat',
+    maskPosition: 'center',
+    WebkitMaskImage: url,
+    WebkitMaskSize: 'contain',
+    WebkitMaskRepeat: 'no-repeat',
+    WebkitMaskPosition: 'center',
+  } as CSSProperties
+  const radius = mask ? maskBorderRadius[mask] : undefined
+  return (
+    <IconLink
+      href={app.link ? `/${app.link}/` : '/'}
+      label={app.name}
+      className={className}
+    >
+      <span className='relative flex size-8 items-center justify-center'>
+        {radius !== undefined ? (
+          <span
+            className='flex size-8 items-center justify-center'
+            style={{
+              backgroundColor: background || 'var(--primary)',
+              borderRadius: radius,
+            }}
+          >
+            <span
+              className='size-5 bg-white'
+              style={glyph}
+              aria-hidden='true'
+            />
+          </span>
+        ) : (
+          <span
+            className='bg-primary/70 group-hover:bg-primary size-6 transition-colors duration-150'
+            style={glyph}
+            aria-hidden='true'
+          />
+        )}
+        {app.highlight && (
+          <span
+            className='absolute -top-0.5 -right-0.5 flex size-2.5'
+            aria-hidden='true'
+          >
+            <span className='bg-primary absolute inline-flex size-full animate-ping rounded-full opacity-75' />
+            <span className='bg-primary relative inline-flex size-2.5 rounded-full' />
+          </span>
+        )}
+      </span>
+    </IconLink>
+  )
+}
+
+/**
+ * Home, then the second most recent and the most recent app, beside the
+ * avatar. The app on screen is never offered, Home included. recent is
+ * app paths, most recent first.
+ */
+export function MenuShortcuts({
+  query,
+  current,
+  recent,
+}: {
+  query: ReturnType<typeof useMenuApps>
+  current: string
+  recent: string[]
+}) {
+  const { t } = useLingui()
+  const icons = query.data?.icons ?? []
+  const home = icons.find((app) => app.link === '')
+  const latest = recent
+    .filter((path) => path !== current && path !== '')
+    .map((path) => icons.find((app) => app.link === path))
+    .filter((app): app is MenuApp => app !== undefined)
+    .slice(0, 2)
+    .reverse()
+  const shortcut = (app: MenuApp) => (
+    <AppLink
+      key={`${app.id}:${app.path}:${app.file}`}
+      app={app}
+      mask={query.data?.icon_mask}
+      background={query.data?.icon_background}
+      className='size-9 shrink-0'
+    />
+  )
+
+  return (
+    <>
+      {current !== '' &&
+        (home ? (
+          shortcut(home)
+        ) : (
+          // A home app older than its icon is still reachable.
+          <IconLink href='/' label={t`Home`} className='size-9 shrink-0'>
+            <House className='text-primary/70 group-hover:text-primary size-6 transition-colors duration-150' />
+          </IconLink>
+        ))}
+      {latest.map(shortcut)}
+    </>
+  )
+}

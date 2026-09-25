@@ -223,10 +223,13 @@
     // --- Sidebar state ---
     // Persisted across app switches so the sidebar stays collapsed/expanded.
     var sidebarOpen = localStorage.getItem('sidebar_state') !== 'false';
-    // Whether the currently-loaded app has a sidebar at all. Apps without one
-    // (e.g. home) still want the menu rendered horizontally even when the
-    // persisted collapse state is "collapsed".
-    var sidebarPresent = false;
+    // Whether the currently-loaded app has a sidebar at all: true, false, or
+    // null while a newly loaded app has yet to say. The menu keeps its shape
+    // while it is null, so moving between two apps that both show it as a row
+    // does not flash a column in between. An app that never says is taken to
+    // have none once it has had time to render.
+    var sidebarPresent = null;
+    var sidebarPresentTimer = null;
 
     function setSidebarState(open) {
         sidebarOpen = open;
@@ -235,8 +238,12 @@
     }
 
     function setSidebarPresent(present) {
-        sidebarPresent = !!present;
-        if (menuEl) menuEl.setAttribute('data-sidebar-present', sidebarPresent ? 'true' : 'false');
+        if (sidebarPresentTimer) { clearTimeout(sidebarPresentTimer); sidebarPresentTimer = null; }
+        sidebarPresent = present === null ? null : !!present;
+        if (menuEl) menuEl.setAttribute('data-sidebar-present', sidebarPresent === null ? 'unknown' : String(sidebarPresent));
+        if (sidebarPresent === null) {
+            sidebarPresentTimer = setTimeout(function() { setSidebarPresent(false); }, 10000);
+        }
     }
 
     // Immersive mode: an app (e.g. a fullscreen game) asks the shell to hide its
@@ -265,12 +272,15 @@
     });
 
     function setCurrentApp(appPath) {
+        // The previous app's answer to whether it has a sidebar says nothing
+        // about this one, and the menu reads the two together.
+        if (menuEl && menuEl.getAttribute('data-app') !== appPath) setSidebarPresent(null);
         if (menuEl) menuEl.setAttribute('data-app', appPath);
     }
 
     // Set initial state
     setSidebarState(sidebarOpen);
-    setSidebarPresent(false);
+    setSidebarPresent(null);
     setCurrentApp(currentAppPath);
 
     var progressInterval = null;
@@ -367,10 +377,11 @@
     function swapIframe(newSrc) {
         var container = iframe.parentNode;
 
-        // Reset sidebar presence — the new app will re-announce whether it
-        // has a sidebar via postMessage. Without this, switching from a
-        // sidebar-app to a sidebar-less app would leave the menu collapsed.
-        setSidebarPresent(false);
+        // Forget sidebar presence until the new app announces whether it has
+        // a sidebar via postMessage. Kept, the old app's answer would describe
+        // the new one; reset to false, the menu would take the shape of an app
+        // without one until the new app said otherwise.
+        setSidebarPresent(null);
         // Clean up any previous stale iframe
         if (staleIframe && staleIframe.parentNode) {
             staleIframe.parentNode.removeChild(staleIframe);
@@ -470,9 +481,22 @@
 
     // --- Shell config (menuToken, domain) — fetched once on load ---
 
+    // The device's zone rides on the boot request: the server keeps it as the
+    // user's zone while the preference is "auto", so recurrences and reminders
+    // follow the device the user last used.
+    function deviceTimezone() {
+        try {
+            return Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        } catch (e) {
+            return '';
+        }
+    }
+
     var shellConfigReady = fetch('/_/shell', {
         method: 'POST',
-        credentials: 'same-origin'
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ timezone: deviceTimezone() })
     }).then(function(r) {
         if (!r.ok) return {};
         return r.json();

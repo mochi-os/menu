@@ -5,7 +5,7 @@
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
 
 {
-	"version": "1.109",
+	"version": "1.110",
 	"label": "app.name",
 	"paths": ["menu"],
 
@@ -16,6 +16,7 @@
 		"": {"file": "web/dist/index.html"},
 		"assets": {"files": "web/dist/assets"},
 		"images": {"files": "web/dist/images", "public": true},
+		"-/apps": {"function": "action_apps"},
 		"-/notifications/list": {"function": "action_notifications_list"},
 		"-/notifications/read": {"function": "action_notifications_read"},
 		"-/notifications/read/all": {"function": "action_notifications_read_all"},
@@ -30,6 +31,6 @@
 		"-/permissions/name": {"function": "action_permissions_name"},
 		"-/permissions/application": {"function": "action_permissions_application"},
 		"-/permissions/check": {"function": "action_permissions_check"},
-		"-/person/asset/:asset": {"function": "action_person_asset", "public": true}
+		"-/person/asset/:asset": {"function": "action_person_asset", "public": true, "asset": true}
 	}
 }
