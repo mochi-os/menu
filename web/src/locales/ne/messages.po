@@ -40,6 +40,10 @@ msgid "{0, plural, one {# result} other {# results}}"
 msgstr "{0, plural, one {# परिणाम} other {# परिणामहरू}}"
 
 #. placeholder {0}: displayInfo.count
+#. placeholder {0}: selectedIds.length
+#. placeholder {0}: unknownIds.length
+#: ../../../lib/web/src/components/person-picker.tsx
+#: ../../../lib/web/src/components/person-picker.tsx
 #: ../../../lib/web/src/components/person-picker.tsx
 msgid "{0, plural, one {# selected} other {# selected}}"
 msgstr "{0, plural, one {# चयन गरिएको} other {# चयन गरिएको}}"
@@ -488,6 +492,7 @@ msgstr "भाषा छनोट गर्नुहोस्"
 #: ../../../lib/web/src/components/banner-section.tsx
 #: ../../../lib/web/src/components/colour-picker.tsx
 #: ../../../lib/web/src/components/colour-picker.tsx
+#: ../../../lib/web/src/components/person-picker.tsx
 #: ../../../lib/web/src/components/travelling-picker.tsx
 #: ../../../lib/web/src/components/travelling-picker.tsx
 #: ../../../lib/web/src/components/travelling-picker.tsx
@@ -503,22 +508,15 @@ msgstr "सबै खाली गर्नुहोस्"
 msgid "Clear search"
 msgstr "खोजी खाली गर्नुहोस्"
 
-#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx
-#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx
 #: ../../../lib/web/src/components/ui/dialog.tsx
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx
 #: ../../../lib/web/src/components/ui/sheet.tsx
+#: ../../../lib/web/src/components/ui/side-panel.tsx
+#: ../../../lib/web/src/components/ui/side-panel.tsx
 #: src/use-permission-request.tsx
 msgid "Close"
 msgstr "बन्द गर्नुहोस्"
-
-#: ../../../lib/web/src/components/entity/add-field-dialog.tsx
-#: ../../../lib/web/src/components/entity/add-field-dialog.tsx
-#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx
-#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx
-msgid "Close dialog"
-msgstr "संवाद बन्द गर्नुहोस्"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx
@@ -858,7 +856,6 @@ msgid "Does not match the required pattern"
 msgstr "आवश्यक ढाँचासँग मेल खाँदैन"
 
 #: ../../../lib/web/src/components/entity/entity-field-dialog.tsx
-#: ../../../lib/web/src/components/entity/entity-object-detail-panel.tsx
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx
 msgid "Done"
 msgstr "सम्पन्न"
@@ -1778,6 +1775,8 @@ msgstr "{0} फिल्टर हटाउनुहोस्"
 
 #: ../../../lib/web/src/components/member-list.tsx
 #: ../../../lib/web/src/components/member-list.tsx
+#: ../../../lib/web/src/components/person-picker.tsx
+#: ../../../lib/web/src/components/person-picker.tsx
 msgid "Remove {name}"
 msgstr "{name} हटाउनुहोस्"
 

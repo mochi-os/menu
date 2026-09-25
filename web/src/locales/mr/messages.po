@@ -40,6 +40,10 @@ msgid "{0, plural, one {# result} other {# results}}"
 msgstr "{0, plural, one {# निकाल} other {# निकाल}}"
 
 #. placeholder {0}: displayInfo.count
+#. placeholder {0}: selectedIds.length
+#. placeholder {0}: unknownIds.length
+#: ../../../lib/web/src/components/person-picker.tsx
+#: ../../../lib/web/src/components/person-picker.tsx
 #: ../../../lib/web/src/components/person-picker.tsx
 msgid "{0, plural, one {# selected} other {# selected}}"
 msgstr "{0, plural, one {# निवडले} other {# निवडले}}"
@@ -488,6 +492,7 @@ msgstr "भाषा निवडा"
 #: ../../../lib/web/src/components/banner-section.tsx
 #: ../../../lib/web/src/components/colour-picker.tsx
 #: ../../../lib/web/src/components/colour-picker.tsx
+#: ../../../lib/web/src/components/person-picker.tsx
 #: ../../../lib/web/src/components/travelling-picker.tsx
 #: ../../../lib/web/src/components/travelling-picker.tsx
 #: ../../../lib/web/src/components/travelling-picker.tsx
@@ -503,22 +508,15 @@ msgstr "सर्व साफ करा"
 msgid "Clear search"
 msgstr "शोध साफ करा"
 
-#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx
-#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx
 #: ../../../lib/web/src/components/ui/dialog.tsx
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx
 #: ../../../lib/web/src/components/ui/sheet.tsx
+#: ../../../lib/web/src/components/ui/side-panel.tsx
+#: ../../../lib/web/src/components/ui/side-panel.tsx
 #: src/use-permission-request.tsx
 msgid "Close"
 msgstr "बंद करा"
-
-#: ../../../lib/web/src/components/entity/add-field-dialog.tsx
-#: ../../../lib/web/src/components/entity/add-field-dialog.tsx
-#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx
-#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx
-msgid "Close dialog"
-msgstr "डायलॉग बंद करा"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx
@@ -858,7 +856,6 @@ msgid "Does not match the required pattern"
 msgstr "आवश्यक नमुन्याशी जुळत नाही"
 
 #: ../../../lib/web/src/components/entity/entity-field-dialog.tsx
-#: ../../../lib/web/src/components/entity/entity-object-detail-panel.tsx
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx
 msgid "Done"
 msgstr "पूर्ण"
@@ -1778,6 +1775,8 @@ msgstr "{0} फिल्टर काढा"
 
 #: ../../../lib/web/src/components/member-list.tsx
 #: ../../../lib/web/src/components/member-list.tsx
+#: ../../../lib/web/src/components/person-picker.tsx
+#: ../../../lib/web/src/components/person-picker.tsx
 msgid "Remove {name}"
 msgstr "{name} काढा"
 

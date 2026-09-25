@@ -40,6 +40,10 @@ msgid "{0, plural, one {# result} other {# results}}"
 msgstr "{0, plural, one {# niðurstaða} other {# niðurstöður}}"
 
 #. placeholder {0}: displayInfo.count
+#. placeholder {0}: selectedIds.length
+#. placeholder {0}: unknownIds.length
+#: ../../../lib/web/src/components/person-picker.tsx
+#: ../../../lib/web/src/components/person-picker.tsx
 #: ../../../lib/web/src/components/person-picker.tsx
 msgid "{0, plural, one {# selected} other {# selected}}"
 msgstr "{0, plural, one {# valið} other {# valin}}"
@@ -488,6 +492,7 @@ msgstr "Veldu tungumál"
 #: ../../../lib/web/src/components/banner-section.tsx
 #: ../../../lib/web/src/components/colour-picker.tsx
 #: ../../../lib/web/src/components/colour-picker.tsx
+#: ../../../lib/web/src/components/person-picker.tsx
 #: ../../../lib/web/src/components/travelling-picker.tsx
 #: ../../../lib/web/src/components/travelling-picker.tsx
 #: ../../../lib/web/src/components/travelling-picker.tsx
@@ -503,22 +508,15 @@ msgstr "Hreinsa allt"
 msgid "Clear search"
 msgstr "Hreinsa leit"
 
-#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx
-#: ../../../lib/web/src/components/entity/entity-create-object-dialog.tsx
 #: ../../../lib/web/src/components/ui/dialog.tsx
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx
 #: ../../../lib/web/src/components/ui/image-lightbox.tsx
 #: ../../../lib/web/src/components/ui/sheet.tsx
+#: ../../../lib/web/src/components/ui/side-panel.tsx
+#: ../../../lib/web/src/components/ui/side-panel.tsx
 #: src/use-permission-request.tsx
 msgid "Close"
 msgstr "Loka"
-
-#: ../../../lib/web/src/components/entity/add-field-dialog.tsx
-#: ../../../lib/web/src/components/entity/add-field-dialog.tsx
-#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx
-#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx
-msgid "Close dialog"
-msgstr "Loka glugga"
 
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx
 #: ../../../lib/web/src/components/layout/app-sidebar.tsx
@@ -858,7 +856,6 @@ msgid "Does not match the required pattern"
 msgstr "Samsvarar ekki tilskildu mynstri"
 
 #: ../../../lib/web/src/components/entity/entity-field-dialog.tsx
-#: ../../../lib/web/src/components/entity/entity-object-detail-panel.tsx
 #: ../../../lib/web/src/components/entity/entity-view-sheet.tsx
 msgid "Done"
 msgstr "Lokið"
@@ -1778,6 +1775,8 @@ msgstr "Fjarlægja síu {0}"
 
 #: ../../../lib/web/src/components/member-list.tsx
 #: ../../../lib/web/src/components/member-list.tsx
+#: ../../../lib/web/src/components/person-picker.tsx
+#: ../../../lib/web/src/components/person-picker.tsx
 msgid "Remove {name}"
 msgstr "Fjarlægja {name}"
 
