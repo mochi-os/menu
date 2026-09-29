@@ -419,7 +419,6 @@ msgstr "Kamera kullanılamıyor"
 #: ../../../lib/web/src/components/ui/create-entity-dialog.tsx
 #: ../../../lib/web/src/components/ui/editable-field-row.tsx
 #: ../../../lib/web/src/features/access/access-dialog.tsx
-#: ../../../lib/web/src/features/access/access-list.tsx
 #: ../../../lib/web/src/features/accounts/account-add.tsx
 #: ../../../lib/web/src/features/accounts/account-verify.tsx
 msgid "Cancel"
@@ -1805,7 +1804,7 @@ msgstr "{name} kaldır"
 msgid "Remove access rule"
 msgstr "Erişim kuralını kaldır"
 
-#. placeholder {0}: formatSubject(subject, data.name)
+#. placeholder {0}: formatSubject(removeSubject ?? '', removeData?.name)
 #: ../../../lib/web/src/features/access/access-list.tsx
 msgid "Remove access rule for \"{0}\"?"
 msgstr "\"{0}\" için erişim kuralı kaldırılsın mı?"
