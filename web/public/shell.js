@@ -371,11 +371,41 @@
         return url + (url.indexOf('?') >= 0 ? '&' : '?') + '_shell=1' + hash;
     }
 
+    // Whether the mounted page holds edits it has not saved, as it last said.
+    // The page's own router asks before its links leave; the exits the shell
+    // owns - back and forward, a cross-app link, reload and the menu - ask
+    // here instead.
+    var unsaved = false;
+    // The navigation held while the page asks its user, run on its answer.
+    var leavePending = null;
+
+    // Run a navigation that replaces the frame, asking the page first while it
+    // holds unsaved edits. A second attempt while one is being asked goes
+    // through, so a page that never answers cannot trap the user.
+    function guardLeave(go) {
+        if (!unsaved) {
+            go();
+            return;
+        }
+        if (leavePending) {
+            leavePending = null;
+            unsaved = false;
+            go();
+            return;
+        }
+        leavePending = go;
+        postToIframe({ type: 'leave-request' });
+    }
+
     // Replace the iframe with a new one, keeping the old visible until the new
     // one sends its ready message. This avoids both history pollution (creating
     // a new element instead of setting .src) and white flashes during transitions.
     function swapIframe(newSrc) {
         var container = iframe.parentNode;
+
+        // The page that held unsaved edits is going; nothing is held for the next.
+        unsaved = false;
+        leavePending = null;
 
         // Forget sidebar presence until the new app announces whether it has
         // a sidebar via postMessage. Kept, the old app's answer would describe
@@ -1724,6 +1754,15 @@
     window.addEventListener('pagehide', abortMicSession);
     window.addEventListener('beforeunload', abortMicSession);
 
+    // A menu link, a reload or closing the tab unloads the shell with the page
+    // in it, and the sandboxed page cannot prompt for itself. The browser's
+    // own prompt is the only one an unload allows.
+    window.addEventListener('beforeunload', function(event) {
+        if (!unsaved) return;
+        event.preventDefault();
+        event.returnValue = '';
+    });
+
     // --- URL sync ---
 
     function getAppNameFromPath(path) {
@@ -1860,8 +1899,38 @@
 
     // --- popstate (back/forward) ---
 
+    // Set while the shell walks history back to where it was, so that walk is
+    // not taken for the user's own.
+    var restoring = false;
+
     window.addEventListener('popstate', function() {
         var path = window.location.pathname + window.location.search + window.location.hash;
+        if (restoring) {
+            restoring = false;
+            lastNavigatedPath = path;
+            historyDepthRestore();
+            return;
+        }
+        // A back or forward cannot be cancelled, only undone: with unsaved
+        // edits the shell steps back to the page, asks it, and repeats the
+        // step if the user leaves. The step is the change in depth, which every
+        // entry the shell pushes records.
+        if (unsaved && !leavePending) {
+            var state = history.state;
+            var after = (state && typeof state.depth === 'number' && state.depth > 0) ? state.depth : 0;
+            var step = after - shellHistoryDepth;
+            if (step !== 0) {
+                restoring = true;
+                history.go(-step);
+                guardLeave(function() { history.go(step); });
+                return;
+            }
+        }
+        if (leavePending) {
+            // Moved again while asked: the user insists.
+            leavePending = null;
+            unsaved = false;
+        }
         lastNavigatedPath = path;
         historyDepthRestore();
         var newApp = getAppNameFromPath(path);
@@ -1992,7 +2061,21 @@
                 break;
 
             case 'navigate-external':
-                handleNavigateExternal(data);
+                guardLeave(function() { handleNavigateExternal(data); });
+                break;
+
+            case 'unsaved':
+                unsaved = data.value === true;
+                break;
+
+            case 'leave-answer':
+                if (!leavePending) break;
+                var go = leavePending;
+                leavePending = null;
+                if (data.proceed === true) {
+                    unsaved = false;
+                    go();
+                }
                 break;
 
             case 'navigate-top':
@@ -2012,8 +2095,10 @@
                 // entry the shell started at, or the app walks the user off
                 // the site.
                 if (navigating || shellHistoryDepth <= 0) break;
-                shellHistoryDepth--;
-                window.history.back();
+                guardLeave(function() {
+                    shellHistoryDepth--;
+                    window.history.back();
+                });
                 break;
 
             case 'title':

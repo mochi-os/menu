@@ -1400,3 +1400,157 @@ describe('shell storage proxy bounds each app', () => {
     expect(localStorage.getItem('app:feeds:k3')).toBe(replacement)
   })
 })
+
+// A page with unsaved edits says so, and the shell asks it before back,
+// forward or a cross-app link replaces the frame. An unload, which the
+// sandboxed page cannot prompt for, gets the browser's own prompt.
+describe('shell leave guard: a page with unsaved edits is asked first', () => {
+  const popped = () =>
+    new Promise<void>((resolve) => {
+      window.addEventListener('popstate', () => resolve(), { once: true })
+    })
+
+  const frame = () => document.getElementById('app-frame') as HTMLIFrameElement
+
+  const sendFromMounted = (data: Record<string, unknown>) => {
+    const event = new MessageEvent('message', { data })
+    Object.defineProperty(event, 'source', { value: frame().contentWindow })
+    window.dispatchEvent(event)
+  }
+
+  // Every test boots a fresh shell into the same window, and earlier shells'
+  // listeners stay on it, so an unload is put only to this shell's own.
+  let unloads: EventListener[] = []
+  const unloadPrevented = () => {
+    const event = new Event('beforeunload', { cancelable: true })
+    for (const listener of unloads) listener(event)
+    return event.defaultPrevented
+  }
+  beforeEach(() => {
+    unloads = []
+    const add = window.addEventListener.bind(window)
+    vi.spyOn(window, 'addEventListener').mockImplementation(((
+      type: string,
+      listener: EventListener,
+      options?: boolean | AddEventListenerOptions
+    ) => {
+      if (type === 'beforeunload') unloads.push(listener)
+      add(type, listener, options)
+    }) as typeof window.addEventListener)
+  })
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
+  // The shell pushes an entry, the page reports edits, then Back is pressed.
+  // The shell walks forward again to the page, so two popstates arrive.
+  async function backWithEdits() {
+    const shell = boot({ app: 'feeds-entity' })
+    await shell.start()
+    shell.send({ type: 'navigate', path: '/feeds/deeper' })
+    await shell.settle()
+    shell.send({ type: 'unsaved', value: true })
+    const mounted = frame()
+    const back = popped()
+    window.history.back()
+    await back
+    const restored = popped()
+    await restored
+    await shell.settle()
+    return { shell, mounted }
+  }
+
+  it('steps back to the page and asks it instead of leaving', async () => {
+    const { shell, mounted } = await backWithEdits()
+    expect(shell.path()).toBe('/feeds/deeper')
+    expect(frame()).toBe(mounted)
+    expect(shell.posted).toContainEqual({ type: 'leave-request' })
+  })
+
+  it('takes the step once the page says leave', async () => {
+    const { shell, mounted } = await backWithEdits()
+    const again = popped()
+    sendFromMounted({ type: 'leave-answer', proceed: true })
+    await again
+    await shell.settle()
+    expect(shell.path()).toBe(HOME)
+    expect(frame()).not.toBe(mounted)
+  })
+
+  it('stays when the page says stay', async () => {
+    const { shell, mounted } = await backWithEdits()
+    const go = vi.spyOn(window.history, 'go')
+    sendFromMounted({ type: 'leave-answer', proceed: false })
+    await shell.settle()
+    expect(go).not.toHaveBeenCalled()
+    expect(shell.path()).toBe('/feeds/deeper')
+    expect(frame()).toBe(mounted)
+    go.mockRestore()
+  })
+
+  it('holds a cross-app link until the page answers', async () => {
+    const shell = boot({ app: 'feeds-entity' })
+    await shell.start()
+    shell.send({ type: 'unsaved', value: true })
+    shell.send({ type: 'navigate-external', url: '/settings/' })
+    await shell.settle()
+    expect(shell.path()).toBe(HOME)
+    expect(shell.tokenApps).not.toContain('settings')
+    expect(shell.posted).toContainEqual({ type: 'leave-request' })
+
+    shell.send({ type: 'leave-answer', proceed: true })
+    await shell.settle()
+    expect(shell.path()).toBe('/settings/')
+  })
+
+  it('lets a second attempt through, so a silent page cannot trap the user', async () => {
+    const shell = boot({ app: 'feeds-entity' })
+    await shell.start()
+    shell.send({ type: 'unsaved', value: true })
+    shell.send({ type: 'navigate-external', url: '/settings/' })
+    shell.send({ type: 'navigate-external', url: '/settings/' })
+    await shell.settle()
+    expect(shell.path()).toBe('/settings/')
+  })
+
+  it('prompts on an unload only while the page holds edits, and forgets them with the frame', async () => {
+    const shell = boot({ app: 'feeds-entity' })
+    await shell.start()
+    expect(unloadPrevented()).toBe(false)
+    shell.send({ type: 'unsaved', value: true })
+    expect(unloadPrevented()).toBe(true)
+    shell.send({ type: 'unsaved', value: false })
+    expect(unloadPrevented()).toBe(false)
+
+    shell.send({ type: 'unsaved', value: true })
+    shell.send({ type: 'navigate-external', url: '/feeds/other' })
+    shell.send({ type: 'leave-answer', proceed: true })
+    await shell.settle()
+    expect(shell.path()).toBe('/feeds/other')
+    expect(unloadPrevented()).toBe(false)
+  })
+
+  it("does not carry a page's edits into the next one when a step cannot be undone", async () => {
+    const shell = boot({ app: 'feeds-entity' })
+    await shell.start()
+    // An entry the shell did not push records no depth, so a step between it
+    // and the start is no change of depth, and cannot be walked back.
+    window.history.pushState(null, '', '/feeds/elsewhere')
+    shell.send({ type: 'unsaved', value: true })
+    const back = popped()
+    window.history.back()
+    await back
+    await shell.settle()
+    expect(shell.path()).toBe(HOME)
+    expect(unloadPrevented()).toBe(false)
+  })
+
+  it('leaves without asking when nothing is unsaved', async () => {
+    const shell = boot({ app: 'feeds-entity' })
+    await shell.start()
+    shell.send({ type: 'navigate-external', url: '/settings/' })
+    await shell.settle()
+    expect(shell.path()).toBe('/settings/')
+    expect(shell.posted).not.toContainEqual({ type: 'leave-request' })
+  })
+})
