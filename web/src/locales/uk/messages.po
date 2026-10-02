@@ -36,6 +36,9 @@ msgid "(you)"
 msgstr "(ви)"
 
 #: ../../../lib/web/src/components/entity/entity-board-container.tsx
+#: ../../../lib/web/src/components/entity/entity-board-container.tsx
+#: ../../../lib/web/src/components/entity/entity-board-container.tsx
+#: ../../../lib/web/src/components/entity/entity-tree-view.tsx
 msgid "[not set]"
 msgstr "[не задано]"
 
@@ -52,6 +55,11 @@ msgstr "{0, plural, one {# результат} few {# результати} many
 #: ../../../lib/web/src/components/person-picker.tsx
 msgid "{0, plural, one {# selected} other {# selected}}"
 msgstr "{0, plural, one {# вибрано} few {# вибрано} many {# вибрано} other {# вибрано}}"
+
+#. placeholder {0}: overflow.get(day) ?? 0
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+msgid "{0, plural, one {+# more} other {+# more}}"
+msgstr "{0, plural, one {ще +#} few {ще +#} many {ще +#} other {ще +#}}"
 
 #. placeholder {0}: countDeepChildren(object.id)
 #: ../../../lib/web/src/components/entity/entity-board-card.tsx
@@ -1483,8 +1491,8 @@ msgstr "Результатів не знайдено."
 #: ../../../lib/web/src/components/entity/entity-board-container.tsx
 #: ../../../lib/web/src/components/entity/entity-board-container.tsx
 #: ../../../lib/web/src/components/entity/entity-tree-view.tsx
-msgid "No status"
-msgstr "Немає статусу"
+#~ msgid "No status"
+#~ msgstr "Немає статусу"
 
 #: ../../../lib/web/src/components/timezone-select.tsx
 msgid "No time zone found."

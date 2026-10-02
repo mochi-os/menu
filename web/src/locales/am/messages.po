@@ -36,6 +36,9 @@ msgid "(you)"
 msgstr "(እርስዎ)"
 
 #: ../../../lib/web/src/components/entity/entity-board-container.tsx
+#: ../../../lib/web/src/components/entity/entity-board-container.tsx
+#: ../../../lib/web/src/components/entity/entity-board-container.tsx
+#: ../../../lib/web/src/components/entity/entity-tree-view.tsx
 msgid "[not set]"
 msgstr "[አልተዘጋጀም]"
 
@@ -52,6 +55,11 @@ msgstr "{0, plural, one {# ውጤት} other {# ውጤቶች}}"
 #: ../../../lib/web/src/components/person-picker.tsx
 msgid "{0, plural, one {# selected} other {# selected}}"
 msgstr "{0, plural, one {# ተመርጧል} other {# ተመርጠዋል}}"
+
+#. placeholder {0}: overflow.get(day) ?? 0
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+msgid "{0, plural, one {+# more} other {+# more}}"
+msgstr "{0, plural, one {+# ተጨማሪ} other {+# ተጨማሪ}}"
 
 #. placeholder {0}: countDeepChildren(object.id)
 #: ../../../lib/web/src/components/entity/entity-board-card.tsx
@@ -1483,8 +1491,8 @@ msgstr "ምንም ውጤቶች አልተገኙም።"
 #: ../../../lib/web/src/components/entity/entity-board-container.tsx
 #: ../../../lib/web/src/components/entity/entity-board-container.tsx
 #: ../../../lib/web/src/components/entity/entity-tree-view.tsx
-msgid "No status"
-msgstr "ሁኔታ የለም"
+#~ msgid "No status"
+#~ msgstr "ሁኔታ የለም"
 
 #: ../../../lib/web/src/components/timezone-select.tsx
 msgid "No time zone found."

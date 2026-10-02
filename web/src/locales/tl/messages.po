@@ -36,6 +36,9 @@ msgid "(you)"
 msgstr "(ikaw)"
 
 #: ../../../lib/web/src/components/entity/entity-board-container.tsx
+#: ../../../lib/web/src/components/entity/entity-board-container.tsx
+#: ../../../lib/web/src/components/entity/entity-board-container.tsx
+#: ../../../lib/web/src/components/entity/entity-tree-view.tsx
 msgid "[not set]"
 msgstr "[hindi naitakda]"
 
@@ -52,6 +55,11 @@ msgstr "{0, plural, one {# resulta} other {# resulta}}"
 #: ../../../lib/web/src/components/person-picker.tsx
 msgid "{0, plural, one {# selected} other {# selected}}"
 msgstr "{0, plural, one {# napili} other {# napili}}"
+
+#. placeholder {0}: overflow.get(day) ?? 0
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+msgid "{0, plural, one {+# more} other {+# more}}"
+msgstr "{0, plural, one {+# pa} other {+# pa}}"
 
 #. placeholder {0}: countDeepChildren(object.id)
 #: ../../../lib/web/src/components/entity/entity-board-card.tsx
@@ -1483,8 +1491,8 @@ msgstr "Walang nakitang resulta."
 #: ../../../lib/web/src/components/entity/entity-board-container.tsx
 #: ../../../lib/web/src/components/entity/entity-board-container.tsx
 #: ../../../lib/web/src/components/entity/entity-tree-view.tsx
-msgid "No status"
-msgstr "Walang status"
+#~ msgid "No status"
+#~ msgstr "Walang status"
 
 #: ../../../lib/web/src/components/timezone-select.tsx
 msgid "No time zone found."

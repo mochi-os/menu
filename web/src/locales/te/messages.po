@@ -36,6 +36,9 @@ msgid "(you)"
 msgstr "(మీరు)"
 
 #: ../../../lib/web/src/components/entity/entity-board-container.tsx
+#: ../../../lib/web/src/components/entity/entity-board-container.tsx
+#: ../../../lib/web/src/components/entity/entity-board-container.tsx
+#: ../../../lib/web/src/components/entity/entity-tree-view.tsx
 msgid "[not set]"
 msgstr "[సెట్ చేయలేదు]"
 
@@ -52,6 +55,11 @@ msgstr "{0, plural, one {# ఫలితం} other {# ఫలితాలు}}"
 #: ../../../lib/web/src/components/person-picker.tsx
 msgid "{0, plural, one {# selected} other {# selected}}"
 msgstr "{0, plural, one {# ఎంచుకోబడింది} other {# ఎంచుకోబడ్డాయి}}"
+
+#. placeholder {0}: overflow.get(day) ?? 0
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+msgid "{0, plural, one {+# more} other {+# more}}"
+msgstr "{0, plural, one {+# మరిన్ని} other {+# మరిన్ని}}"
 
 #. placeholder {0}: countDeepChildren(object.id)
 #: ../../../lib/web/src/components/entity/entity-board-card.tsx
@@ -1483,8 +1491,8 @@ msgstr "ఫలితాలు ఏవీ కనుగొనబడలేదు."
 #: ../../../lib/web/src/components/entity/entity-board-container.tsx
 #: ../../../lib/web/src/components/entity/entity-board-container.tsx
 #: ../../../lib/web/src/components/entity/entity-tree-view.tsx
-msgid "No status"
-msgstr "స్థితి లేదు"
+#~ msgid "No status"
+#~ msgstr "స్థితి లేదు"
 
 #: ../../../lib/web/src/components/timezone-select.tsx
 msgid "No time zone found."

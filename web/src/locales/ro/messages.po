@@ -36,6 +36,9 @@ msgid "(you)"
 msgstr "(tu)"
 
 #: ../../../lib/web/src/components/entity/entity-board-container.tsx
+#: ../../../lib/web/src/components/entity/entity-board-container.tsx
+#: ../../../lib/web/src/components/entity/entity-board-container.tsx
+#: ../../../lib/web/src/components/entity/entity-tree-view.tsx
 msgid "[not set]"
 msgstr "[nesetat]"
 
@@ -52,6 +55,11 @@ msgstr "{0, plural, one {# rezultat} few {# rezultate} other {# de rezultate}}"
 #: ../../../lib/web/src/components/person-picker.tsx
 msgid "{0, plural, one {# selected} other {# selected}}"
 msgstr "{0, plural, one {# selectat} few {# selectate} other {# selectate}}"
+
+#. placeholder {0}: overflow.get(day) ?? 0
+#: ../../../lib/web/src/components/calendar/month-grid.tsx
+msgid "{0, plural, one {+# more} other {+# more}}"
+msgstr "{0, plural, one {+# în plus} few {+# în plus} other {+# în plus}}"
 
 #. placeholder {0}: countDeepChildren(object.id)
 #: ../../../lib/web/src/components/entity/entity-board-card.tsx
@@ -1483,8 +1491,8 @@ msgstr "Nu s-au găsit rezultate."
 #: ../../../lib/web/src/components/entity/entity-board-container.tsx
 #: ../../../lib/web/src/components/entity/entity-board-container.tsx
 #: ../../../lib/web/src/components/entity/entity-tree-view.tsx
-msgid "No status"
-msgstr "Fără stare"
+#~ msgid "No status"
+#~ msgstr "Fără stare"
 
 #: ../../../lib/web/src/components/timezone-select.tsx
 msgid "No time zone found."
