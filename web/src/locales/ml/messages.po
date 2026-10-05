@@ -56,11 +56,6 @@ msgstr "{0, plural, one {# ഫലം} other {# ഫലങ്ങൾ}}"
 msgid "{0, plural, one {# selected} other {# selected}}"
 msgstr "{0, plural, one {# തിരഞ്ഞെടുത്തു} other {# തിരഞ്ഞെടുത്തു}}"
 
-#. placeholder {0}: overflow.get(day) ?? 0
-#: ../../../lib/web/src/components/calendar/month-grid.tsx
-msgid "{0, plural, one {+# more} other {+# more}}"
-msgstr "{0, plural, one {+# കൂടി} other {+# കൂടി}}"
-
 #. placeholder {0}: countDeepChildren(object.id)
 #: ../../../lib/web/src/components/entity/entity-board-card.tsx
 msgid "{0, plural, one {+# nested} other {+# nested}}"
@@ -1379,8 +1374,8 @@ msgstr "നീക്കി"
 msgid "Moved {field}"
 msgstr "{field} നീക്കി"
 
-#. placeholder {0}: dayName(current.day)
 #. placeholder {0}: dayName(dragging.day)
+#. placeholder {0}: dayName(opening(current, format.zonedDay))
 #: ../../../lib/web/src/components/calendar/month-grid.tsx
 #: ../../../lib/web/src/components/calendar/time-grid.tsx
 msgid "Moving to {0}"
@@ -1487,12 +1482,6 @@ msgstr "ഫലങ്ങളൊന്നും കണ്ടെത്തിയി�
 #: ../../../lib/web/src/components/command-menu.tsx
 msgid "No results found."
 msgstr "ഫലങ്ങളൊന്നും കണ്ടെത്തിയില്ല."
-
-#: ../../../lib/web/src/components/entity/entity-board-container.tsx
-#: ../../../lib/web/src/components/entity/entity-board-container.tsx
-#: ../../../lib/web/src/components/entity/entity-tree-view.tsx
-#~ msgid "No status"
-#~ msgstr "സ്ഥിതി ഇല്ല"
 
 #: ../../../lib/web/src/components/timezone-select.tsx
 msgid "No time zone found."
