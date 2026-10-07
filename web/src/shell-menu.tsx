@@ -533,7 +533,7 @@ export function MochiShellMenu() {
             menuOpen ? 'translate-y-0' : 'pointer-events-none translate-y-full'
           )}
         >
-          <div className='bg-muted mx-auto mt-4 mb-1 h-2 w-25 shrink-0 rounded-full' />
+          <div className='bg-muted mx-auto mt-2 mb-1 h-1.5 w-9 shrink-0 rounded-full' />
           {menuContent}
         </div>
 
