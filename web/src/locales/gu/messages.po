@@ -26,6 +26,11 @@ msgstr "(સંપાદિત)"
 msgid "(expand)"
 msgstr "(વિસ્તાર કરો)"
 
+#. placeholder {0}: file.oldPath
+#: ../../../lib/web/src/components/diff-viewer.tsx
+msgid "(from {0})"
+msgstr ""
+
 #: ../../../lib/web/src/components/calendar/event-title.tsx
 #: ../../../lib/web/src/components/calendar/tooltip.ts
 msgid "(No title)"
@@ -41,6 +46,11 @@ msgstr "(તમે)"
 #: ../../../lib/web/src/components/entity/entity-tree-view.tsx
 msgid "[not set]"
 msgstr "[સેટ નથી]"
+
+#. placeholder {0}: files.length
+#: ../../../lib/web/src/components/diff-viewer.tsx
+msgid "{0, plural, one {# file changed} other {# files changed}}"
+msgstr ""
 
 #. placeholder {0}: visible.length
 #: ../../../lib/web/src/components/inline-entity-search.tsx
@@ -112,6 +122,10 @@ msgstr "{totalCount, plural, one {# વસ્તુ} other {# વસ્તુઓ
 #: ../../../lib/web/src/components/entity/entity-comment-thread.tsx
 msgid "{totalDescendants, plural, one {# reply} other {+# more replies}}"
 msgstr "{totalDescendants, plural, one {# જવાબ} other {+# વધુ જવાબો}}"
+
+#: ../../../lib/web/src/components/diff-viewer.tsx
+msgid "{truncated, plural, one {# more file not shown} other {# more files not shown}}"
+msgstr ""
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
@@ -362,6 +376,10 @@ msgstr "બેનર દૂર કર્યું"
 #: ../../../lib/web/src/components/banner-section.tsx
 msgid "Banner updated"
 msgstr "બેનર અપડેટ કર્યું"
+
+#: ../../../lib/web/src/components/diff-viewer.tsx
+msgid "Binary file not shown"
+msgstr ""
 
 #: ../../../lib/web/src/components/member-list.tsx
 #: ../../../lib/web/src/components/member-list.tsx
@@ -656,6 +674,7 @@ msgstr "ક્લિપબોર્ડ પર કૉપિ કર્યું"
 
 #: ../../../lib/web/src/components/calendar/month-grid.tsx
 #: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
 #: ../../../lib/web/src/components/calendar/time-grid.tsx
 #: ../../../lib/web/src/components/calendar/time-grid.tsx
 #: ../../../lib/web/src/components/ui/copy-button.tsx
@@ -1445,6 +1464,10 @@ msgstr "કોઈ ઍક્સેસ નિયમો કન્ફિગર ક�
 msgid "No activity yet"
 msgstr "હજુ સુધી કોઈ પ્રવૃત્તિ નથી"
 
+#: ../../../lib/web/src/components/diff-viewer.tsx
+msgid "No changes to display"
+msgstr ""
+
 #: ../../../lib/web/src/components/entity/entity-comment-list.tsx
 msgid "No comments yet"
 msgstr "હજુ સુધી કોઈ કૉમેન્ટ્સ નથી"
@@ -1527,6 +1550,15 @@ msgstr "કોઈ નહીં"
 #: ../../../lib/web/src/lib/preference-utils.ts
 msgid "Normal"
 msgstr "સામાન્ય"
+
+#. placeholder {0}: formatFileSize(file.limit)
+#: ../../../lib/web/src/components/diff-viewer.tsx
+msgid "Not compared: larger than {0}"
+msgstr ""
+
+#: ../../../lib/web/src/components/diff-viewer.tsx
+msgid "Not compared: over the size limit"
+msgstr ""
 
 #: ../../../lib/web/src/components/attachment-image.tsx
 #: ../../../lib/web/src/features/errors/general-error.tsx
@@ -2125,6 +2157,10 @@ msgstr "સ્રોતો"
 msgid "Spacious"
 msgstr "વિશાળ"
 
+#: ../../../lib/web/src/components/diff-viewer.tsx
+msgid "Split"
+msgstr ""
+
 #: ../../../lib/web/src/components/entity/entity-comment-list.tsx
 msgid "Start the discussion by adding the first comment."
 msgstr "પ્રથમ ટિપ્પણી ઉમેરીને ચર્ચા શરૂ કરો."
@@ -2343,6 +2379,10 @@ msgstr "અનુપલબ્ધ"
 #: ../../../lib/web/src/lib/request.ts
 msgid "Unexpected API error"
 msgstr "અનપેક્ષિત API ભૂલ"
+
+#: ../../../lib/web/src/components/diff-viewer.tsx
+msgid "Unified"
+msgstr ""
 
 #: ../../../lib/web/src/lib/preference-utils.ts
 msgid "United States"

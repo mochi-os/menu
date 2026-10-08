@@ -26,6 +26,11 @@ msgstr "(өзгөртүлгөн)"
 msgid "(expand)"
 msgstr "(жайып көрсөтүү)"
 
+#. placeholder {0}: file.oldPath
+#: ../../../lib/web/src/components/diff-viewer.tsx
+msgid "(from {0})"
+msgstr ""
+
 #: ../../../lib/web/src/components/calendar/event-title.tsx
 #: ../../../lib/web/src/components/calendar/tooltip.ts
 msgid "(No title)"
@@ -41,6 +46,11 @@ msgstr "(сиз)"
 #: ../../../lib/web/src/components/entity/entity-tree-view.tsx
 msgid "[not set]"
 msgstr "[орнотулган эмес]"
+
+#. placeholder {0}: files.length
+#: ../../../lib/web/src/components/diff-viewer.tsx
+msgid "{0, plural, one {# file changed} other {# files changed}}"
+msgstr ""
 
 #. placeholder {0}: visible.length
 #: ../../../lib/web/src/components/inline-entity-search.tsx
@@ -112,6 +122,10 @@ msgstr "{totalCount, plural, one {# элемент} other {# элемент}}"
 #: ../../../lib/web/src/components/entity/entity-comment-thread.tsx
 msgid "{totalDescendants, plural, one {# reply} other {+# more replies}}"
 msgstr "{totalDescendants, plural, one {# жооп} other {+# дагы жооп}}"
+
+#: ../../../lib/web/src/components/diff-viewer.tsx
+msgid "{truncated, plural, one {# more file not shown} other {# more files not shown}}"
+msgstr ""
 
 #: ../../../lib/web/src/components/layout/mochi-menu.tsx
 msgid "{unreadCount, plural, one {Open menu (# unread notification)} other {Open menu (# unread notifications)}}"
@@ -362,6 +376,10 @@ msgstr "Баннер алынып салынды"
 #: ../../../lib/web/src/components/banner-section.tsx
 msgid "Banner updated"
 msgstr "Баннер жаңыланды"
+
+#: ../../../lib/web/src/components/diff-viewer.tsx
+msgid "Binary file not shown"
+msgstr ""
 
 #: ../../../lib/web/src/components/member-list.tsx
 #: ../../../lib/web/src/components/member-list.tsx
@@ -656,6 +674,7 @@ msgstr "Алмашуу буферине көчүрүлдү"
 
 #: ../../../lib/web/src/components/calendar/month-grid.tsx
 #: ../../../lib/web/src/components/calendar/month-grid.tsx
+#: ../../../lib/web/src/components/calendar/time-grid.tsx
 #: ../../../lib/web/src/components/calendar/time-grid.tsx
 #: ../../../lib/web/src/components/calendar/time-grid.tsx
 #: ../../../lib/web/src/components/ui/copy-button.tsx
@@ -1445,6 +1464,10 @@ msgstr "Кирүү эрежелери жок. Бул ресурска ким к�
 msgid "No activity yet"
 msgstr "Активдүүлүк азырынча жок"
 
+#: ../../../lib/web/src/components/diff-viewer.tsx
+msgid "No changes to display"
+msgstr ""
+
 #: ../../../lib/web/src/components/entity/entity-comment-list.tsx
 msgid "No comments yet"
 msgstr "Комментарийлер азырынча жок"
@@ -1527,6 +1550,15 @@ msgstr "Эч кимиси"
 #: ../../../lib/web/src/lib/preference-utils.ts
 msgid "Normal"
 msgstr "Кадимки"
+
+#. placeholder {0}: formatFileSize(file.limit)
+#: ../../../lib/web/src/components/diff-viewer.tsx
+msgid "Not compared: larger than {0}"
+msgstr ""
+
+#: ../../../lib/web/src/components/diff-viewer.tsx
+msgid "Not compared: over the size limit"
+msgstr ""
 
 #: ../../../lib/web/src/components/attachment-image.tsx
 #: ../../../lib/web/src/features/errors/general-error.tsx
@@ -2125,6 +2157,10 @@ msgstr "Булактар"
 msgid "Spacious"
 msgstr "Кенен"
 
+#: ../../../lib/web/src/components/diff-viewer.tsx
+msgid "Split"
+msgstr ""
+
 #: ../../../lib/web/src/components/entity/entity-comment-list.tsx
 msgid "Start the discussion by adding the first comment."
 msgstr "Биринчи комментарий жазып, талкууну баштаңыз."
@@ -2343,6 +2379,10 @@ msgstr "Жеткиликсиз"
 #: ../../../lib/web/src/lib/request.ts
 msgid "Unexpected API error"
 msgstr "Күтүлбөгөн API катасы"
+
+#: ../../../lib/web/src/components/diff-viewer.tsx
+msgid "Unified"
+msgstr ""
 
 #: ../../../lib/web/src/lib/preference-utils.ts
 msgid "United States"
