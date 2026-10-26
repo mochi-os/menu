@@ -823,8 +823,9 @@
         return { method: method, headers: headers, body: body, credentials: 'omit', redirect: 'manual' };
     }
 
-    function handleFetch(data, requester) {
+    function handleFetch(data, frame) {
         var id = data.id;
+        var requester = frame.contentWindow;
         // To the window that asked and no other. Its page may have changed
         // since, and the next app's page there must not take this answer for
         // one of its own: the frame draws request ids at random.
@@ -833,9 +834,10 @@
             msg.id = id;
             requester.postMessage(msg, '*', transfer || []);
         }
-        // From the frame, not the top URL, as handleDownload: the app it was
-        // created for.
-        var app = iframe.dataset ? (iframe.dataset.app || '') : '';
+        // From the frame that asked, not the top URL, as handleDownload: the
+        // app it was created for. The outgoing frame of a cross-app switch
+        // asks too, for its own app, not the one replacing it.
+        var app = frame.dataset ? (frame.dataset.app || '') : '';
         var url;
         try { url = new URL(data.url, window.location.href); } catch (e) { url = null; }
         var method = typeof data.method === 'string' ? data.method.toUpperCase() : '';
@@ -2156,6 +2158,18 @@
     // --- Message handler ---
 
     window.addEventListener('message', function(event) {
+        // The outgoing frame of a cross-app switch stays on screen until the
+        // next is ready, and its page may still be saving or refetching. Its
+        // requests are carried as before the switch, for its own app, until
+        // the frame is removed, which ends them (fetchAbortFrame); nothing
+        // else it sends is heard. Dropped, they were never sent at all, and
+        // the page waited on an answer that never came.
+        if (staleIframe && event.source === staleIframe.contentWindow && event.data && typeof event.data === 'object') {
+            if (event.data.type === 'fetch') handleFetch(event.data, staleIframe);
+            else if (event.data.type === 'fetch.abort') handleFetchAbort(event.data, event.source);
+            return;
+        }
+
         // Validate: must come from the sandboxed iframe (opaque origin = "null")
         if (event.source !== iframe.contentWindow) return;
 
@@ -2334,7 +2348,7 @@
                 break;
 
             case 'fetch':
-                handleFetch(data, event.source);
+                handleFetch(data, iframe);
                 break;
 
             case 'fetch.abort':
