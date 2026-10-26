@@ -25,13 +25,10 @@ function boot(respond?: (call: Call) => Promise<unknown>) {
     'fetch',
     vi.fn((url: string, init?: RequestInit) => {
       const target = String(url)
-      if (target.indexOf('/_/token') >= 0) {
-        return Promise.resolve({
-          ok: true,
-          json: () => Promise.resolve({ app: 'entity', token: 'app-token' }),
-        })
-      }
-      if (/^http:\/\/localhost:3000\/(feeds|settings)\//.test(target)) {
+      // The bridge's own requests, whatever their URL: only it fetches with
+      // redirects left unfollowed. Recording by URL instead missed exactly
+      // the requests the refusal tests are about.
+      if (init?.redirect === 'manual') {
         const call = { url: target, init: init as Call['init'] }
         calls.push(call)
         if (respond) return respond(call)
@@ -42,6 +39,12 @@ function boot(respond?: (call: Call) => Promise<unknown>) {
             headers: { 'Content-Type': 'application/json' },
           })
         )
+      }
+      if (target.indexOf('/_/token') >= 0) {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({ app: 'entity', token: 'app-token' }),
+        })
       }
       return Promise.resolve({
         ok: true,
@@ -365,6 +368,45 @@ describe('shell fetch: ends with the frame’s say-so', () => {
     await shell.settle()
     expect(answered.filter((m) => m.type === 'fetch.result')).toEqual([])
     expect(shell.results()).toMatchObject([{ id: 13, status: 200 }])
+  })
+
+  // A frame that navigates itself stays the same window, so answers to the
+  // page that left would reach whatever page it loaded next. They end as the
+  // page goes: 'leaving' from the page, or, for bundles that send none, the
+  // frame loading again.
+  it('aborts the requests of a page that leaves', async () => {
+    const shell = boot(() => new Promise(() => {}))
+    shell.send({
+      type: 'fetch',
+      id: 14,
+      url: '/feeds/-/slow',
+      method: 'GET',
+      headers: [],
+    })
+    await shell.settle()
+    const signal = shell.calls[0].init.signal as AbortSignal
+
+    shell.send({ type: 'leaving' })
+    expect(signal.aborted).toBe(true)
+  })
+
+  it('aborts them when the frame loads another page', async () => {
+    const shell = boot(() => new Promise(() => {}))
+    // The frame's own first page.
+    shell.iframe.dispatchEvent(new Event('load'))
+    shell.send({
+      type: 'fetch',
+      id: 15,
+      url: '/feeds/-/slow',
+      method: 'GET',
+      headers: [],
+    })
+    await shell.settle()
+    const signal = shell.calls[0].init.signal as AbortSignal
+    expect(signal.aborted).toBe(false)
+
+    shell.iframe.dispatchEvent(new Event('load'))
+    expect(signal.aborted).toBe(true)
   })
 
   it('tells the frame the bridge is there', async () => {

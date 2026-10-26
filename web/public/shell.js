@@ -82,6 +82,7 @@
     // frame is replaced.
     iframe.dataset.app = getAppNameFromPath(window.location.pathname);
     iframe.src = initialSrc;
+    watchFrame(iframe);
     container.appendChild(iframe);
     var tokenRefreshTimer = null;
     // Incremented on every cross-app navigation; token fetches and refresh
@@ -437,6 +438,7 @@
         next.style.visibility = 'hidden';
         next.dataset.app = getAppNameFromPath(newSrc);
         next.src = shellSrc(newSrc);
+        watchFrame(next);
         container.insertBefore(next, staleIframe);
 
         iframe = next;
@@ -878,6 +880,68 @@
         var requests = fetchRequests.get(requester);
         var controller = requests && requests.get(data.id);
         if (controller) controller.abort();
+    }
+
+    // What the shell knows of the page each frame holds. A frame can navigate
+    // itself - a link the app's interceptor does not route, a form post, a
+    // location assignment - and the shell cannot see where, as its origin is
+    // opaque. It can see that it did: a page sends 'ready' once and 'leaving'
+    // as it goes, and the frame fires 'load' for every page after its first.
+    // `answered` is whether this page's 'ready' was answered; `page` counts
+    // the pages that have gone, so an answer still being prepared for one
+    // never reaches the next; `loads` counts the frame's loads.
+    var frameStates = new WeakMap();
+    function frameState(frame) {
+        var state = frameStates.get(frame);
+        if (!state) {
+            state = { answered: false, page: 0, loads: 0 };
+            frameStates.set(frame, state);
+        }
+        return state;
+    }
+
+    // The page in this frame has gone. Its requests end now, before the next
+    // page can listen for their answers, and the token refresh stops: it
+    // posts to whatever page the frame holds.
+    function frameLeft(frame) {
+        frameState(frame).page++;
+        fetchAbortFrame(frame);
+        if (frame === iframe && tokenRefreshTimer) {
+            clearTimeout(tokenRefreshTimer);
+            tokenRefreshTimer = null;
+        }
+    }
+
+    // A backstop for app bundles that send no 'leaving': every load after the
+    // frame's first is a page the shell did not put there.
+    function watchFrame(frame) {
+        frame.addEventListener('load', function() {
+            var state = frameState(frame);
+            state.loads++;
+            if (state.loads > 1) frameLeft(frame);
+        });
+    }
+
+    // A second 'ready' from one frame is a page the shell did not load, and so
+    // is a page naming another app's path. It may be another app's, and the
+    // shell has only the frame's original app to go on, so it hands it
+    // nothing: it loads the path the page names, in a new frame and for
+    // whichever app that path is, as any navigation is loaded. A page that
+    // names none, or none here, sends the frame back to where the shell had it.
+    // Either way it is not answered: a page sends 'ready' once, so a repeat
+    // from the same page is treated as a new one.
+    function frameStray(data) {
+        frameLeft(iframe);
+        // A cross-app navigation in flight replaces this frame anyway.
+        if (navigating) return;
+        var here = window.location.pathname + window.location.search + window.location.hash;
+        var claimed = typeof data.path === 'string' ? sameOriginTarget(stripShell(data.path)) : null;
+        if (claimed && claimed.app && claimed.path !== here) {
+            handleNavigateExternal({ url: claimed.path });
+            return;
+        }
+        showProgress();
+        swapIframe(here);
     }
 
     // A frame being removed takes its requests with it, as its own would go.
@@ -2099,6 +2163,12 @@
         if (!data || typeof data !== 'object' || !data.type) return;
 
         switch (data.type) {
+            case 'leaving':
+                // The page is going (pagehide): end its requests before the
+                // next page in this window can hear their answers.
+                frameLeft(iframe);
+                break;
+
             case 'ready':
                 // App is ready — fetch token and shell config, then send init.
                 // `navigating` is NOT cleared here: completeTransition owns it,
@@ -2114,6 +2184,18 @@
                 // already established that `iframe` is the sender.
                 // No fallback to the top URL: an unstamped frame must fail to
                 // get a token rather than quietly get someone else's.
+                var asker = iframe;
+                var state = frameState(asker);
+                // A page whose own path names another app came by a redirect
+                // or a navigation the shell did not make, as surely as a second
+                // 'ready' did. Older bundles send no path.
+                var elsewhere = typeof data.path === 'string' && getAppNameFromPath(stripShell(data.path)) !== (asker.dataset.app || '');
+                if (state.answered || elsewhere) {
+                    frameStray(data);
+                    break;
+                }
+                state.answered = true;
+                var page = state.page;
                 var appName = iframe.dataset.app || '';
                 // Pin the iframe that asked: `iframe` is reassigned by a
                 // navigation, and fetchToken also sets currentAppEntity, which
@@ -2121,6 +2203,7 @@
                 var requester = event.source;
                 Promise.all([fetchToken(appName), shellConfigReady]).then(function(results) {
                     if (!iframe || iframe.contentWindow !== requester) return; // navigated away: this token is not theirs
+                    if (frameState(asker).page !== page) return; // the page that asked has gone; the window now holds another
                     var tokenData = results[0];
                     var sc = shellConfig || {};
                     if (!currentLocale && sc.locale) currentLocale = sc.locale;
@@ -2153,6 +2236,7 @@
                     completeTransition();
                 }).catch(function() {
                     if (!iframe || iframe.contentWindow !== requester) return; // same rule on the failure path
+                    if (frameState(asker).page !== page) return;
                     var theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
                     var initMsg = {
                         type: 'init',

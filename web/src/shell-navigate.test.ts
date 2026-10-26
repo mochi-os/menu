@@ -758,25 +758,21 @@ describe('shell token: a response from before a navigation is dead on arrival', 
   it('mints for the frame that asked, not the app the top URL has moved to', async () => {
     const tokens = deferredTokens()
     const shell = boot({ granted: true, token: tokens.token })
-
-    // Feeds completes its handshake normally.
-    shell.send({ type: 'ready' })
-    await shell.settle()
-    tokens.take('feeds').resolve({ app: 'feeds-entity', token: 'feeds-token' })
-    await shell.settle()
     shell.posted.length = 0
 
-    // Feeds asks the shell to cross to settings. The top URL moves at once,
-    // but the frame is replaced only when the settings mint resolves - so
-    // holding it leaves the FEEDS frame mounted under the SETTINGS URL.
+    // Feeds asks the shell to cross to settings before its own handshake.
+    // The top URL moves at once, but the frame is replaced only when the
+    // settings mint resolves - so holding it leaves the FEEDS frame mounted
+    // under the SETTINGS URL.
     shell.send({ type: 'navigate-external', url: '/settings/' })
     await shell.settle()
     expect(shell.path()).toBe('/settings/')
     expect(document.getElementById('app-frame')).toBe(shell.iframe)
 
-    // THE ATTACK: feeds sends 'ready' inside that window. It triggered the
-    // navigation itself and nothing caps how many 'ready' messages it may
-    // send, so the window is its to pick.
+    // THE ATTACK: feeds sends its 'ready' inside that window. It triggered
+    // the navigation itself, so the window is its to pick. (A second 'ready'
+    // from a page is answered with nothing at all: see the self-navigation
+    // tests.)
     shell.tokenApps.length = 0
     shell.send({ type: 'ready' })
     await shell.settle()
@@ -1185,10 +1181,6 @@ describe('shell ready: a late ready from the outgoing frame cannot re-install it
   it("keeps the mounted app's id when the previous app's mint lands last", async () => {
     const mints = deferredTokens()
     const shell = boot({ token: mints.token })
-    shell.send({ type: 'ready' })
-    mints.release('feeds')
-    await shell.settle()
-    expect(shellAppId()).toBe('feeds-entity')
 
     // Cross to settings. The shell mints for settings and swaps the frame
     // only once that resolves, so until then the feeds frame is still the
@@ -1196,8 +1188,9 @@ describe('shell ready: a late ready from the outgoing frame cannot re-install it
     shell.send({ type: 'navigate-external', url: '/settings/' })
     await shell.settle()
     expect(mints.waiting('settings')).toBe(1)
-    // The outgoing frame posts ready again inside that window (a document
-    // reload, or a hostile app): a second feeds mint, under the new epoch.
+    // The outgoing frame posts its ready inside that window (a hostile app
+    // picking its moment): a feeds mint, under the new epoch. (A repeated
+    // 'ready' mints nothing at all, so the window needs its first.)
     shell.send({ type: 'ready' })
     await shell.settle()
     expect(mints.waiting('feeds')).toBe(1)
@@ -1552,5 +1545,168 @@ describe('shell leave guard: a page with unsaved edits is asked first', () => {
     await shell.settle()
     expect(shell.path()).toBe('/settings/')
     expect(shell.posted).not.toContainEqual({ type: 'leave-request' })
+  })
+})
+
+// A frame can navigate itself - a protocol-relative link, a form post, a
+// location assignment - and stays the same window, so the shell, which cannot
+// see where an opaque-origin frame went, used to hand the next page the first
+// app's year-long token on its 'ready', and keep refreshing it. A page sends
+// 'ready' once; a second, or one naming another app's path, is a page the
+// shell did not load, and it gets nothing: the shell loads the path it names
+// in a new frame, for whichever app that is.
+describe('shell: a frame that navigates itself gets nothing', () => {
+  afterEach(() => vi.useRealTimers())
+
+  const current = () =>
+    document.getElementById('app-frame') as HTMLIFrameElement
+  const inits = (posted: Record<string, unknown>[]) =>
+    posted.filter((m) => m.type === 'init' || m.type === 'token-refresh')
+
+  it('answers a second ready with no token, and loads the page it names in a new frame', async () => {
+    const shell = boot()
+    await shell.start()
+    expect(shell.tokenApps).toEqual(['feeds'])
+
+    // The feeds frame now holds another app's page, which says where it is.
+    shell.send({ type: 'ready', path: '/settings/profile' })
+    await shell.settle()
+
+    expect(inits(shell.posted)).toEqual([])
+    expect(current()).not.toBe(shell.iframe)
+    expect(current().dataset.app).toBe('settings')
+    expect(shell.path()).toBe('/settings/profile')
+    // The only new mint is the shell's own, for the frame it made.
+    expect(shell.tokenApps).toEqual(['feeds', 'settings'])
+  })
+
+  it('reloads where the shell had it when the page names no path', async () => {
+    const shell = boot()
+    await shell.start()
+
+    // An older bundle sends no path.
+    shell.send({ type: 'ready' })
+    await shell.settle()
+
+    expect(inits(shell.posted)).toEqual([])
+    expect(current()).not.toBe(shell.iframe)
+    expect(current().dataset.app).toBe('feeds')
+    expect(shell.path()).toBe(HOME)
+  })
+
+  it('reloads where the shell had it when the path names another origin', async () => {
+    const shell = boot()
+    await shell.start()
+
+    shell.send({ type: 'ready', path: '//evil.example/settings/' })
+    await shell.settle()
+
+    expect(inits(shell.posted)).toEqual([])
+    expect(current().dataset.app).toBe('feeds')
+    expect(shell.path()).toBe(HOME)
+  })
+
+  it('answers a first ready naming another app with no token either', async () => {
+    const shell = boot()
+
+    // The page the feeds frame loaded is another app's - a redirect took it
+    // there - and it says so.
+    shell.send({ type: 'ready', path: '/settings/' })
+    await shell.settle()
+
+    expect(inits(shell.posted)).toEqual([])
+    expect(shell.tokenApps).toEqual(['settings'])
+    expect(current().dataset.app).toBe('settings')
+  })
+
+  it('still answers a first ready naming its own app', async () => {
+    const shell = boot()
+    shell.send({ type: 'ready', path: '/feeds/?_shell=1' })
+    await shell.settle()
+
+    expect(shell.posted.filter((m) => m.type === 'init')).toHaveLength(1)
+    expect(current()).toBe(shell.iframe)
+  })
+
+  it('drops the answer for a page that left while its token was minted', async () => {
+    const mints = deferredTokens()
+    const shell = boot({ token: mints.token })
+    shell.send({ type: 'ready', path: HOME })
+    await shell.settle()
+
+    // The page goes before its token arrives; the window will hold the next.
+    shell.send({ type: 'leaving' })
+    mints.release('feeds')
+    await shell.settle()
+
+    expect(inits(shell.posted)).toEqual([])
+  })
+
+  it('drops it too when only the frame loading again says so', async () => {
+    const mints = deferredTokens()
+    const shell = boot({ token: mints.token })
+    shell.send({ type: 'ready', path: HOME })
+    await shell.settle()
+
+    // An older bundle sends no 'leaving'. The first load is the frame's own
+    // page; a second is a page the shell did not load.
+    shell.iframe.dispatchEvent(new Event('load'))
+    shell.iframe.dispatchEvent(new Event('load'))
+    mints.release('feeds')
+    await shell.settle()
+
+    expect(inits(shell.posted)).toEqual([])
+  })
+
+  it('leaves a cross-app navigation in flight to replace the frame', async () => {
+    const mints = deferredTokens()
+    const shell = boot({ token: mints.token })
+    shell.send({ type: 'ready', path: HOME })
+    mints.release('feeds')
+    await shell.settle()
+
+    // Crossing to settings: the frame is replaced once its mint resolves.
+    shell.send({ type: 'navigate-external', url: '/settings/' })
+    await shell.settle()
+    // The feeds frame's page reloads meanwhile: it gets nothing, and the
+    // navigation, not a second one, replaces it.
+    shell.send({ type: 'ready', path: HOME })
+    await shell.settle()
+    expect(current()).toBe(shell.iframe)
+    expect(
+      inits(shell.posted).filter((m) => m.token === 'feeds-token')
+    ).toHaveLength(1)
+
+    mints.release('settings')
+    await shell.settle()
+    expect(current()).not.toBe(shell.iframe)
+    expect(current().dataset.app).toBe('settings')
+  })
+
+  it('stops refreshing the token once the page has gone', async () => {
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
+    const shell = boot()
+    await shell.start()
+
+    shell.send({ type: 'leaving' })
+    await vi.advanceTimersByTimeAsync(11 * 60 * 1000)
+    await shell.settle()
+
+    expect(inits(shell.posted)).toEqual([])
+  })
+
+  it('keeps refreshing the token while the page stays', async () => {
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] })
+    const shell = boot()
+    await shell.start()
+
+    // Its own first load is not a new page.
+    shell.iframe.dispatchEvent(new Event('load'))
+    await vi.advanceTimersByTimeAsync(11 * 60 * 1000)
+    await shell.settle()
+
+    expect(shell.posted.filter((m) => m.type === 'token-refresh')).toHaveLength(
+      1
+    )
   })
 })
