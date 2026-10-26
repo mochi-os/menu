@@ -414,6 +414,7 @@
         setSidebarPresent(null);
         // Clean up any previous stale iframe
         if (staleIframe && staleIframe.parentNode) {
+            fetchAbortFrame(staleIframe);
             staleIframe.parentNode.removeChild(staleIframe);
         }
 
@@ -460,6 +461,7 @@
         iframe.style.opacity = '';
         iframe.style.pointerEvents = '';
         if (staleIframe && staleIframe.parentNode) {
+            fetchAbortFrame(staleIframe);
             staleIframe.parentNode.removeChild(staleIframe);
         }
         staleIframe = null;
@@ -775,6 +777,115 @@
             URL.revokeObjectURL(objectUrl);
         }, 1000);
         postToIframe({ type: 'download.result', id: id, ok: true });
+    }
+
+    // Fetch bridge: the iframe's opaque origin makes every request it sends to
+    // this server cross-origin, the app token's Authorization header makes
+    // each one need a CORS preflight, and browsers keep no preflight answer for
+    // an opaque origin - so every request paid an extra round trip. This page
+    // shares the server's origin, so it makes the request instead, holding
+    // nothing the frame does not already have: the frame's own headers (its
+    // own app token), no cookies, and only URLs in the frame's own app. A
+    // redirect is not followed: an app's action may answer with one, and
+    // following it would carry the request wherever the app chose, from this
+    // page's same-origin standing. Refusals are answered, so the frame sends
+    // the request itself as before.
+    var fetchMethods = ['GET', 'HEAD', 'POST', 'PUT', 'PATCH', 'DELETE'];
+    var fetchRequests = new Map(); // frame window -> Map(request id -> AbortController)
+
+    // The fetch options for a request, or null when the request is not one the
+    // bridge carries.
+    function fetchInit(method, data) {
+        var headers;
+        try {
+            headers = new Headers(Array.isArray(data.headers) ? data.headers : []);
+        } catch (e) {
+            return null;
+        }
+        var body = data.body;
+        if (body && typeof body === 'object' && Array.isArray(body.form)) {
+            // FormData does not survive postMessage; its entries do.
+            var form = new FormData();
+            try {
+                body.form.forEach(function(entry) { form.append(entry[0], entry[1]); });
+            } catch (e) {
+                return null;
+            }
+            body = form;
+            headers.delete('Content-Type'); // the browser writes the boundary
+        } else if (!(body === undefined || body === null || typeof body === 'string' ||
+                body instanceof Blob || body instanceof ArrayBuffer || ArrayBuffer.isView(body))) {
+            return null;
+        }
+        if (body === null || method === 'GET' || method === 'HEAD') body = undefined;
+        return { method: method, headers: headers, body: body, credentials: 'omit', redirect: 'manual' };
+    }
+
+    function handleFetch(data, requester) {
+        var id = data.id;
+        // To the window that asked and no other. Its page may have changed
+        // since, and the next app's page there must not take this answer for
+        // one of its own: the frame draws request ids at random.
+        function answer(msg, transfer) {
+            msg.type = 'fetch.result';
+            msg.id = id;
+            requester.postMessage(msg, '*', transfer || []);
+        }
+        // From the frame, not the top URL, as handleDownload: the app it was
+        // created for.
+        var app = iframe.dataset ? (iframe.dataset.app || '') : '';
+        var url;
+        try { url = new URL(data.url, window.location.href); } catch (e) { url = null; }
+        var method = typeof data.method === 'string' ? data.method.toUpperCase() : '';
+        var init = null;
+        if (app && url && url.origin === window.location.origin &&
+                getAppNameFromPath(url.pathname) === app && fetchMethods.indexOf(method) >= 0) {
+            init = fetchInit(method, data);
+        }
+        if (!init) {
+            answer({ refused: true });
+            return;
+        }
+
+        var controller = new AbortController();
+        init.signal = controller.signal;
+        var requests = fetchRequests.get(requester);
+        if (!requests) {
+            requests = new Map();
+            fetchRequests.set(requester, requests);
+        }
+        requests.set(id, controller);
+
+        fetch(url.href, init).then(function(response) {
+            if (response.type === 'opaqueredirect') {
+                answer({ redirect: true });
+                return;
+            }
+            return response.arrayBuffer().then(function(buffer) {
+                var headers = [];
+                response.headers.forEach(function(value, name) { headers.push([name, value]); });
+                answer({ status: response.status, statusText: response.statusText, headers: headers, body: buffer }, [buffer]);
+            });
+        }).catch(function() {
+            answer({ failed: true });
+        }).then(function() {
+            if (requests.get(id) === controller) requests.delete(id);
+            if (requests.size === 0 && fetchRequests.get(requester) === requests) fetchRequests.delete(requester);
+        });
+    }
+
+    function handleFetchAbort(data, requester) {
+        var requests = fetchRequests.get(requester);
+        var controller = requests && requests.get(data.id);
+        if (controller) controller.abort();
+    }
+
+    // A frame being removed takes its requests with it, as its own would go.
+    function fetchAbortFrame(frame) {
+        var requests = frame && frame.contentWindow && fetchRequests.get(frame.contentWindow);
+        if (!requests) return;
+        fetchRequests.delete(frame.contentWindow);
+        requests.forEach(function(controller) { controller.abort(); });
     }
 
     // WebAuthn bridge: the iframe's opaque origin makes navigator.credentials
@@ -2025,6 +2136,9 @@
                         asset: tokenData.asset || '',
                         theme: theme,
                         inShell: true,
+                        // The fetch bridge: an app frame sends its requests
+                        // through this page (handleFetch).
+                        fetch: true,
                         sidebarOpen: sidebarOpen,
                         domain: sc.domain || null,
                         locale: currentLocale || null,
@@ -2045,6 +2159,9 @@
                         token: '',
                         theme: theme,
                         inShell: true,
+                        // The fetch bridge: an app frame sends its requests
+                        // through this page (handleFetch).
+                        fetch: true,
                         sidebarOpen: sidebarOpen,
                         domain: null,
                         locale: currentLocale || null,
@@ -2130,6 +2247,14 @@
 
             case 'download.content':
                 handleDownloadContent(data);
+                break;
+
+            case 'fetch':
+                handleFetch(data, event.source);
+                break;
+
+            case 'fetch.abort':
+                handleFetchAbort(data, event.source);
                 break;
 
             case 'sidebar-state':
