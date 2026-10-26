@@ -154,3 +154,63 @@ describe('useMenuNotifications retires what is on screen', () => {
     )
   })
 })
+
+// The bell and its badge show a read on the click, and the row comes back
+// unread with a toast if the server refuses it.
+describe('useMenuNotifications shows a read before the server answers', () => {
+  const unread = (id: string) => ({
+    id,
+    app: 'chat',
+    topic: 'message',
+    object: 'o1',
+    content: 'Hello',
+    link: '/chat/elsewhere',
+    count: 1,
+    created: 1,
+    read: 0,
+  })
+
+  let refuse: (error: unknown) => void
+  beforeEach(() => {
+    window.history.pushState({}, '', '/home')
+    vi.mocked(menuFetch).mockImplementation(async (path: string) => {
+      if (path === '-/notifications/list') {
+        return { data: [unread('n1'), unread('n2')] }
+      }
+      return new Promise((_resolve, reject) => {
+        refuse = reject
+      })
+    })
+  })
+
+  const readIds = (notifications: { id: string; read: number }[]) =>
+    notifications.filter((n) => n.read !== 0).map((n) => n.id)
+
+  it('marks one read at once and unread again when refused', async () => {
+    const { result } = renderHook(() => useMenuNotifications(), { wrapper })
+    await waitFor(() => expect(result.current.notifications).toHaveLength(2))
+
+    act(() => result.current.markAsRead('n1'))
+    await waitFor(() =>
+      expect(readIds(result.current.notifications)).toEqual(['n1'])
+    )
+
+    act(() => refuse(new Error('refused by the server')))
+    await waitFor(() => expect(toast.error).toHaveBeenCalledTimes(1))
+    expect(readIds(result.current.notifications)).toEqual([])
+  })
+
+  it('marks all read at once and unread again when refused', async () => {
+    const { result } = renderHook(() => useMenuNotifications(), { wrapper })
+    await waitFor(() => expect(result.current.notifications).toHaveLength(2))
+
+    act(() => result.current.markAllAsRead())
+    await waitFor(() =>
+      expect(readIds(result.current.notifications)).toEqual(['n1', 'n2'])
+    )
+
+    act(() => refuse(new Error('refused by the server')))
+    await waitFor(() => expect(toast.error).toHaveBeenCalledTimes(1))
+    expect(readIds(result.current.notifications)).toEqual([])
+  })
+})

@@ -10,6 +10,7 @@ import { useLingui } from '@lingui/react/macro'
 import {
   toast,
   getErrorMessage,
+  optimistic,
   websocketFailed,
   websocketOpened,
   websocketProtocols,
@@ -238,14 +239,36 @@ export function useMenuNotifications() {
     refetchInterval: 5 * 60 * 1000,
   })
 
-  // A refused read leaves the badge as it was, so the failure has to be said:
-  // silent, it reads as the click having done nothing.
+  // A read shows in the bell and its badge on the click. A refused one puts
+  // the badge back, so the failure has to be said: silent, it reads as the
+  // click having done nothing.
+  const readPatch = optimistic(queryClient, (id: string | undefined) => [
+    {
+      filters: { queryKey: notificationKeys.list(), exact: true },
+      update: (old: NotificationsListResponse) => {
+        // The server stamps `read` with the time in seconds.
+        const now = Math.floor(Date.now() / 1000)
+        return {
+          ...old,
+          data: old.data.map((notification) =>
+            notification.read === 0 &&
+            (id === undefined || notification.id === id)
+              ? { ...notification, read: now }
+              : notification
+          ),
+        }
+      },
+    },
+  ])
+
   const markAsReadMutation = useMutation({
     mutationFn: markAsRead,
+    onMutate: readPatch.onMutate,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: notificationKeys.all() })
     },
-    onError: (error) => {
+    onError: (error, _id, context) => {
+      readPatch.rollback(context)
       toast.error(
         getErrorMessage(error, t`Failed to mark notification as read`)
       )
@@ -254,10 +277,12 @@ export function useMenuNotifications() {
 
   const markAllAsReadMutation = useMutation({
     mutationFn: markAllAsRead,
+    onMutate: () => readPatch.onMutate(undefined),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: notificationKeys.all() })
     },
-    onError: (error) => {
+    onError: (error, _variables, context) => {
+      readPatch.rollback(context)
       toast.error(
         getErrorMessage(error, t`Failed to mark all notifications as read`)
       )
