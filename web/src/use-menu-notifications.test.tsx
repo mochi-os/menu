@@ -143,6 +143,26 @@ describe('useMenuNotifications retires what is on screen', () => {
     )
   })
 
+  // A refused read puts the row back unread, which runs the retire pass again.
+  // It must not send again, or every refusal sends another read.
+  it('sends a refused read once, not again when the row comes back', async () => {
+    window.history.pushState({}, '', '/chat/c1')
+    vi.mocked(menuFetch).mockImplementation(async (path: string) => {
+      if (path === '-/notifications/list') {
+        return { data: [row('n5', '/chat/c1')] }
+      }
+      throw new Error('refused by the server')
+    })
+    const { result } = renderHook(() => useMenuNotifications(), { wrapper })
+    await waitFor(() => expect(toast.error).toHaveBeenCalledTimes(1))
+    await waitFor(() => expect(result.current.notifications[0]?.read).toBe(0))
+    await new Promise((resolve) => setTimeout(resolve, 50))
+    const reads = vi
+      .mocked(menuFetch)
+      .mock.calls.filter(([path]) => path === '-/notifications/read')
+    expect(reads).toHaveLength(1)
+  })
+
   it('retires nothing from an app listing with no entity', async () => {
     window.history.pushState({}, '', '/chat')
     listing([row('n4', '/chat')])
