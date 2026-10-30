@@ -131,6 +131,31 @@ describe('shell fetch: carries the frame’s requests in its own app', () => {
     expect(sent?.transfer).toEqual([result.body])
   })
 
+  it('revalidates when the frame asks, and only then', async () => {
+    const shell = boot()
+    shell.send({
+      type: 'fetch',
+      id: 1,
+      url: '/feeds/-/attachments/x/thumbnail',
+      method: 'GET',
+      headers: [],
+      cache: 'no-cache',
+    })
+    shell.send({
+      type: 'fetch',
+      id: 2,
+      url: '/feeds/-/list',
+      method: 'GET',
+      headers: [],
+      cache: 'reload',
+    })
+    await shell.settle()
+    expect(shell.calls).toHaveLength(2)
+    expect(shell.calls[0].init.cache).toBe('no-cache')
+    // Nothing else the frame names reaches the request.
+    expect(shell.calls[1].init.cache).toBeUndefined()
+  })
+
   it('rebuilds a form from its entries and lets the browser type it', async () => {
     const shell = boot()
     shell.send({

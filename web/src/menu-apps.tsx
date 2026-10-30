@@ -7,6 +7,7 @@ import type { CSSProperties, ReactNode } from 'react'
 import { useLingui } from '@lingui/react/macro'
 import { cn, Tooltip, TooltipContent, TooltipTrigger } from '@mochi/web'
 import { House } from 'lucide-react'
+import { clickInPlace } from './navigate'
 import { type MenuApp, type useMenuApps } from './use-menu-apps'
 
 // Theme icon masks, as the home screen draws them.
@@ -34,6 +35,7 @@ function IconLink({
       <TooltipTrigger asChild>
         <a
           href={href}
+          onClick={clickInPlace}
           aria-label={label}
           className={cn(
             'group hover:bg-hover active:bg-interactive-active focus-visible:ring-ring flex items-center justify-center rounded-md transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none',

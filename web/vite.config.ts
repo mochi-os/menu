@@ -40,7 +40,9 @@ function shellScript(): Plugin {
 export default defineConfig({
   base: './',
   plugins: [
-    mochiPlugin(),
+    // The shell page itself, never in the frame: native modules (see
+    // mochiPlugin's frame option); core loads its entry as one.
+    mochiPlugin({ frame: false }),
     react({
       plugins: [['@lingui/swc-plugin', {}]],
     }),

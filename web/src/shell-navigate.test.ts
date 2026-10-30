@@ -612,24 +612,21 @@ describe('shell token: a response from before a navigation is dead on arrival', 
     const tokens = deferredTokens()
     const shell = boot({ granted: true, token: tokens.token })
 
-    // 'ready' starts the feeds token fetch. Do not resolve it yet.
+    // The feeds frame's mint started as the frame was made. Do not resolve
+    // it yet.
     shell.send({ type: 'ready' })
     await shell.settle()
     // Cross to settings while feeds' mint is in flight.
     shell.send({ type: 'navigate-external', url: '/settings/' })
     await shell.settle()
 
-    // The settings response lands and the new iframe completes its handshake
+    // The settings frame's own mint lands and it completes its handshake
     // (mic.start is dropped while a navigation is still in flight).
     tokens
       .take('settings')
       .resolve({ app: 'settings-entity', token: 'settings-token' })
     await shell.settle()
     sendFromCurrent({ type: 'ready' })
-    await shell.settle()
-    tokens
-      .take('settings')
-      .resolve({ app: 'settings-entity', token: 'settings-token' })
     await shell.settle()
 
     // Only now does the STALE feeds response arrive, out of order.
@@ -761,32 +758,29 @@ describe('shell token: a response from before a navigation is dead on arrival', 
     shell.posted.length = 0
 
     // Feeds asks the shell to cross to settings before its own handshake.
-    // The top URL moves at once, but the frame is replaced only when the
-    // settings mint resolves - so holding it leaves the FEEDS frame mounted
-    // under the SETTINGS URL.
+    // The top URL moves and the frame is replaced at once: the settings
+    // frame mints its own token as it is made.
     shell.send({ type: 'navigate-external', url: '/settings/' })
     await shell.settle()
     expect(shell.path()).toBe('/settings/')
-    expect(document.getElementById('app-frame')).toBe(shell.iframe)
+    const settings = document.getElementById('app-frame') as HTMLIFrameElement
+    expect(settings).not.toBe(shell.iframe)
+    expect(settings.dataset.app).toBe('settings')
 
-    // THE ATTACK: feeds sends its 'ready' inside that window. It triggered
-    // the navigation itself, so the window is its to pick. (A second 'ready'
-    // from a page is answered with nothing at all: see the self-navigation
-    // tests.)
-    shell.tokenApps.length = 0
+    // THE POINT: each mint names the app its frame was made for - feeds for
+    // the first, settings for the second - never what the address bar says.
+    expect(shell.tokenApps).toEqual(['feeds', 'settings'])
+
+    // THE ATTACK: feeds, still on screen while settings loads, sends its
+    // 'ready'. The outgoing frame is heard only for its own requests.
     shell.send({ type: 'ready' })
-    await shell.settle()
-
-    // THE POINT: the mint names feeds - the app this frame was created for -
-    // not settings, which is only what the address bar now says.
-    expect(shell.tokenApps).toEqual(['feeds'])
-
-    // And the credential that actually reaches the frame is feeds', so a
-    // settings-scoped token never lands in the feeds iframe.
     tokens.take('feeds').resolve({ app: 'feeds-entity', token: 'feeds-token' })
+    tokens
+      .take('settings')
+      .resolve({ app: 'settings-entity', token: 'settings-token' })
     await shell.settle()
-    const init = shell.posted.find((m) => m.type === 'init')
-    expect(init?.token).toBe('feeds-token')
+    expect(shell.tokenApps).toEqual(['feeds', 'settings'])
+    expect(shell.posted.find((m) => m.type === 'init')).toBeUndefined()
   })
 })
 
@@ -1615,7 +1609,9 @@ describe('shell: a frame that navigates itself gets nothing', () => {
     await shell.settle()
 
     expect(inits(shell.posted)).toEqual([])
-    expect(shell.tokenApps).toEqual(['settings'])
+    // The feeds mint was the frame's own, made with it, and never reaches the
+    // page; the settings one is the new frame's.
+    expect(shell.tokenApps).toEqual(['feeds', 'settings'])
     expect(current().dataset.app).toBe('settings')
   })
 
@@ -1665,22 +1661,23 @@ describe('shell: a frame that navigates itself gets nothing', () => {
     mints.release('feeds')
     await shell.settle()
 
-    // Crossing to settings: the frame is replaced once its mint resolves.
+    // Crossing to settings replaces the frame at once.
     shell.send({ type: 'navigate-external', url: '/settings/' })
     await shell.settle()
-    // The feeds frame's page reloads meanwhile: it gets nothing, and the
-    // navigation, not a second one, replaces it.
+    const settings = current()
+    expect(settings).not.toBe(shell.iframe)
+    expect(settings.dataset.app).toBe('settings')
+
+    // The feeds frame's page reloads while it is still on screen: it gets
+    // nothing, and starts no navigation of its own.
     shell.send({ type: 'ready', path: HOME })
+    mints.release('settings')
     await shell.settle()
-    expect(current()).toBe(shell.iframe)
+    expect(current()).toBe(settings)
     expect(
       inits(shell.posted).filter((m) => m.token === 'feeds-token')
     ).toHaveLength(1)
-
-    mints.release('settings')
-    await shell.settle()
-    expect(current()).not.toBe(shell.iframe)
-    expect(current().dataset.app).toBe('settings')
+    expect(mints.waiting('feeds')).toBe(0)
   })
 
   it('stops refreshing the token once the page has gone', async () => {
@@ -1708,5 +1705,129 @@ describe('shell: a frame that navigates itself gets nothing', () => {
     expect(shell.posted.filter((m) => m.type === 'token-refresh')).toHaveLength(
       1
     )
+  })
+})
+
+// The token used to be minted only once the frame's page said ready, and a
+// cross-app switch waited for a first mint before it even made the new frame,
+// whose page then minted again: two round trips in series. Each frame now
+// mints for the app it was made for as it is made, and its 'ready' is
+// answered with that mint.
+describe('shell token: minted as the frame is made', () => {
+  const current = () =>
+    document.getElementById('app-frame') as HTMLIFrameElement
+  const sendFromCurrent = (data: Record<string, unknown>) => {
+    const event = new MessageEvent('message', { data })
+    Object.defineProperty(event, 'source', { value: current().contentWindow })
+    window.dispatchEvent(event)
+  }
+
+  it('mints before the page says ready, and answers ready with that mint', async () => {
+    const mints = deferredTokens()
+    const shell = boot({ token: mints.token })
+    // THE POINT: the frame's mint is in flight before its page has loaded.
+    expect(shell.tokenApps).toEqual(['feeds'])
+
+    shell.send({ type: 'ready', path: HOME })
+    await shell.settle()
+    mints.release('feeds')
+    await shell.settle()
+
+    expect(shell.tokenApps).toEqual(['feeds'])
+    const init = shell.posted.find((m) => m.type === 'init')
+    expect(init?.token).toBe('feeds-token')
+  })
+
+  it('makes the new frame at once on a cross-app link, with one mint for it', async () => {
+    const mints = deferredTokens()
+    const shell = boot({ token: mints.token })
+    shell.send({ type: 'ready', path: HOME })
+    mints.release('feeds')
+    await shell.settle()
+
+    shell.send({ type: 'navigate-external', url: '/settings/' })
+    // No mint has answered, and the frame is already the new app's.
+    expect(current()).not.toBe(shell.iframe)
+    expect(current().dataset.app).toBe('settings')
+    expect(shell.tokenApps).toEqual(['feeds', 'settings'])
+
+    sendFromCurrent({ type: 'ready', path: '/settings/' })
+    mints.release('settings')
+    await shell.settle()
+    expect(shell.tokenApps).toEqual(['feeds', 'settings'])
+    expect(mints.waiting('settings')).toBe(0)
+  })
+
+  it('makes the new frame at once on back to another app', async () => {
+    const mints = deferredTokens()
+    const shell = boot({ token: mints.token })
+    shell.send({ type: 'ready', path: HOME })
+    mints.release('feeds')
+    await shell.settle()
+
+    window.history.pushState({}, '', '/settings/')
+    window.dispatchEvent(new PopStateEvent('popstate'))
+    // No mint has answered. (Shells booted by earlier tests hear popstate
+    // too, so the mints are not counted here.)
+    expect(current()).not.toBe(shell.iframe)
+    expect(current().dataset.app).toBe('settings')
+    expect(shell.tokenApps).toContain('settings')
+  })
+})
+
+// The menu's own links - its app shortcuts and notifications - ask this page
+// to load them in the frame, as an app's cross-app link does, rather than
+// reloading the whole shell.
+describe('shell mochi-navigate: the menu loads its links in place', () => {
+  const current = () =>
+    document.getElementById('app-frame') as HTMLIFrameElement
+  const navigate = (url: unknown) =>
+    window.dispatchEvent(
+      new CustomEvent('mochi-navigate', { detail: { url }, cancelable: true })
+    )
+
+  it('loads another app in a new frame and says it took the link', async () => {
+    const shell = boot()
+    await shell.start()
+
+    expect(navigate('/settings/')).toBe(false)
+    expect(shell.path()).toBe('/settings/')
+    expect(current()).not.toBe(shell.iframe)
+    expect(current().dataset.app).toBe('settings')
+  })
+
+  it('leaves a link it will not load to the menu', async () => {
+    const shell = boot()
+    await shell.start()
+
+    for (const url of ['/', 'https://evil.example/', '//evil.example/x', 7]) {
+      expect(navigate(url)).toBe(true)
+    }
+    expect(shell.path()).toBe(HOME)
+    expect(current()).toBe(shell.iframe)
+  })
+
+  it('asks a page with unsaved edits first', async () => {
+    const shell = boot()
+    await shell.start()
+    shell.send({ type: 'unsaved', value: true })
+
+    expect(navigate('/settings/')).toBe(false)
+    expect(shell.posted).toContainEqual({ type: 'leave-request' })
+    expect(current()).toBe(shell.iframe)
+  })
+})
+
+// A page reads its frame's name to learn that this shell carries its requests
+// (handleFetch), and so fetches its code through here rather than itself.
+describe('shell frames: named for the fetch bridge', () => {
+  it('names the first frame and every frame after it', async () => {
+    const shell = boot()
+    expect(shell.iframe.name).toBe('mochi:bridge')
+    await shell.start()
+    shell.send({ type: 'navigate-external', url: '/settings/' })
+    const next = document.getElementById('app-frame') as HTMLIFrameElement
+    expect(next).not.toBe(shell.iframe)
+    expect(next.name).toBe('mochi:bridge')
   })
 })
