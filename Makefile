@@ -12,7 +12,14 @@ RELEASE = ../../release
 # plain pnpm there rather than failing on a path outside this repo.
 SAFE_PNPM = $(abspath ../../claude/scripts/safe-pnpm.sh)
 
-all: web/dist/index.html
+all: vendor web/dist/index.html
+
+# The shared Starlark library reaches the app as a symlink into lib/starlark.
+# The link is committed, so a fresh checkout has it; this recreates it if it
+# was removed. The release zip materialises it through zip -r.
+vendor:
+	mkdir -p lib
+	ln -sf ../../../lib/starlark/assets.star lib/assets.star
 
 clean:
 	rm -rf web/dist
@@ -22,9 +29,9 @@ clean:
 # and tsconfig files) and the workspace lockfile.
 web/dist/index.html: $(shell find web/src web/public ../../lib/web/src -type f 2>/dev/null) $(shell find web -maxdepth 1 -type f 2>/dev/null) $(wildcard ../../pnpm-lock.yaml)
 	bash -c 'cd web && if [ -x "$(SAFE_PNPM)" ]; then "$(SAFE_PNPM)" run build; else pnpm run build; fi'
-release: web/dist/index.html
+release: vendor web/dist/index.html
 	rm -f $(RELEASE)/$(APP)_*.zip
-	zip -r $(RELEASE)/$(APP)_$(VERSION).zip app.json *.star labels web/dist
+	zip -r $(RELEASE)/$(APP)_$(VERSION).zip app.json *.star lib labels web/dist
 	# Tagged by claude/scripts/commit.sh when the version bump is committed:
 	# tagging here runs before that commit, so the tag named the one before it.
 
