@@ -216,23 +216,6 @@ def action_permissions_check(a):
 # and the people app is never fetched cross-app.
 _PERSON_ASSETS = ("avatar", "style")
 
-def stream_asset(a, entity_id, service, asset):
-    s = mochi.remote.stream(entity_id, service, asset, {})
-    if not s:
-        a.error.label(404, "errors.asset_unavailable", asset=asset)
-        return None
-    header = s.read()
-    if not header or header.get("status") != "200":
-        a.error.label(404, "errors.asset_not_set", asset=asset)
-        return None
-    a.header("Cache-Control", "private, max-age=300")
-    if "data" in header:
-        return {"data": header["data"]}
-    a.header("Content-Type", header.get("content_type", "application/octet-stream"))
-    # The avatar cap matches what the people app accepts on upload.
-    a.write.stream(s, maximum=2 * 1024 * 1024)
-    return None
-
 def action_person_asset(a):
     asset = a.input("asset")
     if asset not in _PERSON_ASSETS:
@@ -242,4 +225,4 @@ def action_person_asset(a):
     if not user:
         a.error.label(403, "errors.asset_unavailable", asset=asset)
         return
-    return stream_asset(a, user, "people", asset)
+    return asset_serve(a, user, "people", asset, version=a.input("version"))

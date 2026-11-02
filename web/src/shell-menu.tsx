@@ -13,7 +13,6 @@ import {
   NotificationCategoryButton,
   NotificationList,
   SignOutDialog,
-  shellNavigateExternal,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -32,6 +31,7 @@ import {
 } from 'lucide-react'
 import { ChromeBoundary } from './chrome-boundary'
 import { MenuShortcuts } from './menu-apps'
+import { clickInPlace, followInPlace } from './navigate'
 import { useMenuApps } from './use-menu-apps'
 import { useMenuCategories } from './use-menu-categories'
 import { useMenuNotifications } from './use-menu-notifications'
@@ -238,7 +238,7 @@ export function MochiShellMenu() {
     if (notification.link) {
       setMenuOpen(false)
       if (isSameOriginLink(notification.link)) {
-        shellNavigateExternal(notification.link)
+        followInPlace(notification.link)
       } else if (isSafeLink(notification.link)) {
         // Off-origin http(s) target — open in a new tab rather than navigating
         // the shell away; noopener stops the opened page reaching back.
@@ -364,7 +364,7 @@ export function MochiShellMenu() {
           <TooltipTrigger asChild>
             <a
               href='/notifications/'
-              onClick={() => setMenuOpen(false)}
+              onClick={(event) => clickInPlace(event, () => setMenuOpen(false))}
               aria-label={t`View all`}
               className='hover:bg-hover active:bg-interactive-active flex items-center justify-center rounded-md p-1.5 transition-colors'
             >

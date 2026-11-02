@@ -25,13 +25,10 @@ function boot(respond?: (call: Call) => Promise<unknown>) {
     'fetch',
     vi.fn((url: string, init?: RequestInit) => {
       const target = String(url)
-      if (target.indexOf('/_/token') >= 0) {
-        return Promise.resolve({
-          ok: true,
-          json: () => Promise.resolve({ app: 'entity', token: 'app-token' }),
-        })
-      }
-      if (/^http:\/\/localhost:3000\/(feeds|settings)\//.test(target)) {
+      // The bridge's own requests, whatever their URL: only it fetches with
+      // redirects left unfollowed. Recording by URL instead missed exactly
+      // the requests the refusal tests are about.
+      if (init?.redirect === 'manual') {
         const call = { url: target, init: init as Call['init'] }
         calls.push(call)
         if (respond) return respond(call)
@@ -42,6 +39,12 @@ function boot(respond?: (call: Call) => Promise<unknown>) {
             headers: { 'Content-Type': 'application/json' },
           })
         )
+      }
+      if (target.indexOf('/_/token') >= 0) {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({ app: 'entity', token: 'app-token' }),
+        })
       }
       return Promise.resolve({
         ok: true,
@@ -126,6 +129,31 @@ describe('shell fetch: carries the frame’s requests in its own app', () => {
     // The body is handed over, not copied.
     const sent = shell.posted.find((p) => p.message === result)
     expect(sent?.transfer).toEqual([result.body])
+  })
+
+  it('revalidates when the frame asks, and only then', async () => {
+    const shell = boot()
+    shell.send({
+      type: 'fetch',
+      id: 1,
+      url: '/feeds/-/attachments/x/thumbnail',
+      method: 'GET',
+      headers: [],
+      cache: 'no-cache',
+    })
+    shell.send({
+      type: 'fetch',
+      id: 2,
+      url: '/feeds/-/list',
+      method: 'GET',
+      headers: [],
+      cache: 'reload',
+    })
+    await shell.settle()
+    expect(shell.calls).toHaveLength(2)
+    expect(shell.calls[0].init.cache).toBe('no-cache')
+    // Nothing else the frame names reaches the request.
+    expect(shell.calls[1].init.cache).toBeUndefined()
   })
 
   it('rebuilds a form from its entries and lets the browser type it', async () => {
@@ -365,6 +393,131 @@ describe('shell fetch: ends with the frame’s say-so', () => {
     await shell.settle()
     expect(answered.filter((m) => m.type === 'fetch.result')).toEqual([])
     expect(shell.results()).toMatchObject([{ id: 13, status: 200 }])
+  })
+
+  // Crossing apps keeps the outgoing frame on screen until the next is ready,
+  // and its page may still be saving as it goes. Its requests used to be
+  // dropped unsent - only the new frame was heard - and the page waited for
+  // ever on the answer.
+  async function crossed(respond?: (call: Call) => Promise<unknown>) {
+    const shell = boot(respond)
+    shell.send({ type: 'navigate-external', url: '/settings/' })
+    await shell.settle()
+    const next = document.getElementById('app-frame') as HTMLIFrameElement
+    expect(next).not.toBe(shell.iframe)
+    return { shell, next }
+  }
+
+  it('carries the outgoing frame’s requests during a switch', async () => {
+    const { shell } = await crossed()
+    shell.send({
+      type: 'fetch',
+      id: 16,
+      url: '/feeds/-/save',
+      method: 'POST',
+      headers: [],
+      body: 'unsaved',
+    })
+    await shell.settle()
+
+    expect(shell.calls.map((call) => call.url)).toEqual([
+      'http://localhost:3000/feeds/-/save',
+    ])
+    expect(shell.results()).toMatchObject([{ id: 16, status: 201 }])
+  })
+
+  it('holds the outgoing frame to its own app, not the one replacing it', async () => {
+    const { shell } = await crossed()
+    shell.send({
+      type: 'fetch',
+      id: 17,
+      url: '/settings/-/list',
+      method: 'GET',
+      headers: [],
+    })
+    await shell.settle()
+
+    expect(shell.calls).toHaveLength(0)
+    expect(shell.results()).toEqual([
+      { type: 'fetch.result', id: 17, refused: true },
+    ])
+  })
+
+  it('ends the outgoing frame’s requests when it is removed', async () => {
+    const { shell, next } = await crossed(() => new Promise(() => {}))
+    shell.send({
+      type: 'fetch',
+      id: 18,
+      url: '/feeds/-/slow',
+      method: 'GET',
+      headers: [],
+    })
+    await shell.settle()
+    const signal = shell.calls[0].init.signal as AbortSignal
+
+    shell.send({ type: 'fetch.abort', id: 99 })
+    expect(signal.aborted).toBe(false)
+
+    const fresh = next.contentWindow as Window
+    fresh.postMessage = (() => {}) as typeof fresh.postMessage
+    shell.send({ type: 'ready' }, fresh)
+    await shell.settle()
+    expect(signal.aborted).toBe(true)
+  })
+
+  it('lets the outgoing frame cancel its own request', async () => {
+    const { shell } = await crossed(() => new Promise(() => {}))
+    shell.send({
+      type: 'fetch',
+      id: 19,
+      url: '/feeds/-/slow',
+      method: 'GET',
+      headers: [],
+    })
+    await shell.settle()
+    const signal = shell.calls[0].init.signal as AbortSignal
+
+    shell.send({ type: 'fetch.abort', id: 19 })
+    expect(signal.aborted).toBe(true)
+  })
+
+  // A frame that navigates itself stays the same window, so answers to the
+  // page that left would reach whatever page it loaded next. They end as the
+  // page goes: 'leaving' from the page, or, for bundles that send none, the
+  // frame loading again.
+  it('aborts the requests of a page that leaves', async () => {
+    const shell = boot(() => new Promise(() => {}))
+    shell.send({
+      type: 'fetch',
+      id: 14,
+      url: '/feeds/-/slow',
+      method: 'GET',
+      headers: [],
+    })
+    await shell.settle()
+    const signal = shell.calls[0].init.signal as AbortSignal
+
+    shell.send({ type: 'leaving' })
+    expect(signal.aborted).toBe(true)
+  })
+
+  it('aborts them when the frame loads another page', async () => {
+    const shell = boot(() => new Promise(() => {}))
+    // The frame's own first page.
+    shell.iframe.dispatchEvent(new Event('load'))
+    shell.send({
+      type: 'fetch',
+      id: 15,
+      url: '/feeds/-/slow',
+      method: 'GET',
+      headers: [],
+    })
+    await shell.settle()
+    const signal = shell.calls[0].init.signal as AbortSignal
+    expect(signal.aborted).toBe(false)
+
+    shell.iframe.dispatchEvent(new Event('load'))
+    expect(signal.aborted).toBe(true)
   })
 
   it('tells the frame the bridge is there', async () => {

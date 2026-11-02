@@ -130,7 +130,7 @@ const catalogs: Catalogs = {
 async function init() {
   const shellReady = (
     window as unknown as {
-      __mochi_shell_ready?: Promise<{ menuToken?: string }>
+      __mochi_shell_ready?: Promise<{ menuToken?: string; identity?: unknown }>
     }
   ).__mochi_shell_ready
 

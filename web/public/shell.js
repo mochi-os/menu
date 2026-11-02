@@ -69,6 +69,13 @@
         updateTitle();
     });
 
+    // The name of every app frame, which its page reads as window.name: this
+    // shell carries the frame's requests for its own app (handleFetch), so
+    // the page's loader fetches its code through here, from this window's
+    // cache, rather than from the network on every page view. A shell older
+    // than the bridge names no frame, and the page loads its code itself.
+    var FRAME_NAME = 'mochi:bridge';
+
     // Create the initial iframe — derive src from current URL. shellSrc also
     // sheds any _shell a polluted bookmark or stale address bar carries.
     var initialSrc = shellSrc(window.location.pathname + window.location.search + window.location.hash);
@@ -81,7 +88,9 @@
     // against the top URL, which a cross-app navigation moves before the old
     // frame is replaced.
     iframe.dataset.app = getAppNameFromPath(window.location.pathname);
+    iframe.name = FRAME_NAME;
     iframe.src = initialSrc;
+    watchFrame(iframe);
     container.appendChild(iframe);
     var tokenRefreshTimer = null;
     // Incremented on every cross-app navigation; token fetches and refresh
@@ -295,9 +304,8 @@
     function armReadyTimeout() {
         clearTimeout(readyTimeout);
         // The navigation this timer belongs to. A cross-app navigation raises
-        // the epoch when it starts and re-arms only once its token fetch
-        // settles, so a timer armed before it is still pending across that
-        // window - and completing a transition it did not create clears
+        // the epoch when it starts, and a timer armed before it must not
+        // complete the transition it did not create: that clears
         // `navigating` and un-dims the outgoing frame under the incoming
         // app's URL.
         var epoch = navigationEpoch;
@@ -436,7 +444,10 @@
         next.setAttribute('allow', 'gamepad *; fullscreen *; autoplay *');
         next.style.visibility = 'hidden';
         next.dataset.app = getAppNameFromPath(newSrc);
+        next.name = FRAME_NAME;
         next.src = shellSrc(newSrc);
+        watchFrame(next);
+        frameMint(next);
         container.insertBefore(next, staleIframe);
 
         iframe = next;
@@ -540,9 +551,20 @@
         shellConfig = {};
     });
 
+    // Who is signed in, as the server reports it - /_/shell for the menu, each
+    // token mint for the frame it was minted for - reduced to the id and name,
+    // or null from a server older than the field.
+    function identityFrom(identity) {
+        if (!identity || typeof identity.id !== 'string' || !identity.id) return null;
+        return { id: identity.id, name: typeof identity.name === 'string' ? identity.name : '' };
+    }
+
     // Expose promise for menu app (runs in shell page, needs menuToken before rendering)
     window.__mochi_shell_ready = shellConfigReady.then(function() {
-        return { menuToken: (shellConfig && shellConfig.menuToken) || '' };
+        return {
+            menuToken: (shellConfig && shellConfig.menuToken) || '',
+            identity: identityFrom(shellConfig && shellConfig.identity)
+        };
     });
 
     // --- Token management ---
@@ -602,8 +624,52 @@
         }
     }
 
+    // What the mounted frame was last told of the appearance and the colour
+    // theme, by its init or by a change since; a value it already holds is
+    // not sent again.
+    var postedAppearance = null;
+    var postedColorTheme = null;
+
+    function appearanceNow() {
+        return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    }
+
+    function postAppearance() {
+        var theme = appearanceNow();
+        if (theme === postedAppearance) return;
+        postedAppearance = theme;
+        postToIframe({ type: 'theme-change', theme: theme });
+    }
+
+    function postColorTheme() {
+        var text = JSON.stringify(currentColorTheme);
+        if (text === postedColorTheme) return;
+        postedColorTheme = text;
+        postToIframe({ type: 'color-theme-change', colorTheme: currentColorTheme });
+    }
+
+    // The frame's init carries both values whole.
+    function postInit(msg) {
+        postedAppearance = msg.theme;
+        postedColorTheme = JSON.stringify(msg.colorTheme || null);
+        postToIframe(msg);
+    }
+
     window.addEventListener('mochi-sidebar-toggle', function() {
         postToIframe({ type: 'sidebar-toggle' });
+    });
+
+    // The menu's own links - its app shortcuts and notifications - load in
+    // place, as an app's cross-app link does, rather than reloading the whole
+    // shell page. Cancelling the event tells the menu the shell took it; a
+    // target the shell will not load is left to the menu's own link.
+    window.addEventListener('mochi-navigate', function(event) {
+        var url = event.detail && event.detail.url;
+        if (typeof url !== 'string') return;
+        var target = sameOriginTarget(url);
+        if (!target || !target.app) return;
+        event.preventDefault();
+        guardLeave(function() { handleNavigateExternal({ url: url }); });
     });
 
     // --- localStorage proxy (namespaced by app ID) ---
@@ -818,11 +884,17 @@
             return null;
         }
         if (body === null || method === 'GET' || method === 'HEAD') body = undefined;
-        return { method: method, headers: headers, body: body, credentials: 'omit', redirect: 'manual' };
+        var init = { method: method, headers: headers, body: body, credentials: 'omit', redirect: 'manual' };
+        // An image the frame shows asks to be revalidated: its address no
+        // longer carries a token, so a copy this window's cache kept for one
+        // account must not be shown to the next without the server asking.
+        if (data.cache === 'no-cache') init.cache = 'no-cache';
+        return init;
     }
 
-    function handleFetch(data, requester) {
+    function handleFetch(data, frame) {
         var id = data.id;
+        var requester = frame.contentWindow;
         // To the window that asked and no other. Its page may have changed
         // since, and the next app's page there must not take this answer for
         // one of its own: the frame draws request ids at random.
@@ -831,9 +903,10 @@
             msg.id = id;
             requester.postMessage(msg, '*', transfer || []);
         }
-        // From the frame, not the top URL, as handleDownload: the app it was
-        // created for.
-        var app = iframe.dataset ? (iframe.dataset.app || '') : '';
+        // From the frame that asked, not the top URL, as handleDownload: the
+        // app it was created for. The outgoing frame of a cross-app switch
+        // asks too, for its own app, not the one replacing it.
+        var app = frame.dataset ? (frame.dataset.app || '') : '';
         var url;
         try { url = new URL(data.url, window.location.href); } catch (e) { url = null; }
         var method = typeof data.method === 'string' ? data.method.toUpperCase() : '';
@@ -878,6 +951,79 @@
         var requests = fetchRequests.get(requester);
         var controller = requests && requests.get(data.id);
         if (controller) controller.abort();
+    }
+
+    // What the shell knows of the page each frame holds. A frame can navigate
+    // itself - a link the app's interceptor does not route, a form post, a
+    // location assignment - and the shell cannot see where, as its origin is
+    // opaque. It can see that it did: a page sends 'ready' once and 'leaving'
+    // as it goes, and the frame fires 'load' for every page after its first.
+    // `answered` is whether this page's 'ready' was answered; `page` counts
+    // the pages that have gone, so an answer still being prepared for one
+    // never reaches the next; `loads` counts the frame's loads.
+    var frameStates = new WeakMap();
+    function frameState(frame) {
+        var state = frameStates.get(frame);
+        if (!state) {
+            state = { answered: false, page: 0, loads: 0 };
+            frameStates.set(frame, state);
+        }
+        return state;
+    }
+
+    // Mint the token for the app a frame was made for as the frame is made,
+    // not when its page says ready: the page takes a round trip or more to
+    // load and the mint another, and neither needs the other. 'ready' posts it
+    // only after its own checks, so a frame that never asks never gets it.
+    function frameMint(frame) {
+        var state = frameState(frame);
+        state.token = fetchToken(frame.dataset.app || '');
+        // Settled by 'ready', if it comes; a frame replaced first wastes it.
+        state.token.catch(function() {});
+    }
+
+    // The page in this frame has gone. Its requests end now, before the next
+    // page can listen for their answers, and the token refresh stops: it
+    // posts to whatever page the frame holds.
+    function frameLeft(frame) {
+        frameState(frame).page++;
+        fetchAbortFrame(frame);
+        if (frame === iframe && tokenRefreshTimer) {
+            clearTimeout(tokenRefreshTimer);
+            tokenRefreshTimer = null;
+        }
+    }
+
+    // A backstop for app bundles that send no 'leaving': every load after the
+    // frame's first is a page the shell did not put there.
+    function watchFrame(frame) {
+        frame.addEventListener('load', function() {
+            var state = frameState(frame);
+            state.loads++;
+            if (state.loads > 1) frameLeft(frame);
+        });
+    }
+
+    // A second 'ready' from one frame is a page the shell did not load, and so
+    // is a page naming another app's path. It may be another app's, and the
+    // shell has only the frame's original app to go on, so it hands it
+    // nothing: it loads the path the page names, in a new frame and for
+    // whichever app that path is, as any navigation is loaded. A page that
+    // names none, or none here, sends the frame back to where the shell had it.
+    // Either way it is not answered: a page sends 'ready' once, so a repeat
+    // from the same page is treated as a new one.
+    function frameStray(data) {
+        frameLeft(iframe);
+        // A cross-app navigation in flight replaces this frame anyway.
+        if (navigating) return;
+        var here = window.location.pathname + window.location.search + window.location.hash;
+        var claimed = typeof data.path === 'string' ? sameOriginTarget(stripShell(data.path)) : null;
+        if (claimed && claimed.app && claimed.path !== here) {
+            handleNavigateExternal({ url: claimed.path });
+            return;
+        }
+        showProgress();
+        swapIframe(here);
     }
 
     // A frame being removed takes its requests with it, as its own would go.
@@ -1974,26 +2120,15 @@
             historyPush(target.path);
             lastNavigatedPath = target.path;
 
-            // Show progress bar and dim current iframe immediately (before token fetch)
+            // The new frame mints its own token as it is made (frameMint), so
+            // the swap waits for nothing.
             showProgress();
-            iframe.style.opacity = '0.6';
-            iframe.style.pointerEvents = 'none';
-
-            var epoch = navigationEpoch;
-            fetchToken(newApp).then(function(token) {
-                if (epoch !== navigationEpoch) return; // a later navigation owns the iframe now
-                storageSelect(newApp);
-                swapIframe(target.path);
-                scheduleTokenRefresh(newApp);
-            }).catch(function() {
-                if (epoch !== navigationEpoch) return;
-                storageSelect(newApp);
-                swapIframe(target.path);
-                // Re-arm even without a token: this replaces the previous
-                // app's timer, which would otherwise fire and deliver ITS
-                // token into this app's iframe.
-                scheduleTokenRefresh(newApp);
-            });
+            storageSelect(newApp);
+            swapIframe(target.path);
+            // Re-armed here as well as on 'ready': this replaces the previous
+            // app's timer, which would otherwise fire and deliver ITS token
+            // into this app's iframe.
+            scheduleTokenRefresh(newApp);
         } else {
             // Same app: move the top URL and reload the iframe. The iframe
             // cannot navigate itself (pushState is a no-op on its opaque
@@ -2062,25 +2197,11 @@
             baseTitle = 'Mochi';
             updateTitle();
 
-            // Show progress bar and dim current iframe immediately (before token fetch)
+            // As in handleNavigateExternal: the new frame mints its own token.
             showProgress();
-            iframe.style.opacity = '0.6';
-            iframe.style.pointerEvents = 'none';
-
-            var epoch = navigationEpoch;
-            fetchToken(newApp).then(function() {
-                if (epoch !== navigationEpoch) return; // a later navigation owns the iframe now
-                storageSelect(newApp);
-                swapIframe(path);
-                scheduleTokenRefresh(newApp);
-            }).catch(function() {
-                if (epoch !== navigationEpoch) return;
-                storageSelect(newApp);
-                swapIframe(path);
-                // Re-arm even without a token — same reason as in
-                // handleNavigateExternal's failure path.
-                scheduleTokenRefresh(newApp);
-            });
+            storageSelect(newApp);
+            swapIframe(path);
+            scheduleTokenRefresh(newApp);
         } else {
             // Same app — reload iframe at the new path
             // (pushState/replaceState don't work in sandboxed iframes with opaque origins)
@@ -2092,6 +2213,18 @@
     // --- Message handler ---
 
     window.addEventListener('message', function(event) {
+        // The outgoing frame of a cross-app switch stays on screen until the
+        // next is ready, and its page may still be saving or refetching. Its
+        // requests are carried as before the switch, for its own app, until
+        // the frame is removed, which ends them (fetchAbortFrame); nothing
+        // else it sends is heard. Dropped, they were never sent at all, and
+        // the page waited on an answer that never came.
+        if (staleIframe && event.source === staleIframe.contentWindow && event.data && typeof event.data === 'object') {
+            if (event.data.type === 'fetch') handleFetch(event.data, staleIframe);
+            else if (event.data.type === 'fetch.abort') handleFetchAbort(event.data, event.source);
+            return;
+        }
+
         // Validate: must come from the sandboxed iframe (opaque origin = "null")
         if (event.source !== iframe.contentWindow) return;
 
@@ -2099,6 +2232,12 @@
         if (!data || typeof data !== 'object' || !data.type) return;
 
         switch (data.type) {
+            case 'leaving':
+                // The page is going (pagehide): end its requests before the
+                // next page in this window can hear their answers.
+                frameLeft(iframe);
+                break;
+
             case 'ready':
                 // App is ready — fetch token and shell config, then send init.
                 // `navigating` is NOT cleared here: completeTransition owns it,
@@ -2114,13 +2253,26 @@
                 // already established that `iframe` is the sender.
                 // No fallback to the top URL: an unstamped frame must fail to
                 // get a token rather than quietly get someone else's.
+                var asker = iframe;
+                var state = frameState(asker);
+                // A page whose own path names another app came by a redirect
+                // or a navigation the shell did not make, as surely as a second
+                // 'ready' did. Older bundles send no path.
+                var elsewhere = typeof data.path === 'string' && getAppNameFromPath(stripShell(data.path)) !== (asker.dataset.app || '');
+                if (state.answered || elsewhere) {
+                    frameStray(data);
+                    break;
+                }
+                state.answered = true;
+                var page = state.page;
                 var appName = iframe.dataset.app || '';
                 // Pin the iframe that asked: `iframe` is reassigned by a
                 // navigation, and fetchToken also sets currentAppEntity, which
                 // a granted permission is recorded against.
                 var requester = event.source;
-                Promise.all([fetchToken(appName), shellConfigReady]).then(function(results) {
+                Promise.all([state.token || fetchToken(appName), shellConfigReady]).then(function(results) {
                     if (!iframe || iframe.contentWindow !== requester) return; // navigated away: this token is not theirs
+                    if (frameState(asker).page !== page) return; // the page that asked has gone; the window now holds another
                     var tokenData = results[0];
                     var sc = shellConfig || {};
                     if (!currentLocale && sc.locale) currentLocale = sc.locale;
@@ -2142,17 +2294,24 @@
                         sidebarOpen: sidebarOpen,
                         domain: sc.domain || null,
                         locale: currentLocale || null,
-                        language: currentLanguage || null
+                        language: currentLanguage || null,
+                        // Who is signed in, so the page need not ask
+                        // /_/identity: the id and name its own token already
+                        // reads there, and nothing more. From the frame's own
+                        // mint, so a rename or another sign-in since the shell
+                        // page loaded is not lost.
+                        identity: identityFrom(tokenData.identity)
                         // No restore-banner state here: the re-link list names
                         // e-mail addresses, and only the app that renders the
                         // banner may ask (a.user.restore(), under its grant).
                     };
                     if (currentColorTheme) initMsg.colorTheme = currentColorTheme;
-                    postToIframe(initMsg);
+                    postInit(initMsg);
                     scheduleTokenRefresh(appName);
                     completeTransition();
                 }).catch(function() {
                     if (!iframe || iframe.contentWindow !== requester) return; // same rule on the failure path
+                    if (frameState(asker).page !== page) return;
                     var theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
                     var initMsg = {
                         type: 'init',
@@ -2168,7 +2327,7 @@
                         language: currentLanguage || null
                     };
                     if (currentColorTheme) initMsg.colorTheme = currentColorTheme;
-                    postToIframe(initMsg);
+                    postInit(initMsg);
                     completeTransition();
                 });
                 break;
@@ -2250,7 +2409,7 @@
                 break;
 
             case 'fetch':
-                handleFetch(data, event.source);
+                handleFetch(data, iframe);
                 break;
 
             case 'fetch.abort':
@@ -2284,7 +2443,7 @@
                 // root from the server, never from the app.
                 currentColorTheme = data.colorTheme || null;
                 refreshTheme();
-                postToIframe({ type: 'color-theme-change', colorTheme: currentColorTheme });
+                postColorTheme();
                 break;
 
             case 'locale-set':
@@ -2367,21 +2526,26 @@
     });
 
     // --- Theme sync ---
-    // Listen for theme changes from the menu app and forward to iframe
+    // Forward the top window's appearance and colour theme to the frame. A
+    // theme is applied one property at a time, so one change arrives here as
+    // dozens of records, and the frame re-renders the whole app for every
+    // message: it is told once per batch, and only of a value it does not
+    // already hold.
     var observer = new MutationObserver(function(mutations) {
+        var appearance = false;
+        var colors = false;
         mutations.forEach(function(mutation) {
-            if (mutation.attributeName === 'class') {
-                var isDark = document.documentElement.classList.contains('dark');
-                postToIframe({ type: 'theme-change', theme: isDark ? 'dark' : 'light' });
-            }
-            if (mutation.attributeName === 'style') {
-                postToIframe({ type: 'color-theme-change', colorTheme: currentColorTheme });
-            }
+            if (mutation.attributeName === 'class') appearance = true;
+            if (mutation.attributeName === 'style') colors = true;
         });
+        if (appearance) postAppearance();
+        if (colors) postColorTheme();
     });
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class', 'style'] });
 
     // --- Initial load progress ---
+    // The first frame was made before the token and frame state existed.
+    frameMint(iframe);
     showProgress();
     armReadyTimeout();
 

@@ -46,7 +46,13 @@ const appearance = () =>
 // The root's theme values must come from the server, never from the app that
 // reports a change: the consent dialog renders from them.
 function boot(
-  options: { theme?: string; appearance?: string; root?: string } = {}
+  options: {
+    theme?: string
+    appearance?: string
+    root?: string
+    identity?: Record<string, unknown>
+    minted?: Record<string, unknown>
+  } = {}
 ) {
   document.documentElement.removeAttribute('style')
   // The server renders the user's theme inline on the shell page before any
@@ -71,6 +77,7 @@ function boot(
               menuToken: 'menu-token',
               theme: options.theme ?? '',
               appearance: options.appearance ?? 'auto',
+              ...(options.identity ? { identity: options.identity } : {}),
             }),
         })
       }
@@ -78,7 +85,11 @@ function boot(
         return Promise.resolve({
           ok: true,
           json: () =>
-            Promise.resolve({ app: 'feeds-entity', token: 'app-token' }),
+            Promise.resolve({
+              app: 'feeds-entity',
+              token: 'app-token',
+              ...(options.minted ? { identity: options.minted } : {}),
+            }),
         })
       }
       return Promise.resolve({
@@ -317,5 +328,114 @@ describe('shell theme: the colour theme names the background hue in full', () =>
       { colorTheme?: Record<string, unknown> } | undefined
     expect(init?.colorTheme?.background).toBe('250')
     expect(init?.colorTheme?.hueBg).toBe('250')
+  })
+})
+
+// A theme is applied to the root one property at a time - the menu's own
+// ThemeProvider removes and re-sets some thirty - and each record used to
+// reach the frame as its own message, on which the frame re-rendered the
+// whole app: 66 per theme change, and on every page load.
+describe('shell theme: the frame hears each change once', () => {
+  const kinds = (posted: Record<string, unknown>[], type: string) =>
+    posted.filter((m) => m.type === type)
+
+  it('sends nothing for a batch that leaves the theme as the frame has it', async () => {
+    const shell = boot({ root: '--hue: 250; --hue-chroma: 0.1; --hue-bg: 250' })
+    shell.send({ type: 'ready' })
+    await shell.settle()
+    expect(kinds(shell.posted, 'init')).toHaveLength(1)
+    shell.posted.length = 0
+
+    // The menu re-applying the same theme, a property at a time.
+    const root = document.documentElement
+    for (let i = 0; i < 33; i++) {
+      root.style.removeProperty('--x' + i)
+      root.style.setProperty('--x' + i, String(i))
+    }
+    await shell.settle()
+    expect(kinds(shell.posted, 'color-theme-change')).toEqual([])
+  })
+
+  it('sends one message for a batch of appearance changes', async () => {
+    const shell = boot()
+    shell.send({ type: 'ready' })
+    await shell.settle()
+    shell.posted.length = 0
+
+    const root = document.documentElement
+    root.classList.add('dark')
+    root.classList.remove('light')
+    root.classList.add('dark')
+    await shell.settle()
+    expect(kinds(shell.posted, 'theme-change')).toEqual([
+      { type: 'theme-change', theme: 'dark' },
+    ])
+
+    // And none for a class change that leaves it dark.
+    root.classList.add('unrelated')
+    await shell.settle()
+    expect(kinds(shell.posted, 'theme-change')).toHaveLength(1)
+  })
+
+  it("forwards an app's new theme once, not again as the root is refreshed", async () => {
+    const shell = boot({ theme: '--hue: 140; --foreground: oklch(0.145 0 0)' })
+    shell.send({ type: 'ready' })
+    await shell.settle()
+    shell.posted.length = 0
+
+    shell.send({ type: 'color-theme-set', colorTheme: HOSTILE })
+    await shell.settle()
+    expect(shell.shellCalls()).toBeGreaterThan(0)
+    expect(kinds(shell.posted, 'color-theme-change')).toEqual([
+      { type: 'color-theme-change', colorTheme: HOSTILE },
+    ])
+  })
+})
+
+// /_/shell names who is signed in, and the shell hands each frame the id and
+// name in its init, so the page need not ask /_/identity itself.
+describe('shell identity: init carries who is signed in', () => {
+  const IDENTITY = {
+    id: 'identity-alice',
+    fingerprint: 'alicefp12',
+    name: 'Alice',
+    privacy: 'public',
+  }
+
+  it('gives the frame the id and name its own mint names, and nothing more', async () => {
+    // The shell page loaded as Alice; the session has since been renamed (or
+    // is someone else's), which the frame's own mint knows.
+    const shell = boot({
+      identity: IDENTITY,
+      minted: { ...IDENTITY, name: 'Alice Renamed', extra: 'not passed on' },
+    })
+    shell.send({ type: 'ready' })
+    await shell.settle()
+    const init = shell.posted.find((m) => m.type === 'init')
+    expect(init?.identity).toEqual({
+      id: 'identity-alice',
+      name: 'Alice Renamed',
+    })
+  })
+
+  it('gives the menu the same', async () => {
+    boot({ identity: IDENTITY })
+    const ready = (
+      window as unknown as {
+        __mochi_shell_ready: Promise<{ identity?: unknown }>
+      }
+    ).__mochi_shell_ready
+    expect((await ready).identity).toEqual({
+      id: 'identity-alice',
+      name: 'Alice',
+    })
+  })
+
+  it('carries none from a server that reports none', async () => {
+    const shell = boot()
+    shell.send({ type: 'ready' })
+    await shell.settle()
+    const init = shell.posted.find((m) => m.type === 'init')
+    expect(init?.identity).toBeNull()
   })
 })

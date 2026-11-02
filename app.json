@@ -10,7 +10,8 @@
 	"paths": ["menu"],
 
 	"architecture": {"engine": "starlark", "version": 4},
-	"execute": ["menu.star"],
+	"execute": ["lib/assets.star", "menu.star"],
+	"require": {"version": {"minimum": "0.4.244"}},
 
 	"actions": {
 		"": {"file": "web/dist/index.html"},
