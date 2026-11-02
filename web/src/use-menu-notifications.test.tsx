@@ -10,7 +10,7 @@ import { toast } from '@mochi/web'
 import { renderHook, act, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { menuFetch } from './menu-api'
-import { useMenuNotifications } from './use-menu-notifications'
+import { notificationsAfter, useMenuNotifications } from './use-menu-notifications'
 
 i18n.loadAndActivate({ locale: 'en', messages: {} })
 
@@ -152,5 +152,200 @@ describe('useMenuNotifications retires what is on screen', () => {
       '-/notifications/read',
       expect.anything()
     )
+  })
+})
+
+const bell = (id: string, created: number, read = 0) => ({
+  id,
+  app: 'chat',
+  topic: 'message',
+  object: 'o1',
+  content: `Message ${id}`,
+  link: `/chat/${id}`,
+  sender: 'sender-entity',
+  count: 1,
+  created,
+  read,
+})
+
+// A frame lands in the list the bell holds, as a fetch would answer it: oldest
+// first, a row sent again replacing the one held, a row the bell does not list
+// left out. A frame that cannot be applied asks for the list again.
+describe('notificationsAfter', () => {
+  const held = [bell('a', 10), bell('c', 30)]
+
+  it('puts a new row where its time puts it, with its sender', () => {
+    const next = notificationsAfter(held, { type: 'new', web: true, ...bell('b', 20) })
+    expect(next?.map((row) => row.id)).toEqual(['a', 'b', 'c'])
+    expect(next?.[1].sender).toBe('sender-entity')
+  })
+
+  it('replaces a row sent again rather than listing it twice', () => {
+    const next = notificationsAfter(held, { type: 'new', web: true, ...bell('a', 10), count: 3 })
+    expect(next?.map((row) => [row.id, row.count])).toEqual([['a', 3], ['c', 1]])
+  })
+
+  it('leaves out a row the bell does not list', () => {
+    expect(notificationsAfter(held, { type: 'new', web: false, ...bell('b', 20) })).toBe(held)
+    expect(notificationsAfter(held, { type: 'new', web: false, ...bell('a', 10) })?.map((row) => row.id)).toEqual(['c'])
+  })
+
+  it('asks for the list when the frame cannot say whether the bell lists it', () => {
+    expect(notificationsAfter(held, { type: 'new', ...bell('b', 20) })).toBeNull()
+  })
+
+  it('marks one row, then every row, read', () => {
+    const one = notificationsAfter(held, { type: 'read', id: 'c' })
+    expect(one?.map((row) => Boolean(row.read))).toEqual([false, true])
+    const every = notificationsAfter(held, { type: 'read_all' })
+    expect(every?.every((row) => row.read > 0)).toBe(true)
+  })
+
+  it('asks for the list on a clear, which names no rows', () => {
+    expect(notificationsAfter(held, { type: 'clear_object' })).toBeNull()
+  })
+})
+
+// The socket the hook opens, captured so a test can deliver frames to it.
+class FrameSocket {
+  static OPEN = 1
+  static CONNECTING = 0
+  static last: FrameSocket | null = null
+  readyState = 0
+  onopen: (() => void) | null = null
+  onmessage: ((event: { data: string }) => void) | null = null
+  onclose: (() => void) | null = null
+  onerror: (() => void) | null = null
+  constructor() {
+    FrameSocket.last = this
+  }
+  open() {
+    this.readyState = 1
+    this.onopen?.()
+  }
+  send(frame: object) {
+    this.onmessage?.({ data: JSON.stringify(frame) })
+  }
+  close() {}
+}
+
+// THE POINT: every frame - a new notification, a read, a read of every row -
+// downloaded the whole list again in every open tab. They are applied to the
+// list held; only a frame that cannot be applied, and a reconnect, which lost
+// the frames sent meanwhile, fetch it.
+describe('useMenuNotifications applies frames to the list it holds', () => {
+  beforeEach(() => {
+    FrameSocket.last = null
+    vi.stubGlobal('WebSocket', FrameSocket)
+    vi.mocked(menuFetch).mockImplementation(async (path: string) => {
+      if (path === '-/notifications/list') return { data: [bell('a', 10)] }
+      return {}
+    })
+  })
+
+  const fetches = () =>
+    vi.mocked(menuFetch).mock.calls.filter(([path]) => path === '-/notifications/list').length
+
+  async function mounted() {
+    window.history.pushState({}, '', '/feeds')
+    const hook = renderHook(() => useMenuNotifications(), { wrapper })
+    await waitFor(() => expect(hook.result.current.notifications).toHaveLength(1))
+    await waitFor(() => expect(FrameSocket.last).not.toBeNull())
+    const opened = fetches()
+    act(() => FrameSocket.last!.open())
+    // The open reads the list again, for frames sent before it.
+    await waitFor(() => expect(fetches()).toBe(opened + 1))
+    await waitFor(() =>
+      expect(client.getQueryState(['menu-notifications', 'list'])?.fetchStatus).toBe('idle')
+    )
+    return hook
+  }
+
+  it('adds a new notification, marks reads, and fetches nothing', async () => {
+    const { result } = await mounted()
+    const before = fetches()
+    act(() => FrameSocket.last!.send({ type: 'new', web: true, ...bell('b', 20) }))
+    await waitFor(() => expect(result.current.notifications.map((row) => row.id)).toEqual(['a', 'b']))
+    act(() => FrameSocket.last!.send({ type: 'read', id: 'a' }))
+    await waitFor(() => expect(result.current.notifications[0].read).toBeGreaterThan(0))
+    act(() => FrameSocket.last!.send({ type: 'read_all' }))
+    await waitFor(() => expect(result.current.notifications.every((row) => row.read > 0)).toBe(true))
+    expect(fetches()).toBe(before)
+  })
+
+  it('fetches the list for a frame from an older notifications app, a clear, a category change, and a reconnect', async () => {
+    await mounted()
+    const before = fetches()
+    act(() => FrameSocket.last!.send({ type: 'new', ...bell('b', 20) }))
+    await waitFor(() => expect(fetches()).toBe(before + 1))
+    act(() => FrameSocket.last!.send({ type: 'clear_object', app: 'chat', object: 'o1' }))
+    await waitFor(() => expect(fetches()).toBe(before + 2))
+    act(() => FrameSocket.last!.send({ type: 'clear_object', app: 'chat', object: 'o1', changed: 2 }))
+    await waitFor(() => expect(fetches()).toBe(before + 3))
+    act(() => FrameSocket.last!.send({ type: 'categories' }))
+    await waitFor(() => expect(fetches()).toBe(before + 4))
+    act(() => FrameSocket.last!.open())
+    await waitFor(() => expect(fetches()).toBe(before + 5))
+  })
+
+  it('fetches nothing for a clear that changed no row', async () => {
+    const { result } = await mounted()
+    const before = fetches()
+    act(() => FrameSocket.last!.send({ type: 'clear_object', app: 'chat', object: 'o1', changed: 0 }))
+    act(() => FrameSocket.last!.send({ type: 'new', web: true, ...bell('b', 20) }))
+    await waitFor(() => expect(result.current.notifications).toHaveLength(2))
+    expect(fetches()).toBe(before)
+  })
+
+  it('fetches again for a frame arriving while the list is being fetched', async () => {
+    const { result } = await mounted()
+    const start = fetches()
+    let land: (value: unknown) => void = () => {}
+    vi.mocked(menuFetch).mockImplementation(async (path: string) => {
+      if (path !== '-/notifications/list') return {}
+      // The first fetch answers from before the frame, the second after it.
+      if (fetches() === start + 1) {
+        await new Promise((resolve) => (land = resolve))
+        return { data: [bell('a', 10)] }
+      }
+      return { data: [bell('a', 10), bell('b', 20)] }
+    })
+    act(() => {
+      void client.refetchQueries({ queryKey: ['menu-notifications', 'list'] })
+    })
+    await waitFor(() => expect(fetches()).toBe(start + 1))
+    act(() => FrameSocket.last!.send({ type: 'new', web: true, ...bell('b', 20) }))
+    act(() => land(undefined))
+    await waitFor(() =>
+      expect(result.current.notifications.map((row) => row.id)).toEqual(['a', 'b'])
+    )
+    expect(fetches()).toBe(start + 2)
+  })
+
+  it('leaves unread a notification that arrives while marking all read is answered', async () => {
+    const { result } = await mounted()
+    let answer: (value: unknown) => void = () => {}
+    vi.mocked(menuFetch).mockImplementation(async (path: string) => {
+      if (path === '-/notifications/list') return { data: [bell('a', 10)] }
+      await new Promise((resolve) => (answer = resolve))
+      return {}
+    })
+    act(() => result.current.markAllAsRead())
+    await waitFor(() => expect(result.current.notifications[0].read).toBeGreaterThan(0))
+    // The server marks all read, then b arrives, then the answer lands.
+    act(() => FrameSocket.last!.send({ type: 'read_all' }))
+    act(() => FrameSocket.last!.send({ type: 'new', web: true, ...bell('b', 20) }))
+    await waitFor(() => expect(result.current.notifications).toHaveLength(2))
+    await act(async () => answer(undefined))
+    await waitFor(() => expect(result.current.notifications[1].read).toBe(0))
+    expect(result.current.notifications[1].id).toBe('b')
+  })
+
+  it('marks a clicked notification read without fetching the list', async () => {
+    const { result } = await mounted()
+    const before = fetches()
+    act(() => result.current.markAsRead('a'))
+    await waitFor(() => expect(result.current.notifications[0].read).toBeGreaterThan(0))
+    expect(fetches()).toBe(before)
   })
 })

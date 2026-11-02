@@ -73,6 +73,92 @@ const wsState: WebSocketState = {
   minting: false,
 }
 
+/** A notifications socket frame, as the notifications app writes it. */
+export interface NotificationFrame extends Partial<Notification> {
+  type?: string
+  /** On a "new" frame: whether the bell lists the row at all. */
+  web?: boolean
+  /** On a clear_object frame: how many rows it changed. */
+  changed?: number
+}
+
+/**
+ * The bell's list once a frame is applied to it, or null when only fetching
+ * the list again can say: a frame from a notifications app too old to carry
+ * the row whole, or a clear, which names no rows. Downloading the whole list
+ * for every frame cost each open tab its full size per notification, read and
+ * open chat. The list stays as a fetch would answer it: oldest first, a row
+ * hidden from the bell left out, a row sent again replacing the one held.
+ */
+export function notificationsAfter(
+  list: Notification[],
+  frame: NotificationFrame
+): Notification[] | null {
+  const now = Math.floor(Date.now() / 1000)
+  switch (frame.type) {
+    case 'new': {
+      if (
+        typeof frame.web !== 'boolean' ||
+        typeof frame.id !== 'string' ||
+        typeof frame.created !== 'number'
+      )
+        return null
+      const rest = list.filter((row) => row.id !== frame.id)
+      if (!frame.web) return rest.length === list.length ? list : rest
+      const row: Notification = {
+        id: frame.id,
+        app: frame.app ?? '',
+        topic: frame.topic ?? '',
+        object: frame.object ?? '',
+        content: frame.content ?? '',
+        link: frame.link ?? '',
+        sender: frame.sender ?? '',
+        count: frame.count ?? 1,
+        created: frame.created,
+        read: frame.read ?? 0,
+      }
+      const after = rest.findIndex((held) => held.created > row.created)
+      return after < 0
+        ? [...rest, row]
+        : [...rest.slice(0, after), row, ...rest.slice(after)]
+    }
+    case 'read':
+      if (typeof frame.id !== 'string') return null
+      return list.map((row) =>
+        row.id === frame.id && !row.read ? { ...row, read: now } : row
+      )
+    case 'read_all':
+      return list.map((row) => (row.read ? row : { ...row, read: now }))
+  }
+  return null
+}
+
+// Apply a frame to the held list, or fetch the list again when the frame
+// cannot be applied. A fetch already under way answers from before the frame
+// and would overwrite it on landing, so then the list is fetched again, which
+// cancels that one, as every frame did before.
+function applyFrame(
+  queryClient: ReturnType<typeof useQueryClient>,
+  frame: NotificationFrame
+) {
+  const fetching =
+    queryClient.getQueryState(notificationKeys.list())?.fetchStatus ===
+    'fetching'
+  const held = fetching
+    ? undefined
+    : queryClient.getQueryData<NotificationsListResponse>(
+        notificationKeys.list()
+      )
+  const next = held ? notificationsAfter(held.data, frame) : null
+  if (held && next) {
+    if (next !== held.data) {
+      queryClient.setQueryData(notificationKeys.list(), { ...held, data: next })
+    }
+    return
+  }
+  void queryClient.invalidateQueries({ queryKey: notificationKeys.list() })
+}
+
 // The token rides in the subprotocol, so it stays out of the URL and out of
 // every access log; only a page that has fallen back for a server which
 // ignores it puts the token back in the query string.
@@ -116,7 +202,7 @@ function broadcastToIframes(msg: Record<string, unknown>) {
 function handleWebSocketMessage(event: MessageEvent) {
   if (!wsState.queryClientRef) return
   try {
-    const data = JSON.parse(event.data)
+    const data = JSON.parse(event.data) as NotificationFrame
     switch (data.type) {
       case 'new':
       case 'read':
@@ -124,9 +210,14 @@ function handleWebSocketMessage(event: MessageEvent) {
       case 'clear_all':
       case 'clear_app':
       case 'clear_object':
-        wsState.queryClientRef.invalidateQueries({
-          queryKey: notificationKeys.list(),
-        })
+      // Which rows the bell lists changed with a topic's category or a
+      // category's destinations: the frame names none, so the list is
+      // fetched.
+      case 'categories':
+        // A clear is sent on every open of an object, for the phone; one that
+        // changed no row changes nothing listed here or in the app frames.
+        if (data.type === 'clear_object' && data.changed === 0) break
+        applyFrame(wsState.queryClientRef, data)
         broadcastToIframes({ type: 'notification-update', event: data.type })
         break
     }
@@ -165,6 +256,12 @@ function openWebSocket(token: string) {
     ws.onopen = () => {
       established = true
       websocketOpened(protocols)
+      // Frames sent before the socket was open are lost: on a reconnect, and
+      // on the first open, after a list read before it. Fetching cancels a
+      // read under way, which may also be from before.
+      void wsState.queryClientRef?.invalidateQueries({
+        queryKey: notificationKeys.list(),
+      })
     }
     ws.onmessage = handleWebSocketMessage
     ws.onclose = () => {
@@ -232,20 +329,25 @@ export function useMenuNotifications() {
   const { data, isLoading, isError } = useQuery<NotificationsListResponse>({
     queryKey: notificationKeys.list(),
     queryFn: fetchNotifications,
-    // WebSocket invalidation is the primary update path; poll slowly as a
+    // WebSocket frames are the primary update path; poll slowly as a
     // fallback for sessions where the WebSocket can never connect (e.g. a
     // proxy that blocks upgrades), so the badge doesn't stay frozen.
     refetchInterval: 5 * 60 * 1000,
   })
 
-  // A refused read leaves the badge as it was, so the failure has to be said:
-  // silent, it reads as the click having done nothing.
+  // A read lands in the held list as it is asked for, as its frame lands it
+  // in every other tab: fetching the whole list again for it was a second
+  // download on top of the frame's. Landing it when the answer came instead
+  // marked read a notification whose frame arrived in between. A refused read
+  // fetches the list again, and has to be said: silent, it reads as the click
+  // having done nothing.
+  const refused = () =>
+    void queryClient.invalidateQueries({ queryKey: notificationKeys.list() })
   const markAsReadMutation = useMutation({
     mutationFn: markAsRead,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: notificationKeys.all() })
-    },
+    onMutate: (id) => applyFrame(queryClient, { type: 'read', id }),
     onError: (error) => {
+      refused()
       toast.error(
         getErrorMessage(error, t`Failed to mark notification as read`)
       )
@@ -254,10 +356,9 @@ export function useMenuNotifications() {
 
   const markAllAsReadMutation = useMutation({
     mutationFn: markAllAsRead,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: notificationKeys.all() })
-    },
+    onMutate: () => applyFrame(queryClient, { type: 'read_all' }),
     onError: (error) => {
+      refused()
       toast.error(
         getErrorMessage(error, t`Failed to mark all notifications as read`)
       )
