@@ -131,6 +131,48 @@ describe('shell fetch: carries the frame’s requests in its own app', () => {
     expect(sent?.transfer).toEqual([result.body])
   })
 
+  it('tells a frame that asks how much of a download has come, and only one that asks', async () => {
+    const chunk = new Uint8Array(1000).fill(7)
+    const body = () =>
+      new Response(
+        new ReadableStream({
+          start(controller) {
+            for (let k = 0; k < 3; k++) controller.enqueue(chunk)
+            controller.close()
+          },
+        }),
+        { status: 200 }
+      )
+    const shell = boot(() => Promise.resolve(body()))
+    shell.send({
+      type: 'fetch',
+      id: 4,
+      url: '/feeds/assets/model.glb',
+      method: 'GET',
+      headers: [],
+      progress: true,
+    })
+    shell.send({
+      type: 'fetch',
+      id: 5,
+      url: '/feeds/assets/model.glb',
+      method: 'GET',
+      headers: [],
+    })
+    await shell.settle()
+    const progress = shell.posted
+      .filter((p) => p.message.type === 'fetch.progress')
+      .map((p) => p.message)
+    expect(progress.length).toBeGreaterThan(0)
+    expect(progress.every((m) => m.id === 4)).toBe(true)
+    expect(progress[progress.length - 1].received).toBe(3000)
+    const results = shell.results()
+    expect(results.map((m) => m.id).sort()).toEqual([4, 5])
+    for (const result of results) {
+      expect((result.body as ArrayBuffer).byteLength).toBe(3000)
+    }
+  })
+
   it('revalidates when the frame asks, and only then', async () => {
     const shell = boot()
     shell.send({
@@ -526,5 +568,8 @@ describe('shell fetch: ends with the frame’s say-so', () => {
     await shell.settle()
     const init = shell.posted.find((p) => p.message.type === 'init')
     expect(init?.message.fetch).toBe(true)
+    // and that it reports a carried download's progress, without which a
+    // frame that needs to see one moving loads it itself.
+    expect(init?.message.progress).toBe(true)
   })
 })
