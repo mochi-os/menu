@@ -934,9 +934,11 @@
                 answer({ redirect: true });
                 return;
             }
-            return response.arrayBuffer().then(function(buffer) {
-                var headers = [];
-                response.headers.forEach(function(value, name) { headers.push([name, value]); });
+            var headers = [];
+            response.headers.forEach(function(value, name) { headers.push([name, value]); });
+            return fetchBody(response, data.progress === true ? function(received) {
+                requester.postMessage({ type: 'fetch.progress', id: id, received: received }, '*');
+            } : null).then(function(buffer) {
                 answer({ status: response.status, statusText: response.statusText, headers: headers, body: buffer }, [buffer]);
             });
         }).catch(function() {
@@ -945,6 +947,38 @@
             if (requests.get(id) === controller) requests.delete(id);
             if (requests.size === 0 && fetchRequests.get(requester) === requests) fetchRequests.delete(requester);
         });
+    }
+
+    // A response's body, read whole. A frame that asked for progress hears how
+    // many bytes have come so far, at most every tenth of a second: a large
+    // download carried here shows no movement in the frame otherwise, and Air
+    // calls a load that shows none for 20 s stalled.
+    function fetchBody(response, progress) {
+        if (!progress || !response.body || !response.body.getReader) return response.arrayBuffer();
+        var reader = response.body.getReader();
+        var chunks = [];
+        var received = 0;
+        var told = 0;
+        function pump() {
+            return reader.read().then(function(step) {
+                if (step.done) {
+                    var buffer = new Uint8Array(received);
+                    var at = 0;
+                    chunks.forEach(function(chunk) { buffer.set(chunk, at); at += chunk.length; });
+                    progress(received);
+                    return buffer.buffer;
+                }
+                chunks.push(step.value);
+                received += step.value.length;
+                var now = Date.now();
+                if (now - told >= 100) {
+                    told = now;
+                    progress(received);
+                }
+                return pump();
+            });
+        }
+        return pump();
     }
 
     function handleFetchAbort(data, requester) {
@@ -2291,6 +2325,9 @@
                         // The fetch bridge: an app frame sends its requests
                         // through this page (handleFetch).
                         fetch: true,
+                        // and hears a carried download's bytes as they come
+                        // (fetch.progress), when it asks.
+                        progress: true,
                         sidebarOpen: sidebarOpen,
                         domain: sc.domain || null,
                         locale: currentLocale || null,
@@ -2321,6 +2358,9 @@
                         // The fetch bridge: an app frame sends its requests
                         // through this page (handleFetch).
                         fetch: true,
+                        // and hears a carried download's bytes as they come
+                        // (fetch.progress), when it asks.
+                        progress: true,
                         sidebarOpen: sidebarOpen,
                         domain: null,
                         locale: currentLocale || null,
