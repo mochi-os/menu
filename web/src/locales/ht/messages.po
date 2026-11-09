@@ -179,8 +179,8 @@ msgid "Add"
 msgstr "Ajoute"
 
 #: ../../../lib/web/src/components/entity/entity-comment-list.tsx
-msgid "Add a comment..."
-msgstr "Ajoute yon kòmantè..."
+msgid "Add a comment"
+msgstr "Ajoute yon kòmantè"
 
 #: ../../../lib/web/src/features/accounts/account-add.tsx
 msgid "Add a new account"
@@ -212,8 +212,8 @@ msgid "Add field"
 msgstr "Ajoute chan"
 
 #: ../../../lib/web/src/components/entity/entity-field-editor.tsx
-msgid "Add item..."
-msgstr "Ajoute eleman..."
+msgid "Add item"
+msgstr "Ajoute eleman"
 
 #: ../../../lib/web/src/components/entity/entity-object-links.tsx
 msgid "Add link"
@@ -228,8 +228,8 @@ msgid "Add option"
 msgstr "Ajoute opsyon"
 
 #: ../../../lib/web/src/components/post-tags.tsx
-msgid "Add tag..."
-msgstr "Ajoute etikèt..."
+msgid "Add tag"
+msgstr "Ajoute etikèt"
 
 #: ../../../lib/web/src/features/accounts/account-add.tsx
 msgid "Add to existing notifications"
@@ -974,16 +974,8 @@ msgid "Ends before it starts"
 msgstr "Li fini anvan li kòmanse"
 
 #: ../../../lib/web/src/components/banner-section.tsx
-msgid "Enter banner text (markdown supported)..."
-msgstr "Antre tèks banyè (markdown sipòte)..."
-
-#: ../../../lib/web/src/components/step-up-dialog.tsx
-msgid "Enter the code from your email"
-msgstr "Antre kòd la ki nan imel ou"
-
-#: ../../../lib/web/src/components/step-up-dialog.tsx
-msgid "Enter your authenticator code"
-msgstr "Antre kòd otantifikatè ou"
+msgid "Enter banner text (markdown supported)"
+msgstr "Antre tèks banyè (markdown sipòte)"
 
 #: ../../../lib/web/src/components/entity/entity-object-detail-panel.tsx
 msgid "Error"
@@ -1904,8 +1896,8 @@ msgstr "Reponn"
 
 #. placeholder {0}: comment.name || comment.author
 #: ../../../lib/web/src/components/entity/entity-comment-thread.tsx
-msgid "Reply to {0}..."
-msgstr "Reponn {0}..."
+msgid "Reply to {0}"
+msgstr "Reponn {0}"
 
 #: ../../../lib/web/src/components/entity/entity-field-dialog.tsx
 msgid "Required"
@@ -1975,8 +1967,13 @@ msgid "Save"
 msgstr "Sove"
 
 #: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx
+#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx
 #: ../../../lib/web/src/components/filter-bar.tsx
 #: ../../../lib/web/src/components/header-search.tsx
+#: ../../../lib/web/src/components/inline-entity-search.tsx
+#: ../../../lib/web/src/components/person-picker.tsx
+#: ../../../lib/web/src/components/search-entity-page.tsx
 #: ../../../lib/web/src/components/search.tsx
 msgid "Search"
 msgstr "Chèche"
@@ -1986,28 +1983,17 @@ msgid "Search for a command to run..."
 msgstr "Chèche yon kòmand pou egzekite..."
 
 #: ../../../lib/web/src/components/place-picker.tsx
+#: ../../../lib/web/src/components/place-picker.tsx
 msgid "Search for a place"
 msgstr "Chèche yon kote"
 
-#: ../../../lib/web/src/components/place-picker.tsx
-msgid "Search for a place..."
-msgstr "Chèche yon kote..."
-
-#: ../../../lib/web/src/components/travelling-picker.tsx
-msgid "Search for destination..."
-msgstr "Chèche pou destinasyon..."
-
-#: ../../../lib/web/src/components/travelling-picker.tsx
-msgid "Search for origin..."
-msgstr "Chèche pou orijin..."
-
 #: ../../../lib/web/src/components/entity/entity-object-links.tsx
-msgid "Search objects..."
-msgstr "Chèche objè..."
+msgid "Search objects"
+msgstr "Chèche objè"
 
 #: ../../../lib/web/src/components/timezone-select.tsx
-msgid "Search time zone..."
-msgstr "Chèche zòn lè..."
+msgid "Search time zone"
+msgstr "Chèche zòn lè"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx
 msgid "Search users"
@@ -2017,26 +2003,15 @@ msgstr "Chèche itilizatè"
 msgid "Search, watch, and sort this view."
 msgstr "Chèche, gade, ak triye vi sa a."
 
-#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx
-#: ../../../lib/web/src/components/entity/entity-view-options-bar.tsx
-#: ../../../lib/web/src/components/inline-entity-search.tsx
-#: ../../../lib/web/src/components/person-picker.tsx
-#: ../../../lib/web/src/components/search-entity-page.tsx
-msgid "Search..."
-msgstr "Chèche..."
-
 #: ../../../lib/web/src/components/search-entity-page.tsx
 #: ../../../lib/web/src/features/access/access-dialog.tsx
 msgid "Searching..."
 msgstr "Ap chèche..."
 
+#: ../../../lib/web/src/components/entity/entity-field-editor.tsx
 #: ../../../lib/web/src/hooks/use-field-type-labels.ts
 msgid "Select"
 msgstr "Chwa"
-
-#: ../../../lib/web/src/components/entity/entity-view-sheet.tsx
-msgid "Select a field"
-msgstr "Chwazi yon jaden"
 
 #: ../../../lib/web/src/components/game/game-empty-state.tsx
 msgid "Select a game"
@@ -2049,10 +2024,6 @@ msgstr "Chwazi yon itilizatè, gwoup, oswa lòt règ pou bay aksè."
 #: ../../../lib/web/src/features/access/access-dialog.tsx
 msgid "Select access rule"
 msgstr "Chwazi règ aksè"
-
-#: ../../../lib/web/src/features/accounts/account-add.tsx
-msgid "Select account type"
-msgstr "Chwazi tip kont"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx
 msgid "Select group"
@@ -2067,17 +2038,12 @@ msgid "Select next card"
 msgstr "Chwazi pwochen kat la"
 
 #: ../../../lib/web/src/components/person-picker.tsx
-msgid "Select person..."
-msgstr "Chwazi yon moun..."
+msgid "Select person"
+msgstr "Chwazi yon moun"
 
 #: ../../../lib/web/src/components/entity/keyboard-shortcuts-help.tsx
 msgid "Select previous card"
 msgstr "Chwazi kat anvan an"
-
-#: ../../../lib/web/src/components/entity/entity-field-editor.tsx
-#: ../../../lib/web/src/components/entity/entity-field-editor.tsx
-msgid "Select..."
-msgstr "Chwazi..."
 
 #. placeholder {0}: getSelectedName()
 #: ../../../lib/web/src/features/access/access-dialog.tsx
@@ -2371,20 +2337,16 @@ msgid "Type"
 msgstr "Tip"
 
 #: ../../../lib/web/src/components/command-menu.tsx
-msgid "Type a command or search..."
-msgstr "Tape yon kòmand oswa rechèch..."
+msgid "Type a command or search"
+msgstr "Tape yon kòmand oswa rechèch"
 
 #: ../../../lib/web/src/components/game/game-chat-input.tsx
-msgid "Type a message…"
-msgstr "Tape yon mesaj…"
+msgid "Type a message"
+msgstr "Tape yon mesaj"
 
 #: ../../../lib/web/src/features/access/access-dialog.tsx
 msgid "Type to search users"
 msgstr "Tape pou chèche itilizatè"
-
-#: ../../../lib/web/src/features/access/access-dialog.tsx
-msgid "Type to search..."
-msgstr "Tape pou chèche..."
 
 #: ../../../lib/web/src/lib/api-response-interceptors.ts
 msgid "Unable to connect to remote server"
