@@ -10,11 +10,13 @@ import { useLingui } from '@lingui/react/macro'
 import {
   toast,
   getErrorMessage,
+  applyNotificationsFrame,
   websocketFailed,
   websocketOpened,
   websocketProtocols,
   websocketQueryToken,
   type Notification,
+  type NotificationFrame,
 } from '@mochi/web'
 import { menuFetch } from './menu-api'
 
@@ -73,90 +75,14 @@ const wsState: WebSocketState = {
   minting: false,
 }
 
-/** A notifications socket frame, as the notifications app writes it. */
-export interface NotificationFrame extends Partial<Notification> {
-  type?: string
-  /** On a "new" frame: whether the bell lists the row at all. */
-  web?: boolean
-  /** On a clear_object frame: how many rows it changed. */
-  changed?: number
-}
-
-/**
- * The bell's list once a frame is applied to it, or null when only fetching
- * the list again can say: a frame from a notifications app too old to carry
- * the row whole, or a clear, which names no rows. Downloading the whole list
- * for every frame cost each open tab its full size per notification, read and
- * open chat. The list stays as a fetch would answer it: oldest first, a row
- * hidden from the bell left out, a row sent again replacing the one held.
- */
-export function notificationsAfter(
-  list: Notification[],
-  frame: NotificationFrame
-): Notification[] | null {
-  const now = Math.floor(Date.now() / 1000)
-  switch (frame.type) {
-    case 'new': {
-      if (
-        typeof frame.web !== 'boolean' ||
-        typeof frame.id !== 'string' ||
-        typeof frame.created !== 'number'
-      )
-        return null
-      const rest = list.filter((row) => row.id !== frame.id)
-      if (!frame.web) return rest.length === list.length ? list : rest
-      const row: Notification = {
-        id: frame.id,
-        app: frame.app ?? '',
-        topic: frame.topic ?? '',
-        object: frame.object ?? '',
-        content: frame.content ?? '',
-        link: frame.link ?? '',
-        sender: frame.sender ?? '',
-        count: frame.count ?? 1,
-        created: frame.created,
-        read: frame.read ?? 0,
-      }
-      const after = rest.findIndex((held) => held.created > row.created)
-      return after < 0
-        ? [...rest, row]
-        : [...rest.slice(0, after), row, ...rest.slice(after)]
-    }
-    case 'read':
-      if (typeof frame.id !== 'string') return null
-      return list.map((row) =>
-        row.id === frame.id && !row.read ? { ...row, read: now } : row
-      )
-    case 'read_all':
-      return list.map((row) => (row.read ? row : { ...row, read: now }))
-  }
-  return null
-}
-
-// Apply a frame to the held list, or fetch the list again when the frame
-// cannot be applied. A fetch already under way answers from before the frame
-// and would overwrite it on landing, so then the list is fetched again, which
-// cancels that one, as every frame did before.
+// Apply a frame to the held list with the reducer the notifications page
+// shares, or fetch the list again when it cannot be applied. False for a frame
+// that concerns the list not at all.
 function applyFrame(
   queryClient: ReturnType<typeof useQueryClient>,
   frame: NotificationFrame
-) {
-  const fetching =
-    queryClient.getQueryState(notificationKeys.list())?.fetchStatus ===
-    'fetching'
-  const held = fetching
-    ? undefined
-    : queryClient.getQueryData<NotificationsListResponse>(
-        notificationKeys.list()
-      )
-  const next = held ? notificationsAfter(held.data, frame) : null
-  if (held && next) {
-    if (next !== held.data) {
-      queryClient.setQueryData(notificationKeys.list(), { ...held, data: next })
-    }
-    return
-  }
-  void queryClient.invalidateQueries({ queryKey: notificationKeys.list() })
+): boolean {
+  return applyNotificationsFrame(queryClient, notificationKeys.list(), frame)
 }
 
 // The token rides in the subprotocol, so it stays out of the URL and out of
@@ -203,23 +129,10 @@ function handleWebSocketMessage(event: MessageEvent) {
   if (!wsState.queryClientRef) return
   try {
     const data = JSON.parse(event.data) as NotificationFrame
-    switch (data.type) {
-      case 'new':
-      case 'read':
-      case 'read_all':
-      case 'clear_all':
-      case 'clear_app':
-      case 'clear_object':
-      // Which rows the bell lists changed with a topic's category or a
-      // category's destinations: the frame names none, so the list is
-      // fetched.
-      case 'categories':
-        // A clear is sent on every open of an object, for the phone; one that
-        // changed no row changes nothing listed here or in the app frames.
-        if (data.type === 'clear_object' && data.changed === 0) break
-        applyFrame(wsState.queryClientRef, data)
-        broadcastToIframes({ type: 'notification-update', event: data.type })
-        break
+    // A frame of another type, and a clear that changed no row, change
+    // nothing listed here or in the app frames.
+    if (applyFrame(wsState.queryClientRef, data)) {
+      broadcastToIframes({ type: 'notification-update', event: data.type })
     }
   } catch {
     // Ignore parse errors

@@ -12,7 +12,7 @@
     var staleIframe = null; // old iframe kept visible during transition
     var menuEl = document.getElementById('menu');
     var shellConfig = null; // populated by /_/shell fetch
-    var currentAppPath = getAppNameFromPath(window.location.pathname);
+    var currentAppPath = getAppNameFromPath(framePath(window.location.pathname));
     // Server-resolved entity id of the loaded app, set by fetchToken; null
     // until the first token resolves and during cross-app navigation.
     // Permission checks key on this; localStorage namespacing keys on
@@ -26,6 +26,10 @@
     // whatever the pushes summed to - which let navigate-back pop past the
     // entry the shell started at.
     function historyPush(path) {
+        // A push drops the entries ahead, so a walk back to the page that
+        // holds unsaved edits (popstate) has nowhere to go: left set, the flag
+        // would swallow the user's next back or forward.
+        restoring = false;
         shellHistoryDepth++;
         history.pushState({ depth: shellHistoryDepth }, '', path);
     }
@@ -75,10 +79,14 @@
     // cache, rather than from the network on every page view. A shell older
     // than the bridge names no frame, and the page loads its code itself.
     var FRAME_NAME = 'mochi:bridge';
+    // The value of the root app's frame's second stamp (stampFrame). Set
+    // here, before the first frame is made and stamped.
+    var ROOT_STAMP = 'true';
 
     // Create the initial iframe — derive src from current URL. shellSrc also
     // sheds any _shell a polluted bookmark or stale address bar carries.
-    var initialSrc = shellSrc(window.location.pathname + window.location.search + window.location.hash);
+    var initialPath = framePath(window.location.pathname + window.location.search + window.location.hash);
+    var initialSrc = shellSrc(initialPath);
     var container = document.getElementById('app-container');
     var iframe = document.createElement('iframe');
     iframe.id = 'app-frame';
@@ -87,7 +95,7 @@
     // The app this frame was created FOR. 'ready' mints against this, never
     // against the top URL, which a cross-app navigation moves before the old
     // frame is replaced.
-    iframe.dataset.app = getAppNameFromPath(window.location.pathname);
+    stampFrame(iframe, initialPath);
     iframe.name = FRAME_NAME;
     iframe.src = initialSrc;
     watchFrame(iframe);
@@ -409,6 +417,7 @@
     // one sends its ready message. This avoids both history pollution (creating
     // a new element instead of setting .src) and white flashes during transitions.
     function swapIframe(newSrc) {
+        newSrc = framePath(newSrc);
         var container = iframe.parentNode;
 
         // The page that held unsaved edits is going; nothing is held for the next.
@@ -443,7 +452,7 @@
         next.setAttribute('sandbox', 'allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads');
         next.setAttribute('allow', 'gamepad *; fullscreen *; autoplay *');
         next.style.visibility = 'hidden';
-        next.dataset.app = getAppNameFromPath(newSrc);
+        stampFrame(next, newSrc);
         next.name = FRAME_NAME;
         next.src = shellSrc(newSrc);
         watchFrame(next);
@@ -906,13 +915,11 @@
         // From the frame that asked, not the top URL, as handleDownload: the
         // app it was created for. The outgoing frame of a cross-app switch
         // asks too, for its own app, not the one replacing it.
-        var app = frame.dataset ? (frame.dataset.app || '') : '';
         var url;
         try { url = new URL(data.url, window.location.href); } catch (e) { url = null; }
         var method = typeof data.method === 'string' ? data.method.toUpperCase() : '';
         var init = null;
-        if (app && url && url.origin === window.location.origin &&
-                getAppNameFromPath(url.pathname) === app && fetchMethods.indexOf(method) >= 0) {
+        if (frameCarries(frame, url) && fetchMethods.indexOf(method) >= 0) {
             init = fetchInit(method, data);
         }
         if (!init) {
@@ -1010,8 +1017,11 @@
     // load and the mint another, and neither needs the other. 'ready' posts it
     // only after its own checks, so a frame that never asks never gets it.
     function frameMint(frame) {
+        var app = frameApp(frame);
+        // An unstamped frame gets no token: 'ready' refuses it too.
+        if (app === null) return;
         var state = frameState(frame);
-        state.token = fetchToken(frame.dataset.app || '');
+        state.token = fetchToken(app);
         // Settled by 'ready', if it comes; a frame replaced first wastes it.
         state.token.catch(function() {});
     }
@@ -1054,6 +1064,16 @@
         var claimed = typeof data.path === 'string' ? sameOriginTarget(stripShell(data.path)) : null;
         if (claimed && claimed.app && claimed.path !== here) {
             handleNavigateExternal({ url: claimed.path });
+            return;
+        }
+        // The top URL names the app the shell holds, unless something moved
+        // it there without a navigation: then that app is entered as a
+        // navigation enters it - its storage, entity id and token refresh with
+        // it - never mounted under the one the shell held.
+        var hereApp = getAppNameFromPath(framePath(here));
+        if (hereApp !== currentAppPath) {
+            lastNavigatedPath = here;
+            enterApp(hereApp, here);
             return;
         }
         showProgress();
@@ -2056,20 +2076,114 @@
 
     // --- URL sync ---
 
+    // The app a path names: its first segment, read from the path alone. A
+    // path may carry its query and hash (popstate, a frame's own 'ready', a
+    // swap's target), and read whole, '/?x' named the app '?x' and '/feeds#y'
+    // the app 'feeds#y'. The string is cut, not resolved as a URL: resolved,
+    // '//host/feeds' - a same-origin pathname with an empty first segment -
+    // names 'feeds', where core routes it by 'host' (framePath).
     function getAppNameFromPath(path) {
-        var match = path.match(/^\/([^/]+)/);
+        var match = String(path).split(/[?#]/)[0].match(/^\/([^/]+)/);
         return match ? match[1] : '';
+    }
+
+    // The path a frame is made for. A same-origin pathname can begin with an
+    // empty segment ('//evil.example/' is the path of http://host//evil.example/),
+    // and as a frame's src that is protocol-relative: the frame loaded the
+    // other server, under the shell's chrome, and its 'ready' was answered with
+    // a token minted for the root app. Core routes such a path by its first
+    // non-empty segment (web_path trims the slashes), so the leading run of
+    // slashes, and of backslashes, which a URL reads as slashes, is collapsed
+    // to one: the frame loads the page core serves there, on this origin. A
+    // path that would still leave it is replaced by the root page.
+    function framePath(path) {
+        var collapsed = String(path).replace(/^[\/\\]+/, '/');
+        try {
+            if (new URL(collapsed, window.location.href).origin === window.location.origin) return collapsed;
+        } catch (e) {}
+        return '/';
+    }
+
+    // Stamp a frame with the app it is made for, by the path it is made for.
+    // The root app, which core serves at /, has the name '', as an unstamped
+    // frame reads, and an unstamped frame must get nothing. So the root app's
+    // frame is stamped a second time, positively, from the path itself - this
+    // origin and nothing past the first slash - never from an empty name.
+    function stampFrame(frame, path) {
+        frame.dataset.app = getAppNameFromPath(path);
+        if (frame.dataset.app !== '') return;
+        var resolved;
+        try { resolved = new URL(path, window.location.href); } catch (e) { return; }
+        if (resolved.origin === window.location.origin && resolved.pathname === '/') {
+            frame.dataset.root = ROOT_STAMP;
+        }
+    }
+
+    // The app a frame was stamped for, or null for a frame that carries no
+    // stamp: an empty name is the root app's only with the root stamp beside
+    // it. Every grant to a frame - its token, its carried requests - asks
+    // here, so an unstamped frame fails rather than becoming the root app's.
+    function frameApp(frame) {
+        var stamp = (frame && frame.dataset) || {};
+        if (stamp.app) return stamp.app;
+        if (stamp.app === '' && stamp.root === ROOT_STAMP) return '';
+        return null;
+    }
+
+    // The paths core sends the root app (web_path, core/server/web.go): a
+    // first segment that names no app and no entity falls through to it, and
+    // these are the ones its pages use - its assets, its actions and its
+    // images. The bridge carries nothing else for its frame, as it carries
+    // nothing outside its own app for any other.
+    var ROOT_PATHS = ['/assets/', '/-/', '/images/'];
+
+    // Whether path, a URL's resolved pathname, is one of the root app's. The
+    // resolving has already removed '.' and '..' segments, their encoded forms
+    // included, and read a backslash as a slash; what the server would decode
+    // after this check - an encoded slash, backslash or dot - and an empty
+    // segment are refused outright, so the match is on the path the server
+    // routes.
+    function rootPath(path) {
+        if (/%(2f|5c|2e)/i.test(path) || path.indexOf('//') >= 0) return false;
+        for (var i = 0; i < ROOT_PATHS.length; i++) {
+            if (path.indexOf(ROOT_PATHS[i]) === 0) return true;
+        }
+        return false;
+    }
+
+    // Whether the bridge carries a request for url from frame: on this origin,
+    // and in the app the frame was made for - its first segment naming the
+    // frame's app, or for the root app's frame, which must carry both its
+    // stamps, one of the root app's paths.
+    function frameCarries(frame, url) {
+        if (!url || url.origin !== window.location.origin) return false;
+        var app = frameApp(frame);
+        if (app === null) return false;
+        if (app) return getAppNameFromPath(url.pathname) === app;
+        return rootPath(url.pathname);
     }
 
     // True only when url resolves to this same origin. Relative paths resolve
     // against the shell origin and pass; absolute off-origin URLs (and anything
-    // unparseable, including javascript:/data:) fail closed.
+    // unparseable, including javascript:/data:) fail closed. So does a path
+    // whose first segment is empty (emptyFirstSegment).
     function isSameOriginUrl(url) {
         try {
-            return new URL(url, window.location.href).origin === window.location.origin;
+            var resolved = new URL(url, window.location.href);
+            return resolved.origin === window.location.origin && !emptyFirstSegment(resolved.pathname);
         } catch (e) {
             return false;
         }
+    }
+
+    // Whether a resolved pathname begins with an empty segment, as
+    // '/a/..//host/chat/' resolves to '//host/chat/'. Given to pushState or a
+    // frame's src, that is protocol-relative: pushState moved the top URL to
+    // /chat/, another app, while the asking app stayed mounted, and its first
+    // segment names the app '' however many apps it reaches. A resolved
+    // pathname reads a backslash as a slash, so this covers both.
+    function emptyFirstSegment(pathname) {
+        return pathname.indexOf('//') === 0;
     }
 
     // Resolve url against the shell origin; null when unparseable or
@@ -2084,6 +2198,7 @@
             return null;
         }
         if (resolved.origin !== window.location.origin) return null;
+        if (emptyFirstSegment(resolved.pathname)) return null;
         return {
             path: resolved.pathname + resolved.search + resolved.hash,
             app: getAppNameFromPath(resolved.pathname)
@@ -2098,11 +2213,20 @@
         // URL to another app while this iframe stays mounted would let the next
         // 'ready' mint that app's token and hand it to the iframe that asked.
         if (!data.path) return;
+        // While the shell walks back to a page with unsaved edits, or waits
+        // for its answer, the top URL is not the page's to move: a push then
+        // dropped the entry the walk was heading for, and the user's next
+        // back was swallowed.
+        if (restoring || leavePending) return;
         // Older app bundles relay their iframe URL verbatim, _shell included;
         // shed it here so the marker never reaches the address bar.
         var target = sameOriginTarget(stripShell(data.path));
         if (!target) return;
-        var currentApp = getAppNameFromPath(window.location.pathname);
+        // The app the asking frame was made for, never the top URL's: during
+        // a walk back the top already names the app being left for, and a
+        // top at //x/feeds/ read raw named ''. An unstamped frame's null
+        // matches no path, so it moves nothing.
+        var currentApp = frameApp(iframe);
         // Exact match, including the empty name. `target.app &&` skipped the
         // check whenever the name resolved empty — and getAppNameFromPath('/')
         // IS empty — so a request to move the top URL to the root passed the
@@ -2134,35 +2258,9 @@
 
         if (newApp !== currentAppPath) {
             // Cross-app navigation: update URL, fetch new token, swap iframe
-            navigating = true;
-            navigationEpoch++;
-            // Drop whatever the app we are leaving posted via color-theme-set
-            // and re-source from the shell's own root. Without this the old
-            // app's custom properties were replayed into every later app's
-            // init for the rest of the session.
-            themeFromRoot();
-            // Fail closed: the previous app's entity id must never survive into
-            // the next app's permission requests — the consent dialog and mic
-            // gate reject when no id is set. fetchToken repopulates it.
-            currentAppEntity = null;
-            setShellAppId(null);
-            currentAppPath = newApp;
-            setCurrentApp(newApp);
-            updateFavicon(newApp);
-            baseTitle = 'Mochi';
-            updateTitle();
             historyPush(target.path);
             lastNavigatedPath = target.path;
-
-            // The new frame mints its own token as it is made (frameMint), so
-            // the swap waits for nothing.
-            showProgress();
-            storageSelect(newApp);
-            swapIframe(target.path);
-            // Re-armed here as well as on 'ready': this replaces the previous
-            // app's timer, which would otherwise fire and deliver ITS token
-            // into this app's iframe.
-            scheduleTokenRefresh(newApp);
+            enterApp(newApp, target.path);
         } else {
             // Same app: move the top URL and reload the iframe. The iframe
             // cannot navigate itself (pushState is a no-op on its opaque
@@ -2175,6 +2273,38 @@
             showProgress();
             swapIframe(target.path);
         }
+    }
+
+    // Enter newApp, loading path - which the top URL already shows - in a new
+    // frame: every navigation that crosses apps comes here, so none can mount
+    // one app under another's storage, entity id or token refresh.
+    function enterApp(newApp, path) {
+        navigating = true;
+        navigationEpoch++;
+        // Drop whatever the app we are leaving posted via color-theme-set
+        // and re-source from the shell's own root. Without this the old
+        // app's custom properties were replayed into every later app's
+        // init for the rest of the session.
+        themeFromRoot();
+        // Fail closed: the previous app's entity id must never survive into
+        // the next app's permission requests — the consent dialog and mic
+        // gate reject when no id is set. fetchToken repopulates it.
+        currentAppEntity = null;
+        setShellAppId(null);
+        currentAppPath = newApp;
+        setCurrentApp(newApp);
+        updateFavicon(newApp);
+        baseTitle = 'Mochi';
+        updateTitle();
+        // The new frame mints its own token as it is made (frameMint), so
+        // the swap waits for nothing.
+        showProgress();
+        storageSelect(newApp);
+        swapIframe(path);
+        // Re-armed here as well as on 'ready': this replaces the previous
+        // app's timer, which would otherwise fire and deliver ITS token
+        // into this app's iframe.
+        scheduleTokenRefresh(newApp);
     }
 
     // --- popstate (back/forward) ---
@@ -2213,29 +2343,11 @@
         }
         lastNavigatedPath = path;
         historyDepthRestore();
-        var newApp = getAppNameFromPath(path);
+        var newApp = getAppNameFromPath(framePath(path));
 
         if (newApp !== currentAppPath) {
             // Different app — swap iframe and fetch new token
-            navigating = true;
-            navigationEpoch++;
-            // Same re-source as handleNavigateExternal: an app's posted theme
-            // must not outlive the app.
-            themeFromRoot();
-            // Fail closed, as in handleNavigateExternal: no stale entity id
-            currentAppEntity = null;
-            setShellAppId(null);
-            currentAppPath = newApp;
-            setCurrentApp(newApp);
-            updateFavicon(newApp);
-            baseTitle = 'Mochi';
-            updateTitle();
-
-            // As in handleNavigateExternal: the new frame mints its own token.
-            showProgress();
-            storageSelect(newApp);
-            swapIframe(path);
-            scheduleTokenRefresh(newApp);
+            enterApp(newApp, path);
         } else {
             // Same app — reload iframe at the new path
             // (pushState/replaceState don't work in sandboxed iframes with opaque origins)
@@ -2292,14 +2404,20 @@
                 // A page whose own path names another app came by a redirect
                 // or a navigation the shell did not make, as surely as a second
                 // 'ready' did. Older bundles send no path.
-                var elsewhere = typeof data.path === 'string' && getAppNameFromPath(stripShell(data.path)) !== (asker.dataset.app || '');
+                // The path is read as a navigation's target is: one that is
+                // not a path on this origin, or begins with an empty segment
+                // ('//feeds/' named the root app's ''), is elsewhere too.
+                var appName = frameApp(asker);
+                var reported = typeof data.path === 'string' ? sameOriginTarget(stripShell(data.path)) : undefined;
+                var elsewhere = reported === null || (reported !== undefined && reported.app !== appName);
                 if (state.answered || elsewhere) {
                     frameStray(data);
                     break;
                 }
                 state.answered = true;
+                // An unstamped frame is answered with nothing.
+                if (appName === null) break;
                 var page = state.page;
-                var appName = iframe.dataset.app || '';
                 // Pin the iframe that asked: `iframe` is reassigned by a
                 // navigation, and fetchToken also sets currentAppEntity, which
                 // a granted permission is recorded against.

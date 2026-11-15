@@ -11,6 +11,17 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 // source and evaluated against a jsdom document shaped like the shell page.
 const SHELL = readFileSync(resolve(__dirname, '../public/shell.js'), 'utf8')
 
+// Every listener put on the window from here on, so bootAt can take the
+// earlier shells' off it: a shell booted by an earlier test still answers
+// popstate, and one left holding a page with unsaved edits walks history.
+type Listening = Parameters<typeof window.addEventListener>
+const windowListeners: Listening[] = []
+const addWindowListener = window.addEventListener.bind(window)
+window.addEventListener = ((...args: Listening) => {
+  windowListeners.push(args)
+  addWindowListener(...args)
+}) as typeof window.addEventListener
+
 const HOME = '/feeds/'
 
 // boot mounts the shell on /feeds/ and returns handles for driving it plus the
@@ -22,13 +33,14 @@ function boot(
     app?: string | null
     granted?: boolean
     token?: (app: string) => Promise<Record<string, unknown>>
+    path?: string
   } = {}
 ) {
   const app = options.app === undefined ? null : options.app
   const granted = options.granted ?? false
   document.body.innerHTML =
     '<div id="app-container"></div><div id="menu"></div><div id="shell-progress"></div>'
-  window.history.replaceState({}, '', HOME)
+  window.history.replaceState({}, '', options.path ?? HOME)
 
   const tokenApps: unknown[] = []
   // Every permission check the shell made. The no-app-id case asserts on this
@@ -1829,5 +1841,399 @@ describe('shell frames: named for the fetch bridge', () => {
     const next = document.getElementById('app-frame') as HTMLIFrameElement
     expect(next).not.toBe(shell.iframe)
     expect(next.name).toBe('mochi:bridge')
+  })
+})
+
+// The app a path names is its first segment, read without the path's query or
+// hash. Read whole, '/?x' named the app '?x' and '/feeds#y' the app 'feeds#y':
+// the root page reached with a query got a frame stamped for no app, minting a
+// token for none, and a page reporting its own path with one was taken for a
+// stray.
+describe('shell: a path’s query and hash name no app', () => {
+  const current = () =>
+    document.getElementById('app-frame') as HTMLIFrameElement
+
+  it.each([
+    ['/?x', ''],
+    ['/#y', ''],
+    ['/feeds?x', 'feeds'],
+    ['/feeds#y', 'feeds'],
+  ])('stamps the frame made for %s with the app %j', async (target, app) => {
+    const shell = boot()
+    window.history.pushState({}, '', target)
+    window.dispatchEvent(new PopStateEvent('popstate'))
+    await shell.settle()
+    expect(current()).not.toBe(shell.iframe)
+    expect(current().dataset.app).toBe(app)
+    // Made for the root page, it is the root app's frame.
+    expect(current().dataset.root).toBe(app === '' ? 'true' : undefined)
+    expect(shell.tokenApps).toContain(app)
+  })
+
+  it.each([['/feeds?x'], ['/feeds#y'], ['/feeds/?x#y']])(
+    'answers a page that reports its own path as %s',
+    async (path) => {
+      const shell = boot()
+      shell.send({ type: 'ready', path })
+      await shell.settle()
+      expect(shell.posted.filter((m) => m.type === 'init')).toHaveLength(1)
+      expect(current()).toBe(shell.iframe)
+    }
+  )
+})
+
+// A same-origin pathname can begin with an empty segment: the path of
+// http://host//evil.example/feeds/ is //evil.example/feeds/, and as a frame's
+// src that is protocol-relative. The frame loaded the other server under the
+// shell's chrome, and its ready was answered with a token minted for the root
+// app. The frame is made for the path core serves, /evil.example/feeds/.
+describe('shell frames: never made for another server', () => {
+  const current = () =>
+    document.getElementById('app-frame') as HTMLIFrameElement
+  const DOUBLED = 'http://localhost:3000//evil.example/feeds/?x=1#y'
+
+  // The shell's own record of the app it shows must name the frame's app,
+  // or the mint for that frame never installs the app's id.
+  const shownApp = () =>
+    (window as unknown as { __mochi_shell?: { appId?: string | null } })
+      .__mochi_shell?.appId
+  beforeEach(() => {
+    delete (window as unknown as { __mochi_shell?: unknown }).__mochi_shell
+  })
+
+  it('loads the page on this origin when the shell itself is at such a path', async () => {
+    const shell = boot({ path: DOUBLED, app: 'app-entity' })
+    const src = new URL(shell.iframe.src)
+    expect(src.origin).toBe(window.location.origin)
+    expect(src.pathname).toBe('/evil.example/feeds/')
+    expect(src.hash).toBe('#y')
+    expect(shell.iframe.dataset.app).toBe('evil.example')
+    expect(shell.iframe.dataset.root).toBeUndefined()
+    // The mint is for the app core routes the path to, never the root app's.
+    expect(shell.tokenApps).toEqual(['evil.example'])
+    await shell.settle()
+    expect(shownApp()).toBe('app-entity')
+  })
+
+  it('loads the page on this origin on a back to such a path', async () => {
+    const shell = boot({ app: 'app-entity' })
+    window.history.pushState({}, '', DOUBLED)
+    window.dispatchEvent(new PopStateEvent('popstate'))
+    await shell.settle()
+    expect(current()).not.toBe(shell.iframe)
+    const src = new URL(current().src)
+    expect(src.origin).toBe(window.location.origin)
+    expect(src.pathname).toBe('/evil.example/feeds/')
+    expect(current().dataset.app).toBe('evil.example')
+    expect(shownApp()).toBe('app-entity')
+  })
+
+  it('reloads on this origin when a stray page leaves the shell at such a path', async () => {
+    const shell = boot({ path: DOUBLED })
+    await shell.start()
+    // A second ready is a page the shell did not load; it reloads the top
+    // URL's page in a new frame.
+    shell.send({ type: 'ready' })
+    await shell.settle()
+    expect(current()).not.toBe(shell.iframe)
+    expect(new URL(current().src).origin).toBe(window.location.origin)
+    expect(current().dataset.app).toBe('evil.example')
+  })
+})
+
+// The adversarial review's probe, kept as regression tests. A frame posting
+// navigate {path: '/a/..//localhost:3000/chat/'} had the shell resolve its
+// path to //localhost:3000/chat/: an empty first segment, so the app ''. Where
+// the top URL also read as '' - at / for the root app, or at //x/feeds/, read
+// without framePath - the guard passed and pushState took the protocol-relative
+// path as /chat/. The next stray reload then mounted chat under the app the
+// shell still held, its storage, entity id and consent.
+// A shell booted at start, with every frame's posts recorded: frames come
+// and go as these tests navigate, and a token's app id names its app.
+type Frame = HTMLIFrameElement
+
+function bootAt(start: string) {
+  for (const [type, listener, options] of windowListeners.splice(0)) {
+    window.removeEventListener(type, listener, options)
+  }
+  document.body.innerHTML =
+    '<div id="app-container"></div><div id="menu"></div><div id="shell-progress"></div>'
+  window.history.replaceState({}, '', start)
+  localStorage.clear()
+  delete (window as unknown as { __mochi_shell?: unknown }).__mochi_shell
+  const tokens: string[] = []
+  vi.stubGlobal(
+    'fetch',
+    vi.fn((url: string, init?: { body?: string }) => {
+      if (String(url).indexOf('/_/token') >= 0) {
+        const app = JSON.parse(init?.body ?? '{}').app ?? ''
+        tokens.push(app)
+        return Promise.resolve({
+          ok: true,
+          json: () =>
+            Promise.resolve({ app: app + '-entity', token: 'token-' + app }),
+        })
+      }
+      return Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ data: {} }),
+      })
+    })
+  )
+  new Function(SHELL)()
+  const posted = new Map<Window, Record<string, unknown>[]>()
+  const watch = (frame: Frame) => {
+    const target = frame.contentWindow as Window
+    if (!posted.has(target)) {
+      const list: Record<string, unknown>[] = []
+      posted.set(target, list)
+      target.postMessage = ((message: Record<string, unknown>) => {
+        list.push(message)
+      }) as typeof target.postMessage
+    }
+    return posted.get(target)!
+  }
+  const current = () => document.getElementById('app-frame') as Frame
+  watch(current())
+  const send = (frame: Frame, data: Record<string, unknown>) => {
+    watch(frame)
+    const event = new MessageEvent('message', { data })
+    Object.defineProperty(event, 'source', { value: frame.contentWindow })
+    window.dispatchEvent(event)
+  }
+  const settle = async () => {
+    for (let i = 0; i < 80; i++) await Promise.resolve()
+  }
+  const path = () =>
+    window.location.pathname + window.location.search + window.location.hash
+  const inits = (frame: Frame) =>
+    watch(frame).filter((message) => message.type === 'init')
+  const shownApp = () =>
+    (window as unknown as { __mochi_shell?: { appId?: string | null } })
+      .__mochi_shell?.appId
+  return { current, send, settle, path, tokens, inits, shownApp, posted: watch }
+}
+
+describe('shell: a path with an empty first segment moves nothing', () => {
+  afterEach(() => localStorage.clear())
+
+  const ESCAPE = '/a/..//localhost:3000/chat/'
+
+  it('keeps an app at its own path, as before', async () => {
+    const shell = bootAt('/x/feeds/')
+    const frame = shell.current()
+    shell.send(frame, { type: 'ready', path: '/x/feeds/' })
+    await shell.settle()
+    shell.send(frame, { type: 'navigate', path: ESCAPE })
+    await shell.settle()
+    expect(shell.path()).toBe('/x/feeds/')
+  })
+
+  it('keeps the root app at /', async () => {
+    const shell = bootAt('/')
+    const frame = shell.current()
+    shell.send(frame, { type: 'ready', path: '/' })
+    await shell.settle()
+    shell.send(frame, { type: 'navigate', path: ESCAPE })
+    await shell.settle()
+    expect(shell.path()).toBe('/')
+  })
+
+  it('keeps an app whose top is at //x/feeds/, and mounts no other app under it', async () => {
+    const shell = bootAt('http://localhost:3000//x/feeds/')
+    const frame = shell.current()
+    shell.send(frame, { type: 'ready', path: '/x/feeds/' })
+    await shell.settle()
+    shell.send(frame, { type: 'navigate', path: ESCAPE })
+    await shell.settle()
+    expect(shell.path()).toBe('//x/feeds/')
+    // A second ready reloads the app the shell holds, nothing else.
+    shell.send(frame, { type: 'ready' })
+    await shell.settle()
+    expect(shell.current()).not.toBe(frame)
+    expect(shell.current().dataset.app).toBe('x')
+  })
+
+  it('still moves the top within its own app from //x/feeds/', async () => {
+    const shell = bootAt('http://localhost:3000//x/feeds/')
+    const frame = shell.current()
+    shell.send(frame, { type: 'ready', path: '/x/feeds/' })
+    await shell.settle()
+    shell.send(frame, { type: 'navigate', path: '/x/feeds/item' })
+    await shell.settle()
+    expect(shell.path()).toBe('/x/feeds/item')
+  })
+
+  // jsdom navigates the top window only by its hash, which is witness enough:
+  // a URL that differs from the top only there is followed when allowed.
+  it('sends the top window to a path on this origin', async () => {
+    const shell = bootAt('/x/feeds/')
+    shell.send(shell.current(), { type: 'navigate-top', url: '/x/feeds/#ok' })
+    await shell.settle()
+    expect(window.location.hash).toBe('#ok')
+  })
+
+  it('does not send the top window to a path with an empty first segment', async () => {
+    const shell = bootAt('http://localhost:3000//x/feeds/')
+    shell.send(shell.current(), {
+      type: 'navigate-top',
+      url: '/a/..//x/feeds/#escaped',
+    })
+    await shell.settle()
+    expect(window.location.hash).toBe('')
+  })
+
+  it('enters the app the top URL names when a stray reload finds it moved', async () => {
+    const shell = bootAt('/x/feeds/')
+    const frame = shell.current()
+    shell.send(frame, { type: 'ready', path: '/x/feeds/' })
+    await shell.settle()
+    expect(shell.shownApp()).toBe('x-entity')
+    // Something moved the top URL without the shell's navigation.
+    window.history.pushState({}, '', '/chat/')
+    shell.send(frame, { type: 'ready' })
+    await shell.settle()
+    const chat = shell.current()
+    expect(chat.dataset.app).toBe('chat')
+    expect(document.getElementById('menu')!.getAttribute('data-app')).toBe(
+      'chat'
+    )
+    // chat's own id, from its own mint; never x's.
+    expect(shell.shownApp()).toBe('chat-entity')
+    shell.send(chat, { type: 'ready', path: '/chat/' })
+    await shell.settle()
+    shell.send(chat, { type: 'storage.set', key: 'draft', value: 'secret' })
+    await shell.settle()
+    expect(localStorage.getItem('app:chat:draft')).toBe('secret')
+    expect(localStorage.getItem('app:x:draft')).toBeNull()
+  })
+
+  it.each([['//feeds/'], ['/a/..//feeds/']])(
+    'answers a root page reporting its path as %s with no token',
+    async (reported) => {
+      const shell = bootAt('/')
+      const frame = shell.current()
+      shell.send(frame, { type: 'ready', path: reported })
+      await shell.settle()
+      expect(shell.inits(frame)).toEqual([])
+    }
+  )
+
+  it.each([
+    ['with a path', { path: '/' }],
+    ['with none', {}],
+  ])(
+    'answers a frame with an empty name and no root stamp with no token, %s',
+    async (_name, extra) => {
+      const shell = bootAt('/')
+      const frame = shell.current()
+      delete frame.dataset.root
+      shell.send(frame, { type: 'ready', ...extra })
+      await shell.settle()
+      expect(shell.inits(frame)).toEqual([])
+    }
+  )
+})
+
+// A page with unsaved edits is walked back to when the user presses back, and
+// asked. The top URL already names the app being left for while the walk is
+// queued: compared with it, the page's own navigate to that app's path was
+// pushed, dropped the entry the walk was heading for, and left the shell
+// swallowing the user's next back with the page mounted under the other app's
+// address.
+describe('shell leave guard: the page cannot move the top while it is asked', () => {
+  afterEach(() => localStorage.clear())
+  const tick = () => new Promise((resolve) => setTimeout(resolve, 30))
+
+  async function walkedBack(
+    during: (x: Frame, shell: ReturnType<typeof bootAt>) => void
+  ) {
+    // A traversal an earlier test queued lands first, not on this shell.
+    await tick()
+    const shell = bootAt('/v/')
+    shell.send(shell.current(), { type: 'ready', path: '/v/' })
+    await shell.settle()
+    shell.send(shell.current(), { type: 'navigate-external', url: '/x/a' })
+    await shell.settle()
+    const x = shell.current()
+    shell.send(x, { type: 'ready', path: '/x/a' })
+    await shell.settle()
+    shell.send(x, { type: 'unsaved', value: true })
+    let fired = false
+    const inject = () => {
+      if (fired) return
+      fired = true
+      during(x, shell)
+    }
+    window.addEventListener('popstate', inject)
+    window.history.back()
+    await tick()
+    await shell.settle()
+    await tick()
+    await shell.settle()
+    window.removeEventListener('popstate', inject)
+    return { shell, x }
+  }
+
+  it('walks back to the page whatever it posts as the walk is queued', async () => {
+    const { shell, x } = await walkedBack((frame, booted) =>
+      booted.send(frame, { type: 'navigate', path: '/v/evil' })
+    )
+    expect(shell.path()).toBe('/x/a')
+    expect(shell.current()).toBe(x)
+    expect(shell.posted(x)).toContainEqual({ type: 'leave-request' })
+    // The user's next back is theirs: it leaves for the other app.
+    window.history.back()
+    await tick()
+    await shell.settle()
+    expect(shell.path()).toBe('/v/')
+    expect(shell.current().dataset.app).toBe('v')
+  })
+
+  it('hears the user’s next back after a push of its own ends the walk', async () => {
+    const { shell } = await walkedBack((frame, booted) =>
+      booted.send(frame, { type: 'navigate-external', url: '/x/b' })
+    )
+    expect(shell.path()).toBe('/x/b')
+    window.history.back()
+    await tick()
+    await shell.settle()
+    expect(shell.path()).toBe('/v/')
+    expect(shell.current().dataset.app).toBe('v')
+  })
+
+  it('moves the top only within the app its frame was made for', async () => {
+    await tick()
+    const shell = bootAt('/x/a')
+    const x = shell.current()
+    shell.send(x, { type: 'ready', path: '/x/a' })
+    await shell.settle()
+    // Something moved the top URL to another app without the shell.
+    window.history.pushState({}, '', '/v/')
+    shell.send(x, { type: 'navigate', path: '/v/evil' })
+    await shell.settle()
+    expect(shell.path()).toBe('/v/')
+    shell.send(x, { type: 'navigate', path: '/x/b' })
+    await shell.settle()
+    expect(shell.path()).toBe('/x/b')
+  })
+
+  it('moves nothing for the page while it is asked, even in its own app', async () => {
+    const { shell, x } = await walkedBack(() => {})
+    shell.send(x, { type: 'navigate', path: '/v/evil' })
+    shell.send(x, { type: 'navigate', path: '/x/b' })
+    await shell.settle()
+    expect(shell.path()).toBe('/x/a')
+  })
+
+  it('leaves for the other app when the page lets it go', async () => {
+    const { shell, x } = await walkedBack((frame, booted) =>
+      booted.send(frame, { type: 'navigate', path: '/x/b' })
+    )
+    shell.send(x, { type: 'leave-answer', proceed: true })
+    await tick()
+    await shell.settle()
+    expect(shell.path()).toBe('/v/')
+    expect(shell.current().dataset.app).toBe('v')
   })
 })
