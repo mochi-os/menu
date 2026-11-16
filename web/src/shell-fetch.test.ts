@@ -728,3 +728,118 @@ describe('shell fetch: ends with the frame’s say-so', () => {
     expect(init?.message.progress).toBe(true)
   })
 })
+
+// A page's own channel (fetch.port): the shell answers the page's requests on
+// it, and no later page in the frame can hear them there, as the channel goes
+// with the page. Through the frame's window, which a page navigating its frame
+// itself hands to the next page before the shell hears it leave, an answer
+// that settled late reached whichever page held the frame.
+describe('shell fetch: a page’s own channel', () => {
+  const opened: MessagePort[] = []
+  afterEach(() => {
+    opened.splice(0).forEach((port) => port.close())
+  })
+
+  // A channel offered to the shell as the frame's page offers it, and what
+  // the shell has said on it.
+  function offer(shell: ReturnType<typeof boot>) {
+    const channel = new MessageChannel()
+    opened.push(channel.port1, channel.port2)
+    const heard: Array<Record<string, unknown>> = []
+    channel.port1.onmessage = (event) => heard.push(event.data)
+    const event = new MessageEvent('message', { data: { type: 'fetch.port' } })
+    Object.defineProperty(event, 'source', {
+      value: shell.iframe.contentWindow,
+    })
+    Object.defineProperty(event, 'ports', { value: [channel.port2] })
+    window.dispatchEvent(event)
+    return { port: channel.port1, heard }
+  }
+
+  it('tells the frame it takes one', async () => {
+    const shell = boot()
+    shell.send({ type: 'ready' })
+    await shell.settle()
+    const init = shell.posted.find((p) => p.message.type === 'init')
+    expect(init?.message.port).toBe(true)
+  })
+
+  it('answers a request on the channel it came on, and not the frame’s window', async () => {
+    const shell = boot()
+    const { port, heard } = offer(shell)
+    port.postMessage({
+      type: 'fetch',
+      id: 21,
+      url: '/feeds/-/list',
+      method: 'GET',
+      headers: [],
+    })
+    await vi.waitFor(() => expect(heard).toHaveLength(1))
+    expect(heard[0]).toMatchObject({
+      type: 'fetch.result',
+      id: 21,
+      status: 201,
+    })
+    expect(shell.calls[0].url).toBe('http://localhost:3000/feeds/-/list')
+    expect(shell.results()).toEqual([])
+  })
+
+  it('ends a request the page abandons on its channel', async () => {
+    const shell = boot(() => new Promise(() => {}))
+    const { port } = offer(shell)
+    port.postMessage({
+      type: 'fetch',
+      id: 22,
+      url: '/feeds/-/slow',
+      method: 'GET',
+      headers: [],
+    })
+    await vi.waitFor(() => expect(shell.calls).toHaveLength(1))
+    const signal = shell.calls[0].init.signal as AbortSignal
+    port.postMessage({ type: 'fetch.abort', id: 22 })
+    await vi.waitFor(() => expect(signal.aborted).toBe(true))
+  })
+
+  it('ends the requests of a page that leaves, and closes its channel', async () => {
+    const shell = boot(() => new Promise(() => {}))
+    const { port, heard } = offer(shell)
+    port.postMessage({
+      type: 'fetch',
+      id: 23,
+      url: '/feeds/-/slow',
+      method: 'GET',
+      headers: [],
+    })
+    await vi.waitFor(() => expect(shell.calls).toHaveLength(1))
+    const signal = shell.calls[0].init.signal as AbortSignal
+    shell.send({ type: 'leaving' })
+    expect(signal.aborted).toBe(true)
+    await new Promise((resolve) => setTimeout(resolve, 20))
+    expect(heard).toEqual([])
+    expect(shell.results()).toEqual([])
+  })
+
+  it('answers nothing to the frame’s window for a page that has left', async () => {
+    let finish: (response: Response) => void = () => {}
+    const shell = boot(
+      () =>
+        new Promise<Response>((resolve) => {
+          finish = resolve
+        })
+    )
+    shell.send({
+      type: 'fetch',
+      id: 24,
+      url: '/feeds/-/slow',
+      method: 'GET',
+      headers: [],
+    })
+    await shell.settle()
+    shell.send({ type: 'leaving' })
+    finish(
+      new Response('{"data":"meant for the page that left"}', { status: 200 })
+    )
+    await shell.settle()
+    expect(shell.results()).toEqual([])
+  })
+})
