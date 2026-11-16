@@ -246,6 +246,29 @@
         if (menuEl) menuEl.setAttribute('data-sidebar', open ? 'expanded' : 'collapsed');
     }
 
+    // The width the user dragged the sidebar to, in CSS pixels, shared by every
+    // app the way the open state is. Null leaves each app at its default. The
+    // app clamps it to its own limits and to the window; the shell only refuses
+    // anything that is not a plausible width, since an app sends it.
+    function sidebarWidthFrom(value) {
+        if (typeof value === 'string' && value !== '') value = Number(value);
+        if (typeof value !== 'number' || !isFinite(value)) return null;
+        value = Math.round(value);
+        return value >= 100 && value <= 4000 ? value : null;
+    }
+    var sidebarWidth = null;
+    try { sidebarWidth = sidebarWidthFrom(localStorage.getItem('sidebar_width')); } catch(e) {}
+
+    function setSidebarWidth(value) {
+        var width = value === null ? null : sidebarWidthFrom(value);
+        if (value !== null && width === null) return; // not a width: keep the saved one
+        sidebarWidth = width;
+        try {
+            if (width === null) localStorage.removeItem('sidebar_width');
+            else localStorage.setItem('sidebar_width', String(width));
+        } catch(e) {}
+    }
+
     function setSidebarPresent(present) {
         if (sidebarPresentTimer) { clearTimeout(sidebarPresentTimer); sidebarPresentTimer = null; }
         sidebarPresent = present === null ? null : !!present;
@@ -2329,6 +2352,7 @@
                         // (fetch.progress), when it asks.
                         progress: true,
                         sidebarOpen: sidebarOpen,
+                        sidebarWidth: sidebarWidth,
                         domain: sc.domain || null,
                         locale: currentLocale || null,
                         language: currentLanguage || null,
@@ -2362,6 +2386,7 @@
                         // (fetch.progress), when it asks.
                         progress: true,
                         sidebarOpen: sidebarOpen,
+                        sidebarWidth: sidebarWidth,
                         domain: null,
                         locale: currentLocale || null,
                         language: currentLanguage || null
@@ -2462,6 +2487,10 @@
 
             case 'sidebar-present':
                 setSidebarPresent(!!data.present);
+                break;
+
+            case 'sidebar-width':
+                setSidebarWidth(data.width);
                 break;
 
             case 'immersive':
