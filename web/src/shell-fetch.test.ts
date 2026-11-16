@@ -13,12 +13,12 @@ const SHELL = readFileSync(resolve(__dirname, '../public/shell.js'), 'utf8')
 
 type Call = { url: string; init: RequestInit & { headers: Headers } }
 
-// boot mounts the shell on /feeds/. App requests reach `respond`, which a test
-// may hold open; the token mint answers at once.
-function boot(respond?: (call: Call) => Promise<unknown>) {
+// boot mounts the shell on /feeds/, or the path given. App requests reach
+// `respond`, which a test may hold open; the token mint answers at once.
+function boot(respond?: (call: Call) => Promise<unknown>, path = '/feeds/') {
   document.body.innerHTML =
     '<div id="app-container"></div><div id="menu"></div><div id="shell-progress"></div>'
-  window.history.replaceState({}, '', '/feeds/')
+  window.history.replaceState({}, '', path)
 
   const calls: Call[] = []
   vi.stubGlobal(
@@ -353,6 +353,161 @@ describe('shell fetch: refuses anything else, so the frame goes direct', () => {
     await shell.settle()
     expect(shell.calls).toHaveLength(0)
     expect(shell.results()).toEqual([])
+  })
+})
+
+// The root app's frame, made for /: its app's name is '', the name an
+// unstamped frame reads as, so it was refused everything and its page
+// downloaded its whole bundle on every view. It is stamped as the root app's
+// from the path it was made for, and carried the paths core sends the root
+// app - its assets, its actions and its images - and nothing else.
+const ROOT_CARRIED = [
+  ['an asset', '/assets/index-abc.js'],
+  ['an action', '/-/icons'],
+  ['an image', '/images/icon.svg'],
+  ['an absolute same-origin asset', 'http://localhost:3000/assets/style.css'],
+]
+
+const ROOT_REFUSED = [
+  ['another app', '/feeds/-/list'],
+  ['another app’s assets', '/feeds/assets/index.js'],
+  ['an entity', '/1sfEACmTn/-/list'],
+  ['a core route', '/_/token'],
+  ['the page itself', '/'],
+  ['a root path without its slash', '/assets'],
+  ['a path that only begins like one', '/assetsx/index.js'],
+  ['traversal', '/assets/../feeds/-/list'],
+  ['encoded traversal', '/assets/%2e%2e/feeds/-/list'],
+  ['half-encoded traversal', '/-/.%2E/settings/-/list'],
+  ['an encoded slash', '/assets/x%2F..%2F..%2Ffeeds/-/list'],
+  ['an encoded slash in the first segment', '/assets%2F..%2Ffeeds/-/list'],
+  ['an encoded backslash', '/assets/x%5C..%5Cfeeds'],
+  ['a backslash', '/assets\\..\\feeds/-/list'],
+  ['a double slash', '/-//feeds/-/list'],
+  ['another origin', 'https://evil.example/assets/index.js'],
+  ['protocol-relative', '//evil.example/assets/index.js'],
+]
+
+describe('shell fetch: the root app’s frame', () => {
+  it('is stamped as the root app’s from the path it was made for', () => {
+    const shell = boot(undefined, '/')
+    expect(shell.iframe.dataset.app).toBe('')
+    expect(shell.iframe.dataset.root).toBe('true')
+  })
+
+  it('leaves another app’s frame without the stamp', () => {
+    const shell = boot()
+    expect(shell.iframe.dataset.app).toBe('feeds')
+    expect(shell.iframe.dataset.root).toBeUndefined()
+  })
+
+  it.each(ROOT_CARRIED)('carries %s', async (_name, url) => {
+    const shell = boot(undefined, '/')
+    shell.send({
+      type: 'fetch',
+      id: 30,
+      url,
+      method: 'GET',
+      headers: [['Authorization', 'Bearer root-token']],
+    })
+    await shell.settle()
+    expect(shell.calls).toHaveLength(1)
+    const { init } = shell.calls[0]
+    expect(init.credentials).toBe('omit')
+    expect(init.redirect).toBe('manual')
+    expect(init.headers.get('Authorization')).toBe('Bearer root-token')
+    expect(shell.results()).toMatchObject([{ id: 30, status: 201 }])
+  })
+
+  it.each(ROOT_REFUSED)('refuses %s', async (_name, url) => {
+    const shell = boot(undefined, '/')
+    shell.send({ type: 'fetch', id: 31, url, method: 'GET', headers: [] })
+    await shell.settle()
+    expect(shell.calls).toHaveLength(0)
+    expect(shell.results()).toEqual([
+      { type: 'fetch.result', id: 31, refused: true },
+    ])
+  })
+
+  // An empty name is not the stamp: a frame whose name went missing, or came
+  // out empty for a path other than /, is refused everything.
+  it('refuses the root app’s frame once its name is gone', async () => {
+    const shell = boot(undefined, '/')
+    delete shell.iframe.dataset.app
+    shell.send({
+      type: 'fetch',
+      id: 32,
+      url: '/assets/index-abc.js',
+      method: 'GET',
+      headers: [],
+    })
+    await shell.settle()
+    expect(shell.calls).toHaveLength(0)
+    expect(shell.results()).toEqual([
+      { type: 'fetch.result', id: 32, refused: true },
+    ])
+  })
+
+  it('refuses a frame whose name came out empty without the stamp', async () => {
+    const shell = boot()
+    shell.iframe.dataset.app = ''
+    shell.send({
+      type: 'fetch',
+      id: 33,
+      url: '/assets/index-abc.js',
+      method: 'GET',
+      headers: [],
+    })
+    await shell.settle()
+    expect(shell.calls).toHaveLength(0)
+    expect(shell.results()).toEqual([
+      { type: 'fetch.result', id: 33, refused: true },
+    ])
+  })
+
+  it('refuses a frame stamped with anything but the root stamp', async () => {
+    const shell = boot(undefined, '/')
+    shell.iframe.dataset.root = ''
+    shell.send({
+      type: 'fetch',
+      id: 35,
+      url: '/assets/index-abc.js',
+      method: 'GET',
+      headers: [],
+    })
+    await shell.settle()
+    expect(shell.calls).toHaveLength(0)
+    expect(shell.results()).toEqual([
+      { type: 'fetch.result', id: 35, refused: true },
+    ])
+  })
+
+  it('refuses the root app’s paths to another app’s frame', async () => {
+    const shell = boot()
+    shell.send({
+      type: 'fetch',
+      id: 34,
+      url: '/assets/index-abc.js',
+      method: 'GET',
+      headers: [],
+    })
+    await shell.settle()
+    expect(shell.calls).toHaveLength(0)
+    expect(shell.results()).toEqual([
+      { type: 'fetch.result', id: 34, refused: true },
+    ])
+  })
+
+  it('stamps a frame it makes for / on a navigation, and only that one', async () => {
+    const shell = boot()
+    window.history.pushState({}, '', '/')
+    window.dispatchEvent(new PopStateEvent('popstate'))
+    await shell.settle()
+    const root = document.getElementById('app-frame') as HTMLIFrameElement
+    expect(root).not.toBe(shell.iframe)
+    expect(root.dataset.app).toBe('')
+    expect(root.dataset.root).toBe('true')
+    expect(shell.iframe.dataset.root).toBeUndefined()
   })
 })
 

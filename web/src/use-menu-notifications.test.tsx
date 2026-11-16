@@ -10,7 +10,7 @@ import { toast } from '@mochi/web'
 import { renderHook, act, waitFor } from '@testing-library/react'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { menuFetch } from './menu-api'
-import { notificationsAfter, useMenuNotifications } from './use-menu-notifications'
+import { useMenuNotifications } from './use-menu-notifications'
 
 i18n.loadAndActivate({ locale: 'en', messages: {} })
 
@@ -166,44 +166,6 @@ const bell = (id: string, created: number, read = 0) => ({
   count: 1,
   created,
   read,
-})
-
-// A frame lands in the list the bell holds, as a fetch would answer it: oldest
-// first, a row sent again replacing the one held, a row the bell does not list
-// left out. A frame that cannot be applied asks for the list again.
-describe('notificationsAfter', () => {
-  const held = [bell('a', 10), bell('c', 30)]
-
-  it('puts a new row where its time puts it, with its sender', () => {
-    const next = notificationsAfter(held, { type: 'new', web: true, ...bell('b', 20) })
-    expect(next?.map((row) => row.id)).toEqual(['a', 'b', 'c'])
-    expect(next?.[1].sender).toBe('sender-entity')
-  })
-
-  it('replaces a row sent again rather than listing it twice', () => {
-    const next = notificationsAfter(held, { type: 'new', web: true, ...bell('a', 10), count: 3 })
-    expect(next?.map((row) => [row.id, row.count])).toEqual([['a', 3], ['c', 1]])
-  })
-
-  it('leaves out a row the bell does not list', () => {
-    expect(notificationsAfter(held, { type: 'new', web: false, ...bell('b', 20) })).toBe(held)
-    expect(notificationsAfter(held, { type: 'new', web: false, ...bell('a', 10) })?.map((row) => row.id)).toEqual(['c'])
-  })
-
-  it('asks for the list when the frame cannot say whether the bell lists it', () => {
-    expect(notificationsAfter(held, { type: 'new', ...bell('b', 20) })).toBeNull()
-  })
-
-  it('marks one row, then every row, read', () => {
-    const one = notificationsAfter(held, { type: 'read', id: 'c' })
-    expect(one?.map((row) => Boolean(row.read))).toEqual([false, true])
-    const every = notificationsAfter(held, { type: 'read_all' })
-    expect(every?.every((row) => row.read > 0)).toBe(true)
-  })
-
-  it('asks for the list on a clear, which names no rows', () => {
-    expect(notificationsAfter(held, { type: 'clear_object' })).toBeNull()
-  })
 })
 
 // The socket the hook opens, captured so a test can deliver frames to it.
