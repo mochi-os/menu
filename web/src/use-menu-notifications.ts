@@ -4,7 +4,7 @@
 // Mochi Application Interface Exception - see license.txt and license-exception.md.
 // Notification fetching for the menu app — uses the menu's own backend
 // instead of cross-app HTTP calls to the notifications app.
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useLingui } from '@lingui/react/macro'
 import {
@@ -58,6 +58,48 @@ const notificationKeys = {
 
 // WebSocket singleton for real-time updates
 const RECONNECT_DELAY = 3000
+const FALLBACK_DELAY = 1000
+
+// The list's first read waits for the socket to open. A frame sent before the
+// socket is open is lost, so a list read first had to be read again once it
+// opened: two downloads of the whole list on most page loads. Read after the
+// open, the list already has the subscription behind it. A socket that has not
+// opened within FALLBACK_DELAY, or that fails, releases the read anyway, and
+// an open after the list was read reads it again.
+const gate = {
+  released: false,
+  timer: null as ReturnType<typeof setTimeout> | null,
+  listeners: new Set<() => void>(),
+  subscribe(listener: () => void) {
+    gate.listeners.add(listener)
+    return () => {
+      gate.listeners.delete(listener)
+    }
+  },
+  snapshot() {
+    return gate.released
+  },
+  arm() {
+    if (gate.released || gate.timer) return
+    gate.timer = setTimeout(gate.release, FALLBACK_DELAY)
+  },
+  release() {
+    if (gate.timer) {
+      clearTimeout(gate.timer)
+      gate.timer = null
+    }
+    if (gate.released) return
+    gate.released = true
+    for (const listener of gate.listeners) listener()
+  },
+  reset() {
+    if (gate.timer) {
+      clearTimeout(gate.timer)
+      gate.timer = null
+    }
+    gate.released = false
+  },
+}
 
 interface WebSocketState {
   instance: WebSocket | null
@@ -151,6 +193,7 @@ function connectWebSocket() {
     if (wsState.instance?.readyState === WebSocket.OPEN) return
     if (wsState.instance?.readyState === WebSocket.CONNECTING) return
     if (!token) {
+      gate.release()
       wsState.reconnectTimer = setTimeout(connectWebSocket, RECONNECT_DELAY)
       return
     }
@@ -169,9 +212,15 @@ function openWebSocket(token: string) {
     ws.onopen = () => {
       established = true
       websocketOpened(protocols)
+      // The first open releases the list's first read, which then follows
+      // the subscription and misses nothing.
+      if (!gate.released) {
+        gate.release()
+        return
+      }
       // Frames sent before the socket was open are lost: on a reconnect, and
-      // on the first open, after a list read before it. Fetching cancels a
-      // read under way, which may also be from before.
+      // on a first open after the fallback released the read. Fetching cancels
+      // a read under way, which may also be from before.
       void wsState.queryClientRef?.invalidateQueries({
         queryKey: notificationKeys.list(),
       })
@@ -179,6 +228,7 @@ function openWebSocket(token: string) {
     ws.onmessage = handleWebSocketMessage
     ws.onclose = () => {
       if (!established) websocketFailed(protocols)
+      gate.release()
       // Only the current socket may act here: a stale socket's late close
       // event must not null out a replacement and spawn a duplicate
       // connection alongside it.
@@ -190,6 +240,7 @@ function openWebSocket(token: string) {
     }
     ws.onerror = () => {}
   } catch {
+    gate.release()
     if (wsState.subscriberCount > 0) {
       wsState.reconnectTimer = setTimeout(connectWebSocket, RECONNECT_DELAY)
     }
@@ -239,9 +290,11 @@ export function useMenuNotifications() {
   const queryClient = useQueryClient()
   const { t } = useLingui()
 
-  const { data, isLoading, isError } = useQuery<NotificationsListResponse>({
+  const released = useSyncExternalStore(gate.subscribe, gate.snapshot)
+  const { data, isPending, isError } = useQuery<NotificationsListResponse>({
     queryKey: notificationKeys.list(),
     queryFn: fetchNotifications,
+    enabled: released,
     // WebSocket frames are the primary update path; poll slowly as a
     // fallback for sessions where the WebSocket can never connect (e.g. a
     // proxy that blocks upgrades), so the badge doesn't stay frozen.
@@ -283,6 +336,7 @@ export function useMenuNotifications() {
     wsState.queryClientRef = queryClient
     wsState.subscriberCount++
     if (wsState.subscriberCount === 1) {
+      gate.arm()
       connectWebSocket()
     }
     // Hidden tabs throttle the reconnect timer to a minute or worse, so
@@ -297,6 +351,7 @@ export function useMenuNotifications() {
       wsState.subscriberCount--
       if (wsState.subscriberCount === 0) {
         disconnectWebSocket()
+        gate.reset()
         wsState.queryClientRef = null
       }
     }
@@ -344,7 +399,8 @@ export function useMenuNotifications() {
 
   return {
     notifications,
-    isLoading,
+    // Loading until the list has been read, the wait for the socket included.
+    isLoading: isPending,
     isError,
     markAsRead: (id: string) => markAsReadMutation.mutate(id),
     markAllAsRead: () => markAllAsReadMutation.mutate(),

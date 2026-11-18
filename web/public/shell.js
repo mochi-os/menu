@@ -924,16 +924,28 @@
         return init;
     }
 
-    function handleFetch(data, frame) {
+    function handleFetch(data, frame, port) {
         var id = data.id;
-        var requester = frame.contentWindow;
-        // To the window that asked and no other. Its page may have changed
-        // since, and the next app's page there must not take this answer for
-        // one of its own: the frame draws request ids at random.
+        var requester = port || frame.contentWindow;
+        var page = frameState(frame).page;
+        // To the page that asked and no other: the next page in its frame,
+        // perhaps another app's, must not take this answer for one of its own.
+        // On the page's own channel (fetchPort) it cannot, as the channel goes
+        // with the page. Through the frame's window, which a page navigating
+        // the frame itself hands to the next before the shell hears it leave,
+        // a page known to have left is answered nothing.
+        function send(msg, transfer) {
+            if (port) {
+                port.postMessage(msg, transfer || []);
+                return;
+            }
+            if (frameState(frame).page !== page) return;
+            requester.postMessage(msg, '*', transfer || []);
+        }
         function answer(msg, transfer) {
             msg.type = 'fetch.result';
             msg.id = id;
-            requester.postMessage(msg, '*', transfer || []);
+            send(msg, transfer);
         }
         // From the frame that asked, not the top URL, as handleDownload: the
         // app it was created for. The outgoing frame of a cross-app switch
@@ -967,7 +979,7 @@
             var headers = [];
             response.headers.forEach(function(value, name) { headers.push([name, value]); });
             return fetchBody(response, data.progress === true ? function(received) {
-                requester.postMessage({ type: 'fetch.progress', id: id, received: received }, '*');
+                send({ type: 'fetch.progress', id: id, received: received });
             } : null).then(function(buffer) {
                 answer({ status: response.status, statusText: response.statusText, headers: headers, body: buffer }, [buffer]);
             });
@@ -1017,6 +1029,20 @@
         if (controller) controller.abort();
     }
 
+    // A page's own channel for the requests it has carried (fetch.port), for
+    // as long as the page is in its frame: what is answered on it reaches that
+    // page and no other.
+    function fetchPort(port, frame) {
+        if (!port || !frame) return;
+        frameState(frame).ports.push(port);
+        port.onmessage = function(event) {
+            var data = event.data;
+            if (!data || typeof data !== 'object') return;
+            if (data.type === 'fetch') handleFetch(data, frame, port);
+            else if (data.type === 'fetch.abort') handleFetchAbort(data, port);
+        };
+    }
+
     // What the shell knows of the page each frame holds. A frame can navigate
     // itself - a link the app's interceptor does not route, a form post, a
     // location assignment - and the shell cannot see where, as its origin is
@@ -1029,7 +1055,7 @@
     function frameState(frame) {
         var state = frameStates.get(frame);
         if (!state) {
-            state = { answered: false, page: 0, loads: 0 };
+            state = { answered: false, page: 0, loads: 0, ports: [] };
             frameStates.set(frame, state);
         }
         return state;
@@ -1103,12 +1129,22 @@
         swapIframe(here);
     }
 
-    // A frame being removed takes its requests with it, as its own would go.
+    // A frame being removed takes its requests with it, as its own would go,
+    // and so does a page leaving its frame, whose channels close with it.
     function fetchAbortFrame(frame) {
-        var requests = frame && frame.contentWindow && fetchRequests.get(frame.contentWindow);
-        if (!requests) return;
-        fetchRequests.delete(frame.contentWindow);
-        requests.forEach(function(controller) { controller.abort(); });
+        if (!frame) return;
+        var state = frameState(frame);
+        var ports = state.ports;
+        state.ports = [];
+        var requesters = ports.slice();
+        if (frame.contentWindow) requesters.push(frame.contentWindow);
+        requesters.forEach(function(requester) {
+            var requests = fetchRequests.get(requester);
+            if (!requests) return;
+            fetchRequests.delete(requester);
+            requests.forEach(function(controller) { controller.abort(); });
+        });
+        ports.forEach(function(port) { port.close(); });
     }
 
     // WebAuthn bridge: the iframe's opaque origin makes navigator.credentials
@@ -2391,6 +2427,7 @@
         if (staleIframe && event.source === staleIframe.contentWindow && event.data && typeof event.data === 'object') {
             if (event.data.type === 'fetch') handleFetch(event.data, staleIframe);
             else if (event.data.type === 'fetch.abort') handleFetchAbort(event.data, event.source);
+            else if (event.data.type === 'fetch.port') fetchPort(event.ports && event.ports[0], staleIframe);
             return;
         }
 
@@ -2469,6 +2506,9 @@
                         // and hears a carried download's bytes as they come
                         // (fetch.progress), when it asks.
                         progress: true,
+                        // and may send them on a channel of the page's own
+                        // (fetch.port), whose answers no later page hears.
+                        port: true,
                         sidebarOpen: sidebarOpen,
                         sidebarWidth: sidebarWidth,
                         domain: sc.domain || null,
@@ -2503,6 +2543,9 @@
                         // and hears a carried download's bytes as they come
                         // (fetch.progress), when it asks.
                         progress: true,
+                        // and may send them on a channel of the page's own
+                        // (fetch.port), whose answers no later page hears.
+                        port: true,
                         sidebarOpen: sidebarOpen,
                         sidebarWidth: sidebarWidth,
                         domain: null,
@@ -2597,6 +2640,10 @@
 
             case 'fetch.abort':
                 handleFetchAbort(data, event.source);
+                break;
+
+            case 'fetch.port':
+                fetchPort(event.ports && event.ports[0], iframe);
                 break;
 
             case 'sidebar-state':

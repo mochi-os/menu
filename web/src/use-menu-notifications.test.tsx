@@ -24,14 +24,22 @@ vi.mock('@mochi/web', async (importOriginal) => {
 vi.mock('./menu-api', () => ({ menuFetch: vi.fn() }))
 
 // The hook opens the notifications socket on mount; none of that is under
-// test, and a real WebSocket would try to connect.
+// test, and a real WebSocket would try to connect. It opens at once, which
+// releases the list's first read.
 class SilentSocket {
   static OPEN = 1
   static CONNECTING = 0
-  readyState = 3
+  readyState = 0
+  onopen: (() => void) | null = null
   onmessage: unknown = null
   onclose: unknown = null
   onerror: unknown = null
+  constructor() {
+    queueMicrotask(() => {
+      this.readyState = 1
+      this.onopen?.()
+    })
+  }
   close() {}
 }
 
@@ -211,15 +219,14 @@ describe('useMenuNotifications applies frames to the list it holds', () => {
   async function mounted() {
     window.history.pushState({}, '', '/feeds')
     const hook = renderHook(() => useMenuNotifications(), { wrapper })
-    await waitFor(() => expect(hook.result.current.notifications).toHaveLength(1))
     await waitFor(() => expect(FrameSocket.last).not.toBeNull())
-    const opened = fetches()
+    // The open releases the list's first read.
     act(() => FrameSocket.last!.open())
-    // The open reads the list again, for frames sent before it.
-    await waitFor(() => expect(fetches()).toBe(opened + 1))
+    await waitFor(() => expect(hook.result.current.notifications).toHaveLength(1))
     await waitFor(() =>
       expect(client.getQueryState(['menu-notifications', 'list'])?.fetchStatus).toBe('idle')
     )
+    expect(fetches()).toBe(1)
     return hook
   }
 
@@ -309,5 +316,89 @@ describe('useMenuNotifications applies frames to the list it holds', () => {
     act(() => result.current.markAsRead('a'))
     await waitFor(() => expect(result.current.notifications[0].read).toBeGreaterThan(0))
     expect(fetches()).toBe(before)
+  })
+})
+
+// THE POINT: the list was read on mount and again when the socket opened a few
+// milliseconds later, for the frames sent before the open - two downloads of
+// the whole list on most page loads. The first read now waits for the open, so
+// the subscription is live before it; a socket that is slow or fails releases
+// it anyway, and every later open reads the list again.
+describe('useMenuNotifications reads the list once per load', () => {
+  beforeEach(() => {
+    FrameSocket.last = null
+    vi.stubGlobal('WebSocket', FrameSocket)
+    vi.mocked(menuFetch).mockImplementation(async (path: string) => {
+      if (path === '-/notifications/list') return { data: [bell('a', 10)] }
+      return {}
+    })
+  })
+
+  const fetches = () =>
+    vi.mocked(menuFetch).mock.calls.filter(([path]) => path === '-/notifications/list').length
+  const pause = (milliseconds: number) =>
+    act(() => new Promise((resolve) => setTimeout(resolve, milliseconds)))
+  const idle = () =>
+    waitFor(() =>
+      expect(client.getQueryState(['menu-notifications', 'list'])?.fetchStatus).toBe('idle')
+    )
+
+  it('reads the list once, after the socket opens', async () => {
+    window.history.pushState({}, '', '/feeds')
+    const { result } = renderHook(() => useMenuNotifications(), { wrapper })
+    await waitFor(() => expect(FrameSocket.last).not.toBeNull())
+    await pause(100)
+    expect(fetches()).toBe(0)
+    expect(result.current.isLoading).toBe(true)
+    act(() => FrameSocket.last!.open())
+    await waitFor(() => expect(result.current.notifications).toHaveLength(1))
+    await idle()
+    await pause(100)
+    expect(fetches()).toBe(1)
+  })
+
+  it('reads the list after the fallback delay when the socket does not open, and again when it does', async () => {
+    window.history.pushState({}, '', '/feeds')
+    const { result } = renderHook(() => useMenuNotifications(), { wrapper })
+    await waitFor(() => expect(FrameSocket.last).not.toBeNull())
+    await pause(300)
+    expect(fetches()).toBe(0)
+    await waitFor(() => expect(result.current.notifications).toHaveLength(1), { timeout: 3000 })
+    await idle()
+    expect(fetches()).toBe(1)
+    // Frames sent before this open were lost.
+    act(() => FrameSocket.last!.open())
+    await waitFor(() => expect(fetches()).toBe(2))
+  })
+
+  it('reads the list at once when the socket fails', async () => {
+    window.history.pushState({}, '', '/feeds')
+    const { result } = renderHook(() => useMenuNotifications(), { wrapper })
+    await waitFor(() => expect(FrameSocket.last).not.toBeNull())
+    act(() => FrameSocket.last!.onclose?.())
+    // Well inside the fallback delay.
+    await waitFor(() => expect(result.current.notifications).toHaveLength(1), { timeout: 400 })
+    expect(fetches()).toBe(1)
+  })
+
+  it('reads the list again on a reconnect', async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true })
+    try {
+      window.history.pushState({}, '', '/feeds')
+      const { result } = renderHook(() => useMenuNotifications(), { wrapper })
+      await waitFor(() => expect(FrameSocket.last).not.toBeNull())
+      const first = FrameSocket.last!
+      act(() => first.open())
+      await waitFor(() => expect(result.current.notifications).toHaveLength(1))
+      await idle()
+      expect(fetches()).toBe(1)
+      act(() => first.onclose?.())
+      await act(() => vi.advanceTimersByTimeAsync(3000))
+      await waitFor(() => expect(FrameSocket.last).not.toBe(first))
+      act(() => FrameSocket.last!.open())
+      await waitFor(() => expect(fetches()).toBe(2))
+    } finally {
+      vi.useRealTimers()
+    }
   })
 })
