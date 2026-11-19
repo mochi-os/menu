@@ -242,7 +242,7 @@ export function MochiShellMenu() {
       } else if (isSafeLink(notification.link)) {
         // Off-origin http(s) target — open in a new tab rather than navigating
         // the shell away; noopener stops the opened page reaching back.
-        window.open(notification.link, '_blank', 'noopener,noreferrer')
+        window.open(notification.link, '_blank', 'noopener,noreferrer') // method-ok: a notification's link opens a page
       }
       // Any other scheme (javascript:/data:) is ignored.
     }
@@ -256,7 +256,7 @@ export function MochiShellMenu() {
       // Not the two-branch form left click uses: a new tab is a top-level
       // document GET without _shell=1, which core answers with the shell
       // (shell_wrap_candidate), so a same-origin link already lands inside it.
-      window.open(notification.link, '_blank', 'noopener,noreferrer')
+      window.open(notification.link, '_blank', 'noopener,noreferrer') // method-ok: a notification's link opens a page
     }
     if (unreadCount === 1) {
       setMenuOpen(false)
