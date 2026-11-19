@@ -72,7 +72,7 @@ export async function menuFetch<T>(
       `[menu-fetch] ${init?.method || 'GET'} ${path} token=${token ? 'present' : 'NONE'}`
     )
   }
-  const res = await fetch(`${MENU_PATH}/${path}`, {
+  const res = await fetch(`${MENU_PATH}/${path}`, { // method-ok: menuFetch itself; the gate scans its callers
     credentials: 'same-origin',
     ...init,
     headers: {
