@@ -41,8 +41,10 @@ export default defineConfig({
   base: './',
   plugins: [
     // The shell page itself, never in the frame: native modules (see
-    // mochiPlugin's frame option); core loads its entry as one.
-    mochiPlugin({ frame: false }),
+    // mochiPlugin's frame option); core loads its entry as one. shared: it
+    // also hosts React's shared files, which the shell carries to every app's
+    // frame, so the browser keeps one copy for all of them (shell.js).
+    mochiPlugin({ frame: false, shared: true }),
     react({
       plugins: [['@lingui/swc-plugin', {}]],
     }),

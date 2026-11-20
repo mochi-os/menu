@@ -933,6 +933,8 @@
         var init = null;
         if (frameCarries(frame, url) && fetchMethods.indexOf(method) >= 0) {
             init = fetchInit(method, data);
+        } else if (sharedFile(frame, url, method)) {
+            init = sharedInit();
         }
         if (!init) {
             answer({ refused: true });
@@ -2197,6 +2199,28 @@
         if (app === null) return false;
         if (app) return getAppNameFromPath(url.pathname) === app;
         return rootPath(url.pathname);
+    }
+
+    // React's shared files (lib/web, shared-react.js): every app's build carries
+    // the same fixed files, and the copy in menu's assets is the one the
+    // browser keeps for all of them, so any app's frame may have it carried.
+    // One folder of menu's, by GET, a name of the shape the build gives the
+    // files and nothing else: no query, and no '%', '.' or '/' past the folder
+    // that the server could read as another path. They are public static
+    // files, so the request sends none of the frame's headers - its app token
+    // never reaches menu's path - and, as every carried request, no cookies.
+    // The frame runs a file only when its bytes are the ones its own build
+    // holds (loader.js).
+    var SHARED_FILE = /^\/menu\/assets\/shared\/[A-Za-z0-9_-]+-[A-Za-z0-9_-]{8}\.js$/;
+
+    function sharedFile(frame, url, method) {
+        if (!url || url.origin !== window.location.origin || url.search !== '') return false;
+        if (method !== 'GET' || frameApp(frame) === null) return false;
+        return SHARED_FILE.test(url.pathname);
+    }
+
+    function sharedInit() {
+        return { method: 'GET', headers: new Headers(), credentials: 'omit', redirect: 'manual' };
     }
 
     // True only when url resolves to this same origin. Relative paths resolve

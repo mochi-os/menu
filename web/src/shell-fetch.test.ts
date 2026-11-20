@@ -843,3 +843,89 @@ describe('shell fetch: a page’s own channel', () => {
     expect(shell.results()).toEqual([])
   })
 })
+
+// React's shared files: any app's frame may have menu's copy carried, and
+// nothing beside them, with none of the frame's own headers.
+const SHARED = '/menu/assets/shared/react-dom-client-B4cgimk2.js'
+
+describe('shell fetch: React’s shared files in menu’s assets', () => {
+  it('carries one for another app’s frame, without the frame’s headers', async () => {
+    const shell = boot()
+    shell.send({
+      type: 'fetch',
+      id: 40,
+      url: SHARED,
+      method: 'GET',
+      headers: [
+        ['Authorization', 'Bearer app-token'],
+        ['X-Other', 'value'],
+      ],
+    })
+    await shell.settle()
+    expect(shell.calls).toHaveLength(1)
+    const { url, init } = shell.calls[0]
+    expect(url).toBe('http://localhost:3000' + SHARED)
+    expect(init.method).toBe('GET')
+    // THE POINT: the frame's app token never reaches menu's path.
+    expect([...init.headers.keys()]).toEqual([])
+    expect(init.credentials).toBe('omit')
+    expect(init.redirect).toBe('manual')
+    expect(shell.results()[0]).toMatchObject({ id: 40, status: 201 })
+  })
+
+  it('carries one for the root app’s frame', async () => {
+    const shell = boot(undefined, '/')
+    shell.send({
+      type: 'fetch',
+      id: 41,
+      url: SHARED,
+      method: 'GET',
+      headers: [],
+    })
+    await shell.settle()
+    expect(shell.calls).toHaveLength(1)
+  })
+
+  it.each([
+    ['POST', 'POST', SHARED],
+    ['HEAD', 'HEAD', SHARED],
+    ['a query', 'GET', SHARED + '?x=1'],
+    ['a stylesheet', 'GET', '/menu/assets/shared/react-B4cgimk2.css'],
+    ['a name with no hash', 'GET', '/menu/assets/shared/react.js'],
+    ['a hash too short', 'GET', '/menu/assets/shared/react-B4cgimk.js'],
+    ['a folder below', 'GET', '/menu/assets/shared/x/react-B4cgimk2.js'],
+    ['menu’s other assets', 'GET', '/menu/assets/index-B4cgimk2.js'],
+    ['a climb out', 'GET', '/menu/assets/shared/../index-B4cgimk2.js'],
+    ['an encoded climb', 'GET', '/menu/assets/shared/%2e%2e/index-B4cgimk2.js'],
+    ['an encoded slash', 'GET', '/menu/assets/shared/x%2freact-B4cgimk2.js'],
+    ['an empty segment', 'GET', '/menu//assets/shared/react-B4cgimk2.js'],
+    ['menu’s actions', 'GET', '/menu/-/apps'],
+    ['another server', 'GET', 'https://evil.example' + SHARED],
+    ['protocol-relative', 'GET', '//evil.example' + SHARED],
+  ])('refuses %s', async (_name, method, url) => {
+    const shell = boot()
+    shell.send({ type: 'fetch', id: 42, url, method, headers: [] })
+    await shell.settle()
+    expect(shell.calls).toHaveLength(0)
+    expect(shell.results()).toEqual([
+      { type: 'fetch.result', id: 42, refused: true },
+    ])
+  })
+
+  it('refuses a frame with no stamp', async () => {
+    const shell = boot()
+    delete shell.iframe.dataset.app
+    shell.send({
+      type: 'fetch',
+      id: 43,
+      url: SHARED,
+      method: 'GET',
+      headers: [],
+    })
+    await shell.settle()
+    expect(shell.calls).toHaveLength(0)
+    expect(shell.results()).toEqual([
+      { type: 'fetch.result', id: 43, refused: true },
+    ])
+  })
+})
